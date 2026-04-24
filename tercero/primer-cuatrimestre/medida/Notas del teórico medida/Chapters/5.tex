@@ -1,0 +1,221 @@
+\section{Medidas}
+
+\subsection{Motivación}
+Sea $\phi: X \to [0, +\infty]$ con $Im(\phi) = \{ y_1\text{, } \cdots \text{, } y_m \}$. Si $\phi^{-1}(y_i) \in \mf{X}$ y conocemos
+$\mu(\phi^{-1}(y_i)) \in [0, +\infty]$ (la medida de cada conjunto) podemos definir \begin{align*}
+    \int \phi \,\mathrm{d} \mu = \sum_{i=1}^m y_i \cdot \mu(\phi^{-1}(y_i))
+\end{align*}
+
+Si $f: X \to [0, +\infty]$ es $\mf{X}$-medible, $\exists$ una sucesión $(\phi_n)_{n \geq 1}$ con funciones así tal que $\phi_n \to f$. Entonces podremos definir
+\begin{align*}
+    \int f \,\mathrm{d}\mu = \lim_{n \to \infty} \int \phi_n \,\mathrm{d}\mu
+\end{align*}
+
+Dado un espacio medible $(X\text{, } \mf{X})$, vamos a considerar ciertas funciones $\mu : \mf{X} \to [0, +\infty] : $ el valor $\mu(E)$ para cada $E \in \mf{X}$
+esté motivado por las nociones de longitud, área, volumen, probabilidad, masa, etc.
+
+\clearpage
+
+\subsection{Series de términos no negativos}
+
+\begin{prop}
+    Sea $(a_n)_{n \geq 1} \subset [0, +\infty] \Rightarrow$ la serie $\sum_{n = 1}^{\infty} a_n$ converge en $[0, +\infty]$
+    y $lim_{n \to \infty} \sum_{i = 1}^{n} a_i = \sum_{i = 1}^{\infty} a_i  $ \\
+    Además:
+    \begin{enumerate}
+        \item Si $(I_n)_{n \geq 1}$ es una sucesión creciente de subconjuntos finitos de $\N$ $(I_n \subseteq I_{n+1} \quad \forall n \geq 1)$ entonces
+              $\bigcup_{n \geq 1} I_n = \N \Rightarrow \sum_{n \geq 1} a_n = \text{sup}\{ \sum_{m \in I_n} a_m : n \geq 1 \}$.
+        \item Si $\sigma: \N \to \N$ es una permutación de $\N$ entonces $\sum_{n \geq 1} a_{\sigma(n)} = \sum_{n \geq 1} a_n$.
+        \item Dado un conjunto numerable $I$, sea $(a_i)_{i \in I}$ una sucesión en $[0, +\infty]$ y $f: \N \to I$ es una biyección, consideremos
+              la sucesión $(b_n)_{n \geq 1} = (a_{f(n)})_{n \geq 1}$, entonces podemos definir a \begin{align*}
+                  \sum_{i \in I} a_i = \sum_{n \geq 1} b_{f(n)}
+              \end{align*}
+              Esto está bien definido pues si $g: \N \to I$ es otra biyección tal que $c_n = a_{g(n)}$ \begin{align*}
+                  \sum_{n \geq 1} c_n              & = \sum_{n \geq 1} a_{g(n)}                            \\
+                  \sum_{n \geq 1} a_{\sigma(f(n))} & = \sum_{n \geq 1} b_{\sigma(n)} = \sum_{n \geq 1} b_n \\
+              \end{align*}
+    \end{enumerate}
+
+    En particular si $I = \N \times \N$ y $(a_{n, m})_{n, m \in \N}$ es una sucesión en $[0, +\infty]$ podemos definir \begin{align*}
+        \sum_{(n, m) \in \N \times \N} a_{n, m} & = \sum_{n \geq 1}(\sum_{m \geq 1} a_{n, m}) \\
+                                                & = \sum_{m \geq 1}(\sum_{n \geq 1} a_{n, m}) \\
+    \end{align*}
+\end{prop}
+
+\subsection{Definición de medida}
+
+\begin{definition}[Medida]
+    Dado un espacio medible $(X\text{, } \mf{X})$, una medida en $X$ es una función $\mu : \mf{X} \to [0, +\infty]$ tal que:
+    \begin{enumerate}
+        \item $\mu(\O) = 0$.
+        \item ($\sigma$-aditividad) Si $(E_n)_{n \geq 1}$ es una sucesión en $\mf{X}$, dos a dos disjuntos $\Rightarrow$ \begin{align*}
+                  \mu(\bigcup_{n \geq 1} E_n) = \sum_{n \geq 1} \mu(E_n)
+              \end{align*}
+    \end{enumerate}
+\end{definition}
+
+\begin{note}
+    Si $A_1, \cdots A_n \in \mf{X}$ son conjuntos dos a dos disjuntos entonces \begin{align*}
+        \mu(\bigcup_{i = 1}^n A_i) = \sum_{i = 1}^n \mu(A_i)
+    \end{align*}
+    Esto se deduce de la propiedad de $\sigma$-aditividad, pues construimos la sucesión $(E_n)_{n \geq 1}$ como $A_1\text{, } A_2\text{, } \cdots\text{, } A_n\text{, } \O\text{, } \O\text{, } \cdots$.
+\end{note}
+
+\begin{definition}[Medida finita]
+    Una medida es finita si $\mu(E) < +\infty \quad \forall E \in \mf{X}$.
+\end{definition}
+
+\begin{definition}[Medida $\sigma$-finita]
+    Una medida es $\sigma$-finita si $\exists (E_n)_{n \geq 1} \subseteq \mf{X}$ tal que: $X = \bigcup_{n \geq 1} E_n$ y $\mu(E_n) < +\infty \quad \forall n \geq 1$.
+\end{definition}
+
+\begin{eg}
+    Si $X \neq \O$, $\mf{X} = P(X)$ y tomamos $\mu : P(X) \to [0, +\infty]$ tal que $\mu(E) = 0 \quad \forall E \in P(X)$ y también es medida si la definimos como \begin{align*}
+        \mu(E) = \begin{cases}
+                     0       & \text{si } E = \O    \\
+                     +\infty & \text{si } E \neq \O
+                 \end{cases}
+    \end{align*}
+    Luego no es finita, ni $\sigma$-finita.
+\end{eg}
+
+\begin{eg}
+    Sea $(X\text{, } \mf{X})$ un espacio medible y fijemos $x_0 \in X \neq \O$.
+    Sea $\mu : \mf{X} \to [0, +\infty]$ tal que \begin{align*}
+        \mu(E) = \begin{cases}
+                     0 & \text{si } x_0 \notin E \\
+                     1 & \text{si } x_0 \in E
+                 \end{cases}
+    \end{align*}
+    Es la medida puntual con masa uno y la notamos $\delta_{x_0}$ ($\delta$ de Dirac). Es una medida finita y es $\sigma$-aditiva pues si construimos
+    una sucesión $E_n$ de conjuntos disjuntos dos a dos $\mu (\bigcup_{n \geq 1} E_n) = \sum_{n \geq 1} \mu(E_n) = 1$. Pues un único conjunto $E_n$ puede contener a $x_0$.
+\end{eg}
+
+\clearpage
+
+\begin{eg}
+    Sea $X = \N$, $\mf{X} = P(\N)$ y la medida de conteo $\mu : P(\N) \to [0, +\infty]$ tal que \begin{align*}
+        \mu(E) = \begin{cases}
+                     +\infty        & \text{si } E \text{ es infinito}           \\
+                     \text{card}(E) & \text{si } E = \{ x_1, x_2, \cdots, x_n \}
+                 \end{cases}
+    \end{align*}
+    Ejercicio, ver que es $\sigma$-aditiva. Es $\sigma$-finita, pero no es finita pues $\N = \bigcup_{n \geq 1} \{ n \}$ y $\mu(\{ n \}) = 1$.
+\end{eg}
+
+\begin{eg}
+    Sea $(X\text{, } \mf{X})$ un espacio medible, $X$ con infinitos elementos, sea $(x_n)_{n \geq 1}$ una sucesión en $X$ con $x_n \neq x_m \quad \forall n \neq m$ y
+    $(a_n)_{n \geq 1}$ otra sucesión en $[0, +\infty]$. Definimos $\mu : \mf{X} \to [0, +\infty]$ como \begin{align*}
+        \mu(E) & = \sum_{n \in \N \text{ } : \text{ } x_n \in E} a_n \\
+               & E \in \mf{X}
+    \end{align*}
+    Queda como ejercicio ver que es medida.
+    Si $\mf{X}$ contiene a los conjuntos unitarios $\{ x_n \}$ con $n \in \N$ entonces $\mu$ es $\sigma$-finita pues $X = (\bigcup_{n \geq 1} \{ x_n \}) \cup (X - \bigcup_{n \geq 1} \{ x_n \})$ ambos medibles, luego
+    $\mu(\{ x_n \}) = a_n$ y $\mu(X - \bigcup_{n \geq 1} \{ x_n \}) = 0$.
+    Además es $\sigma$-finita $\iff \sum_{n \geq 1} a_n < +\infty$
+\end{eg}
+
+\begin{eg}[Medida de Lebesgue]
+    Si $X = \R$ y $\mf{X} = \mc{B}$, más adelante probaremos que $\exists !$ medida $\lambda : \mc{B} \to [0, +\infty]$ tal que:
+    $\lambda((a, b)) = b-a$ con $a, b \in \R$ y $a < b$. \\
+    Es $\sigma$-finita pues $\R = \bigcup_{n \geq 1} (-n, n)$ y $\lambda((-n, n)) = 2n < +\infty$, pero no es finita pues $\lambda(\R) = +\infty$.
+    Notemos que $\lambda$ puede extenderse a una $\sigma$-álgebra de $\R$ más grande que $\mc{B}$, pero no puede extenderse a $P(\R)$.
+\end{eg}
+
+\begin{eg}[Medida n-dimensional de Lebesgue]
+    Sea $X = \R^n$ y $ \mf{X} = \mc{B}_n$, tenemos que $\exists!$ medida $\lambda : \mc{B}_n \to [0, +\infty]$ tal que:
+    \begin{align*}
+        \lambda_n(\prod_{i = 1}^n (a_i, b_i)) = \prod_{i = 1}^n (b_i - a_i) \quad \forall a_i, b_i \in \R \text{ y } a_i < b_i
+    \end{align*}
+\end{eg}
+
+\clearpage
+
+\begin{eg}[Medida de Borel - Stieltjes generada por f]
+    Si $X = \R$, $\mf{X} = \mc{B}$, fijemos $f: \R \to \R$ monótona no decreciente y continua. Probaremos que existe una única medida $\lambda_f : \mc{B} \to [0, +\infty]$ :
+    \begin{align*}
+        \lambda_f((a, b)) = f(b) - f(a) \quad \forall a, b \in \R \text{ y } a < b
+    \end{align*}
+    El ejemplo anterior es un caso particular de esta medida con $f(x) = x$.
+\end{eg}
+
+\begin{lemma}
+    Dado un espacio medible $(X\text{, } \mf{X})$ y una medida $\mu : X \to [0, +\infty]$. Si $F$, $E \in \mf{X}$ y $E \subseteq F \Rightarrow \mu(E) \leq \mu(F)$.
+    Si además $\mu(E) < +\infty \Rightarrow \mu(F - E) = \mu(F) - \mu(E)$.
+    \begin{proof}
+        Como $E \subseteq F$ entonces $F = E \cup (F - E)$, además $F - E = F \cap E^c \in \mf{X}$ y $E \cap (F - E) = \O$.
+        Entonces $\mu(F) = \mu(E) + \mu(F - E) \geq \mu(E)$.
+        Si $\mu(E) < +\infty$ entonces $\mu(F)$, $\mu(F - E)$ son o ambos finitos o ambos infinitos, luego $\mu(F - E) = \mu(F) - \mu(E)$.
+    \end{proof}
+\end{lemma}
+
+\begin{corollary}
+    $\mu$ es finito $\iff \mu(X) < +\infty$.
+\end{corollary}
+
+\begin{lemma}
+    Si $(A_n)_{n \geq 1}$ es una sucesión cualquiera en $\mf{X}$ entonces \begin{align*}
+        \mu(\bigcup_{n \geq 1} A_n) \leq \sum_{n \geq 1} \mu(A_n)
+    \end{align*}
+    \begin{proof}
+        Definamos \begin{align*}
+            F_1 & := A_1 \text{, } F_2 := A_2 - A_1\text{, } \cdots                                                        \\
+            F_n & := A_n - \bigcup_{i = 1}^{n-1} A_i = A_n - ( \bigcup_{k = 1}^{n-1} F_k ) \quad \forall n \geq 2
+        \end{align*}
+        Resulta que es una sucesión en $\mf{X}$ de conjuntos disjuntos dos a dos ya que si $n > m \Rightarrow F_m \cap F_n = (A_m - \bigcup_{k = 1}^{n-1} F_k) \cap F_n = \O$. \\
+        Luego, \begin{align*}
+            \bigcup_{n \geq 1} A_n & = \bigcup_{n \geq 1} F_n \text{, y }                                                                               \\
+                                   & \mu(\bigcup_{n \geq 1} A_n) = \mu(\bigcup_{n \geq 1} F_n) = \sum_{n \geq 1} \mu(F_n) \leq \sum_{n \geq 1} \mu(A_n)
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\clearpage
+
+\begin{lemma}
+    Sea $\mu$ una medida sobre $\mf{X}$:
+    \begin{enumerate}
+        \item Si $(E_n)_{n \geq 1}$ es una sucesión en $\mf{X}$ creciente $\Rightarrow$ $\mu(\bigcup_{n \geq 1} E_n) = \lim_{n \to \infty} \mu(E_n)$.
+        \item Si $(F_n)_{n \geq 1}$ es una sucesión decreciente y $\mu(F_1) < +\infty \Rightarrow$ \begin{align*}
+                  \mu(\bigcap_{n \geq 1} F_n) = \lim_{n \to \infty} \mu(F_n)
+              \end{align*}
+    \end{enumerate}
+    Ejemplo $\{ x \} = \bigcap_{n \geq 1} (x - \frac{1}{n}, x + \frac{1}{n})$ y $\mu(\{ x \}) = \dfrac{2}{n} \to 0$ si $\mu = \lambda$.
+
+    \begin{proof}
+        Veamos el primer caso. \\
+        $\forall n \in \N$ sea $A_n = E_n - E_{n - 1}$, con $E_0 = \O$ y $(A_n)_{n \geq 1}$ es una sucesión en $\mf{X}$ tal que $A_i \cap A_j = \O \quad \text{si } i \neq j$.
+        Entonces \begin{align*}
+            \bigcup_{i = 1}^n A_i & = E_n \text{, y además } \bigcup_{n \geq 1} A_n = \bigcup_{n \geq 1} E_n
+        \end{align*}
+        Por lo que \begin{align*}
+            \mu(\bigcup_{n \geq 1} E_n) & = \mu(\bigcup_{n \geq 1} A_n) = \sum_{n \geq 1} \mu(A_n)                                                                          \\
+                                        & = \lim_{n \to +\infty} \sum_{i = 1}^n \mu(A_i) = \lim_{n \to +\infty} \mu(\bigcup_{i = 1}^n A_i)  = \lim_{n \to +\infty} \mu(E_n) \\
+        \end{align*}
+        Para el segundo caso si $\mu(F_1) < +\infty$ y $\forall n \in \N$ definimos $E_n = F_1 - F_n \Rightarrow (E_n)_{n \geq 1}$ es una sucesión creciente en $\mf{X}$ tal que \begin{align*}
+            \bigcup_{n \geq 1} E_n = \bigcup_{n \geq 1} F_1 \cap F_n^c = F_1 \cap (\bigcup_{n \geq 1} F_n^c) = F_1 \cap (\bigcap_{n \geq 1} F_n)^c & = F_1 - \bigcap_{n \geq 1} F_n
+        \end{align*}
+        \begin{align*}
+            \mu(F_1) - \mu(\cap_{n \geq 1} F_n) = \mu(F_1 - \cap_{n \geq 1} F_n) & = \mu(\bigcup_{n \geq 1} E_n) =^{*} \lim_{n \to +\infty} \mu(F_1 - F_n)               \\
+                                                                                 & = \lim_{n \to +\infty} \mu(F_1) - \mu(F_n) = \mu(F_1) - \lim_{n \to +\infty} \mu(F_n) \\
+        \end{align*}
+        *Por el lema anterior $ \therefore $ \begin{align*}
+            \lim_{n \to +\infty} \mu(F_n) = \mu(\cap_{n \geq 1} F_n)
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\clearpage
+
+Notemos que en el segundo caso la condición $\mu(F_1) < +\infty$ se puede reemplazar por $\mu(F_{n_0}) < +\infty$ para algún $n_0 \geq 1$, pero no puede omitirse.
+Por ejemplo si $X = \R$ y $\mf{X} = \mc{B}$ y $\mu = \lambda$ la medida de Lebesgue, entonces llamemos $F_n = (n, +\infty)$ en este caso
+$\mu(F_n) = +\infty$ y $\mu(\bigcap_{n \geq 1} F_n) = \O$.
+
+Aplicando estas propiedades para la medida de Lebesgue $\lambda$ podemos probar que si $I$ es un intervalo de $\R$ $(a, b) : a, b \in \overline{\R}$ y $a<b$ o $[a, b]$, $(a, b]$, $[a, b)$.
+
+\begin{align*}
+    \lambda(I) = \begin{cases}
+                     l(I)    & \text{si } I \text{ es acotado}    \\
+                     +\infty & \text{si } I \text{ es no acotado}
+                 \end{cases}
+\end{align*}

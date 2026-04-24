@@ -1,0 +1,199 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{newpxtext,newpxmath}
+\usepackage{graphicx}
+
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip\labelsep{\bfseries #1}\hskip\labelsep{\bfseries #2.}]}{\end{trivlist}}
+
+
+\begin{document}
+
+\title{Funciones analíticas}
+\author{Bustos Jordi\\Entrega ejercicios 1 y 5 del parcial}
+
+\maketitle
+
+\begin{theorem}{1}
+    ¿Existe una función holomorfa en \( \D \) tal que \( |f(z)| \leq 1 \) para todo \( z \in \D \) y tal que \( f(0) = \frac{1}{2} \) y
+    \( f'(0) = \frac{3}{4} \)? Si la respuesta es afirmativa encuentren una expresión para dicha función y decidan si es la única que cumple estas condiciones.
+\end{theorem}
+
+\begin{proof}
+    Consideremos el automorfismo del disco unitario definido por:
+    \[
+        \varphi_a(z) = \dfrac{z-a}{1 - \overline{a}z}, \quad \text{con } a = \frac{1}{2}.
+    \]
+    Esta función es holomorfa, biyectiva de \( \D \) en \( \D \) y satisface \( \varphi_a(a) = 0 \). Definamos ahora la función compuesta:
+    \[
+        g(z) = \varphi_a(f(z)) = \frac{f(z) - \frac{1}{2}}{1 - \frac{1}{2}f(z)}.
+    \]
+    Notemos que \( g : \D \to \D \) es holomorfa y satisface \( g(0) = \varphi_a(f(0)) = \varphi_a\left(\frac{1}{2}\right) = 0 \).
+
+    Calculemos la derivada de \( g \) en \( z=0 \) utilizando la regla de la cadena:
+    \[
+        g'(0) = \varphi_a'(f(0)) \cdot f'(0) = \varphi_a'\left(\frac{1}{2}\right) \cdot \frac{3}{4}.
+    \]
+    Para hallar \( \varphi_a'(1/2) \), calculemos primero la derivada general de \( \varphi_a \):
+    \begin{align*}
+        \varphi_a'(z) & = \dfrac{ 1 \cdot (1-\overline{a}z) - (z - a) (-\overline{a}) }{{(1 - \overline{a}z)}^2}                                  \\
+                      & = \dfrac{1 - \overline{a}z + \overline{a}z - |a|^2}{{(1 - \overline{a}z)}^2} = \frac{1 - |a|^2}{{(1 - \overline{a}z)}^2}.
+    \end{align*}
+    Evaluando en \( z = a = 1/2 \):
+    \[
+        \varphi_a'(1/2) = \dfrac{1 - (1/2)^2}{{(1 - (1/2)^2)}^2} = \dfrac{1}{1 - 1/4} = \dfrac{1}{3/4} = \frac{4}{3}.
+    \]
+    Sustituyendo este valor en la expresión de \( g'(0) \):
+    \[
+        g'(0) = \frac{4}{3} \cdot \frac{3}{4} = 1.
+    \]
+
+    El Lema de Schwarz establece que si \( g : \D \to \D \) es holomorfa y \( g(0) = 0 \), entonces \( |g(z)| \leq |z| \) y \( |g'(0)| \leq 1 \). Además, si se cumple la igualdad \( |g'(0)| = 1 \), entonces \( g \) debe ser una rotación, es decir, de la forma \( g(z) = \lambda z \) con \( |\lambda| = 1 \).
+
+    Como hemos calculado que \( g'(0) = 1 \), estamos en el caso de igualdad del Lema. Por lo tanto:
+    \[
+        g(z) = \lambda z.
+    \]
+    Derivando esta expresión obtenemos \( g'(z) = \lambda \). Al evaluar en 0, tenemos \( \lambda = g'(0) = 1 \).
+
+    Así, la función \( g \) queda unívocamente determinada como \( g(z) = z \). Para recuperar \( f \), despejamos de la definición de \( g \):
+    \begin{align*}
+        \varphi_a(f(z)) & = z                  \\
+        f(z)            & = \varphi_a^{-1}(z).
+    \end{align*}
+    Recordando que la inversa de \( \varphi_a \) es \( \varphi_{-a} \) (o despejando algebraicamente):
+    \begin{align*}
+        \dfrac{f(z) - 1/2}{1 - \frac{1}{2}f(z)} & = z                                                                      \\
+        f(z) - \frac{1}{2}                      & = z \left( 1 - \frac{1}{2} f(z) \right)                                  \\
+        f(z) + \frac{z}{2} f(z)                 & = z + \frac{1}{2}                                                        \\
+        f(z) \left( 1 + \frac{z}{2} \right)     & = z + \frac{1}{2}                                                        \\
+        f(z)                                    & = \dfrac{z + \frac{1}{2}}{1 + \frac{1}{2}z} = \varphi_{-\frac{1}{2}}(z).
+    \end{align*}
+    Conclusión: Sí existe tal función, es única y está dada por \( f(z) = \dfrac{2z + 1}{2 + z} \).
+\end{proof}
+
+\clearpage
+
+\begin{theorem}{5}
+    Sea \( a \in \R \) tal que \( a^2 \neq 1 \) y \( n \in \N \). Evaluar la siguiente integral \[
+        \int_0^{\pi} \dfrac{\cos(nt)}{1-2a \cos(t) + a^2} \, \mathrm{d}t
+    \]
+\end{theorem}
+
+\begin{proof}
+    Estudiemos primero que ocurre si \( a = 0 \) y \( n \geq 1 \), \[
+        I = \int_0^{\pi} \cos(nt) \, \mathrm{d}t
+    \]
+    Si realizamos el cambio de variable \( u = nt \), \( du = n dt \) obtenemos \[
+        I = \frac{1}{n} \int_0^{n \pi} \cos(u) \, \mathrm{d}u = \frac{1}{n} {\left[ \sin(u) \right]}_0^{n\pi} = 0.
+    \]
+    Si fuese \( n = 0 \), \( I = \int_0^{\pi} 1 \, \mathrm{d}t = \pi \). \\
+    Por otro lado, si \( a \neq 0 \), \( n \in \N \) y notando que el integrando es una función par se obtiene \[
+        I = \dfrac{1}{2} \int_0^{2\pi} \dfrac{\cos(nt)}{1 - 2a \cos(t) + a^2} \, \mathrm{d}t
+    \]
+    Si tomamos la parametrización en sentido positivo de \( \partial \D \) dada por \( \gamma(t) = e^{it} \) para \( t \in [0, 2\pi] \) obtenemos que \begin{align*}
+        I & = \dfrac{1}{2} \int_0^{2\pi} \dfrac{\Re\left(e^{int}\right)}{1 - 2a \Re\left(e^{it}\right) + a^2} \, \mathrm{d}t                                                  \\
+          & = \dfrac{1}{2} \int_0^{2\pi} \dfrac{\Re\left({({e^{it}})}^n\right)}{1 - 2a \Re\left(e^{it}\right) + a^2} \cdot \dfrac{i e^{it}}{i e^{it}} \, \mathrm{d}t          \\
+          & = \dfrac{1}{2} \int_0^{2\pi} \dfrac{\Re\left({{\gamma(t)}^n}\right)}{1 - 2a \Re\left(\gamma(t)\right) + a^2} \cdot \dfrac{\gamma'(t)}{i \gamma(t)} \, \mathrm{d}t \\
+    \end{align*}
+    Y nuevamente realizando un cambio de variables \( z = \gamma(t) \), \( dz = \gamma'(t) dt \) obtenemos \[
+        I = \dfrac{1}{2} \oint_{\partial \D} \dfrac{\Re\left( z^n \right)}{1 - 2a \Re(z) + a^2} \cdot \dfrac{1}{i z} \, \mathrm{d}z
+    \]
+    Como \( z \in \partial \D \) sabemos que \( \overline{z} = 1/z \), entonces \begin{align*}
+        \Re(z^n) & = \dfrac{1}{2} (z^n + \overline{z}^n) = \dfrac{1}{2} \left( z^n + \dfrac{1}{z^n} \right) \\
+                 & = \dfrac{1}{2} \cdot \dfrac{z^{2n} + 1}{z^n}
+    \end{align*}
+    y además \begin{align*}
+        \Re(z) & = \dfrac{1}{2} (z + \overline{z}) = \dfrac{1}{2} \left( z + \dfrac{1}{z} \right) = \dfrac{1}{2} \cdot \dfrac{z^2 + 1}{z}.
+    \end{align*}
+    Reemplazando en el denominador \begin{align*}
+        z \left( 1 - 2a \Re(z) + a^2 \right) & = z (1 - 2a \dfrac{1}{2} (z + \dfrac{1}{z}) + a^2)       \\
+                                             & = z - az (z + 1/z) + a^2 z = z - a z^2 - a + a^2 z       \\
+                                             & = - a z^2 + (a^2 + 1) z - a = -a (z^2 - (a + 1/a) z + 1) \\
+                                             & = -a (z - a)(z - 1/a).
+    \end{align*}
+    Por lo tanto, \begin{align*}
+        I & = \dfrac{1}{2} \oint_{\partial \D} \dfrac{1}{2} \cdot \dfrac{z^{2n} + 1}{z^n} \cdot \dfrac{1}{-a (z-a)(z-1/a)} \dfrac{1}{i} \, \mathrm{d}z \\
+          & = \dfrac{-1}{4ia} \oint_{\partial \D} \dfrac{z^{2n}+1}{z^n (z-a)(z-1/a)} \, \mathrm{d}z
+    \end{align*}
+    Definamos ahora la función \( G(z) = \dfrac{z^{2n}+ 1}{z^n (z-a)(z-1/a)} \) que resulta holomorfa salvo en los puntos \( z = 0, a, 1/a \). Veamos que ocurre en estas singularidades aisladas:
+    \begin{itemize}
+        \item En \( z = 0 \) tenemos un polo de orden \( n \) pues \begin{align*}
+                  \text{lim}_{z \to 0} z^n G(z) & = \text{lim}_{z \to 0} \dfrac{z^{2n} + 1}{(z - a)(z - 1/a)} = \dfrac{1}{(-a)(-1/a)} = 1 \neq 0.
+              \end{align*}
+        \item En \( z = a \) tenemos un polo simple ya que \begin{align*}
+                  \text{lim}_{z \to a} (z-a) G(z) & = \text{lim}_{z \to a} \dfrac{z^{2n} + 1}{z^n (z - 1/a)} = \dfrac{a^{2n} + 1}{a^n (a - 1/a)} \neq 0.
+              \end{align*}
+        \item En \( z = 1/a \) tenemos otro polo simple ya que \begin{align*}
+                  \text{lim}_{z \to 1/a} (z - 1/a) G(z) & = \text{lim}_{z \to 1/a} \dfrac{z^{2n} + 1}{z^n (z - a)} = \dfrac{{(1/a)}^{2n} + 1}{{(1/a)}^n (1/a - a)} \neq 0.
+              \end{align*}
+    \end{itemize}
+    Luego, por el teorema de los residuos sabemos que \begin{align*}
+        \oint_{\partial \D} G(z) \, \mathrm{d}z & = \oint_{\gamma} G(z) \, \mathrm{d}z                                                                                                                            & \\
+                                                & = 2 \pi i \left(\text{n}(\gamma, 0) \cdot \text{Res}(G, 0) + \text{n}(\gamma, a) \cdot \text{Res}(G, a) + \text{n}(\gamma, 1/a) \cdot \text{Res}(G, 1/a)\right)
+    \end{align*}
+    Calculemos los residuos de \( G \) para los polos simples, en primer lugar en \( z = a \) \begin{align*}
+        \text{Res}(G, a) & = \text{lim}_{z \to a} (z-a)G(z) = \text{lim}_{z \to a} (z-a) \dfrac{z^{2n} + 1}{z^n (z - a)(z - 1/a)} \\
+                         & = \dfrac{a^{2n} + 1}{a^n (a - 1/a)} = \dfrac{a^{2n} + 1}{a^{n+1} - a^{n-1}}                            \\
+                         & = \dfrac{a^{2n} + 1}{a^2 - 1} \cdot \dfrac{1}{a^{n-1}}.
+    \end{align*}
+    Por otro lado, para \( z = 1/a \) \begin{align*}
+        \text{Res}(G, 1/a) & = \text{lim}_{z \to 1/a} (z - 1/a) G(z) = \text{lim}_{z \to 1/a} (z - 1/a) \dfrac{z^{2n} + 1}{z^n (z - a)(z - 1/a)} \\
+                           & = \dfrac{{(1/a)}^{2n} + 1}{ {(1/a)}^n (1/a - a) } = \dfrac{ {(1/a)}^{2n} + 1 }{ {(1/a)}^{n+1} - {(1/a)}^{n-1} }
+    \end{align*}
+    Para el residuo en \( z = 0 \) debemos realizar un desarrollo un poco más sofisticado \[
+        G(z) = \dfrac{z^{2n} + 1}{z^n (z-a)(z-1/a)} = \dfrac{1}{z^n} \left( \dfrac{z^{2n}}{(z-a)(z-1/a)} + \dfrac{1}{(z-a)(z-1/a)} \right)
+    \]
+    Miremos ahora el segundo sumando \begin{align*}
+        \dfrac{1}{(z-a)(z-1/a)} & = \dfrac{A}{z-a} + \dfrac{B}{z-1/a} = \dfrac{A(z - 1/a) + B(z - a)}{(z-a)(z-1/a)} \\
+                                & = \dfrac{(A+B)z - (A/a + Ba)}{(z-a)(z-1/a)}
+    \end{align*}
+    Igualando numeradores obtenemos el sistema \begin{align*}
+        A + B              & = 0 \\
+        -\dfrac{A}{a} - Ba & = 1
+    \end{align*}
+    de donde \( A = \dfrac{a}{a^2 - 1} \) y \( B = \dfrac{-a}{a^2 - 1} \). Por lo tanto, \begin{align*}
+        \dfrac{1}{(z-a)(z-1/a)} & = \dfrac{a}{a^2 - 1} \dfrac{1}{z-a} - \dfrac{a}{a^2 - 1} \dfrac{1}{z-1/a}
+    \end{align*}
+    Reemplazando en \( G(z) \): \begin{align*}
+        G(z) & = \dfrac{1}{z^n} \left( \dfrac{z^{2n}}{(z-a)(z-1/a)} + \dfrac{a}{a^2 - 1} \dfrac{1}{z-a} - \dfrac{a}{a^2 - 1} \dfrac{1}{z-1/a} \right)                                                                   \\
+             & = \dfrac{1}{z^n} \left[ \dfrac{z^{2n}}{(z-a)(z-1/a)} + \dfrac{a}{a^2 - 1} \left( \dfrac{1}{z-a} - \dfrac{1}{z-1/a} \right) \right]                                                                       \\
+             & = \dfrac{1}{z^n} \left[ \dfrac{z^{2n}}{(z-a)(z-1/a)} + \dfrac{a}{a^2 - 1} \left( \dfrac{1}{-a} \dfrac{1}{1-z/a} + \dfrac{1}{1/a} \dfrac{1}{1-az} \right) \right]                                         \\
+             & = \dfrac{1}{z^n} \left[ \dfrac{z^{2n}}{(z-a)(z-1/a)} + \dfrac{a}{a^2 - 1} \left( \dfrac{1}{-a} \sum_{k \geq 0} {\left( \dfrac{z}{a} \right)}^k + \dfrac{1}{1/a} \sum_{k \geq 0} {(az)}^k \right) \right] \\
+    \end{align*}
+    Luego, el término que acompaña a \( \dfrac{1}{z} \) en el desarrollo de Laurent de \( G \) alrededor de \( z = 0 \) es \begin{align*}
+        \text{Res}(G, 0) & = \dfrac{a}{a^2 - 1} \left( \dfrac{1}{-a} \cdot \dfrac{1}{a^{n-1}} + \dfrac{1}{1/a} \cdot a^{n-1} \right) \\
+                         & = \dfrac{a}{a^2 - 1} \left( \dfrac{-1}{a^n} + a^n \right )
+    \end{align*}
+    Para calcular el índice de la curva en \( z = 0, a, 1/a \) notemos que como \( z = 0 \) se encuentra dentro de \( \{ \gamma \} \) y \( \{ \gamma \} \) es una curva cerrada y simple, entonces \( \text{n}(\gamma, 0) = 1 \).
+    Por otro lado, si \( |a| < 1 \) entonces \( a \in \D \) y \( 1/a \notin \D \)
+    por lo que \( \text{n}(\gamma, a) = 1 \) y \( \text{n}(\gamma, 1/a) = 0 \). Si \( |a| > 1 \)
+    entonces \( a \notin \D \) y \( 1/a \in \D \) por lo que \( \text{n}(\gamma, a) = 0 \) y \( \text{n}(\gamma, 1/a) = 1 \). Como por hipótesis \( a^2 \neq 1 \) se tiene que \( a \notin \{ \gamma \} \).
+    Finalmente, juntando todo tenemos que \begin{align*}
+        I & = \dfrac{-1}{4 i a} 2 \pi i \left( \text{Res}(G, 0) + \text{n}(\gamma, a) \text{Res}(G, a) + \text{n}(\gamma, 1/a) \text{Res}(G, 1/a) \right) \\
+          & = \dfrac{-\pi}{2a} \left( \text{Res}(G, 0) + \text{n}(\gamma, a) \text{Res}(G, a) + \text{n}(\gamma, 1/a) \text{Res}(G, 1/a) \right)
+    \end{align*}
+    Si \( |a| < 1 \) entonces \begin{align*}
+        I & = \dfrac{-\pi}{2a} \left( \dfrac{a}{a^2 - 1} \left( \dfrac{-1}{a^n} + a^n \right) + \dfrac{a^{2n} + 1}{a^{n+1} - a^{n-1}} \right) \\
+          & = \dfrac{-\pi}{2(a^2 - 1)} \left( -\dfrac{1}{a^n} + a^n + \dfrac{a^{2n} + 1}{a^n} \right)                                         \\
+          & = \dfrac{-\pi}{2(a^2 - 1)} \left( a^n + \dfrac{a^{2n} + 1 - 1}{a^n} \right)                                                       \\
+          & = \dfrac{-\pi}{2(a^2 - 1)} \left( a^n + a^n \right) = \dfrac{-\pi a^n}{a^2 - 1} = \dfrac{\pi a^n}{1 - a^2}
+    \end{align*}
+    Si \( |a| > 1 \) entonces \begin{align*}
+        I & = \dfrac{-\pi}{2a} \left( \dfrac{a}{a^2 - 1} \left( \dfrac{-1}{a^n} + a^n \right) + \dfrac{{(1/a)}^{2n} + 1}{{(1/a)}^{n+1} - {(1/a)}^{n-1}} \right) \\
+          & =  \dfrac{-\pi}{2a} \left(\dfrac{a^{n+1} - a^{-(n-1)}}{a^2-1} - \dfrac{a^{n+1}(a^{-2n}+1)}{a^2-1} \right)                                           \\
+          & = \dfrac{-\pi}{2a} \left( \dfrac{1}{a^2-1} \left( a^{n+1} - a^{-n+1} - (a^{-n+1} + a^{n+1}) \right)     \right)                                     \\
+          & = \dfrac{-\pi}{2a} \left( \dfrac{-2a^{-n+1}}{a^2-1} \right)                                                                                         \\
+          & = \dfrac{\pi a^{-n}}{a^2 - 1}                                                                                                                       \\
+    \end{align*}
+\end{proof}
+\end{document}

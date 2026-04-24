@@ -1,0 +1,328 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                       % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica I}
+\author{Bustos Jordi\\Teoría de conjuntos}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sean \(A\) y \(B\) dos conjuntos y \( f:A\rightarrow B\) una función. Sean \( M\subseteq A\) y \(N\subseteq B\). Demostrar:
+    \begin{enumerate}
+        \item \(M\subseteq f^{-1}(f(M))\). Además, si \(f\) es inyectiva entonces vale la igualdad.
+        \item \(f(f^{-1}(N))\subseteq N\). Además, si \(f\) es suryectiva entonces vale la igualdad.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{proof}
+    (a) Para demostrar que \(M\subseteq f^{-1}(f(M))\), tomamos un elemento \(x \in M\). Por definición de imagen, \(f(x) \in f(M)\). Luego, por definición de preimagen, \(x \in f^{-1}(f(M))\). Por lo tanto, \(M \subseteq f^{-1}(f(M))\).
+    Ahora, si \(f\) es inyectiva, queremos demostrar que \(f^{-1}(f(M)) \subseteq M\). Tomamos un elemento \(y \in f^{-1}(f(M))\). Esto significa que \(f(y) \in f(M)\), lo que implica que existe un elemento \(x \in M\) tal que \(f(y) = f(x)\). Dado que \(f\) es inyectiva, concluimos que \(y = x\), y por lo tanto \(y \in M\). Así, \(f^{-1}(f(M)) \subseteq M\).
+
+    (b) Para demostrar que \(f(f^{-1}(N))\subseteq N\), tomamos un elemento \(z \in f(f^{-1}(N))\). Esto significa que existe un elemento \(w \in f^{-1}(N)\) tal que \(f(w) = z\). Por definición de preimagen, \(w \in f^{-1}(N)\) implica que \(f(w) \in N\). Por lo tanto, \(z = f(w) \in N\), y así \(f(f^{-1}(N)) \subseteq N\).
+    Ahora, si \(f\) es suryectiva, queremos demostrar que \(N \subseteq f(f^{-1}(N))\). Tomamos un elemento \(n \in N\). Dado que \(f\) es suryectiva, existe un elemento \(a \in A\) tal que \(f(a) = n\). Por definición de preimagen, \(a \in f^{-1}(N)\) porque \(f(a) = n \in N\). Luego, \(f(a) \in f(f^{-1}(N))\), lo que implica que \(n \in f(f^{-1}(N))\). Por lo tanto, \(N \subseteq f(f^{-1}(N))\).
+\end{proof}
+
+\begin{ejercicio}{2}
+    Sean \(A\) y \(B\) dos conjuntos y \( f:A\rightarrow B\) una función. Sea \( {\{M_{i}\}}_{i\in I} \) una familia no vacía de subconjuntos de \(A\) y \( {\{N_{j}\}}_{j\in J} \) una familia no vacía de subconjuntos de \(B\). ¿Qué relación de inclusión existe entre cada par de conjuntos en los siguientes casos?:
+    \begin{enumerate}
+        \item \(f(\bigcup_{i\in I}M_{i})\) y \(\bigcup_{i\in I}f(M_{i})\). \(f^{-1}(\bigcup_{j\in J}N_{j})\) y \(\bigcup_{j\in J}f^{-1}(N_{j})\).
+        \item \(f(\bigcap_{i\in I}M_{i})\) y \(\bigcap_{i\in I}f(M_{i})\). \(f^{-1}(\bigcap_{j\in J}N_{j})\) y \(\bigcap_{j\in J}f^{-1}(N_{j})\).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{3}
+    Sean \(A\) y \(B\) dos conjuntos, \(N\subseteq B\) y \(f:A\rightarrow B\) una función. ¿Qué relación de inclusión existe entre los siguientes conjuntos?:
+    \(f^{-1}(B-N)\) y \(A-f^{-1}(N)\).
+\end{ejercicio}
+
+\begin{proof}
+    \( x \in f^{-1}(B-N) \iff f(x) \in B-N \iff f(x) \notin N \iff x \notin f^{-1}(N) \iff x \in A - f^{-1}(N) \).
+\end{proof}
+
+\begin{ejercicio}{4}
+    Sean \(A\) y \(B\) dos conjuntos, \(M\subseteq A\) y \(f:A\rightarrow B\) una función. ¿Qué relación de inclusión existe entre los siguientes conjuntos?:
+    \(f(A-M)\) y \(B-f(M)\).
+    ¿Qué propiedades sobre \(f\) son necesarias para que sea válida la igualdad de los conjuntos anteriores?.
+\end{ejercicio}
+
+\begin{proof}
+    Para ver que \( f(A-M) \subseteq B-f(M) \), tomamos un elemento \( y \in f(A - M) \subseteq B \), luego existe un elemento \( x \in A - M \) tal que \( f(x) = y \). Dado que \( x \notin M \), no es posible que \( f(x) \in f(M) \), por lo que \( y \in B - f(M) \).
+    Para ver que la otra contención no vale consideremos el siguiente contraejemplo, sea \( A = \{ a, b \} \), \( B = \{ c, d \} \), \( M = \{ a \} \) y \( f : A \to B \) definida por \( f(a) = c \) y \( f(b) = c \). Entonces \( f(A - M) = f(\{ b \}) = \{ c \} \) y \( B - f(M) = B - f(\{ a \}) = B - \{ c \} = \{ d \} \), por lo que \( f(A - M) \not\subseteq B - f(M) \).
+    Para que se cumpla la igualdad \( f(A - M) = B - f(M) \) es necesario que \( f \) sea inyectiva. En efecto, si \( f \) es inyectiva, entonces \( f(M) \) es un subconjunto de \( B \) que no contiene a ningún elemento de \( f(A - M) \), lo que implica que \( f(A - M) \subseteq B - f(M) \). Por otro lado, si \( y \in B - f(M) \), entonces no existe ningún elemento \( x \in M \) tal que \( f(x) = y \). Dado que \( f \) es inyectiva, esto implica que no existe ningún elemento \( x \in A - M \) tal que \( f(x) = y \), lo que implica que \( y \in f(A - M) \). Por lo tanto, \( B - f(M) \subseteq f(A - M) \). Combinando ambas contenciones, concluimos que \( f(A - M) = B - f(M) \) si \( f \) es inyectiva.
+\end{proof}
+
+\begin{ejercicio}{5}
+    Para \(f:A\rightarrow B\), \(g:B\rightarrow C\) y \(M\subseteq C\). Entonces \( {(g\circ f)}^{-1}(M)=f^{-1}(g^{-1}(M)) \).
+\end{ejercicio}
+
+\begin{proof}
+    Es claro que \( {(g \circ f)}^{-1} \) es la inversa de \( g \circ f \), luego \[
+        f^{-1}(g^{-1}) \circ (g \circ f) = id_A = (g \circ f) \circ f^{-1}(g^{-1}) \implies f^{-1}(g^{-1}) = {(g \circ f)}^{-1}
+    \]
+    por la unicidad de la inversa de una función.
+\end{proof}
+
+\begin{ejercicio}{6}
+    Sea \( X \) un conjunto y \( F:\mathcal{P}(X)\rightarrow\mathcal{P}(X)\) tal que si \(U\subseteq V\subseteq X\) entonces \(F(U)\subseteq F(V)\). Demostrar que existe \(Z\in\mathcal{P}(X)\) tal que \(F(Z)=Z\).
+\end{ejercicio}
+
+\begin{proof}
+    Definamos la siguiente familia de conjuntos \[
+        \mathcal{F} = \{ A \subseteq X : A \subseteq F(A) \}
+    \]
+    Nuestro candidato es \[
+        Z = \bigcup_{A \in \mathcal{F}} A
+    \]
+    En efecto, veamos que \( Z \subseteq F(Z) \). Dado \( A \in Z \) existe un \( A_0 \in \mathcal{F} \) tal que \( A \in A_0 \). Por definición de \( \mathcal{F} \) se tiene que \( A_0 \subseteq F(A_0) \) y
+    como \( A_0 \) es parte de la unión que conforma a \( Z \) se tiene que \( A_0 \subseteq Z \) y tenemos que \( F(A_0) \subseteq F(Z) \) por hipotesis, luego \[
+        A \in A_0 \subseteq F(A_0) \subseteq F(Z) \implies Z \subseteq F(Z)
+    \]
+    y, por lo tanto, \( Z \subseteq F(Z) \).
+    Por otro lado, para ver que \( F(Z) \subseteq Z \) basta notar que \( F(Z) \subseteq F(F(Z)) \) y esto implica que \( F(Z) \in \mathcal{F} \) y por lo tanto \( F(Z) \subseteq Z \).
+\end{proof}
+
+\begin{ejercicio}{7}
+    Demostrar la equivalencia entre:
+    \begin{itemize}
+        \item AdE
+        \item AdE 2
+        \item Para cualquier familia \( {\{X_{i}\}}_{i\in I}\) de conjuntos no vacios y disjuntos dos a dos existe un conjunto \(Y\) que cumple \(|Y\cap X_{i}|=1\) para cada \(i\in I\).
+    \end{itemize}
+\end{ejercicio}
+
+\begin{definition}[AdE]
+    Sea \( A \neq \varnothing \) un conjunto. Entonces existe una función \[
+        e: \mathcal{P}_0(A) \to A \quad \text{tal que} \quad e(X) \in X \text{ para todo } X \in \mathcal{P}_0(A)
+    \]
+\end{definition}
+
+\begin{definition}[AdE 2]
+    Dada una familia de conjuntos \( {\{ X_i \}}_{i \in I} \) vale que \[
+        \text{si } X_j \neq \varnothing \quad \forall j \in I \implies \prod_{i \in J} X_i \neq \varnothing
+    \]
+\end{definition}
+
+\begin{proof}
+    Para demostrar que AdE implica AdE 2, supongamos que AdE es cierta. Luego, dada la familia \( {\{ X_i \}}_{i \in I} \) con \( X_j \neq \varnothing \) para todo \( j \in I \), sea \( e \) la función de elección del axioma:
+    definimos \[
+        f: I \to \bigcup_{i \in I} X_i \quad \text{tal que} \quad f(i) = e(X_i) \in X_i
+    \]
+    Esto implica que \( f \in \prod_{i \in I} X_i \), por lo tanto \( \prod_{i \in I} X_i \neq \varnothing \).
+
+    Veamos que AdE 2 implica la tercera afirmación. Dada la familia \( {\{ X_i \}}_{i \in I} \) de conjuntos no vacíos y disjuntos dos a dos, por AdE 2 existe una función \( f \in \prod_{i \in I} X_i \).
+    Definamos ahora el conjunto \( Y = \{ f(i) : i \in I \} \) que es la imagen de \( f \). Dado que \( f(i) \in X_i \) para cada \( i \in I \) y que \( f(i) \neq f(j) \) si \( i \neq j \) por ser disjuntos dos a dos,
+    se tiene que \( |Y \cap X_i| = 1 \) para cada \( i \in I \).
+
+    Finalmente veamos que la tercera afirmación implica AdE. Dado \( \mathcal{P_0}(A) = \mathcal{F} \) definamos la familia \[
+        \mathcal{\bar{F}} = \{ X \times \{ X \} : X \in \mathcal{F} \}
+    \]
+    Notar que la familia \( \mathcal{\bar{F}} \) es una familia de conjuntos no vacíos y disjuntos dos a dos. Por hipotesis existe un conjunto \( Y \) tal que \( |Y \cap (X \times \{ X \})| = 1 \).
+    Digamos que \( Y \cap (X \times \{ X \}) = (x, X) \) para cada \( X \in \mathcal{F} \). Definamos ahora la función de elección \( e : \mathcal{F} \to A \) por \( e(X) = x \). Es claro que \( e(X) \in X \) para cada \( X \in \mathcal{F} \), por lo tanto AdE se cumple.
+\end{proof}
+
+\begin{ejercicio}{8}
+    Dar contraejemplos para mostrar que no son válidas las recíprocas de las siguientes implicaciones:
+    Buen orden \( \implies \) Orden total \( \implies \) Lattice \( \implies \) Orden dirigido (superiormente e inferiormente)
+\end{ejercicio}
+
+\begin{definition}[Buen orden]
+    Un orden \( (A, \leq) \) es un buen orden si todo subconjunto no vacío de \( A \) tiene un primer elemento.
+\end{definition}
+
+\begin{definition}[Orden total]
+    Un orden \( (A, \leq) \) es un orden total si para todo \( a, b \in A \) se cumple que \( a \leq b \) o \( b \leq a \).
+\end{definition}
+
+\begin{definition}[Lattice]
+    Un orden \( (A, \leq) \) es un lattice si para todo \( a, b \in A \) existen el supremo \( a \vee b \) y el ínfimo \( a \wedge b \).
+\end{definition}
+
+\begin{definition}[Orden Dirigido]
+    Un orden \( (A, \leq) \) es un orden dirigido superiormente si para todo \( a, b \in A \) existe \( c \in A \) tal que \( a \leq c \) y \( b \leq c \). De manera similar, es un orden dirigido inferiormente si para todo \( a, b \in A \) existe \( d \in A \) tal que \( d \leq a \) y \( d \leq b \).
+\end{definition}
+
+\begin{proof}
+    Para el ejemplo de un orden total que no sea un buen orden consideremos \( (\Z, \leq) \), el orden es total pero el subconjunto \( \N^- \) no tiene primer elemento, por lo tanto no es un buen orden. \\
+    Un Lattice que no es Orden total es el siguiente, dado \( X \) un conjunto con al menos dos elementos, \( (\mathcal{P}(X), \subseteq) \) pues los singueletes son incomparables. \\
+    Para el contraejemplo de un orden dirigido que no es un lattice consideremos el siguiente conjunto \( A = \{ a, b, c, d, e \} \) con el orden dado por \begin{itemize}
+        \item \( a \leq c \) y \( b \leq c \)
+        \item \( a \leq d \) y \( b \leq d \)
+        \item \( c \leq e \) y \( d \leq e \)
+        \item Las cotas superiores de \( \{ a, b \} \) son \( \{ c, d, e \} \) y no existe una cota superior mínima pues \( c \) y \( d \) son incomparables, por lo tanto no es un lattice.
+    \end{itemize}
+\end{proof}
+
+\begin{ejercicio}{9}
+    Demostrar que el orden definido entre los números cardinales es un orden total.
+\end{ejercicio}
+
+\begin{proof}
+    Sean A y B conjuntos cualesquiera quiero ver que existe \( f : A \to B \) inyectiva o \( g: A \to B \) suryectiva para poder garantizar que \( |A| \leq |B| \) o \( |B| \leq |A| \).
+
+    Para esto consideremos: \[
+        F = \{  (X, f) : X \subseteq A \text{ y } f: X \to B \text{ inyectiva} \}
+    \]
+    Ahora dotemos a \( F \) con el orden \( (X, f) \leq ( Y, g ) \) si \( X \subseteq Y \) y \( g(x) = f(x) \) para todo \( x \in X \), es decir \( g \) extiende a \( f \).
+    Para aplicar el LdZ necesitamos ver que toda cadena tiene un elemento maximal, pero esto es sencillo, dada una cadena podemos tomar la unión de todos los dominios \( U \) de la misma y definir la función \( h: U \to B \) inyectiva tomando el valor que le daba cualquiera de las funciones en la cadena.
+    Luego, es claro que \( (U, h) \) es cota superior de la cadena y esto nos dice que existe \( (M, f^*) \) elemento maximal de \( F \) con \( M \subseteq A \).
+
+    Consideremos los dos casos posibles, si \( M = A \) entonces \( f^* : M = A \to B \) es inyectiva, por otro lado si \( M \neq A \) entonces existe al menos un elemento \( a \in A - M \). Si existiese \( b \in B \) tal que \( f^*(a) = b \) entonces \( (M, f^*) \) no sería maximal.
+    Esto nos dice que la imagen de \( f^* \) debe ser todo \( B \), entonces podemos concluir que \( |A| \leq |B| \) o \( |B| \leq |A| \) y por lo tanto el orden definido entre los números cardinales es un orden total.
+\end{proof}
+
+\begin{ejercicio}{10}
+    Demostrar las siguientes propiedades referida a conjuntos numerables.
+    \begin{enumerate}
+        \item El producto cartesiano de \(n\) conjuntos numerables es también un conjunto numerable.
+        \item La unión de una cantidad numerable de conjuntos numerables es un conjunto numerable.
+        \item Todo subconjunto de un conjunto numerable es un conjunto numerable.
+        \item Partes finitas de un conjunto numerable es también un conjunto numerable.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{proof}
+    (a) Se demuestra por inducción sobre la cantidad de conjuntos \(n\).
+
+    \textbf{Caso base (\(n=2\)):} Sean \(A\) y \(B\) dos conjuntos numerables. Existen funciones inyectivas \(f: A \to \N\) y \(g: B \to \N\). Definimos una nueva función para el producto cartesiano \(h: A \times B \to \N\) de la siguiente manera:
+    \(h(a, b) = 2^{f(a)} \cdot 3^{g(b)}\)
+
+    Por el Teorema Fundamental de la Aritmética (la factorización en números primos es única), si \(2^{f(a)} \cdot 3^{g(b)} = 2^{f(a')} \cdot 3^{g(b')}\), entonces obligatoriamente \(f(a) = f(a')\) y \(g(b) = g(b')\). Como \(f\) y \(g\) son inyectivas, esto implica que \(a = a'\) y \(b = b'\). Por lo tanto, \(h\) es inyectiva y \(A \times B\) es numerable.
+
+    \textbf{Paso inductivo:} Asumimos que el producto cartesiano de \(k\) conjuntos numerables es numerable (hipótesis inductiva). Queremos probarlo para \(k+1\) conjuntos. Sabemos que:
+    \(\prod_{i=1}^{k+1} A_i \cong \left( \prod_{i=1}^{k} A_i \right) \times A_{k+1}\)
+
+    Por hipótesis inductiva, el término \(\prod_{i=1}^{k} A_i\) es un conjunto numerable. \(A_{k+1}\) también lo es por definición. Al agruparlos así, tenemos el producto cartesiano de \textit{dos} conjuntos numerables, que ya demostramos en el caso base que es numerable. Por el principio de inducción, la propiedad se cumple para todo \(n\).
+
+    (b) Sea \( {\{A_i \}}_{i \in \N}\) una familia numerable de conjuntos numerables. Queremos demostrar que su unión \(U = \bigcup_{i \in \N} A_i\) es numerable.
+
+    Como cada \(A_i\) es numerable, podemos listar sus elementos. Sea \(a_{i,j}\) el \(j\)-ésimo elemento del conjunto \(i\)-ésimo.
+    Para definir una función inyectiva \(F: U \to \N\), tomamos un elemento cualquiera \(x \in U\). Como \(x\) puede pertenecer a varios conjuntos de la familia, elegimos el menor índice \(i\) tal que \(x \in A_i\), y luego elegimos el índice \(j\) correspondiente a su posición en ese conjunto (es decir, \(x = a_{i,j}\)).
+
+    Definimos la función:
+    \(F(x) = 2^i \cdot 3^j\)
+
+    Dado que para cada \(x\) los valores de \(i\) y \(j\) elegidos son únicos, y la factorización en primos es única, \(F(x) = F(y)\) implica que tienen los mismos índices \(i\) y \(j\), por lo tanto \(x = y\). Así, \(F\) es inyectiva y la unión \(U\) es numerable.
+
+    (c) Sea \(A\) un conjunto numerable y sea \(B \subseteq A\) un subconjunto cualquiera de \(A\).
+
+    Dado que \(A\) es numerable, existe una función inyectiva \(f: A \to \N\).
+    Consideramos la restricción de \(f\) al subconjunto \(B\), denotada como \(f|_B : B \to \N\). Esta función simplemente toma un elemento \(x \in B\) y le aplica la misma regla \(f(x)\).
+
+    Si tomamos \(x, y \in B\) tales que \(f|_B(x) = f|_B(y)\), esto significa que \(f(x) = f(y)\). Como sabemos que \(f\) original es inyectiva en todo el dominio \(A\), concluimos que \(x = y\).
+    Al haber encontrado una función inyectiva de \(B\) a \(\N\), queda demostrado que \(B\) es numerable.
+
+    (d) Sea \(A\) un conjunto numerable. Queremos demostrar que el conjunto de todas sus partes finitas, \(\mathcal{P}_{fin}(A)\), es numerable.
+
+    Podemos clasificar los subconjuntos finitos por su tamaño. Sea \(S_k\) el conjunto de todos los subconjuntos de \(A\) que tienen exactamente \(k\) elementos.
+    Cualquier subconjunto de tamaño \(k\) puede formarse eligiendo \(k\) elementos de \(A\), lo cual puede representarse ordenando arbitrariamente sus elementos como una \(k\)-tupla, es decir, un elemento de \(A^k\).
+
+    Dado que \(A\) es numerable, \(A^k\) es el producto cartesiano de \(k\) conjuntos numerables, el cual sabemos que es numerable por la propiedad (a). Como todo elemento de \(S_k\) proviene de \(A^k\), \(S_k\) debe ser numerable (es la imagen de un conjunto numerable).
+
+    Finalmente, el conjunto de todas las partes finitas es la unión de todos estos conjuntos según su tamaño:
+    \(\mathcal{P}_{fin}(A) = \bigcup_{k=0}^{\infty} S_k\)
+
+    Esta es la unión numerable (indexada por \(k \in \N_0\)) de conjuntos numerables (\(S_k\)). Por la propiedad (b), esta unión es un conjunto numerable.
+
+\end{proof}
+
+\begin{ejercicio}{11}
+    Demostrar que \( {\{0,1\}}^{\N} \) no es numerable.
+\end{ejercicio}
+
+\begin{proof}
+    Procederemos por reducción al absurdo utilizando el argumento diagonal de Cantor. Supongamos que el conjunto \( S = {\{0,1\}}^\N \) es numerable.
+
+    Esto implica que existe una biyección entre los números naturales \( \N \) y \( S \). Por lo tanto, podemos enumerar todas las sucesiones de \(S\) como \(s_1, s_2, s_3, \dots \), donde cada sucesión \(s_n\) se puede escribir en función de sus componentes como:
+    \[s_n = (s_{n,1}, s_{n,2}, s_{n,3}, \dots)\]
+    con \( s_{n,i} \in \{0,1\} \) para todo \(n, i \in \N\).
+
+    Construyamos ahora una nueva sucesión \(d = (d_1, d_2, d_3, \dots)\) tal que su \(n\)-ésimo término se define invirtiendo el \(n\)-ésimo término de la \(n\)-ésima sucesión de nuestra lista. Formalmente:
+    \[d_n = 1 - s_{n,n}\]
+    (es decir, si \(s_{n,n} = 0\), entonces \(d_n = 1\); y si \(s_{n,n} = 1\), entonces \(d_n = 0\)).
+
+    Dado que cada \(d_n \in \{0,1\} \), es claro que la sucesión \(d \in S\). Sin embargo, por construcción, la sucesión \(d\) difiere de cada sucesión \(s_n\) en al menos el \(n\)-ésimo término (ya que \(d_n \neq s_{n,n}\)).
+
+    Por lo tanto, \( d \neq s_n \) para todo \(n \in \N \), lo que significa que \(d\) no está en nuestra enumeración original. Esto contradice el supuesto de que habíamos enumerado \emph{todas} las sucesiones de \(S\). Esta contradicción demuestra que nuestro supuesto inicial era falso, por lo que concluimos que \( {\{0,1\}}^\N \) no es numerable.
+\end{proof}
+
+\begin{ejercicio}{12}
+    Demostrar que si \(A\) es infinito y \(F\) es finito entonces \(|A\cup F|=|A|\).
+\end{ejercicio}
+
+\begin{proof}
+    Por el teorema de Cantor-Bernstein-Schröder, para demostrar que \(|A\cup F|=|A|\) es suficiente mostrar que \(A\cup F\) se inyecta en \(A\) y que \(A\) se inyecta en \(A\cup F\).
+    Consideremos por un lado \( f : A \to A \cup F \) definida por \( f(a) = a \) para todo \( a \in A \). Esta función es claramente inyectiva.
+
+    Veamos ahora como construir una función inyectiva \( g : A \cup F \to A \). Dado que \( F \) es finito podemos considerar \[
+        F = \{ x_1 , \ldots , x_n \}
+    \]
+    Por el \textbf{Teorema 1.6.1} del apunte sabemos que \( \exists B \subset A \) tal que \( |B| = \aleph_0 \), es decir, \(B\) es un subconjunto infinito numerable de \(A\). Por lo tanto, podemos enumerar los elementos de \(B\) como \( B = \{ b_1 , b_2 , b_3 , \ldots \} \).
+    Definamos ahora la función \( g : A \cup F \to A \) de la siguiente manera:
+    \[
+        g(x) = \begin{cases}
+            x       & \text{si } x \in A - B                                   \\
+            b_i     & \text{si } x = x_i \in F \text{ para } i = 1, \ldots , n \\
+            b_{n+i} & \text{si } x = b_i \in B \text{ para } i = 1, 2, \ldots
+        \end{cases}
+    \]
+    Es fácil verificar que \( g \) es inyectiva. Luego por el teorema de Cantor-Bernstein-Schröder, concluimos que \( |A\cup F|=|A| \).
+\end{proof}
+
+\section*{Ejercicios complementarios}
+
+\begin{ejercicio}{1}
+    Demostrar que todo morfismo \( f:A\rightarrow A\) (\(A \) un retículo completo) tiene al menos un punto fijo.
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Demostrar que existe al menos un conjunto de números reales que no es medible Lebesgue.
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Demostrar que en todo conjunto no vacío puede definirse una estructura de grupo.
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Demostrar que el cardinal de un conjunto infinito es igual al cardinal de su conjunto partes finitas.
+\end{ejercicio}
+
+\end{document}

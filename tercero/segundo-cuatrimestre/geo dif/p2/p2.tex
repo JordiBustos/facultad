@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Práctica II}
+
+\maketitle
+
+\begin{theorem}{6}
+    Sean \( W \subseteq \R^3 \) abierto y \( f : W \to \R \) una función suave. Definimos una función suave \( \textit{grad}(f) : W \to \R^3 \) como: \begin{align*}
+        \textit{grad}(f) = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)
+    \end{align*}
+    Demostrar que si \( a \in \R \) es un valor regular de \( f \) y \( S := f^{-1}(a) \),
+    entonces para todo \( p \in S \), \( \textit{grad}(f(p)) \) es un vector no nulo ortogonal al plano tangente \( T_p S \).
+\end{theorem}
+
+\begin{proof}
+    Como \( a \) es un valor regular de \( f \) tenemos, por definición, que \( d f_p \) es suryectiva. Supongamos que \( \textit{grad}(f(p)) = 0 \).
+    Entonces \( d f_p(v) = \textit{grad}(f(p)) \cdot v = 0 \) para todo \( v \in \R^3 \), pero por el teorema de la dimensión tenemos que: \begin{align*}
+        \text{dim}(\text{Im}(d f_p)) = \text{dim}(\R^3) - \text{dim}(\text{Ker}(d f_p)) = 3 - 3 = 0
+    \end{align*}
+    Lo cual es una contradicción, pues \( df_p \) es suryectiva. Por lo tanto \( \exists v \in \R^3 \) tal que \( df_p(v) \neq 0 \) y entonces \( \textit{grad}(f(p)) \neq 0 \). \\
+    Sea \( \alpha : (-\epsilon, \epsilon) \to S \) una curva suave tal que \( \alpha(0) = p \) y \( \alpha'(0) = w \in T_p S \). Entonces \( \beta = f \circ \alpha : (-\epsilon, \epsilon) \to \R \) es diferenciable y \begin{align*}
+        \beta'(0) = df_p(w) = \textit{grad}(f(\alpha(0))) \cdot \alpha'(0) = \textit{grad}(f(p)) \cdot w = 0
+    \end{align*}
+    Pues \( f(\alpha(t)) = a \quad \forall t \in (-\epsilon, \epsilon) \implies \beta \equiv a \therefore \beta' \equiv 0 \). Así, \( \textit{grad}(f(p)) \) es ortogonal a \( T_p S \).
+\end{proof}
+\end{document}

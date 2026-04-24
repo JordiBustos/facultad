@@ -1,0 +1,660 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                       % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                   % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+\newcommand{\coint}[2]{\left[ #1, #2 \right)}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica II}
+\author{Bustos Jordi\\Espacios Topológicos}
+
+\maketitle
+
+\section{Parte I}
+
+\begin{ejercicio}{1}
+    Demostrar que \(\overline{X-A} = X - \Int{A} \) y \({(X-A)}^\circ = X - \cl{A}\).
+\end{ejercicio}
+
+\begin{proof}
+    Para ver que \( X - \cl{A} = {(X - A)}^\circ \) notemos que \[
+        X - \cl{A} = \bigcup \, \{ X - F : F \text{ cerrado}, A \subseteq F \} = \bigcup \, \{ U : U \text{ abierto}, U \subseteq X - A \} = {(X - A)}^\circ
+    \]
+    y analogamente para \( \overline{X - A} = X - \Int{A} \): \[
+        \overline{X - A} = \bigcap \, \{ F : F \text{ cerrado}, X - A \subseteq F \} = \bigcap \, \{ X - U : U \text{ abierto}, A \subseteq U \} = X - \Int{A}
+    \]
+\end{proof}
+
+\begin{ejercicio}{2}
+    Determinar si la familia \( \tau \subseteq \mathcal{P}(X) \) es una topología sobre \( X \) para los siguientes casos:
+    \begin{enumerate}
+        \item \( X=\R^{2} \) y \( \tau \) integrada por \( \varnothing \), \( X \) y todos los círculos abiertos centrados en el origen.
+        \item \(X=\R \) y \(\tau \) integrada por \(\varnothing \), \(X\) y los conjuntos infinitos de \(X\).
+        \item \(X\) un conjunto y \(\tau \) integrada por \(\varnothing \) y los conjuntos cuyo complemento es finito.
+        \item \(X\) un conjunto y \(\tau \) integrada por \(\varnothing \) y los conjuntos cuyo complemento es numerable.
+        \item \(X\) un conjunto y \(\tau \) integrada por \(\varnothing \), \(X\) y los conjuntos cuyo complemento es infinito.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{proof}
+    Veamos cada caso por separado:
+    \begin{enumerate}
+        \item Es una topología, ya que que \( \varnothing, X \in \tau \), la únión de cualquier colección de círculos abiertos es un círculo abierto cuyo radio es el supremo de los radios de los círculos que forman la colección (puede ser \( r = \infty \)) y la intersección finita de círculos abiertos es el círculo abierto cuyo radio es el menor de los radios de los círculos que forman la colección. Es el menor y no el ínfimo por ser finitos.
+        \item No es topología pues \( A \cap B = \{ 0 \} \) si \( A = \{ 0 \} \cup (1, \infty) \in \tau \) y \( B = \{ 0 \} \cup (-\infty, -1) \in \tau \).
+        \item Es una topología, ya que \( \varnothing, X \in \tau \), la unión de cualquier colección de conjuntos con complemento finito es un conjunto con complemento finito y la intersección finita de conjuntos con complemento finito es un conjunto con complemento finito.
+        \item Análogamente al caso anterior, es una topología.
+        \item No es una topología, dado \( a \in X \) definamos \( F = \{ \{ x \} : x \in X - \{ a \} \} \) una familia de elementos de \( \tau \), pero \( \bigcup F = X - \{ a \} \) no es un elemento de \( \tau \).
+    \end{enumerate}
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{3}
+    Mostrar que los conjuntos \((t,+\infty)\) junto con \(\varnothing \) y \(\R \) forman una topología en \(\R \). Dado \(a\in\R \) calcular \(\overline{\{a\}}\).
+\end{ejercicio}
+\begin{proof}
+    Por definición de \( \tau \) se tiene que \( \varnothing, \R \in \tau \), la unión de cualquier colección de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\sup_{t \in T} t, +\infty) \) (notar que si \( \sup_{t \in T} t = +\infty \) entonces el conjunto resultante es vacío y está en la topología) y la intersección finita de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\text{max}_{t \in T} t, +\infty) \). Por lo tanto, \( \tau \) es topología.
+
+    Nuevamente por definición se tiene que:
+    \[
+        \overline{\{ a \}} = \bigcap \, \{ F : F \text{ cerrado en } \tau, \{ a \} \subseteq F \}
+    \]
+    Notemos que \( F \) es cerrado en \( \tau \) si y sólo si \( \R - F \) es de la forma \( (t, +\infty) \) o vacío, entonces \( F \) es cerrado si y sólo si \( F = \R \) o \( F = (-\infty, t] \) para algún \( t \in \R \). Por lo tanto, reemplazando en la expresión anterior:
+    \[
+        \overline{\{ a \}} = \bigcap \, \{ F : F = \R \text{ o } F = (-\infty, t] \text{ para algún } t \in \R, a \in F \} = (-\infty, a]
+    \]
+\end{proof}
+
+\begin{ejercicio}{4}
+    Sea \((X, d)\) un espacio métrico, demostrar que \((X,\tau_{d})\) es un espacio topológico.
+\end{ejercicio}
+\begin{proof}
+    Sea \( \mathcal{F} \) una familia arbitraria de elementos de \( \tau_d \) entonces \( \bigcup \mathcal{F} \) es abierto, ya que dado \( x \in \bigcup \mathcal{F} \) existe al menos un \( f \in \mathcal{F} \) tal que \( x \in f \) y como
+    \( f \) es d-abierto existe \( \varepsilon > 0 \) tal que \( B(x, \varepsilon) \subseteq f \subseteq \bigcup \mathcal{F} \). Por lo tanto, \( \bigcup \mathcal{F} \in \tau_d \).
+    Además, si \( F_1, \ldots, F_n \) son elementos de \( \tau_d \) se tiene que si \( x \in \bigcap_{i = 1}^n F_i \) entonces \( x \in F_i \) para cada \( i = 1, \ldots, n\) y
+    entonces existe \( \varepsilon_i > 0 \) tal que \( B(x, \varepsilon_i) \subseteq F_i \) para cada \( i = 1, \ldots, n\). Por lo tanto, \( B(x, \text{min}_{i = 1}^n \varepsilon_i) \subseteq \bigcap_{i = 1}^n F_i \) y entonces \( \bigcap_{i = 1}^n F_i \in \tau_d \).
+    Es claro que \( \varnothing, X \in \tau_d \) por lo que \( (X, \tau_d) \) es un espacio topológico.
+\end{proof}
+
+\begin{ejercicio}{5}
+    Sean \((X, d)\) un espacio métrico y \(A\subset X\). Probar que \(x\in\cl{A}\iff d(x,A)=0\). Deducir que \(A\) es cerrado si y sólo si \(d(y,A)=0\Rightarrow y\in A\).
+\end{ejercicio}
+\begin{proof}
+    Supongamos que \( x \in \cl{A} \) entonces dado \( \varepsilon > 0 \) se tiene que \( B(x, \varepsilon) \cap A \neq \varnothing \) y por lo tanto existe \( a \in A \) tal que \( d(x, a) < \varepsilon \). Esto nos dice que \( d(x, A) = \text{inf}_{a \in A} d(x, a) = 0 \).
+    Recíprocamente, supongamos que \( d(x, A) = 0 \) entonces dado \( \varepsilon > 0 \) existe \( a \in A \) tal que \( d(x, a) < \varepsilon \) y por lo tanto \( B(x, \varepsilon) \cap A \neq \varnothing \). Esto nos dice que \( x \in \cl{A} \).
+    Para la segunda parte, si \( A \) es cerrado entonces \( A = \cl{A} \) y por lo tanto si \( d(y, A) = 0 \) entonces \( y \in \cl{A} = A \). Recíprocamente, si \( d(y, A) = 0 \Rightarrow y \in A \) entonces \( \cl{A} = A \) y por lo tanto \( A \) es cerrado.
+\end{proof}
+
+\begin{ejercicio}{6}
+    Dado \(X\) un espacio topológico. Demostrar que \(\partial A=\partial(X-A)\) y \(\partial(A\cup B)\subseteq\partial A\cup\partial B\).
+\end{ejercicio}
+\begin{proof}
+    Para la primera parte basta con notar que: \[
+        \partial A = \cl{A} \cap \overline{X - A} = \cl{A} \cap (X - \Int{A}) = \cl{A} - \Int{A}
+    \]
+    luego, \[
+        \partial(X - A) = \overline{X - A} \cap \overline{X - (X - A)} = \overline{X - A} \cap \Int{A} = \cl{A} - \Int{A} = \partial A
+    \]
+    Para ver la contención consideremos \( x \in \partial (A \cup B) \implies x \in \overline{A \cup B} \) y \( x \in \overline{X - (A \cup B)}\). La primera pertenencia nos dice que \( x \in \cl{A} \cup \overline{B} \) y la segunda nos dice que \( x \in \overline{(X-A) \cap (X-B)} \subseteq \overline{X-A} \cap \overline{X-B} \)
+    Luego, si ocurre que \( x \in \cl{A} \) entonces debe ser que \( x \in \overline{X-A} \) y por lo tanto \( x \in \partial A \). De manera análoga, si ocurre que \( x \in \overline{B} \) debe ser que \( x \in \partial B \). Por lo tanto, vale \( \partial (A \cup B) \subseteq \partial A \cup \partial B \).
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{7}
+    Para \(B \subset X\) se define \( C(\varnothing) = \varnothing \) y \( C(A) = A \cup B\). Mostrar que \( C \) es un operador clausura y determinar los abiertos asociados.
+\end{ejercicio}
+\begin{proof}
+    Definimos operador clausura como \( cl : \mathcal{P}(X) \to \mathcal{P}(X) \) tal que para todo \( A, B \subseteq X \) vale que:
+    \begin{enumerate}
+        \item \( A \subseteq cl(A) \)
+        \item \( A \subseteq B \implies cl(A) \subseteq cl(B) \)
+        \item \( cl(cl(A)) = cl(A) \)
+    \end{enumerate}
+    Veamos que \( C \) cumple estas propiedades:
+    \begin{enumerate}
+        \item Para todo \( A \subseteq X \) se tiene que \( A \subseteq A \cup B = C(A) \).
+        \item Si \( E \subseteq F \) entonces \( E \cup B \subseteq F \cup B \) y por lo tanto \( C(E) \subseteq C(F) \).
+        \item Para todo \( A \subseteq X \) se tiene que \( C(C(A)) = C(A \cup B) = (A \cup B) \cup B = A \cup B = C(A) \).
+    \end{enumerate}
+    Por lo tanto, \( C \) es un operador clausura. Para determinar los abiertos asociados notemos que \( A \) es abierto asociado a \( C \) si y sólo si \( X - A \) es cerrado asociado a \( C \) o equivalentemente \[
+        C(X - A) = (X - A) \iff (X - A) \cup B = X - A \iff B \subseteq X - A \iff A \subseteq X - B
+    \]
+    Por lo tanto, los abiertos asociados a \( C \) son exactamente los subconjuntos de \( X - B \).
+\end{proof}
+
+\begin{ejercicio}{8}
+    Sea \( X = \R \) y sea \( \mathcal{S} = \{ (-\infty,a) : a \in \R \} \cup \{ (b,\infty) : b \in \R \} \).
+    \begin{enumerate}
+        \item Probar que \(\mathcal{S}\) es una subbase.
+        \item Determinar explícitamente la base generada por \(\mathcal{S}\).
+        \item Identificar la topología generada y compararla con la topología usual.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Para ver que es subbase recordemos la \textbf{Proposición 2.3.2} del apunte de Demetrio que nos dice que si \( \bigcup \mathcal{S} = X \) entonces: \[
+        \tau(\mathcal{S}) = \{ \text{ unión arbitraria de intersecciones finitas de elementos de } \mathcal{S} \, \}
+    \]
+    Luego, por definición necesitamos ver que: \[
+        \tau(\mathcal{S}) = \tau
+    \]
+    En efecto, dado \( U \in \tau \) entonces \( U = \bigcup_{i \in I} (a_i, b_i) \) para algún \( I \) y \( a_i, b_i \in \R \), luego para cada \( i \in I \) tomamos \( (-\infty, b_i) \cap (a, +\infty) = (a_i, b_i) \) y por lo tanto \[
+        U = \bigcup_{i \in I} \, (a_i, b_i) = \bigcup_{i \in I} \, \left( (-\infty, b_i) \cap (a_i, +\infty) \right) \in \tau(\mathcal{S}) \text{ por la Proposición 2.3.2}
+    \]
+    Dado ahora \( U \in \tau(\mathcal{S}) \) entonces \( U = \bigcup_{i \in I} \, \bigcap_{j = 1}^{n_i} S_{ij} \) para algún \( I \), \( n_i \in \N \) y \( S_{ij} \in \mathcal{S} \) para cada \( i \in I \) y \( j = 1, \ldots, n_i \). Notemos que cada intersección finita de elementos de \( \mathcal{S} \) es un intervalo abierto o vacío, ya que si \( S_{ij} = (-\infty, a_{ij}) \) entonces \( S_{i1} \cap S_{i2} \cap \ldots \cap S_{in_i} = (-\infty, a_i) \) donde \( a_i = \text{min}_{j = 1}^{n_i} a_{ij} \) y si \( S_{ij} = (b_{ij}, +\infty) \) entonces \( S_{i1} \cap S_{i2} \cap \ldots \cap S_{in_i} = (b_i, +\infty) \) donde \( b_i = max_{j = 1}^{n_i} b_{ij} \). Por lo tanto, cada intersección finita de elementos de \( S \) es un intervalo abierto o vacío y por lo tanto su unión es un conjunto abierto en la topología usual. Por lo tanto, \( U = \bigcup_{i\in I} (a_i, b_i) \in \tau(\mathcal{S})\). Luego, \( \tau(\mathcal{S}) = \tau \) y por lo tanto \( \mathcal{S} \) es una subbase de la topología usual.
+
+    Para el inciso (b) basta con notar que la base generada por \( \mathcal{S} \) es la colección de intersecciones finitas de elementos de \( \mathcal{S} \) que pueden resultar vacías, intervalos abiertos o semirrectas abiertas. Por lo tanto, \[
+        \mathcal{B} = \varnothing \cup \R \cup \{ (a, b) : a, b \in \R \cup \{-\infty, +\infty \}, a < b \}
+    \]
+    Finalmente, para el inciso (c), notemos que ya demostramos que \( \mathcal{S} \) es base de la topología usual, por lo tanto \( \tau(\mathcal{S}) \) es la topología usual de \( \R \).
+\end{proof}
+
+\begin{ejercicio}{9}
+    Sea \(X\) un conjunto y \(\mathcal{F}\subset\mathcal{P}(X)\).
+    \begin{enumerate}
+        \item Probar que existe una única topología que contiene a \(\mathcal{F}\) como subbase.
+        \item Describirla explícitamente como intersecciones finitas y uniones arbitrarias.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Consideremos la colección de todas las topologías sobre \( X \) que contienen a \( \mathcal{F} \) y llamemosla \( \mathcal{A} \). Luego, \[
+        \tau = \bigcap_{\tau_i \in \mathcal{A}} \tau_i
+    \]
+    es la topología que tiene a \( \mathcal{F} \) como subbase. Entonces, si \( \tau^{\prime} \) es una topología que tiene a \( \mathcal{F} \) como subbase, en particular es topología y contiene a \( \mathcal{F} \) entonces es una de los \( \tau_i \) y, por lo tanto, \( \tau \subseteq \tau^{\prime} \). Aplicando el mismo razonamiento a \( \tau^{\prime} \) se tiene que \( \tau^{\prime} \subseteq \tau \) y por lo tanto \( \tau = \tau^{\prime} \). Por lo tanto, \( \tau \) es la única topología que tiene a \( \mathcal{F} \) como subbase.
+
+    Para describirla explícitamente, notemos que \[
+        \mathcal{B} = \{ V_1 \cap \cdots \cap V_n : n \in \N \text{ y } V_1, \ldots, V_n \in \mathcal{F} \}
+    \]
+    es base de \( \tau(\mathcal{F}) \) y por lo tanto \[
+        \tau(\mathcal{F}) = \left \{ \bigcup_{i \in I} B_i : I \text{ es un conjunto de índices y } B_i \in \mathcal{B} \text{ para cada } i \in I \right \}
+    \]
+\end{proof}
+
+\begin{ejercicio}{10}
+    Dada una familia \( \{\tau_{i}:i\in I\} \) de topologías en un conjunto \(X\). Mostrar que \(\bigwedge_{i\in I}\tau_{i}\) y \(\bigvee_{i\in I}\tau_{i}\) son topologías en \(X\); y son las topologías ínfimo y supremo de la familia (en el orden entre topologías).
+\end{ejercicio}
+\begin{proof}
+    Veamos primero que \( \bigcap_{i \in I} \tau_i \) es una topología. Es claro que \( \varnothing, X \in \bigcap_{i \in I} \tau_i \). Además, si \( \mathcal{F} \) es una familia arbitraria de elementos de \( \bigcap_{i \in I} \tau_i \) entonces \( \bigcup \mathcal{F} \in \tau_i \) para cada \( i \in I \) y por lo tanto \( \bigcup \mathcal{F} \in \bigcap_{i \in I} \tau_i \). Finalmente, si \( F_1, \ldots, F_n \) son elementos de \( \bigcap_{i \in I} \tau_i \) entonces \( F_1, \ldots, F_n \in \tau_i \) para cada \( i \in I \) y por lo tanto \( F_1 \cap F_2 \cap \ldots \cap F_n \in \tau_i \) para cada \( i \in I\) y por lo tanto \( F_1 \cap F_2 \cap \ldots \cap F_n \in \bigcap_{i \in I} \tau_i \). Por lo tanto, \( \bigcap_{i \in I} \tau_i \) es una topología.
+    Análogamente se puede demostrar que \( \bigcup_{i \in I} \tau_i \) es una topología.
+
+    Veamos ahora que \( \bigcap_{i \in I} \tau_i \) es el ínfimo de la familia. Dado \( i \in I \) es claro que \( \bigcap_{i \in I} \tau_i \subseteq \tau_i \), por lo que es cota inferior. Veamos que es la menor de las cotas inferiores con el orden entre topologías. Sea \( \tau \) una topología tal que \( \tau \subseteq \tau_i \) para cada \( i \in I \). Entonces, \( \tau \subseteq \bigcap_{i \in I} \tau_i \) y por lo tanto \( \bigcap_{i \in I} \tau_i \) es el ínfimo de la familia. Análogamente se puede demostrar que \( \bigcup_{i \in I} \tau_i \) es el supremo de la familia.
+\end{proof}
+
+\begin{ejercicio}{11}
+    Demuestre que si \(\mathcal{A}\) es una base para una topología sobre \(X\), entonces la topología generada por \(\mathcal{A}\) es igual a la intersección de todas las topologías sobre \(X\) que contienen a \(\mathcal{A}\). Pruebe lo mismo si \(\mathcal{A}\) es una subbase.
+\end{ejercicio}
+\begin{proof}
+    Queremos ver que \( \tau(\mathcal{A}) \) que es la menor topología que contiene a \( \mathcal{A} \) es igual a la intersección de todas las topologías que contienen a \( \mathcal{A} \). En efecto, si \( \tau(\mathcal{A}) \) es la menor topología que contiene a \( \mathcal{A} \) es claro que \( \tau(\mathcal{A}) \subseteq \bigcap \, \{ \tau : \tau \text{ es topología y } \mathcal{A} \subseteq \tau \} \).
+    Para ver que \[
+        \mathcal{F} = \bigcap \, \{ \tau : \tau \text{ es topología y } \mathcal{A} \subseteq \tau \} \subseteq \tau(\mathcal{A})
+    \]
+    consideremos \( U \in \mathcal{F} \), entonces \( U \in \tau \) para cada topología \( \tau \) que contiene a \( \mathcal{A} \). En particular, \( U \in \tau(\mathcal{A}) \) y por lo tanto \( U \in \tau(\mathcal{A}) \). Por lo tanto, \( \mathcal{F} = \tau(\mathcal{A}) \).
+
+    Para el caso de subbase, notemos que la base generada por la subbase es una base y por lo tanto el resultado se sigue del caso anterior. Se puede ver que \( \tau(\mathcal{A}) = \tau(\mathcal{B}) \) donde \( \mathcal{B} = \{ V_1 \cap \cdots \cap V_n : n \in \N \text{ y } V_1, \ldots, V_n \in \mathcal{A} \} \) es la base generada por la subbase \( \mathcal{A} \).
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{12}
+    Dado \((\Sigma,\le)\) un conjunto ordenado. Un \( I\subseteq\Sigma \) se dice hereditario si cumple que dado \(p\in I\) y \(q\ge p\) implica \(q\in I\). Mostrar que los conjuntos hereditarios forman una topología en \( \Sigma \) y admite la siguiente base: \(\mathcal{B}_{1}= \{ [p) : p \in \Sigma \} \) siendo \( [p)=\{q\in\Sigma:p\le q\} \).
+\end{ejercicio}
+\begin{proof}
+    Veamos que los conjuntos hereditarios forman una topología. Es claro que \( \varnothing, \Sigma \) son hereditarios.
+    Además, si \( \mathcal{F} \) es una familia arbitraria de conjuntos hereditarios entonces dado \( p \in \bigcup \mathcal{F} \), \( q \geq p \) quiero ver que \( q \in \bigcup \mathcal{F} \). En efecto, dado \( p \in \bigcup \mathcal{F} \) existe \( A \in \mathcal{F} \) tal que \( p \in A \) y como \( A \) es hereditario entonces \( q \in A \subseteq \bigcup \mathcal{F} \). Por lo tanto, \( \bigcup \mathcal{F} \) es hereditario y pertenece a la topología.
+    Si consideramos \( F_1, \ldots, F_n \), \( n \in \N \) conjuntos hereditarios entonces dado \( p \in \bigcap_{i = 1}^n F_i \), \( q \geq p \) quiero ver que \( q \in \bigcap_{i = 1}^n F_i \). Como cada uno de los \( F_i \) es hereditario entonces \( q \in F_i \) para cada \( i \in \{ 1, \ldots, n \} \) y por lo tanto \( q \in \bigcap_{i = 1}^n F_i \). Por lo tanto, \( \bigcap_{i = 1}^n F_i \) es hereditario y pertenece a la topología. Por lo tanto, los conjuntos hereditarios forman una topología.
+
+    Por la \textbf{Proposición 2.3.2 (1)} del apunte de Demetrio se tiene que \( \mathcal{B}_1 \) es una base de la topología de los conjuntos hereditarios si y sólo si se cumple que dados \[
+        U, V \in \mathcal{B}_1 \text{ y } x \in U \cap V \Rightarrow \exists W \in \mathcal{B}_1 : x \in W \subseteq U \cap V
+    \]
+    entonces dados \( \coint{p_1}{q_1} \) y \( \coint{p_2}{q_2} \) en \( \mathcal{B}_1 \) y dado \( x \in \coint{p_1}{q_1} \cap \coint{p_2}{q_2} \) entonces el conjunto \( \coint{x}{y} \) es un elemento de \( \mathcal{B}_1 \) que contiene a \( x \) y está contenido en \( \coint{p_1}{q_1} \cap \coint{p_2}{q_2} \). Por lo tanto, \( \mathcal{B}_1 \) es una base de la topología de los conjuntos hereditarios.
+\end{proof}
+
+\clearpage
+
+\section{Parte II}
+
+\begin{ejercicio}{1}
+    Mostrar que en cualquier espacio topológico las siguientes propiedades son equivalentes entre sí.
+    \begin{enumerate}
+        \item \( X \) es \( T_{1} \).
+        \item Los puntos de \( X \) son cerrados.
+        \item Para todo \( x\in X \) vale que \( \bigcap\mathcal{O}(x)=\{x\} \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Recordemos que el hecho de que \( X \) sea \( T_1 \) significa que para \( x, y \in X \) distintos, existe \( U, V \in \mathcal{O}(x) \) tal que \( x \notin V \) e \( y \notin U \).
+    Supongamos entonces que  \( X \) es \( T_1 \) y veamos que los puntos de \( X \) son cerrados. Dado \( x \in X \) se tiene que para cada \( y \in X \) con \( x \neq y \) vale que existe \( V \in \mathcal{O}(x) \) tal que \( y \notin V \).
+    Por lo tanto, \( X - \{ x \} = \bigcup_{y \in X - \{ x \}} V_y \) donde \( V_y \in \mathcal{O}(x) \) es tal que \( y \notin V_y \). Por lo tanto, \( X - \{ x \} \) es abierto por ser unión de una familia de conjuntos abiertos y por lo tanto \( \{ x \} \) es cerrado.
+
+    Consideremos ahora que todos los puntos de \( X \) son cerrados, entonces dado \( x \in X \) se tiene que \( \{ x \} \) es cerrado y por lo tanto \( X - \{ x \} \) es abierto. Sabemos que \( \mathcal{O}(x) = \{ U \subseteq X : U \text{ es entorno de } x \} \) y \( U \) es entorno de \( x \) si existe \( A \) abierto tal que \( x \in A \subseteq U \).
+    Notar que \[
+        \{ x \} \subseteq \bigcap \mathcal{O}(x) \text{ es trivial}
+    \]
+    Veamos que \( \bigcap \mathcal{O}(x) \subseteq \{ x \} \). En efecto, dado \( y \in X - \{ x \} \) como \( X - \{ y \} \) es un abierto tal que \( x \in X - \{ y \} \) entonces \( X - \{ y \} \in \mathcal{O}(x) \) y por lo tanto \( y \notin \bigcap \mathcal{O}(x) \), como esto vale para todo \( y \in X \) se tiene que \( \bigcap \mathcal{O}(x) = \{ x \} \).
+
+    Finalmente veamos que si \( \forall x \in X \) se tiene que \( \bigcap \mathcal{O}(x) = \{ x \} \) entonces \( \forall x, y \in X \) con \( x \neq y \) existe \( U, V \in \mathcal{O}(x) \) tal que \( x \notin V \) e \( y \notin U \).
+    En efecto, dado \( x, y \in X \) con \( x \neq y \) entonces \( y \notin \bigcap \mathcal{O}(x) \) y por lo tanto existe al menos un \( U \in \mathcal{O}(x) \) tal que \( y \notin U \). De manera análoga, existe al menos un \( V \in \mathcal{O}(y) \) tal que \( x \notin V \). Por lo tanto, vale que \( X \) es \( T_1 \).
+\end{proof}
+
+\begin{ejercicio}{2}
+    Mostrar que en cualquier espacio topológico las siguientes propiedades son equivalentes entre sí.
+    \begin{enumerate}
+        \item \( X \) es \( T_{2} \).
+        \item Para todo \( x\in X \) vale que \( \bigcap_{U\in\mathcal{O}(x)}\overline{U}=\{x\} \).
+        \item Si \( x \neq y \) entonces existe \( U\in\mathcal{O}(x) \) tal que \( y\notin\overline{U} \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Recordemos que el hecho de que \( X \) sea \( T_2 \) significa que dados \( x, y \in X \) distintos entonces existen \( U \in \mathcal{O}(x) \) y \( V \in \mathcal{O}(y) \) tal que \( U \cap V = \varnothing \).
+    Supongamos entonces que \( X \) es \( T_2 \) y veamos que \( \bigcap_{U \in \mathcal{O}(x)} \overline{U} = \{ x \} \) para cada \( x \in X \). Dado \( x \in X \) es claro que \( x \in \bigcap_{U \in \mathcal{O}(x)} \overline{U} \).
+    Veamos ahora que \( \bigcap_{U \in \mathcal{O}(x)} \overline{U} \subseteq \{ x \} \). En efecto, dado \( y \in X \) con \( y \neq x \) entonces como \( X \) es \( T_2 \) existe \( U \in \mathcal{O}(x) \) y \( V \in \mathcal{O}(y) \) tal que \( U \cap V = \varnothing \).
+    Entonces como \( U \in \mathcal{O}(x) \) y \( U \cap V = \varnothing \) entonces \( y \notin \overline{U} \) y por lo tanto \( y \notin \bigcap_{U \in \mathcal{O}(x)} \overline{U} \therefore \bigcap_{U \in \mathcal{O}(x)} \overline{U} = \{ x \} \).
+
+    Supongamos que \( \forall x \in X \) vale que \( \bigcap_{U\in\mathcal{O}(x)}\overline{U}=\{x\} \) y veamos que si \( x \neq y \) entonces existe \( U\in\mathcal{O}(x) \) tal que \( y\notin\overline{U} \). En efecto,
+    como \( y \notin \bigcap_{U \in \mathcal{O}(x)} \overline{U} \) entonces existe \( U \in \mathcal{O}(x) \) tal que \( y \notin \overline{U} \).
+
+    Finalmente supongamos que si \( x \neq y \) ambos pertenecientes a \( X \) entonces existe \( U \in \mathcal{O}(x) \) tal que \( y \notin \overline{U} \) y veamos que \( X \) es \( T_2 \). En efecto, por la \textbf{Proposición 2.2.4} del apunte de Demetrio
+    vale que si \( y \notin \overline{U} \) entonces existe \( V \in \mathcal{O}^a(y) \) tal que \( U \cap V = \varnothing \). Por lo tanto, tomando \( U, V \) como los abiertos de la definición se tiene que \( X \) es \( T_2 \).
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{3}
+    Sea \((X, \tau)\) un ET de clase \(T_{1}\), y sea \(A\subseteq X\). Probar que \(x\in A^{\prime}\iff V\cap A\) es infinito, para todo \( V \in \mathcal{O}(x)\).
+    Mostrar también que lo anterior puede ser falso si \(X\) no es de clase \(T_{1}\).
+\end{ejercicio}
+\begin{proof}
+    Dado \( (X, \tau) \) un espacio topológico de clase \( T_1\) y sea \( A \subseteq X \). Veamos que si \( \exists V \in \mathcal{O}(x) \) tal que \( V \cap A \) es finito entonces \( x \notin A' \).
+    En efecto, dado \( V \in \mathcal{O}(x) \) de esa forma, se tiene que \( A \cap V = \{ a_1 \} \cup \cdots \cup \{ a_n \} \) con \( n \in \N \), como la unión finita de conjuntos cerrados es cerrado entonces \( A \cap V \) es cerrado, cada uno de ellos lo es por el \textbf{Ejercicio 1}.
+    Luego \( F = (A \cap V) - \{ x \} \) es un conjunto cerrado y finito que no contiene a \( x \). Por lo tanto, \( X - F \) es abierto. Si definimos \( W = V - F \) entonces \( W \) es abierto por ser la intersección de dos abiertos.
+    Como \( x \in V \) y \( x \notin F \) entonces \( x \in W \). Esto nos dice que \( W \in \mathcal{O}(x) \) y \[
+        W \cap A = (V - F) \cap A = (V \cap A) - F = (V \cap A) - ((V \cap A) - \{ x \}) \subseteq \{ x \}
+    \]
+    Luego, \( (W - \{ x \}) \cap A = \varnothing \) y por lo tanto \( x \notin A' \).
+
+    Si \( \forall V \in \mathcal{O}(x) \) se tiene que \( V \cap A \) es infinito entonces veamos que \( x \in A' \). Por definición, \( x \in A' \) si y sólo si \( \forall V \in \mathcal{O}(x) \) se tiene que \( (V - \{ x \}) \cap A \neq \varnothing \), como \( A \cap V \) es infinito, entonces \( A \cap (V - \{ x \}) \) es infinito y en particular no vacío. Por lo tanto, \( x \in A' \).
+
+    Supongamos que \( X = \{ a, b \} \) y que \( \tau = \{ \varnothing, X \} \) es la topología trivial. En este caso \( X \) no es \( T_1 \) y dado \( A = \{ a \} \) entonces \( A' = \{ b \} \) pero \( V \cap A = A \) es finito para \( V = X \). Por lo tanto, si \( X \) no es \( T_1 \) no vale la equivalencia dada.
+\end{proof}
+
+\begin{ejercicio}{4}
+    Mostrar que en los espacios de clase \(T_{1}\) las siguientes propiedades son equivalentes entre sí
+    \begin{enumerate}
+        \item \(X\) es regular.
+        \item Dados \(x\in X\) y un abierto \( W \in \mathcal{O}^{a}(x)\) existe \( U \in \tau \) tal que \(x \in U \subseteq \overline{U} \subseteq W\).
+        \item Dados \(x\in X\) y un cerrado \(F_2\) tales que \( x \notin F_2 \) se verifica que existe un abierto \(U\) tal que \(x \in U\) pero \(F_2 \cap U = \varnothing \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Dado \( X \) de clase \( T_1 \) regular veamos que dado \(x \in X \) y \( W \in \mathcal{O}^a(x) \) existe \( U \in \tau \) tal que \( x \in U \subseteq \overline{U} \subseteq W \).
+    En efecto, dado \( x \in X \) y \( W \in \mathcal{O}^a(x) \) entonces podemos tomar \( F = X - W \) que es un cerrado tal que \( x \notin F \).
+    Por la regularidad de \( X \) existe \( U \in \mathcal{O}(x) \) y \( V \in \tau \) tal que \( F \subseteq V \) y \( U \cap V = \varnothing \). En particular \( F \cap U = (X-W) \cap U = \varnothing \), por lo que \( U \subseteq W \). Además, \( U \subseteq X - F \) y como \( X - F \) es cerrado entonces \( \overline{U} \subseteq X - F = W \). Por lo tanto, \( x \in U \subseteq \overline{U} \subseteq W \).
+
+    Veamos ahora que dados \(x \in X\) y un abierto \(W \in \mathcal{O}^{a}(x)\) existe \(U \in \tau \) tal que \(x \in U \subseteq \overline{U} \subseteq W\) vale que dados \(x \in X\) y un cerrado \(F_{2}\) tales que \(x \notin F_{2}\) se verifica que existe un abierto \(U\) tal que \(x\in U\) pero \(F_{2} \cap U = \varnothing \).
+    En efecto, dado \( x \in X \), \( F_2 \) cerrado tal que \( x \notin F_2 \) consideremos \( W = X - F_2 \) que es un abierto tal que \( x \in W \). Por hipótesis, existe \( U \in \tau \) tal que \( x \in U \subseteq \overline{U} \subseteq W \). Como \( U \subseteq W = X - F_2 \) se tiene que \( U \cap F_2 = \varnothing \). Por lo tanto, \( x \in U \) y \( F_2 \cap U = \varnothing \).
+
+    Finalmente veamos que si dados \( x \in X \) y un cerrado \( F_2 \) tal que \( x \notin F_2 \) se verifica que existe un abierto \( U \) tal que \( x \in U \) pero \( F_2 \cap U = \varnothing \) entonces \( X \) es regular.
+    En efecto, dado \( x \in X \) y \( F \) un cerrado cualquiera tal que \( x \notin F \) entonces por hipótesis existe \( U \in \mathcal{O}(x) \) tal que \( F \cap U = \varnothing \).
+    Además, consideremos \( V = X - \overline{U} \) que es abierto por ser el complemento de un cerrado. Notemos que \( F \subseteq V \) ya que \( F \cap U = \varnothing \) y \( U \subseteq \overline{U} \) entonces \( U \cap V = \varnothing \) y \( F \subseteq V \) que es la definiciónde ser regular.
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{5}
+    Mostrar que en los espacios de clase \(T_{1}\) las siguientes propiedades son equivalentes entre sí
+    \begin{enumerate}
+        \item \(X\) es normal.
+        \item Dados un cerrado \(F\) y un abierto \(W\) tales que \(F \subseteq W\), existe un abierto \(U\) tal que \(F \subseteq U \subseteq \overline{U} \subseteq W\).
+        \item Para todo par de conjuntos cerrados \(F\) y \(F_2\) disjuntos existe un abierto \(U\) tal que \(F \subseteq U\) pero \(F_2 \cap \overline{U} = \varnothing \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Recordemos que si \( X \) es normal entonces dados \( F_1 \) y \( F_2 \) dos subconjuntos cerrados y disjuntos de \( X \) entonces existen \( U \) y \( V \) dos abiertos disjuntos de la topología tal que \( F_1 \subseteq U \) y \( F_2 \subseteq V \).
+    Supongamos entonces que \( X \) es normal y veamos que dados un cerrado \( F \) y un abierto \( W \) tales que \( F \subseteq W \) existe un abierto \( U \) tal que \( F \subseteq U \subseteq \overline{U} \subseteq W \).
+    En efecto, dado \( F \) cerrado y \( W \) abierto tal que \( F \subseteq W \) entonces \( F \) y \( X - W \) son cerrados y disjuntos.
+    Por la normalidad de \( X \) existe \( U, V \) abiertos disjuntos de la topología tal que \( F \subseteq U \) y \( X - W \subseteq V \).
+    En particular, \( U \subseteq X - V \) y como \( X - V \) es cerrado entonces \( \overline{U} \subseteq X - V \subseteq W \). Por lo tanto, \( F \subseteq U \subseteq \overline{U} \subseteq W \).
+
+    Supongamos que vale que dado un cerrado \( F \) y un abierto \( W \) tales que \( F \subseteq W \) existe un abierto \( U \) tal que \( F \subseteq U \subseteq \overline{U} \subseteq W \) y veamos que para todo par de conjuntos cerrados disjuntos existe un abierto \( U \) tal que \( F \subseteq U \) pero \( F_2 \cap \overline{U} = \varnothing \).
+    En efecto, dado \( F_1 \) y \( F_2 \) cerrados y disjuntos entonces \( F_1 \subseteq X - F_2 \) y \( X - F_2 \) es un abierto. Por hipótesis, existe \( U \) abierto tal que \( F_1 \subseteq U \subseteq \overline{U} \subseteq X - F_2 \) y por lo tanto \( F_2 \cap \overline{U} = \varnothing \).
+
+    Finalmente, supongamos que para todo par de conjuntos cerrados disjuntos existe un abierto \( U \) tal que \( F \subseteq U \) pero \( F_2 \cap \overline{U} = \varnothing \) y veamos que \( X \) es normal.
+    En efecto, dados \( F_1 \) y \( F_2 \) cerrados y disjuntos entonces por hipótesis existe \( U \) abierto tal que \( F_1 \subseteq U \) pero \( F_2 \cap \overline{U} = \varnothing \).
+    Además, consideremos \( V = X - \overline{U} \) que es abierto por ser el complemento de un cerrado. Notemos que \( F_2 \subseteq V \) ya que \( F_2 \cap \overline{U} = \varnothing \) y \( U \subseteq \overline{U} \)
+    entonces \( U \cap V = \varnothing \) y \( F_2 \subseteq V \) que es la definición de ser normal.
+\end{proof}
+
+\begin{ejercicio}{6}
+    Sea \(X\) un conjunto infinito y \( \tau_{CF} = \{ \varnothing \} \cup \{ X-V : V \in \mathcal{P}_{F}(X) \} \) (denominada topología co-finita). Identificar sus propiedades de separabilidad.
+    Muestre que para otra topología en \(X\) es \(T_{1}\) sii \( \tau_{CF} \subseteq \tau \).
+\end{ejercicio}
+\begin{proof}
+    Dado \( X \) un conjunto infinito y \( \tau_{CF} \) la topología co-finita, veamos que \( (X, \tau_{CF}) \) es \( T_1 \), pero no es \( T_2 \). Dados \( x, y \in X \) con \( x \neq y \), entonces
+    \( X - \{ y \} \) es un abierto de \( \tau_{CF} \) que contiene a \( x \) y no a \( y \). De manera análoga, \( X - \{ x \} \) es un abierto de \( \tau_{CF} \) que contiene a \( y \) y no a \( x \). Por lo tanto, \( (X, \tau_{CF}) \) es \( T_1 \).
+
+    Sin embargo, \( (X, \tau_{CF}) \) no es \( T_2 \) ya que dados \( x, y \in X \) con \( x \neq y \) entonces dados dos abiertos \( U, V \in \tau_{CF} - \varnothing \) tales que \( |U^c| < \infty \) y \( |V^c| < \infty \) se tiene que
+    \( {(U \cap V)}^c = U^c \cup V^c \) es finito y por lo tanto \( X - (U \cap V) \neq X \) entonces \( U \cap V \neq \varnothing \) y por lo tanto \( (X, \tau_{CF}) \) no es \( T_2 \).
+
+    Veamos ahora que para otra topología \( \tau \) en \( X \) es \( T_1 \sii \tau_{CF} \subseteq \tau \).
+    En efecto, si \( X \) es \( T_1 \) entonces dado \( x \in X \) se tiene que \( \{ x \} \) es cerrado en \( \tau \) y por lo tanto \( U = \{ x_1, \ldots, x_n \} \subseteq X \) es cerrado. Esto implica que \( X - U \) es un abierto de \( \tau \) entonces \( \tau_{CF} \subseteq \tau \).
+    Por otro lado, si \( \tau_{CF} \subseteq \tau \) entonces dado \( x, y \in X \) con \( x \neq y \) entonces \( X - \{ y \} \) es un abierto de \( \tau_{CF} \) que contiene a \( x \) y no a \( y \). De manera análoga, \( X - \{ x \} \) es un abierto de \( \tau_{CF} \) que contiene a \( y \) y no a \( x \). Por lo tanto, \( (X, \tau) \) es \( T_1 \).
+\end{proof}
+
+\begin{ejercicio}{7}
+    Sea \(\R \) con la topología co-finita. Mostrar que no es \(N_{2}\).
+\end{ejercicio}
+\begin{proof}
+    Dado \( \R \) con la topología co-finita, veamos que \( (\R, \tau_{CF}) \) no es \( N_2 \). En efecto, supongamos que tenemos \( \beta = {\{ B_n \}}_{n \in \N} \) una base numerable de la topología \( \tau_{CF} \).
+    Como \( B_n \in \tau_{CF} - \varnothing \) entonces \( |B_n^c| < \infty \) y entonces \[
+        C = \bigcup_{n \in \N} B_n^c
+    \]
+    es a lo sumo numerable. Como \( \R \) es no numerable se tiene que debe existir \( x \in \R - C \implies x \in B_n \quad \forall n \in \N \).
+
+    Consideremos ahora cualquier \( y \in \R - \{ x \} \) y tomemos \( U = \R - \{ y \} \) que es un abierto de \( \tau_{CF} \) que contiene a \( x \) pero no a \( y \). Es claro que \( \exists k \in \N \) tal que
+    \( x \in B_k \subseteq U \) y, por lo tanto, \( y \notin B_k \). Si \( y \notin B_k \) entonces \( y \in B_k^c \subseteq C \).
+    Como \( y \in \R - \{ x \} \) era arbitrario entonces \( \R - \{ x \} \subseteq C \) y por lo tanto \( \R - \{ x \} \) es a lo sumo numerable, absurdo \( \therefore (\R, \tau_{CF}) \) no es \( N_2 \).
+
+
+    Como demostración alternativa, podemos notar que si cada \( B_n \) es un abierto de \( \tau_{CF} \) entonces \[
+        B_n = \R - \{ x_1^n, \ldots, x_{k_n}^n \}
+    \]
+    Si consideramos \( C = \bigcup_{n \in \N} B_n^c = \bigcup_{n \in \N} \{ x_1^n, \ldots, x_{k_n}^n \} \) entonces \( C \) es a lo sumo numerable. Como \( C \) no puede cubrir toda la recta real se tiene que debe existir
+    \( x \in \R - C \) tal que \( x \in B_n \) para cada \( n \in \N \). Luego, si consideramos \( U = (-\infty, x) \cup (x, +\infty) \) que es un abierto de \( \tau_{CF} \) se tiene que \( U \) no puede ser escrito como
+    unión arbitraria de elementos de la base ya que cada elemento de la base contiene a \( x \) y \( U \) no lo hace. Por lo tanto, \( (\R, \tau_{CF}) \) no es \( N_2 \).
+\end{proof}
+
+\begin{ejercicio}{8}
+    Se toma en \(\mathbb{R}\) la familia \( \beta = \{ \coint{a}{b} : a, b \in \mathbb{R} \text{ y } a<b\} \) y \(\tau_{s}=\tau(\beta)\) la topología generada por \( \beta \) (denominada topología semi-abierta).
+    Identificar sus propiedades de numerabilidad.
+\end{ejercicio}
+\begin{proof}
+    Para ver que \( \tau_s \) es \( N_1 \) debemos ver que dado \( x \in \R \) existe \( {\{ B_i \}}_{i \in \N} \) una familia numerable
+    de elementos de la topología tal que para cualquier entorno \( U \in \tau_s \) de \( x \) existe un \( i \in \N \) tal que \( x \in B_i \subseteq U \).
+    En efecto, dado \( U \) entorno de \( x \) entonces sabemos que \( x \in \coint{a}{b} \subseteq U \) para algún \( a \leq x < b \) y entonces \( x \in \coint{a}{x+\frac{1}{n}} \subseteq \coint{a}{b} \subseteq U \) para algún \( n \) lo suficientemente grande.
+    Por lo tanto, \( \{ \coint{a}{x+\frac{1}{n}} : n \in \N \} \) es una familia numerable de elementos de \( \tau_s \) tal que para cualquier \( U \) entorno de \( x \) existe un \( n \in \N \) tal que \( x \in \coint{a}{x+\frac{1}{n}} \subseteq U \)
+    \( \therefore (X, \tau_s) \) es \( N_1 \).
+
+    Para ver que \( \tau_s \) no es \( N_2 \) debemos mostrar que no admite una base numerable. Para ello supongamos que \( \beta' \) es una base numerable de \( \tau_s \) y veamos que esto no puede ser.
+    Tenemos que \[
+        \beta' = \left \{ \coint{a_n}{b_n} : a_n, b_n \in \R, \, n \in \N \text{ y } a_n < b_n \right \}
+    \]
+    Luego, como \( \beta' \) es numerable la colección de los \( a_n, b_n \) es numerables y no pueden cubrir toda la recta real. De aquí se deduce que debe existir \( x \in \R \) tal que \( x \neq a_n \)
+    y \( x \neq b_n \) para cada \( n \in \N \). Además, por Arquimedianidad, podemos afirmar que vale lo mismo para \( x + \frac{1}{k} \) con \( k \in \N \) lo suficientemente grande.
+    Por lo tanto, \( \coint{x}{x+\frac{1}{k}} \) es un abierto de \( \tau_s \) que no puede ser escrito como unión de elementos de \( \beta' \) ya que cada elemento de \( \beta' \)
+    que contiene a \( x \) es de la forma \( \coint{a_n}{b_n} \) con \( a_n < x < x+\frac{1}{k} < b_n \) por lo que \( \coint{a_n}{b_n} \) no puede ser incluido en \( \coint{x}{x+\frac{1}{k}} \). Por lo tanto, \( (X, \tau_s) \) no es \( N_2 \).
+
+    Veamos que es Lindeloff, por el \textbf{Ejercicio 2.4.4} del apunte de Demetrio, basta ver que si \( \sigma \subseteq \beta \) es un cubrimiento de \( \R \) entonces existe un subcubrimiento numerable de \( \sigma \).
+    En efecto, dado \( \sigma \) como dijimos, es claro que \( \exists I \) una familia de índices tal que \[
+        \sigma = \{ \coint{a_i}{b_i} : i \in I \} \subseteq \beta
+    \]
+    Luego, como la topología usual de los abiertos de \( \R \) es Lindeloff, existe \( {\{ i_n \}}_{n \in \N} \subseteq I \) tal que \( \{ (a_{i_n}, b_{i_n}) : n \in \N \} \) es un subcubrimiento numerable de \( \R \) contenido en
+    \( \{ (a_i, b_i) : i \in I \} \). Por lo tanto, \( \{ \coint{a_{i_n}}{b_{i_n}} : n \in \N \} \) es un subcubrimiento numerable de \( \sigma \therefore (X, \tau_s) \) es Lindeloff.
+
+    Es claro que la topología semi-abierta es separable tomando \( \Q \) como el numerable denso. Por lo tanto, \( (X, \tau_s) \) es separable.
+
+    En conclusión, \( (X, \tau_s) \) es \( N_1 \), separable y Lindeloff pero no es \( N_2 \).
+\end{proof}
+
+\begin{ejercicio}{9}
+    Sea \((X, \tau)\) un espacio topológico. Considerando las siguientes propiedades:
+    \begin{enumerate}
+        \item \(X\) es \(N_{2}\).
+        \item \(X\) es separable.
+        \item Todo subespacio discreto de \(X\) es a lo sumo numerable.
+        \item Toda familia de abiertos no vacíos y disjuntos dos a dos es numerable.
+        \item \(X\) es Lindelöff.
+    \end{enumerate}
+    Analizar si las siguientes implicaciones son ciertas o no:
+    (i) \((a)\Rightarrow(c)\), (ii) \((b)\Rightarrow(d)\), (iii) \((a)\Rightarrow(d)\), (iv) \((d)\Rightarrow(a)\), (v) \((e)\Rightarrow(b)\).
+\end{ejercicio}
+\begin{proof}
+    Para ver que \( a \implies c \) supongamos que \( X \) es \( N_2 \) y veamos que todo subespacio discreto de \( X \) es a lo sumo numerable. En efecto, dado \( S \subseteq X \) un subespacio discreto
+    y \( \beta \) la base numerable de \( X \) se tiene que para todo \( x \in S \) existe \( U_x \) un abierto en \( X \) tal que \( U_x \cap S = \{ x \} \). Además, como \( \beta \) es una base de la topología
+    entonces vale que \( \exists n \in \N \) tal que \( x \in B_n \subseteq U_x \). Por lo tanto, \[
+        \{ x \} \subseteq B_n \cap S \subseteq U_x \cap S = \{ x \}
+    \]
+    esto nos dice que \( B_n \cap S = \{ x \} \) y, por lo tanto, a cada \( x \in S \) le corresponde un \( B_n \therefore S \) es a lo sumo numerable.
+
+    Para ver que \( b \implies d \) supongamos que \( X \) es separable i.e \( \exists D \subseteq X \) numerable y denso en \( X \) y veamos que toda familia de abiertos no vacíos y disjuntos dos a dos es numerable.
+    Sea \( \sigma \) una familia de abiertos no vacíos y dos a dos disjuntos, se tiene que para todo \( U \in \sigma \) existe \( x_U \in D \cap U \) ya que \( D \) es denso. Además, como \( \sigma \) es una familia
+    de abiertos disjuntos dos a dos entonces \( x_U \neq x_V \) para cada \(U, V \in \sigma \) con \( U \neq V \). Por lo tanto, a cada \( U \in \sigma \) le corresponde un \( x_U \in D \) y como \( D \) es numerable entonces \( \sigma \) es a lo sumo numerable.
+
+    Veamos que \( a \implies d \). Supongamos que \( X \) es \( N_2 \) y consideremos \( \sigma \) una familia de abiertos no vacíos y dos a dos disjuntos. Por ser \( N_2 \) existe \( \beta \) una base numerable de la topología.
+    Luego, para cada \( U \in \sigma \) existe \( B_U \in \beta \) tal que \( B_U \subseteq U \). Además, como \( \sigma \) es una familia de abiertos disjuntos dos a dos entonces \( B_U \neq B_V \) para cada \(U, V \in \sigma \), \( U \neq V \).
+    y el razonamiento es análogo al de la implicación anterior.
+
+    Es claro que \( d \) no implica \( a \), usando el ejemplo del ejercicio anterior que ya vimos que es separable y, por lo tanto, vale \( d \), pero no es \( N_2 \).
+
+    Para ver que Lindeloff no implica separable podemos considerar dado \( X \) un conjunto no numerable y tomar la topología de los conumerables i.e \( \tau_{CO} = \varnothing \cup \{ U \subseteq X : X - U \text{ es a lo sumo numerable} \} \).
+\end{proof}
+
+\begin{ejercicio}{10}
+    Probar que en el caso que \(X\) sea métrico las propiedades del ejercicio 9 son todas equivalentes.
+\end{ejercicio}
+\begin{proof}
+    Por el ejercicio anterior, ya sabemos que en cualquier espacio topológico valen las implicaciones \((a) \implies (c)\), \((b) \implies (d)\) y \((a) \implies (d)\). Además, recordemos que la implicación \((a) \implies (e)\) también es cierta para espacios topológicos en general, ya que de toda base numerable se puede extraer un subcubrimiento numerable para cualquier cubrimiento abierto.
+
+    Para demostrar que las cinco propiedades son equivalentes cuando el espacio está provisto de una métrica \(d\), propondremos el siguiente esquema lógico:
+    Primero, demostraremos el ciclo \((a) \implies (e) \implies (b) \implies (a)\), de donde se deduce que ser \(N_2\), Lindelöf y separable son condiciones equivalentes.
+    Luego, como ya contamos con las implicaciones \((a) \implies (c)\) y \((b) \implies (d)\), bastará con probar que \((c) \implies (b)\) y \((d) \implies (b)\) para concluir que las cinco propiedades son equivalentes.
+
+    En resumen, nos reducimos a demostrar las siguientes cuatro implicaciones utilizando la estructura de espacio métrico:
+    \begin{enumerate}
+        \item \((e) \implies (b)\)
+        \item \((b) \implies (a)\)
+        \item \((c) \implies (b)\)
+        \item \((d) \implies (b)\)
+    \end{enumerate}
+
+    Veamos que Lindeloff implica separable. Supongamos que \( X \) es Lindeloff y consideremos la familia de abiertos \( \sigma = \{ B(x, 1/n) : x \in X \} \) que es un cubrimiento abierto de \( X \), para \( n \in \N \) fijo.
+    Por ser Lindeloff admite un subcubrimiento numerable \( \sigma' = \{ B(x_i, 1/n) : i \in \N \} \), luego \( D = \{ x_i : i \in \N \} \) es un subconjunto numerable de \( X \).
+    Para ver que \( D \) es denso en \( X \) basta ver que dado \( x \in X \) y \( r > 0 \) entonces \( B(x, r) \cap D \neq \varnothing \). En efecto,
+    dado \( x \in X \) y un abierto \( U \) entonces existe \( \varepsilon > 0 \) tal que \( B(x, \varepsilon) \subseteq U \). Además, por Arquimedianidad puedo elegir \( n \in N \) tal que \( 1/n < \varepsilon/2 \),
+    y como \( \sigma' \) es un cubrimiento de \( X \) entonces existe \( x_i \in D \) tal que \( x \in B(x_i, 1/n) \) y, por lo tanto, \( x_i \in B(x, \varepsilon) \).
+
+    Veamos que separable implica \( N_2 \). Supongamos que \( X \) es separable y consideremos \( D \subseteq X \) un subconjunto numerable y denso en \( X \).
+    Para ver que \( X \) es \( N_2 \) basta que ver que \( \beta = \{ B(x, 1/n) : x \in D, \, n \in \N \} \) es una base numerable de la topología.
+    En efecto, dado \( x \in X \) y \( U \) un entorno de \( x \) entonces existe \( \varepsilon > 0 \) tal que \( B(x, \varepsilon) \subseteq U \). Además, por Arquimedianidad puedo elegir \( n \in \N \) tal que
+    \( 1/n < \varepsilon/2 \) y como \( D \) es denso entonces existe \( x_i \in D \) tal que \( x \in B(x_i, 1/n) \subseteq B(x, \varepsilon) \subseteq U \). Por lo tanto, \( X \) es \( N_2 \).
+
+    Si todo subespacio discreto de \( X \) es a lo sumo numerable entonces \( X \) es separable. Supongamos que \( X \) no es separable y veamos que entonces existe un subespacio discreto de \( X \) que es no numerable.
+    En efecto, dado \( X \) no separable entonces \( \exists \varepsilon > 0 \) tal que \( X \) no puede ser cubierto por numerables bolas de radio \( \varepsilon \). Por lo tanto, elijo
+    \( x_1 \in X \) tal que \( x_2 \notin B(x_1, \varepsilon) \), luego \( x_3 \notin B(x_1, \varepsilon) \cup B(x_2, \varepsilon) \), y así sucesivamente, de esta forma construyo una familia \( S = \{ x_i : i \in I \} \) de puntos de \( X \) tal que \( I \) es un conjunto no numerable (pues numerables bolas no pueden cubrir todo \( X \)) y \( d(x_i, x_j) \geq \varepsilon > 0 \) para cada \( i, j \in I \) con \( i \neq j \).
+    Por lo tanto, \( S \) es un subespacio discreto de \( X \) que es no numerable.
+
+    \( d \implies b \) Sale utilizando el razonamiento anterior.
+\end{proof}
+
+\begin{ejercicio}{11}
+    Considerar \(X\) un conjunto no numerable y \(x_{0}\in X\). Sea la familia formada por el \( \varnothing \) y los conjuntos \(U\) tales que \(x_{0}\in U\).
+    Mostrar que es una topología en \(X\) y estudiar sus propiedades de numerabilidad.
+\end{ejercicio}
+\begin{proof}
+    Veamos que \( \tau = \varnothing \cup \{ U \subseteq X : x_0 \in U \} \) es una topología en \( X \). En efecto, \( \varnothing \in \tau \) y \( X \in \tau \) ya que \( x_0 \in X \).
+    Además, dada una familia \( {\{ U_i \}}_{i \in I} \subseteq \tau \) por definición vale que \( x_0 \in U_i \quad \, i \in I \implies x_0 \in \bigcup_{i \in I} U_i \) y \( \bigcup_{i \in I} U_i \in \tau \).
+    Finalmente, dados \( U_1, U_2 \in \tau \) entonces \( x_0 \in U_1 \) y \( x_0 \in U_2 \) y, por lo tanto, \( x_0 \in U_1 \cap U_2 \) y \( U_1 \cap U_2 \in \tau \therefore \tau \) es una topología en \( X \).
+
+    Queremos ver si \( X \) es separable, Lindeloff, \( N_1 \) y/o \( N_2 \).
+
+    Veamos primero que \( X \) es separable. Para ello basta tomar \( D = \{ x_0 \} \) que es un subconjunto numerable de \( X \) y es
+    denso en \( X \) pues dado \( U \in \tau \) entonces \( x_0 \in U \) y se tiene que \( D \cap U \neq \varnothing \). Por lo tanto, \( X \) es separable.
+
+    Veamos ahora que \( X \) es \( N_1 \) i.e que existe una familia numerable de abiertos de la topología tal que para cada \( x \in X \) y cada entorno \( U \) de \( x \) exista un abierto de la familia que contenga a \( x \) y esté contenido en \( U \).
+    Si \( x = x_0 \) entonces podemos considerar la familia \( \beta = \{ \{ x_0 \} \} \) que es una familia finita (numerable) de abiertos de la topología tal que \( x_0 \in \{ x_0 \} \subseteq U \) para cada \( U \in \tau \).
+    Si \( x \neq x_0 \) entonces cada \( U \in \tau \) que contenga a \( x \) también debe contener a \( x_0 \) entonces tomamos \( \beta = \{ \{x_0, x \} \} \) que es una familia finita (numerable) de abiertos de la topología tal que
+    \( x \in \{ x_0, x \} \subseteq U \) para cada \( U \in \tau \). Por lo tanto, \( X \) es \( N_1 \).
+
+    Por la \textbf{Proposición 2.4.2} del apunte de Demetrio, \( N_2 \) implica \( N_1 \), separable y Lindeloff, entonces si demostramos que \( X \) no es Lindeloff se sigue \( X \) no es \( N_2 \).
+    Para ello basta con encontrar al menos un cubrimiento abierto de \( X \) tal que no admita un subcubrimiento numerable. Siguiendo la idea anterior consideremos el cubrimiento dado por los abiertos
+    \( U_x = \{ x_0, x \} \) para cada \( x \in X - \{ x_0 \} \). Es claro que \( \bigcup_{x \in X} U_x = X \) y que cada \( U_x \in \tau \). Luego, como \( X \) es no numerable entonces
+    \( \{ U_x : x \in X - \{ x_0 \} \} \) es un cubrimiento de \( X \) que no admite un subcubrimiento numerable \( \therefore X \) no es Lindeloff ni \( N_2 \).
+\end{proof}
+
+\begin{ejercicio}{12}
+    Sea \(f:X\rightarrow Y\) una aplicación entre espacios topológicos. Probar que son equivalentes:
+    \begin{enumerate}
+        \item \(f\) es continua.
+        \item Para cualquier \(A\subseteq X\) se cumple que \(f(\cl{A})\subseteq\overline{f(A)}\).
+        \item Para todo cerrado \(F\subseteq Y\) vale que \(f^{-1}(F)\) es cerrado en \(X\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Veamos que \( a \implies b \). Supongamos que \( f \) es continua y veamos que para cualquier \( A \subseteq X \)
+    se tiene que \( f(\cl{A}) \subseteq \overline{f(A)} \). En efecto, basta con notar que \[
+        f(\cl{A}) = f(A \cup A') = f(A) \cup f(A')
+    \]
+    y veamos que \( f(A') \subseteq f(A)' \). Para ello consideremos \( x \in A' \) y por definición se tiene que
+    \( \forall V \in \mathcal{O}(x) \quad (A - \{ x \}) \cap V \neq \varnothing \). Luego, si consideramos \[
+        (f(A) - \{ f(x) \}) \cap U
+    \]
+    para \( U \) un abierto de \( Y \) que contiene a \( f(x) \) entonces por continuidad de \( f \) se tiene que \[
+        f^{-1}(U) \in \mathcal{O}(x) \quad \text{y} \quad f^{-1}((f(A) - \{ f(x) \}) \cap U) \neq \varnothing
+    \]
+    lo que implica que \( (f(A) - \{ f(x) \}) \cap U \neq \varnothing \) y, por lo tanto, \( f(x) \in f(A)' \).
+
+    Veamos ahora que \( b \implies c \). Supongamos que para cualquier \( A \subseteq X \) se cumple que
+    \( f(\cl{A}) \subseteq \overline{f(A)} \) y veamos que para todo cerrado \( F \subseteq Y \) vale que
+    \( f^{-1}(F) \) es cerrado en \( X \). Queremos ver que \( f^{-1}(F) = \overline{f^{-1}(F)} \). En efecto,
+    dado \( x \in \overline{f^{-1}(F)} \) entonces \( f(x) \in f(\overline{f^{-1}(F)}) \subseteq \overline{f(f^{-1}(F))} \subseteq \overline{F} = F \)
+    y, por lo tanto, \( x \in f^{-1}(F) \). Por otro lado, dado \( x \in f^{-1}(F) \) entonces \( x \in \overline{f^{-1}(F)} \) ya que
+    \( f^{-1}(F) \subseteq \overline{f^{-1}(F)} \). Luego, \( f^{-1}(F) = \overline{f^{-1}(F)} \) y, por lo tanto, \( f^{-1}(F) \) es cerrado en \( X \).
+
+    Finalmente, veamos que \( c \implies a \). Supongamos que para todo cerrado \( F \subseteq Y \) vale que \( f^{-1}(F) \) es cerrado en \( X \).
+    Veamos que \( f \) es continua, es decir, que para cada abierto \( U \subseteq Y \) vale que \( f^{-1}(U) \) es abierto en \( X \).
+    En efecto, dado \( U \subseteq Y \) abierto entonces \( F = Y - U \) es cerrado en \( Y \) y, por lo tanto, \( f^{-1}(F) \) es cerrado en \( X \).
+    Como vale que: \[
+        f^{-1}(F) = f^{-1}(Y - U) = X - f^{-1}(U)
+    \]
+    se tiene que \( X - f^{-1}(U) \) es cerrado en \( X \) y, por lo tanto, \( f^{-1}(U) \) es abierto en \( X \therefore f \) es continua.
+\end{proof}
+
+\begin{ejercicio}{13}
+    Sea \((X, \tau)\) un espacio topológico. En \(X\times X\) considerar la topología generada por \( \{U\times V:U,V\in\tau \} \). Probar
+    \begin{enumerate}
+        \item \(X\) es \( T_{2}\iff \) el conjunto diagonal \( \Delta = \{ (x,x) : x \in X \} \) es un cerrado en \( X \times X \).
+    \end{enumerate}
+    Asumiendo que \(Y\) es \( T_{2} \), y \( f,g: X \to Y \) son continuas, demostrar que:
+    \begin{enumerate}[resume]
+        \item Se tiene que \( A = \{ x \in X : f(x)=g(x) \} \) es un cerrado en \(X\).
+        \item Si \( D \subseteq X\) es denso y \(f_{|_{D}} = g_{|_{D}}\) entonces \( f = g \).
+        \item El gráfico \( \rho(f) = \{ (x, f(x)) : x \in X\} \) es cerrado en \( X \times Y \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{proof}
+    Para ver que si \( X \) es \( T_2 \) entonces el conjunto \( \Delta \) es cerrado en \( X \times X \)
+    basta con notar que dado \( (x, y) \in \Delta' \) no puede ser que \( x \neq y \). En efecto, si \( x \neq y \)
+    entonces por hipótesis vale que \( \exists U \in \mathcal{O}(x) \) y \( V \in \mathcal{O}(y) \) tal que \( U \cap V = \varnothing \).
+    Por lo tanto, \( (\Delta - \{ (x, y) \}) \cap U \times V = \varnothing \) y, como \( U \times V \in \mathcal{O}((x, y)) \) entonces
+    \( (x, y) \notin \Delta' \) absurdo, luego no puede ser que \( x \neq y \therefore \Delta' \subseteq \Delta \implies \Delta \) cerrado.
+
+    Si \( \Delta \) es cerrado en \( X \times X \) entonces \( X \) es \( T_2 \). En efecto, dados \( x, y \in X \) con \( x \neq y \)
+    entonces como \( \Delta \) es cerrado vale que \( \Delta^c \) es abierto en \( X \times X \) y entonces debe existir \( U \in \mathcal{O}(x) \)
+    y \( V \in \mathcal{O}(y) \) tal que \( (x, y) \in U \times V \subseteq \Delta^c \) y usando estos \( U \) y \( V \) en la definición de \( T_2 \)
+    vale que \( U \cap V = \varnothing \) pues si no \( (\alpha, \alpha) \in U \times V \) absurdo pues \( U \times V \subseteq \Delta^c \).
+
+    Supongamos ahora que \( Y \) es \( T_2 \) y \( f, g : X \to Y \) son continuas. Veamos que \( A = \{ x \in X : f(x) = g(x) \} \)
+    es cerrado en  \( X \). En efecto, definamos \( h: X \to Y \times Y \) dada por \( h(x) = (f(x), g(x)) \). Es claro que \( h \) es continua
+    y que \( A = h^{-1}(\Delta) \) con \( \Delta = \{ (y, y) : y \in Y \} \). Luego, como \( Y \) es \( T_2 \) entonces \( \Delta \) es cerrado en \( Y \) y, por ser \( h \) continua, \( A \) es cerrado.
+
+    Para ver la segunda proposición basta con notar que \( \overline{D} = X \), entonces:\[
+        D \subseteq A \implies \overline{D} \subseteq \cl{A} = A \implies X \subseteq A \implies A = X
+    \] es decir \( f(x) = g(x) \) para cada \( x \in X \).
+
+    Finalmente, consideremos \( H: X \times Y \to Y \times Y \) dada por \( H(x, y) = (f(x), y) \). Es claro que \( H \) es continua y que
+    si definimos \( \Delta = \{ (y, y) : y \in Y \} \) entonces vale que \( H^{-1}(\Delta) = \{ (x, y) : f(x) = y \} = \rho(f) \). Luego,
+    como \( Y \) es \( T_2 \implies \Delta \) cerrado en \( Y \times Y \) y \( H \) es continua \( \therefore \rho(f) \) es cerrado en \( X \times Y \).
+\end{proof}
+
+\clearpage
+
+\subsection*{Ejercicios Complementarios}
+
+\textbf{Parte I}
+
+\begin{ejercicio}{C1}
+    Tomando \(X\) un conjunto finito se define \(d(\varnothing,\varnothing)=0\) y, en otros casos, \(d(A,B)=\frac{|A\Delta B|}{|A\cup B|}\). Mostrar que \(d\) es una métrica en \(\mathcal{P}(X)\).
+\end{ejercicio}
+
+\begin{ejercicio}{C2}
+    Considerar el conjunto \([0,1]\times[0,1]\) con la topología del orden asociada al orden lexicográfico. Encontrar la clausura de los siguientes conjuntos:
+    \begin{enumerate}
+        \item \( \{(\frac{1}{n},0):n\in \N \} \)
+        \item \( \{(1-\frac{1}{n},\frac{1}{2}):n\in \N \} \)
+        \item \( \{(x,0):0<x<1\} \)
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{C3}
+    (Kuratowski). Considere la colección de todos los subconjuntos \(A\) del espacio topológico \(X\). Las operaciones de clausura \(A\rightarrow\cl{A}\) y complementario \(A\rightarrow X-A\) son funciones que van de esta colección en ella misma.
+    \begin{enumerate}
+        \item Pruebe que, comenzando con un conjunto dado \(A\), se pueden formar no más de 14 conjuntos distintos al aplicar estas dos operaciones sucesivamente.
+        \item Encuentre un subconjunto \(A\) de \( \R \) (con su topología usual) para el que se obtenga el máximo de 14.
+    \end{enumerate}
+\end{ejercicio}
+
+\textbf{Parte II}
+
+\begin{ejercicio}{C1}
+    Sea \((X, \tau)\) un ET que es \(N_{2}\) y sea \(\mathcal{B}\) una base de \( \tau \). Probar que existe una subfamilia numerable \(\mathcal{C}\subseteq\mathcal{B}\) que sigue siendo base de \(\tau\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{C2}
+    Sea \((X, \tau)\) un ET regular y Lindelöff. Probar que \(X\) es normal.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{C3}
+    Sea \(f:X\rightarrow Y\) continua. Probar que si \(X\) es de Lindelöf, o si \(X\) tiene un subconjunto denso numerable, entonces \(f(X)\) satisface la misma condición.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{C4}
+    Sea \( f:X\rightarrow Y \) una función abierta continua. Mostrar que si \( X \) satisface \( N_{1} \) o \( N_{2} \), entonces \( f(X) \) satisface el mismo axioma.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,236 @@
+\section{Funciones medibles}
+
+\begin{prop}
+    Sea $f: \R^n \to \R$, $f$ es continua si $f^{-1}(V)$ es abierto de $ \R^n$ $(\forall V$ abierto en $\tau_1)$.
+\end{prop}
+En lo que sigue vamos a considerar un espacio medible fijo de la forma $(X \text{, } \mf{X})$.
+
+Notación: Dada una función $f: X \to \R$ para cada $\alpha \in \R$ definimos: \begin{equation*}
+    \{ f > \alpha \} := \{ x \in X : f(x) > \alpha \} = f^{-1}((\alpha, +\infty))
+\end{equation*}
+
+\begin{definition}[Función medible]
+    Una función $f: X \to \R$ es $\mf{X}$-medible ($ \sigma $-medible) si $\{ f > \alpha \} \in \mf{X} \quad (\forall \alpha \in \R)$.
+\end{definition}
+
+\begin{lemma}
+    Dada $f: X \to \R$ una función, son equivalentes:
+    \begin{enumerate}
+        \item $f$ es $\mf{X}$-medible.
+        \item $\{ f \geq \alpha \} \in \mf{X} \quad (\forall \alpha \in \R)$.
+        \item $\{ f \leq \alpha \} \in \mf{X} \quad (\forall \alpha \in \R)$.
+        \item $\{ f < \alpha \} \in \mf{X} \quad (\forall \alpha \in \R)$.
+    \end{enumerate}
+
+    \begin{proof}
+        Sea $\alpha \text{, } \gamma \in \R$.
+        \begin{itemize}
+            \item $(1) \iff (3)$: $\{ f \leq \alpha \} = \{ f > \alpha \}^c \in \mf{X}$.
+            \item $(2) \iff (4)$ Análogo.
+            \item $(1) \iff (2)$: Supongamos que $f$ es $\mf{X}$-medible. Dado $\alpha \in \R$ quiero ver que $\{ f \geq \alpha \} \in \mf{X}$.
+                  \begin{align*}
+                      x & \in \{ f \geq \alpha \} \iff f(x) \geq \alpha > \alpha - \frac{1}{n} \quad (\forall n \in \N)  \\
+                      x & \in \{ f > \alpha - \frac{1}{n} \} \quad (\forall n \in \N)                                    \\
+                        & \Rightarrow \{ f \geq \alpha \} = \bigcap_{n \geq 1} \{ f > \alpha - \frac{1}{n} \} \in \mf{X}
+                  \end{align*}
+                  Para la vuelta supongamos que vale $(2)$. Quiero ver que $\{ f > \gamma \} \in \mf{X}$. Notemos que
+                  \begin{equation*}
+                      \{ f > \gamma \} = \bigcup_{n \geq 1} \{ f \geq \gamma + \frac{1}{n} \}
+                  \end{equation*}
+                  \begin{equation*}
+                      x \in \{ f > \gamma \} \iff f(x) > \gamma \iff \exists n_x \in \N : f(x) > \gamma + \frac{1}{n_x}
+                  \end{equation*}
+                  Luego $\bigcup_{n \geq 1} \{ f \geq \gamma + \frac{1}{n} \} \in \mf{X}$.
+        \end{itemize}
+    \end{proof}
+\end{lemma}
+
+\begin{eg}
+    Toda función constante es medible. $f: X \to \R : f(x) = c \quad (\forall x \in X)$.
+    \begin{proof}
+        Dado $\alpha \in \R$. Tenemos que \begin{equation*}
+            \{ f > \alpha \} = \begin{cases}
+                \O & \alpha \geq c \\
+                X  & \alpha < c
+            \end{cases}
+        \end{equation*}
+    \end{proof}
+\end{eg}
+
+\begin{eg}
+    Dado $E \subseteq X$ consideremos la función característica de $E$. Como $\chi_E: X \to \R$ dada por:
+    \begin{equation*}
+        \chi_E(x) = \begin{cases}
+            1 & x \in E    \\
+            0 & x \notin E
+        \end{cases}
+    \end{equation*}
+    \begin{proof}
+        Consideremos $E = [0, 1]$. Dado $\alpha \in \R$. Tenemos que \begin{equation*}
+            \{ \chi_E > \alpha \} = \begin{cases}
+                \O & \alpha \geq 1     \\
+                E  & 0 \leq \alpha < 1 \\
+                X  & \alpha < 0
+            \end{cases}
+        \end{equation*}
+        Luego $\chi_E$ es medible $\iff E \in \mf{X}$.
+    \end{proof}
+\end{eg}
+
+\begin{eg}
+    Si $X = \R^n$, $\mf{X} = \mc{B} \Rightarrow$ toda función continua es medible con respecto a la $\sigma$-álgebra de Borel.
+\end{eg}
+
+\begin{eg}
+    $X = \R$, $\mf{X} = \mc{B}_n$ y $f: \R \to \R$ es monótona (creciente) entonces es $\mc{B}$-medible.
+\end{eg}
+
+\begin{prop}
+    $f: X \to \R$ es $\mf{X}$-medible $\iff f^{-1}(B) \in \mf{X} \quad (\forall B \in \mc{B})$.
+    \begin{proof}
+        Supongamos que $f : X \to \R$ es $\mf{X}$-medible. Luego definimos $E = \{ F \subseteq \R : f^{-1}(F) \in \mf{X} \}$ que es $\sigma$-álgebra.
+        Si $A = \{ (\alpha\text{, } +\infty) : \alpha \in \R \}$, $\sigma(A) = \mc{B}$ y por ser $f$ $\mf{X}$-medible, $f^{-1}((\alpha\text{, } +\infty)) \in \mf{X}$.
+        Luego, $(\alpha \text{, } +\infty) \in E$ y $\sigma(A) = \mc{B} \subseteq E$ por ser la menor $\sigma$-álgebra, entonces se tiene que $\forall B \in \mc{B} \quad f^{-1}(B) \in \mf{X}$.
+
+        Supongamos ahora que $f^{-1}(B) \in \mf{X} \quad \forall B \in \mc{B}$.
+        Como $(\alpha \text{, } +\infty) \in \mc{B} \quad \forall \alpha \in \R \Rightarrow f^{-1}((\alpha \text{, } +\infty)) \in \mf{X}$ y $f$ es $\mf{X}$-medible.
+    \end{proof}
+\end{prop}
+
+
+\begin{lemma}
+    Sean $f$, $g: X \to \R$ funciones medibles, $c \in \R$ entonces $c \cdot f$, $f²$, $f + g$, $|f|$, $f \cdot g$, son $\mf{X}$-medibles.
+    $f² = f(x) \cdot f(x)$.
+    \begin{proof}
+        Veamos que $f²$ es $\mf{X}$-medible. Dado $\alpha \in \R$ quiero ver que $\{ f² > \alpha \} \in \mf{X}$
+        Si $\alpha < 0 \Rightarrow \{ f² > \alpha \} = X$.
+
+        Si $\alpha \geq 0 \Rightarrow$
+        \begin{equation*}
+            \{ f^2 > \alpha \} = \{ x \in X : f(x) \cdot f(x) > \sqrt{\alpha} \cdot \sqrt{\alpha} \}
+        \end{equation*}
+        \begin{equation*}
+            \{ f > \sqrt{\alpha} \} \cup \{ f > \sqrt{\alpha} \} \in \mf{X}
+        \end{equation*} $\therefore f²$ es $\mf{X}$-medible.
+
+        Veamos ahora que $f + g$ es $\mf{X}$-medible. Dado $\alpha \in \R$ quiero ver que \begin{equation*}
+            \{ f + g > \alpha \} \in \mf{X}
+        \end{equation*}
+        Para $x \in X$ tenemos que: \begin{equation*}
+            (f+g)(x) > \alpha \iff f(x) + g(x) > \alpha \iff f(x) > r \land g(x) > \alpha - r \text{ para algún } r \in \Q
+        \end{equation*}
+        Entonces $\{ f + g > \alpha \} = \bigcup_{r \in \Q} (\{ f > r \} \cap \{ g > \alpha - r \}) \in \mf{X}$ por ser unión numerable $\therefore f+g$ es $\mf{X}$-medible.
+
+        Por último veamos que $f \cdot g$ es $\mf{X}$-medible. Dado $\alpha \in \R$ quiero ver que \begin{equation*}
+            \{ f \cdot g > \alpha \} \in \mf{X}
+        \end{equation*}
+        Sabemos que:
+        \begin{equation*}
+            (f+g)² \text{ es } \mf{X} \text{-medible} \Rightarrow f² + 2 \cdot f \cdot g + g² \text{ es } \mf{X} \text{-medible}
+        \end{equation*}
+        \begin{equation*}
+            f \cdot g = \frac{1}{2} \left( (f+g)² - f² - g² \right) \text{ es } \mf{X} \text{-medible}
+        \end{equation*}
+    \end{proof}
+\end{lemma}
+
+\section{Funciones medibles en la recta extendida}
+
+\begin{definition}
+    Dada $f: X \to \overline{R}$ diremos que $f$ es $\mf{X}$-medible si
+    \begin{equation*}
+        f^{-1}((\alpha, +\infty]) = f^{-1}((\alpha, +\infty)) \cup f^{-1}(\{ +\infty \}) = \{ f > \alpha \} \in \mf{X} \quad (\forall \alpha \in \R)
+    \end{equation*}
+\end{definition}
+
+A la clase de las funciones (a valores en la recta extendida) $\mf{X}$-medibles la denotaremos por $M(X \text{, } \mf{X})$.
+
+\begin{note}
+    Si $f: X \to \R \Rightarrow f \in M(X \text{, } \mf{X})$.
+\end{note}
+
+\begin{note}
+    Si \begin{equation*}f \in M(X\text{, } \mf{X}) \Rightarrow \{ f = +\infty \} = f^{-1}(\{ +\infty \}) = \bigcap_{n \geq 1} \{ f > n \} \in \mf{X}\end{equation*}
+    Además, \begin{equation*}\{ f = -\infty \} = f^{-1}(\{ -\infty \}) = \bigcap_{n \geq 1} \{ f < -n \} \in \mf{X}\end{equation*}
+\end{note}
+
+\begin{lemma}
+    Dada una función $f: X \to \overline{\R}$ consideremos $A_f = \{ f = +\infty \}$, $B_f = \{ f = -\infty \}$ y
+    \begin{equation*} \hat{f} = \begin{cases}
+            f & x \in X \setminus (A_f \cup B) \\
+            0 & x \in A_f                      \\
+            0 & x \in B_f
+        \end{cases}
+    \end{equation*}
+    $\Rightarrow f \in M(X\text{, } \mf{X}) \iff A_f, B_f \in \mf{X}$ y $\hat{f}$ es $\mf{X}$-medible.
+    \begin{proof}
+        Supongamos primero que $f \in M(X\text{, } \mf{X})$. Dado $\alpha \in \R$, ya vimos que $A_f, B_f \in \mf{X}$. Veamos que $\hat{f}$ es $\mf{X}$-medible.
+
+        Quiero ver que $\{ \hat{f} > \alpha \} \in \mf{X}$. Si $\alpha \geq 0$ entonces
+        \begin{equation*}
+            \{ \hat{f} > \alpha \} = \{ f > \alpha \} - A_f = \{ f > \alpha \} \cap A_f^C \in \mf{X}
+        \end{equation*}
+        Si $\alpha < 0$ entonces \begin{equation*}
+            \{ \hat{f} < \alpha \} = \{ f > \alpha \} \cup \{ \hat{f} = 0 \} = \{ f > \alpha \} \cup (A_f \cup B_f) = \{ f > \alpha\} \cup B_f \in \mf{X}
+        \end{equation*}
+        Luego $\hat{f} \in \mf{X}$. Supongamos ahora que $A_f, B_f \in \mf{X}$ y $\hat{f}$ es $\mf{X}$-medible. Dado $\alpha \in \R$ tenemos que \begin{equation*}
+            \{ f > \alpha \} = \{ \hat{f} > \alpha \} \cup A_f \in \mf{X}
+        \end{equation*}
+        Si $\alpha < 0$ entonces \begin{equation*}
+            \{ f > \alpha \} = \{ \hat{f} < \alpha \} \setminus B_f = \{ \hat{f} < \alpha \} \cap B_f^c \in \mf{X}
+        \end{equation*}
+    \end{proof}
+\end{lemma}
+
+\begin{corollary}
+    Si $f$, $g \in M(X \text{, } \mf{X})$ y $c \in \R$. Las funciones $c \cdot f$, $f²$, $|f|$, $f \cdot g \in M(X \text{, } \mf{X})$.
+\end{corollary}
+
+\begin{note}
+    Dados $f\text{, } g \in M(X\text{, } \mf{X})$ consideremos los conjuntos \begin{itemize}
+        \item $E_1 = \{ f = + \infty \} \cap \{ g = - \infty \} \in \mf{X}$.
+        \item $E_2 = \{ f = - \infty \} \cap \{ g = + \infty \} \in \mf{X}$.
+    \end{itemize}
+    Notemos que no está definida la suma $f + g$ en $E_1 \cup E_2$.
+    Definimos \begin{equation*}
+        f+g = \begin{cases}
+            f+g & x \in X \setminus (E_1 \cup E_2) \\
+            0   & x \in E_1 \cup E_2
+        \end{cases}
+    \end{equation*}
+    $f+g \in M(X\text{, } \mf{X})$
+    \begin{proof}
+        Ejercicio.
+    \end{proof}
+\end{note}
+
+\begin{lemma}
+    Dada una sucesión de funciones $(f_n)_{n \geq 1}$ en $M(X\text{, } \mf{X})$ sean $f, f^*, F, F^*$ definidas por:
+    \begin{equation*}
+        f(x) = \inf_{n \geq 1} f_n(x) \quad f^*(x) = \liminf_{n \to \infty} f_n(x)
+    \end{equation*}
+    \begin{equation*}
+        F(x) = \sup_{n \geq 1} f_n(x) \quad F^*(x) = \limsup_{n \to \infty} f_n(x)
+    \end{equation*}
+    Entonces $f, f^*, F, F^* \in M(X\text{, } \mf{X})$.
+    \begin{proof}
+        Dado $\alpha \in \R$ tenemos que \begin{equation*}
+            \{ F > \alpha \} = \bigcup_{n \geq 1} \{ f_n > \alpha \} \in \mf{X}
+        \end{equation*}
+        \begin{equation*}
+            \{ f > \alpha \} = \bigcap_{n \geq 1} \{ f_n > \alpha \} \in \mf{X}
+        \end{equation*}
+        Veamos $F^* \in M(X\text{, } \mf{X})$. Para cada $n \in \N$ defino $h_n = sup_{m \geq n} f_m \in \mf{X}$. Por ser subsucesión de funciones medibles.
+        Luego \begin{equation*}
+            F^* = inf_{n \geq 1} (sup_{m \geq n} f_m) \in \mf{X}
+        \end{equation*}
+        Análogamente para $f^*$.
+    \end{proof}
+\end{lemma}
+
+\begin{corollary}
+    Dada $(f_n)_{n \geq 1} : f_n \in M(X\text{, } \mf{X}) \quad (\forall n \in \N)$. Supongamos que la sucesión converge puntualmente a $f$ entonces $f \in M(X\text{, } \mf{X})$.
+    \begin{proof}
+        Notemos que $f = \liminf f_n = \limsup f_n$ y aplicamos el lema anterior.
+    \end{proof}
+\end{corollary}

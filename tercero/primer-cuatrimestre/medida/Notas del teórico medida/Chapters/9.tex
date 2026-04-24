@@ -1,0 +1,131 @@
+\section{Extensión Caratheódory / Hahn}
+
+\begin{definition}[Medida completa]
+    Dado un espacio de medida $(X$, $\mf{X}$, $\mu)$, $\mf{X}$ es completa con respecto a $\mu$ si $\forall E \in \mf{X}$ con $\mu(E) = 0$ vale que
+    $\forall B \subseteq E$, $B \in \mf{X}$ y $\mu(B) = 0$.
+\end{definition}
+
+\begin{corollary}
+    $\mf{X}(\Gamma)$ es completo con respecto a $\Gamma: \mf{X}(\Gamma) \to [0, +\infty]$.
+    \begin{proof}
+        Sea $E \in \mf{X}(\Gamma) : \mu(E) = 0$ y $B \subseteq E$.
+
+        Fijado $A \subseteq X$ notemos que $A \cap B \subset E \Rightarrow \Gamma(A \cap B) = 0$.
+        Además, $A \setminus B \subseteq A \Rightarrow \Gamma(A) \geq \Gamma(A \setminus B) = \Gamma(A \cap B) + \Gamma(A \setminus B)$.
+        Luego, como $A$ es arbitrario, resulta que $B \in \mf{X}(\Gamma)$ y $\Gamma(B) \leq \Gamma(E) = 0 \therefore \Gamma(B) = 0$.
+    \end{proof}
+\end{corollary}
+
+Dada una medida $\mu$ sobre un álgebra $\mc{A} \subseteq \mc{P}(X)$, sea $\mu^*$ la medida exterior asociada a $\mu$ notaremos $\mc{A}^* := \mf{X}(\mu^*)$.
+
+\begin{corollary}[Extensión de Caratheódory]
+    Si $\mu$ es una medida sobre un álgebra $\mc{A} \subseteq \mc{P}(X)$, entonces \begin{enumerate}
+        \item $\mc{A} \subseteq \mc{A}^*$.
+        \item $\mu^*(A) = \mu(A)$ para todo $A \in \mc{A}$.
+    \end{enumerate}
+    i.e $\mu^*$ es la extensión de Caratheódory de $\mu$.
+    \begin{proof}
+        Dado $E \in \mc{A}$ quiero ver que $E \in \mc{A}^*$.
+
+        Fijado el $A \subseteq X$ con $\mu(A) < +\infty$, sea $\e > 0$ y consideremos $(F_n)_{n \geq 1}$ una sucesión en $\mc{A}
+            : E \subseteq \bigcup_{n \geq 1} F_n$ y $\sum_{n \geq 1} \mu(F_n) < \mu^*(A) + \e$.
+
+        Notemos que $A \cap E = \bigcup_{n \geq 1} E \cap F_n$, $E \cap F_n \in \mc{A}$ y $\mu^*(A \cap E) \leq \sum_{n \geq 1} \mu(E \cap F_n)$.
+
+        Por otro lado $A \setminus E = \bigcup_{n \geq 1} F_n \setminus E : F_n \setminus E \in \mc{A}$ y $\mu^*(A \setminus E) \leq \sum_{n \geq 1} \mu(F_n \setminus E)$ por definición de medida exterior.
+        Luego, \begin{align*}
+            \mu^*(A \cap E) + \mu^*(A \setminus E) & \leq \sum_{n \geq 1} \left( \mu(E \cap F_n) + \mu(F_n \setminus E) \right) \\
+                                                   & = \sum_{n \geq 1} \mu(F_n) < \mu^*(A) + \e                                 \\
+        \end{align*}
+
+        Como $\e > 0$ es arbitario entonces $\mu^*(A) \geq \mu^*(A \cap E) + \mu^*(A \setminus E)$ y como $A$ es arbitrario $E \in \mc{A}^*$.
+        Por lo tanto $\mc{A} \subseteq \mc{A}^*$.
+
+        El segundo punto fue demostrado anteriormente, la medida exterior coincide con la medida interior para los elementos del álgebra.
+    \end{proof}
+\end{corollary}
+
+\begin{definition}
+    Si $\mu : \mc{A} \to [0, +\infty]$ es una medida sobre un álgebra $\mc{A} \subseteq \mc{P}(X)$ diremos que $\mu$ es $\sigma$-finita si $\exists (F_n)_{n \geq 1} \subseteq \mc{A}$ con $X \subseteq \bigcup_{n \geq 1} F_n$ y $\mu(F_n) < +\infty \quad \forall n \geq 1$.
+\end{definition}
+
+\begin{note}
+    Si $\mu : \mc{A} \to [0, +\infty]$ es una medida finita $\Rightarrow \exists$ una sucesión creciente $(E_n)_{n \geq 1} \subseteq \mc{A}$ tal que $X \subseteq \bigcup_{n \geq 1} E_n$
+    y $\mu(E_n) < +\infty \quad \forall n \geq 1$. De hecho, si $(F_n)_{n \geq 1}$ verifican la definición anterior entonces $E_1 = F_1 \in \mc{A}$,
+    $E_n = \bigcup_{k = 1}^n F_k \in \mc{A}$ y $\mu(E_n) \leq \sum_{k = 1}^n \mu(F_k) < +\infty \quad \forall n \geq 1$.
+\end{note}
+
+\begin{theorem}[Extensión de Hahn]
+    Dada $\mu : \mc{A} \to [0, +\infty]$ una medida $\sigma$-finita sobre el álgebra $\mc{A} \subseteq \mc{P}(X)$, entonces $\exists!$ medida definida sobre $\mc{A}^*$ que extiende a $\mu$.
+
+    \begin{proof}
+        La existencia es consecuencia del teorema de extensión de Caratheódory. Queremos ver que $\mf{X}$ es una $\sigma$-álgebra en $X : \mc{A} \subseteq \mf{X} \subseteq \mc{A}^*$
+        y $\nu : \mf{X} \to [0, +\infty] : \nu(A) = \mu(A) \quad \forall A \in \mc{A} \Rightarrow \nu(E) = \mu^*(E) \quad \forall E \in \mf{X}$ i.e $\nu = \restr{\mu^*}{\mf{X}}$.
+
+        Fijado el $\mf{X}$ y $\nu$ así, y sea $(F_n)_{n \geq 1} $ una sucesión creciente en $\mc{A}$ tal que $X \subseteq \bigcup_{n \geq 1} F_n$ y $\mu(F_n) < +\infty \quad \forall n \geq 1$.
+
+        Dado $E \in \mf{X}$ veamos que $\nu(E) = \mu^*(E)$. Alcanza con ver que \begin{align*}
+            \nu(E \cap F_n) = \mu^*(E \cap F_n) \quad \forall n \geq 1
+        \end{align*}
+        Pues entonces \begin{align*}
+            \nu(E) & = \lim_{n \to +\infty} \nu(E \cap F_n)   \\
+                   & = \lim_{n \to +\infty} \mu^*(E \cap F_n) \\
+                   & = \mu^*(E)
+        \end{align*}
+        Pues $E = \bigcup_{n \geq 1} E \cap F_n$ y $(E \cap F_n)_{n \geq 1}$ es creciente.
+
+        Si $n \in \N \Rightarrow \tilde{E} = E \cap F_n$, notemos que $F_n \setminus E = F_n \setminus \tilde{E}$. Veamos que $\nu(\tilde{E}) = \mu^*(\tilde{E})$.
+
+        Dada una sucesión \begin{align*}
+            (A_k)_{k \geq 1} \subseteq \mc{A} : \tilde{E} \subseteq \bigcup_{k \geq 1} A_k & \Rightarrow                                                                              \\
+                                                                                           & \nu(\tilde{E}) \leq \nu\left(\bigcup_{k \geq 1} A_k\right) \leq \sum_{k \geq 1} \nu(A_k) \\
+                                                                                           & = \sum_{k \geq 1} \mu(A_k)                                                               \\
+                                                                                           & \Rightarrow \nu(\tilde{E}) \leq \mu^*(\tilde{E})
+        \end{align*}
+        De la misma manera $\nu(F_n \setminus \tilde{E}) \leq \mu^*(F_n \setminus \tilde{E})$.
+        Como los $F_n \in \mc{A} \Rightarrow \nu(\tilde{E}) + \nu(F_n \setminus \tilde{E}) = \nu(F_n) = \mu(F_n) = \mu^*(F_n) = \mu^*(\tilde{E}) + \mu^*(F_n \setminus \tilde{E})$.
+        Resulta que $\nu(\tilde{E}) = \nu(E \cap F_n) = \mu^*(E \cap F_n) = \mu^*(\tilde{E})$ y $\nu(F_n \setminus \tilde{E}) = \mu^*(F_n \setminus \tilde{E})$ y tenemos \begin{align*}
+            \nu(E \cap F_n) = \mu^*(F_n \cap E) \quad \forall n \in \N
+        \end{align*}
+        Pues el $n$ es arbitrario, luego tomamos $\mf{X} = \mc{A}^*$ y $\nu(E) = \mu^*(E)$ para todo $E \in \mf{X}$.
+    \end{proof}
+\end{theorem}
+
+\section{Medida de Lebesgue}
+
+Por el teorema de extensión de Caratheódory $(\R$, $\mc{F}^*$, $\ell^*)$ es un espacio de medida completa.
+Como sabemos que $\ell$ es $\sigma$-finita, por el teorema de enxtensión de Hahn, $\ell^*$ es la única extensión de $\ell$ a la $\sigma$-álgebra $\mc{F}^*$,
+o a cualquier $\mf{X} : \mc{F} \subseteq \mf{X} \subseteq \mc{F}^*$.
+
+A partir de ahora, a la medida $\restr{\ell^*}{\mc{F}^*} := \lambda$ la llamaremos la medida de Lebesgue en $\R$ y $\mc{F}^*$ es la $\sigma$-álgebra de conjuntos
+medibles Lebesgue y lo notaremos $\mc{L} := \mc{F}^*$.
+
+Ejercicio: Probar que la $\sigma$-álgebra generada por $\mc{F}$ es la $\sigma$-álgebra de Borel i.e $\mc{F} \subseteq \mc{B} \subseteq \mc{L}$.
+
+En particular, $\lambda$ es la única medida sobre los Borelianos que verifica \begin{itemize}
+    \item $\lambda((a, b)) = b - a = \lambda((a, b] - \{ b \})$.
+    \item $\lambda([a, b]) = b - a$.
+    \item $\lambda([a, b)) = b - a$.
+    \item $\lambda((a, b]) = b - a$.
+\end{itemize}
+
+Por supuesto la misma afirmación vale para $\lambda$ sobre $\mc{L}$.
+
+\begin{note}
+    No se pierde demasiadad generalidad al considerar $\lambda : \mc{B} \to [0, +\infty]$.
+    \begin{itemize}
+        \item $(\forall E \in \mc{L}) (\exists B \in \mc{B}$, $N \in \mc{L} : \lambda(N) = 0$ y $E = B \cup N)$.
+        \item si $f : \R \to \overline{\R}$ es medible Lebesgue $\Rightarrow \exists g : \R \to \overline{\R}$ medible Borel tal que $ f = g$ $\lambda$-c.t.p.
+    \end{itemize}
+\end{note}
+
+Ejercicio: $\lambda$ es invariante por translaciones. Notemos que, además, esta propiedad caracteriza a la medida de Lebesgue i.e si $\mu : \mc{B} \to [0, +\infty]$ es una medida tal que \begin{enumerate}
+    \item $\mu(B) < +\infty$ si $B \in \mc{B}$ es acotado.
+    \item $\mu$ es invariante por translaciones.
+\end{enumerate}
+$\Rightarrow \exists \alpha \in \R : \mu = \alpha \cdot \lambda$ i.e $\mu(B) = \alpha \cdot \lambda(B) \quad \forall B \in \mc{B}$
+
+\begin{note}
+    $\mc{B} \subset \mc{L}$ es estricta (no lo probamos).
+    La demostración está en \textit{Real and abstract anlysis - Edwin Hewitt y Karl Stromberg}.
+\end{note}

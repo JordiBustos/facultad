@@ -1,0 +1,184 @@
+\section{Teorema de Weierstrass}
+
+\subsection{Preliminares}
+
+\begin{definition}[Relativamente compacto]
+    Un subconjunto \(F \subseteq \R^n\) se dice relativamente compacto si toda sucesión en \(F\) posee una subsucesión convergente.
+\end{definition}
+
+\begin{definition}[Compacto]
+    Un conjunto se dice compacto si además de ser relativamente compacto, es acotado.
+\end{definition}
+
+\begin{definition}[Función continua]
+    Una función \(f: F \subseteq \R^n \to \R^n\) se dice continua si para todo punto \(x_0 \in F\) y para todo \(\epsilon > 0\), existe un \(\delta > 0\) tal que si \(|x - x_0| < \delta\), entonces \(|f(x) - f(x_0)| < \epsilon\).
+\end{definition}
+
+\begin{definition}[Función acotada superiormente]
+    Una función \(f: F \subseteq \R^n \to \R\) se dice acotada superiormente si existe un número real \(M\) tal que para todo \(x \in F\), se cumple que \(f(x) \leq M\).
+\end{definition}
+
+\begin{prop}
+    Si \((x_n)_{n \in \N} \to x \in \R^n\), entonces toda subsucesión de \((x_n)_{n \in \N}\) también converge a \(x\).
+\end{prop}
+
+\begin{prop}
+    Si \(f : \R^n \to \R^m\) es continua y \((x_n)_{n \in \N} \to x \in \R^n\), entonces \(f(x_n) \to f(x)\).
+\end{prop}
+
+\begin{definition}[Máximo de una función]
+    Se dice que una función \(f : \R \to \R\) alcanza su máximo si \(\exists \, x \text{, } y \in \R : f(x) = y\) y \(f(t) \leq y \, \forall t \in \R\).
+\end{definition}
+
+\newpage
+
+\subsection{Teorema de Weierstrass}
+
+\begin{theorem}[Weierstrass]
+    Sea \(\O \neq K \subseteq \R^n\) compacto. Una función continua \(f : K \to \R\) es acotada superiormente y, más aún, \(\exists \, y \in K\) tal que \(f(x) \leq f(y) \, \forall x \in K\).
+    Es decir, \(f\) alcanza su máximo en \(K\).
+
+    \begin{proof}
+        \textbf{Acotación superior de \(f\):}
+
+        Supongamos, por el absurdo, que \(f\) no está acotada superiormente. Entonces, para cada \(n \in \N\), existe \(x_n \in K\) tal que \(f(x_n) \geq n\).
+
+        Como \( (x_n)_{n \in \N} \subset K \) y \(K\) es compacto, existe una subsucesión \( (x_{\phi(n)})_{n \in \N} \) que converge a un punto \(\alpha \in K\). Es decir:
+        \[
+            \lim_{n \to +\infty} x_{\phi(n)} = \alpha \in K.
+        \]
+
+        Como \(f\) es continua en \(\alpha\), se tiene que:
+        \[
+            f(x_{\phi(n)}) \to f(\alpha).
+        \]
+
+        Sin embargo, dado que \(f(x_{\phi(n)}) \geq \phi(n) \geq n\), \(f(x_{\phi(n)})\) no puede ser acotada, lo cual contradice su convergencia. Esto es un absurdo. Por lo tanto, \(f\) debe estar acotada superiormente.
+
+        \textbf{Existencia de un máximo:}
+
+        Sea \(F = \{f(x) : x \in K\} \neq \O\), que está acotado superiormente. Entonces, existe \(s = \sup(F)\).
+
+        Por definición de supremo, existe una sucesión \((y_n)_{n \in \N} \subset K\) tal que \(f(y_n) \to s\). Como \(K\) es compacto, existe una subsucesión \((y_{\phi(n)})_{n \in \N}\) tal que \(y_{\phi(n)} \to y \in K\).
+
+        Por continuidad de \(f\), se tiene:
+        \[
+            f(y_{\phi(n)}) \to f(y).
+        \]
+
+        Como \(f(y_{\phi(n)}) \to s\), se deduce que \(f(y) = s\). Por lo tanto, \(f(y)\) es una cota superior de \(F\) y \(f(y) \in F\). Esto implica que \(f(y)\) es el máximo de \(f\) en \(K\).
+
+        \(\therefore\) \(f\) alcanza su máximo en \(K\).
+    \end{proof}
+\end{theorem}
+
+\begin{note}
+    Vale para acotada inferiormente y alcanza su mínimo.
+\end{note}
+
+\newpage
+
+\section{Teorema de Valor Intermedio}
+
+\begin{theorem}[Teorema de Valor Intermedio]
+    Sea \(f: [a, b] \to \R \) continua. Entonces, \(\forall y \) entre \(f(a)\) y \(f(b)\), \(\exists \, x \in [a, b]\) tal que \(f(x) = y\).
+    \begin{proof}
+        Si \(f(a) = f(b)\), entonces \(f(x) = f(a) = f(b)\) para todo \(x \in [a, b]\), y no hay nada que probar.
+
+        Supongamos sin pérdida de generalidad que \(f(a) < f(b)\). Sea \(y \in (f(a), f(b))\). Definimos el conjunto:
+        \[
+            U = \{x \in [a, b] : f(x) < y \}.
+        \]
+        Como \(f(a) < y\), entonces \(U \neq \varnothing \). Además, \(U\) está acotado por \(b\), por lo que existe \(\alpha = \sup(U)\), con \(\alpha \in [a, b]\).
+
+        Ahora, consideremos una sucesión \({(x_n)}_{n \in \N} \subset U\) tal que \(x_n \to \alpha \). Dado que \(f\) es continua, se tiene que:
+        \[
+            f(x_n) \to f(\alpha).
+        \]
+        Como \(x_n \in U\), entonces \(f(x_n) < y\) para todo \(n \in \N \). Por lo tanto:
+        \[
+            \lim_{n \to \infty} f(x_n) \leq y.
+        \]
+
+        Queremos demostrar que \(f(\alpha) = y\). Supongamos por el contrario que \(f(\alpha) < y\). Entonces, por construcción, \(\alpha \in U \).
+        Además, como \(y < f(b)\) y \(\alpha \in [a, b]\), necesariamente \(\alpha < b\).
+
+        Como \(f\) es continua, en particular es continua en \( x = \alpha \) y tenemos que\begin{align*}
+            \forall \e > 0 \, \exists \delta > 0 : 0 < \| x - \alpha \| < \delta \Rightarrow \| f(x) - f(\alpha) \| < \e
+        \end{align*}
+        Tomemos \( \e < \|y - f(\alpha)\| \) entonces \( \exists \delta > 0 \) que cumple con la definición. Sea \( x = \alpha + \frac{\delta}{2} \)\begin{align*}
+             & \Rightarrow 0 < \| x - \alpha \| = \frac{\delta}{2} < \delta \Rightarrow \| f(x) - f(\alpha) \| < \e < \| y - f(\alpha) \| \\
+             & \Rightarrow f(x) \in B_{\e}(f(\alpha))                                                                                     \\
+             & \Rightarrow f(x) < y                                                                                                       \\
+             & \Rightarrow x = \alpha + \frac{\delta}{2} \in U                                                                            \\
+        \end{align*}
+        Absurdo pues dijimos que \( \alpha = \sup U \). Por lo tanto, debe ser \( f(\alpha) = y \).
+        Notemos que si \( \alpha + \frac{\delta}{2} > b \) podemos tomar \( n \in \N \) lo suficientemente grande tal que \( \alpha < \alpha + \frac{\delta}{n} < b \).
+    \end{proof}
+\end{theorem}
+
+\newpage
+
+\section{Topología}
+\subsection{Preliminares}
+
+\begin{definition}[Arco-conexo]
+    Decimos que \(\mathcal{C} \subseteq \mathbb{R}^n\) es arco-conexo si, dados \(a, b \in \mathcal{C}\), existe una función continua \(\sigma : [0, 1] \to \mathbb{R}^n\) tal que:
+    \[
+        \operatorname{Im}(\sigma) \subseteq \mathcal{C}, \quad \sigma(0) = a, \quad \sigma(1) = b.
+    \]
+\end{definition}
+
+\begin{definition}[Conexo]
+    Un conjunto \(A \subseteq \mathbb{R}^n\) es conexo si no existen dos abiertos no vacíos \(U, V \subseteq A\) tales que:
+    \[
+        U \cap V = \varnothing \quad \text{y} \quad U \cup V = A.
+    \]
+\end{definition}
+
+\begin{prop}
+    Si \(A \subseteq \mathbb{R}^n\) es conexo y \(f: A \to \mathbb{R}^m\) es continua, entonces \(f(A)\) es conexo.
+\end{prop}
+
+\begin{prop}
+    Sea \(\mathcal{C}\) una familia de subconjuntos conexos de \(\mathbb{R}^n\). Si cada par \(A, B \in \mathcal{C}\) satisface \(A \cap B \neq \varnothing\), entonces:
+    \[
+        \bigcup_{C \in \mathcal{C}} C
+    \]
+    es conexo.
+\end{prop}
+
+\begin{theorem}
+    Todo subconjunto no vacío y \textbf{arco-conexo} de \(\mathbb{R}^n\) es conexo.
+    \begin{proof}
+        Sea \(A \subseteq \mathbb{R}^n\) un conjunto no vacío y \(a_0 \in A\). Por la definición de arco-conexidad, para cada \(a \in A\), existe una función continua \(\sigma_a : [0, 1] \to \mathbb{R}^n\) tal que:
+        \[
+            \operatorname{Im}(\sigma_a) \subseteq A, \quad \sigma_a(0) = a_0, \quad \sigma_a(1) = a.
+        \]
+
+        Como \([0, 1]\) es conexo, el conjunto \(\sigma_a([0, 1])\) es conexo. Además, contiene a \(a_0\) y \(a\), y está contenido en \(A\).
+
+        Ahora, por la segunda proposición, dado que todos los conjuntos \(\sigma_a([0, 1])\) son conexos y comparten el punto común \(a_0\), la unión:
+        \[
+            \bigcup_{a \in A} \sigma_a([0, 1])
+        \]
+        es conexa. Por otro lado, se tiene que:
+        \[
+            \bigcup_{a \in A} \sigma_a([0, 1]) = A.
+        \]
+
+        Por lo tanto, \(A\) es conexo.
+    \end{proof}
+\end{theorem}
+
+Veremos una demostración alternativa.
+
+Sea \( C \) un conjunto arco-conexo tenemos que \( \forall x\text{, }y \in C \quad \exists \sigma : [0\text{, }1] \to \R \) tal que
+\( Im(\sigma) \subseteq C \) y \( \sigma(0) = x \) y \( \sigma(1) = y \), \( \sigma \) continua. Por el absurdo, supongamos que \( C \) no es conexo, entonces \begin{align*}
+    \exists U\text{, }V \text{ abiertos disjuntos, no vacíos, tales que } U \cap C \neq \varnothing \text{, } V \cap C \neq \varnothing \text{ y } C \subseteq U \cup V\text{.}
+\end{align*}
+Luego si tomamos \( x \in U \), \( y \in V \) por hipótesis existe \( \sigma \) como se mencionó antes. Ahora, notemos que \begin{align*}
+    [0\text{, }1] \text{ es conexo } \Rightarrow \sigma([0\text{, }1]) \text{ es conexo.}
+\end{align*}
+Como \( \sigma([0\text{, }1]) \subseteq C \subseteq U \cup V \), \( \{ x \} \subseteq \sigma([0\text{, }1]) \cap U \) y \( \{y\} \subseteq \sigma([0\text{, }1]) \cap V \).
+Se sigue que por definición \( \sigma([0\text{, }1]) \) no es conexo y esto contradice que \( \sigma([0\text{, }1]) \) sea conexo \( \therefore \) \( C \) es conexo.

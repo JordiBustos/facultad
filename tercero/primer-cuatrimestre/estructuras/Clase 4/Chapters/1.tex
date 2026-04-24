@@ -1,0 +1,161 @@
+\section{Anillos}
+
+\begin{definition}
+    $R$ anillo, $I \subseteq R$ ideal a izquierda (derecha, bilátero). $I$ es máximal a izquierda
+    (derecha, bilátero) sí $I \neq R$ y si $\exists J \subseteq R$ ideal del mismo tipo que $I$ tal que $I \subseteq J$.
+    Entonces $J = I$ o $J = R$.
+\end{definition}
+
+Decimos que $K \triangleleft R$ es primo si $\forall a$, $b \in \R$ si $a \cdot b \in K \Rightarrow a \in K \lor b \in K$.
+
+\begin{prop}
+    $R$ anillo, $K \triangleleft R$. \begin{enumerate}
+        \item $R/K$ es un anillo de división $\iff$ $K$ es máximal a izquierda $\iff$ $K$ es máximal a derecha.
+        \item $R/K$ es simple $\iff K$ es máximal bilátero.
+        \item $R/K$ es dominio $\iff K$ es primo.
+    \end{enumerate}
+\end{prop}
+
+\begin{definition}[Producto directo (externo)]
+    $\{ R_i \}_{i \in I}$ anillos. El grupo abeliano $\prod_{i \in I} R_i$ es anillo con el producto $(r_i)_{i \in I} \cdot (s_i)_{i \in I} = (r_i \cdot s_i)_{i \in I}$
+\end{definition}
+
+$\forall k \in I$, $\pi_k : \prod_{i \in I} R_i \to R_k$ es la proyección canónica. Es morfismo suryectivo de anillos $\pi_k((r_i)_{i \in I}) = r_k$.
+
+$\iota_k : R_k \to \prod_{i \in I} R_i$ es la inyección canónica $\iota_k(r) = (0, \ldots, 0, r, 0, \ldots)$. Es monomorfismo de anillos.
+
+Si $\{ A_i \}_{i \in I}$ es familia de grupo sabelianos tal que $A_i \triangleleft R_i \quad \forall i \in I \Rightarrow \prod_{i \in I} A_i \triangleleft \prod_{i \in I} R_i$.
+
+Si $I = \{ 1 $, $\cdots$,$ n\}$, todo ideal bilátero de $R_1 \times \cdots \times R_n$ es de la forma $I_1 \times \cdots \times I_n$ con $I_i \triangleleft R_i$.
+
+\begin{prop}[Propiedad universal]
+    $\{ R_i \}_{i \in I}$ una familia de anillos, $\{ \phi_k : S \to R_k \}$ familia de morfimos de anillos $\forall k \in I$.
+
+    \[
+        \begin{tikzcd}
+            & S \arrow[dashed]{r}{\exists! \; \overline{\psi}} \arrow[swap]{dr}{\psi_k} & \prod_{i \in I} R_i \arrow{d}{\pi_k} \\
+            & & R_k
+        \end{tikzcd}
+    \]
+\end{prop}
+
+Sea $R$ un anillo y $K \triangleleft R$. Dados $r$, $t \in R$ decimos que $r$ es congruente a $t$ módulo $K$ si
+$r - t \in K$.
+Escribimos $r \equiv t \mod K$.
+\begin{align*}
+    r & \equiv t \mod K \iff r - t \in K \iff r + K = t + K \\
+\end{align*}
+
+Sea $r_1$, $t_1$, $r_2$, $t_2 \in R$. Si $r_1 \equiv t_1 \mod K$ y $r_2 \equiv t_2 \mod K$ entonces
+\begin{align*}
+    r_1 + r_2     & \equiv t_1 + t_2 \mod K     \\
+    r_1 \cdot r_2 & \equiv t_1 \cdot t_2 \mod K
+\end{align*}
+
+\begin{eg}
+    Sean $R = \Z$, $K = n \Z$, dados $x$, $y \in \Z$ decimos que $x$ es congruente a $y$ módulo $n$ si
+    $x - y \in n \Z \iff n | x-y \iff x \equiv_n y$.
+\end{eg}
+
+\begin{lemma}
+    Sea $R$ un anillo, $n \geq 2$ y $K_1$, $K_2$, $\cdots$, $K_n \triangleleft R$.
+    Llamemos $L_i = \bigcap_{j \neq i} K_j$ Si $K_i + K_j = R \quad \forall i \neq j \Rightarrow K_i + L_i = R \quad \forall i = 1$, $\cdots$, $n$.
+    \begin{proof}
+        Por inducción en $n$.
+        Si $n = 2 \Rightarrow K_1$, $K_2 \triangleleft R$ y $L_1 = K_2$, $L_2 = K_1$, $K_1 + K_2 = R$.
+        Entonces $K_1 + L_1 = K_1 + K_2 = R$ y $K_2 + L_2 = K_2 + K_1 = R$.
+        Hipótesis inductiva: El lema vale para $n = l \geq 2$.
+        Tésis inductiva: Sean $K_1$, $K_2$, $\cdots$, $K_{l+1} \triangleleft R$ y $L_i = \bigcap_{j \neq i} K_j$ tales que $K_i + K_j = R \quad \forall i \neq j$.
+
+        Veamos que $K_i + L_i = R \quad \forall i = 1$, $\cdots$, $l+1$.
+        Llamemos $M_{ij} = \bigcap_{t \neq i,j} K_t$. Si $1 \leq i \neq j \leq l+1$ entonces por HI, $K_i + M_{ij} = R$. Luego, \begin{align*}
+            R & = K_i + R = K_i + R² = K_i + (K_i + M_{ij}) (K_i + K_j)                   \\
+              & K_i + K_i^2 + K_i \cdot K_j + M_{ij} K_i + M_{ij} K_j \subseteq K_i + L_i
+        \end{align*}
+
+        Entonces $R \subseteq K_i + L_i \subseteq R \Rightarrow K_i + L_i = R$.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}[Chino del resto]
+    Sea $R$ un anillo $n \geq 2$, $K_1$, $K_2$, $\cdots$, $K_n \triangleleft R$ tales que $K_i + K_j = R \quad \forall i \neq j$.
+    Si $K = \bigcap_{i = 1}^n K_i \Rightarrow R/K \cong \bigoplus_{i = 1}^n R/K_i$.
+    \begin{proof}
+        En el apunte.
+    \end{proof}
+\end{theorem}
+
+\begin{eg}
+    Sea $K$ un cuerpo y consideramos el anillo $R = K[x]$.
+    Sea $f \in K[x]$ tal que $gr(f) > 0$ y sea $f = p_1^{\alpha_1} \cdots p_n^{\alpha_n}$ la factorización de $f$ en factores irreducibles.
+    Luego, $\forall i \neq k$, $p_i$, $p_k$ son coprimos en $K[x]$ y esto implica que $p_i^{\alpha_i} K[x] + p_k^{\alpha_k} K[x] = K[x]$.
+    Llamando $K_i = p_i^{\alpha_i} K[x]$ y aplicando el teorema anterior $K[x]/f K[x] \cong \bigoplus_{i = 1}^n K[x] / p_i^{\alpha_i} K[x]$.
+\end{eg}
+
+\begin{corollary}
+    Sean $z_1$, $z_2$, $\cdots$, $z_n \in \Z$ tal que son coprimos dos a dos. Dados $b_1$, $b_2$, $\cdots$, $b_n \in \Z$. \begin{align*}
+        x & \equiv b_1 \mod z_1 \\
+        x & \equiv b_2 \mod z_2 \\
+          & \vdots              \\
+        x & \equiv b_n \mod z_n
+    \end{align*}
+    Tiene solución única módulo $z = \prod_{i = 1}^n z_i$.
+    \begin{proof}
+        Sea $R = \Z$ y $K_i = z_i \Z \triangleleft \Z \quad \forall i$. Si $i \neq j$, $K_i + K_j = \Z$ pues son coprimos.
+
+        $K = \bigcap_{i = 1}^n K_i = z \Z \Rightarrow \Z / z \Z \cong \bigoplus_{i = 1}^n \Z / z_i \Z$
+    \end{proof}
+\end{corollary}
+
+\begin{theorem}[Segundo y tercer teorema de isomorfismos para anillos]
+    Sean $R$ un anillo, $K \triangleleft R$ \begin{enumerate}
+        \item Si $A \subseteq R$ es un subanillo, $A + K \subseteq R$ es un subanillo y $A+K/K \cong A / A \cap K$.
+        \item Si $I \triangleleft R$ tal que $K \subseteq I \Rightarrow I/K \triangleleft R/K$ y $R/I \cong (R/K)/(I/K)$.
+    \end{enumerate}
+    \begin{proof}
+        Ejercicio.
+    \end{proof}
+\end{theorem}
+
+\begin{lemma}[Zorn]
+    Sea $(X$, $\leq)$ un conjunto no vacío parcialmente ordenado. Si toda cadena en $X$ tiene una cota superior, entonces $X$ tiene un elemento maximal. Equivalente al axioma de elección.
+\end{lemma}
+
+\begin{theorem}
+    Sea $R$ un anillo y $t \in$ $\{$izquierda, derehca, bilátero$\}$. Entonces todo ideal $I \subseteq R$ de tipo $t$ está contenido en un ideal maximal de tipo $t$. \begin{proof}
+        Sea $I \subseteq R$ un ideal de tipo $t$ y sea $X = \{ J \subset R : J \text{ es de tipo } t \text{, } I \subseteq J\}$.
+
+        $X$ es un conjunto parcialmente ordenado con $\subseteq$. Sea $Y \subseteq X$ una cadena, veamos que está acotada. Si $Y$ es vacío $I \in X$ es cota superior de $Y$.
+        Si $Y \neq \O$, $J = \bigcup_{K \in Y} K$ es una cota superior de $Y$ pues $I \subseteq J$ y $J$ es de tipo $t$.
+        Veamos que $J$ es un ideal de tipo $t$ \begin{itemize}
+            \item $0 \in I \subseteq J \Rightarrow 0 \in J$.
+            \item Si $x$, $y \in J \Rightarrow \exists K \in Y : x$, $y \in K \Rightarrow x+y \in K \subseteq J \Rightarrow x+y \in J$.
+            \item Si $x \in J \Rightarrow \exists K \in Y : x \in K \Rightarrow -x \in K \subseteq J \Rightarrow -x \in J$.
+            \item Si $x \in J$, $a \in R \Rightarrow \exists K \in Y : x \in K \Rightarrow x \cdot a \in K$ o $a \cdot x \in K \Rightarrow xa \in J$ o $ax \in J$.
+        \end{itemize}
+        $\therefore$ $J$ es un ideal de tipo $t$.
+
+        Luego por lema de Zorn, $X$ tiene un elemento maximal $M$. Por definición de $X$, $M$ es ideal de tipo $t$ y es maximal entre todas los ideales del mismo tipo que contienen a $I$. Restar ver que $M$ es maximal entre todos los ideales de tipo $t$ de $R$.
+
+        Supongamos que $M$ no es maximal, luego $\exists N \subseteq R$ ideal de tipo $t$ tal que $M \subset N \subset R$, pero entonces $I \subseteq N$ y esto implica que $N \in X$ lo que contradice la maximalidad de $M$ en $X$.
+    \end{proof}
+\end{theorem}
+
+\begin{note}
+    Todo anillo $R$ tiene un cociente $R/I$ que es un anillo simple, si además es conmutativo, $R/I$ es cuerpo. Sin embargo, un anillo no conmutativo puede no admitir cocientes que sean anillos de división.
+    Por ejemplo si $R = M_n(S)$, con $S$ anillo, todo ideal bilátero de $R$ es de la forma $K = M_n(I)$, con $I \triangleleft S$.
+    Luego $R/K = M_n(S)/M_n(I) \cong M_n(S/I)$ que siempre tiene divisores de cero.
+\end{note}
+
+\begin{prop}
+    Sea $R$ un anillo y $M = R - R^*$. Son equivalentes \begin{enumerate}
+        \item $M$ es un ideal a izquierda.
+        \item $M$ es un ideal a derecha.
+        \item $R$ tiene un único ideal a izquierda maximal.
+        \item $R$ tiene un único ideal a derecha maximal.
+    \end{enumerate}
+
+    \begin{proof}
+        Proposición 2.4.29 del apunte.
+    \end{proof}
+\end{prop}

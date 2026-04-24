@@ -1,0 +1,181 @@
+Dado un espacio normado $(V \text{, } \norm{\cdot})$, sea $d : V \times V \to [0\text{, } +\infty)$ la distancia inducida por
+$\norm{\cdot}$, tal que $d(x\text{, }y) = \norm{x - y}$ para todo $x\text{, }y \in V$.
+
+Queda como ejercicio verificar que $d$ es una métrica y que verifica las siguientes propiedades: \begin{enumerate}
+    \item $d(\alpha x\text{, } \alpha y) = |\alpha| d(x\text{, }y)$ para todo $\alpha \in \R$ y $x\text{, }y \in V$.
+    \item $d(x + z \text{, } y + z) = d(x \text{, }y)$ para todo $z \in V$ y $x\text{, }y \in V$.
+\end{enumerate}
+
+\begin{eg}[Distancias que no provienen de una norma]
+    Si $\norm{\cdot}$ es una norma de $\R^2$
+    \begin{align*}
+        d(x\text{, }y) & = \begin{cases}
+                               0 & \text{si } x = y    \\
+                               1 & \text{si } x \neq y
+                           \end{cases} \\
+    \end{align*}
+    \begin{align*}
+        d(x\text{, }y) & = \begin{cases}
+                               0                & \text{si } x = y    \\
+                               \norm{x - y} + 1 & \text{si } x \neq y
+                           \end{cases}
+    \end{align*}
+\end{eg}
+
+\begin{definition}
+    Dado un espacio normado $(V \text{, } \norm{\cdot})$, sea $(f_n)_{n \geq 1}$
+    una sucesión en $V$. Diremos que la sucesión es convergente en norma si existe $f \in V$ tal que
+    $\forall \e > 0$, $\exists n_0 \in \N :$ si $n \geq n_0 \Rightarrow \norm{f_n - f} < \e$.
+    En este caso, diremos que la sucesión es de cauchy en norma si $\forall \e > 0$, $\exists N \in \N : $ si $n$, $m \geq N \Rightarrow \norm{f_n - f_m} < \e$
+\end{definition}
+
+\begin{note}
+    \begin{enumerate}
+        \item Si $(f_n)_{n \geq 1}$ es convergente, entonces es de Cauchy.
+        \item Si $f_n \to f$ y $f_n \to g$, entonces $f = g$.
+    \end{enumerate}
+\end{note}
+
+\begin{definition}[Espacio de Banach]
+    Un espacio normado $(V \text{, } \norm{\cdot})$ es de Banach si toda sucesión de Cauchy en norma es convergente en norma, i.e, si es completo
+\end{definition}
+
+\begin{note}
+    Si $(f_n)_{n \geq 1}$ es una sucesión de Cauchy en $(V \text{, } \norm{\cdot})$, entonces existe $(f_{n_k})_{k \geq 1}$ subsucesión de $(f_n)_{n \geq 1}$ que verifica \begin{align*}
+        \norm{f_{n_{k+1}} - f_{n_k}} < \frac{1}{2^k} \quad \forall k \geq 1
+    \end{align*}
+
+    \begin{proof}
+        Como $(f_n)_{n \geq 1}$ es de Cauchy, $\forall k \geq 1$ existe $M_k \in \N$ tal que si $n$, $m \geq M_k$ entonces $\norm{f_n - f_m} < \frac{1}{2^k}$
+
+        Tomemos $n_1 = M_1$. Luego, sea $n_2 = \max\{M_2, n_1+1\}$.
+        Luego supongamos que tenemos elegidos $\{ f_1 \text{, } f_2 \text{, } \cdots \text{, } f_{n_k} \}$ y sea $n_{k+1} = \max\{M_{k+1} \text{, } n_k + 1\} \Rightarrow$
+        \begin{align*}
+            \norm{f_{n_{k+1}} - f_{n}} < \frac{1}{2^k} \quad \forall n \geq n_k
+        \end{align*}
+        $\therefore$ Queda demostrado por inducción.
+    \end{proof}
+\end{note}
+
+\begin{theorem}[Riesz - Fucher]
+    Dado un espacio de medida $(X \text{, } \mf{X} \text{, } \mu)$, si $p \in [1 \text{, } +\infty)$ entonces $(L_p(X \text{, } \mf{X}\text{, } \mu) \text{, } \norm{\cdot}_p)$ es un espacio de Banach real.
+\end{theorem}
+
+Para la prueba, fijemos $p \in [1\text{, } +\infty)$, sabemos que $(L_p \text{, } \norm{\cdot}_p)$ es un espacio normado, sólo resta probar que es completo.
+
+Dada una sucesión de Cauchy $(f_n)_{n \geq 1}$ en $L_p$, sea $(f_{n_k})_{k \geq 1}$ una subsucesión de $(f_n)_{n \geq 1}$ tal que $\norm{f_{n_k} - f_{n_{k+1}}} < \dfrac{1}{2^k} \quad \forall k \geq 1$. Luego, definimos
+$g : X \to [0 \text{, } +\infty]$ como \begin{align*}
+    g(x) & = |f_{n_1}(x)| + \sum_{k \geq 1} |f_{n_{k+1}}(x)-f_{n_k}(x)|                       \\
+         & = |f_{n_1}(x)| + \lim_{m \to +\infty} \sum_{k = 1}^m |f_{n_{k+1}}(x) - f_{n_k}(x)|
+\end{align*}
+Si $x \in X$ es tal que $g(x) \in \R$ entonces existe el límite \begin{align*}
+     & \lim_{m \to +\infty} f_{n_1}(x) + \sum_{k = 1}^m |f_{n_{k+1}}(x) - f_{n_k}(x)| = \lim_{m \to +\infty} f_{n_m}(x)
+\end{align*}
+Aplicando el Lema de Fatou, \begin{align*}
+    \int g^p \, d\mu & = \int \lim_{m \to +\infty} \left(|f_{n_1}| + \sum_{k = 1}^m |f_{n_{k+1}} - f_{n_k}| \right)^p \, d\mu      \\
+                     & \leq \liminf_{m \to +\infty} \int \left(|f_{n_1}| + \sum_{k = 1}^m |f_{n_{k+1}} - f_{n_k}|\right)^p \, d\mu \\
+\end{align*}
+
+Luego, \begin{align*}
+    \norm{g}_p & = \left(\int g^p \, d\mu \right)^{\frac{1}{p}} \leq \left( \liminf_{m \to +\infty} \int \left( |f_{n_1}| + \sum_{k = 1}^m |f_{n_{k+1}} - f_{n_k} | \right)^p \, d\mu \right)^{\frac{1}{p}} \\
+               & = \liminf_{m \to +\infty} \left( \int \left( |f_{n_1}| + \sum_{k = 1}^m |f_{n_{k+1}} - f_{n_k}| \right)^p d\mu \right)^{\frac{1}{p}}                                                       \\
+               & = \liminf_{m \to +\infty} \norm{ |f_{n_1}| + \sum_{k = 1}^m | f_{n_{k+1}} - f_{n_k} |}_p                                                                                                   \\
+               & \leq \liminf_{m \to +\infty} \left( \norm{f_{n_1}}_p + \sum_{k = 1}^m \norm{f_{n_{k+1}} - f_{n_k}}_p \right)                                                                               \\
+               & \leq \norm{f_{n_1}}_p + \liminf_{m \to +\infty} \sum_{k = 1}^m \frac{1}{2^k}                                                                                                               \\
+               & = \norm{f_{n_1}}_p + 1
+\end{align*}
+
+$\therefore g \in L_p(X \text{, } \mf{X} \text{, } \mu)$ y por una observación anterior, si $N = \{ x \in X : g(x)^p = +\infty \} \Rightarrow \mu(N) = 0$ pues \begin{align*}
+     & \int g^p \, d \mu < +\infty \text{, } g^p \in M^{+}(X \text{, } \mf{X})
+\end{align*}
+
+Además $N = \{ x \in X : g(x) = +\infty \}$. Luego $(g(x) \in \R) \, (\forall x \in X \setminus N) \Rightarrow$ por la completitud de $\R$, para cada $x \in X \setminus N$, existe el límite.
+\\
+
+$\lim_{m \to +\infty} \left( f_{n_1}(x) + \sum_{k = 1}^m f_{n_{k+1}}(x) - f_{n_k}(x) \right) = \lim_{m \to +\infty} f_{n_m}(x)$.
+
+O sea, $(f_{n_m}(x))_{m \geq 1}$ es convergente (en $\R$) para cada $x \in X \setminus N$. Luego,
+definimos $f : X \to \R$ como : \begin{align*}
+    f(x) = \begin{cases}
+               \lim_{m \to +\infty} \left( f_{n_1}(x) + \sum_{k=1}^m \left( f_{n_{k+1}}(x) - f(x) \right) \right) & \text{si } x \in X \setminus N \\
+               0                                                                                                  & \text{si } x \in N
+           \end{cases}
+\end{align*}
+
+Es decir, \begin{align*}
+    f = \chi_{N^c} \cdot \limsup_{m \to +\infty} f_{n_m}
+\end{align*}
+
+Entonces, $f$ es $\mf{X}$-medible. Notemos que $|f(x)| \leq g(x) \, \forall x \in X \Rightarrow |f(x)|^p \leq g^p(x) \, \forall x \in X$.
+Por lo que \begin{align*}
+     & \int |f|^p \, d\mu \leq \int g^p \, d\mu < +\infty \\
+\end{align*}
+Es decir, $f \in L_p(X \text{, } \mf{X} \text{, } \mu)$
+
+Veamos que $(f_{n_k})_{k \geq 1}$ converge en norma $p$ a la clase de $f$. Queremos ver que $\int |f_{n_k} - f|^p \, d\mu \to 0$ cuando $k \to +\infty$.
+
+Sabemos que $f_{n_k} \to f \, \mu \text{-c.t.p}$. Además $|f(x)| \leq g(x) \, \forall x \in X$ y $|f_{n_k}(x)| \leq |f_{n_1}| + \sum_{i = 1}^k |f_{n_{i+1}}(x) - f_{n_i}(x)| \leq g(x) \, \forall k \geq 1$.
+
+Luego, $|f - f_{n_k}|^p \leq \left( |f| + |f_{n_k}|\right)^p \leq 2^p g^p $ por el TCD \begin{align*}
+    \lim_{k \to +\infty} \int |f - f_{n_k}|^p \, d\mu & = \int \lim_{k \to +\infty} |f - f_{n_k}|^p \, d\mu = 0
+\end{align*}
+
+Solo falta probar que toda sucesión $(f_n)_{n \geq 1}$ converge a $f$ en norma $p$. Dado $\e > 0$, $\exists N_1 \geq 1$ tal que si $n$, $m \geq N_1 \Rightarrow \norm{f_n - f_m}_p < \frac{\e}{2}$ y $K \geq 1$ tal que si $k > K \Rightarrow \norm{f_{n_k} - f}_p < \frac{\e}{2}$.
+
+Si elegimos $\tilde{K} = \max\{ K \text{, } N_1 \}$ tenemos que $\norm{f_n - f}_p \leq \norm{f_n - f_{n_k}}_p + \norm{f_{n_k} - f}_p < \frac{\e}{2} + \frac{\e}{2} = \e$ para todo $n \geq \tilde{K}$.
+
+\begin{corollary}
+    Si $p \in [1 \text{, } +\infty)$ y $(f_n)_{n \geq 1}$ es una sucesión de Cauchy que converge a $f$ en $L_p(X \text{, } \mf{X} \text{, } \mu)$, entonces
+    existe una subsucesión $(f_{n_k})_{k \geq 1}$ que converge a $f$ $\mu$-c.t.p.
+\end{corollary}
+
+
+\begin{definition}
+    Sea $\mc{R}([a \text{, } b]) = \{ f : [a \text{, } b] \to \R : f \text{ es integrable Riemann} \}$ es un $\R$-e.v. Definamos la norma $\norm{\cdot}_0 : \mc{R}([a \text{, } b]) \to [0 \text{, } +\infty )$ como: \begin{align*}
+        \norm{f}_0 & = \int_a^b |f(t)| \, dt
+    \end{align*}
+
+    Queda como ejercicio verificar que es una norma.
+\end{definition}
+
+
+\begin{definition}
+    Dadas $f$, $g \in \mc{R}([a \text{, } b])$ diremos que son equivalentes si $\norm{f - g}_0 = 0$.
+\end{definition}
+
+Si llamamos $N = \{ f \in \mc{R}([a \text{, } b]) : \norm{f}_0 = 0 \}$ resulta que $N$ es un subespacio de $\mc{R}([a \text{, }b])$, $f$ es equivalente a $g \iff f-g \in N$ y además,
+$N = \{ f \in \mc{R}([a \text{, }b]) : f = 0 \quad \lambda \text{-c.t.p} \}.$ Si $\mc{R}([a \text{, } b]) / N = \mc{R}([a \text{, } b])$, entonces $(\mc{R}([a \text{, } b])\text{, } \norm{\cdot}_0)$ es un espacio normado.
+
+\newpage
+
+\begin{prop}
+    $\mc{R}([a \text{, } b])$ no es un espacio de Banach.
+
+    \begin{proof}
+        Sea $K \subseteq [0\text{, } 1]$ un conjunto cerrado, sea $d: [0 \text{, } 1] \to [0 \text{, } 1]$ definida por: \begin{align*}
+            d(x) = d(x \text{, } K) = \inf_{y \in K} |x-y|
+        \end{align*}
+        Notemos que $d$ es continua, luego para cada $n \geq 1$, sea $f_n : [0 \text{, } 1] \to [0 \text{, } 1]$ dada por $f_n(x) = (1 - d(x))^n$.
+
+        Si $x \in K$, $d(x) = 0 \Rightarrow f_n(x) = 1 \quad \forall k \geq 1 \Rightarrow f_n(x) \to 1$ si $n \to +\infty$.
+
+        Si $x \notin K$, $0 < d(x) \leq 1 \Rightarrow f_n(x) = (1- d(x))^n \to 0$ de forma decreciente cuando $n \to +\infty$.
+        \\ $\therefore f_n \to \chi_K$ cuando $n \to +\infty$ puntualmente.
+
+        Ahora veamos como construir un $K$ adecuado. Sea $\sigma: \N \to \Q \cap (0 \text{, } 1)$ una biyección y anotemos $r_n = \sigma(n)$ si $n \in \N$.
+
+        Fijado $\e \in (0\text{, }1)$. Para cada $n \geq 1$ sea $0 < a_n < b_n < 1$ tales que $r_n \in (a_n \text{, } b_n)$ y $b_n - a_n < \frac{\e}{2^n}$.
+
+        Si llamamos $E = \cup_{n \geq 1} (a_n \text{, } b_n)$, $E$ es un conjunto abierto y denso en $[0 \text{, }1]$ y $\lambda(E) \leq \sum_{n \geq 1} \lambda((a_n \text{, } b_n)) = \sum_{n \geq 1} (b_n - a_n) < \sum_{n \geq 1} \frac{\e}{2^n} = \e$.
+
+        Luego, $K := E^c$ es cerrado y $\lambda(K) \geq 1 - \e$ y $K^{\circ} = \O$. Veamos que $(f_n)_{n \geq 1}$ es de Cauchy en $(\mc{R}([0 \text{, } 1]) \text{, } \norm{\cdot}_0)$.
+
+        Sabemos que $\chi_K$, $f_n \in L_1([0 \text{, } 1], \mc{L}, \lambda)$, $f_n \to \chi_K$. Además $|f_n| \leq 1$. Luego, por el TCD \begin{align*}
+            \norm{f_n - \chi_K}_1 = \int |f_n - \chi_K | \, d\lambda \to_{n \to +\infty} \int 0 \, d\lambda = 0
+        \end{align*}
+        $\therefore$, $(f_n)_{n \geq 1}$ converge a $\chi_K$ en norma $1$. En particular, es de Cauchy en $L_1$, pero $\norm{f_n - f_m}_0 = \int_{0}^{1} | f_n(x) - f_m(x) | \, dx = \int |f_n - f_m| \, d\lambda = 0$
+
+        Veamos que no existe $g \in \mc{R}([0 \text{, } 1])$ tal que $f_n \to g$ en norma $0$. Supongamos que existe tal $g$. Entonces, $\int_{0}^{1} |f_n(x) - g(x)| \, dx \to 0$. Luego $(f_n)_{n \geq 1}$ converge a $g$ en $L_1$ y, por el corolario, existe una subsucesión
+        $(f_{n_k})_{k \geq 1}$ que converge a $g$ $\lambda$-c.t.p. Entonces, $g = \chi_K$ $\lambda$-c.t.p. Para mostrar que $g \notin \mc{R}([0 \text{, } 1])$, veamos que $\sup_P(s(g\text{, } P)) < \inf_P(S(g\text{, } P))$.
+    \end{proof}
+\end{prop}

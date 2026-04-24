@@ -1,0 +1,821 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+
+% --- Configuración de Página ---
+\geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.4em minus 0.2em}
+
+% --- Configuración de Hipervínculos ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    citecolor=darkblue,
+    bookmarksnumbered=true
+}
+
+% --- Colores Profesionales ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+
+% --- Encabezados y Pies de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkblue}{\textbf{Teorema de Radon-Nikodym}}}
+\fancyhead[R]{\textcolor{mediumgray}{Medida e Integración}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{darkblue}\hrule width\headwidth height\headrulewidth \kern-\headrulewidth}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Definición de Entornos Matemáticos con Estilo ---
+\newtheoremstyle{profesional}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{darkblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{profesional}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lemma}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+
+% --- Estilo para definiciones (verde) ---
+\newtheoremstyle{definicion-style}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{definicion-style}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+
+% --- Estilo para observaciones (púrpura) ---
+\newtheoremstyle{observacion-style}%
+    {0.5em}%
+    {0.5em}%
+    {\color{mediumgray}\itshape}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+\newtheorem{observacion}[teorema]{Observación}
+
+% --- Macros útiles ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\M}{\X}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\X}{\mathfrak{X}}
+
+\newcommand{\coint}[1]{\left[ #1 \right)}
+
+% --- Configuración de tcolorbox para teoremas ---
+\tcbset{
+    colback=white,
+    colframe=darkblue,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=3pt,
+    right=3pt,
+    top=3pt,
+    bottom=3pt
+}
+
+% --- Formato de títulos de secciones ---
+\titleformat{\section}
+    {\Large\bfseries\color{darkblue}}
+    {\thesection.}
+    {0.5em}
+    {}
+    [\vspace{0.3em}\noindent\textcolor{darkblue}{\rule{\textwidth}{1.5pt}}]
+
+\titleformat{\subsection}
+    {\large\bfseries\color{accentblue}}
+    {\thesubsection.}
+    {0.5em}
+    {}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{accentblue}}
+    {\thesubsubsection.}
+    {0.5em}
+    {}
+
+\begin{document}
+
+% --- PORTADA PROFESIONAL ---
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{1cm}
+
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{0.5cm}
+    {\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+    {\normalsize Facultad de Ciencias Exactas}\\
+    {\normalsize Departamento de Matemática}\\
+
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{2.5cm}
+
+    {\Huge \textbf{\textcolor{darkblue}{Diferenciación de medidas}}}\\
+
+    \vspace{3cm}
+
+    {\large \textbf{Examen Final}}\\
+    {\normalsize Medida e Integración}
+
+    \vspace{2.5cm}
+
+    {\normalsize
+        \begin{tabular}{ll}
+            \textbf{Autor:}   & Jordi Bustos               \\
+            \textbf{Fecha:}   & \today                     \\
+            \textbf{Carrera:} & Licenciatura en Matemática
+        \end{tabular}
+    }
+
+    \vfill
+
+    {\footnotesize \textcolor{mediumgray}{%
+            Este documento presenta un desarrollo riguroso del Teorema de Radon-Nikodym,\\
+            uno de los resultados fundamentales en teoría de la medida e integración.
+        }}
+
+    \vspace{1cm}
+\end{center}
+
+\newpage
+
+% --- EPÍGRAFE ---
+\thispagestyle{empty}
+\vspace*{\fill}
+
+\begin{flushright}
+    \textit{``Considero a cada hombre como un deudor}\\
+    \textit{de su profesión,}\\
+    \textit{y ya que de ella recibe sustento y provecho,}\\
+    \textit{así debe procurar,}\\
+    \textit{mediante el estudio,}\\
+    \textit{servirle de ayuda y ornato.''}
+
+    \vspace{0.5cm}
+    \textbf{--- Francis Bacon}
+\end{flushright}
+
+\vspace*{\fill}
+
+\newpage
+
+% --- ÍNDICE ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+% --- CUERPO DEL TRABAJO ---
+\section{Introducción}
+
+En esta sección establecemos la notación y recordamos los conceptos fundamentales necesarios para abordar el Teorema de Radon-Nikodym.
+
+\begin{definicion}[\( \sigma \)-álgebra]
+    Sea \(X\) un conjunto no vacío. Una \(\sigma \)-álgebra \(\X \) sobre \(X\) es una colección de subconjuntos de \(X\) que incluye al conjunto vacío, es cerrada bajo complementos y cerrada bajo uniones contables.
+\end{definicion}
+
+\begin{definicion}[Espacio medible]
+    Un \textbf{espacio medible} es un par \((X, \X)\) donde \(X\) es un conjunto no vacío y \(\X \) es una \( \sigma \)-álgebra sobre \(X\).
+\end{definicion}
+
+\begin{definicion}[Medida]
+    Una \textbf{medida} en el espacio medible \((X, \X)\) es una función \(\mu: \X \to [0, \infty]\) tal que:
+    \begin{enumerate}[label = (\roman*)]
+        \item \(\mu(\varnothing) = 0\),
+        \item Si \({\{ A_n \}}_{n=1}^{\infty}\) es una sucesión de conjuntos disjuntos en \(\X \), entonces:
+              \[\mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n),\]
+              donde la serie converge absolutamente o ambos lados son infinitos del mismo signo.
+    \end{enumerate}
+\end{definicion}
+
+Un espacio de medida se denota como \( (X, \X, \mu) \), donde:
+\begin{itemize}[leftmargin=2em]
+    \item \(X\) es un conjunto no vacío (el espacio subyacente),
+    \item \(\X \) es una \(\sigma \)-álgebra de subconjuntos de \(X\),
+    \item \(\mu: \X \to [0, \infty]\) es una medida positiva.
+\end{itemize}
+
+\begin{definicion}[Función medible]
+    Una función \( f : X \to \R \) es \textbf{medible} con respecto a la \( \sigma \)-álgebra \( \X \) si
+    para cada \( \alpha \in \R \) el conjunto \( \{ x \in X : f(x) > \alpha \} \) pertenece a \( \X \).
+\end{definicion}
+
+Para una función medible no negativa \(f: X \to [0, \infty]\), la integral respecto a la medida \(\mu \) se denota mediante la notación estándar de Lebesgue:
+\[
+    \int_X f \, d\mu = \sup \left \{ \int_X \varphi \, d\mu : 0 \leq \varphi \leq f, \, \varphi \text{ es una función simple} \right \}
+\]
+
+\begin{observacion}
+    En todo lo que sigue asumimos familiaridad con los conceptos básicos de teoría de la medida: conjuntos medibles, funciones medibles, integrales de Lebesgue, y convergencia \( \mu \)-c.t.p.
+\end{observacion}
+
+\section{Cargas y preliminares para el teorema de Radon-Nikodym}
+
+\begin{definicion}[Carga]
+    Si \( \X \) es una \( \sigma \)-álgebra sobre un conjunto \( X \), entonces una función \( \nu \) a valores reales extendidos definida sobre \( \X \)
+    se llama \textbf{carga} si \( \nu(\varnothing) = 0 \) y \( \nu \) es contable aditiva en el sentido de que si \( {(E_n)}_{n \geq 1} \)
+    es una sucesión de conjuntos disjuntos en \( \X \) entonces \( \nu\left(\bigcup_{n=1}^\infty E_n\right) = \sum_{n=1}^\infty \nu(E_n) \).
+\end{definicion}
+
+Es claro que la suma y diferencia de cargas es una carga. Es más, cualquier combinación lineal de cargas es una carga.
+
+\begin{lemma}
+    Sea \( \nu \) una carga en \( X \). Si \( {(E_n)}_{n \geq 1} \) y \( {(F_n)}_{n \geq 1} \) son sucesiones crecientes y decrecientes respectivamente de conjuntos en \( \X \) (con \( |\nu(F_1)| < \infty \)), entonces
+    \begin{align*}
+        \nu\left(\bigcup_{n=1}^\infty E_n\right) & = \lim_{n \to \infty} \nu(E_n) \\
+        \nu\left(\bigcap_{n=1}^\infty F_n\right) & = \lim_{n \to \infty} \nu(F_n)
+    \end{align*}
+\end{lemma}
+
+\begin{proof}
+    Para la sucesión creciente, definimos \( A_1 = E_1 \) y \( A_n = E_n \setminus E_{n-1} \) para \( n \geq 2 \). Los conjuntos \( A_n \) son disjuntos, \( \bigcup_{n=1}^k A_n = E_k \) y \( \bigcup_{n=1}^\infty A_n = \bigcup_{n=1}^\infty E_n \). Por la aditividad numerable de \( \nu \):
+    \[
+        \nu\left(\bigcup_{n=1}^\infty E_n\right) = \sum_{n=1}^\infty \nu(A_n) = \lim_{k \to \infty} \sum_{n=1}^k \nu(A_n) = \lim_{k \to \infty} \nu(E_k).
+    \]
+
+    Para la sucesión decreciente, definimos \( B_n = F_1 \setminus F_n \). Entonces \( (B_n) \) es creciente y \( \bigcup B_n = F_1 \setminus (\bigcap F_n) \). Por la primera parte:
+    \[
+        \nu\left(F_1 \setminus \bigcap F_n\right) = \lim_{n \to \infty} \nu(F_1 \setminus F_n).
+    \]
+    Dado que \( |\nu(F_1)| < \infty \), aplicamos la propiedad de la resta \( \nu(F_1 \setminus A) = \nu(F_1) - \nu(A) \):
+    \[
+        \nu(F_1) - \nu\left(\bigcap F_n\right) = \nu(F_1) - \lim_{n \to \infty} \nu(F_n).
+    \]
+    Cancelando \( \nu(F_1) \), se obtiene el resultado.
+\end{proof}
+
+\begin{definicion}
+    Notaremos \( M^+ = M^+(X, \X) \) al conjunto de todas las funciones \( \X \)-medibles de \( X \) en la recta real extendida que son no negativas.
+    La colección \( M = M(X, \X) \) está formada por todas las funciones \( \X \)-medibles de \( X \) en la recta real extendida.
+
+    Finalmente, \( L = L(X, \X, \mu) \) es el conjunto de todas las funciones \( f : X \to \R \), \( \X \)-medibles e integrables. Es decir \[
+        \int f^+ \, d\mu < \infty \quad \text{y} \quad \int f^- \, d\mu < \infty
+    \] tal que \[
+        \int f \, d \mu = \int f^+ \, d\mu - \int f^- \, d\mu
+    \]
+\end{definicion}
+
+\begin{proposicion}\label{prop:monotona_creciente}
+    Si \( {(f_n)}_{n \geq 1} \) es una sucesión monotona creciente de funciones en \( M^+(X, \X) \) entonces \( f = \lim_{n \to \infty} f_n \) es una función medible.
+\end{proposicion}
+\begin{proof}
+    Se sigue de que \( f(x) = \lim f_n(x) = \liminf f_n(x) \) para todo \( x \in X \) y \( f^* = \liminf f_n \) es una función medible.
+\end{proof}
+
+\begin{lemma}\label{lem:monotonia_integral}
+    Si \( f \), \( g \in M^+ \) y \( f \leq g \) entonces \[
+        \int f \, d \mu \leq \int g \, d \mu
+    \]
+\end{lemma}
+\begin{proof}
+    Si \( \varphi \) es una función simple y medible en \( M^+ \) tal que \( 0 \leq \varphi \leq f \) entonces
+    \[
+        \int \varphi \, d \mu \leq \int f \, d \mu \leq \int g \, d \mu
+    \]
+    Por lo tanto, tomando supremo sobre todas las funciones simples \( \varphi \) que satisfacen \( 0 \leq \varphi \leq f \) se obtiene que \[
+        \int f \, d \mu = \sup_{\varphi} \int \varphi \, d \mu \leq \int g \, d \mu
+    \]
+\end{proof}
+
+\begin{lemma}\label{lem:integral_subconjunto}
+    Si \( f \in M^+ \) y \( E \), \( F \in \X \), si \( E \subseteq F \) entonces \[
+        \int_E f \, d \mu \leq \int_F f \, d \mu
+    \]
+\end{lemma}
+\begin{proof}
+    Como \( f \chi_E \leq f \chi_F \) este lema es una consecuencia directa del resultado anterior.
+\end{proof}
+
+\begin{teorema}[Teorema de la convergencia monótona]
+    Si \( {(f_n)}_{n \geq 1} \) es una sucesión monotona creciente de funciones en \( M^+(X, \X) \) que convergen a \( f \) entonces \[
+        \int f \, d\mu = \lim_{n \to \infty} \int f_n \, d\mu
+    \]
+\end{teorema}
+\begin{proof}
+    Por la Proposición~\ref{prop:monotona_creciente} se tiene que \( f \) es una función medible. Dado que \( f_n \leq f_{n+1} \leq f \) se sigue por el Lema~\ref{lem:monotonia_integral} que \[
+        \int f_n \, d \mu \leq \int f_{n+1} \, d \mu \leq \int f \, d \mu \quad \forall n \geq 1
+    \]
+    Por lo tanto se tiene que \[
+        \lim \int f_n \, d \mu \leq \int f \, d \mu
+    \]
+    Para ver la desigualdad contraria y así establecer la igualdad definamos \( \alpha \in (0, 1) \) y sea \( \varphi \) una función simple y medible que satisface \[
+        0 \leq \varphi \leq f
+    \]
+    Sea \[
+        A_n = \{ x \in X : f_n(x) \geq \alpha \varphi(x) \}
+    \]
+    tal que \( A_n \in \X \), \( A_n \geq A_{n+1} \) y \( X = \bigcup_{n \geq 1} A_n \). Por lo tanto, por el Lema~\ref{lem:integral_subconjunto}:\[
+        \int_{A_n} \alpha \varphi \, d \mu \leq \int_{A_n} f_n \, d \mu \leq \int f_n \, d \mu
+    \]
+    Como \( (A_n) \) es una sucesión monótona creciente y tiene unión \( X \) se sigue que, por el Lema~\ref{lem:monotonia_integral}, \[
+        \int \varphi \, d \mu = \lim \int_{A_n} \varphi \, d \mu
+    \]
+    Luego, tomando límite con respecto a \( n \) en la ecuación anterior:\[
+        \alpha \int \varphi \, d \mu \leq \lim \int f_n \, d \mu
+    \]
+    Como vale para todo \( 0 < \alpha < 1 \), deducimos que:\[
+        \int \varphi \, d \mu \leq \lim \int f_n \, d \mu
+    \]
+    y como \( \varphi \in M^+ \) es una función simple arbitaria que satisface \( 0 \leq \varphi \leq f \) concluímos que \[
+        \int f \, d \mu = \sup_{\varphi} \int \varphi \, d \mu \leq \lim \int f_n \, d \mu
+    \]
+    Juntando las dos desigualdades obtenemos que \[
+        \int f \, d \mu = \lim \int f_n \, d \mu
+    \]
+\end{proof}
+
+\begin{lemma}[Lema de Fatou]
+    Si \( {(f_n)}_{n \geq 1} \) es una sucesión de funciones en \( M^+ \) entonces \[
+        \int \liminf f_n \, d\mu \leq \liminf \int f_n \, d\mu
+    \]
+\end{lemma}
+\begin{proof}
+    Sea \( g_m = \inf \{ f_m, f_{m+1}, \ldots \} \) tal que \( g_m \leq f_n \) siempre que \( m \leq n \). Entonces: \[
+        \int g_m \, d \mu \leq \int f_n \, d \mu \quad \forall m \leq n
+    \]
+    y vale que \[
+        \int g_m \, d \mu \leq \liminf \int f_n \, d \mu
+    \]
+    Como la sucesión \( (g_m) \) es monótona creciente y converge a \( \liminf f_n \) se sigue por el teorema de la convergencia monótona que: \[
+        \int \liminf f_n \, d \mu = \lim \int g_m \, d \mu \leq \liminf \int f_n \, d \mu
+    \]
+\end{proof}
+
+\begin{proposicion}
+    Si \( f \in M^+ \) y \( \nu : \X \to [0, \infty] \) dada por \( \nu(E) = \int_E f \, d\mu \) entonces \( \nu \) es una medida en \( \X \).
+\end{proposicion}
+\begin{proof}
+    Dado que \( f \geq 0 \) se sigue que \( \nu(E) \geq 0 \). Si \( E = \varnothing \), entonces \( f \chi_E \equiv 0 \) y, por lo tanto, \( \nu(\varnothing) = 0 \).
+    Para ver que \( \nu \) es contable aditiva, sea \( {(E_n)}_{n \geq 1} \) una sucesión de conjuntos disjuntos en \( \X \) con unión \( E \) y \( f_n = \sum_{k = 1}^n f \chi_{E_k} \). Entonces:
+    \[
+        \int f_n \, d\mu = \sum_{k = 1}^n \int f \chi_{E_k} \, d \mu = \sum_{k = 1}^n \nu(E_k)
+    \]
+    como \( f_n \nearrow f \chi_E \), por el teorema de la convergencia monótona vale que: \[
+        \nu(E) = \int f \chi_E \, d \mu = \lim \int f_n \, d \mu = \sum_{k \geq 1} \nu(E_k)
+    \]
+\end{proof}
+
+\begin{lemma}
+    Si \( f \in L \) y \( \nu : \X \to \R \) dada por \( \nu(E) = \int_E f \, d\mu \) entonces \( \nu \) es una carga en \( \X \).
+\end{lemma}
+\begin{proof}
+    En efecto, dado que \( f^+ \) y \( f^- \) pertenecen a \( M^+ \) las funciones \begin{align*}
+        \nu^+(E) & = \int_E f^+ \, d\mu \\
+        \nu^-(E) & = \int_E f^- \, d\mu
+    \end{align*}
+    son medidas en \( \X \) por la proposición anterior. Por lo tanto, son finitas pues \( f \in L \). Dado que \( \nu = \nu^+ - \nu^- \), se concluye que \( \nu \) es una carga en \( \X \).
+\end{proof}
+
+La función \( \nu \) es frecuentemente llamada la integral indefinida de \( f \) respecto de \( \mu \). Dado que \( \nu \) es una carga, si
+\( {(E_n)}_{n \geq 1} \) es una sucesión de conjuntos disjuntos en \( \X \) con unión \( E \) entonces: \[
+    \nu(E) = \int_E f \, d\mu = \sum_{n \geq 1} \int_{E_n} f \, d\mu = \sum_{n \geq 1} \nu(E_n)
+\]
+Nos referimos a esta relación diciendo que la integral indefinida de una función en \( L \) es aditiva contable.
+
+\begin{definicion}
+    Si \( \nu \) es una carga en \( \X \) entonces un conjunto \( P \in \X \) es un \textbf{conjunto positivo} con respecto a \( \nu \)
+    si \( \nu(E \cap P) \geq 0 \) para todo \( E \in \X \). De manera análoga, \( N \) es un \textbf{conjunto negativo} con respecto a \( \nu \) si
+    \( \nu(E \cap N) \leq 0 \) para todo \( E \in \X \). Un conjunto \( M \in \X \) es un \textbf{conjunto nulo} con respecto a \( \nu \) si
+    \( \nu(E \cap M) = 0 \) para todo \( E \in \X \).
+\end{definicion}
+
+\begin{proposicion}
+    Si \( P \) es un conjunto positivo y \( E \) es un subconjunto medible de \( P \), entonces \( E \) es positivo.
+\end{proposicion}
+\begin{proof}
+    Sabemos que \( \nu(A \cap P) \geq 0 \) para todo \( A \in \X \). Notemos que \( A \cap E \in \X \) y la propiedad anterior vale en particular para \( A \cap E \). Entonces: \[
+        \nu((A \cap E) \cap P) = \nu(A \cap E) \geq 0
+    \]
+    para todo \( A \in \X \), lo que implica que \( E \) es un conjunto positivo.
+\end{proof}
+
+\begin{proposicion}
+    Si \( P_1 \) y \( P_2 \) son conjuntos positivos, entonces \( P_1 \cup P_2 \) es un conjunto positivo.
+\end{proposicion}
+\begin{proof}
+    Es claro que:
+    \[
+        P_1 \cup P_2 = P_1 \cup (P_2 \setminus P_1)
+    \]
+    Luego, para todo \( E \in \X \):\begin{align*}
+        \nu(E \cap (P_1 \cup P_2)) & = \nu(E \cap (P_1 \cup (P_2 \setminus P_1)))          \\
+                                   & = \nu((E \cap P_1) \cup (E \cap (P_2 \setminus P_1))) \\
+                                   & = \nu(E \cap P_1) + \nu(E \cap (P_2 \setminus P_1))
+    \end{align*}
+    Donde \( \nu(E \cap P_1) \geq 0 \) por hipotesis. Veamos que ocurre con el segundo término, \( P_2 \setminus P_1 \subseteq P_2 \) y como \( P_2 \setminus P_1 \in \X \), se tiene que
+    \( P_2 \setminus P_1 \) es un conjunto positivo por la proposición anterior. Por lo tanto, \( \nu(E \cap (P_2 \setminus P_1)) \geq 0 \). En consecuencia, \( \nu(E \cap (P_1 \cup P_2)) \geq 0 \) para todo \( E \in \X \), lo que implica que \( P_1 \cup P_2 \) es un conjunto positivo.
+\end{proof}
+
+Demostraremos ahora dos resultados que serán utilizados directamente en la demostración del teorema de Radon-Nikodym.
+
+\begin{teorema}\label{teo:convergencia_en_medida}
+    Sea \( (f_n) \) una sucesión de funciones medibles a valores reales que es de Cauchy en medida. Entonces existe una subsucesión que converge a una función medible \( f \) en medida y \( \mu \)-c.t.p.
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{proposicion}\label{prop:funcion_casi_nula}
+    Si \( f \in M^+ \). Entonces \( f(x) = 0 \) en casi todo punto \( x \in X \) si y solo si \( \int f \, d\mu = 0 \).
+\end{proposicion}
+\begin{proof}
+    Si vale \( \int f \, d \mu = 0 \), definamos \( E_n = \{ x \in X : f(x) > 1/n \} \) tal que \( f \geq 1/n \chi_{E_n} \) y, por lo tanto:\[
+        0 = \int f \, d \mu \geq \int \frac{1}{n} \chi_{E_n} \, d \mu = \frac{1}{n} \mu(E_n) \geq 0
+    \]
+    luego, \( \mu(E_n) = 0 \) y por lo tanto el conjunto \[
+        \{ x \in X : f(x) > 0 \} = \bigcup_{n \geq 1} E_n
+    \]
+    también tiene medida nula. En consecuencia, \( f(x) = 0 \) para casi todo \( x \in X \).
+
+    Reciprocamente, si \( f(x) = 0 \) para casi todo \( x \in X \). Si \( E = \{ x \in X : f(x) > 0 \} \) entonces \( \mu(E) = 0 \) y sea \( f_n = n \chi_E \) tal que \[
+        f \leq \liminf f_n
+    \]
+    luego, por el lema de Fatou, se tiene que \[
+        0 \leq \int f \, d \mu \leq \liminf \int f_n \, d \mu = \liminf n \mu(E) = \liminf n \cdot 0 = 0
+    \]
+\end{proof}
+
+\section{Teorema de Descomposición de Hahn}
+
+\begin{teorema}[Descomposición de Hahn]
+    Sea \(\nu \) una medida con signo en el espacio medible \((X, \X)\). Entonces existen dos conjuntos medibles \(P\) y \(N\) en \(\X \) tales que:
+    \begin{enumerate}[label = (\roman*)]
+        \item \(X = P \cup N\),
+        \item \(P \cap N = \varnothing \),
+        \item \(P\) es un conjunto positivo con respecto a \(\nu \),
+        \item \(N\) es un conjunto negativo con respecto a \(\nu \).
+    \end{enumerate}
+    Esta descomposición no necesariamente es única.
+\end{teorema}
+
+\begin{proof}
+    La clase \(\mathcal{P}\) de todos los conjuntos positivos con respecto a \(\nu \) es no vacía, pues \(\varnothing \in \mathcal{P}\). Definamos
+    \(\alpha = \sup \{ \nu(A) : A \in \mathcal{P} \} \). Sea \({(A_n)}_{n \geq 1}\) una sucesión de conjuntos en \(\mathcal{P}\) tal que
+    \(\lim_{n \to \infty} \nu(A_n) = \alpha \). Entonces definimos
+    \[
+        P = \bigcup_{n \geq 1} A_n
+    \]
+    Dado que la unión de conjuntos positivos es positiva, la sucesión puede ser construida de forma que sea monótona creciente. Por lo tanto, \(P\) es un conjunto positivo para \(\nu \), pues para cualquier \(E \in \X \):
+    \[
+        \nu(E \cap P) = \nu \left( E \cap \bigcup_{n \geq 1} A_n \right) = \nu \left(\bigcup_{n \geq 1} (E \cap A_n) \right) = \lim_{n \to \infty} \nu(E \cap A_n) \geq 0
+    \]
+    ya que \(E \cap A_n \subseteq A_n\). Además, resulta que \(\alpha = \lim_{n \to \infty} \nu(A_n) = \nu(P) < +\infty \).
+
+    Resta ver que \(N = X \setminus P\) es un conjunto negativo para \(\nu \). Supongamos por absurdo que no lo es; entonces existe \(E \in \X \) tal que \(E \subseteq N\) y \(\nu(E) > 0\). El conjunto \(E\) no puede ser positivo, pues en ese caso \(P \cup E\) sería un conjunto positivo con \(\nu(P \cup E) = \nu(P) + \nu(E) > \alpha \), lo cual contradice que \(\alpha \) es el supremo de las medidas de conjuntos positivos.
+
+    Luego, \(E\) debe contener algún conjunto con carga negativa. Sea \(n_1\) el primer número natural tal que \(E\) contiene un conjunto medible \(E_1\) que verifica \(\nu(E_1) \leq -1/n_1\). Entonces:
+    \[
+        \nu(E \setminus E_1) = \nu(E) - \nu(E_1) > \nu(E) > 0
+    \]
+    Sin embargo, \(E \setminus E_1\) tampoco puede ser positivo, pues \(P \cup (E \setminus E_1)\) superaría el supremo \(\alpha \).
+
+    Aplicando el mismo razonamiento, \(E \setminus E_1\) contiene un conjunto con carga negativa. Sea \(n_2\) el primer natural tal que \(E \setminus E_1\) contiene un conjunto \(E_2 \in \X \) con \(\nu(E_2) \leq -1/n_2\). Repitiendo este argumento de forma inductiva, obtenemos una sucesión de conjuntos disjuntos \({(E_k)}_{k \geq 1}\) contenidos en \(E\) y una sucesión de naturales \(n_k\) tales que \(\nu(E_k) \leq -1/n_k\).
+
+    Definamos
+    \[
+        F = \bigcup_{k \geq 1} E_k
+    \]
+    Dado que \(\nu \) es una medida con signo y \(\nu(E) > 0\), la serie converge, es decir:
+    \[
+        \nu(F) = \sum_{k \geq 1} \nu(E_k) \leq - \sum_{k \geq 1} \frac{1}{n_k}
+    \]
+    Como la suma converge, necesariamente \(-1/n_k \to 0\), lo que implica que \(n_k \to \infty \).
+
+    Ahora, supongamos que existe un subconjunto medible \(G \subseteq E \setminus F\) tal que \(\nu(G) < 0\). Existirá entonces algún entero \(m\) tal que \(\nu(G) \leq -1/m\). Como \(n_k \to \infty \), para \(k\) suficientemente grande tendremos que \(n_k - 1 > m\), y por lo tanto:
+    \[
+        \nu(G) \leq -\frac{1}{n_k - 1}
+    \]
+    Pero \(G \subseteq E \setminus F \subseteq E \setminus (E_1 \cup \ldots \cup E_{k-1})\). Esto significa que en el paso \(k\) existía un conjunto (precisamente \(G\)) con medida menor o igual a \(-1/(n_k - 1)\), lo cual contradice la elección de \(n_k\) como el \textbf{primer} natural que cumplía dicha cota.
+
+    En consecuencia, ningún subconjunto de \(E \setminus F\) puede tener medida negativa. Esto prueba que \(E \setminus F\) es un conjunto positivo. Dado que:
+    \[
+        \nu(E \setminus F) = \nu(E) - \nu(F) > 0
+    \]
+    (pues \(\nu(E) > 0\) y \(\nu(F) \leq 0\)), deducimos que \(P \cup (E \setminus F)\) es un conjunto positivo con medida estrictamente mayor que \(\alpha \), llegando a nuestra contradicción final.
+
+    Por lo tanto, la suposición original era falsa: \(N = X \setminus P\) es efectivamente un conjunto negativo con respecto a \(\nu \), completando la demostración.
+    A la descomposición \( P \), \( N \) la llamamos \textbf{descomposición de Hahn} de \( X \) con respecto a \( \nu \).
+\end{proof}
+
+\begin{lemma}
+    Si \( P_1 \), \( N_1 \) y \( P_2 \), \( N_2 \) son descomposiciones de Hahn de \( X \) con respecto a \( \nu \) y \( E \in \X \) entonces \[
+        \nu(E \cap P_1) = \nu(E \cap P_2) \quad \text{y} \quad \nu(E \cap N_1) = \nu(E \cap N_2).
+    \]
+\end{lemma}
+\begin{proof}
+    Dado que \( E \cap (P_1 \setminus P_2) \subseteq P_1 \) y \( E \cap (P_1 \setminus P_2) \subseteq N_2 \), se tiene que
+    \( \nu(E \cap (P_1 \setminus P_2)) \geq 0 \) y \( \nu(E \cap (P_1 \setminus P_2)) \leq 0 \implies \nu(E \cap (P_1 \setminus P_2)) = 0 \).
+
+    Notemos que \( E \cap P_1 = (E \cap P_1 \cap P_2) \cup (E \cap P_1 \cap P_2^c) \). Entonces:
+    \[
+        \nu(E \cap P_1) = \nu(E \cap P_1 \cap P_2) + \nu(E \cap P_1 \cap P_2^c) = \nu(E \cap P_1 \cap P_2) + 0 = \nu(E \cap P_1 \cap P_2)
+    \]
+    Análogamente, \[
+        \nu(E \cap P_2) = \nu(E \cap P_1 \cap P_2)
+    \]
+    y entonces \( \nu(E \cap P_1) = \nu(E \cap P_2) \). De manera similar, se prueba que \( \nu(E \cap N_1) = \nu(E \cap N_2) \).
+\end{proof}
+
+\begin{definicion}
+    Sea \( \nu \) una carga en \( \X \) y \( P \), \( N \) la descomposición de Hahn de \( X \) con respecto a \( \nu \).
+    La \textbf{variación positiva y negativa} de \( \nu \) son las medidas finitas \( \nu^+ \) y \( \nu^- \) definidas para \( E \in \X \) por:
+    \[
+        \nu^+(E) = \nu(E \cap P) \quad \text{y} \quad \nu^-(E) = -\nu(E \cap N)
+    \]
+\end{definicion}
+
+\begin{definicion}[Variación total]
+    La \textbf{variación total} de \( \nu \) es la medida finita \( |\nu| \) definida para \( E \in \X \) por:
+    \[
+        |\nu|(E) = \nu^+(E) + \nu^-(E)
+    \]
+\end{definicion}
+
+Por el lema anterior se deduce que \( \nu^+ \) y \( \nu^- \) no dependen de la elección de la descomposición de Hahn. Además, es claro que \( \nu = \nu^+ - \nu^- \).
+
+\section{Teorema de Descomposición de Jordan}
+
+\begin{teorema}[Descomposición de Jordan]
+    Si \( \nu \) es una carga en \( \X \), entonces existen dos medidas finitas en \( \X \) tal que \( \nu \) es la diferencia de ellas. En particular,
+    \( \nu = \nu^+ - \nu^- \). Además, si \( \nu = \mu_1 - \mu_2 \) con \( \mu_1 \) y \( \mu_2 \) medidas finitas, entonces \( \mu_1(E) \geq \nu^+(E) \) y \( \mu_2(E) \geq \nu^-(E) \) para todo \( E \in \X \).
+\end{teorema}
+\begin{proof}
+    La representación \( \nu = \nu^+ - \nu^- \) ya fue establecida en la sección anterior. Dado que \( \mu_1 \) y \( \mu_2 \) son no negativas, se tiene que:
+    \[
+        \nu^+(E) = \nu(E \cap P) = \mu_1(E \cap P) - \mu_2(E \cap P) \leq \mu_1(E \cap P) \leq \mu_1(E)
+    \]
+    Análogamente, \( \nu^-(E) \leq \mu_2(E) \quad \forall E \in \X \).
+\end{proof}
+
+Vimos previamente que si \( f \) es integrable con respecto a una medida \( \mu \) en \( \X \) y que si \( \nu \) está definida para \( E \in \X \) por:
+\[
+    \nu(E) = \int_E f \, d\mu
+\]
+para todo \( E \in \X \). Entonces \( \nu \) es una carga en \( \X \). Ahora identificaremos la variación positiva y negativa de \( \nu \).
+
+\begin{teorema}
+    Si \( f \in L(X, \X, \mu) \) y \( \nu \) como antes, entonces \( \nu^+ \), \( \nu^- \) y \( |\nu| \) son las medidas dadas por:\begin{align*}
+        \nu^+(E) & = \int_E f^+ \, d\mu \\
+        \nu^-(E) & = \int_E f^- \, d\mu \\
+        |\nu|(E) & = \int_E |f| \, d\mu
+    \end{align*}
+    para todo \( E \in \X \).
+\end{teorema}
+\begin{proof}
+    En efecto, dado \( P_f = \{ x \in X : f(x) \geq 0 \} \) y \( N_f = \{ x \in X : f(x) < 0 \} \). Entonces \( X = P_f \cup N_f \) y \( P_f \cap N_f = \varnothing \).
+    Si \( E \in \X \) es claro que \( \nu(E \cap P_f) \geq 0 \) y \( \nu(E \cap N_f) \leq 0 \), lo que implica que \( P_f \) es un conjunto positivo y \( N_f \) es un conjunto negativo con respecto a \( \nu \) y son la descomposición de Hahn de \( \nu \).
+    Por lo tanto, \( \nu^+(E) = \nu(E \cap P_f) = \int_{E \cap P_f} f \, d\mu = \int_E f^+ \, d\mu \) y \( \nu^-(E) = -\nu(E \cap N_f) = -\int_{E \cap N_f} f \, d\mu = \int_E f^- \, d\mu \). Finalmente, \( |\nu|(E) = \nu^+(E) + \nu^-(E) = \int_E f^+ + f^- \, d\mu = \int_E |f| \, d\mu \).
+\end{proof}
+
+\section{Continuidad Absoluta}
+
+Esta sección introduce la relación fundamental entre dos medidas que es central para el Teorema de Radon-Nikodym.
+
+\begin{definicion}
+    Sea \((X, \X, \mu)\) un espacio de medida y \(\nu \) una medida con signo en \((X,  \X)\). Se dice que \(\nu \) es \textbf{absolutamente continua} respecto de \(\mu \), lo cual se denota por \(\nu \ll \mu \), si:
+    \[\text{Para todo } A \in \X, \quad \mu(A) = 0 \implies \nu(A) = 0.\]
+\end{definicion}
+
+\begin{lemma}
+    Si \( \nu \), \( \mu \) son medidas finitas en \( \X \). Entonces \( \nu \ll \mu \iff \, \forall \varepsilon > 0 \; \exists \delta > 0 \) tal que si \( E \in \X \) y \( \mu(E) < \delta \implies \nu(E) < \varepsilon \).
+\end{lemma}
+\begin{proof}
+    Si \( \nu \ll \mu \) y \( \mu(E) = 0 \) entonces \( \nu(E) < \varepsilon \) para todo \( \varepsilon > 0 \). Por lo tanto, si \( \nu \ll \mu \) se cumple la condición de la derecha tomando \( \delta = 0 \).
+
+    Por otro lado, supongamos que \( \exists \varepsilon > 0 \) y conjuntos \( {(E_n)}_{n \geq 1} \) en \( \X \) con \( \mu(E_n) < 2^{-n} \) y \( \nu(E_n) \geq \varepsilon \).
+    Entonces, sea \( F_n = \bigcup_{k \geq n} E_k \) tal que \( \mu(F_n) < 2^{-n+1} \) y \( \nu(F_n) \geq \varepsilon \). Dado que \( (F_n) \) es una sucesión decreciente de conjuntos medibles:\begin{align*}
+        \mu\left( \bigcap_{n \geq 1} F_n \right) & = \lim_{n \to \infty} \mu(F_n) = 0              \\
+        \nu\left( \bigcap_{n \geq 1} F_n \right) & = \lim_{n \to \infty} \nu(F_n) \geq \varepsilon
+    \end{align*}
+    Por lo tanto \( \nu \) no es absolutamente continua respecto de \( \mu \).
+\end{proof}
+
+\begin{ejemplo}
+    Sea \(f \in L^1_{\text{loc}}(\mu)\) una función localmente integrable. Defina \(\nu(A) = \int_A f \, d\mu \). Entonces \(\nu \ll \mu \), pues si \(\mu(A) = 0\), se tiene \(\nu(A) = \int_A f \, d\mu = 0\).
+\end{ejemplo}
+
+\begin{proposicion}
+    Si \(\nu \ll \mu \) y \(\mu \) es \(\sigma \)-finita, entonces \(|\nu| \ll \mu \).
+\end{proposicion}
+
+\section{El Teorema de Radon-Nikodym}
+
+\begin{teorema}[Radon-Nikodym para medidas finitas]
+    Sea \( \nu \) y \( \mu \) medidas finitas en \( \X \) y supongamos que \( \nu \ll \mu \). Entonces existe una función medible \( f \in M^+ \) tal que:\[
+        \nu(E) = \int_E f \, d\mu \quad \text{para todo } E \in \X.
+    \]
+    Además, la función \( f \) es única salvo conjuntos de medida \( \mu \)-nula, y se denota por \( f = \frac{d\nu}{d\mu} \) y se llama la \textbf{derivada de Radon-Nikodym} de \( \nu \) respecto de \( \mu \).
+\end{teorema}
+\begin{proof}
+    Sea \( c > 0 \) y \( P(c) \), \( N(c) \) la descomposición de Hahn de la la carga \( \nu - c \mu \). Dado \( k \in \N \), consideremos los siguientes conjuntos medibles:\[
+        A_1 = N, \quad A_{k+1} = N\left( (k+1) c \right) \setminus \bigcup_{j = 1}^k A_j
+    \]
+    es claro que los conjuntos \( A_k \), \( k \in \N \) son disjuntos y que \[
+        \bigcup_{j = 1}^k N(jc) = \bigcup_{j = 1}^k A_j
+    \]
+    Se sigue que:\[
+        A_k = N(kc) \setminus \bigcup_{j = 1}^{k-1} N(jc) = N(kc) \cap \bigcap_{j = 1}^{k-1} P(jc)
+    \]
+    Por lo tanto, si \( E \) es un subconjunto medible de \( A_k \) entonces \( E \subseteq N(kc) \) y \( E \subseteq P((k-1)c) \), luego:\[
+        (k-1)c \mu(E) \leq \nu(E) \leq k c \mu(E)
+    \]
+    Definamos \( B = X \setminus \bigcup_{j \geq 1} A_j = \bigcap_{j \geq 1} P(jc) \) tal que \( B \subseteq P(kc) \, \forall k \in \N \). Esto implica que:\[
+        0 \leq k c \mu(B) \leq \nu(B) \leq \nu(X) < +\infty \quad \forall k \in \N
+    \]
+    Por lo tanto, \( \mu(B) = 0 \). Como \( \nu \ll \mu \) se sigue que \( \nu(B) = 0 \).
+    Definamos \begin{align*}
+        f_c(x) = \begin{cases}
+                     (k-1) c & \text{si } x \in A_k \\
+                     0       & \text{si } x \in B
+                 \end{cases}
+    \end{align*}
+    Si \( E \) es un conjunto medible arbitrario, entonces \( E \) es la unión de los conjuntos disjuntos \( E \cap B \), \( E \cap A_k \) para \( k \in \N \). Por lo tanto:\[
+        \int_E f_c \, d \mu \leq \nu(E) \leq \int_E (f_c + c) \, d \mu \leq \int_E f_c \, d \mu + c \mu(X)
+    \]
+    Utilizando esta construcción consideremos ahora \( c = 2^{-n} \) para \( n \in \N \) y obtengamos una sucesión de funciones \( f_n \) tal que:\[
+        \int_E f_n \, d \mu \leq \int_E f_n \, d \mu + 2^{-n} \mu(X) \quad \forall n \in \N
+    \]
+    Sea \( m \geq n \) y observando que \begin{align*}
+        \int_E f_n \, d \mu & \leq \nu(E) \leq \int_E f_m \, d \mu + 2^{-m} \mu(X) \\
+        \int_E f_m \, d \mu & \leq \nu(E) \leq \int_E f_n \, d \mu + 2^{-n} \mu(X)
+    \end{align*}
+    se concluye que \[
+        \left| \int_E (f_n - f_m) \, d \mu \right| \leq 2^{-n} \mu(X) \quad \forall E \in \X
+    \]
+    Si dejamos \( E \) ser los conjuntos tales que el integrando es positivo o negativo y combinamos ambas ecuaciones obtenemos que:\[
+        \int |f_n - f_m| \, d \mu \leq 2^{-n+1} \mu(X) \quad \forall m \geq n
+    \]
+    Luego, \( (f_n) \) converge en medida y en \( L^1(\mu) \) a \( f \). Como \( f_n \in M^+ \) es claro que \( f \in M^+ \) por el Teorema~\ref{teo:convergencia_en_medida}. Además, \[
+        \left | \int_E f_n \, \mu - \int_E f \, d \mu \right| \leq \int_E |f_n - f| \, d \mu \leq \int | f_n - f | \, d \mu
+    \]
+    finalmente: \[ \nu(E) = \lim \int_E f_n \, d \mu = \int_E f \, d \mu \quad \forall E \in \X \]
+
+    Para ver la unicidad de \( f \) salvo conjuntos de medida \( \mu \) nula, supongamos que \( h \in M^+ \) es otra función que satisface\[
+        \nu(E) = \int_E f \, d \mu = \int_E h \, d \mu \quad \forall E \in \X
+    \]
+    Sea \( E_1 = \{ x \in X : f(x) > h(x) \} \) y \( E_2 = \{ x \in X : h(x) > f(x) \} \). Entonces, por la Proposición~\ref{prop:funcion_casi_nula} se tiene que \( f(x) = h(x) \, \mu \)-c.t.p
+\end{proof}
+
+\begin{teorema}[Radon-Nikodym para medidas \(\sigma \)-finitas]
+    Sean \( \nu \) y \( \mu \) ahora medidas \( \sigma \)-finitas en \( \X \) y supongamos que \( \nu \ll \mu \).
+    Entonces vale el mismo resultado que en el teorema anterior.
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{ejemplo}
+    Sea \(X = [0, 1]\), \(\X \) la \(\sigma \)-álgebra de Borel, y \(\mu \) la medida de Lebesgue. Defina \(g: [0, 1] \to \R_{\geq 0}\) como una función medible positiva integrable y ponga \(\nu(A) = \int_A g \, d\mu \). Entonces \(\nu \ll \mu \) y \(\frac{d\nu}{d\mu} = g\) en casi todo punto.
+\end{ejemplo}
+
+\begin{observacion}
+    El Teorema de Radon-Nikodym no es válido en general sin la condición \(\sigma \)-finita.
+\end{observacion}
+
+\section{Descomposición de Lebesgue}
+
+En terminos intuitivos, una medida \( \nu \) es absolutamente continua con respecto a otra medida \( \mu \) en el sentido de que conjuntos que tienen medida \( \mu \)
+pequeña también tienen medida \( \nu \) pequeña.
+Para expresar el concepto opuesto introducimos la idea de medida mutuamente singular.
+
+\begin{definicion}[Medida mutuamente singulares]
+    Sean \( \nu \) y \( \mu \) medidas en \( \X \). Se dice que \( \nu \) y \( \mu \) son mutuamente singulares, denotado por \( \nu \perp \mu \),
+    si existen conjuntos medibles \( A, B \in \X \) con \( A \cup B = X \), \( A \cap B = \varnothing \),
+    tal que \( \nu(A) = 0 \) y \( \mu(B) = 0 \).
+\end{definicion}
+
+\begin{observacion}
+    Notemos que esta definición es simétrica, es decir, \( \nu \perp \mu \) si y solo si \( \mu \perp \nu \).
+\end{observacion}
+
+\begin{teorema}[Descomposición de Lebesgue]
+    Sean \( \nu \) y \( \mu \) medidas \( \sigma \)-finitas en \( \X \).
+    Entonces existen dos medidas \( \nu_1 \) tal que \( \nu_1 \perp \mu \) y \( \nu_2 \) tal que \( \nu_2 \ll \mu \) tal que \( \nu = \nu_1 + \nu_2 \).
+    Además, está descomposición es única.
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+\section{Diferenciación de medidas}
+
+Comencemos con un teorema sobre derivadas de ciertas funciones para motivar la idea de diferenciación de medidas. En esta sección notaremos \( m \)
+la medida de Lebesgue en \( \R \).
+
+\begin{teorema}
+    Supongamos que \( \mu \) es una medida de Borel en \( \R \) y que \[
+        f(x) = \mu\left( (-\infty, x) \right) \quad (x \in \R)
+    \]
+    Si \( x, A \in \R \) entonces las siguientes proposiciones son equivalentes:\begin{enumerate}[label = (\roman*)]
+        \item \( f \) es diferenciable en \( x \) y \( f'(x) = A \).
+        \item Para todo \( \varepsilon > 0 \; \exists \delta > 0 \) tal que \[
+                  \left| \dfrac{\mu(I)}{m(I)} - A \right| < \varepsilon
+              \] para todo segmento abierto \( I \) que contenga a \( x \) y cuya longitud es menor que \( \delta \).
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Consideremos \( \mu - A m \) en lugar de \( \mu \), restringida a algún segmento que contenga a \( x \) de modo que la nueva medida sea finita.
+    Esto muestra que no se pierde generalidad suponiendo \( A = 0 \). Si \( f'(x) = 0 \) y \( \varepsilon > 0 \) existe \( \delta > 0 \) tal que \[
+        \left| f(t) - f(x) \right| \leq \varepsilon | t - x |
+    \]
+    si \( | t - x | < \delta \). Supongamos que \( x \in I \), \( I = (s, t) \) y \( t - s < \delta \). Tomemos \( s_n \) tal que \[
+        x > s_1 > s_2 > \cdots
+    \]
+    con \( s_n \to s \). Entonces \begin{align*}
+        | \mu(\coint{s_n, t}) | & = | f(t) - f(s_n) | \leq |f(t) - f(x)| + |f(x) - f(s_n)|                                    \\
+                                & \leq \varepsilon |t - x| + \varepsilon |x - s_n| = \varepsilon (t - s_n) < \varepsilon m(I)
+    \end{align*}
+    y como \( I = \bigcup_{n \geq 1} \coint{s_n, t} \) se deduce que \( |\mu(I)| \leq \varepsilon m(I) \). Por lo que (I) implica (II).
+
+    Por otro lado, supongamos que vale (II) con \( A = 0 \). Tomemos \( \varepsilon > 0 \) y elijamos \( \delta > 0 \) como en (II).
+    Si \( s < x < t \) y \( t - s < \delta \), elijamos \( s_n \) de modo que \[
+        t-\delta < s_1 < s_2 < \cdots
+    \]
+    y \( s_n \to s \). Entonces \[
+        |\mu((s_n, t))| < \varepsilon (t - s_n) \quad \forall n > n_0 \in \N
+    \]
+    Como \( \coint{s, t} = \bigcap_{n \geq 1} (s_n, t) \) y \[
+        f(t) - f(s) = \mu\left( \coint{s, t} \right)
+    \]
+    se deduce que \[
+        \left | f(t) - f(s) \right| \leq \varepsilon |t - s| \quad (s < x < t < s + \delta)
+    \]
+    Si se verifica (II), entonces \( \mu(\{ x \}) = 0 \) donde \( \{ x \} \) es el conjunto que consta solo de \( x \). En consecuencia, \( f \) es continua en \( x \).
+    Por lo tanto, o \( s \) o \( t \) pueden cambiarse por \( x \) en la desigualdad anterior, lo que implica que \( f \) es diferenciable en \( x \) y \( f'(x) = 0 \).
+\end{proof}
+
+\begin{definicion}
+    El teorema anterior sugiere que la derivada de \( \mu \) en \( x \) podría definirse como el límite de los cocientes \[
+        \dfrac{\mu(I)}{m(I)}
+    \]
+    cuando los segmentos \( I \) se contraen hacia el punto \( x \). Se podrían considerar cocientes de la forma \( \frac{\mu(E)}{m(E)} \) para conjuntos medibles \( E \) de alguna familia \( \mathcal{E} \).
+
+    Supongamos que \( x \in \R^k \). Una sucesión \( {( E_i )}_{i \geq 1} \) de conjuntos medibles Borel en \( \R^k \) se dice que \textbf{se contrae aceptablemente} a \( x \)
+    si existe un número \( \alpha > 0 \) con la siguiente propiedad: Cada \( E_i \) está en una bola abierta \( B(x, r_i) \) con centro \( x \) y radio \( r_i > 0 \), tal que \[
+        m(E_i) \geq \alpha m(B(x, r_i)) \quad (i = 1, 2, \ldots)
+    \]
+    y \( r_i \to 0 \) cuando \( i \to +\infty \). Notar que \( m \) ahora es la medida de Lebesgue en \( \R^k \).
+\end{definicion}
+
+Notemos que en la definición anterior no se requiere que \( x \in E_i \), ni siquiera que \( x \) esté en la adherencia de \( E_i \).
+
+TODO
+
+\newpage
+
+% --- BIBLIOGRAFÍA ---
+\section*{Referencias Bibliográficas}
+\addcontentsline{toc}{section}{Referencias Bibliográficas}
+
+\begin{thebibliography}{99}
+
+    \bibitem{bartle} Bartle, R. G. (1966). \textit{The Elements of Integration and Lebesgue Measure}. John Wiley \& Sons. [Referencia clásica y completa sobre teoría de la medida.]
+
+    \bibitem{favazo} Fava, N., \& Zo, F. (1996). \textit{Medida e integral de Lebesgue}. Red Olímpica. [Excelente exposición en español de la teoría de Lebesgue.]
+
+    \bibitem{rudin} Rudin, W. (1987). \textit{Real and Complex Analysis} (3rd ed.). McGraw-Hill. [Capítulo 8: Diferenciación de medidas]
+
+\end{thebibliography}
+
+\end{document}

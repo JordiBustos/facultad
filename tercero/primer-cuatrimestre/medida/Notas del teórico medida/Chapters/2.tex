@@ -1,0 +1,187 @@
+\section{La $\sigma$-álgebra de Borel}
+\label{sec:borel}
+
+A $\R^n$ lo pensamos dotado de la distancia euclídea.
+Si $x = (x_1, \cdots, x_n)$ e $y = (y_1, \cdots, y_n)$ son dos puntos de $\R^n$, la distancia
+entre ellos es
+\begin{equation*}
+    d(x, y) = \|x-y\| = \sqrt{ \sum_{i=1}^n (x_i - y_i)^2 }
+\end{equation*}
+
+Consideramos la topología usual de $\R^n$ notada $\tau^n$ al conjunto de todos los abiertos de $\R^n$.
+
+\begin{definition}
+    Dados $a = (a_1\text{, } \cdots\text{, } a_n)$, $b = (b_1\text{, } \cdots\text{, } b_n) \in \R^n$ con $a_i < b_i (\forall i = 1 \text{, } \cdots \text{, } n)$
+    Definimos el intervalo abierto (a, b) como
+    \begin{align*}
+        (a, b) & = \prod_{i=1}^n (a_i\text{, } b_i)                                                                                                \\
+               & = \{ x = (x_1\text{, } \cdots \text{, } x_n) \in \R^n : a_i < x_i < b_i \text{, } (\forall i = 1 \text{, } \cdots \text{, } n) \}
+    \end{align*}
+\end{definition}
+
+\begin{definition}[$\e$-cubo]
+    Dados $x= (x_1, \cdots, x_n)$ y $\e > 0$ el $\e$-cubo centrado en $x$ es el conjunto definido por
+    \begin{equation*}
+        C(x, \e) = \prod_{i = 1}^n \left(x - \frac{\e}{2}, x + \frac{\e}{2}\right)
+    \end{equation*}
+\end{definition}
+
+\begin{prop}
+    Sea $V \subseteq \R^n$ abierto e $y \in C(x, \e)$ entonces
+    \begin{enumerate}
+        \item $(\forall x \in V) \quad (\exists \e > 0) : C(x \text{, } \e) \subseteq V$.
+        \item $x \in C(y\text{, } \e)$.
+        \item $C(x\text{, } \e) \subseteq C(y\text{, } 2 \cdot \e)$.
+    \end{enumerate}
+\end{prop}
+
+\clearpage
+
+\begin{definition}[$\sigma$-álgebra de Borel de $\R^n$]
+    Es la $\sigma$-álgebra generada por:
+    \begin{equation*}
+        \mc{A} = \{ (a\text{, } b) : a\text{, } b \in \R^n : a_i < b_i \text{, } i = 1\text{, } \cdots \text{, } n \}
+    \end{equation*}
+    Lo notamos $\mc{B}^n$.
+\end{definition}
+
+Queremos ver que efectivamente $\tau_n \subseteq \mc{B}^n$.
+Consideremos la clase $\beta_n = \{ C(q\text{, } \frac{1}{m}) : q \in \Q^n\text{, } m \in \N \}$.
+$\beta_n$ es numerable pues el conjunto de índices que enumera a $\beta_n$ es
+\[ \underbrace{\Q^n \times \cdots \times \Q^n}_{n \text{ veces}} \times \N \] que es numerable.
+
+\begin{prop}
+    Dado un abierto no vacío $V \subseteq \R^n$ existe una familia $\mc{A}_V \subseteq \mc{B}_n$ tal que
+    $V = \bigcup_{B \in \mc{A}_V} B$.
+
+    \begin{proof}
+        Sabemos que $\Q^n$ es denso en $\R^n$. Como $V$ es abierto y no vacío entonces $V \cap \Q^n \neq \O$.
+        Luego $B(x\text{, } \e) \subseteq V$ y $B(x\text{, } \e) \cap \Q^n \neq \O$. Por lo tanto $B(x\text{, } \e) \subset V \cap \Q^n$.
+
+        Para cada $q \in V \cap \Q^n$ defino $m_q = \min\{ m \in \N : C(q, \frac{1}{m}) \} \subseteq V$.
+        Llamemos $\mc{A}_V = \{ C(q\text{, } \frac{1}{m_q}) : q \in V \cap \Q^n \}$ la cual es una familia numerable.
+
+        Veamos que $\bigcup_{q \in V \cap \Q^n} C(q\text{, } \frac{1}{m_q}) = V$.
+        \begin{itemize}
+            \item $\subseteq$ es trivial.
+            \item $\supseteq$ Dado $x \in V$, $\exists m \in \N : C(x, \frac{1}{m}) \subseteq V$. Consideremos
+                  $C(x\text{, } \frac{1}{2m}) \subseteq C(x, \frac{1}{m}) \subseteq V$ que es un abierto no vacío.
+
+                  Resulta que $C(x\text{, } \frac{1}{2m}) \cap \Q^n \neq \O$.
+                  Sea $q \in C(x\text{, } \frac{1}{2m}) \subseteq V \cap \Q^n$
+
+                  $\Rightarrow x \in C(q\text{, } \frac{1}{2m})$, en particular $m_q \leq 2m$, pues como $x \in C(q\text{, } \frac{1}{2m})$
+                  implica que $C(q\text{, } \frac{1}{2m}) \subseteq C(x\text{, } \frac{2}{2m}) \subseteq V$.
+
+                  $\Rightarrow x \in C(q\text{, } \frac{1}{2m}) \subseteq C(q\text{, } \frac{1}{m_q}) \therefore x \in \bigcup_{q \in \mc{A}_v} C(q, \frac{1}{m_q}) = \bigcup_{B \in \mc{A}_V} B$ .
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{corollary}
+    La $\sigma$-álgebra de Borel de $\R^n$ coincide con la $\sigma(\tau_n)$. En particular:
+    \begin{itemize}
+        \item Todo abierto de $\R^n$ es un conjunto Boreliano.
+        \item Todo conjunto cerrado de $\R^n$ es un Boreliano por ser complemento de un abierto.
+        \item Por último, todo subconjunto numerable de $\R^n$ es un Boreliano. (Dado $x \in \R^n, \{ x \} = \bigcap_{n \geq 1}C(x, \frac{1}{n})$).
+    \end{itemize}
+\end{corollary}
+
+\clearpage
+
+\begin{prop}
+    Dado un espacio medible $(X\text{, } \mf{X})$ y sea $X_0 \subseteq \mf{X}$, entonces
+    \begin{enumerate}
+        \item $\mf{X}_0 = \{ A \subseteq X_0 : A = E \cap X_0 \text{ para algún } E \in \mf{X} \}$ es $\sigma$-álgebra de $X_0$. En particular,
+              si $X_0 \in \mf{X} \Rightarrow \mf{X}_0 = \{ A \subseteq X_0 : A \in \mf{X} \}$, la demostración queda como ejercicio.
+        \item Si $\mc{A}$ es una familia en partes de $X$ tal que $\mf{X} = \sigma(\mc{A})$ entonces $\mf{X}_0 = \sigma(\mc{A}_0)$ donde
+              $\mc{A}_0 = \{ A_0 \subseteq X_0 : A_0 = A \cap X_0 \text{ para algún } A \in \mc{A} \}$.
+              \begin{proof}
+                  Veamos primero que $\mc{A}_0 \subseteq \mf{X}_0$. Si $A_0 \in \mc{A}_0 \Rightarrow \exists A \in \mc{A} : A_0 = \mc{A} \cap X_0$.
+                  Como $A \in \mc{A} \subseteq \sigma(\mc{A}) = \mf{X}$ resulta que $A_0 = A \cap X_0 \in \mf{X}_0$.
+                  Entonces $\mc{A}_0 \subseteq \mf{X}_0$. Por lo tanto $\sigma(\mc{A}_0) \subseteq \mf{X}_0$.
+
+                  Ahora veamos que $\mf{X}_0 \subseteq \sigma(\mc{A}_0)$.
+                  Consideramos la clase $\mc{G} = \{ E \subseteq X : E \cap X_0 \in \sigma(\mc{A}_0) \}$ y veamos que $\mf{X} \subseteq \mc{G}$.
+                  Alcanza con probar que $\mc{A} \subseteq \mc{G}$. Pues si $A \in \mc{A}$, $A \cap X_0 \in \mc{A}_0 \subseteq \sigma(\mc{A}_0) \Rightarrow A \in \mc{G}$.
+                  Si probamos que $G$ es una $\sigma$-álgebra, tendríamos que $\mc{A} \subseteq \mc{G}$ y $\sigma(\mc{A}) \subseteq \mc{G}$ y $\sigma(\mc{A}) = \mf{X}$.
+                  Luego $\mf{X}_0 \subseteq \sigma(\mc{A}_0)$.
+              \end{proof}
+    \end{enumerate}
+\end{prop}
+
+\begin{eg}
+    Si $\beta \in B_n$ entonces la $\sigma$-álgebra de Borel de $\beta$, $B_n(\beta) = \{ A \subseteq \beta : A \in B_n \}$ está generado por la familia de conjuntos
+    de la forma $(a, b) \cap \beta$ para $a$, $b \in \R^n$ con $a_i < b_i \quad (\forall i = 1 \text{, } \cdots \text{, } n)$.
+\end{eg}
+
+\section{Recta real extendida}
+
+\begin{definition}[Recta real extendida]
+    Definimos $\overline{\R} = \R \cup \{ -\infty\text{, } +\infty \}$. Con las siguientes convenciones:
+    \begin{enumerate}
+        \item Dado $r \in \R$ tenemos que $-\infty < r < +\infty$.
+        \item $\substack{+ \\ -} \infty + \substack{+ \\ -} \infty = \substack{+ \\ -} \infty$ y
+              $\substack{+ \\ -} \infty + \substack{- \\ +} \infty$ no está definido.
+        \item $\substack{+ \\ -} \infty \cdot \substack{+ \\ -} \infty = +\infty$ y
+              $\substack{+ \\ -} \infty \cdot \substack{- \\ +} \infty = -\infty$
+              Si $r \in \R$ entonces $r \cdot +\infty = +\infty$ si $r > 0$ y $r \cdot +\infty = -\infty$. si $r < 0$.
+        \item $0 \cdot \substack{+ \\ -} \infty = 0 = \substack{+ \\ -} \infty \cdot 0$.
+        \item Tampoco definimos cocientes entre infinitos o de la forma $\frac{r}{\substack{+ \\ -} \infty}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{note}
+    El producto no va a ser continuo en la recta real extendida.
+    Si $a_n = +\infty \cdot \frac{1}{n} (\forall n \in \N)$ entonces $lim_{n \to +\infty} a_n = +\infty$. Pero $+\infty \cdot lim_{n \to +\infty} \frac{1}{n} = +\infty \cdot 0 = 0$.
+\end{note}
+
+Notemos que si $A \subseteq \overline{\R} \Rightarrow inf(A) \in \overline{\R}$ y $sup(A) \in \overline{\R}$.
+
+Dada una sucesión $(x_n)_{n \in \N} \subseteq \R$, sea $\O \neq L = \{ x \in \overline{\R} : \exists x_{n_k} \to x \} \subseteq \overline{\R}$.
+
+\begin{definition}
+    $\limsup_{n \to \infty} x_n = sup(L)$ y $\liminf_{n \to \infty} x_n = inf(L)$.Ambos pertenecen a $L$.
+
+    Además, si para cada $n \in \N$ definimos $\alpha_m = \sup \left\{ x_n : n \geq m \right\}$ la sucesión $\alpha_m$ es decreciente y
+    $\limsup_{n \to \infty} x_n = inf\{\alpha_m\} = inf_{m \geq 1} ( sup_{n \geq m}\{x_n\} )$.
+
+    Análogamente $\liminf_{n \to \infty} x_n = \sup\left\{\alpha_m\right\} = \sup_{m \geq 1} ( inf_{n \geq m}\{x_n\} )$.
+\end{definition}
+
+\begin{prop}
+    Propiedades de límite superior e inferior:
+    \begin{itemize}
+        \item $\limsup_{n \to \infty} (- x_n) = - \liminf_{n \to \infty} x_n$
+        \item $\liminf_{n \to \infty} (- x_n) = - \limsup_{n \to \infty} x_n$
+    \end{itemize}
+\end{prop}
+
+\begin{note}
+    Si $(x_n)_{n \in \N}$ es una sucesión en $\R$ y $x \in \overline{\R}, x_n \to x \iff \limsup x_n = \liminf x_n = x$.
+\end{note}
+
+Veamos como extender $\mc{B}$ a $\overline{\R}$.
+
+\begin{definition}[Borel extendida]
+    Para cada $E \in \mc{B}$, sean $E_1 = E \cup \{ + \infty \}$, $E_2 = E \cup \{ - \infty \}$ y $E_3 = E \cup \{ + \infty, - \infty \}$.
+    Consideremos $\overline{\mc{B}} = \{ E_1 \text{, } E_2 \text{, } E_3 \text{, } E : E \in \mc{B} \} = \sigma(\{ (a, +\infty] : a \in \R \})$.
+    $\overline{\mc{B}}$ es $\sigma$-álgebra de $\overline{\R}$.
+
+    \begin{proof}
+        \begin{enumerate}
+            \item $\O \in \mc{B} \Rightarrow \O \in \overline{\mc{B}}$ y $\R \in \mc{B} \Rightarrow \overline{\R} = \R \cup \{ +\infty \text{, } -\infty \} \Rightarrow \overline{\R} \in \overline{\mc{B}}$.
+            \item \begin{align*}
+                      E   & \in \mc{B} \Rightarrow E^c \in \mc{B} \Rightarrow E^c \in \overline{\mc{B}}                                                          \\
+                      E_1 & = E \cup \{ +\infty \} : E \in \mc{B} \Rightarrow E_1^c = E^c \cap [-\infty \text{, } + \infty) \in \overline{\mc{B}}                \\
+                      E_2 & = E \cup \{ -\infty \} : E \in \mc{B} \Rightarrow E_2^c = E^c \cap (-\infty \text{, } + \infty] \in \overline{\mc{B}}                \\
+                      E_3 & = E \cup \{ +\infty, -\infty \} : E \in \mc{B} \Rightarrow E_3^c = E^c \cap (-\infty \text{, } + \infty) = E^c \in \overline{\mc{B}}
+                  \end{align*}
+            \item Sea $\{ A_n \}_{n \geq 1} \subseteq \overline{\mc{B}} \Rightarrow$ \begin{align*}
+                       & \forall n \in \N \quad A_n \cap \R \in \mc{B} \Rightarrow \left( \bigcup_{n \geq 1} A_n \right) \cap \R \in \mc{B} \\
+                       & \Rightarrow \left( \bigcup_{n \geq 1} A_n \cap \R \right) \in \mc{B}                                               \\
+                       & \Rightarrow \bigcup_{n \geq 1} A_n \in \overline{\mc{B}}
+                  \end{align*}
+        \end{enumerate}
+    \end{proof}
+\end{definition}

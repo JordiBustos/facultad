@@ -33,7 +33,6 @@
 *.maf
 *.mtc
 *.mtc0
-*.pdf
 
 # ==========================================
 # Python
@@ -82,3 +81,5 @@ Thumbs.db
 # Dev containers / entornos
 # ==========================================
 .devcontainer/
+
+./plan/*

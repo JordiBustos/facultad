@@ -1,0 +1,77 @@
+% !TeX root = main.tex
+\documentclass[12pt,a4paper]{book} 
+\input{Configs/Configs}
+
+\begin{document}
+\renewcommand{\contentsname}{\vspace{0cm} Contenido \vspace{-2cm}}
+
+\begin{titlepage}
+    \vspace*{2cm}
+
+    \noindent
+    \vspace*{0.5cm}
+    \titlefont{Notas del teórico}
+
+    \vspace{1.5cm}
+    \epigraph{Medida e Integración - Francisco Martinez Pería 2025}%
+    {\textsc{Bustos Jordi}}
+    \null\vfill
+    \vspace*{1cm}
+    \noindent
+    \hfill
+    \begin{minipage}{0.7\linewidth}
+        \begin{flushright}
+            \printauthor
+        \end{flushright}
+    \end{minipage}
+    %
+    \begin{minipage}{0.02\linewidth}
+        \rule{1pt}{70pt}
+    \end{minipage}
+    \titlepagedecoration
+\end{titlepage}
+
+\let\cleardoublepage=\clearpage
+\tableofcontents
+\blankpage
+
+\chapter*{Prefacio}
+\input{Chapters/preface}
+
+\chapter{Clase I - 06/03 }
+\input{Chapters/1}
+
+\chapter{Clase II - 11/03 }
+\input{Chapters/2}
+
+\chapter{Clase III - 13/03 }
+\input{Chapters/3}
+
+\chapter{Clase IV - 20/03 }
+\input{Chapters/4}
+
+\chapter{Clase V - 25/03 }
+\input{Chapters/5}
+
+\chapter{Clase VI - 27/03 }
+\input{Chapters/6}
+
+\chapter{Clase VII - 01/04 }
+\input{Chapters/7}
+
+\chapter{Clase VIII - 03/04 }
+\input{Chapters/8}
+
+\chapter{Clase IX - 08/04 }
+\input{Chapters/9}
+
+\chapter{Parciales}
+\input{Chapters/parciales}
+
+\blankpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\nocite{*}
+
+\end{document}

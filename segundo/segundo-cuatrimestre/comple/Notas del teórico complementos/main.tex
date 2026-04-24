@@ -1,0 +1,116 @@
+% !TeX root = main.tex
+\documentclass[12pt,a4paper]{book} 
+\input{Configs/Configs}
+\begin{document}
+\renewcommand{\contentsname}{\vspace{0cm} Contenido \vspace{-2cm}}
+
+\begin{titlepage}
+	\vspace*{2cm}
+
+	\noindent
+	\vspace*{0.5cm}
+	\titlefont{Notas del teórico}
+
+	\vspace{1.5cm}
+	\epigraph{Complementos de análisis matemático - Irene Drelichman 2024}%
+	{\textsc{Bustos Jordi}}
+	\null\vfill
+	\vspace*{1cm}
+	\noindent
+	\hfill
+	\begin{minipage}{0.7\linewidth}
+		\begin{flushright}
+			\printauthor
+		\end{flushright}
+	\end{minipage}
+	%
+	\begin{minipage}{0.02\linewidth}
+		\rule{1pt}{70pt}
+	\end{minipage}
+	\titlepagedecoration
+\end{titlepage}
+
+\let\cleardoublepage=\clearpage
+\tableofcontents
+\blankpage
+
+\chapter*{Prefacio}
+\input{Chapters/preface}
+
+\chapter{Clase I - 23/08 }
+\input{Chapters/1}
+
+\chapter{Clase II - 27/08}
+\input{Chapters/2}
+
+\chapter{Clase III - 30/08}
+\input{Chapters/3}
+
+\chapter{Clase IV - 03/09}
+\input{Chapters/4}
+
+\chapter{Clase V - 06/09}
+\input{Chapters/5}
+
+\chapter{Clase VI - 10/09}
+\input{Chapters/6}
+
+\chapter{Clase VII - 13/09}
+\input{Chapters/7}
+
+\chapter{Clase VIII - 24/09}
+\input{Chapters/8}
+
+\chapter{Clase IX - 27/09}
+\input{Chapters/9}
+
+\chapter{Clase X - 01/10}
+\input{Chapters/10}
+
+\chapter{Clase XI - 04/10}
+\input{Chapters/11}
+
+\chapter{Clase XII - 08/10}
+\input{Chapters/12}
+
+% TODO: revisar clase 13
+\chapter{Clase XIII - 15/10}
+\input{Chapters/13}
+
+\chapter{Clase XIV - 18/10}
+\input{Chapters/14}
+
+\chapter{Clase XV - 25/09}
+\input{Chapters/15}
+
+\chapter{Clase XVI - 29/09}
+\input{Chapters/16}
+
+\chapter{Clase XVII - 01/10}
+\input{Chapters/17}
+
+\chapter{Clase XVIII - 05/10}
+\input{Chapters/18}
+
+\chapter{Clase XIX - 08/10}
+\input{Chapters/19}
+
+\chapter{Clase XX - 12/11}
+\input{Chapters/20}
+
+\chapter{Clase XXI - 15/11}
+\input{Chapters/21}
+
+\chapter{Clase XXII - 22/11}
+\input{Chapters/22}
+
+\chapter{Parciales}
+\input{Chapters/parciales}
+
+\blankpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\nocite{*}
+
+\end{document}

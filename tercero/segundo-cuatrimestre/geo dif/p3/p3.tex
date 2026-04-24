@@ -1,0 +1,80 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{newpxtext,newpxmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Práctica III}
+
+\maketitle
+
+\begin{theorem}{2}
+    Sean \( S^2 \) la esfera unitaria en \( \R^3 \) y \( E \) el elipsoide \begin{align*}
+        E = \left\{ (x,y,z) \in \R^3 : \frac{x^2}{9} + \frac{y^2}{4} + z^2 = 1 \right\}
+    \end{align*}
+    Definamos \( f : S^2 \to E \) mediante \( f(x,y,z) = (3x, 2y, z) \) y tomemos \( p := \left( \frac{3}{4}, \frac{\sqrt{3}}{4}, \frac{1}{2}  \right) \).
+    Calcular: \begin{itemize}
+        \item \( T_p S^2 \).
+        \item \( T_{f(p)} E \).
+        \item \( df_p : T_p S^2 \to T_{f(p)} E \) y su matriz asociada.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    Podemos parametrizar \( E \) y \( S^2 \) en un entorno de \( p \) y \( f(p) \) mediante \( \phi: U \subset \R^2 \to E \) y \( \psi: V \subset \R^2 \to S^2 \) como sigue:
+    \begin{align*}
+        \phi(x, y) & = \left( x, y, \sqrt{1 - \frac{x^2}{9} - \frac{y^2}{4}} \right) \\
+        \psi(x, y) & = \left(x, y, \sqrt{1 - x^2 - y^2} \right)
+    \end{align*}
+    Luego, \( p = \psi\left( \frac{3}{4}, \frac{\sqrt{3}}{4} \right) \) y \( f(p) = \phi\left( \frac{9}{4}, \frac{\sqrt{3}}{2} \right) = \left( \frac{9}{4}, \frac{\sqrt{3}}{2}, \frac{1}{2} \right) \).
+    Por lo tanto, \( T_p S^2 \) está dado por: \begin{align*}
+        T_p S^2 & = span \left\{ \frac{\partial \psi}{\partial x}\left( \frac{3}{4}, \frac{\sqrt{3}}{4} \right), \frac{\partial \psi}{\partial y}\left( \frac{3}{4}, \frac{\sqrt{3}}{4} \right) \right\} \\
+                & = span \left\{ \left( 1, 0, -\frac{3}{2} \right), \left( 0, 1, -\frac{\sqrt{3}}{2} \right) \right\}
+    \end{align*}
+    Por otro lado: \begin{align*}
+        T_{f(p)} E & = span \left\{ \frac{\partial \phi}{\partial x}\left( \frac{9}{4}, \frac{\sqrt{3}}{2} \right), \frac{\partial \phi}{\partial y}\left( \frac{9}{4}, \frac{\sqrt{3}}{2} \right) \right\} \\
+                   & = span \left\{ \left( 1, 0, -\frac{1}{2} \right), \left( 0, 1, -\frac{\sqrt{3}}{4} \right) \right\}
+    \end{align*}
+    Para la construcción de \( df_p \), consideremos \( w \in T_p S^2 \) y \( \gamma : (-\epsilon, \epsilon) \to S^2 \) una curva tal que \( \gamma(0) = p \) y \( \gamma'(0) = w \). Entonces: \begin{align*}
+        df_p(w) & = (f \circ \gamma)'(0) = \left( 3x'(0), 2y'(0), z'(0) \right)
+    \end{align*}
+    Si \( w = (a, b, c) \), se sigue que \( df_p(a, b, c) = (3a, 2b, c) \).
+    Veamos ahora cuanto valen \( v_0 = df_p(1, 0, -\frac{3}{2}) = (3, 0, -\frac{3}{2}) \) y \( v_1 = df_p(0, 1, -\frac{\sqrt{3}}{2}) = (0, 2, -\frac{\sqrt{3}}{2}) \)
+    Y escribamos a \( v_0, v_1 \) en función de la base de \( T_{f(p)} E \): \begin{align*}
+        v_0 & = 3(1, 0, -\frac{1}{2}) + 0(0, 1, -\frac{\sqrt{3}}{4}) \\
+        v_1 & = 0(1, 0, -\frac{1}{2}) + 2(0, 1, -\frac{\sqrt{3}}{4})
+    \end{align*}
+    Por lo tanto, la matriz asociada a \( df_p \) es: \begin{align*}
+        \begin{pmatrix}
+            3 & 0 \\
+            0 & 2
+        \end{pmatrix}
+    \end{align*}
+\end{proof}
+
+\end{document}

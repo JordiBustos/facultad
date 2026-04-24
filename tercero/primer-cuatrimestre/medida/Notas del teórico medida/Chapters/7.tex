@@ -1,0 +1,145 @@
+\section{Generación de medida (continuación)}
+
+Habíamos visto que $\ell : \mf{Y} \to [0, +\infty]$ es condicionalmente finitamente aditiva.
+Es decir que si $I_1 \text{, } \cdots \text{, } I_n \in \mf{Y}$ son conjuntos dos a dos disjuntos tal que
+$\bigcup_{i = 1}^n I_i \in \mf{Y} \Rightarrow \ell(\bigcup_{k = 1}^n I_k) = \sum_{k = 1}^n \ell(I_k)$.
+
+Queda como ejercicio ver que: \begin{enumerate}
+    \item Si $I$, $J \in \mf{Y}$ y $I \subseteq J$ entonces $\ell(I) \leq \ell(J)$.
+    \item $\ell$ también es condicionalmente subaditiva i.e si $I_1 \text{, } \cdots \text{, } I_n \in \mf{Y} : \bigcup_{i = 1}^n I_k \in \mf{Y}$ entonces
+          $\ell(\bigcup_{k = 1}^n I_k) \leq \sum_{k = 1}^n \ell(I_k)$.
+\end{enumerate}
+
+
+Veamos que $\ell: \mf{Y} \to [0, +\infty]$ es condicionalmente $\sigma$-aditiva i.e si $(I_n)_{n \geq 1} \subseteq \mf{Y}$ es una sucesión
+de conjuntos dos a dos disjuntos tal que $\bigcup_{n \geq 1} I_n \in \mf{Y}$ entonces $\ell(\bigcup_{n \geq 1} I_n) = \sum_{n \geq 1} \ell(I_n)$.
+Hay que considerar varios casos según la forma de $I := \bigcup_{n \geq 1} I_n$.
+
+El primer caso es cuando $I = (a$, $b]$ con $a$, $b \in \R$ y $a < b$.
+Sin pérdida de generalidad supongamos que $I_n \neq \O \quad \forall n \in \N$ y, como $I_n \subseteq I$,
+$I_n = (a_n, b_n]$ con $a \leq a_n < b_n \leq b$.
+
+Primero veamos que $\sum_{n \geq 1} \ell(I_n) \leq \ell(I)$, fijemos $m \in \N$ y supongamos que $I_1$, $\cdots$, $I_m$ son tales que
+$a_1 < a_2 < \cdots < a_m$, si no es así los reordenamos (son finitos).
+
+Como son dos a dos disjuntos y son subconjuntos de $I$ con \begin{align*}
+    a \leq a_1 < b_1 \leq a_2 < b_2 \leq a_3 < \cdots \leq a_m < b_m \leq b
+\end{align*}
+
+Luego, \begin{align*}
+    \sum_{n = 1}^m \ell(I_n) & = \sum_{n = 1}^m (b_n - a_n)                                          \\
+                             & = -a_1 + (b_1 - a_2) + (b_2 - a_3) + \cdots + (b_{m - 1} - a_m) + b_m \\
+                             & \leq b_n - a_1 \leq b - a = \ell(I)
+\end{align*} Pues cada $(b_1 - a_2)$, $(b_2 - a_3)$, $\cdots$, $(b_{m - 1} - a_m)$ son negativos.
+
+Por lo tanto la suma parcial $\sum_{n = 1}^m \ell(I_n) \leq \ell(I) \quad \forall m \in \N$.
+Entonces $\sum_{n \geq 1} \ell(I_n) \leq \ell(I)$.
+
+Veamos ahora que $b-a = \ell(I) \leq \sum_{n \geq 1} \ell(I_n)$.
+Basta probar que dado $a < a^{\prime} < b \Rightarrow b - a^{\prime} \leq \sum_{n \geq 1} I_n$.
+
+Fijemos un $a^{\prime} \in (a\text{, } b]$ y sea $\e > 0$, para cada $j \in \N$ sea $\e_j = \dfrac{\e}{2 \cdot j}$.
+
+Definamos $U_j = (a_j$, $b_j + \e_j)$ y notemos que $[a^\prime$, $b] \subseteq (a$, $b] = \bigcup_{n \geq 1} I_n \subseteq \bigcup_{n \geq 1} U_n$.
+
+Por el Teorema de Heine-Borel $[a^\prime$, $b]$ es compacto y entonces $\exists m \geq 1 : [a^\prime \text{, } b] = \bigcup_{j = 1}^m U_j$.
+
+Consideremos $I^\prime_j = (a_j$, $b_j + \e_j] \in \mf{Y} \quad \forall j = 1$, $\cdots$, $m$.
+
+Luego $(a^\prime$, $b] \subseteq \bigcup_{j = 1}^m I^\prime_j \Rightarrow b - a^\prime = \ell((a^\prime, b]) \leq \ell(\bigcup_{j = 1}^m I^\prime_j)$
+
+Si $I^\prime_j \cap (a^\prime$, $b] = \O$ entonces lo podemos descartar para que $\bigcup_{j = 1}^m I^\prime_j$ sea conexa y, por lo tanto, pertenezca a $\mf{Y}$.
+
+Luego por ser condicionalmente subaditiva tenemos que \begin{align*}
+    b - a^\prime \leq \ell(\bigcup_{j = 1}^m I^\prime_j) & \leq \sum_{j = 1}^m \ell(I^\prime_j)                                                                              \\
+                                                         & = \sum_{j = 1}^m b_j + \e_j - a_j = \sum_{j = 1}^m b_j - a_j + \sum_{j = 1}^m \e_j                                \\
+                                                         & \leq \sum_{n \geq 1} \ell(I_n) + \e \cdot \sum_{j = 1}^m \dfrac{1}{2 \cdot j} \leq \sum_{n \geq 1} \ell(I_n) + \e \\
+\end{align*}
+
+Como $\e > 0$ era arbitrario resulta que $b - a^\prime \leq \sum_{n \geq 1} \ell(I_n)$.
+
+Si tomamos $a^\prime = a + \frac{1}{n} \Rightarrow b-a = lim_{n \to +\infty} b - (a + \frac{1}{n}) \leq \sum_{n \geq 1} \ell(I_n)$
+
+El caso dos es cuando $I = (-\infty$, $b]$ con $b \in \R$.
+
+Sabemos que $\ell(I) = +\infty$. Veamos que $\sum_{n \geq 1} \ell(I_n) = +\infty$.
+
+Si algún $I_{n_0}$ tiene $\ell(I_{n_0}) = +\infty$ ya está.
+
+Supongamos que $\ell(I_n) < +\infty \quad \forall n \geq 1$, luego $I_n = (a_n$, $b_n]$, $a_n$, $b_n \in \R$, $a_n < b_n \quad \forall n \in \N$.
+
+Fijemos $k \in \N : b > -k$. Luego $[-k, b] \subseteq \bigcup_{n \geq 1} I_n = I \subseteq \bigcup_{n \geq 1} (a_n$, $b_n + \frac{1}{2^n}$.
+
+Como $[k, b]$ es compacto por Teorema de Heine-Borel tenemos que $\exists m \in \N : [-k$, $b] \subseteq \bigcup_{n = 1}^m (a_n$, $b_n + \frac{1}{2^n}) \in \mf{Y}$.
+
+Por el mismo argumento de antes (si hay más de una componente conexa se la descarta) \begin{align*}
+    b - (-k) & = \ell([-k \text{, } b])                                                                                                     \\
+             & \leq \ell(\bigcup_{n = 1}^m (a_n\text{, } b_n + \frac{1}{2^n})) \leq \sum_{n = 1}^m \ell((a_n\text{, } b_n + \frac{1}{2^n})) \\
+             & = \sum_{n = 1}^m (b_n + \frac{1}{2^n} - a_n) = \sum_{n = 1}^m (b_n - a_n) + \sum_{n = 1}^m \frac{1}{2^n}                     \\
+             & \leq \sum_{n \geq 1} \ell(I_n) + 1
+\end{align*}
+
+Luego $\sum_{n \geq 1} \ell(I_n) \geq b + k - 1 \quad \forall k \in \N : b > -k \therefore$ tenemos que $\sum_{n \geq 1} \ell(I_n) = +\infty$.
+
+El tercer caso es cuando $(a$, $+\infty)$ con $a \in \R$ y el cuarto es cuando $I = \R$, ambos quedan como ejercicio.
+
+\clearpage
+
+\section{Extensión de $\ell$ al álgebra}
+
+Recordemos que $\mc{F} = \{ A \subseteq \R : A = \bigcup_{i = 1}^m I_i \text{ con } I_1 \text{, } \cdots \text{, } I_m \in \mf{Y} \text{ dos a dos disjuntos} \}$ y extendamos la función
+$\ell$ a $\ell: \mc{F} \to [0$, $+\infty]$ como $\ell(A) = \sum_{n = 1}^m \ell(I_n)$ si $A \in \mc{F}$.
+
+\begin{prop}
+    $\ell$ está bien definida.
+
+    \begin{proof}
+        Supongamos que $A = \bigcup_{k = 1}^{m_1} I_k^1 = \bigcup_{j = 1}^{m_2} I_j^2$ con los $I_k^1$, $I_j^2 \in \mf{Y}$ dos a dos disjuntos.
+        Fijado el $k = 1$, $\cdots$, $m_1$, $I_k^1 = \bigcup_{j = 1}^{m_2} I_k^1 \cap I_j^2$ con $I_k^1 \cap I_j^2 \in \mf{Y}$ por ser $\mf{Y}$ semiálgebra y dos a dos disjuntos.
+        Como $\ell$ es condicionalmente finita aditiva en $\mf{Y}$ se tiene que $\ell(I_k^1) = \sum_{j = 1}^{m_2} \ell(I_k^1 \cap I_j^2)$.
+
+        Análogamente, fijado el $j = 1$, $\cdots$, $m_2$ se tiene que $\ell(I_j^2) = \sum_{k = 1}^{m_1} \ell(I_k^1 \cap I_j^2)$.
+        Luego \begin{align*}
+            \sum_{k = 1}^{m_1} \ell(I_k^1) & = \sum_{k = 1}^{m_1} \sum_{j = 1}^{m_2} \ell(I_k^1 \cap I_j^2) \\
+                                           & = \sum_{j = 1}^{m_2} \sum_{k = 1}^{m_1}\ell(I_k^1 \cap I_j^2)  \\
+                                           & = \sum_{j = 1}^{m_2} \ell(I_j^2)                               \\
+        \end{align*}
+        $\therefore$ está bien definida.
+    \end{proof}
+\end{prop}
+
+\begin{definition}
+    $\mc{A} \subseteq P(X)$ un álgebra. Una medida sobre $\mc{A}$ es una función $\mu : \mc{A} \to [0$, $+\infty]$ tal que: \begin{enumerate}
+        \item $\mu(\O) = 0$.
+        \item Si $(E_n)_{n \geq 1} \subseteq \mc{A}$ es una sucesión de conjuntos dos a dos disjuntos tal que $\bigcup_{n \geq 1} E_n \in \mc{A}$ enotnces
+              $\mu(\bigcup_{n \geq 1} E_n) = \sum_{n \geq 1} \mu(E_n)$.
+    \end{enumerate}
+\end{definition}
+
+\clearpage
+
+\begin{lemma}
+    La función $\ell : \mc{F} \to [0$, $+\infty]$ es una medida sobre el álgebra $\mc{F}$.
+    \begin{proof}
+        Bosquejo de la demostración: $\ell(\O) = 0$ es trivial.
+        Para ver que $\ell$ es condicionalmente $\sigma$-aditiva en $\mc{F}$, podemos seguir la siguiente estrategia: \begin{enumerate}
+            \item Probar que $\ell$ es finitamente aditiva en $\mc{F}$.
+            \item Probar que si $E$, $F \in \mc{F}$ y $E \subseteq F$ entonces $\ell(E) \leq \ell(F)$.
+            \item Probar que $\ell$ es finitamente subaditiva.
+            \item Sea $(E_n)_{n \geq 1} \subseteq \mc{F}$ una sucesión de conjuntos dos a dos disjuntos tales que $E = \bigcup_{n \geq 1} E_n \in \mf{Y}$. Veamos que
+                  $\ell(E) = \sum_{n \geq 1} \ell(E_n)$. Para cada $n \in \N$, $E_n = \bigcup_{k = 1}^{m_n} I_k^n$ con $I_k^n \in \mf{Y}$ dos a dos disjuntos.
+                  Luego, $\{ I_k^n : n \in \N \text{, } k = 1 \text{, } \cdots \text{, } m_n \}$ es una colección en $\mf{Y}$ de conjuntos dos a dos disjuntos y además podemos enumerarlos en una sucesión tal que
+                  $E_i^\prime = I_i^1$ si $i = 1$, $\cdots$, $m_1$, $E_i^\prime = I_{i - m_1}^2$ si $i = m_1 + 1$, $\cdots$, $m_1 + m_2$ y así sucesivamente.
+
+                  Luego $\bigcup_{n \geq 1} E_n^\prime = \bigcup_{n \geq 1} \bigcup_{j = 1}^{m_n} I_j^n = \bigcup_{n \geq 1} E_n = E \in \mf{Y}$ como $\ell$ es condicionalmente $\sigma$-aditiva en $\mf{Y}$ resulta que \begin{align*}
+                      \ell(E) & = \sum_{n \geq 1} \ell(E_n^\prime)               \\
+                              & = \sum_{n \geq 1} \sum_{k = 1}^{m_n} \ell(I_k^n) \\
+                              & = \sum_{n \geq 1} \ell(E_n)
+                  \end{align*}
+            \item Deducir la $\sigma$-aditividad condicional si $E = \bigcup_{n \geq 1} E_n \in \mc{F}$, con $I_1$, $\cdots$, $I_n$ dos a dos disjuntos y $m \geq 2$.
+                  De nuevo $E_n = \bigcup_{k = 1}^{m_n} I_k^n$ con $I_k^n \in \mf{Y}$ dos a dos disjuntos. \\
+                  $I_i = I_i \cap E = I_i \cap \bigcup_{n \geq 1} E_n = \bigcup_{n \geq 1} (I_i \cap E_n) = \bigcup_{n \geq 1} \bigcup_{k = 1}^{m_n} I_i \cap I_k^n$. \\
+                  Luego $\ell(I_i) = \sum_{n \geq 1} \sum_{k = 1}^{m_n} \ell(I_i \cap I_k^n)$...
+        \end{enumerate}
+    \end{proof}
+\end{lemma}

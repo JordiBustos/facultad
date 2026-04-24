@@ -1,0 +1,315 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                      % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Net convergence/accumulation notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}   % Frequently in
+\newcommand{\nnevto}[1]{\not\!\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\nnfrto}[1]{\not\!\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica IV}
+\author{Bustos Jordi\\Redes}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Probar que si \( \mathbf{z} \) es una subred de \( \mathbf{y} \) e \( \mathbf{y} \) es una subred de \( \mathbf{x} \) entonces \( \mathbf{z} \) es una subred de \( \mathbf{x} \).
+\end{ejercicio}
+\begin{proof}
+    Dada \( \mathbf{x} = {(x_i)}_{i \in I} \subseteq X \) la red, \( h : J \to I \) tal que \( h \) es creciente, \( h(J) \) es cofinal e \( \mathbf{y} = \mathbf{x} \circ h \) es la subred y \( g : K \to J \) tal que
+    \( g \) es creciente, \( g(K) \) es cofinal (en \( J \)) y \( \mathbf{z} = \mathbf{y} \circ g \) veamos que \( \mathbf{z} \) es subred de \( \mathbf{x} \).
+    Notemos que la composición de funciones crecientes es creciente, por lo que \( h \circ g \) es creciente, además se tiene que \[
+        \mathbf{z} = \mathbf{y} \circ g = (\mathbf{x} \circ h) \circ g = \mathbf{x} \circ (h \circ g)
+    \]
+    Nos queda ver que \( (h \circ g)(K) \) es cofinal, es decir dado \( i \in I \) quiero encontrar \( k \in K \) tal que \( i \leq (h \circ g)(k) \).
+    En efecto, dado \( i \in I \quad \exists j \in J \) tal que \( i \leq h(j) \) por ser \( h(J) \) cofinal en \( I \).
+    Además, para el mismo \( j \) existe \( k \in K \) tal que \( j \leq g(k) \) pues \( g(K) \) cofinal en \( J \), componiendo \( h \) a ambos lados y utilizando que \( h \) es creciente se tiene que \[
+        i \leq_I h(j) \leq_I (h \circ g)(k)
+    \]
+    Por lo tanto, \( (h \circ g)(K) \) es cofinal en \( I \) y, por lo tanto, \( \mathbf{z} \) es subred de \( \mathbf{x} \).
+\end{proof}
+
+\begin{ejercicio}{2}
+    Sea \( \mathbf{x} = {(x_i)}_{i \in I} \) una red en un conjunto \( X \). Demostrar que:
+    \begin{enumerate}
+        \item Dado \( K \subseteq I \) un subconjunto cofinal entonces la red \( \mathbf{x}|_K = {(x_i)}_{i \in K} \) es una subred de \( \mathbf{x} \).
+        \item En particular, fijado cualquier \( i_0 \in I \), la red \( {(x_i)}_{i \geq i_0} \) dada por el conjunto \( I_0 = \{ i \in I : i \geq i_0 \} \subseteq I \) es una subred de \( \mathbf{x} \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Consideremos la inclusión \( \rho : K \to I \) tal que \( \rho(k) = k \). Claramente es una función creciente tal que \( \mathbf{x}|_K = \mathbf{x} \circ \rho \). Veamos que \( \rho(K) \) es cofinal en \( I \),
+    dado \( i \in I \) como \( K \subseteq I \) es cofinal, se tiene que existe \( k \in K \) tal que \( i \leq_I k = \rho(k) \implies \rho(K) \) es cofinal \( \therefore \mathbf{x}|_K \) es subred.
+
+    Notar que dado \( i_0 \in I \) la red \( {(x_i)}_{i \geq i_0} \) es subred pues dado \( i \in I \) e \( i \in I_0 \) como \( I \) es dirigido \( \exists j \in I \) tal que \[
+        i_0 \leq j \text{ y } i \leq j
+    \]
+    luego \( j \in I_0 \) y \( i \leq j \) por lo que \( I_0 \) es cofinal en \( I \) y, por lo tanto, \( {(x_i)}_{i \geq i_0} \) es subred de \( \mathbf{x} \).
+\end{proof}
+
+\begin{ejercicio}{3}
+    Sea \( (X, \tau) \) un ET y sea \( \mathbf{x} = {(x_i)}_{i \in I} \) una red en \( X \). Probar que:
+    \begin{enumerate}
+        \item Si \textbf{x} vive en un \( Y \subseteq X \) e \( y \in Y \) entonces \( x_i \xrightarrow{\tau} y \) si y sólo si \( x_i \xrightarrow{\tau_Y} y \).
+        \item Si \textbf{x}  vive en un \( Y \subseteq X \) e \( y \in Y \) entonces \( y \) es punto de acumulación de \textbf{x} respecto a \( \tau \) si y sólo si \( y \) es punto de acumulación de \textbf{x} respecto a \( \tau_Y \).
+        \item Si \( x_i \xrightarrow{i \in I} x \in X \) y \( F \subseteq X \) es un cerrado tal que \textbf{x} \( \evto{F} \) entonces \( x \in F \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Si \( x_i \xrightarrow{i \in I} y \) y \( U_Y = U \cap Y \) es un abierto relativo con \( y \in U_y \), como \( U \) es abierto en \( \tau \) que contiene a \( y \)
+    existe un \( i_0 \in I \) tal que \( \forall i \geq i_0 \) vale que \( x_i \in U \), como \( x \) vive en \( Y \), \( x_i \in U_Y \). La vuelta sale de forma análoga.
+
+    Para el segundo punto notemos que si \( y \) es punto de acumulación de la red entonces \( {(x_i)}_{i \in I} \frto{U} \quad \forall U \in \mathcal{O}^a(y) \). Luego,
+    como \textbf{x} vive en \( Y \) y dado \( U \in \mathcal{O}^a(y) \), consideramos el abierto relativo \( V = U \cap Y \) entonces como \( \forall i \in I \) existe un \( j \in I \) tal que \( i \leq j \) y
+    \( x_j \in U \), como además \( x_j \in Y \implies x_j \in U \cap Y \implies x \frto{V} \) y como \( V \) era arbitrario \( y \) es punto de acumulación en la topología relativa. La recíproca sale de manera análoga.
+
+    Dado \( U \in \mathcal{O}(x) \) como \( x_i \xrightarrow{i \in I} x \in X \) existe \( i_0 \in I \) tal que \( \forall i \geq i_0 \), \( x_i \in U \).
+    Como \textbf{x} \( \evto{F} \) existe \( i_1 \in I \) tal que \( \forall i \geq i_1 \), \( x_i \in F \). Tomando \( i_2 \geq i_0, i_1 \) (puedo pues es dirigido) se tiene que
+    \( x_{i_2} \in U \cap F \neq \varnothing \). Esto prueba que \( x \in \cl{F} = F \).
+\end{proof}
+
+\begin{ejercicio}{4}
+    Sean \( (X, \tau) \) un ET, \( A \subseteq X \) y \( x = {(x_i)}_{i \in I} \) una red en \( X \). Entonces \( x \) está eventualmente en \( A \) si y sólo si no está frecuentemente en \( X \setminus A \), es decir,
+    \[
+        x \evto{A} \iff x \nnfrto{X \setminus A}.
+    \]
+    Análogamente, \( x \) no está frecuentemente en \( A \) si y sólo si está eventualmente en \( X \setminus A \), es decir,
+    \[
+        x \nnfrto{A} \iff x \evto{X \setminus A}.
+    \]
+\end{ejercicio}
+\begin{proof}
+    Supongamos primero que \( x \evto{A} \) y veamos que \( x \nnfrto{X \setminus A} \). En efecto, como \( x \evto{A} \) vale que \( \exists i_0 \in I \) tal que \( x_i \in A \) para todo \( i_0 \leq i \). Vale que
+    \( x \frto{X \setminus A} \) si \( \forall i \in I \quad \exists i \leq j \in I \) tal que \( x_j \in X \setminus A \),
+    la negación de eso mismo sería que \( \exists i \in I \quad \forall i \leq j \in I \) tal que \( x_j \notin X \setminus A \equiv x_j \in A \) que es lo que vimos tomando \( i = i_0 \).
+
+    Recíprocamente si \( x \nnfrto{X \setminus A} \) entonces \( \exists i_0 \in I \) tal que \( x_i \notin X \setminus A \) para todo \( i_0 \leq i \),
+    pero justamente que \( x_i \notin X \setminus A \) implica que \( x_i \in A \) para todo
+    \( i_0 \leq i \) por lo que \( x \evto{A} \).
+
+    El otro si y sólo si se puede demostrar de manera análoga.
+\end{proof}
+
+\begin{ejercicio}{5}
+    Sea \textbf{x} una red en \( X \) y \( \beta \) una familia de subconjuntos no vacíos de \( X \) tales que:
+    \begin{enumerate}
+        \item La intersección de dos elementos cualesquiera de \( \beta \) contiene algún otro elemento de \( \beta \).
+        \item La red \textbf{x} está frecuentemente en todo \( A \in \beta \).
+    \end{enumerate}
+    Demostrar que existe una subred de \textbf{x} que está eventualmente en todo \( A \in \beta \).
+\end{ejercicio}
+\begin{proof}
+    Definamos el siguiente conjunto:
+    \[
+        J = \{ (i, A) : i \in I, \, A \in \beta \text{ y } x_i \in A \}
+    \]
+    dotado del orden \( \leq \) dado por \((i_1, A_1) \leq (i_2, A_2) \iff i_1 \leq i_2 \text{ y } A_2 \subseteq A_1\).
+
+    Primero, veamos que \(J\) es un conjunto dirigido. Dados \(j_1 = (i_1, A_1)\) y \(j_2 = (i_2, A_2)\) en \(J\),
+    por la propiedad (a) de la familia \(\beta \), existe \(A_3 \in \beta \) tal que \(A_3 \subseteq A_1 \cap A_2\).
+    Como \(I\) es un conjunto dirigido, existe \(i' \in I\) tal que \(i' \geq i_1\) e \(i' \geq i_2\).
+    Por la propiedad (b), la red \textbf{x} está frecuentemente en \(A_3\), por lo que existe \(i_3 \in I\) con \(i_3 \geq i'\)
+    tal que \(x_{i_3} \in A_3\). Notemos que \(i_3 \geq i_1\) e \(i_3 \geq i_2\).
+    Tomando \(j_3 = (i_3, A_3) \in J\), se cumple que \(j_1 \leq j_3\) y \(j_2 \leq j_3\).
+
+    Definamos ahora la función \(\rho: J \to I\) dada por:
+    \[
+        \rho(j) = \rho((i, A)) = i
+    \]
+    Claramente es creciente (monótona), ya que si \( (i_1, A_1) \leq (i_2, A_2) \), entonces \( i_1 \leq i_2 \), lo que implica \( \rho(i_1, A_1) \leq \rho(i_2, A_2) \).
+
+    Veamos que la imagen de \(\rho \) es cofinal en \(I\). Dado cualquier \(i_0 \in I\), elegimos un \(A \in \beta \) cualquiera. Como \textbf{x} está frecuentemente en \(A\), existe un \(i \geq i_0\) tal que \(x_i \in A\). Luego, el elemento \(j = (i, A)\) pertenece a \(J\), y se tiene que \(\rho(j) = i \geq i_0\).
+
+    Definimos entonces la subred \(\mathbf{y} = \mathbf{x} \circ \rho \).
+    Dado \(A_0 \in \beta \), queremos ver que \(\mathbf{y}\) está eventualmente en \(A_0\). En efecto, como \textbf{x} está frecuentemente en \(A_0\), existe algún \(i_0 \in I\) tal que \(x_{i_0} \in A_0\). Por lo tanto, \(j_0 = (i_0, A_0) \in J\).
+
+    Para cualquier \(j = (i, A) \in J\) tal que \(j_0 \leq j\), se tiene por la definición del orden en \(J\) que \(A \subseteq A_0\) e \(i \geq i_0\). Además, por estar en \(J\), sabemos que \(x_i \in A\). Por lo tanto, para todo \(j \geq j_0\) tenemos:
+    \[
+        y_j = x_{\rho(j)} = x_i \in A \subseteq A_0
+    \]
+    Esto prueba que la subred \(\mathbf{y}\) está eventualmente en \(A_0\). Como \(A_0 \in \beta \) fue arbitrario, la subred está eventualmente en todo \(A \in \beta \).
+\end{proof}
+
+\begin{ejercicio}{6}
+    Sea \( (X, d) \) un EM siendo \( \tau_d \) la topología generada. Dados \( x \in X \) y \( \mathbf{x} = {(x_i)}_{i \in I} \) en \( X \), probar que
+    \[
+        x_i \xrightarrow{\tau_d} x \iff d(x_i, x) \xrightarrow{\R} 0 \iff \text{para todo } \varepsilon > 0 \text{ se cumple } \mathbf{x} \evto{B(x, \varepsilon)}.
+    \]
+\end{ejercicio}
+\begin{proof}
+    El primer si y sólo si se demuestra teniendo en cuenta que en un espacio métrico los abiertos son precisamente las uniones de bolas abiertas, a su vez
+    nos interesa ver solo la base de entornos abiertos de \( x \).
+    Por lo tanto si \( x_i \xrightarrow{\tau_d} x \) entonces \( \forall \varepsilon > 0 \) existe \( i_0 \in I \) tal que
+    \( \forall i \geq i_0 \) se tiene que \( x_i \in B(x, \varepsilon) \) pues \( \mathbf{x} \evto{B(x, \varepsilon)} \), lo que implica que \( d(x_i, x) < \varepsilon \) para todo \( i \geq i_0 \), es decir,
+    \( d(x_i, x) \xrightarrow{\R} 0 \). La vuelta sale de manera análoga.
+
+    Con el mismo razonamiento podemos ver que si \( \mathbf{x} \evto{B(x, \varepsilon)} \) para todo \( \varepsilon > 0 \) entonces dado \( \varepsilon > 0 \),
+    \( \exists i_0 \in I \) tal que \( \forall i \geq i_0 \) se tiene que \( x_i \in B(x, \varepsilon) \), lo que implica que \[
+        d(x_i, x) < \varepsilon \quad \forall i \geq i_0
+    \]
+    y, por lo tanto, \( d(x_i, x) \xrightarrow{\R} 0 \). La vuelta sale de manera análoga.
+\end{proof}
+
+\begin{ejercicio}{7}
+    Sea \( (X, d) \) un EM y \( x \) una red convergente. ¿Puede afirmarse que \( x \) está acotada?
+\end{ejercicio}
+\begin{proof}
+    No pues consideremos \( I = \{ i \in \R : i < 0 \} \) y \( {(x_i)}_{i \in I} \) dada por \( x_i = i \). Es claro que esta red no es convergente, pero si la extendemos con \( x_0 = 0 \) como \( 0 \) es máximo
+    del conjunto \( I \cup \{ 0 \} \) la red converge a \( x_0 \), sin embargo no está acotada inferiormente y, por lo tanto, no está acotada.
+\end{proof}
+
+Demostraremos una proposición que nos servirá en el siguiente ejercicio.
+\begin{proposicion}
+    Sean \( {(x_n)}_{n \geq 1} \) e \( {(y_n)}_{n \geq 1} \) dos sucesiones de Cauchy en un espacio métrico \( (X, d) \) entonces \[ \exists \lim_{n \to +\infty} d(x_n, y_n) \]
+\end{proposicion}
+\begin{proof}
+    En efecto, dado \( \varepsilon > 0 \) como \( {(x_n)}_{n \geq 1} \) es de Cauchy \( \exists n_0 \in \N \) tal que \( \forall n, m \geq n_0 \) vale que \[
+        d(x_n, x_m) < \varepsilon/2
+    \]
+    De manera análoga, como \( {(y_n)}_{n \geq 1} \) es de Cauchy \( \exists m_0 \in \N \) tal que \( \forall n, m \geq m_0 \) vale que \[
+        d(y_n, y_m) < \varepsilon/2
+    \]
+    Tomando \( n_1 = \max \{ n_0, m_0 \} \) se tiene que \( \forall n, m \geq n_1 \) vale que \[
+        d(x_n, y_n) \leq d(x_n, x_m) + d(x_m, y_m) + d(y_m, y_n) < \varepsilon/2 + d(x_m, y_m) + \varepsilon/2 = \varepsilon + d(x_m, y_m)
+    \]
+    Por lo tanto, \begin{align*}
+        \limsup_{n \to +\infty} d(x_n, y_n)                         & \leq \limsup_{n \to +\infty} \varepsilon + d(x_m, y_m)                                                         \\
+        \limsup_{n \to +\infty} d(x_n, y_n)                         & \leq \varepsilon + d(x_m, y_m)                                                                                 \\
+        \liminf_{m \to +\infty} \limsup_{n \to +\infty} d(x_n, y_n) & \leq \liminf_{m \to +\infty} \varepsilon + d(x_m, y_m)                                                         \\
+        \limsup_{n \to +\infty} d(x_n, y_n)                         & \leq \varepsilon + \liminf_{m \to +\infty} d(x_m, y_m)                                                         \\
+        \limsup_{n \to +\infty} d(x_n, y_n)                         & \leq \varepsilon + \liminf_{n \to +\infty} d(x_n, y_n) \quad \text{ cambiando el índice de \( m \) a \( n \) }
+    \end{align*}
+    Dado que \( \varepsilon > 0 \) era arbitrario,
+    se concluye que \[ \limsup_{n \to +\infty} d(x_n, y_n) = \liminf_{n \to +\infty} d(x_n, y_n) \]
+    Es decir, \( \lim_{n \to +\infty} d(x_n, y_n) \) existe.
+\end{proof}
+
+\begin{ejercicio}{8}
+    Sea \( (X, d) \) un espacio métrico. Entonces se tiene que:
+    \begin{enumerate}
+        \item Existe un EM completo \( X^c \) y una isometría \( f : X \to X^c \) tal que \( f(X) \) es denso en \( X^c \).
+        \item Dado otro EM completo \( Y \) y otra isometría \( g : X \to Y \) tal que \( g(X) \) es denso en \( Y \), entonces existe una isometría suryectiva \( \Phi : X^c \to Y \) tal que \( \Phi \circ f = g \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Comenzaremos la demostración definiendo: \[
+        \mathcal{C} := \{ {(x_n)}_{n \geq 1} : {(x_n)}_{n \geq 1} \text{ es una sucesión de Cauchy en } (X, d) \}
+    \]
+    Es fácil ver que si definimos la relación \( \sim \) en \( \mathcal{C} \) dada por \( {(x_n)} \sim {(y_n)} \iff \lim_{n \to +\infty} d(x_n, y_n) = 0 \) entonces \( \sim \) es una relación de equivalencia.
+    Definamos entonces \( X^c = \mathcal{C} / \sim \) y la función \( f : X \to X^c \) dada por \( f(x) = [(x, x, x, \ldots)] \) la clase de equivalencia de la sucesión constantemente \( x \in X \).
+    Dado \( p, q \in X^c \) con \( p = [(x_n)] \) y \( q = [(y_n)] \) definamos \( d^c(p, q) = \lim_{n \to +\infty} d(x_n, y_n) \). Debemos probar que: \begin{enumerate}
+        \item \( d^c \) está bien definida.
+        \item \( f : X \to X^c \) es una isometría i.e \( d^c(f(x), f(y)) = d(x, y) \) para todo \( x, y \in X \).
+        \item \( f(X) \) es denso en \( X^c \).
+        \item \( (X^c, d^c) \) es un espacio métrico completo.
+    \end{enumerate}
+    Para el primer punto, supongamos que \( p = [(x_n)] = [(x_n')] \) y que \( q = [(y_n)] = [(y_n')] \) entonces \begin{align*}
+        \lim_{n \to +\infty} d(x_n, y_n) & \leq \lim_{n \to +\infty} d(x_n, x_n') + d(x_n', y_n') + d(y_n', y_n) \\
+                                         & = 0 + \lim_{n \to +\infty} d(x_n', y_n') + 0                          \\
+                                         & = \lim_{n \to +\infty} d(x_n', y_n')
+    \end{align*}
+    Análogamente, \[
+        \lim_{n \to +\infty} d(x_n', y_n') \leq \lim_{n \to +\infty} d(x_n', x_n) + d(x_n, y_n) + d(y_n, y_n') = \lim_{n \to +\infty} d(x_n, y_n)
+    \]
+    Por lo tanto, \( \lim_{n \to +\infty} d(x_n, y_n) = \lim_{n \to +\infty} d(x_n', y_n') \) y \( d^c \) está bien definida.
+
+    Para el segundo punto tomemos \( x, y \in X \) entonces \( f(x) = [(x, x, x, \ldots)] \) y \( f(y) = [(y, y, y, \ldots)] \)
+    por lo que \( d^c(f(x), f(y)) = \lim_{n \to +\infty} d(x, y) = d(x, y)\).
+
+    Para el tercer punto dado \( p = [(x_n)] \in X^c \) y \( \varepsilon > 0 \) como \( (x_n) \) es de Cauchy, existe \( n_0 \in \N \) tal que \( d(x_n, x_{n_0}) < \varepsilon \)
+    para todo \( n \geq n_0 \). Por lo tanto, \( d^c(p, f(x_{n_0})) = \lim_{n \to +\infty} d(x_n, x_{n_0}) \leq \varepsilon \) y \( f(X) \) es denso \( X^c \).
+
+    Finalmente, sea \( {(p_m)}_{m \geq 1} \) una sucesión de Cauchy en \( X^c \) con \( p_m = [(x_n^m)] \) queremos ver que \( {(p_m)}_{m \geq 1} \) converge en \( X^c \).
+    Como \( f(X) \) es denso en \( X^c \), para cada \( m \in \N \) existe \( y_m \in X \) tal que \[
+        d^c(p_m, f(y_m)) < 1/m
+    \]
+    Veamos que \( {(y_m)}_{m \geq 1} \) es una sucesión de Cauchy en \( X \). Dado \( \varepsilon > 0 \) como \( {(p_m)}_{m \geq 1} \) es de Cauchy, existe
+    \( m_0 \in \N \) tal que \( d^c(p_m, p_{m'}) < \varepsilon/3 \) para todo \( m, m' \geq m_0 \). Podemos elegir, \( m_0 \) tal que \( 1/m_0 < \varepsilon/3 \). Entonces,\begin{align*}
+        d(y_m, y_{m'}) & \leq d(y_m, p_m) + d(p_m, p_{m'}) + d(p_{m'}, y_{m'})         \\
+                       & 1/m + \varepsilon/3 + 1/m' < 1/m_0 + \varepsilon/3 + 1/m_0    \\
+                       & < \varepsilon/3 + \varepsilon/3 + \varepsilon/3 = \varepsilon
+    \end{align*}
+    para todo \( m, m' \geq m_0 \). Por lo tanto, \( {(y_m)}_{m \geq 1} \) es de Cauchy en \( X \) y este será nuestro candidato a límite.
+
+    Veamos ahora que \( p_m \to f(y) \) en \( X^c \). En efecto,\begin{align*}
+        d^c(p_m, f(y)) & \leq d^c(p_m, f(y_m)) + d^c(f(y_m), f(y))                  \\
+                       & < 1/m + d(y_m, y) \quad \text{ pues \( f \) es isometría } \\
+    \end{align*}
+    Dado que \( y_m \to y \) en \( X \) y \( 1/m \to 0 \) en \( \R \), se concluye que \( d^c(p_m, f(y)) \to 0 \) y, por lo tanto, \( p_m \to f(y) \) en \( X^c \).
+    Esto prueba que \( (X^c, d^c) \) es un espacio métrico completo.
+
+    Para el segundo punto, dado \( p = [(x_n)] \in X^c \) definamos \( \Phi(p) = \lim_{n \to +\infty} g(x_n) \). Veamos que:\begin{enumerate}
+        \item \( \Phi \) está bien definida.
+        \item \( \Phi : X^c \to Y \) es una isometría.
+        \item \( \Phi \) es suryectiva.
+    \end{enumerate}
+    Veamos que está bien definida, supongamos que \( p = [(x_n)] = [(x_n')] \) entonces \( \lim_{n \to +\infty} d(x_n, x_n') = 0 \) y como \( g \) es isometría
+    \( \lim_{n \to +\infty} d(g(x_n), g(x_n')) = 0 \) lo que implica que \( \lim_{n \to +\infty} g(x_n) = \lim_{n \to +\infty} g(x_n') \) y \( \Phi(p) \) no depende del representante que elijamos.
+
+    Es isometría pues dados \( p = [(x_n)] \), \( y = [(y_n)] \) elementos en \( X^c \) entonces \begin{align*}
+        d_Y(\Phi(p), \Phi(y)) & = d_Y \left (\lim_{n \to +\infty} g(x_n), \lim_{n \to +\infty} g(y_n) \right )         \\
+                              & = \lim_{n \to +\infty} d_Y(g(x_n), g(y_n)) \quad \text{ por continuidad de \( d_Y \) } \\
+                              & = \lim_{n \to +\infty} d_X(x_n, y_n) \quad \text{ pues \( g \) es isometría }          \\
+                              & = d^c(p, y)
+    \end{align*}
+    Finalmente veamos que \( \Phi \) es suryectiva, sea \( y \in Y \). Como \( g(X) \) es denso en \( Y \), existe una sucesión
+    \( {(x_n)}_{n \geq 1} \) en \( X \) tal que \( g(x_n) \to y \) en \( Y \). Entonces, como toda sucesión convergente es de Cauchy,
+    \( {(x_n)}_{n \geq 1} \) es de Cauchy en \( X \) y, por lo tanto, \( p = [(x_n)] \in X^c \). Además, \( \Phi(p) = \lim_{n \to +\infty} g(x_n) = y \), lo que prueba
+    que \( y \) está en la imagen de \( \Phi \) y, como \( y \) era arbitrario, \( \Phi \) es suryectiva.
+\end{proof}
+
+\begin{ejercicio}{9}
+    Dada \( x \) una red en \( X \):
+    \begin{enumerate}
+        \item Si \( Y \subseteq Z \subseteq X \) y \( x \) es universal en \( Y \) entonces es universal en \( Z \).
+        \item Si \( x \) es universal en \( X \) entonces toda subred de \( x \) también es universal en \( X \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{10}
+    Probar que toda red universal induce un ultrafiltro. ¿Todo ultrafiltro puede generarse por una red universal?
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+\end{document}

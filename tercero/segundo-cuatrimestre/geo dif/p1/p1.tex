@@ -1,0 +1,80 @@
+
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{newpxtext,newpxmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Práctica I}
+
+\maketitle
+
+\begin{theorem}{1}
+  Dada una curva \( \alpha : I \to \R^3 \), parametrizada por longitud de arco, con curvatura y torsión no nulas tal que
+  \( \| \alpha(s) \| = a \), para todo \( s \in I \). Demostrar que se cumple la siguiente ecuación: \begin{align*}
+    {\left( \frac{1}{\kappa} \right)}^2 + \left( \frac{\dot{\kappa}}{\kappa^2 \tau} \right) = a^2
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  Como \( \| \alpha(s) \| = a \) constante, diferenciando \( \alpha \cdot \alpha = a^2 \) obtenemos \begin{align*}
+    2 \alpha \cdot \dot{\alpha} = 0 \implies \alpha \cdot t(s) = 0 \quad \forall s \in I
+  \end{align*}
+  es decir, \( t(s) \) es ortogonal a \( \alpha(s) \) para todo \( s \in I \). Usando la base de Frenet \( \{ t, n, b\} \) podemos escribir \begin{align*}
+    \alpha(s) = A(s) n(s) + B(s) b(s)
+  \end{align*}
+  Diferenciando y utilizando las fórmulas de Frenet \begin{align*}
+    t' & = \kappa n           \\
+    n' & = -\kappa t + \tau b \\
+    b' & = -\tau n
+  \end{align*}
+  y recordando que \( t = \alpha' \) por estar parametrizada por longitud de arco, obtenemos \begin{align*}
+    t = \dot{\alpha} & = A' n + A n' + B' b + B b'                      \\
+                     & = (-A\kappa) t + (A' - B\tau) n + (B' + A\tau) b
+  \end{align*}
+  Comparando componentes \begin{align*}
+    1 + A\kappa & = 0 \\
+    A' - B\tau  & = 0 \\
+    B' + A\tau  & = 0
+  \end{align*}
+  De la primera ecuación obtenemos \( A = \frac{-1}{\kappa} \) pues la curvatura es no nula y derivando \( A' = \frac{\dot{\kappa}}{\kappa^2} \). Sustituyendo en la segunda ecuación \begin{align*}
+    B & = \frac{\dot{\kappa}}{\kappa^2 \tau} \quad \tau \neq 0 \text{ por hipótesis}
+  \end{align*}
+  Luego, \begin{align*}
+    \| \alpha(s) \|^2 & = {A(s)}^2 + {B(s)}^2                                                                         \\
+                      & = {\left( \frac{1}{\kappa} \right)}^2 + {\left( \frac{\dot{\kappa}}{\kappa^2 \tau} \right)}^2 \\
+                      & = a^2
+  \end{align*}
+  que es lo que queríamos demostrar.
+\end{proof}
+
+% -----------------------------------------------
+% Ignore everything that appears below this.
+% -----------------------------------------------
+
+\end{document}

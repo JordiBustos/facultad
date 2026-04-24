@@ -1,0 +1,124 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{newpxtext,newpxmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Práctica IV}
+
+\maketitle
+
+\begin{theorem}{7}
+    Decimos que las curvas coordenadas de una parametrización \(\varphi(u,v)\) constituyen una \emph{red de Tchebyshev} si las longitudes de los lados opuestos de cualquier cuadrilátero formado por ellas son iguales.
+    \medskip
+
+    \textbf{(a)} Mostrar que formar una red de Tchebyshev equivale a
+    \[
+        \frac{\partial E}{\partial v}=\frac{\partial G}{\partial u}=0.
+    \]
+
+    \medskip
+
+    \textbf{(b)} Probar que si las curvas coordenadas de una parametrización forman una red de Tchebyshev, entonces es posible reparametrizar el entorno coordenado de modo que los nuevos coeficientes de la primera forma fundamental sean
+    \[
+        E=1,\qquad F=\cos\theta,\qquad G=1,
+    \]
+    donde \( \theta \) es el ángulo entre las curvas coordenadas.
+
+    \medskip
+
+    \textbf{Sugerencia.} Considerar las nuevas coordenadas como
+    \[
+        \bar{u}(u,v)=\int_{u_0}^{u}\|\varphi_u(t,v) \| \,dt
+        \quad\text{y}\quad
+        \bar{v}(u,v)=\int_{v_0}^{v}\| \varphi_v(u, t) \| \,dt,
+    \]
+    y entonces plantear
+    \[
+        \bar{\varphi}(\bar{u},\bar{v})=\varphi\bigl(u(\bar{u},\bar{v}),\,v(\bar{u},\bar{v})\bigr)
+    \]
+    y calcular los coeficientes de la primera forma fundamental.
+\end{theorem}
+
+\begin{proof}
+    \textbf{(a)} Supongamos que las curvas coordenadas de una parametrización \( \varphi \) constituyen una red de Tchebyshev. Consideremos \( u_0 < u_1 \) y \( v_0 < v_1 \) y construyamos el cuadrilátero de vértices:
+    \[
+        A = \varphi(u_0, v_0), \quad B = \varphi(u_1, v_0), \quad C = \varphi(u_1, v_1), \quad D = \varphi(u_0, v_1).
+    \]
+    Luego, sean \( \gamma_{v_0} = \varphi(u, v_0) \) y \( \gamma_{v_1} = \varphi(u, v_1) \) las curvas coordenadas se tiene que:
+    \[
+        \| \gamma_{v_0}'(u) \| = \| \varphi_u(u, v_0) \| = \sqrt{E(u, v_0)} \quad \text{y} \quad \| \gamma_{v_1}'(u) \| = \| \varphi_u(u, v_1) \| = \sqrt{E(u, v_1)}
+    \]
+    Por lo tanto si definimos el mapeo \( v \mapsto L(u_0, u_1, v) \) como: \begin{align*}
+        L(u_0, u_1, v) & = \int_{u_0}^{u_1} \sqrt{E(u, v)} \, \mathrm{d}u
+    \end{align*}
+    Nos queda constante por hipótesis y si además recordamos que \( E \) es suave esto implica que: \begin{align*}
+        \frac{\partial L}{\partial v}(u_0, u_1, v) = 0 & = \int_{u_0}^{u_1} \frac{\partial}{\partial v} \sqrt{E(u, v)} \, \mathrm{d}u                    \\
+                                                       & = \int_{u_0}^{u_1} \frac{1}{2\sqrt{E(u, v)}} \frac{\partial E}{\partial v}(u, v) \, \mathrm{d}u \\
+                                                       & \implies \frac{\partial E}{\partial v}(u, v) = 0 \quad \forall u \in (u_0, u_1)
+    \end{align*}
+    Análogamente se puede demostrar que \( \frac{\partial G}{\partial u} = 0 \).
+    Si tenemos ahora que \( \frac{\partial E}{\partial v} = \frac{\partial G}{\partial u} = 0 \) entonces \( E(u, v) = E(u) \) y \( G(u, v) = G(v) \). Por lo tanto:
+    \[
+        L(u_0, u_1, v) = \int_{u_0}^{u_1} \sqrt{E(u)} \, \mathrm{d}u
+    \]
+    es independiente de \( v \) y análogamente \( L(u, v_0, v_1) = \int_{v_0}^{v_1} \sqrt{G(v)} \, \mathrm{d}v \) es independiente de \( u \). Por lo tanto las curvas coordenadas de \( \varphi \) constituyen una red de Tchebyshev.
+    \medskip
+
+    \textbf{(b)} Si definimos las nuevas coordenadas como:
+    \begin{align*}
+        \bar{u}(u, v) & = \int_{u_0}^{u} \| \varphi_u(t, v) \| \, \mathrm{d}t = \int_{u_0}^{u} \sqrt{E(t)} \, \mathrm{d}t = \bar{u}(u) \\
+        \bar{v}(u, v) & = \int_{v_0}^{v} \| \varphi_v(u, t) \| \, \mathrm{d}t = \int_{v_0}^{v} \sqrt{G(t)} \, \mathrm{d}t = \bar{v}(v)
+    \end{align*}
+    Por el teorema fundamental del cálculo sabemos que \( \bar{u} \) y \( \bar{v} \) son diferenciables y definiendo la nueva parametrización como:
+    \[
+        \bar{\varphi}(\bar{u}, \bar{v}) = \varphi(u(\bar{u}, \bar{v}), v(\bar{u}, \bar{v}))
+    \]
+    aplicando regla de la cadena podemos calcular las derivadas parciales como:
+    \begin{align*}
+        \bar{\varphi}_{\bar{u}}(\bar{u}, \bar{v}) & = \varphi_u(u, v) \frac{\partial u}{\partial \bar{u}} + \varphi_v(u, v) \frac{\partial v}{\partial \bar{u}} = \varphi_u(u, v) \frac{\partial u}{\partial \bar{u}} \\
+        \bar{\varphi}_{\bar{v}}(\bar{u}, \bar{v}) & = \varphi_u(u, v) \frac{\partial u}{\partial \bar{v}} + \varphi_v(u, v) \frac{\partial v}{\partial \bar{v}} = \varphi_v(u, v) \frac{\partial v}{\partial \bar{v}}
+    \end{align*}
+    Luego, como: \begin{align*}
+        \frac{\partial \bar{u}}{\partial u} & = \sqrt{E(u)} \implies \frac{\partial u}{\partial \bar{u}} = \frac{1}{\sqrt{E(u)}} \\
+        \frac{\partial \bar{v}}{\partial v} & = \sqrt{G(v)} \implies \frac{\partial v}{\partial \bar{v}} = \frac{1}{\sqrt{G(v)}}
+    \end{align*}
+    Finalmente podemos calcular los nuevos coeficientes de la primera forma fundamental como:
+    \begin{align*}
+        \bar{E}(\bar{u}, \bar{v}) & = \frac{1}{E(u)} \langle \varphi_u(u, v), \varphi_u(u, v) \rangle = \frac{E(u)}{E(u)} = 1                                      \\
+        \bar{F}(\bar{u}, \bar{v}) & = \frac{1}{\sqrt{E(u)G(v)}} \langle \varphi_u(u, v), \varphi_v(u, v) \rangle = \frac{F(u, v)}{\sqrt{E(u)G(v)}} =^* \cos \theta \\
+        \bar{G}(\bar{u}, \bar{v}) & = \frac{1}{G(v)} \langle \varphi_v(u, v), \varphi_v(u, v) \rangle = \frac{G(v)}{G(v)} = 1
+    \end{align*}
+    Utilizando en * la \emph{observación 3.1.11} del apunte. Por lo tanto los nuevos coeficientes de la primera forma fundamental son:
+    \[
+        \bar{E} = 1, \quad \bar{F} = \cos \theta, \quad \bar{G} = 1
+    \]
+    con \( \theta \) el ángulo entre las curvas coordenadas.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,341 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15} % Asegura compatibilidad de pgfplots
+\usepgfplotslibrary{fillbetween}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                       % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                   % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+\newcommand{\coint}[2]{\left[ #1, #2 \right)}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica III}
+\author{Bustos Jordi\\Espacios Conexos}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sean \((X, \tau)\) un ET, \( \{ A_\alpha \} \) una colección de subespacios conexos de \(X\) y \(A\) un subespacio conexo de \(X\). Demostrar que si \( A \cap A_\alpha \neq \varnothing \) para todo \( \alpha \), entonces \(A \cup \left( \bigcup_\alpha A_\alpha \right)\) es conexo.
+\end{ejercicio}
+\begin{proof}
+    Es claro que \( A \, \cup \, \bigcup_\alpha A_\alpha = \bigcup_\alpha (A \cup A_\alpha) \).
+    Dado que \( A \) y \( A_\alpha \) son conexos y \( A \cap A_\alpha \neq \varnothing \), entonces \( A \cup A_\alpha \) es conexo para cada \( \alpha \). Aplicando el mismo razonamiento \( \bigcup_\alpha (A \cup A_\alpha) \) es conexo.
+\end{proof}
+
+\begin{ejercicio}{2}
+    Probar que si \( X \) es un conjunto infinito, entonces \(X\) es conexo con la topología de los complementos finitos (o topología finita).
+\end{ejercicio}
+\begin{proof}
+    En efecto, supongamos que tenemos una \( X \)-separación de \( X \) tal que \( U, V \) abiertos de la topología finita, \( U \cup V = X \) y
+    \( U \cap V \cap X = U \cap V = \varnothing \) y veamos que no puede ocurrir que \( U \cap X \neq \varnothing \) y \( V \cap X \neq \varnothing \).
+    En efecto, como los complementos de los abiertos son finitos, entonces \( |U^c| = n \in \N \) y \( |V^c| = m \in \N \).
+    Luego, existen menos de \( m \) elementos en \( U \) que no están en \( V \) pues \( U \cup V = X \).
+    De la misma manera existen menos de \( n \) elementos en \( V \) que no están en \( U \) y \( U \cap V \) puede dejar afuera a lo sumo \( n + m \) elementos de \( X \), pero como \( X \) es infinito y \( U \cap V = \varnothing \) debe ser \( U = \varnothing \) o \( V = \varnothing \).
+\end{proof}
+
+\begin{ejercicio}{3}
+    Sean \(\tau_1\) y \(\tau_2\) dos topologías en \(X\) tal que \(\tau_1 \subseteq \tau_2\). ¿Qué puede decirse de la conectividad de \(X\) en una de sus topologías respecto de la conectividad en la otra?
+\end{ejercicio}
+\begin{proof}
+    Sea \( \tau_1 = \{ \varnothing, X \} \) y \( \tau_2 = \{ \varnothing, A, A^c, X \} \) con \( A \subset X \) es claro que \( \tau_1 \subseteq \tau_2 \).
+    Además \( \tau_1 \) es conexa pero \( \tau_2 \) no pues \( A \) es clopen no trivial de \( \tau_2 \).
+
+    Por otro lado, si vale que si \( X \) es conexo con \( \tau_2 \) entonces \( X \) es conexo con \( \tau_1 \) si \( \tau_1 \subseteq \tau_2 \). En efecto,
+    dados \( U, V \in \tau_1 \) con \( U \cup V = X \) y \( U \cap V \cap X = \varnothing \), la separación no puede ser fuerte pues \( U, V \in \tau_2 \) y eso implicaría que \( X \) no es conexo en \( \tau_2 \).
+\end{proof}
+
+\begin{ejercicio}{4}
+    Sea \(A\) un subespacio conexo de \(X\). Analizar si \( \Int{A} \) y \(\partial A\) son conexos. ¿Vale la recíproca?
+\end{ejercicio}
+\begin{proof}
+    Para ver \( \partial A \) no es conexo basta con considerar \( A \) un anillo en \( \R^2 \) y su frontera \( \partial A \) es la unión de dos círculos concéntricos, que no son conexos entre sí.
+    Para ver que \( \Int{A} \) no es conexo basta con considerar dos discos tangentes de radio \( 1 \) y \( A \) la unión de ambos. Entonces \( A \)
+    es conexo pero \( \Int{A} \) es la unión de dos discos abiertos tangentes, que no son conexos entre sí pues se puede tomar cada disco para hacer la separación.
+
+    Veamos si \( \Int{A} \) y \( \partial A \) es conexo, entonces \( A = \Int{A} \cup \partial A \) es conexo. Recordemos que la definición de frontera es \[
+        \partial A = \cl{A} - \Int{A} = \cl{A} - \Int{A} = \cl{A} - \Int{A}
+    \]
+    Consideremos el siguiente contraejemplo: \( A = \{ (x, y) \in \R^2 : x^2 + y^2 < 1 \} \cup \{ (x, 0) \in \Q^2 : 1 \leq x \leq 2 \} \).
+    Entonces \[ \cl{A} = \{ (x, y) \in \R^2 : x^2 + y^2 = 1 \} \cup \{ (x, 0) \in \R^2 : 1 \leq x \leq 2 \} \] y \[ \Int{A} = \{ (x, y) \in \R^2 : x^2 + y^2 < 1 \} \] que ambos son conexos. Sin embargo,
+    \( A \) no es conexo pues podemos considerar el abierto \( U = \{ (x, y) \in \R^2 : x > \sqrt{2} \} \) y \( V = \{ (x, y) \in \R^2 : x < \sqrt{2} \} \) que forman una separación de \( A \).
+\end{proof}
+
+\begin{ejercicio}{5}
+    Dar un contraejemplo para cada una de las siguientes afirmaciones falsas:
+    \begin{enumerate}
+        \item Un conjunto conexo implica que es localmente conexo.
+        \item Un conjunto arcoconexo es localmente arcoconexo.
+        \item La intersección de dos conjuntos conexos es un conjunto conexo.
+        \item La intersección de 2 conjuntos localmente conexos es un conjunto localmente conexo.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Para el primer punto consideremos el conjunto en \( \R^2 \) dado por \[ A = \{ (t, \sin(1/t)) : 0 < t \leq 1 \} \cup \{ (0, y) : -1 \leq y \leq 1 \} \] Por la \textbf{Observación 3.2.6 (iii)} sabemos que \( A \) es conexo
+    pero no es localmente conexo pues cualquier entorno de \( (0, y) \) intersecta a \( A \) en un conjunto que no es conexo.
+
+    Para el segundo punto consideremos el mismo conjunto con la siguiente modificación \[ A = \{ (t, \sin(1/t)) : 0 < t \leq 1 \} \cup \{ (0, y) : -1 \leq y \leq 1 \} \cup \{ (t, -1) : 0 \leq t \leq 1 \} \]
+    Entonces \( A \) es arcoconexo, pero con el mismo razonamiento que el punto anterior \( A \) no es localmente arcoconexo.
+
+    Para el tercer punto, sin salir de \( \R^2 \), podemos considerar \( A = \{ (x, y) \in \R^2 : 4 \leq y \leq 5 \} \) y
+    \( B = \{ (x, y) \in \R^2 : x^2 \leq y \leq x^2 + 1 \} \), es fácil ver que la intersección son dos conjuntos disjuntos.
+
+    Finalmente, para el cuarto punto, consideremos la siguiente modificación del seno topológico:\begin{equation*}
+        f(x) = \begin{cases}
+            \sin(1/x) & \text{si } x > 0    \\
+            0         & \text{si } x \leq 0
+        \end{cases}
+    \end{equation*}
+    y consideremos \( A = \{ (x, y) \in \R^2 : y \leq f(x) \} \) y \( B \) el semiplano superior. Entonces \( A \) y \( B \) son localmente conexos y su intersección es \[
+        A \cap B = \{ (x, y) \in \R^2 : 0 \leq y \leq f(x) \} \cup \{ (x, y) \in \R^2 : x \leq y \leq 0 \}
+    \]
+
+    Si analizamos un entorno de \( (0, 0) \) tomando \( \varepsilon > 0 \) el entorno relativo \( A \cap B \cap B_{\varepsilon}((0, 0)) \) contiene al origen y a una cantidad infinita de islas del seno topológico relleno, como las islas están separadas
+    por espacios vacíos, entonces \( A \cap B \cap B_{\varepsilon}((0, 0)) \) no es conexo y \( A \cap B \) no es localmente conexo.
+\end{proof}
+
+\begin{tikzpicture}
+    \begin{axis}[
+            axis lines=middle,
+            xlabel={\( x \)},
+            ylabel={\( y \)},
+            xmin=-0.4, xmax=1.2,
+            ymin=-1.0, ymax=1.0,
+            samples=600,
+            domain=0.015:1.2,
+            enlargelimits=false,
+            axis on top,
+            width=15cm,
+            height=9cm,
+            xtick=\empty,
+            ytick=\empty,
+            grid=major,
+            grid style={gray!20, thin}
+        ]
+
+        % 1. Semiplano superior B (fondo suave)
+        \fill[blue!8] (axis cs:-0.4, 0) rectangle (axis cs:1.2, 1.0);
+        \draw[blue!40, thin] (axis cs:-0.4, 0) -- (axis cs:1.2, 0);
+        \node[blue!70, anchor=south west, font=\small] at (axis cs:0.5, 0.5) {\( B = \{y \ge 0\} \)};
+
+        % 2. Conjunto A
+        \addplot [name path=F, draw=none] {x * (sin(deg(15/x)) - 0.5)};
+        \addplot [name path=Fneg, draw=none, domain=-0.4:0] {x};
+        \addplot [name path=bot, draw=none, domain=-0.4:1.2] {-1};
+
+        \addplot [red!12, forget plot] fill between [of=F and bot];
+        \addplot [red!12, forget plot] fill between [of=Fneg and bot];
+        \fill[red!12] (axis cs:0,0) -- (axis cs:0.015, {0.015 * (sin(deg(15/0.015)) - 0.5)}) -- (axis cs:0.015, -1) -- (axis cs:0,-1) -- cycle;
+
+        % 3. Intersección A ∩ B
+        \begin{scope}
+            \clip (axis cs:-0.4, 0) rectangle (axis cs:1.2, 1.0);
+
+            \addplot [teal!60!black, forget plot] fill between [of=F and bot];
+            \addplot [teal!60!black, forget plot] fill between [of=Fneg and bot];
+            \fill[teal!60!black] (axis cs:0,0) -- (axis cs:0.015, {0.015 * (sin(deg(15/0.015)) - 0.5)}) -- (axis cs:0.015, -1) -- (axis cs:0,-1) -- cycle;
+        \end{scope}
+
+        % 4. Frontera de A (curva f(x))
+        \addplot [red!80!black, very thick, forget plot] {x * (sin(deg(15/x)) - 0.5)};
+        \addplot [red!80!black, very thick, domain=-0.4:0, forget plot] {x};
+        \draw[red!80!black, very thick] (axis cs:0,0) -- (axis cs:0.015, {0.015 * (sin(deg(15/0.015)) - 0.5)});
+
+        % 5. Círculo de entorno alrededor del origen (punteado)
+        \draw[dashed, teal!40, line width=1pt] (axis cs:0,0) circle (0.12cm and 0.12cm);
+
+        % 6. Puntos clave y etiquetas
+        \fill[teal!80] (axis cs:0,0) circle (2.5pt);
+        \node[teal!80, anchor=south east, font=\small, inner sep=2pt] at (axis cs:-0.02, -0.05) {\( (0,0) \)};
+
+        % Etiqueta del conjunto A
+        \node[red!70, anchor=north west, font=\small] at (axis cs:0.1, -0.7) {\(A = \{y \le f(x)\}\)};
+
+        % Etiqueta descriptiva de las islas
+        \node[teal!70, anchor=south west, font=\small, align=left] at (axis cs:0.22, 0.35) {\textbf{Islas} \\ \textbf{de} \( A \cap B \)};
+    \end{axis}
+\end{tikzpicture}
+
+\clearpage
+
+\begin{ejercicio}{6}
+    Sean \((X, \tau)\) un ET y \(A, B \subset X\) tales que \(A \cup B\) y \(A \cap B\) son conexos.
+    \begin{enumerate}
+        \item Si \( A \) y \( B \) son abiertos entonces  \( A \) y \( B \) son conexos.
+        \item Si \( A \) y \( B \) son cerrados entonces \( A \) y \( B \) son conexos.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Supongamos que \( A \) y \( B \) son abiertos tal que \( A \cap B \neq \varnothing \) y, s.p.d.g, que \( A \) no es conexo.
+    Entonces existe una \( X \)-separación fuerte \( E \), \( F \) de \( A \) tal que
+    \( A \subseteq E \cup F \), \( A \cap E \cap F = \varnothing \), \( A \cap E \neq \varnothing \) y
+    \( A \cap F \neq \varnothing \).
+
+    Tenemos que \( A \subseteq E \cup F \implies A \cap B \subseteq (E \cap B) \cup (F \cap B) \) y \( E \cap B, F \cap B \) son abiertos pues \( E, F, B \) lo son.
+
+    \( A \cap E \cap F = \varnothing \implies A \cap E \cap F \cap B = \varnothing \equiv (A \cap B) \cap (E \cap B) \cap (F \cap B) = \varnothing \). Como \( A \cap B \) es conexo, vale que
+    \( A \cap B \cap E = \varnothing \) o \( A \cap B \cap F = \varnothing \). Supongamos que \( A \cap B \cap E = \varnothing \), como \( A \cap E \neq \varnothing \)
+    y \( A \cap B \neq \varnothing \implies E \cap B \neq \varnothing \). Luego, \( A \cup B \subseteq (E \cup F) \cup B \equiv A \cup B \subseteq E \cup (F \cup B) \).
+
+    Se tiene que \( E \cap F \cap B = \varnothing \), \( ( A \cup B ) \cap F = (A \cap F) \cup (B \cap F) \neq \varnothing \) y \( (A \cup B) \cap E \neq \varnothing \). Como \( E \), \( F \cup B \) son abiertos,
+    \( (A \cup B) \cap E \cap (F \cup B) = \varnothing \) y \( (A \cup B) \cap E \neq \varnothing \) y \( (A \cup B) \cap F \neq \varnothing \). Absurdo! Pues \( A \cup B \) es conexo.
+
+    La otra implicación sale considerando que \( A^c \) y \( B^c \) son abiertos y aplicando el mismo razonamiento al caso anterior.
+\end{proof}
+
+\begin{ejercicio}{7}
+    En \( \N \) se define \( \tau = \{ I_n : n \in \N \} \cup \{ \varnothing, \N \} \), con \( I_n = \{ 1, 2, \ldots, n \} \). ¿Cuáles son los subconjuntos conexos?
+\end{ejercicio}
+\begin{proof}
+    Es claro que todo subconjunto \( A \) es conexo pues si hubiese una separación con dos abiertos de la topología \( I_n \), \( I_m \), como vale que \[
+        I_n \subseteq I_m \text{ o } I_m \subseteq I_n
+    \]
+    no se puede hacer una separación de \( A \) con \( I_n \) e \( I_m \) pues \( A \subseteq I_n \cup I_m \equiv A \subseteq I_n \text{ o } A \subseteq I_m \) y, si \( n \leq m \), \( A \cap I_n \cap I_m = A \cap I_n = A \neq \varnothing \).
+\end{proof}
+
+\begin{ejercicio}{8}
+    Sea \((X, \tau)\) un espacio topológico. Sea \( x \in U \subseteq X \) con \(U\) una componente conexa de \(X\). Demostrar que
+    \begin{enumerate}
+        \item \(U\) es el mayor subconjunto conexo de \(X\) que contiene a \(x\).
+        \item Toda componente conexa es cerrada.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Consideremos \( U \) la componente conexa de \( X \) que contiene a \( x \) y supongamos que \( V \) es un conexo tal que \( x \in V \) y
+    \( U \subset V \). Entonces, como \( V \) es estrictamente más grande que \( U \), existe \( y \in V \setminus U \), pero como existe
+    un conexo (\(V\)) tal que \( x, y \in V \), entonces \( x \overset{con}{\sim} y \) y, por lo tanto, \( y \in U \). Absurdo! Por lo tanto, \( U \) es el mayor subconjunto conexo de \( X \) que contiene a \( x \).
+
+    Veamos ahora que toda componente conexa \( U \) es cerrada. Por el absurdo, supongamos que no lo es. Entonces, existe \( y \in \cl{U} \setminus U \). Consideremos ahora
+    el conjunto \( C = U \cup \{ y \} \). Si \( C \) admite una \( X \)-separación fuerte \( E, F \in \tau \) tal que \( C \subseteq E \cup F \),
+    \( C \cap E \cap F = \varnothing \) y \( C \cap E \neq \varnothing \) y \( C \cap F \neq \varnothing \), entonces como \( U \subseteq C \subseteq E \cup F \),
+    sin pérdida de generalidad podemos suponer que \( U \subseteq E \) y \( C \cap F = (U \cup \{ y \}) \cap F = \{ y \} \).
+    Pero notemos ahora que \( \forall V \in \mathcal{O}^a(y) \), \( V \cap (U \setminus \{ y \}) = V \cap U \neq \varnothing \), tomando \( F = V \) en la definición llegamos a que \[
+        F \cap (U \setminus \{ y \}) = F \cap U = \varnothing
+    \]
+    lo cual contradice que \( y \in \cl{U} \). Por lo tanto, \( C \) es conexo y \( U \subset C \) que contradice la maximalidad de \( U \). Por lo tanto, \( y \in U \) y \( U \) es cerrado
+\end{proof}
+
+\begin{ejercicio}{9}
+    Mostrar que en un espacio localmente arcoconexo las componentes conexas y las componentes arcoconexas son iguales.
+\end{ejercicio}
+\begin{proof}
+    Sea \( x \in X \). Si llamamos \( E \) y \( F \) a la componente conexa y arcoconexa respectivamente, entonces \( F \subseteq E \) es trivial pues todo conjunto arco-conexo es conexo y \( E \) es el más grande.
+    Veamos ahora que \( E \subseteq F \), para eso, recordemos que como \( E \) es conexo vale que los únicos clopen relativos a \( E \) son \( \varnothing \) y \( E \).
+    Sea \( y \in F \), \( \exists U \in \beta_x \subseteq \mathcal{O}^a(z) \) tal que \( y \in U \subseteq F \). Como \( U \cup F \) es arco-conexo, pues tienen un punto en común, entonces \( U \subseteq F \) por ser
+    \( F \) maximal. Luego, para todo \( y \in F \) puedo encontrar un entorno abierto \( U \) contenido en \( F \) y por lo tanto \( F \) es abierto. Sea \( F^c \) la unión de todas las componentes arco-conexas distintas de \( F \),
+    como todas son abiertas, \( F^c \) es abierto y \( F \) es cerrado. Luego, \( F \) es clopen en \( X \) y si consideramos el subespacio \( E \) con la topología relativa, \( F \) es clopen en \( E \).
+    Por lo tanto, como \( F \cap E \neq \varnothing \) se sigue que \( F \cap E = E \implies E \subseteq F \).
+\end{proof}
+
+\begin{ejercicio}{10}
+    Sea \(X\) un espacio localmente arcoconexo. Demuestre que cada conjunto abierto y conexo en \(X\) es también arcoconexo.
+\end{ejercicio}
+\begin{proof}
+    Sea \( U \) un conjunto abierto y conexo en \( X \). Para cada \( x \in U \) consideremos \( C_x = \{ y \in U : \overset{con}{\sim} x \} \) la componente arcoconexa de \( x \) en \( U \) y, si logramos demostrar que es clopen relativo a \( U \), entonces \( C_x = U \) y, por lo tanto, \( U \) sería arcoconexo.
+
+    Veamos primero que es abierto: En efecto, dado \( y \in C_x \) veamos que existe un entorno \( V \) de \( y \)
+    completamente contenido en \( C_x \). Para eso, como \( X \) es localmente arcoconexo, existe un entorno arcoconexo \( V \subseteq U \) de \( y \).
+    Además, dado \( z \in V \) es claro que puedo conectar \( y \) con \( z \) mediante un arco contenido en \( V \) y conectar
+    \( x \) con \( y \) mediante un arco contenido en \( C_x \), entonces \( x \) y \( z \) están conectados por un arco contenido en \( C_x \cup V \), pero entonces \( z \in C_x \) y, luego \( V \subseteq C_x \).
+    Esto nos dice que \( C_x \) es abierto.
+
+    Veamos ahora que es cerrado: En efecto, dado \( y \in U \setminus C_x \) y \( V \subseteq U \) el entorno arcoconexo de la base de entornos de \( y \).
+    Supongamos que \( V \cap C_x \neq \varnothing \), entonces existe \( z \in V \cap C_x \) y, como \( V \) es arcoconexo,
+    puedo conectar a \( z \) con \( y \) y a \( y \) con \( x \) mediante un arco contenido en \( V \cup C_x \), esto implica que \( y \in C_x \), absurdo! Por lo tanto,
+    \( V \cap C_x = \varnothing \) y \( U \setminus C_x \) es abierto. Por lo tanto, \( C_x \) es cerrado.
+
+    Luego, \( C_x \) es clopen relativo a \( U \) conexo \( \therefore U = C_x \) y \( U \) es arcoconexo.
+\end{proof}
+
+\begin{ejercicio}{11}
+    Mostrar que un conjunto infinito dotado de la topología co-finita es conexo.
+\end{ejercicio}
+\begin{proof}
+    Sea \( U \in \tau \) supongamos que tenemos una separación de \( U \). Luego, \( \exists \, E, F \in \tau \) tal que
+    \( U \subseteq E \cup F \), \( U \cap E \cap F = \varnothing \). Sea \( U^c = {\{ x_i \}}_{i=1}^n \) se tiene que \( E \cap F \subseteq U^c \) pero \( E \cap F \in \tau \) por lo que
+    debe ser \( E \cap F = \varnothing \) y, por lo tanto aplicando el mismo razonamiento que en el \textbf{Ejercicio 2}, \( E = \varnothing \) o \( F = \varnothing \). Por lo que no
+    puede haber una separación de \( U \) y \( U \) es conexo.
+\end{proof}
+
+\begin{ejercicio}{12}
+    Sean \(x\) e \(y\) dos elementos distintos en la misma componente conexa de \(X\). Demostrar que cualquier clopen de \(X\) tiene ambos o a ninguno.
+\end{ejercicio}
+\begin{proof}
+    Dados \( x \), \( y \) en la misma componente conexa \( C \). Supongamos que \( U \) es un clopen de \( X \) tal que \( x \in U \) y \( y \notin U \). Entonces \( V = X \setminus U \) es un clopen de \( X \) tal que 
+    \( y \in V \) y \( x \notin V \). Luego, \( U \cup V = X \) y \( U \cap V = \varnothing \) es una separación de \( X \) tal que \( x \in U \) e \( y \in V \).
+    Ahora notemos que \( C_1 = U \cap C \) y \( C_2 = V \cap C \) son abiertos relativos a \( C \) tales que \( C_1 \cup C_2 = C \), 
+    \( \{ x \} \subseteq C_1 \cap C \) y \( \{ y \} \subseteq C_2 \cap C \) y \( C_1 \cap C_2 = \varnothing \). Esto contradice que \( C \) es conexo.
+    Por lo tanto, no puede existir un clopen de \( X \) que contenga a \( x \), pero no a \( y \) o que contenga a \( y \) pero no a \( x \). Por lo tanto, cualquier clopen de \( X \) tiene ambos o a ninguno. 
+\end{proof}
+
+\clearpage
+
+\subsection*{Ejercicios Complementarios}
+
+\begin{ejercicio}{C1}
+    Sea \(Y \subseteq X\) ambos conexos. Si \((U, V)\) es una separación fuerte de \(Y^c\) entonces \(Y \cup U\) y \(Y \cup V\) son conexos.
+\end{ejercicio}
+
+\begin{proof}
+\end{proof}
+
+\begin{ejercicio}{C2}
+    Si \(Y\) es un subespacio conexo de \(X\) tal que \(Y \cap A \neq \varnothing\) y \(Y \cap A^c \neq \varnothing\) entonces \(Y \cap \partial A \neq \varnothing\).
+\end{ejercicio}
+
+\begin{proof}
+\end{proof}
+
+\begin{ejercicio}{C3}
+    Considerar \(F_1 \supseteq F_2 \supseteq \cdots \supseteq F_n \supseteq \cdots\) una sucesión infinita decreciente de conjuntos cerrados y conexos en \(\R^2\) (con la topología usual). ¿Es \(\bigcap_{n \geq 1} F_n\) conexo?
+\end{ejercicio}
+
+\begin{proof}
+\end{proof}
+
+\begin{ejercicio}{C4}
+    Probar que la imagen de un conjunto arcoconexo bajo una función continua es un conjunto arcoconexo.
+\end{ejercicio}
+
+\begin{proof}
+\end{proof}
+
+\begin{ejercicio}{C5}
+    Considerar \(X = [0, 1] \times [0, 1]\) dotado con el orden lexicográfico y la topología de orden respectiva. Mostrar que \(X\) es conexo pero no arcoconexo.
+\end{ejercicio}
+
+\begin{proof}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,70 @@
+%!TEX root = main.tex
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{mathrsfs}
+\usepackage{euler}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage[breaklinks = true]{hyperref}
+\usepackage{lipsum}
+\usepackage{tikz-cd}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\varnothing}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\e{\ensuremath{\varepsilon}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Salida:}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+#1 % the function
+\littletaller % pretend it's a little taller at normal size
+\right|_{#2} % this is the delimiter
+}}
+
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+% \norm{ \biggl(\sum_{n=1}^N \mathbf{P}_{n}\biggr) }
+
+\def\upint{\mathchoice%
+  {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.18}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  total={170mm,245mm},
+  left=20mm,
+  top=20mm,
+}
+
+\input{Configs/Boxes}
+\input{Configs/Formats}

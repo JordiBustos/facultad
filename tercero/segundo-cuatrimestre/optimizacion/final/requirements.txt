@@ -1,0 +1,6 @@
+streamlit
+sympy
+plotly
+numpy
+scipy
+htbuilder

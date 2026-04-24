@@ -1,0 +1,181 @@
+\section{Introducción al Problema de Optimización}
+
+El problema vamos a abordar es el de minimizar \( f: \R^n \to \R \) sin restricciones, con la hipótesis de que \( f \in C^1 \), es decir:
+\[
+    \min_{x \in \R^n} f(x)
+\]
+
+\begin{definition}[Gradiente]
+    Sea \( f: \R^n \to \R \) una función diferenciable. El \textbf{gradiente} de \(f\) en un punto \(x \in \R^n\) es el vector de derivadas parciales:
+    \[
+        \nabla f(x) = \begin{pmatrix} \frac{\partial f}{\partial x_1}(x) \\ \vdots \\ \frac{\partial f}{\partial x_n}(x) \end{pmatrix}
+    \]
+    El gradiente apunta en la dirección de máximo crecimiento de \( f \).
+\end{definition}
+
+\begin{note}
+    \( -\nabla f(x) \) es la dirección de \textbf{máximo descenso} de \( f \) en el punto \( x \).
+\end{note}
+
+\subsection{Preliminares}
+
+\begin{theorem}[Condición necesaria de primer orden]
+    Sea \( f : \R^n \to \R \) una función de clase \( C^1 \). Si \( x^* \) es un minimizador local de \( f \) en \( \R^n \), entonces \( \nabla f(x^*) = 0 \).
+    \begin{proof}
+        Sea \( d \in \R^n \setminus \{ 0 \} \), \( x^* \) minimizador local de \( f \) entonces \( \exists \delta > 0 \)
+        \[
+            f(x^*) \leq f(x^* + \alpha d) \quad \forall \alpha \in (0, \delta)
+        \]
+        Por el Teorema de Taylor,
+        \[
+            f(x^* + \alpha d) = f(x^*) + {\nabla f(x^*)}^T d \alpha + o(\alpha)
+        \]
+        donde \( \lim_{\alpha \to 0} \frac{o(\alpha)}{\alpha} = 0 \). Dividiendo por \( \alpha \) y usando la desigualdad anterior obtenemos:
+        \[
+            0 \leq {\nabla f(x^*)}^T d + \frac{o(\alpha)}{\alpha}
+        \]
+        y tomando límite cuando \( \alpha \to 0^+ \) se concluye que \( \nabla f(x^*) \cdot d \geq 0 \quad \forall d \in \R^n \). Luego, si fuera \( \nabla f(x^*) \neq 0 \) se podría elegir \( d = - \nabla f(x^*) \) 
+        y obtener \( \| \nabla f(x^*) \|^2 \leq 0 \) lo cual es absurdo. Por lo tanto, \( \nabla f(x^*) = 0 \).
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Una dirección \( d \in \R^n \) se dice de \textbf{descenso} de \( f \) en un punto \( x \in \R^n \) si existe \( \e > 0 \) tal que:
+    \[
+        f(x + \alpha d) < f(x) \quad \forall \alpha \in (0, \e)
+    \]
+\end{definition}
+
+\begin{lemma}
+    Sea \( f \) diferenciable en \( x \in \R^n \). Entonces \begin{enumerate}
+        \item Si \( \nabla f(x) \cdot d < 0 \), entonces \( d \) es una dirección de descenso de \( f \) en \( x \).
+        \item Si \( d \) es una dirección de descenso de \( f \) en \( x \), entonces \( \nabla f(x) \cdot d \leq 0 \).
+    \end{enumerate}
+
+    \begin{proof}
+        Para la primera parte, si \( \nabla f(x) \cdot d < 0 \), entonces por la definición de derivada direccional, tenemos que:
+        \[
+            \lim_{\alpha \to 0^+} \frac{f(x + \alpha d) - f(x)}{\alpha} = \nabla f(x) \cdot d < 0
+        \]
+        Esto implica que existe \( \e > 0 \) tal que para todo \( \alpha \in (0, \e) \), se cumple \( f(x + \alpha d) < f(x) \), es decir, \( d \) es una dirección de descenso.
+
+        Para la segunda parte, si \( d \) es una dirección de descenso \[
+            f(x + \alpha d) - f(x) = \nabla f(x)^T d \alpha + o(\alpha)
+        \]
+        Dividiendo por \( \alpha \) y tomando el límite, obtenemos:
+        \[
+            \nabla f(x) \cdot d = \lim_{\alpha \to 0^+} \frac{f(x + \alpha d) - f(x)}{\alpha} \leq 0
+        \]
+    \end{proof}
+\end{lemma}
+
+\subsection{Descripción del Algoritmo}
+
+Por las condiciones necesarias de optimalidad de primer orden, sabemos que un punto \( x \in \R^n \) tal que \( \nabla f(x) \neq 0 \) no puede ser punto mínimo y debe existir \( z \in \R^n \) tal que \( f(z) \leq f(x) \).
+Luego, para encontrar un minimizador local, la idea es seguir la dirección de máximo descenso, moviéndonos en la dirección opuesta al gradiente una cierta magnitud dada por un parámetro de paso.
+
+El esquema general de un algoritmo basado en direcciones de descenso es el siguiente, dados \( x_0 \in \R^n \) y \( f \in C^1 \) por el problema, se itera el siguiente proceso:
+
+\begin{algorithm}
+    \caption{Algoritmo General de Descenso}
+    \label{alg:descenso_general}
+    \begin{algorithmic}[1]
+        \Require Punto inicial \( x_0 \in \mathbb{R}^n \), función \( f \in C^1 \), tolerancia \( \e > 0 \), maximo número de iteraciones \( N \in \N \)
+        \Ensure Solución aproximada \( x^* \)
+
+        \State \( k \gets 0 \)
+
+        \While{\( k < N \) y \( \|\nabla f(x_k)\| > \e \) y \( \| x_k - x_{k-1} \| > \e \)} \Comment{Paso 4: Verificar si es solución}
+
+        \State Definir dirección de descenso \( d_k \) para \( f \) en \( x_k \) \Comment{Paso 1}
+
+        \State Determinar \( t_k > 0 \) tal que \( f(x_k + t_k d_k) < f(x_k) \) \Comment{Paso 2}
+
+        \State \( x_{k+1} \gets x_k + t_k d_k \) \Comment{Paso 3: Actualización}
+
+        \State \( k \gets k + 1 \)
+        \EndWhile
+
+        \State \Return \( x_k \)
+    \end{algorithmic}
+\end{algorithm}
+
+Como las direcciones \( d_k \) son de descenso, siempre se puede encontrar un \( t_k > 0 \) lo suficientemente chico tal que
+\( {\{f(x_k)\}}_{k \in \N} \) sea una sucesión decreciente, podemos garantizar de esta forma convergencia a puntos estacionarios de \( f \) i.e puntos donde \( \nabla f(x) = 0 \).
+
+Nos queda ver cómo elegir las direcciones \( d_k \) y los parámetros de paso \( t_k \) para garantizar la convergencia a un mínimo local. Para esta exposición nos centraremos en el método de descenso por gradiente, donde se elige \( d_k = -\nabla f(x_k) \).
+
+\subsection{Longitud de paso}
+
+Una forma de elegir el parámetro de paso \( t_k \) es mediante una búsqueda exacta, es decir, eligiendo \( t_k \) como el valor que minimiza la función
+\( \varphi: \R \to \R \) dada por \( \varphi(t) = f(x_k + t d_k) \) que cumple \[
+    {\varphi(t_k)}^\prime = {\nabla f(x_k + t_k d_k)}^T d_k = 0
+\]
+Sin embargo, esta estrategia es computacionalmente costosa, ya que requiere resolver un subproblema de optimización unidimensional en cada iteración. Por lo tanto, se suelen utilizar estrategias de búsqueda inexacta, como las condiciones de Armijo o Wolfe, que garantizan una disminución suficiente de la función sin necesidad de encontrar el mínimo exacto en la dirección \( d_k \).
+
+La condición de Armijo establece que el paso \( t_k \) debe satisfacer:
+\[
+    f(x_k + t_k d_k) \leq f(x_k) + \sigma_1 t_k {\nabla f(x_k)}^T d_k
+\]
+para algún \( \sigma_1 \in (0, 1) \). Esta condición exige que la reducción de la función \( f \) en el nuevo punto sea proporcional a la longitud de paso \( t_k \) y a la derivada direccional \( {\nabla f(x_k)}^T d_k \), asegurando así una disminución suficiente de \( f \) en cada iteración.
+
+La condición de Wolfe, por otro lado, requiere que el paso \( t_k \) satisfaga tanto la condición de Armijo como la siguiente condición de curvatura:
+\[
+    {\nabla f(x_k + t_k d_k)}^T d_k \geq \sigma_2 {\nabla f(x_k)}^T d_k
+\]
+para algún \( \sigma_2 \in (\sigma_1, 1) \). Esta condición asegura que el paso \( t_k \) no solo proporcione una disminución suficiente de la función \( f \) sino que también garantiza que la longitud del paso no sea demasiado pequeña, lo que podría ralentizar la convergencia del algoritmo.
+
+En ambos casos se puede demostrar que si \( f \in C^1 \) y \( d_k \) es una dirección de descenso, entonces existe un \( \e > 0 \) tal que \( \forall t \in (0, \e) \) se satisfacen ambas condiciones.
+
+\clearpage
+
+En la práctica, en un proceso algorítmico que utilice la búsqueda de Armijo se procede de la siguiente manera:
+
+\begin{algorithm}
+    \caption{Búsqueda de Armijo}
+    \label{alg:armijo}
+    \begin{algorithmic}[1]
+        \Require \( f \in C^1 \), \( t_0 = 1 \), \( \sigma_1 \in (0, 1) \), \( \beta \in (0, 1) \), \( x_k \in \R^n \), Dirección de descenso \( d_k \in \R^n \)
+        \Ensure \( t_k \) que satisface la condición de Armijo
+
+        \State \( k \gets 0 \)
+
+        \While{ \( f(x_k + t_k d_k) > f(x_k) + \sigma_1 t_k {\nabla f(x_k)}^T d_k \) } \Comment{Paso 2: Verificar si vale Armijo}
+
+        \State \( t_k \gets \beta t_k \) \Comment{Paso 1: Reducir el paso}
+        \State \( k \gets k + 1 \)
+
+        \EndWhile
+
+        \State \Return \( t_k \)
+    \end{algorithmic}
+\end{algorithm}
+
+En general \( \beta = 1/2 \) y \( \sigma_1 = 10^{-4} \), sabemos que el bucle se detendrá en un número finito de iteraciones pues dijimos que existe un \( \e > 0 \) tal que \( \forall t \in (0, \e) \) se cumple la condición de Armijo. En la práctica, también se puede establecer un número máximo de iteraciones para evitar bucles con muchos pasos.
+Para una implementación de la búsqueda de Wolfe se puede ver \emph{Wright and Nocedal, ‘Numerical Optimization’, 1999, pp. 59-61}.
+
+Finalmente, el algoritmo completo de descenso por gradiente con búsqueda de Armijo se presenta a continuación:
+
+\begin{algorithm}
+    \caption{Descenso por Gradiente con Búsqueda de Armijo}
+    \label{alg:descenso_armijo}
+    \begin{algorithmic}[1]
+        \Require \( f \in C^1 \), \( x_0 \in \R^n \), \( \e > 0 \), \( N \in \N \)
+        \Ensure Solución aproximada \( x^* \)
+
+        \State \( k \gets 0 \)
+
+        \While{\( k < N \) y \( \|\nabla f(x_k)\| > \e \) y \( \| x_k - x_{k-1} \| > \e \)}
+
+        \State \( d_k = -\nabla f(x_k) \)
+
+        \State Determinar \( t_k > 0 \) mediante la búsqueda de Armijo (Algoritmo~\ref{alg:armijo})
+
+        \State \( x_{k+1} = x_k + t_k d_k \)
+
+        \State \( k = k + 1 \)
+        \EndWhile
+
+        \State \Return \( x_k \)
+    \end{algorithmic}
+\end{algorithm}

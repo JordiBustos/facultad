@@ -1,0 +1,116 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{newpxtext,newpxmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\RP}{\mathbb{R}\mathbb{P}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Variedades}
+
+\maketitle
+
+\begin{theorem}{1}
+    Probar que el espacio proyectivo real \( \RP^2 \) es una variedad suave de dimensión 2. (En esta materia alcanza con encontrar una estructura suave sobre \( \RP^2 \)).
+\end{theorem}
+
+\begin{proof}
+    Siguiendo la construcción presentada en el apunte (Capítulo 6, pág. 120), exhibiremos una estructura suave sobre \( \RP^2 \) mediante un atlas de parametrizaciones.
+
+    Recordemos que la notación: \( [x : y : z] \)
+    representa la clase de equivalencia del vector \( (x, y, z) \). Dos vectores representan el mismo punto si son proporcionales, es decir: \( [x : y : z] = [\lambda x : \lambda y : \lambda z] \)
+    para todo escalar \(\lambda \in \mathbb{R} \setminus \{0\} \).
+
+    Consideramos el caso \( n=2 \). El espacio \(\RP^2\) está cubierto por los conjuntos abiertos \(V_1, V_2, V_3\), definidos por la no nulidad de la coordenada \(i\)-ésima:
+    \[ V_1 = \{[x:y:z] \mid x \neq 0\}, \quad V_2 = \{[x:y:z] \mid y \neq 0\}, \quad V_3 = \{[x:y:z] \mid z \neq 0\}. \]
+
+    Es inmediato que \(\bigcup_{i=1}^3 V_i = \RP^2\), ya que por definición, en cualquier punto \([x:y:z]\) al menos una coordenada es no nula.
+
+    Definimos las parametrizaciones (cartas inversas) \(\varphi_i : \mathbb{R}^2 \to V_i\) como:
+    \begin{align*}
+        \varphi_1(u,v) & = [1 : u : v], \\
+        \varphi_2(u,v) & = [u : 1 : v], \\
+        \varphi_3(u,v) & = [u : v : 1].
+    \end{align*}
+
+    Estas aplicaciones son biyecciones sobre sus imágenes. Para demostrar que definen una estructura suave, verificamos la diferenciabilidad de las funciones de transición (cambios de carta). Analicemos explícitamente la transición de la carta 2 a la carta 1, dada por la composición \(\varphi_1^{-1} \circ \varphi_2\).
+
+    Sea \((u,v) \in \mathbb{R}^2\) tal que su imagen caiga en la intersección \(V_1 \cap V_2\). Esto implica que la primera coordenada de \(\varphi_2(u,v)\) debe ser no nula.
+
+    Calculamos:
+    \[
+        \varphi_2(u, v) = [u : 1 : v].
+    \]
+    Para aplicar \( \varphi_1^{-1}\), reescalamos las coordenadas homogéneas dividiendo por \(u\) (válido pues \(u \neq 0\) en la intersección):
+    \[
+        [u : 1 : v] = \left[ 1 : \frac{1}{u} : \frac{v}{u} \right].
+    \]
+    Ahora, observando que \(\varphi_1^{-1}([1:a:b]) = (a,b)\), obtenemos:
+    \[
+        (\varphi_1^{-1} \circ \varphi_2)(u, v) = \left( \frac{1}{u}, \frac{v}{u} \right).
+    \]
+
+    La función resultante \(T(u,v) = (1/u, v/u)\) es una función racional de \(\mathbb{R}^2\) en \(\mathbb{R}^2\), la cual es infinitamente diferenciable (\( C^\infty \)) en su dominio de definición (\(u \neq 0\)).
+
+    Por simetría, los otros cambios de carta (\(\varphi_j^{-1} \circ \varphi_k\)) son análogos (cocientes de coordenadas) y también son suaves. Concluimos que \(\RP^2\) admite una estructura de variedad suave de dimensión 2.
+\end{proof}
+
+\clearpage
+
+\begin{theorem}{2}
+    Probar que \( df_p : T_p M \to T_{f(p)} N \) es una aplicación lineal.
+\end{theorem}
+
+\begin{proof}
+    Utilizando la \textbf{Definición 6.5.1} (versión algebraica vía derivaciones), sabemos que dado un vector tangente \( v \in T_p M \), su diferencial actúa sobre una función suave \( g \in C^{\infty}(N) \) de la siguiente manera:
+    \begin{equation*}
+        df_p(v)(g) = v(g \circ f).
+    \end{equation*}
+
+    Queremos probar que la aplicación es lineal, es decir, que para cualesquiera vectores \( v, w \in T_p M \) y escalares \( \lambda, \mu \in \mathbb{R} \) se cumple:
+    \begin{equation*}
+        df_p(\lambda v + \mu w) = \lambda df_p(v) + \mu df_p(w).
+    \end{equation*}
+
+    Para verificar esto, evaluamos el lado izquierdo sobre una función de prueba arbitraria \( g \in C^{\infty}(N) \). Recordando que las operaciones en el espacio tangente \( T_p M \) están definidas punto a punto, tenemos:
+
+    \begin{align*}
+        df_p(\lambda v + \mu w)(g) & = (\lambda v + \mu w)(g \circ f)                                    &  & \text{(por Def. 6.5.1)}                          \\
+                                   & = \lambda v(g \circ f) + \mu w(g \circ f)                           &  & \text{(por linealidad en } T_p M\text{ ) }       \\
+                                   & = \lambda \left[ df_p(v)(g) \right] + \mu \left[ df_p(w)(g) \right] &  & \text{(por Def. 6.5.1)}                          \\
+                                   & = (\lambda df_p(v) + \mu df_p(w))(g)                                &  & \text{(por definición de suma en el codominio)}.
+    \end{align*}
+
+    Dado que esta igualdad se cumple para toda función \( g \), concluimos que los operadores son iguales:
+    \[
+        df_p(\lambda v + \mu w) = \lambda df_p(v) + \mu df_p(w).
+    \]
+
+    Por lo tanto, \( df_p \) es una aplicación lineal.
+\end{proof}
+
+\end{document}

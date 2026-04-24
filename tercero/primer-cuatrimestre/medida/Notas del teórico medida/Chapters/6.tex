@@ -1,0 +1,148 @@
+\section{Espacio de medida}
+
+\begin{definition}[Espacio de medida]
+    Un espacio de medida es una terna ($X\text{, } \mf{X}\text{, } \mu$), donde $X$ es un conjunto, $\mf{X}$ es una $\sigma$-álgebra de subconjuntos de $X$ y $\mu$ es una medida en $\mf{X}$.
+\end{definition}
+
+Un espacio de probabilidad es un espacio de medida tal que $\mu(X) = 1$.
+En este caso a $X$ se lo llama espacio muestral, a $\mf{X}$ se lo llama colección de eventos y
+una función $f: X \to \R$, $\mf{X}$-medible se la llama variable aleatoria.
+
+\begin{definition}
+    Dado un espacio de medida ($X\text{, } \mf{X}\text{, } \mu$), sea $P(x)$ una "propiedad" que se puede predicar de sobre los elementos $X \in \mf{X}$.
+    Diremos que $P(x)$ vale $\mu$-casi todo punto ($\mu$-c.t.p) si $\exists N \in \mf{X}$ con $\mu(N) = 0 : P(x)$ vale $\forall x \in N^c$.
+\end{definition}
+
+\begin{eg}
+    $f, g : X \to \R$ dos funciones diremos que $f = g \quad \mu$-c.t.p si $\exists N \in \mf{X}$ con $\mu(N) = 0 : f(x) = g(x) \quad \forall x \in N^c$.
+    Por ejemplo si ($X\text{, } \mf{X}\text{, } \mu$) $=$ ($\R, \mc{B}, \lambda $), las funciones $f = X_{\Q}$, y $g = 0$ son $\lambda$-c.t.p iguales ya que
+    $f(x) = g(x) = 0 \quad \forall x \in \Q^c$ y $\lambda(\Q) = 0$.
+\end{eg}
+
+\begin{eg}
+    Sea $(f_n)_{n \geq 1}$ una sucesión de funciones $f_n : X \to \R$ diremos que $f_n \to f \quad \mu$-c.t.p si $\exists N \in \mf{X}$ con $\mu(N) = 0$ tal que
+    $f_n(x) \to f(x)$ $\forall x \in N^c$.
+\end{eg}
+
+\begin{definition}[Carga]
+    Dado un espacio medible $(X, \mf{X}, \mu)$, una carga en $\mf{X}$ es una función $\nu : \mf{X} \to \R$: \begin{enumerate}
+        \item $\nu(\O) = 0$.
+        \item Si $(E_n)_{n \geq 1}$ es una sucesión en $\mf{X}$ disjuntos dos a dos entonces $\nu(\bigcup E_n) = \sum \nu(E_n)$.
+    \end{enumerate}
+
+    Admitimos solo valores reales en la imagen para evitar situaciones del tipo $\infty + (-\infty)$.
+    Luego $\sum_{n \geq 1} \nu(E_n)$ converge pues si definimos $\sigma : \N \to \N$ una permutación de los naturales entonces
+    \begin{align*}
+        \sum_{n \geq 1} \nu(E_{\sigma(n)}) & = \nu (\bigcup_{n \geq 1} E_{\sigma(n)}) \\
+        = \nu (\bigcup_{n \geq 1} E_n)     & = \sum_{n \geq 1} \nu(E_{n})             \\
+    \end{align*}
+    $\therefore$ converge incondicionalmente $\Rightarrow$ converge absolutamente.
+\end{definition}
+
+\section{Generación de medida}
+
+Motivación: ¿Cómo podemos construir una medida con ciertas propiedades
+cuando no sabemos como definirla sobre todos los conjuntos de la $\sigma$-álgebra?
+
+Consideremos la clase $\mf{Y}$ formada por los intervalos de la forma \begin{enumerate}
+    \item $(a, b]$ con $a, b \in \R$, $a<b$.
+    \item $(-\infty, b]$ con $b \in \R$.
+    \item $(c, \infty)$ con $c \in \R$.
+    \item $(-\infty, \infty)$.
+    \item $\O$.
+\end{enumerate}
+
+Luego definimos $\ell: \mf{Y} \to [0, +\infty]$ dada por: \begin{enumerate}
+    \item $\ell((a, b]) = b - a$.
+    \item $\ell((-\infty, b]) = +\infty$.
+    \item $\ell((c, \infty)) = +\infty$.
+    \item $\ell((-\infty, \infty)) = +\infty$.
+    \item $\ell(\O) = 0$.
+\end{enumerate}
+
+Sabemos que $\sigma(\mf{Y}) = \mc{B}$, la $\sigma$-álgebra de Borel de $\R$, pero no sabemos como extender la definición de $\ell$ a todos los conjuntos de $\mc{B}$.
+
+La clase de $\mf{Y}$ tiene estructura de semiálgebra.
+
+\begin{definition}[Semiálgebra]
+    Una colección de subconjuntos $\mc{A}$ de $X$ es una semiálgebra si: \begin{enumerate}
+        \item $\O, X \in \mc{A}$.
+        \item Si $A_1 \text{, } \cdots \text{, } A_n \in \mc{A} \Rightarrow \bigcap_{i = 1}^n A_i \in \mc{A}$.
+        \item Si $A \in \mc{A} \Rightarrow A^c = \bigcup_{k = 1}^n S_k$ para $S_1\text{, } \cdots \text{, } S_n \in \mc{A}$ dos a dos disjuntos.
+    \end{enumerate}
+\end{definition}
+
+Se deja como ejercicio verificar que efectivamente $\mf{Y}$ es una semiálgebra con la definición de semiálgebra de $\R$.
+
+\begin{lemma}
+    La función $\ell : \mf{Y} \to [0, +\infty]$ es finitamente aditivia, i.e, si $I_1, \cdots, I_n \in \mf{Y}$ son conjuntos dos a dos disjuntos y
+    $\bigcup_{i = 1}^n I_i \in \mf{Y} \Rightarrow \ell(\bigcup_{i = 1}^n I_n) = \sum_{i = 1}^n \ell(I_i)$.
+    \begin{proof}
+        Supongamos $I_1\text{, } \cdots \text{, } I_n \in \mf{Y}$, no vacíos, cuya unión también pertenece a $\mf{Y}$.
+        Si alguno es no acotado, la unión también y será $\ell(\bigcup_{i = 1}^n I_i) = +\infty = \sum_{i = 1}^n \ell(I_i)$.
+
+        Supongamos ahora que cada $I_k = (a_k\text{, } b_k]$ con $a_k\text{, } b_k \in \R$, $a_k < b_k$.
+        Luego $\bigcup_{i = 1}^n I_i$ es de la forma $(a \text{, } b]$ con $a = \min(a_1\text{, } \cdots \text{, } a_n)$ y $b = \max(b_1, \cdots, b_n)$.
+        Sin pérdida de generalidad supongamos que $a_1 < a_2 < \cdots < a_n$, si no es así reordenamos los intervalos.
+
+        De esto se sigue que $a_1 = a < b_1 = a_2 < b_2 = a_3 < \cdots b_{n - 1} = a_n < b_n = b$, pues no puede haber huecos, ya que dijimos que la unión pertenece a $\mf{Y}$.
+        Claramente $\ell(\bigcup_{i = 1}^n I_i) = b - a = \ell((a\text{, } b])$ y, finalmente \begin{align*}
+            \sum_{k = 1}^n \ell(I_k) & = \sum_{k = 1}^n (b_k - a_k)                                          \\
+                                     & = (b_1 - a_1) + (b_2 - a_2) + \cdots + (b_n - a_n)                    \\
+                                     & = -a_1 + (b_1 - a_2) + (b_2 - a_3) + \cdots + (b_{n - 1} - a_n) + b_n \\
+                                     & = b_n - a_1 = b - a
+        \end{align*}
+        $\therefore$ $\ell(\bigcup_{i = 1}^n I_i) = \sum_{i = 1}^n \ell(I_i)$.
+    \end{proof}
+\end{lemma}
+
+De acuerdo con el lema anterior podríamos extender la función $\ell$ a una clase más grande de subconjuntos de $\R$.
+
+Sea $\mc{F} = \{ A \subseteq \R : A = \bigcup_{i = 1}^n I_i \text{, para ciertos } n \in \N \text{, } I_1, \cdots, I_n \in \mf{Y} \text{ dos a dos disjuntos} \}$,
+defimos $\ell : \mc{F} \to [0, +\infty]$ como $\ell(A) = \sum_{i = 1}^n \ell(I_i)$ si $A = \bigcup_{i = 1}^n I_i$ con las mismas condiciones que pedimos.
+
+\begin{note}
+    Queda ver que $\ell$ está bien definida, i.e, no depende de la forma en que se escriba $A$ como unión de intervalos.
+\end{note}
+
+\begin{definition}[Álgebra]
+    Dado un conjunto $X$, una clase $\mc{A} \in P(X)$ es un álgebra si: \begin{enumerate}
+        \item $\O, X \in \mc{A}$.
+        \item Si $E \in \mc{A} \Rightarrow E^c \in \mc{A}$.
+        \item Si $E_1, \cdots, E_n \in \mc{A} \Rightarrow \bigcup_{i = 1}^n E_i \in \mc{A}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Dada una semiálgebra $\mc{S} \subseteq P(X)$ la clase $\mc{A} = \{ A \subseteq X : A = \bigcup_{i = 1}^n S_i \text{, } S_j \in \mc{S} \quad \forall j = 1 \text{, }\cdots \text{, } n \text{, dos a dos disjuntos} \}$
+    es un álgebra de subcojuntos de $X$.
+
+    Además $\mc{A}$ es la menor álgebra que contiene a $\mc{S}$ y se la llama álgebra generada por $\mc{S}$.
+
+    \begin{proof}
+        Veamos que $\mc{A}$ es cerrada bajo la intersección finita.
+
+        Sean $S_1 \text{, } \cdots \text{, } S_n \in \mc{S}$ dos a dos disjuntos y $F_1 \text{, } \cdots \text{, } F_m \in \mc{S}$ dos a dos disjuntos.
+
+        Llamemos $S = \bigcup_{i = 1}^n S_i$ y $F = \bigcup_{j = 1}^m F_j \in \mc{A}$.
+
+        \begin{align*}
+            S \cap F & = \bigcup_{i = 1}^n S_i \cap \bigcup_{j = 1}^m F_j   \\
+                     & = \bigcup_{i = 1}^n (S_i \cap \bigcup_{j = 1}^m F_j) \\
+                     & = \bigcup_{i = 1}^n \bigcup_{j = 1}^m (S_i \cap F_j) \\
+        \end{align*}
+
+        Luego $\forall (i\text{, } j) \in \{ 1 \text{, } \cdots \text{, } n \} \times \{ 1 \text{, } \cdots \text{, } m\}$, sea $S_{ij} = S_i \cap F_j \in \mc{S}$.
+        Además $S_{ij} \cap S_{kl} = \O$ si $(i\text{, } j) \neq (k \text{, } l)$.
+        Luego $S \cap F \in \mc{A}$ pues $S \cap F$ es unión finita de elementos de $\mc{S}$ dos a dos disjuntos.
+
+        Ahora veamos que se cumplen las propiedades de álgebra:
+        \begin{enumerate}
+            \item Se cumple pues $\mc{S}$ es semiálgebra.
+            \item Dado $A \in \mc{A}$, sean $S_1 \text{, } \cdots \text{, } S_n \in \mc{S}$ tal que $A = \bigcup_{i = 1}^n S_i$, dos a dos disjuntos. Entonces
+                  $A^c = \bigcap_{i = 1}^n S_i^c \Rightarrow \forall i = 1 \text{, } \cdots \text{, } n$ como $S_i \in \mc{S}$ y $\mc{S}$ es una semiálgebra $\exists B_1^i \text{, } B_2^i \text{, } \cdots \text{, } B_n^i \in \mc{S}$ dos a dos disjuntos
+                  tal que $S_i^c = \bigcup_{j = 1}^n B_j^i \in \mc{A} \Rightarrow \bigcap_{i = 1}^n S_i^c \in \mc{A}$, pues ya probamos que la intersección finita es cerrada.
+            \item Queda como ejercicio.
+        \end{enumerate}
+    \end{proof}
+\end{lemma}

@@ -1,0 +1,344 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{newpxtext,newpxmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{theorem}[2][Ejercicio]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\title{Geometría Diferencial}
+\author{Bustos Jordi\\Práctica V}
+
+\maketitle
+
+\begin{theorem}{1}
+    Consideremos la tractriz dada por \( \gamma(t) = (sen(t), 0, \ln(\tan(t/2))) \), con \( t \in (\pi/2, \pi) \). La superficie de revolución obtenida al rotar la tractriz alrededor del eje \( z \) es llamada
+    pseudoesfera. Probar que la curvatura de Gauss de la pseudoesfera es \( K \equiv -1 \).
+\end{theorem}
+
+\begin{proof}
+    La parametrización de la pseudoesfera es \begin{align*}
+        \varphi(u, v) & = (f(v) \cos(u), f(v) \sin(u), g(v))                                                               \\
+                      & = (\sen(v) \cos(u), \sen(v) \sin(u), \ln(\tan(v/2))), \quad (u \in [0, 2\pi), v \in (\pi/2, \pi)).
+    \end{align*}
+    Luego, por \textbf{Ejemplo 4.8.4} se tiene que \begin{align*}
+        K & = -\frac{f''(v)}{f(v)} = -\frac{-\sen(v)}{\sen(v)} = -1.
+    \end{align*}
+    Que es lo que queríamos demostrar.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{2}
+    Consideremos el hiperboloide de la ecuación \( z = axy \) con \( a \in \R \). Mostrar que en el origen la curvatura de Gauss es \( K = -a^2 \) y la curvatura media es \( H = 0 \).
+\end{theorem}
+
+\begin{proof}
+    La parametrización del hiperboloide es \begin{align*}
+        \varphi(u, v) & = (u, v, auv), \quad (u, v \in \R).
+    \end{align*}
+    Luego, \begin{align*}
+        \varphi_u & = (1, 0, av),                                                                                                           \\
+        \varphi_v & = (0, 1, au),                                                                                                           \\
+        N         & = \frac{\varphi_u \times \varphi_v}{\|\varphi_u \times \varphi_v\|} = \frac{(-av, -au, 1)}{\sqrt{1 + a^2u^2 + a^2v^2}}.
+    \end{align*}
+    Luego, la aplicación de Weingarten viene dada por: \begin{align*}
+        W_p(\varphi_u) & = -N_u = \frac{(0, a/\sqrt{1 + a^2u^2 + a^2v^2}, au(auv)'_u)}{(1 + a^2u^2 + a^2v^2)^{3/2}} = \frac{(0, a, 0)}{{(1 + a^2u^2 + a^2v^2)}^{3/2}}, \\
+        W_p(\varphi_v) & = -N_v = \frac{(a/\sqrt{1 + a^2u^2 + a^2v^2}, 0, av(auv)'_v)}{(1 + a^2u^2 + a^2v^2)^{3/2}} = \frac{(a, 0, 0)}{{(1 + a^2u^2 + a^2v^2)}^{3/2}}.
+    \end{align*}
+    Por lo que la representación matricial de \( W_p \) en la base \( \{\varphi_u, \varphi_v\} \) es \begin{align*}
+        [W_p] & = \begin{pmatrix}
+                      0                                       & \frac{a}{{(1 + a^2u^2 + a^2v^2)}^{3/2}} \\
+                      \frac{a}{{(1 + a^2u^2 + a^2v^2)}^{3/2}} & 0
+                  \end{pmatrix}.
+    \end{align*}
+    Luego, \begin{align*}
+        K & = \det(W_p) = -\frac{a^2}{{(1 + a^2u^2 + a^2v^2)}^{3}} \stackrel{(u,v)=(0,0)}{=} -a^2, \\
+        H & = 0.
+    \end{align*}
+    Que es lo que queríamos demostrar. Análogamente podríamos haber definido \( \gamma(t) = (t, 0, 0) \) tal que \( \gamma(0) = (0, 0, 0) = p \) y \( \gamma'(0) = (1, 0, 0) \). Calcular \begin{align*}
+        dN_{p} = \frac{d}{dt}N(\varphi(t, 0)) \Big|_{t=0} & = \frac{d}{dt}\left(\frac{(-a \cdot 0, -a t, 1)}{\sqrt{1 + a^2 t^2 + a^2 \cdot 0^2}}\right) \Big|_{t=0} = (0, -a, 0).
+    \end{align*}
+    Por lo que \( W_p(\gamma'(0)) = -dN_p(\gamma'(0)) = (0, a, 0) \) y obtenemos el mismo resultado. Lo mismo se puede hacer con \( \beta(t) = (0, t, 0) \), resultando en: \begin{align*}
+        W_p(\beta'(0)) & = (a, 0, 0).
+    \end{align*}
+    Por lo tanto la representación matricial de \( W_p \) en la base \( \{\gamma'(0), \beta'(0)\} \) es la misma que antes y obtenemos los mismos valores para \( K \) y \( H \).
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{3}
+    Calcular la curvatura de Gauss del helicoide \( \varphi(u, v) = (v \cos(u), v \sin(u), u) \) y mostrar que es creciente en función de la distancia al eje \( z \).
+\end{theorem}
+
+\begin{proof}
+    La parametrización del helicoide es \begin{align*}
+        \varphi(u, v) = (v \cos(u), v \sin(u), u), \quad (u, v \in \R).
+    \end{align*}
+    Luego, \begin{align*}
+        \varphi_u & = (-v \sin(u), v \cos(u), 1),                                                                                       \\
+        \varphi_v & = (\cos(u), \sin(u), 0),                                                                                            \\
+        N         & = \frac{\varphi_u \times \varphi_v}{\|\varphi_u \times \varphi_v\|} = \frac{(-\sen u, \cos u, -v)}{\sqrt{1 + v^2}}.
+    \end{align*}
+    Luego, la aplicación de Weingarten viene dada por: \begin{align*}
+        W_p(\varphi_u) & = -N_u = \varphi_v \cdot \frac{-1}{\sqrt{1+v^2}}    \\
+        W_p(\varphi_v) & = -N_v = \varphi_u \cdot \frac{1}{{(1+v^2)}^{3/2}}.
+    \end{align*}
+    Por lo tanto la representación matricial de \( W_p \) en la base \( \{\varphi_u, \varphi_v\} \) es \begin{align*}
+        [W_p] & = \begin{pmatrix}
+                      0                       & \frac{1}{{(1+v^2)}^{3/2}} \\
+                      \frac{-1}{\sqrt{1+v^2}} & 0
+                  \end{pmatrix}.
+    \end{align*}
+    Luego, \begin{align*}
+        K & = \det(W_p) = -\frac{1}{{(1+v^2)}^{2}}.
+    \end{align*}
+    Observamos que \( K \) depende únicamente de \( v \) que es la distancia al eje \( z \) y pues \begin{align*}
+        \| \varphi(u, v) - (0, 0, u) \| = |v|.
+    \end{align*}
+    Por lo tanto, \( K \) es creciente en función de la distancia al eje \( z \), pues \( K'(|v|) > 0 \) si consideramos a \( K \) como función de la distancia al eje \( z \).
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{4}
+    Mostrar que la curvatura media \( H \) en \( p \in S \) está dada por \begin{align*}
+        H = \frac{1}{\pi} \int_0^{\pi} k_n(\theta) \, \mathrm{d}\theta.
+    \end{align*}
+    donde \( k_n(\theta) \) es la curvatura normal en la dirección que forma un ángulo \( \theta \) con la dirección principal \( e_1 \).
+\end{theorem}
+
+\begin{proof}
+    En efecto, por la \textbf{Observación 4.4.4} sabemos que si \( v \in T_p S\) es unitario, \( v = e_1 \cos \theta + e_2 \sin \theta \) siendo \( \theta \) el ángulo determinado por \( v \) y \( e_1 \). Entonces \begin{align*}
+        k_n(v) = k_1 \cos^2 \theta + k_2 \sin^2 \theta.
+    \end{align*}
+    con \( k_1, k_2 \) las curvaturas principales en \( p \). Luego, \begin{align*}
+        \int_0^{\pi} k_n(\theta) \, \mathrm{d}\theta & = \int_0^{\pi} (k_1 \cos^2 \theta + k_2 \sin^2 \theta) \, \mathrm{d}\theta                                \\
+                                                     & = k_1 \int_0^{\pi} \cos^2 \theta \, \mathrm{d}\theta + k_2 \int_0^{\pi} \sin^2 \theta \, \mathrm{d}\theta \\
+                                                     & = k_1 \cdot \frac{\pi}{2} + k_2 \cdot \frac{\pi}{2} = \frac{\pi}{2}(k_1 + k_2).
+    \end{align*}
+    Por lo tanto, \begin{align*}
+        \frac{1}{\pi} \int_0^{\pi} k_n(\theta) \, \mathrm{d}\theta & = \frac{1}{\pi} \cdot \frac{\pi}{2}(k_1 + k_2) = \frac{k_1 + k_2}{2} = H.
+    \end{align*}
+    Que es lo que queríamos demostrar.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{6}
+    Mostrar que si \( H \equiv 0 \) sobre \( S \) y \( S \) no tiene puntos planares, entonces la aplicación de Gauss \( N: S \to S^2 \) satisface \begin{align*}
+        \langle dN_p(w_1), dN_p(w_2) \rangle = -K(p) \langle w_1, w_2 \rangle
+    \end{align*}
+    para todo \( p \in S \) y todo \( w_1, w_2 \in T_p S \).
+\end{theorem}
+
+\begin{proof}
+    Recordemos que \( H = \frac{1}{2} \text{tr}(W_p) \), si \begin{align*}
+        W_p = \begin{pmatrix}
+                  k_1 & 0   \\
+                  0   & k_2
+              \end{pmatrix}
+    \end{align*}
+    Se tiene que \( H \equiv 0 \) implica que \( k_1 + k_2 = 0 \) y por lo tanto \( k_2 = -k_1 \) y además \( k_1 \neq 0 \) pues no tiene puntos planares. Luego, la aplicación de Weingarten viene dada por \begin{align*}
+        W_p = \begin{pmatrix}
+                  k_1 & 0    \\
+                  0   & -k_1
+              \end{pmatrix}.
+    \end{align*}
+    Por lo tanto, para todo \( w_1, w_2 \in T_p S \) tenemos que \( K(p) = \det W_p = -k_1^2 \) y \begin{align*}
+        \langle dN_p(w_1), dN_p(w_2) \rangle & = \langle -W_p(w_1), -W_p(w_2) \rangle = \langle W_p(w_1), W_p(w_2) \rangle \\
+                                             & = \left \langle \begin{pmatrix}
+                                                                   k_1 & 0    \\
+                                                                   0   & -k_1
+                                                               \end{pmatrix} w_1, \begin{pmatrix}
+                                                                                      k_1 & 0    \\
+                                                                                      0   & -k_1
+                                                                                  \end{pmatrix} w_2 \right \rangle         \\
+                                             & = k_1^2 \langle w_1, w_2 \rangle = -K(p) \langle w_1, w_2 \rangle.
+    \end{align*}
+    Que es lo que queríamos demostrar.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{7}
+    Sea S una superficie parametrizada por \( \varphi(u, v) = (u, v u^2) \), calcular la aplicación de Weingarten \( W_p \) e indicar las curvaturas principales en un punto \( p \in S \).
+\end{theorem}
+
+\begin{proof}
+    Análogamente a los ejercicios anteriores, la parametrización de la superficie es \begin{align*}
+        \varphi(u, v) & = (u, v, u^2), \quad (u, v \in \R).
+    \end{align*}
+    Luego, \begin{align*}
+        \varphi_u      & = (1, 0, 2u),                                                                                             \\
+        \varphi_v      & = (0, 1, 0),                                                                                              \\
+        N              & = \frac{\varphi_u \times \varphi_v}{\|\varphi_u \times \varphi_v\|} = \frac{(-2u, 0, 1)}{\sqrt{1 + 4u^2}} \\
+        W_p(\varphi_u) & = -N_u = \varphi_u \cdot \frac{-2}{\sqrt{1 + 4u^2}}                                                       \\
+        W_p(\varphi_v) & = -N_v = 0.
+    \end{align*}
+    Por lo tanto la representación matricial de \( W_p \) en la base \( \{\varphi_u, \varphi_v\} \) es \begin{align*}
+        [W_p] & = \begin{pmatrix}
+                      \frac{-2}{\sqrt{1 + 4u^2}} & 0 \\
+                      0                          & 0
+                  \end{pmatrix}.
+    \end{align*}
+    Luego, las curvaturas principales son \begin{align*}
+        k_1 & = \frac{-2}{\sqrt{1 + 4u^2}}, \\
+        k_2 & = 0.
+    \end{align*}
+    para todo \( p = \varphi(u, v) \in S \).
+\end{proof}
+
+\begin{theorem}{8}
+    Sea S una superficie orientada. Demostrar que la suma de las curvaturas normales en un punto, en cualquier par de direcciones ortogonales, es constante.
+\end{theorem}
+
+\begin{proof}
+    Sean \( u, v \in T_p S \) dos direcciones ortogonales unitarias y \( \theta \) el ángulo entre \( u \) y la dirección principal \( e_1 \). Entonces, debe ser \begin{align*}
+        u & = k_1 \cos \theta + k_2 \sin \theta                                                           \\
+        v & = k_1 \cos (\theta + \pi/2) + k_2 \sin (\theta + \pi/2) = -k_1 \sin \theta + k_2 \cos \theta.
+    \end{align*}
+    s.p.d.g. Luego, \begin{align*}
+        k_n(u) & = k_1 \cos^2 \theta + k_2 \sin^2 \theta,   \\
+        k_n(v) & = k_1 \sin^2 \theta + k_2 \cos^2 \theta.   \\
+               & \implies k_n(u) + k_n(v) = k_1 + k_2 = 2 H
+    \end{align*}
+    Por lo tanto, la suma de dos curvaturas normales en un punto en direcciones ortogonales es constantemente igual a \( 2H \).
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{9}
+    Probar que una curva conexa regular \( \gamma(t) = \varphi(u(t), v(t)) \) en un entorno coordenado
+    \( \varphi(U) \) de una superficie regular \( S \) es una línea de curvatura si y sólo si satisface la siguiente ecuación diferencial: \begin{align*}
+        (fE - eF) {(u')}^2 + (gE - eG) u'v'+ (gF - fG){(v')}^2 = 0.
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    Sea \( S \) la superficie parametrizada por \( \varphi(u, v) \) si tomamos la curva \( \gamma(t) = \varphi(u(t), v(t)) \) y suponemos que es línea de curvatura,
+    por \textbf{Proposición 4.6.2 (Olinde Rodrigues)} se tiene que \begin{align*}
+        N'(s) & = \lambda(s) \gamma'(s) \\
+    \end{align*}
+    Con \( -\lambda(s) \) la curvatura principal en la dirección de \( \gamma'(s) \). Luego, \begin{align*}
+        N'(s) & = N_u u' + N_v v'                                                                                                                                                          \\
+              & = \frac{fF - eG}{EG - F^2} \varphi_u u' + \frac{gF - fG}{EG - F^2} \varphi_v v' + \frac{eF - fE}{EG - F^2} (\varphi_u v' + \varphi_v u')                                   \\
+              & = \left( \frac{fF - eG}{EG - F^2} u' + \frac{eF - fE}{EG - F^2} v' \right) \varphi_u + \left( \frac{gF - fG}{EG - F^2} v' + \frac{eF - fE}{EG - F^2} u' \right) \varphi_v.
+    \end{align*}
+    Además, \( \gamma'(s) = \varphi_u u' + \varphi_v v'. \)
+    Uniendo las dos ecuaciones \begin{align*}
+        N'(s)                                                                                                                                                                   & = \lambda(s) \gamma'(s)                                                            \\
+                                                                                                                                                                                & = \lambda(s) (\varphi_u u' + \varphi_v v')                                         \\
+                                                                                                                                                                                & = \left( \lambda(s) u' \right) \varphi_u + \left( \lambda(s) v' \right) \varphi_v. \\
+        \left( \frac{fF - eG}{EG - F^2} u' + \frac{eF - fE}{EG - F^2} v' \right) \varphi_u + \left( \frac{gF - fG}{EG - F^2} v' + \frac{eF - fE}{EG - F^2} u' \right) \varphi_v & = \left( \lambda(s) u' \right) \varphi_u + \left( \lambda(s) v' \right) \varphi_v.
+    \end{align*}
+    Obteniendo el siguiente sistema de ecuaciones: \begin{align*}
+        \frac{fF - eG}{EG - F^2} u' + \frac{eF - fE}{EG - F^2} v' & = \lambda(s) u', \\
+        \frac{gF - fG}{EG - F^2} v' + \frac{eF - fE}{EG - F^2} u' & = \lambda(s) v'.
+    \end{align*}
+    Despejando \( \lambda \) de ambas ecuaciones se obtiene: \begin{align*}
+        \left [ \frac{fF - eG}{EG - F^2} u' + \frac{eF - fE}{EG - F^2} v' \right] \cdot 1/u'          & = \lambda(s)                                                                           \\
+        \left [ \frac{gF - fG}{EG - F^2} v' + \frac{eF - fE}{EG - F^2} u' \right] \cdot 1/v'          & = \lambda(s)                                                                           \\
+        \implies \left [ \frac{fF - eG}{EG - F^2} u' + \frac{eF - fE}{EG - F^2} v' \right] \cdot 1/u' & = \left [ \frac{gF - fG}{EG - F^2} v' + \frac{eF - fE}{EG - F^2} u' \right] \cdot 1/v'
+    \end{align*}
+    Multiplicando por \( u'v'(EG - F^2) \) se obtiene: \begin{align*}
+        (fF - eG) {(u')}^2 + (eF - fE) u'v'                               & = (gF - fG) {(v')}^2 + (eF - fE) u'v' \\
+        \implies (fE - eF) {(u')}^2 + (gE - eG) u'v' + (gF - fG) {(v')}^2 & = 0.
+    \end{align*}
+    Que es lo que queríamos demostrar. La implicación recíproca se demuestra de forma análoga.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{10}
+    Mostrar que ningún entorno de un punto de una esfera puede ser mapeado isométricamente a un plano.
+\end{theorem}
+
+\begin{proof}
+    El ejercicio es trivial si utilizamos el teorema de Egregium de Gauss que nos dice que la curvatura de Gauss es invariante por isometrías. Como la curvatura de la esfera es \( K > 0 \) y la del plano es \( K \equiv 0 \) se tiene que no puede existir una isometría.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{11}
+    Probar que no existe ninguna superficie regular que admita una parametrización local cuyos coeficientes de la primera y segunda forma sean \begin{align*}
+        E = G = 1, \qquad F = 0, \qquad e = 0, \qquad f = g = 1
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    Supongamos que existe una superficie \( S \) regular con una parametrización local \( \varphi : U \to S \) tal que \begin{align*}
+        E = G = 1, \qquad F = 0, \qquad e = 0, \qquad f = g = 1
+    \end{align*}
+    Luego, por el \textbf{Teorema de Gauss} se tiene que \begin{align*}
+        K & = \frac{eg - f^2}{EG - F^2} = \frac{0 \cdot 1 - 1^2}{1 \cdot 1 - 0^2} = -1.
+    \end{align*}
+    Por otro lado, como \( F \equiv 0 \) se tiene que, por \textbf{Proposición 4.9.7}, la curvatura de Gauss \( K \) puede ser expresada en función de los coeficientes de la primera forma fundamental y sus derivadas parciales como \begin{align*}
+        K & = -\frac{1}{2 \sqrt{EG - F^2}} \left( {\left( \frac{E_v - F_u}{\sqrt{EG - F^2}} \right)}_v + {\left( \frac{G_u - F_v}{\sqrt{EG - F^2}} \right)}_u \right).
+    \end{align*}
+    Por lo que, sustituyendo los valores de los coeficientes de la primera forma fundamental se obtiene: \begin{align*}
+        K & = -\frac{1}{2} \left( 0_v + 0_u \right) = 0.
+    \end{align*}
+    Llegando a una contradicción pues \( K \) no puede ser \( -1 \) y \( 0 \) a la vez. Por lo tanto, no existe ninguna superficie regular que admita una parametrización local cuyos coeficientes de la primera y segunda forma sean los dados.
+\end{proof}
+
+\vspace{1em}
+
+\begin{theorem}{12}
+    Si S está parametrizada localmente por \( \varphi : U \to S \), entonces \( \varphi \) es una
+    aplicación conforme si y solo si \( E = G \) y \( F = 0 \).
+\end{theorem}
+
+\begin{proof}
+    Supongamos que es una aplicación conforme. Por definición, tenemos que \begin{align*}
+        E = \langle \varphi_u, \varphi_u \rangle, \qquad
+        F = \langle \varphi_u, \varphi_v \rangle, \qquad
+        G = \langle \varphi_v, \varphi_v \rangle.
+    \end{align*}
+    Como \( \varphi \) es conforme, se tiene que para todo \( w_1, w_2 \in T_p S \) \begin{align*}
+        \langle d\varphi_p(w_1), d\varphi_p(w_2) \rangle & = \lambda(p) \langle w_1, w_2 \rangle.
+    \end{align*}
+    Con \( \lambda(p) > 0 \). Consideremos la base canónica dada por \( \{ e_1, e_2 \} \) en \( T_{(u, v)} S\) tal que
+    \( d \varphi_p : T_{(u, v)} U \to T_{p} S \), luego \begin{align*}
+        \langle d\varphi_p(e_1), d\varphi_p(e_1) \rangle & = \lambda(p) \langle e_1, e_1 \rangle \implies E = \lambda(p), \\
+        \langle d\varphi_p(e_2), d\varphi_p(e_2) \rangle & = \lambda(p) \langle e_2, e_2 \rangle \implies G = \lambda(p), \\
+        \langle d\varphi_p(e_1), d\varphi_p(e_2) \rangle & = \lambda(p) \langle e_1, e_2 \rangle \implies F = 0.
+    \end{align*}
+    pues \( \varphi_u = d\varphi_p(e_1) \) y \( \varphi_v = d\varphi_p(e_2) \). Por lo tanto, \( E = G \) y \( F = 0 \).
+    Recíprocamente, dados \( x = (v_1, v_2) \), \( y = (w_1, w_2) \in T_{(u, v)} U \) se tiene que \begin{align*}
+        d\varphi_p(x) & = v_1 \varphi_u + v_2 \varphi_v, \\
+        d\varphi_p(y) & = w_1 \varphi_u + w_2 \varphi_v.
+    \end{align*}
+    Por lo que \begin{align*}
+        \langle d\varphi_p(x), d\varphi_p(y) \rangle & = \langle v_1 \varphi_u + v_2 \varphi_v, w_1 \varphi_u + w_2 \varphi_v \rangle                                                                                                              \\
+                                                     & = v_1 w_1 \langle \varphi_u, \varphi_u \rangle + v_1 w_2 \langle \varphi_u, \varphi_v \rangle + v_2 w_1 \langle \varphi_v, \varphi_u \rangle + v_2 w_2 \langle \varphi_v, \varphi_v \rangle \\
+                                                     & = v_1 w_1 E + v_1 w_2 F + v_2 w_1 F + v_2 w_2 G                                                                                                                                             \\
+                                                     & = E (v_1 w_1 + v_2 w_2)                                                                                                                                                                     \\
+                                                     & = E \langle x, y \rangle.
+    \end{align*}
+    Por lo tanto, \( \varphi \) es conforme con \( \lambda(p) = E = \langle \varphi_u, \varphi_u \rangle > 0 \) si \( \varphi \) es regular.
+\end{proof}
+
+\end{document}

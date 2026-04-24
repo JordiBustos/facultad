@@ -1,0 +1,200 @@
+\section{Extensión de la medida}
+
+Veremos que si $\mu: \mc{A} \to [0, +\infty]$ es una medida sobre un álgebra $\mc{A}$ entonces $\exists$ una $\sigma$-álgebra
+$\mc{A}^*$ tal que $\mc{A} \subseteq \mc{A}^*$ y $\exists \mu^*$ : $\mc{A}^* \to [0, +\infty]$ con $\mu^*(E) = \mu(E) \quad \forall E \in \mc{A}$.
+
+\begin{definition}[Medida exterior]
+    Dado un conjunto $X$, una medida exterior en $X$ es una función $\Gamma : \mc{P}(X) \to [0, +\infty]$ tal que:
+    \begin{enumerate}
+        \item $\Gamma(\emptyset) = 0$.
+        \item $\Gamma(A) \leq \Gamma(B)$ si $A \subseteq B$.
+        \item Es $\sigma$-subaditiva i.e $(E_n)_{n \geq 1}$ es una sucesión en $\mc{P}(X)$ entonces \begin{align*}
+                  \Gamma\left(\bigcup_{n \geq 1} E_n\right) \leq \sum_{n \geq 1} \Gamma(E_n)
+              \end{align*}
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Dado un conjunto $X$, $\mc{A} \subseteq \mc{P}(X)$ un álgebra y $\mu$ una medida en $\mc{A}$ entonces si definimos $\mu^*: \mc{P}(X) \to [0, +\infty]$ como \begin{align*}
+        \mu^*(A) = \inf \left\{ \sum_{n \geq 1} \mu(E_n) : A \subseteq \bigcup_{n \geq 1} E_n, E_i \in \mc{A}, \forall i \right\}
+    \end{align*}
+    \begin{enumerate}
+        \item $\mu^*$ es una medida exterior.
+        \item $\mu^*(E) = \mu(E) \quad \forall E \in \mc{A}$
+    \end{enumerate}
+
+    \begin{proof}
+        Notemos que $A \in \mc{P}(X)$ y la sucesión $(E_n)_{n \geq 1}$ en $\mc{A}$ dada por $E_1 = X$, $E_n = \O \quad \forall n \geq 2$
+        verifica que $\bigcup_{n \geq 1} E_n = X \supset A$ y entonces $\mu^*(A)$ está bien definida.
+
+        Veamos (2), supongamos que $A \in \mc{A}$ y $E_1 = A$, $E_n = \O \quad \forall n \geq 2$.
+        Entonces $\mu^*(A) \leq \sum_{n \geq 1} \mu(E_n) = \mu(A)$ por ser el ínfimo. Por otra parte, si $(E_n)_{n \geq 1}$ es una sucesión
+        cualquiera en $\mc{A}$ tal que $A \subseteq \bigcup_{n \geq 1} E_n \Rightarrow (A \cap E_n)_{n \geq 1}$ también es una sucesión en $\mc{A}$
+        tal que $A = \bigcup_{n \geq 1} A \cap E_n \in \mc{A}$.
+
+        Notemos que $\mu(A \cap E_i) \leq \mu(E_i)$ y luego, por la $\sigma$-subaditividad condicional de $\mu$ resulta que: \begin{align*}
+            \mu(A) = \bigcup_{n \geq 1} A \cap E_n & \leq \sum_{n \geq 1} \mu(A \cap E_n) \\
+                                                   & \leq \sum_{n \geq 1} \mu(E_n)
+        \end{align*}
+        Por lo tanto $\mu^*(A) \geq \mu(A) \therefore \mu^*(A) = \mu(A)$. Queda como ejercicio ver que efectivamente es monótona con la inclusión.
+
+        Veamos (1), sea $(A_n)_{n \geq 1} \subset \mc{P}(X)$. Si $\exists n_0 \in \N : \mu(A_{n_0}) = +\infty$, es trivial. Supongamos que $\mu^*(A_n) < +\infty \quad \forall n \geq 1$.
+        Dado $\e > 0$, para cada $n \in \N$, por definición de $\mu^*$, existe una sucesión $(E_{n, k})_{k \geq 1} \subset \mc{A}$ tal que $A_n \subseteq \bigcup_{n \geq 1} E_{n, k}$
+        \begin{align*}
+             & \Rightarrow \sum_{k \geq 1} \mu(E_{n, k}) \leq \mu^*(A_n) + \frac{\e}{2^n}                                                    \\
+             & \Rightarrow \left\{ E_{n, k} : (n, k) \in \N \times \N \right\} \subseteq \mc{A} \text{ verifica que:}                        \\
+             & \bigcup_{(n, k) \in \N \times \N} E_{n, k}  = \bigcup_{n \geq 1} \bigcup_{k \geq 1} E_{n, k} \supseteq \bigcup_{n \geq 1} A_n \\
+             & \Rightarrow \mu^*\left( \bigcup_{n \geq } A_n \right) \leq \sum_{(n, k) \in \N \times \N} \mu(E_{n, k})                       \\
+             & = \sum_{n \geq 1} \sum_{k \geq 1} \mu(E_{n, k}) \leq \sum_{n \geq 1} \mu^*(A_n) + \frac{\e}{2^n}                              \\
+             & = \sum_{n \geq 1} \mu^*(A_n) + \e
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{eg}
+    La medida $\ell : \mc{F} \to [0, +\infty]$ sobre el álgebra $\mc{F}$, consideremos la medida exterior $\ell^*: \mc{P}(\R) \to [0, +\infty]$.
+    Notemos que si $A \subseteq \R \Rightarrow$ \begin{align*}
+        \ell^*(A) = \inf \left\{ \sum_{n \geq 1} (b_n - a_n) = \sum_{n \geq 1} \ell(I_n) : A \subseteq \bigcup_{n \geq 1} (a_n, b_n] = \bigcup_{n \geq 1}  I_n : a_n < b_n \right\}
+    \end{align*}
+\end{eg}
+
+
+Tomamos los de la semiálgebra pues los elementos del álgebra pueden ser definidos como unión de $I_k$ disjuntos dos a dos y entonces $\ell^*$ tiene las siguientes propiedades:
+\begin{enumerate}
+    \item Si $B \subset \R$ es numerable $\Rightarrow \ell^*(B) = 0$. El recíproco no es cierto.
+    \item Si $A \subseteq \R \Rightarrow \exists E \in \mc{B} : A \subseteq E$ y $\ell^*(A) = \ell^*(E)$. Esto no implica que $\ell^*(E-A) = 0$. \\
+          En efecto si $\ell^*(A) = +\infty \Rightarrow E = \R$, si $\ell^*(A) < +\infty$, para cada $n \in \N$ existe una sucesión $I_{n, k} = (a_k^n, b_k^n] \quad \forall k \geq 1 :
+              A \subseteq \bigcup_{k \geq 1} I_{n, k}$ y $\sum_{k \geq 1} b_k^n - a_k^n \leq \ell^*(A) + 1/n$, por definición de ínfimo. \\
+          Sea $E_n := \bigcup_{k \geq 1} I_{n, k} \in \mc{B}$ tal que \begin{align*}
+              \ell^*(E_n) & \leq \sum_{n \geq 1} \ell^*(I_{n, k}) = \sum_{k \geq 1} \ell(I_{n, k}) \\
+                          & \sum_{k \geq 1} b_k^n - a_k^n \leq \ell^*(A) + \frac{1}{n}
+          \end{align*}
+          Sea $E := \bigcap_{n \geq 1} E_n \in \mc{B}$. Como $A \subseteq E \Rightarrow \ell^*(A) \leq \ell^*(E)$, pero $\ell^*(E) \leq \ell^*(E_n) \leq \ell^*(A) + 1/n \quad \forall n \geq 1$.
+
+          $\therefore \ell^*(A) = \ell^*(E)$.
+\end{enumerate}
+
+\begin{note}
+    Consideremos $E \subseteq \R$ cualquiera y para cada intervalo $I \in \mf{Y}$ tomemos la medida exterior $\ell^*(E \cap I)$ y como medida interior
+    de $E \cap I$, $\ell_* := \ell(I) - \ell^*(I \setminus E)$. Podríamos decir que $E$ es medible con respecto a $\ell^*$ si \begin{align*}
+         & \ell^*(E \cap I) = \ell_*(E \cap I) \quad \forall I \in \mf{Y}                                        \\
+         & \Rightarrow \ell^*(E \cap I) + \ell^*(I \setminus E) = \ell(I) = \ell^*(I) \quad \forall I \in \mf{Y} \\
+         & E = (E \cap I) \cup (E \setminus I) \text{ y } (E \cap I) \cap (I \setminus E) = \O
+    \end{align*}
+\end{note}
+
+\section{Medida exterior}
+
+\begin{definition}
+    Dado un conjunto $X$, sea $\Gamma$ una medida exterior sobre $X$, diremos que $E \subseteq X$ es $\Gamma$-medible si \begin{align*}
+        \Gamma(A) = \Gamma(A \cap E) + \Gamma(A \cap E^c) \quad \forall A \subseteq X
+    \end{align*}
+    A la colección de los conjuntos $\Gamma$-medibles la llamaremos $\mf{X}(\Gamma)$.
+\end{definition}
+
+\begin{note}
+    Como $\Gamma$ es una medida exterior, alcanza con ver que \begin{align*}
+        \Gamma(A) \geq \Gamma(A \cap E) + \Gamma(A \cap E^c) \quad \forall A \subseteq X
+    \end{align*}
+    También alcanza con considerar $A$ con $\Gamma(A) < +\infty$.
+\end{note}
+
+\begin{note}
+    $E$ es $\Gamma$-medible si $\Gamma$ resulta aditiva con respecto a la partición $A = (A \cap E) \cup (A \cap E^c)$ con $(A\cap E) \cap (A \cap E^c) = \O \quad \forall A \subset X$
+\end{note}
+
+\begin{theorem}[Carathéodory]
+    Dado un conjunto $X$, sea $\Gamma$ una medida exterior en $X \Rightarrow \mf{X}(\Gamma)$ es $\sigma$-álgebra sobre $X$ y $\Gamma$ resulta
+    $\sigma$-aditiva sobre $\mf{X}(\Gamma)$ i.e $(X, \mf{X}(\Gamma), \restr{\Gamma}{\mf{X}(\Gamma)})$ es un espacio de medida.
+\end{theorem}
+
+Notemos que $X$, $\O \in \mf{X}(\Gamma)$, pues dado $A \subset X$ \begin{align*}
+     & \Gamma(A \cap \O) + \Gamma(A \setminus \O) = \Gamma(\O) + \Gamma(A) = \Gamma(A) \\
+     & \Gamma(A \cap X) + \Gamma(A \setminus X) = \Gamma(A) + \Gamma(\O) = \Gamma(A)   \\
+     & \Rightarrow \O, X \in \mf{X}(\Gamma)
+\end{align*}
+Veamos que $\mf{\Gamma}$ es cerrada por complementación, si $E \in \mf{X}(\Gamma)$, dado $A \subset X$ \begin{align*}
+     & \Gamma(A \cap E^c) + \Gamma(A \setminus E^c) = \Gamma(A \setminus E) + \Gamma(A \cap E) = \Gamma(A) \\
+     & E^c = X \setminus E \in \mf{X}(\Gamma)
+\end{align*}
+Dados $E, F \in \mf{X}(\Gamma)$, veamos que $E \cap F \in \mf{X}(\Gamma)$ i.e $\Gamma(A) = \Gamma(A \cap (E \cap F)) + \Gamma(A \setminus (E \cap F)) \text{, } \forall A \subseteq X$.
+
+Fijado el $A \subseteq X$, sea \begin{align*}
+    B = A \setminus (E \cap F) & = A \cap (E \cap F)^c                                  \\
+                               & A \cap (E^c \cup F^c) = (A \cap E^c) \cup (A \cap F^c) \\
+                               & = (A \setminus E) \cup (A \setminus F)
+\end{align*}
+
+Notemos que \begin{align*}
+     & B \cap F = A \setminus (E \cap F) = (A \cap F) \setminus E                  \\
+     & B \setminus F = A \setminus (E \cup F) \cup (A \setminus F) = A \setminus F
+\end{align*}
+
+Como $F \in \mf{X}(\Gamma) \Rightarrow$ \begin{align*}
+    \Gamma(B) & = \Gamma(A \setminus (E \cap F)) = \Gamma(B \cap F) + \Gamma(B \setminus F)          \\
+              & = \Gamma((A \cap F) \setminus E) + \Gamma(A \setminus F)                             \\
+              & \Rightarrow \Gamma(A \cap (E \cap F)) + \Gamma(A \setminus (E \cap F))               \\
+              & = \Gamma(A \cap (E \cap F)) + \Gamma((A \cap F) \setminus E) + \Gamma(A \setminus F) \\
+              & = \Gamma(A \cap F) + \Gamma(A \setminus F) = \Gamma(A)
+\end{align*}
+En el último paso utilizamos que tanto $E$ como $F$ pertenecen a $\mf{X}(\Gamma)$.
+Por lo tanto si $E$, $F \in \mf{X}(\Gamma) \Rightarrow E \cap F \in \mf{X}(\Gamma)$, además $E \cup F = (E^c)^c \cup (F^c)^c = (E^c \cap F^c)^c \in \mf{X}(\Gamma)$.
+Luego por inducción, si $E_1$, $\cdots$, $E_n \in \mf{X}(\Gamma) \Rightarrow \bigcup_{k = 1}^n E_k \in \mf{X}(\Gamma) \Rightarrow \mf{X}(\Gamma)$ es un álgebra en $X$.
+
+Dados $E_1$, $E_2 \in \mf{X}(\Gamma) : E_1 \cap E_2 = \O$ veamos que \begin{align*}
+    \Gamma(A \cap (E_1 \cup E_2)) = \Gamma(A \cap E_1) + \Gamma(A \cap E_2) \quad \forall A \subset X
+\end{align*}
+
+Fijemos el $A \subset X \Rightarrow$ \begin{align*}
+     & \Gamma(A \cap (E_1 \cup E_2)) = \Gamma(A \cap (E_1 \cup E_2) \cap E_1) + \Gamma(A \cap (E_1 \cup E_2) \cap E_1^c) \\
+     & = \Gamma(A \cap E_1) + \Gamma((A \cap E_2) \setminus E_1)                                                         \\
+     & = \Gamma(A \cap E_1) + \Gamma(A \cap E_2)
+\end{align*}
+Así que por inducción si $E_1$, $\cdots$, $E_n \in \mf{X}(\Gamma)$ disjuntos dos a dos entonces \begin{align*}
+     & \Gamma\left( A \cap \bigcup_{k = 1}^n E_k \right) = \sum_{k = 1}^n \Gamma(A \cap E_k) \quad \forall A \subset X
+\end{align*}
+
+Ahora veamos que si $(E_n)_{n \geq 1} \subset \mf{X}(\Gamma)$ son disjuntos dos a dos entonces $\bigcup_{m \geq 1} F_m = \bigcup_{k = 1}^m E_k \in \mf{X}(\Gamma)$. Luego $(F_m)_{m \geq 1}$ es una sucesión
+creciente en $\mf{X}(\Gamma)$. Como $\Gamma$ es monótona tenemos que $\forall A \subset X \quad \exists \lim_{n \to +\infty} \Gamma(A \cap F_m)$ y $\lim_{n \to +\infty} \Gamma(A \setminus F_m) < +\infty$.
+Quiero ver que para cada $A \subset X$ \begin{align*}
+    \Gamma(A) = \Gamma\left(A \cap \left(\bigcup_{n \geq 1} E_n\right)\right) + \Gamma\left(A \setminus \left(\bigcup_{n \geq 1} E_n\right) \right)
+\end{align*}
+
+Sabemos que para cada $m \geq 1$
+\begin{align*}
+     & \Gamma(A \cap F_m) + \Gamma(A \setminus F_m) = \Gamma(A),                                                                                          \\
+     & \Gamma\left(A \cap \bigcup_{k=1}^m E_k\right) + \Gamma(A \setminus F_m) = \left(\sum_{k=1}^m \Gamma(A \cap E_k) \right) + \Gamma(A \setminus F_m).
+\end{align*}
+
+Como $F_m \subseteq \bigcup_{n \geq 1} E_n \Rightarrow A \setminus \bigcup_{n \geq 1} E_n \subset A \setminus F_m$ y \begin{align*}
+    \Gamma\left(A \setminus \left(\bigcup_{n \geq 1} E_n \right)\right) \leq \Gamma(A \setminus F_m)
+\end{align*}
+
+Luego, \begin{align*}
+    \Gamma(A) & = \lim_{n \to +\infty} \Gamma(A \cap F_m) + \lim_{n \to +\infty} \Gamma(A \setminus F_m)                            \\
+              & \geq \lim_{n \to +\infty} \sum_{k = 1}^n \Gamma(A \cap E_k) + \Gamma\left(A \setminus \bigcup_{k \geq 1} E_k\right) \\
+              & = \sum_{n \geq 1} \Gamma(A \cap E_n) + \Gamma\left(A \setminus \bigcup_{n \geq 1} E_n \right) \text{ *}             \\
+              & \geq \Gamma\left(\bigcup_{n \geq 1} (A \cap E_n)\right) + \Gamma\left(A \setminus \bigcup_{n \geq 1} E_n \right)    \\
+              & = \Gamma\left(A \cap \bigcup_{n \geq 1} E_n\right) + \Gamma\left(A \setminus \bigcup_{n \geq 1} E_n \right)         \\
+              & \therefore \bigcup_{n \geq 1} E_n \in \mf{X}(\Gamma)
+\end{align*}
+
+Además si en * consideramos $A = \bigcup_{n \geq 1} E_n \Rightarrow$ \begin{align*}
+    \Gamma(A) = \Gamma\left( \bigcup_{n \geq 1} E_n \right) & \geq \sum_{n \geq 1} \Gamma(A \cap E_n) + \Gamma(A \setminus A) \\
+                                                            & = \sum_{n \geq 1} \Gamma(E_n) \text{ **}
+\end{align*}
+
+Y la otra desigualdad sale de la $\sigma$-subaditividad de $\Gamma$. Para terminar de probar que $\mf{X}(\Gamma)$ es $\sigma$-álgebra tomemos
+$(A_n)_{n \geq 1} \subseteq \mf{X}(\Gamma)$ y quiero ver que \begin{align*}
+    \bigcup_{n \geq 1} A_n \in \mf{X}(\Gamma)
+\end{align*}
+
+Consideremos: \begin{align*}
+     & E_1= A_1 \in \mf{X}(\Gamma)                                                                          \\
+     & E_n = A_n \setminus \left(\bigcup_{i = 1}^{n-1} A_i\right) \in \mf{X}(\Gamma) \quad \forall n \geq 2
+\end{align*}
+
+$(E_n)_{n \geq 1}$ es una sucesión de conjuntos dos a dos disjuntos tales que \begin{align*}
+    \bigcup_{n \geq 1} A_n = \bigcup_{n \geq 1} E_n
+\end{align*}
+Entonces por lo que probamos recién $\bigcup_{n \geq 1} A_n \in \mf{X}(\Gamma) \therefore \mf{X}(\Gamma)$ es $\sigma$-álgebra y por ** $\restr{\Gamma}{\mf{X}(\Gamma)}$ es $\sigma$-aditiva.
