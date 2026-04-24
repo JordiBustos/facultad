@@ -1,0 +1,84 @@
+# ==========================================
+# LaTeX
+# ==========================================
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.xdv
+*.xmpi
+*.nav
+*.snm
+*.vrb
+*.sta
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+*.maf
+*.mtc
+*.mtc0
+*.pdf
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ==========================================
+# Jupyter
+# ==========================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ==========================================
+# Editores
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Datos y binarios pesados
+# ==========================================
+*.mat
+*.wav
+*.mp3
+*.mp4
+*.zip
+*.tar.gz
+
+# ==========================================
+# Dev containers / entornos
+# ==========================================
+.devcontainer/

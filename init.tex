@@ -1,0 +1,174 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+
+% --- Configuración de Página ---
+\geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.4em minus 0.2em}
+
+% --- Colores ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+
+% --- Configuración de Hipervínculos ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    citecolor=darkblue,
+    bookmarksnumbered=true
+}
+
+% --- Encabezados y Pies de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkblue}{\textbf{TÍTULO DEL TRABAJO}}}
+\fancyhead[R]{\textcolor{mediumgray}{NOMBRE DE LA MATERIA}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{darkblue}\hrule width\headwidth height\headrulewidth \kern-\headrulewidth}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Entornos Matemáticos ---
+\newtheoremstyle{profesional}%
+    {0.5em}{0.5em}{}
+    {0pt}{\textbf{\color{darkblue}}}{:}
+    {0.5em}
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}
+
+\theoremstyle{profesional}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lemma}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+
+\newtheoremstyle{definicion-style}%
+    {0.5em}{0.5em}{}
+    {0pt}{\textbf{\color{accentblue}}}{:}
+    {0.5em}
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}
+
+\theoremstyle{definicion-style}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+
+\newtheoremstyle{observacion-style}%
+    {0.5em}{0.5em}{\color{mediumgray}\itshape}
+    {0pt}{\textbf{\color{accentblue}}}{:}
+    {0.5em}
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}
+\newtheorem{observacion}[teorema]{Observación}
+
+% --- Macros ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% --- tcolorbox ---
+\tcbset{
+    colback=white,
+    colframe=darkblue,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=3pt, right=3pt, top=3pt, bottom=3pt
+}
+
+% --- Formato de secciones ---
+\titleformat{\section}
+    {\Large\bfseries\color{darkblue}}
+    {\thesection.}{0.5em}{}
+    [\vspace{0.3em}\noindent\textcolor{darkblue}{\rule{\textwidth}{1.5pt}}]
+
+\titleformat{\subsection}
+    {\large\bfseries\color{accentblue}}
+    {\thesubsection.}{0.5em}{}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{accentblue}}
+    {\thesubsubsection.}{0.5em}{}
+
+\begin{document}
+
+% --- PORTADA ---
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{1cm}
+
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{0.5cm}
+    {\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+    {\normalsize Facultad de Ciencias Exactas}\\
+    {\normalsize Departamento de Matemática}\\
+
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{2.5cm}
+
+    {\Huge \textbf{\textcolor{darkblue}{TÍTULO DEL TRABAJO}}}\\
+
+    \vspace{3cm}
+
+    {\large \textbf{TIPO DE DOCUMENTO}}\\   % Ej: Examen Final, Notas de teórico, Práctica
+    {\normalsize NOMBRE DE LA MATERIA}
+
+    \vspace{2.5cm}
+
+    {\normalsize
+        \begin{tabular}{ll}
+            \textbf{Autor:}   & Jordi Bustos               \\
+            \textbf{Fecha:}   & \today                     \\
+            \textbf{Carrera:} & Licenciatura en Matemática
+        \end{tabular}
+    }
+
+    \vfill
+
+    \vspace{1cm}
+\end{center}
+
+\newpage
+
+% --- ÍNDICE ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+% --- CUERPO ---
+\section{Introducción}
+
+
+
+\newpage
+
+% --- BIBLIOGRAFÍA ---
+\section*{Referencias Bibliográficas}
+\addcontentsline{toc}{section}{Referencias Bibliográficas}
+
+\begin{thebibliography}{99}
+
+    \bibitem{ref1} Autor, A. (Año). \textit{Título}. Editorial.
+
+\end{thebibliography}
+
+\end{document}
