@@ -339,17 +339,20 @@ Es claro que la suma y diferencia de cargas es una carga. Es más, cualquier com
     Por lo tanto se tiene que \[
         \lim \int f_n \, d \mu \leq \int f \, d \mu
     \]
-    Para ver la desigualdad contraria y así establecer la igualdad definamos \( \alpha \in (0, 1) \) y sea \( \varphi \) una función simple y medible que satisface \[
-        0 \leq \varphi \leq f
-    \]
-    Sea \[
+    Para ver la desigualdad contraria y así establecer la igualdad tomemos \( \alpha \in (0, 1) \)
+    y sea \( \varphi \) una función simple y medible tal que \( 0 \leq \varphi \leq f \)
+    Definimos \[
         A_n = \{ x \in X : f_n(x) \geq \alpha \varphi(x) \}
     \]
-    tal que \( A_n \in \X \), \( A_n \geq A_{n+1} \) y \( X = \bigcup_{n \geq 1} A_n \). Por lo tanto, por el Lema~\ref{lem:integral_subconjunto}:\[
-        \int_{A_n} \alpha \varphi \, d \mu \leq \int_{A_n} f_n \, d \mu \leq \int f_n \, d \mu
+    con \( A_n \in \X \), \( A_n \subseteq A_{n+1} \) y \( X = \bigcup_{n \geq 1} A_n \).
+    Recordemos que podemos definir la medida \[
+        \lambda(E) = \int_E \alpha \varphi \, d \mu
     \]
-    Como \( (A_n) \) es una sucesión monótona creciente y tiene unión \( X \) se sigue que, por el Lema~\ref{lem:monotonia_integral}, \[
-        \int \varphi \, d \mu = \lim \int_{A_n} \varphi \, d \mu
+    y como \( (A_n) \) es una sucesión monótona creciente con unión \( X \) se sigue que \[
+        \lambda \left(\bigcup_{n \geq 1} A_n \right) = \lim \lambda(A_n) = \lim \int_{A_n} \alpha \varphi \, d \mu = \int \alpha \varphi \, d \mu
+    \]
+    Además, por el Lema~\ref{lem:integral_subconjunto}:\[
+        \int_{A_n} \alpha \varphi \, d \mu \leq \int_{A_n} f_n \, d \mu \leq \int f_n \, d \mu
     \]
     Luego, tomando límite con respecto a \( n \) en la ecuación anterior:\[
         \alpha \int \varphi \, d \mu \leq \lim \int f_n \, d \mu
@@ -476,6 +479,8 @@ Demostraremos ahora dos resultados que serán utilizados directamente en la demo
     \]
 \end{proof}
 
+\clearpage
+
 \section{Teorema de Descomposición de Hahn}
 
 \begin{teorema}[Descomposición de Hahn]
@@ -518,7 +523,7 @@ Demostraremos ahora dos resultados que serán utilizados directamente en la demo
     \]
     Dado que \(\nu \) es una medida con signo y \(\nu(E) > 0\), la serie converge, es decir:
     \[
-        \nu(F) = \sum_{k \geq 1} \nu(E_k) \leq - \sum_{k \geq 1} \frac{1}{n_k}
+        \nu(F) = \sum_{k \geq 1} \nu(E_k) \leq - \sum_{k \geq 1} \frac{1}{n_k} \leq 0
     \]
     Como la suma converge, necesariamente \(-1/n_k \to 0\), lo que implica que \(n_k \to \infty \).
 
@@ -526,7 +531,7 @@ Demostraremos ahora dos resultados que serán utilizados directamente en la demo
     \[
         \nu(G) \leq -\frac{1}{n_k - 1}
     \]
-    Pero \(G \subseteq E \setminus F \subseteq E \setminus (E_1 \cup \ldots \cup E_{k-1})\). Esto significa que en el paso \(k\) existía un conjunto (precisamente \(G\)) con medida menor o igual a \(-1/(n_k - 1)\), lo cual contradice la elección de \(n_k\) como el \textbf{primer} natural que cumplía dicha cota.
+    Pero \(G \subseteq E \setminus F \subseteq E \setminus (E_1 \cup \ldots \cup E_k)\). Esto significa que en el paso \(k\) existía un conjunto (precisamente \(G\)) con medida menor o igual a \(-1/(n_k - 1)\), lo cual contradice la elección de \(n_k\) como el \textbf{primer} natural que cumplía dicha cota.
 
     En consecuencia, ningún subconjunto de \(E \setminus F\) puede tener medida negativa. Esto prueba que \(E \setminus F\) es un conjunto positivo. Dado que:
     \[
@@ -631,14 +636,6 @@ Esta sección introduce la relación fundamental entre dos medidas que es centra
     Por lo tanto \( \nu \) no es absolutamente continua respecto de \( \mu \).
 \end{proof}
 
-\begin{ejemplo}
-    Sea \(f \in L^1_{\text{loc}}(\mu)\) una función localmente integrable. Defina \(\nu(A) = \int_A f \, d\mu \). Entonces \(\nu \ll \mu \), pues si \(\mu(A) = 0\), se tiene \(\nu(A) = \int_A f \, d\mu = 0\).
-\end{ejemplo}
-
-\begin{proposicion}
-    Si \(\nu \ll \mu \) y \(\mu \) es \(\sigma \)-finita, entonces \(|\nu| \ll \mu \).
-\end{proposicion}
-
 \section{El Teorema de Radon-Nikodym}
 
 \begin{teorema}[Radon-Nikodym para medidas finitas]
@@ -730,12 +727,25 @@ Para expresar el concepto opuesto introducimos la idea de medida mutuamente sing
 \end{observacion}
 
 \begin{teorema}[Descomposición de Lebesgue]
-    Sean \( \nu \) y \( \mu \) medidas \( \sigma \)-finitas en \( \X \).
-    Entonces existen dos medidas \( \nu_1 \) tal que \( \nu_1 \perp \mu \) y \( \nu_2 \) tal que \( \nu_2 \ll \mu \) tal que \( \nu = \nu_1 + \nu_2 \).
+    Sean \( \lambda \) y \( \mu \) medidas \( \sigma \)-finitas en \( \X \).
+    Entonces existen dos medidas \( \lambda_1 \) tal que \( \lambda_1 \perp \mu \) y \( \lambda_2 \) tal que \( \lambda_2 \ll \mu \) tal que \( \lambda = \lambda_1 + \lambda_2 \).
     Además, está descomposición es única.
 \end{teorema}
 \begin{proof}
-    TODO
+    Sea \( \nu = \lambda + \mu \) tal que \( \nu \) es una medida \( \sigma \)-finita. Como \( \lambda \ll \nu \) y \( \mu \ll \nu \) el TRN implica que existen \( f, g \in M^+ \) tales que \[
+        \lambda(E) = \int_E f \, d \nu \quad \text{y} \quad \mu(E) = \int_E g \, d \nu
+    \]
+    para todo \( E \in \X \). Sea \( A = \{ x : g(x) = 0 \} \) y \( B = \{ x : g(x) > 0 \} \), tales que \( A \cap B = \varnothing \) y \( A \cup B = X \). Si definimos \[
+        \lambda_1(E) = \lambda(E \cap A) \quad \text{y} \quad \lambda_2(E) = \lambda(E \cap B)
+    \]
+    Como \( \mu(A) = 0 \) entonces se sigue que \( \lambda_1 \perp \mu \). Para ver que \( \lambda_2 \ll \mu \) notemos que si \( \mu(E) = 0 \) entonces \( \int_E g \, d \nu = 0 \) por lo que \( g(x) = 0 \, \nu \)-c.t.p para todo \( x \in E \). Luego, \( \nu(E \cap B) = 0 \); como \( \lambda \ll \nu \)
+    \[
+        \lambda_2(E) = \lambda(E \cap B) = 0
+    \]
+    Claramente, \( \lambda = \lambda_1 + \lambda_2 \) y \( \lambda_1 \perp \mu \) y \( \lambda_2 \ll \mu \).
+
+    Para ver la unicidad consideremos \( \alpha \) una medida tal que \( \alpha \perp \mu \) y \( \beta \ll \mu \) con \( \lambda = \alpha + \beta \).
+    Entonces \( \alpha = \lambda - \beta \) y \( \beta = \lambda - \alpha \). Dado que \( \alpha \perp \mu \) y \( \beta \ll \mu \) se deduce que \( \alpha = 0 \) y \( \beta = 0 \), lo que implica que \( \lambda_1 = 0 \) y \( \lambda_2 = 0 \).
 \end{proof}
 
 \section{Diferenciación de medidas}
