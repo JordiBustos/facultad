@@ -296,20 +296,39 @@ Demostraremos una proposición que nos servirá en el siguiente ejercicio.
 \end{proof}
 
 \begin{ejercicio}{9}
-    Dada \( x \) una red en \( X \):
+    Dada \( \mathbf{x} \) una red en \( X \):
     \begin{enumerate}
-        \item Si \( Y \subseteq Z \subseteq X \) y \( x \) es universal en \( Y \) entonces es universal en \( Z \).
-        \item Si \( x \) es universal en \( X \) entonces toda subred de \( x \) también es universal en \( X \).
+        \item Si \( Y \subseteq Z \subseteq X \) y \( \mathbf{x} \) es universal en \( Y \) entonces es universal en \( Z \).
+        \item Si \( \mathbf{x} \) es universal en \( X \) entonces toda subred de \( \mathbf{x} \) también es universal en \( X \).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \( Y \subseteq Z \subseteq X \) y \( \mathbf{x} \) una red universal en \( Y \). Dado \( A \subseteq Z \) tal que \( A \cap Y \neq \varnothing \), como \( \mathbf{x} \) es universal en \( Y \)
+    se tiene que \( x \evto{A \cap Y} \) o \( x \evto{A^c \cap Y} \). En el primer caso, como \( A \cap Y \subseteq A \) se concluye que \( x \evto{A} \). En el segundo caso, que \( x \evto{A^c} \).
+    Veamos que ocurre si \( Y \cap A = \varnothing \), entonces \( Y \subseteq A^c \) y \( A^c \cap Y = Y \neq \varnothing \) por lo que \( x \evto{A^c} \).
 
+    Para la segunda parte consideremos \( \mathbf{x} \) universal en \( X \) y \( \mathbf{y} \) una subred de \( \mathbf{x} \). Dado \( A \subseteq X \) se tiene que \[
+        x \evto{A} \text{ o } x\evto{A^c}
+    \]
+    Por definición tenemos que \( \mathbf{y} = \mathbf{x} \circ h \) para alguna función creciente \( h : J \to I \) tal que \( h(J) \) es cofinal en \( I \), \( J \) dirigido. Luego,
+    por definición de estar eventualmente en un conjunto, existe un \( i_0 \in I \) tal que \( \forall i \geq i_0 \) se tiene que \( x_i \in A \) o \( x_i \in A^c \).
+    Dado que \( h(J) \) es cofinal en \( I \), existe un \( j_0 \in J \) tal que \( h(j_0) \geq i_0 \) y como \( h \) es creciente vale que \( h(j) \geq i_0 \) para todo \( j \geq j_0 \). Por lo tanto,
+    \( y_j = x_{h(j)} \in A \) o \( y_j \in A^c \quad \forall j \geq j_0 \therefore \mathbf{y} \) es universal en \( X \).
 \end{proof}
 
 \begin{ejercicio}{10}
     Probar que toda red universal induce un ultrafiltro. ¿Todo ultrafiltro puede generarse por una red universal?
 \end{ejercicio}
 \begin{proof}
+    Sea \( \mathbf{x} \) la red universal en \( X \) consideremos el ya estudiado filtro \[
+        F_{\mathbf{x}} = \{ A \subseteq X : x \evto{A} \}
+    \]
+    Luego, dado \( B \subseteq X \) se tiene que \( x \evto{B} \) o \( x \evto{B^c} \) por ser \( \mathbf{x} \) universal en \( X \).
+    Por lo tanto, \( B \in F_{\mathbf{x}} \) o \( B^c \in F_{\mathbf{x}} \) y, por lo tanto, \( F_{\mathbf{x}} \) es un ultrafiltro.
 
+    Consideremos un ultrafiltro \( F \) en \( X \) y construyamos una red universal \( \mathbf{x} \) tal que \( F_{\mathbf{x}} = F \).
+    Para ello, consideremos el conjunto dirigido \( I = F \) por el orden dado por la inclusión al revés. Luego, para cada \( A \in F \)
+    elijo un \( x_A \) haciendo uso del AdE y es fácil ver que \( {(x_A)}_{A \in F} \) es una red universal en \( X \) y que \( F_{\mathbf{x}} = F \).
 \end{proof}
+
 \end{document}
