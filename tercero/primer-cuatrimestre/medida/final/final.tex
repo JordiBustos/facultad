@@ -799,21 +799,125 @@ la medida de Lebesgue en \( \R \).
     El teorema anterior sugiere que la derivada de \( \mu \) en \( x \) podría definirse como el límite de los cocientes \[
         \dfrac{\mu(I)}{m(I)}
     \]
-    cuando los segmentos \( I \) se contraen hacia el punto \( x \). Se podrían considerar cocientes de la forma \( \frac{\mu(E)}{m(E)} \) para conjuntos medibles \( E \) de alguna familia \( \mathcal{E} \).
-
-    Supongamos que \( x \in \R^k \). Una sucesión \( {( E_i )}_{i \geq 1} \) de conjuntos medibles Borel en \( \R^k \) se dice que \textbf{se contrae aceptablemente} a \( x \)
-    si existe un número \( \alpha > 0 \) con la siguiente propiedad: Cada \( E_i \) está en una bola abierta \( B(x, r_i) \) con centro \( x \) y radio \( r_i > 0 \), tal que \[
-        m(E_i) \geq \alpha m(B(x, r_i)) \quad (i = 1, 2, \ldots)
-    \]
-    y \( r_i \to 0 \) cuando \( i \to +\infty \). Notar que \( m \) ahora es la medida de Lebesgue en \( \R^k \).
+    cuando los segmentos \( I \) se contraen hacia el punto \( x \). Además, se podría definir de manera análoga para \( \R^k \).
 \end{definicion}
 
-Notemos que en la definición anterior no se requiere que \( x \in E_i \), ni siquiera que \( x \) esté en la adherencia de \( E_i \).
+En efecto, fijado \( k \in \N \) para \( \R^k \) notemos la bola de radio \( r > 0 \) centrada en \( x \) por \[
+    B(x, r) = \{ y \in \R^k : \| y - x \| < r \}
+\]
+donde \( \| \cdot \| \) denota la métrica euclídea. Entonces, para una medida de Borel \( \mu \) en \( \R^k \)
+asociamos el cociente: \[
+    (Q_r, \mu)(x) = \dfrac{\mu(B(x, r))}{m(B(x, r))}
+\]
+donde \( m = m_k \) es la medida de Lebesgue en \( \R^k \).
 
-TODO
+\begin{definicion}
+    Para estudiar a \( D\mu \) definimos la \textit{Derivada simétrica} de \( \mu \) en \( x \) como el límite\[
+        (D\mu)(x) = \lim_{r \to 0} (Q_r, \mu)(x) = \lim_{r \to 0} \dfrac{\mu(B(x, r))}{m(B(x, r))}
+    \]
+    en aquellos puntos \( x \in \R^k \) donde el límite existe.
+\end{definicion}
+
+\begin{definicion}
+    Definimos la \textit{Función maximal} de \( \mu \geq 0 \) en \( x \) como \[
+        (M\mu)(x) = \sup_{0 < r < \infty} (Q_r, \mu)(x)
+    \]
+    Cuando \( \mu \) es una medida con signo, se reemplaza \( \mu \) por su variación total \( |\mu| \) en el cociente \( Q_r \), ya que \( \mu(B(x,r)) \) puede ser negativo y se desea medir la masa total acumulada cerca de \( x \) sin importar el signo. Para medidas positivas, \( |\mu| = \mu \) y la definición coincide con la anterior.
+\end{definicion}
+
+Se puede demostrar que \( (M\mu) \) es una función medible demostrando que es \textit{semi-continua inferiormente}, es decir, que \( \{ x \in \R^k : (M\mu)(x) > t \} \) es un conjunto abierto para todo \( t \in \R \).
+
+\begin{lemma}
+    Si \( W \) es la unión de una colección finita de bolas \( B(x_i, r_i) \) con \( i = 1, \ldots, N \) entonces existe un subconjunto
+    \( S \subset \{ 1, \ldots, N \} \) tal que:\begin{enumerate}[label = (\roman*)]
+        \item Las bolas \( B(x_i, r_i) \) con \( i \in S \) son disjuntas.
+        \item \( W \subset \bigcup_{i \in S} B(x_i, 3 r_i) \).
+        \item \( m(W) \leq 3^k \sum_{i \in S} m(B(x_i, r_i)) \).
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    TODO
+\end{proof}
+
+El siguiente teorema dice, más o menos, que la función maximal de una medida no puede ser grande en un conjunto grande.
+
+\begin{teorema}
+    Si \( \mu \) es una medida de Borel en \( \R^k \) y \( \lambda > 0 \) entonces \[
+        m\{M\mu > \lambda \} \leq \dfrac{3^k \cdot |\mu|(\R^k)}{\lambda}
+    \]
+    Donde \( m\{M\mu > \lambda \} = m( \{x \in \R^k : (M\mu)(x) > \lambda \}) \).
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+Sabemos que si \( f \in L^1(\R^k) \) entonces, dado \( \lambda > 0 \) vale que \[
+    m\{ |f| > \lambda \} \leq \dfrac{\| f \|_1}{\lambda}
+\]
+Pues, considerando \( E = \{ |f| > \lambda \} \) tenemos que \[
+    \lambda m(E) \leq \int_E |f| \, d m \leq \int_{\R^k} |f| \, d m = \| f \|_1
+\]
+Luego, para cada \( f \) medible tal que \( \lambda \cdot m\{ |f| > \lambda \} \) es una función acotada de \( \lambda \) en \( (0, \infty) \) se tiene que
+\( f \in \text{weak} L^1(\R^k) \). Por esto \( L^1 \subseteq \text{weak} L^1 \) y la inclusión es estricta (considerar \(f(x) = 1/|x|^k \)).
+
+\begin{definicion}
+    Definimos la \textit{Función maximal de Hardy-Littlewood} de \( f \in L^1(\R^k) \) como \[
+        (Mf)(x) = \sup_{0 < r < \infty} \dfrac{1}{m(B_r)} \int_{B(x, r)} |f(y)| \, d m(y)
+    \]
+    Notamos \( B_r \) para dejar en claro que \( m(B(x, r)) \) depende solo del radio \( r \). Si
+    identificamos \( f \) con la medida \( \mu \) dada por \( d \mu = |f| \, d m \) entonces \( Mf = M\mu \).
+\end{definicion}
+
+El teorema anterior implica que el operador \( M \) manda \( L^1 \) a \( \text{weak} L^1 \) y que
+es acotado por \( 3^k \) que depende solo de \( \R^k \):
+
+Para cada \( f \in L^1 \) y cada \( \lambda > 0 \), \[
+    m\{ Mf > \lambda \} \leq \dfrac{3^k \| f \|_1}{\lambda}
+\]
+
+\begin{definicion}
+    Dada \( f \in L^1 \), \( x \in \R^k \) tal que \[
+        \lim_{r \to 0} \dfrac{1}{m(B(x, r))} \int_{B(x, r)} |f(y) - f(x)| \, d m(y) = 0
+    \] se dice que \( x \) es un \textbf{Punto de Lebesgue} de \( f \).
+\end{definicion}
+
+\begin{teorema}
+    Si \( f \in L^1(\R^k) \) entonces casi todo punto \( x \in \R^k \) es un punto de Lebesgue de \( f \).
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{teorema}
+    Si \( \mu \) es una medida de Borel en \( \R^k \) tal que \( \mu \ll m \). Sea \( f \) la derivada de Radon-Nikodym de \( \mu \) con respecto a \( m \) entonces \( D \mu = f \) para \( m \)-c.t.p y además \[
+        \mu(E) = \int_E (D\mu) \, d m \quad \forall E \text{ conjunto de Borel en } \R^k
+    \]
+    En otras palabras, la derivada de Radon-Nikodym de \( \mu \) se puede obtener como el límite de cocientes \( Q_r\mu \).
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{definicion}
+    Diremos que \( (E_i) \) una sucesión de conjuntos de Borel en \( \R^k \) se contrae aceptablemente a \( x \in \R^k \) si existe un número
+    \( \alpha > 0 \) tal que \( (B(x, r_i)) \) con \( r_i \to 0 \) tal que \( E_i \subseteq B(x, r_i) \) y \[
+        m(E_i) \geq \alpha m(B(x, r_i)) \quad \forall i \in \N
+    \]
+
+    No es necesario que \( x \in E_i \) o \( x \in \overline{E_i} \) para que \( (E_i) \) se contraiga aceptablemente a \( x \).
+\end{definicion}
+
+\begin{teorema}
+    Dado \( x \in \R^k \) y \( \{ E_i(x) \} \) una sucesión de conjuntos de Borel que se contrae aceptablemente a \( x \) y \( f \in L^1 \) entonces \[
+        f(x) = \lim_{i \to \infty} \dfrac{1}{m(E_i(x))} \int_{E_i(x)} f \, d m
+    \]
+    para cada punto de Lebesgue de \( f \) i.e \( m \)-c.t.p.
+\end{teorema}
+\begin{proof}
+    TODO
+\end{proof}
 
 \newpage
-
 % --- BIBLIOGRAFÍA ---
 \section*{Referencias Bibliográficas}
 \addcontentsline{toc}{section}{Referencias Bibliográficas}
