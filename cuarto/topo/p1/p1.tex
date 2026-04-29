@@ -307,6 +307,29 @@
     Es fácil verificar que \( g \) es inyectiva. Luego por el teorema de Cantor-Bernstein-Schröder, concluimos que \( |A\cup F|=|A| \).
 \end{proof}
 
+Del apunte de Demetrio:
+
+\begin{ejercicio}{13}
+    Demostrar que si \(A\) es infinito entonces \( |A| = |A \times \N| \).
+\end{ejercicio}
+\begin{proof}
+    Es fácil ver que \( f: A \to A \times \N \) dada por \( f(a) = (a, 1) \) es inyectiva. La construcción de la otra inyección es un poco más sofisticada. Consideremos el siguiente conjunto: \[
+        \mathcal{P} = \{ (X, f) : X \subseteq A \text{ y } f : X \times \N \to X \text{ es biyectiva} \}
+    \]
+    dotado del orden \( (X, f) \leq (Y, g) \iff X \subseteq Y \) y \( g \) extiende a \( f \). Replicando el razonamiento del \textbf{Ejercicio 9}, aplicamos el LdZ para encontrar el elemento maximal
+    \( (M, f^*) \) de \( \mathcal{P} \). Sea \( R = M \setminus A \) es fácil ver que si \( R \) no es finito se rompe la maximalidad de \( (M, f^*) \). Luego, dado que \( R \) es finito,
+    \( R = \{ r_1, r_2, \ldots, r_k \} \) y, además, \( \exists S \subseteq M \) tal que \( |S| = \aleph_0 \) y construimos la biyección \( \varphi: A \to M \) dada por \[
+        \varphi(a) = \begin{cases}
+            a       & \text{si } a \in M - S - R                                 \\
+            r_i     & \text{si } a = s_i \in S \text{ para } i = 1, 2, \ldots, k \\
+            s_{i-k} & \text{si } a = s_i \in S \text{ para } i > k
+        \end{cases}
+    \]
+    Finalmente, definimos \( g : A \times \N \to A \) dada por: \[
+        g(a, n) = \Phi^{-1}(f^*(\varphi(a)), n)
+    \]
+    que es inyectiva. Luego, por el teorema de Cantor-Bernstein-Schröder, concluimos que \( |A| = |A \times \N| \).
+\end{proof}
 \section*{Ejercicios complementarios}
 
 \begin{ejercicio}{1}
