@@ -72,7 +72,7 @@
 \begin{proof}
     Veamos cada caso por separado:
     \begin{enumerate}
-        \item Es una topología, ya que que \( \varnothing, X \in \tau \), la únión de cualquier colección de círculos abiertos es un círculo abierto cuyo radio es el supremo de los radios de los círculos que forman la colección (puede ser \( r = \infty \)) y la intersección finita de círculos abiertos es el círculo abierto cuyo radio es el menor de los radios de los círculos que forman la colección. Es el menor y no el ínfimo por ser finitos.
+        \item Es una topología, ya que que \( \varnothing, X \in \tau \), la únión de cualquier colección de círculos abiertos es un círculo abierto cuyo radio es el supremo de los radios de los círculos que forman la colección (puede ser \( r = \infty \)) y la intersección finita de círculos abiertos con mismo centro es el círculo abierto cuyo radio es el menor de los radios de los círculos que forman la colección. Es el menor y no el ínfimo por ser finitos.
         \item No es topología pues \( A \cap B = \{ 0 \} \) si \( A = \{ 0 \} \cup (1, \infty) \in \tau \) y \( B = \{ 0 \} \cup (-\infty, -1) \in \tau \).
         \item Es una topología, ya que \( \varnothing, X \in \tau \), la unión de cualquier colección de conjuntos con complemento finito es un conjunto con complemento finito y la intersección finita de conjuntos con complemento finito es un conjunto con complemento finito.
         \item Análogamente al caso anterior, es una topología.
@@ -86,7 +86,7 @@
     Mostrar que los conjuntos \((t,+\infty)\) junto con \(\varnothing \) y \(\R \) forman una topología en \(\R \). Dado \(a\in\R \) calcular \(\overline{\{a\}}\).
 \end{ejercicio}
 \begin{proof}
-    Por definición de \( \tau \) se tiene que \( \varnothing, \R \in \tau \), la unión de cualquier colección de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\sup_{t \in T} t, +\infty) \) (notar que si \( \sup_{t \in T} t = +\infty \) entonces el conjunto resultante es vacío y está en la topología) y la intersección finita de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\text{max}_{t \in T} t, +\infty) \). Por lo tanto, \( \tau \) es topología.
+    Por definición de \( \tau \) se tiene que \( \varnothing, \R \in \tau \), la unión de cualquier colección de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\inf_{t \in T} t, +\infty) \) (notar que si el ínfimo se va a \(- \infty \) el conjunto resultante es \( \R \in \tau \)) y la intersección finita de conjuntos de la forma \( (t, +\infty) \) es un conjunto de la misma forma dado por \( (\text{max}_{t \in T} t, +\infty) \). Por lo tanto, \( \tau \) es topología.
 
     Nuevamente por definición se tiene que:
     \[
@@ -255,9 +255,9 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
-    Recordemos que el hecho de que \( X \) sea \( T_1 \) significa que para \( x, y \in X \) distintos, existe \( U, V \in \mathcal{O}(x) \) tal que \( x \notin V \) e \( y \notin U \).
-    Supongamos entonces que  \( X \) es \( T_1 \) y veamos que los puntos de \( X \) son cerrados. Dado \( x \in X \) se tiene que para cada \( y \in X \) con \( x \neq y \) vale que existe \( V \in \mathcal{O}(x) \) tal que \( y \notin V \).
-    Por lo tanto, \( X - \{ x \} = \bigcup_{y \in X - \{ x \}} V_y \) donde \( V_y \in \mathcal{O}(x) \) es tal que \( y \notin V_y \). Por lo tanto, \( X - \{ x \} \) es abierto por ser unión de una familia de conjuntos abiertos y por lo tanto \( \{ x \} \) es cerrado.
+    Recordemos que el hecho de que \( X \) sea \( T_1 \) significa que para \( x, y \in X \) distintos, existe \( U \in \mathcal{O}(x) \) tal que \( y \notin U \) y existe \( V \in \mathcal{O}(y) \) tal que \( x \notin V \).
+    Supongamos entonces que  \( X \) es \( T_1 \) y veamos que los puntos de \( X \) son cerrados.
+    Consideremos \( X - \{ x \} = \bigcup_{y \in X - \{ x \}} V_y \) donde \( V_y \in \mathcal{O}(y) \) es tal que \( x \notin V_y \) y, por lo tanto, \( X - \{ x \} \) es abierto y entonces \( \{ x \} \) es cerrado.
 
     Consideremos ahora que todos los puntos de \( X \) son cerrados, entonces dado \( x \in X \) se tiene que \( \{ x \} \) es cerrado y por lo tanto \( X - \{ x \} \) es abierto. Sabemos que \( \mathcal{O}(x) = \{ U \subseteq X : U \text{ es entorno de } x \} \) y \( U \) es entorno de \( x \) si existe \( A \) abierto tal que \( x \in A \subseteq U \).
     Notar que \[
@@ -408,10 +408,10 @@
     \( \therefore (X, \tau_s) \) es \( N_1 \).
 
     Para ver que \( \tau_s \) no es \( N_2 \) debemos mostrar que no admite una base numerable. Para ello supongamos que \( \beta' \) es una base numerable de \( \tau_s \) y veamos que esto no puede ser.
-    Tenemos que \[
+    Dado \[
         \beta' = \left \{ \coint{a_n}{b_n} : a_n, b_n \in \R, \, n \in \N \text{ y } a_n < b_n \right \}
-    \]
-    Luego, como \( \beta' \) es numerable la colección de los \( a_n, b_n \) es numerables y no pueden cubrir toda la recta real. De aquí se deduce que debe existir \( x \in \R \) tal que \( x \neq a_n \)
+    \] queremos ver que existe \( \coint{x}{y} \in \tau_s \) tal que \( \coint{a_n}{b_n} \nsubseteq \coint{x}{y} \quad \forall n \in \N \). En efecto, 
+    Como \( \beta' \) es numerable la colección de los \( a_n, b_n \) es numerable y no pueden cubrir toda la recta real. De aquí se deduce que debe existir \( x \in \R \) tal que \( x \neq a_n \)
     y \( x \neq b_n \) para cada \( n \in \N \). Además, por Arquimedianidad, podemos afirmar que vale lo mismo para \( x + \frac{1}{k} \) con \( k \in \N \) lo suficientemente grande.
     Por lo tanto, \( \coint{x}{x+\frac{1}{k}} \) es un abierto de \( \tau_s \) que no puede ser escrito como unión de elementos de \( \beta' \) ya que cada elemento de \( \beta' \)
     que contiene a \( x \) es de la forma \( \coint{a_n}{b_n} \) con \( a_n < x < x+\frac{1}{k} < b_n \) por lo que \( \coint{a_n}{b_n} \) no puede ser incluido en \( \coint{x}{x+\frac{1}{k}} \). Por lo tanto, \( (X, \tau_s) \) no es \( N_2 \).
