@@ -292,11 +292,25 @@
     Sean \(x\) e \(y\) dos elementos distintos en la misma componente conexa de \(X\). Demostrar que cualquier clopen de \(X\) tiene ambos o a ninguno.
 \end{ejercicio}
 \begin{proof}
-    Dados \( x \), \( y \) en la misma componente conexa \( C \). Supongamos que \( U \) es un clopen de \( X \) tal que \( x \in U \) y \( y \notin U \). Entonces \( V = X \setminus U \) es un clopen de \( X \) tal que 
+    Dados \( x \), \( y \) en la misma componente conexa \( C \). Supongamos que \( U \) es un clopen de \( X \) tal que \( x \in U \) y \( y \notin U \). Entonces \( V = X \setminus U \) es un clopen de \( X \) tal que
     \( y \in V \) y \( x \notin V \). Luego, \( U \cup V = X \) y \( U \cap V = \varnothing \) es una separación de \( X \) tal que \( x \in U \) e \( y \in V \).
-    Ahora notemos que \( C_1 = U \cap C \) y \( C_2 = V \cap C \) son abiertos relativos a \( C \) tales que \( C_1 \cup C_2 = C \), 
+    Ahora notemos que \( C_1 = U \cap C \) y \( C_2 = V \cap C \) son abiertos relativos a \( C \) tales que \( C_1 \cup C_2 = C \),
     \( \{ x \} \subseteq C_1 \cap C \) y \( \{ y \} \subseteq C_2 \cap C \) y \( C_1 \cap C_2 = \varnothing \). Esto contradice que \( C \) es conexo.
-    Por lo tanto, no puede existir un clopen de \( X \) que contenga a \( x \), pero no a \( y \) o que contenga a \( y \) pero no a \( x \). Por lo tanto, cualquier clopen de \( X \) tiene ambos o a ninguno. 
+    Por lo tanto, no puede existir un clopen de \( X \) que contenga a \( x \), pero no a \( y \) o que contenga a \( y \) pero no a \( x \). Por lo tanto, cualquier clopen de \( X \) tiene ambos o a ninguno.
+\end{proof}
+
+Del apunte de Demetrio:
+
+\begin{ejercicio}{13}
+    Sea \( (X, \tau) \) un espacio topológico conexo, \( f : X \to \R \) una función continua y \( x, y \in X \) probar que \( f \) toma todos los valores entre \( f(x) \) y \( f(y) \).
+\end{ejercicio}
+\begin{proof}
+    Por el absurdo, supongamos que \( f \) no toma algún valor entre \( f(x) \) y \( f(y) \). Spdg \( f(x) < c < f(y) \) y \( f(z) \neq c \) para todo \( z \in X \).
+    Entonces, definimos: \[
+        U = f^{-1}((-\infty, c)) \quad \text{y} \quad V = f^{-1}((c, +\infty)).
+    \]
+    Que son abiertos en \( X \) por la continuidad de \( f \). Además, \( U \cap V = \varnothing \) y \( U \cup V = X \), lo que contradice la conexidad de \( X \).
+    Por lo tanto, \( f \) debe tomar todos los valores entre \( f(x) \) y \( f(y) \).
 \end{proof}
 
 \clearpage
@@ -306,30 +320,36 @@
 \begin{ejercicio}{C1}
     Sea \(Y \subseteq X\) ambos conexos. Si \((U, V)\) es una separación fuerte de \(Y^c\) entonces \(Y \cup U\) y \(Y \cup V\) son conexos.
 \end{ejercicio}
-
 \begin{proof}
 \end{proof}
 
 \begin{ejercicio}{C2}
-    Si \(Y\) es un subespacio conexo de \(X\) tal que \(Y \cap A \neq \varnothing\) y \(Y \cap A^c \neq \varnothing\) entonces \(Y \cap \partial A \neq \varnothing\).
+    Si \(Y\) es un subespacio conexo de \(X\) tal que \(Y \cap A \neq \varnothing \) y \(Y \cap A^c \neq \varnothing \) entonces \(Y \cap \partial A \neq \varnothing \).
 \end{ejercicio}
-
 \begin{proof}
+    Supongamos por el absurdo que \( Y \cap \partial A = \varnothing \). Sabemos que \( \Int{A} \subseteq A \subseteq \cl{A} \) y, en consecuencia, \( A^c \subseteq {\Int{A}}^c \).
+    Luego, como \( \partial A = \cl{A} \setminus \Int{A} \) se tiene que: \[
+        Y \cap \partial A = Y \cap \cl{A} \cap {\Int{A}}^c = \varnothing
+    \]
+    Como \( A \subseteq \cl{A} \) y \( A \cap Y \neq \varnothing \implies \cl{A} \cap Y \neq \varnothing \), análogamente se tiene que \( {\Int{A}}^c \cap Y \neq \varnothing \). Por lo tanto
+    debe ser \( \partial A = \varnothing \), lo que implica por definición que \( \cl{A} = \Int{A} \therefore A \) es clopen e \( Y \) no es conexo.
 \end{proof}
 
 \begin{ejercicio}{C3}
-    Considerar \(F_1 \supseteq F_2 \supseteq \cdots \supseteq F_n \supseteq \cdots\) una sucesión infinita decreciente de conjuntos cerrados y conexos en \(\R^2\) (con la topología usual). ¿Es \(\bigcap_{n \geq 1} F_n\) conexo?
+    Considerar \(F_1 \supseteq F_2 \supseteq \cdots \supseteq F_n \supseteq \cdots \) una sucesión infinita decreciente de conjuntos cerrados y conexos en \(\R^2\) (con la topología usual). ¿Es \(\bigcap_{n \geq 1} F_n\) conexo?
 \end{ejercicio}
-
 \begin{proof}
+    La idea para armar el contraejemplo es aprovecharnos del hecho de que los \( F_i \) no son compactos y por ello podemos hacer la siguiente construcción: Comencemos con
+    \( F_1 = [-2, 2] \times \R \) y para cada \( n \geq 2 \) consideremos \( F_n = ([-2, 2] \times \R) \setminus ((-1, 1) \times (-n, n)) \). Entonces, cada \( F_n \) es cerrado y
+    conexo, pero \( \bigcap_{n \geq 1} F_n = ([-2, 2] \times \R) \setminus ((-1, 1) \times \R) \) que es la unión de dos rectángulos disjuntos y, por lo tanto, no es conexo.
 \end{proof}
 
 \begin{ejercicio}{C4}
     Probar que la imagen de un conjunto arcoconexo bajo una función continua es un conjunto arcoconexo.
 \end{ejercicio}
-
 \begin{proof}
-\end{proof}
+    Sea \( A \) un conjunto arcoconexo y \( f : A \to Y \) una función continua. Para cada \( x, y \in A \) existe un arco \( \alpha : [0, 1] \to A \) tal que \( \alpha(0) = x \) y \( \alpha(1) = y \).
+    Entonces, la composición \( f \circ \alpha : [0, 1] \to Y \) es un arco en \( Y \) que conecta a \( f(x) \) con \( f(y) \). Por lo tanto, para cada par de puntos en \( f(A) \), existe un arco que los conecta dentro de \( f(A) \), lo que implica que \( f(A) \) es arcoconexo.  \end{proof}
 
 \begin{ejercicio}{C5}
     Considerar \(X = [0, 1] \times [0, 1]\) dotado con el orden lexicográfico y la topología de orden respectiva. Mostrar que \(X\) es conexo pero no arcoconexo.
