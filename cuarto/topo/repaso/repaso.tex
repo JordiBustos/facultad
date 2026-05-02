@@ -1,0 +1,171 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                       % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+\newcommand{\coint}[2]{\left[ #1, #2 \right)}
+
+% Net convergence notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica de Repaso\\Primer Parcial}
+\author{Bustos Jordi\\Espacios Topológicos, Conexidad y Redes}
+
+\maketitle
+
+\section{Espacios Topológicos y Separación}
+
+\begin{ejercicio}{1}
+    Sea \((X, \leq)\) un conjunto totalmente ordenado. Se define la \textit{topología del orden} \(\tau_\leq \) como la generada por los intervalos abiertos \(\{ (a,b) : a, b \in X,\, a < b \}\), donde \((a,b) = \{ x \in X : a < x < b \}\).
+    Notar que si \(X\) tiene un mínimo \(m\) o un máximo \(M\), entonces también se incluyen los intervalos de la forma \(\coint{m}{b}\) o \((a, M]\) respectivamente. Demostrar las siguientes afirmaciones sobre \((X, \tau_\leq)\):
+    \begin{enumerate}
+        \item Demostrar que \((X, \tau_\leq)\) es \(T_2\).
+        \item Mostrar que si \(X = \R \) con el orden usual, entonces \(\tau_\leq \) coincide con la topología usual de \(\R \).
+        \item Describir la clausura del intervalo abierto \((a,b)\) en la topología del orden sobre \(\R \), y dar un ejemplo de un conjunto totalmente ordenado en el que \(\cl{(a,b)} \neq [a,b]\).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sean \(\tau_1 \subseteq \tau_2\) dos topologías sobre un mismo conjunto \(X\). Analizar las siguientes implicaciones; demostrarlas o dar un contraejemplo:
+    \begin{enumerate}
+        \item Si \((X, \tau_2)\) es \(T_1\), entonces \((X, \tau_1)\) es \(T_1\).
+        \item Si \((X, \tau_1)\) es \(T_2\), entonces \((X, \tau_2)\) es \(T_2\).
+        \item Si \((X, \tau_1)\) es normal, entonces \((X, \tau_2)\) es normal.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \((X, \tau)\) un ET y \(A \subseteq X\) un subespacio. Demostrar que:
+    \begin{enumerate}
+        \item Si \((X, \tau)\) es \(T_1\), entonces \((A, \tau_A)\) es \(T_1\).
+        \item Si \((X, \tau)\) es \(N_1\), entonces \((A, \tau_A)\) es \(N_1\).
+        \item Si \((X, \tau)\) es \(N_2\), entonces \((A, \tau_A)\) es \(N_2\).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \((X, \tau)\) un ET que satisface el primer axioma de numerabilidad \((N_1)\).
+    \begin{enumerate}
+        \item Demostrar que para todo \(A \subseteq X\) y todo \(x \in X\): \( x \in \cl{A} \) si y sólo si existe una sucesión \({(a_n)}_{n \in \N}\) en \(A\) tal que \(a_n \to x\). (Nota: en espacios que no son \(N_1\) esto puede fallar.)
+        \item Concluir que en un ET \(N_1\), un subconjunto \(A\) es cerrado si y sólo si es \textit{secuencialmente cerrado}: toda sucesión en \(A\) convergente en \(X\) tiene límite en \(A\).
+    \end{enumerate}
+\end{ejercicio}
+
+\clearpage
+
+\section{Conexidad}
+
+\begin{ejercicio}{5}
+    Sea \(A\) un subespacio conexo de \((X, \tau)\). Demostrar que \(\cl{A}\) es conexo. Más aún, demostrar que si \(A \subseteq B \subseteq \cl{A}\), entonces \(B\) también es conexo.
+\end{ejercicio}
+
+\begin{ejercicio}{6}
+    Sea \(f : X \to Y\) continua.
+    \begin{enumerate}
+        \item Si \(X\) es conexo, demostrar que \(f(X)\) es conexo.
+        \item Si \(f\) es además abierta y \(X\) es localmente conexo, demostrar que \(f(X)\) es localmente conexo.
+        \item Deducir que la conexidad y la conexidad local son invariantes topológicos (se preservan bajo homeomorfismos).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{7}
+    Sea \(f : X \to \R \) continua con \(X\) conexo.
+    \begin{enumerate}
+        \item Demostrar que \(f(X)\) es un intervalo (posiblemente no acotado o degenerado).
+        \item Deducir el \textbf{Teorema del Valor Intermedio}: si \(f : [a, b] \to \R \) es continua, \(f(a) < c < f(b)\), entonces existe \(x_0 \in (a, b)\) tal que \(f(x_0) = c\).
+        \item Probar que todo polinomio de grado impar \(p : \R \to \R \) tiene al menos una raíz real.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{8}
+    Sea \((X, \tau)\) un ET conexo y \(A \subsetneq X\) un subconjunto propio y no vacío.
+    \begin{enumerate}
+        \item Demostrar que \(\bd A \neq \varnothing \).
+        \item Deducir que los únicos subconjuntos de \(X\) que son simultáneamente abiertos y cerrados son \(\varnothing \) y \(X\).
+        \item Sea \(f : X \to \{0, 1\} \) continua (donde \( \{0,1\} \) lleva la topología discreta). Demostrar que \(f\) es constante.
+    \end{enumerate}
+\end{ejercicio}
+
+\clearpage
+
+\section{Redes y Convergencia}
+
+\begin{ejercicio}{9}
+    Sea \((X, \tau)\) un ET, \(A \subseteq X\) y \(x \in X\). Demostrar que
+    \[
+        x \in \cl{A} \iff \exists \text{ red } {(x_i)}_{i \in I} \text{ en } A \text{ tal que } x_i \to x.
+    \]
+    Deducir que \(A\) es cerrado si y sólo si es cerrado bajo límites de redes.
+\end{ejercicio}
+
+\begin{ejercicio}{10}
+    Sea \((X, \tau)\) un ET Hausdorff. Demostrar que toda red en \(X\) tiene a lo sumo un límite. Analizar si la recíproca es cierta: si toda red tiene a lo sumo un límite, ¿es \(X\) necesariamente \(T_2\)?
+\end{ejercicio}
+
+\begin{ejercicio}{11}
+    Sea \(X\) un conjunto infinito dotado de la topología cofinita \(\tau_{CF}\).
+    \begin{enumerate}
+        \item Demostrar que si \({(x_i)}_{i \in I}\) es una red en \(X\) que para todo subconjunto finito \(F \subsetneq X\) está eventualmente en \(X \setminus F\), entonces \(x_i \to p\) para todo \(p \in X\).
+        \item Sea \({(x_n)}_{n \in \N}\) una sucesión en \(X\) con todos sus términos distintos. Demostrar que converge a todo punto de \(X\) en la topología \(\tau_{CF}\). Deducir que en \((\R, \tau_{CF})\) la convergencia de sucesiones no caracteriza la topología (compare con el ejercicio anterior de \(N_1\)).
+        \item Demostrar que toda función continua \(f : (\R, \tau_{CF}) \to (\R, \tau_{usual})\) es constante.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{12}
+    Sea \((X, \tau)\) un ET, \({(x_i)}_{i \in I}\) una red en \(X\) y \(x \in X\). Decimos que \(x\) es \textit{punto de acumulación} de la red si para todo entorno \(U \in \Ent{x}\) y todo \(i_0 \in I\) existe \(i \geq i_0\) tal que \(x_i \in U\).
+    \begin{enumerate}
+        \item Demostrar que si \(x_i \to x\), entonces \(x\) es punto de acumulación de la red.
+        \item Demostrar que \(x\) es punto de acumulación de \({(x_i)}_{i \in I}\) si y sólo si existe una subred de \({(x_i)}\) que converge a \(x\).
+        \item Deducir que en un espacio \(T_2\), si una red tiene un único punto de acumulación \(x\) y converge a algún punto, entonces converge a \(x\).
+    \end{enumerate}
+\end{ejercicio}
+
+\clearpage
+
+\subsection*{Ejercicios Complementarios}
+\begin{ejercicio}{C1}
+    Sea \((X, \tau)\) un ET y \(U \subseteq X\). Probar que \(U\) es abierto si y sólo si para toda red \({(x_i)}_{i \in I}\) en \(X\) tal que \(x_i \to x \in U\), la red está eventualmente en \(U\).
+\end{ejercicio}
+
+\begin{ejercicio}{C2}
+    Sea \(Y\) un subespacio cerrado de un ET normal \((X, \tau)\). Demostrar que \((Y, \tau_Y)\) es normal.
+\end{ejercicio}
+
+\begin{ejercicio}{C3}
+    Sea \((X, d)\) un EM completo y sea \({(F_n)}_{n \geq 1}\) una sucesión decreciente de subconjuntos cerrados no vacíos de \(X\) tal que \(\mathrm{diam}(F_n) \to 0\). Demostrar que \(\bigcap_{n \geq 1} F_n\) es no vacío y tiene exactamente un punto. (Teorema de Cantor de intersección anidada.)
+\end{ejercicio}
+
+\end{document}

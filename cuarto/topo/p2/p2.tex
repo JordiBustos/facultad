@@ -410,7 +410,7 @@
     Para ver que \( \tau_s \) no es \( N_2 \) debemos mostrar que no admite una base numerable. Para ello supongamos que \( \beta' \) es una base numerable de \( \tau_s \) y veamos que esto no puede ser.
     Dado \[
         \beta' = \left \{ \coint{a_n}{b_n} : a_n, b_n \in \R, \, n \in \N \text{ y } a_n < b_n \right \}
-    \] queremos ver que existe \( \coint{x}{y} \in \tau_s \) tal que \( \coint{a_n}{b_n} \nsubseteq \coint{x}{y} \quad \forall n \in \N \). En efecto, 
+    \] queremos ver que existe \( \coint{x}{y} \in \tau_s \) tal que \( \coint{a_n}{b_n} \nsubseteq \coint{x}{y} \quad \forall n \in \N \). En efecto,
     Como \( \beta' \) es numerable la colección de los \( a_n, b_n \) es numerable y no pueden cubrir toda la recta real. De aquí se deduce que debe existir \( x \in \R \) tal que \( x \neq a_n \)
     y \( x \neq b_n \) para cada \( n \in \N \). Además, por Arquimedianidad, podemos afirmar que vale lo mismo para \( x + \frac{1}{k} \) con \( k \in \N \) lo suficientemente grande.
     Por lo tanto, \( \coint{x}{x+\frac{1}{k}} \) es un abierto de \( \tau_s \) que no puede ser escrito como unión de elementos de \( \beta' \) ya que cada elemento de \( \beta' \)
@@ -629,7 +629,7 @@
 \textbf{Parte II}
 
 \begin{ejercicio}{C1}
-    Sea \((X, \tau)\) un ET que es \(N_{2}\) y sea \(\mathcal{B}\) una base de \( \tau \). Probar que existe una subfamilia numerable \(\mathcal{C}\subseteq\mathcal{B}\) que sigue siendo base de \(\tau\).
+    Sea \((X, \tau)\) un ET que es \(N_{2}\) y sea \(\mathcal{B}\) una base de \( \tau \). Probar que existe una subfamilia numerable \(\mathcal{C}\subseteq\mathcal{B}\) que sigue siendo base de \( \tau \).
 \end{ejercicio}
 \begin{proof}
 
@@ -643,18 +643,33 @@
 \end{proof}
 
 \begin{ejercicio}{C3}
-    Sea \(f:X\rightarrow Y\) continua. Probar que si \(X\) es de Lindelöf, o si \(X\) tiene un subconjunto denso numerable, entonces \(f(X)\) satisface la misma condición.
+    Sea \(f : X \rightarrow Y\) continua. Probar que si \(X\) es de Lindelöf, o si \(X\) tiene un subconjunto denso numerable, entonces \(f(X)\) satisface la misma condición.
 \end{ejercicio}
 \begin{proof}
-
+    Supongamos que \( X \) es Lindelöf y veamos que \( f(X) \) también lo es. Sea \( \sigma \) un cubrimiento abierto de \( f(X) \) entonces \( \{ f^{-1}(U) : U \in \sigma \} \) es un cubrimiento abierto de \( X \) y, por ser \( X \) Lindelöf, existe un subcubrimiento numerable \( \{ f^{-1}(U) : U \in \sigma' \} \) con \( \sigma' \subseteq \sigma \).
+    Luego, \[
+        X = \bigcup_{U \in \sigma'} f^{-1}(U) \implies f(X) = f\left( \bigcup_{U \in \sigma'} f^{-1}(U) \right) = \bigcup_{U \in \sigma'} f(f^{-1}(U)) \subseteq \bigcup_{U \in \sigma'} U
+    \]
+    Luego, es claro que \( \{ f(U) : U \in \sigma' \} \) es un subcubrimiento numerable de \( f(X) \) contenido en \( \{ f(U) : U \in \sigma \} \). Por lo tanto, \( f(X) \) es Lindelöf.
+    
+    Supongamos ahora que \( X \) es separable y veamos que \( f(X) \) también es separable.
+    En efecto, dado \( D \subseteq X \) un subconjunto numerable y denso en \( X \) entonces \( \cl{D} = X \) y, por continuidad de \( f \), \( f(\cl{D}) \subseteq \cl{f(D)} \) lo que implica que \( f(X) = f(\cl{D}) \subseteq \cl{f(D)} \) y, por lo tanto, \( f(D) \) es un subconjunto numerable y denso en \( f(X) \). Por lo tanto, \( f(X) \) es separable.
 \end{proof}
 
 \begin{ejercicio}{C4}
-    Sea \( f:X\rightarrow Y \) una función abierta continua. Mostrar que si \( X \) satisface \( N_{1} \) o \( N_{2} \), entonces \( f(X) \) satisface el mismo axioma.
+    Sea \( f : X \rightarrow Y \) una función abierta continua. Mostrar que si \( X \) satisface \( N_{1} \) o \( N_{2} \), entonces \( f(X) \) satisface el mismo axioma.
 \end{ejercicio}
 \begin{proof}
+    Supongamos primeramente que \( X \) es \( N_1 \) y veamos que \( f(X) \) también es \( N_1 \). En efecto,
+    dado \( y \in f(X) \) existe \( x \in X \) tal que \( f(x) = y \). Además, como \( X \) es \( N_1 \)
+    existe \( {\{ B_i \}}_{i \in \N} \) una familia numerable de abiertos \( X \) tal que para cada \( U \in \tau \)
+    \( \exists n \in \N \) tal que \( x \in B_n \subseteq U \). Luego, como \( f \) es abierta se satisface que
+    \( f(B_n) \) es un abierto de \( Y \). Sea \( V \) un entorno de \( y \) entonces por la continuidad de \( f \) se tiene que \( f^{-1}(V) \)
+    es un entorno abierto de \( x \) y existe \( n \in \N \) tal que \( x \in B_n \subseteq f^{-1}(V) \implies y \in f(B_n) \subseteq V \). Por lo tanto, \( f(X) \) es \( N_1 \).
 
+    Supongamos ahora que \( X \) es \( N_2 \) y veamos que \( f(X) \) también es \( N_2 \). En efecto,
+    por hipótesis existe \( \beta = \{ B_n : n \in \N \} \) una base numerable de la topología de \( X \).
+    Luego, \( \beta' = \{ f(B_n) : n \in \N \} \) es una familia numerable de abiertos de \( Y \). Para ver que \( \beta' \) es una base de la topología de \( f(X) \) basta con notar que dado \( y \in f(X) \) y \( V \) un entorno de \( y \) entonces por continuidad de \( f \) se tiene que \( f^{-1}(V) \) es un entorno abierto de \( x \) y existe \( n \in \N \) tal que \( x \in B_n \subseteq f^{-1}(V) \) y por lo tanto \( y \in f(B_n) \subseteq V \). Por lo tanto, \( f(X) \) es \( N_2 \).
 \end{proof}
-
 
 \end{document}
