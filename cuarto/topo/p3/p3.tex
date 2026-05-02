@@ -85,7 +85,7 @@
     es conexo pero \( \Int{A} \) es la unión de dos discos abiertos tangentes, que no son conexos entre sí pues se puede tomar cada disco para hacer la separación.
 
     Veamos si \( \Int{A} \) y \( \partial A \) es conexo, entonces \( A = \Int{A} \cup \partial A \) es conexo. Recordemos que la definición de frontera es \[
-        \partial A = \cl{A} - \Int{A} = \cl{A} - \Int{A} = \cl{A} - \Int{A}
+        \partial A = \cl{A} - \Int{A}
     \]
     Consideremos el siguiente contraejemplo: \( A = \{ (x, y) \in \R^2 : x^2 + y^2 < 1 \} \cup \{ (x, 0) \in \Q^2 : 1 \leq x \leq 2 \} \).
     Entonces \[ \cl{A} = \{ (x, y) \in \R^2 : x^2 + y^2 = 1 \} \cup \{ (x, 0) \in \R^2 : 1 \leq x \leq 2 \} \] y \[ \Int{A} = \{ (x, y) \in \R^2 : x^2 + y^2 < 1 \} \] que ambos son conexos. Sin embargo,
@@ -262,7 +262,7 @@
     Sea \(X\) un espacio localmente arcoconexo. Demuestre que cada conjunto abierto y conexo en \(X\) es también arcoconexo.
 \end{ejercicio}
 \begin{proof}
-    Sea \( U \) un conjunto abierto y conexo en \( X \). Para cada \( x \in U \) consideremos \( C_x = \{ y \in U : \overset{con}{\sim} x \} \) la componente arcoconexa de \( x \) en \( U \) y, si logramos demostrar que es clopen relativo a \( U \), entonces \( C_x = U \) y, por lo tanto, \( U \) sería arcoconexo.
+    Sea \( U \) un conjunto abierto y conexo en \( X \). Para cada \( x \in U \) consideremos \( C_x = \{ y \in U : y \overset{arc}{\sim} x \} \) la componente arcoconexa de \( x \) en \( U \) y, si logramos demostrar que es clopen relativo a \( U \), entonces \( C_x = U \) y, por lo tanto, \( U \) sería arcoconexo.
 
     Veamos primero que es abierto: En efecto, dado \( y \in C_x \) veamos que existe un entorno \( V \) de \( y \)
     completamente contenido en \( C_x \). Para eso, como \( X \) es localmente arcoconexo, existe un entorno arcoconexo \( V \subseteq U \) de \( y \).
