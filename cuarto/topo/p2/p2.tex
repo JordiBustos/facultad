@@ -416,12 +416,12 @@
     Por lo tanto, \( \coint{x}{x+\frac{1}{k}} \) es un abierto de \( \tau_s \) que no puede ser escrito como unión de elementos de \( \beta' \) ya que cada elemento de \( \beta' \)
     que contiene a \( x \) es de la forma \( \coint{a_n}{b_n} \) con \( a_n < x < x+\frac{1}{k} < b_n \) por lo que \( \coint{a_n}{b_n} \) no puede ser incluido en \( \coint{x}{x+\frac{1}{k}} \). Por lo tanto, \( (X, \tau_s) \) no es \( N_2 \).
 
-    Veamos que es Lindeloff, por el \textbf{Ejercicio 2.4.4} del apunte de Demetrio, basta ver que si \( \sigma \subseteq \beta \) es un cubrimiento de \( \R \) entonces existe un subcubrimiento numerable de \( \sigma \).
-    En efecto, dado \( \sigma \) como dijimos, es claro que \( \exists I \) una familia de índices tal que \[
+    Veamos si es Lindeloff, por el \textbf{Ejercicio 2.4.4} del apunte de Demetrio, basta ver si para \( \sigma \subseteq \beta \) un cubrimiento de \( \R \) existe un subcubrimiento numerable de \( \sigma \).
+    Dado \( \sigma \) como dijimos, es claro que \( \exists I \) una familia de índices tal que \[
         \sigma = \{ \coint{a_i}{b_i} : i \in I \} \subseteq \beta
     \]
-    Luego, como la topología usual de los abiertos de \( \R \) es Lindeloff, existe \( {\{ i_n \}}_{n \in \N} \subseteq I \) tal que \( \{ (a_{i_n}, b_{i_n}) : n \in \N \} \) es un subcubrimiento numerable de \( \R \) contenido en
-    \( \{ (a_i, b_i) : i \in I \} \). Por lo tanto, \( \{ \coint{a_{i_n}}{b_{i_n}} : n \in \N \} \) es un subcubrimiento numerable de \( \sigma \therefore (X, \tau_s) \) es Lindeloff.
+    y \( \bigcup_{i \in I} \coint{a_i}{b_i} = \R \). \textbf{TODO}: ir a la topología usual de \( \R \) quedarse el cubrimiento numerable, ver que los extremos izquierdos que se pierden son numerables y quedarse con más (numerables) intervalos del cubrimiento original.
+
 
     Es claro que la topología semi-abierta es separable tomando \( \Q \) como el numerable denso. Por lo tanto, \( (X, \tau_s) \) es separable.
 
@@ -651,7 +651,7 @@
         X = \bigcup_{U \in \sigma'} f^{-1}(U) \implies f(X) = f\left( \bigcup_{U \in \sigma'} f^{-1}(U) \right) = \bigcup_{U \in \sigma'} f(f^{-1}(U)) \subseteq \bigcup_{U \in \sigma'} U
     \]
     Luego, es claro que \( \{ f(U) : U \in \sigma' \} \) es un subcubrimiento numerable de \( f(X) \) contenido en \( \{ f(U) : U \in \sigma \} \). Por lo tanto, \( f(X) \) es Lindelöf.
-    
+
     Supongamos ahora que \( X \) es separable y veamos que \( f(X) \) también es separable.
     En efecto, dado \( D \subseteq X \) un subconjunto numerable y denso en \( X \) entonces \( \cl{D} = X \) y, por continuidad de \( f \), \( f(\cl{D}) \subseteq \cl{f(D)} \) lo que implica que \( f(X) = f(\cl{D}) \subseteq \cl{f(D)} \) y, por lo tanto, \( f(D) \) es un subconjunto numerable y denso en \( f(X) \). Por lo tanto, \( f(X) \) es separable.
 \end{proof}
