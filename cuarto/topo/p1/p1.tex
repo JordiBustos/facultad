@@ -244,11 +244,11 @@
 
     (c) Sea \(A\) un conjunto numerable y sea \(B \subseteq A\) un subconjunto cualquiera de \(A\).
 
-    Dado que \(A\) es numerable, existe una función inyectiva \(f: A \to \N\).
-    Consideramos la restricción de \(f\) al subconjunto \(B\), denotada como \(f|_B : B \to \N\). Esta función simplemente toma un elemento \(x \in B\) y le aplica la misma regla \(f(x)\).
+    Dado que \(A\) es numerable, existe una función inyectiva \(f: A \to \N \).
+    Consideramos la restricción de \(f\) al subconjunto \(B\), denotada como \(f|_B : B \to \N \). Esta función simplemente toma un elemento \(x \in B\) y le aplica la misma regla \(f(x)\).
 
     Si tomamos \(x, y \in B\) tales que \(f|_B(x) = f|_B(y)\), esto significa que \(f(x) = f(y)\). Como sabemos que \(f\) original es inyectiva en todo el dominio \(A\), concluimos que \(x = y\).
-    Al haber encontrado una función inyectiva de \(B\) a \(\N\), queda demostrado que \(B\) es numerable.
+    Al haber encontrado una función inyectiva de \(B\) a \(\N \), queda demostrado que \(B\) es numerable.
 
     (d) Sea \(A\) un conjunto numerable. Queremos demostrar que el conjunto de todas sus partes finitas, \(\mathcal{P}_{fin}(A)\), es numerable.
 
@@ -325,10 +325,8 @@ Del apunte de Demetrio:
             s_{i-k} & \text{si } a = s_i \in S \text{ para } i > k
         \end{cases}
     \]
-    Finalmente, definimos \( g : A \times \N \to A \) dada por: \[
-        g(a, n) = \Phi^{-1}(f^*(\varphi(a)), n)
-    \]
-    que es inyectiva. Luego, por el teorema de Cantor-Bernstein-Schröder, concluimos que \( |A| = |A \times \N| \).
+    Finalmente, definimos la función \( g : A \times \N \to A \) dada por \( g(a, n) = f^*(\varphi(a), n) \)
+    que es inyectiva, lo que nos permite concluir que \( |A| = |A \times \N| \).
 \end{proof}
 \section*{Ejercicios complementarios}
 
