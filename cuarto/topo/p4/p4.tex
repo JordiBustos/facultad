@@ -308,7 +308,7 @@ Demostraremos una proposición que nos servirá en el siguiente ejercicio.
     Veamos que ocurre si \( Y \cap A = \varnothing \), entonces \( Y \subseteq A^c \) y \( A^c \cap Y = Y \neq \varnothing \) por lo que \( x \evto{A^c} \).
 
     Para la segunda parte consideremos \( \mathbf{x} \) universal en \( X \) y \( \mathbf{y} \) una subred de \( \mathbf{x} \). Dado \( A \subseteq X \) se tiene que \[
-        x \evto{A} \text{ o } x\evto{A^c}
+        \mathbf{x} \evto{A} \text{ o } \mathbf{x} \evto{A^c}
     \]
     Por definición tenemos que \( \mathbf{y} = \mathbf{x} \circ h \) para alguna función creciente \( h : J \to I \) tal que \( h(J) \) es cofinal en \( I \), \( J \) dirigido. Luego,
     por definición de estar eventualmente en un conjunto, existe un \( i_0 \in I \) tal que \( \forall i \geq i_0 \) se tiene que \( x_i \in A \) o \( x_i \in A^c \).
@@ -321,9 +321,9 @@ Demostraremos una proposición que nos servirá en el siguiente ejercicio.
 \end{ejercicio}
 \begin{proof}
     Sea \( \mathbf{x} \) la red universal en \( X \) consideremos el ya estudiado filtro \[
-        F_{\mathbf{x}} = \{ A \subseteq X : x \evto{A} \}
+        F_{\mathbf{x}} = \{ A \subseteq X : \mathbf{x} \evto{A} \}
     \]
-    Luego, dado \( B \subseteq X \) se tiene que \( x \evto{B} \) o \( x \evto{B^c} \) por ser \( \mathbf{x} \) universal en \( X \).
+    Luego, dado \( B \subseteq X \) se tiene que \( \mathbf{x} \evto{B} \) o \( \mathbf{x} \evto{B^c} \) por ser \( \mathbf{x} \) universal en \( X \).
     Por lo tanto, \( B \in F_{\mathbf{x}} \) o \( B^c \in F_{\mathbf{x}} \) y, por lo tanto, \( F_{\mathbf{x}} \) es un ultrafiltro.
 
     Consideremos un ultrafiltro \( F \) en \( X \) y construyamos una red universal \( \mathbf{x} \) tal que \( F_{\mathbf{x}} = F \).
