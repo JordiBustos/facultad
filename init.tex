@@ -54,9 +54,9 @@
 
 \theoremstyle{profesional}
 \newtheorem{teorema}{Teorema}[section]
-\newtheorem{lemma}[teorema]{Lema}
-\newtheorem{proposicion}[teorema]{Proposición}
-\newtheorem{corolario}[teorema]{Corolario}
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposicion}{Proposición}[section]
+\newtheorem{corolario}{Corolario}[section]
 
 \newtheoremstyle{definicion-style}%
     {0.5em}{0.5em}{}
@@ -65,15 +65,15 @@
     {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}
 
 \theoremstyle{definicion-style}
-\newtheorem{definicion}[teorema]{Definición}
-\newtheorem{ejemplo}[teorema]{Ejemplo}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
 
 \newtheoremstyle{observacion-style}%
     {0.5em}{0.5em}{\color{mediumgray}\itshape}
     {0pt}{\textbf{\color{accentblue}}}{:}
     {0.5em}
     {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}
-\newtheorem{observacion}[teorema]{Observación}
+\newtheorem{observacion}{Observación}[section]
 
 % --- Macros ---
 \newcommand{\R}{\mathbb{R}}
@@ -156,8 +156,6 @@
 
 % --- CUERPO ---
 \section{Introducción}
-
-
 
 \newpage
 

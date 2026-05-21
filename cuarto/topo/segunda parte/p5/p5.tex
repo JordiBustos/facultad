@@ -1,0 +1,306 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                      % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Net convergence/accumulation notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}   % Frequently in
+\newcommand{\nnevto}[1]{\not\!\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\nnfrto}[1]{\not\!\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica V}
+\author{Bustos Jordi\\Funciones continuas, métricas y topologías}
+
+\maketitle
+
+\section*{Funciones Continuas}
+
+\begin{ejercicio}{1}
+    Sean \( (X, \tau) \), \( (Y, \sigma) \) dos espacios topológicos y sea \( f : X \to Y \) una función. Demostrar las siguientes proposiciones:
+    \begin{enumerate}
+        \item La función \( f \) es continua si y sólo si para toda red \( \mathbf{x} = {(x_i)}_{i \in I} \) en \( X \) que converge a algún \( x \in X \) se cumple que \( f(x_i) \xrightarrow{i \in I} f(x) \).
+        \item La función \( f \) es continua de \( (X, \tau) \to (Y, \sigma) \) si y sólo si es continua de \( (X, \tau) \to (f(X), \sigma_{f(X)}) \).
+        \item Si \( f \) es continua y suryectiva, y \( D \) es \( \tau \)-denso en \( X \) entonces \( f(D) \) es \( \sigma \)-denso en \( Y \).
+        \item Si \( f \) es continua y \( D \) es \( \tau \)-denso en \( X \) entonces \( f(D) \) es \( \sigma_{f(X)} \)-denso en \( f(X) \).
+        \item Si \( f \) es continua y \( A \subseteq X \) entonces \( f|_A : A \to Y \) es continua.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Dados \( (X, \tau) \), \( (Y, \sigma) \) dos espacios topológicos y sea \( f : X \to Y \) una función.
+    \begin{enumerate}
+        \item \( (\Leftarrow) \) \textbf{Proposición 5.1.1} del apunte de Demetrio. \( (\Rightarrow) \) Dado \( x \in X \) y \( V \in \mathcal{O}^a(f(x)) \) vale que \( f^{-1}(V) \in \tau \) por la continuidad de \( f \),
+              como \( f^{-1}(V) \in \mathcal{O}^a(x) \) vale que: \[
+                  x \evto{f^{-1}(V)} \implies f(x) \evto{V} \implies f(x_i) \xrightarrow{i \in I} f(x)
+              \]
+        \item \( (\Rightarrow) \) como \( \sigma_{f(X)} \subseteq \sigma \) entonces la \( \sigma \)-convergencia de redes implica la \( \sigma_{f(X)} \)-convergencia de redes.
+              De lo que se deduce que \( f \) es continua por el punto anterior. \( (\Leftarrow) \) Si \( f \) es continua en \( (f(X), \sigma_{f(X)}) \) entonces \[
+                  \forall U \in \sigma_{f(X)} \quad U = V \cap f(X) \text{ con } V \in \sigma \implies f^{-1}(U) = f^{-1}(V) \in \tau
+              \]
+              pero entonces \( f \) es continua de \( (X, \tau) \to (Y, \sigma) \).
+        \item Dado \( D \) \( \tau \)-denso en \( X \) y \( f \) continua y suryectiva, dado \( y \in Y \) existe \( x \in X \) tal que \( f(x) = y \).
+              Como \( D \) es denso en \( X \) entonces existe una red \( \mathbf{d} = {(d_i)}_{i \in I} \) en \( D \) que converge a \( x \) y por la continuidad de \( f \) se deduce que \( f(d_i) \xrightarrow{i \in I} f(x) = y \). Por lo tanto \( f(D) \) es \( \sigma \)-denso en \( Y \).
+        \item Análogo al punto anterior restringiendo la función a \( f(X) \).
+        \item Dado \( A \subseteq X \) y \( f \) continua, sea \( {(x_i)}_{i \in I} \) una red en \( A \). Si \( x \in A \) tal que \( x_i \xrightarrow{i \in I} x \) entonces \( f(x_i) \xrightarrow{i \in I} f(x) \) por la continuidad de \( f \). Por lo tanto \( f|_A : A \to Y \) es continua.
+    \end{enumerate}
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{2}
+    Sean \( X \) un conjunto y \( \tau \), \( \sigma \) dos topologías en \( X \). Probar que son equivalentes las proposiciones:
+    \begin{enumerate}
+        \item Se cumple \( \cl{A}^{\tau} \subseteq \cl{A}^{\sigma} \) para todo \( A \in \partes(X) \).
+        \item \( \tau \)-convergencia de redes en \( X \) implica \( \sigma \)-convergencia de redes en \( X \).
+        \item Se cumple \( \sigma \subseteq \tau \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Demostraremos (c) \( \Rightarrow \) (b) \( \Rightarrow \) (a) \( \Rightarrow \) (c).
+
+    Empecemos por (c) \( \Rightarrow \) (b). Dado \( \sigma \subseteq \tau \) y \( {(x_i)}_{i \in I} \) una red que converge a \( x \) en \( \tau \) entonces \( \forall U \in \mathcal{O}^a_{\tau}(x) \) vale que
+    \( \mathbf{x} \evto{U} \) y como \( \sigma \) tiene menos abiertos que \( \tau \) entonces \( \forall V \in \mathcal{O}^a_{\sigma}(x) \) vale que \( V \in \mathcal{O}^a_{\tau}(x) \) y por lo tanto \( \mathbf{x} \evto{V} \)
+    \( \therefore {(x_i)}_{i \in I} \) converge a \( x \) en \( \sigma \).
+
+    Veamos que (b) \( \Rightarrow \) (a). Dado \( A \in \partes(X) \) y \( x \in \cl{A}^{\tau} \) entonces existe una red \( \mathbf{x} \) tal que \( \mathbf{x} \evto{A} \) y \( \mathbf{x} \xrightarrow{i \in I} x \) en \( \tau \). Por la hipótesis se deduce que \( \mathbf{x} \xrightarrow{i \in I} x \) en \( \sigma \) y por lo tanto \( x \in \cl{A}^{\sigma} \).
+
+    Finalmente para ver que (a) \( \Rightarrow \) (c) tomemos \( A \in \sigma \) entonces \( A^c \) es cerrado en \( \sigma \), entonces:  \[
+        A^c = \cl{A^c}^{\sigma}
+    \]
+    Además, por hipotesis, sabemos que \( A^c \subseteq \cl{A^c}^{\tau} \subseteq \cl{A^c}^{\sigma} = A^c \implies \cl{A^c}^{\tau} = A^c \implies A \in \tau \)
+\end{proof}
+
+\begin{ejercicio}{3}
+    Considerar en \( Y \) un orden total y la topología del orden respectiva. Sean \( f, g : X \to Y \) continuas. Entonces:
+    \begin{enumerate}
+        \item \( \{ x \in X : f(x) \leq g(x) \} \) es cerrado en \( X \).
+        \item La función \( h(x) = \min \{ f(x), g(x) \} \) es continua.
+    \end{enumerate}
+    Notar que en la topología del orden, los abiertos son de la forma \( (a, b) = \{ y \in Y : a < y < b \} \), \( (a, +\infty) = \{ y \in Y : a < y \} \) o \( (-\infty, b) = \{ y \in Y : y < b \} \).
+\end{ejercicio}
+\begin{proof}
+    Dado \( Y \) un orden total y la topología del orden respectiva, sean \( f,g : X \to Y \) continuas. Definamos: \[
+        A = \{ x \in X : f(x) \leq g(x) \}
+    \]
+    Sea \( {(x_i)}_{i \in I} \) una red que vive en \( A \) con \( x_i \xrightarrow{i \in I} x \in X \). Nos preguntamos si \( x \in A \). En efecto,
+    por la continuidad de \( f \) y \( g \) se deduce que \( f(x_i) \xrightarrow{i \in I} f(x) \) y \( g(x_i) \xrightarrow{i \in I} g(x) \).
+    Supongamos que \( f(x) > g(x) \), entonces como \( Y \) es un orden total con la topología del orden entonces se pueden elegir dos abiertos que respeten el orden, es decir \( f(x) \in U = (c, +\infty) \), \( g(x) \in V = (-\infty, c) \) con \( c \) un punto intermedio \( f(x) > c > g(x) \), si no existiese tomo \( U = (g(x), +\infty) \), \( V = (-\infty, f(x)) \) y \( U > V \).
+    Luego, \( f(x_i) \evto{U} \) y \( g(x_i) \evto{V} \) entonces por como elegimos \( U \) y \( V \) se deduce que \( f(x_i) > g(x_i) \) eventualmente, lo que contradice el hecho de que \( x_i \in A \). Por lo tanto \( f(x) \leq g(x) \) y \( A \) es cerrado.
+
+    Para la función \( h \) basta notar que \[
+        h(x) = \begin{cases}
+            f(x) & \text{si } x \in \{ x \in X : f(x) \leq g(x) \} \\
+            g(x) & \text{si } x \in \{ x \in X : g(x) \leq f(x) \}
+        \end{cases} \]
+    Como ambos conjuntos son cerrados y \( f \) y \( g \) son continuas y coinciden en la intersección entonces \( h \) es continua por el \emph{Lema del pegoteo}.
+\end{proof}
+
+\section*{Topologías}
+
+\begin{ejercicio}{1}
+    Sea \( P = \prod_{\alpha \in \mathbb{A}} (X_\alpha, \tau_\alpha) \) dotado de la topología producto \( \tau_P \). Para cada \( \alpha \in \mathbb{A} \) sea \( D_\alpha \subseteq X_\alpha \) denso.
+    \begin{enumerate}
+        \item Probar que el producto \( \prod_{\alpha \in \mathbb{A}} D_\alpha \) es denso en \( P \).
+        \item Asumiendo que \( P \neq \varnothing \) se fija \( \mathbf{x} = {\{x_\alpha \}}_{\alpha \in \mathbb{A}} \in \prod_{\alpha \in \mathbb{A}} D_\alpha \) y se definen los conjuntos
+              \[
+                  D_F = \prod_{\alpha \in F} D_\alpha \times \prod_{\alpha \in \mathbb{A} - F} \{x_\alpha \} \subseteq P \qquad \text{para cada } F \in \pf(\mathbb{A})
+              \]
+              Mostrar que \( D = \bigcup_{F \in \pf(\mathbb{A})} D_F \) es denso en \( P \) y es más pequeño que el conjunto denso anterior.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sea \( P = \prod_{n \in \N} (X_n, \tau_n) \) dotado de la topología producto \( \tau_P \).
+    \begin{enumerate}
+        \item Si suponemos que todos los \( X_n \) son de tipo \( N_2 \) entonces \( P \) también lo es.
+        \item Ídem con \( N_1 \) y separable.
+        \item Muestre que no pasa lo mismo con Lindelöff.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( f : \R \to \R^{\N} \) definida por \( f(t) = (t, t, t, \ldots) \). ¿Es continua si se considera en \( \R \) la topología usual y en \( \R^{\N} \) la topología caja?
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( L \) el subconjunto de \( \R^{\N} \) formado por los \( (x_1, x_2, \ldots) \) con una cantidad finita de componentes no nulas. ¿Cuál es la clausura de \( L \) en \( \R^{\N} \) con la topología producto y con la topología caja?
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( \Gamma \) un conjunto no-numerable. Se define
+    \[
+        \varphi(\Gamma) = \{ f : \Gamma \to \R : f(\lambda) = 0 \text{ para todo } \lambda \in \Gamma \text{ salvo para un conjunto } A \subseteq \Gamma \text{ numerable} \}
+    \]
+    Considerando que \( \varphi(\Gamma) \subseteq \R^{\Gamma} \) y en \( \R^{\Gamma} \) está la topología producto. Demostrar que \( \cl{\varphi(\Gamma)} = \R^{\Gamma} \).
+\end{ejercicio}
+
+\begin{ejercicio}{6}
+    Sea \( X \) un espacio topológico y \( g : X \to Y \) suryectiva. ¿Cuál es la topología más pequeña en \( Y \) que hace que \( g \) sea continua?
+\end{ejercicio}
+
+\begin{ejercicio}{7}
+    Sea \( g : \R \to S^1 \) dada por \( g(t) = e^{i2\pi t} \).
+    \begin{enumerate}
+        \item Como \( (\R, +) \) y \( (S^1, \cdot) \) son grupos, mostrar que \( g \) es un morfismo.
+        \item Mostrar que \( \ker(g) = \Z \). Y que la relación de equivalencia \( \equiv \) dada por \( g \) es la congruencia módulo \( \Z \). Las clases de equivalencia son los conjuntos \( t + \Z \) para \( t \in [0, 1) \).
+        \item Mostrar que \( \R/\Z \) es homeomorfo a \( S^1 \). (\( \R/\Z \) con la topología cociente y \( S^1 \) con la topología inducida por \( \C \)).
+        \item Mostrar que \( g \) no es cerrada.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{8}
+    Mostrar que existen funciones abiertas que no son cerradas y funciones cerradas que no son abiertas.
+\end{ejercicio}
+
+\begin{ejercicio}{9}
+    Sean \( Y = \{(x, y) : x = 0 \text{ ó } y = 0\} \) y \( g : \R^2 \to Y \) definida por
+    \[
+        g(x, y) = \begin{cases} (x, 0) & x \neq 0 \\ (0, y) & x = 0 \end{cases}
+    \]
+    Mostrar que \( g \) es suryectiva y que la topología cociente asociada \( \tau_g \) no es Hausdorff (\( \R^2 \) con la topología usual).
+\end{ejercicio}
+
+\section*{Métricas}
+
+\begin{ejercicio}{1}
+    Mostrar que las siguientes métricas en \( \R \) son topológicamente equivalentes pero no son equivalentes (a secas). Mostrar que \( (\R, d_2) \) no es completo.
+    \[
+        d_1(x, y) = |x - y| \qquad \text{y} \qquad d_2(x, y) = |f(x) - f(y)| \quad \text{siendo } f(t) = \frac{t}{1 + |t|}
+    \]
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Dado un conjunto \( X \) se define \( d(x, y) = \begin{cases} 1 & x \neq y \\ 0 & x = y \end{cases} \). Mostrar que \( d \) es una métrica. ¿Cuál es la topología \( \tau_d \)?
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Mostrar que si \( (X, \tau) \) y \( (Y, \sigma) \) son homeomorfos y \( \tau \) es metrizable entonces \( \sigma \) también.
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( P = \prod_{n \in \N} (X_n, \tau_n) \) dotado de la topología producto \( \tau_P \). Si cada \( \tau_n \) proviene de una métrica \( d_n \) en \( X_n \) entonces existe una métrica \( d_P \) en \( P \) tal que \( \tau_P = \tau_{d_P} \).
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( L \) el subconjunto de \( \R^{\N} \) formado por las sucesiones con una cantidad finita de componentes no nulas. ¿Cuál es la clausura en \( \R^{\N} \) respecto a la topología uniforme?
+\end{ejercicio}
+
+\begin{ejercicio}{6}
+    Considerando las funciones \( E, F : C([0,1], \R) \to \R \) definidas por
+    \[
+        E(f) = f(0) \qquad F(f) = \int_0^1 f(t)\, dt
+    \]
+    \begin{enumerate}
+        \item Demostrar que son continuas considerando en \( C([0,1], \R) \) la métrica uniforme.
+        \item Demostrar que \( F \) es continua pero \( E \) no lo es si se considera en \( C([0,1], \R) \) la métrica
+              \[
+                  d_1(f, g) = \int_0^1 |f(t) - g(t)|\, dt
+              \]
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{7}
+    Mostrar que en un espacio métrico, la propiedad `separable' es hereditaria.
+\end{ejercicio}
+
+\begin{ejercicio}{8}
+    Mostrar que \( X \) es separable respecto a dos métricas \( d_1 \) y \( d_2 \) si y sólo si es separable respecto a la métrica \( d = \max\{d_1, d_2\} \).
+\end{ejercicio}
+
+\section*{Funciones Continuas (Lema de Urysohn/Teorema de Tietze)}
+
+\begin{ejercicio}{1}
+    Sea \( (X, \tau) \) un espacio topológico. Probar que:
+    \begin{enumerate}
+        \item Si \( X \) es normal entonces \( X \) es completamente regular.
+        \item La clase completamente regular es hereditaria.
+        \item El producto de espacios completamente regulares sigue siendo completamente regular.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sea \( (X, \tau) \) un espacio topológico completamente regular.
+    \begin{enumerate}
+        \item Probar que dada una red \( \mathbf{x} = \{x_i\}_{i \in I} \) en \( X \) y \( x \in X \) se cumple
+              \[
+                  x_i \xrightarrow{i \in I} x \iff f(x_i) \xrightarrow{i \in I} f(x) \quad \text{para toda } f \in C(X, [0,1])
+              \]
+        \item Probar que la topología original \( \tau \) en \( X \) no es otra que la topología inicial asociada a \( C(X, [0,1]) \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( X \) un espacio topológico completamente regular. Considerando \( C(X, \R) \subseteq \R^X \) demostrar que \( C(X, \R) \) es denso respecto de la topología producto en \( \R^X \).
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( (X, \tau) \) un espacio topológico regular y sean \( \mathbf{x} = {(x_i)}_{i \in I} \) e \( \mathbf{y} = {(y_j)}_{j \in J} \) dos redes en \( X \) ambas convergentes. Entonces son equivalentes:
+    \begin{itemize}
+        \item Las dos redes tienen el mismo límite.
+        \item La red \( \{\mathbf{x}, \mathbf{y}\} = {(\{x_i, y_j\})}_{(i,j) \in I \times J} \) cumple \( \{\mathbf{x}, \mathbf{y}\} \evto{U} \) para todo abierto \( U \subseteq X \times X \) tal que \( \Delta \subseteq U \). El orden en \( I \times J \) es en las dos entradas a la vez: \( (i,j) \leq (k,l) \iff i \leq_I k \) y \( j \leq_J l \).
+    \end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( X \) un espacio regular con una base numerable. Sea \( U \) un abierto de \( X \).
+    \begin{enumerate}
+        \item Mostrar que \( U \) es igual a la unión numerable de conjuntos cerrados de \( X \).
+        \item Mostrar que existe una \( f \in C(X, [0,1]) \) tal que \( f(x) > 0 \) para los \( x \in U \) y \( f(x) = 0 \) para los \( x \notin U \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{6}
+    Demostrar el \emph{Teorema Fuerte de Urysohn}: Dados \( A \) y \( B \) conjuntos cerrados disjuntos de un espacio topológico normal. Entonces existe \( f \in C(X, [0,1]) \) tal que \( f^{-1}(0) = A \) y \( f^{-1}(1) = B \) si y sólo si \( A \) y \( B \) son \( G_\delta \) conjuntos en \( X \).
+
+    \textit{Definición}: \( G_\delta \) conjunto de \( X \) es aquel que puede escribirse como intersección numerable de conjuntos abiertos.
+\end{ejercicio}
+
+\begin{ejercicio}{7}
+    Mostrar que el \emph{Teorema de Tietze} implica el \emph{Lema de Urysohn}.
+\end{ejercicio}
+
+\begin{ejercicio}{8}
+    Demostrar que un espacio topológico normal y conexo con más de un punto es no-numerable.
+\end{ejercicio}
+
+\begin{ejercicio}{9}
+    Mostrar que si \( Y \) es normal y \( \mathcal{B} \) es una base de su topología. Entonces existe un embedding de \( Y \) en \( [0,1]^J \) siendo \( J \) algún subconjunto de \( \mathcal{B} \times \mathcal{B} \).
+\end{ejercicio}
+
+\end{document}

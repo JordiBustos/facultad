@@ -58,9 +58,9 @@
 
 \theoremstyle{profesional}
 \newtheorem{teorema}{Teorema}[section]
-\newtheorem{lemma}[teorema]{Lema}
-\newtheorem{proposicion}[teorema]{Proposición}
-\newtheorem{corolario}[teorema]{Corolario}
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposicion}{Proposición}[section]
+\newtheorem{corolario}{Corolario}[section]
 
 % --- Estilo para definiciones (verde) ---
 \newtheoremstyle{definicion-style}%
@@ -74,8 +74,8 @@
     {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
 
 \theoremstyle{definicion-style}
-\newtheorem{definicion}[teorema]{Definición}
-\newtheorem{ejemplo}[teorema]{Ejemplo}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
 
 % --- Estilo para observaciones (púrpura) ---
 \newtheoremstyle{observacion-style}%
@@ -87,7 +87,7 @@
     {:}%
     {0.5em}%
     {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
-\newtheorem{observacion}[teorema]{Observación}
+\newtheorem{observacion}{Observación}[section]
 
 % --- Macros útiles ---
 \newcommand{\R}{\mathbb{R}}
