@@ -216,10 +216,17 @@
     \]
     Considerando que \( \varphi(\Gamma) \subseteq \R^{\Gamma} \) y en \( \R^{\Gamma} \) está la topología producto. Demostrar que \( \cl{\varphi(\Gamma)} = \R^{\Gamma} \).
 \end{ejercicio}
+\begin{proof}
+    Dado \( \Gamma \) un conjunto no numerable, queremos ver que \( \cl{\varphi(\Gamma)} = \R^\Gamma \). Ello equivale a ver que el conjunto es denso, por lo que tomemos
+    un abierto \( U = \prod_{\lambda \in F} U_\lambda \times \prod_{\lambda \notin F} \R \) con \( F \in \pf{(\Gamma)} \).
+    Luego, tomamos la función \( f : \Gamma \to \R \) dada por \( f(\lambda) = 0 \) si \( \lambda \notin F \) y \( f(\lambda) \in U_\lambda \) si \( \lambda \in F \). Entonces, \( f \in U \cap \varphi(\Gamma) \) y por lo tanto \( U \cap \varphi(\Gamma) \neq \varnothing \quad \forall U \in \tau_P \therefore \cl{\varphi(\Gamma)} = \R^\Gamma \).
+\end{proof}
 
 \begin{ejercicio}{6}
     Sea \( X \) un espacio topológico y \( g : X \to Y \) suryectiva. ¿Cuál es la topología más pequeña en \( Y \) que hace que \( g \) sea continua?
 \end{ejercicio}
+\begin{proof}
+\end{proof}
 
 \begin{ejercicio}{7}
     Sea \( g : \R \to S^1 \) dada por \( g(t) = e^{i2\pi t} \).
