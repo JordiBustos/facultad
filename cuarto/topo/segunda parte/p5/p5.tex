@@ -131,6 +131,8 @@
     Como ambos conjuntos son cerrados y \( f \) y \( g \) son continuas y coinciden en la intersección entonces \( h \) es continua por el \emph{Lema del pegoteo}.
 \end{proof}
 
+\clearpage
+
 \section*{Topologías}
 
 \begin{ejercicio}{1}
@@ -144,6 +146,15 @@
               Mostrar que \( D = \bigcup_{F \in \pf(\mathbb{A})} D_F \) es denso en \( P \) y es más pequeño que el conjunto denso anterior.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Sabemos que si \( U \in \tau_P \) entonces \( U = \prod_{\alpha \in F} U_\alpha \times \prod_{\alpha \in F^c} X_\alpha \) con \( F \in \pf{(\mathbb{A})} \) y \( U_\alpha \in \tau_\alpha \) para cada \( \alpha \in F \).
+    Luego, como \( D_\alpha \) es denso en \( X_\alpha \) entonces \( \exists d_\alpha \in D_\alpha \cap U_\alpha \) para cada \( \alpha \in F \). Además, tomando un \( d_\alpha \in D_\alpha \cap X_\alpha = D_\alpha \) para cada \( \alpha \in F^c \) se deduce que
+    \( {\{ d_\alpha \}}_{\alpha \in \mathbb{A}} \in U \implies \prod_{\alpha \in \mathbb{A}} D_\alpha \) es denso en \( P \).
+
+    Para el segundo punto, siguiendo un razonamiento análogo se puede ver que para \( U \in \tau_P \) tomando el mismo \( F \) que antes, elijo \( D_F \) y armo el mismo \( {\{ d_\alpha \}}_{\alpha \in \mathbb{A}} \in U \) con \( {\{ d_\alpha \}}_{\alpha \in \mathbb{A}} \in D_F \subseteq D \). Por lo tanto, \( \bigcup_{F \in \pf{(\mathbb{A})}} D_F \) es denso en \( P \).
+    Veamos ahora que es más chico que el conjunto anterior. Dado \( d \in D \) es claro que existe \( F \in \pf{(\mathbb{A})} \) tal que \( d \in D_F \). Entonces \( d_\alpha = x_\alpha \in D_\alpha \) si \( \alpha \notin F \) y \( d_\alpha \in D_\alpha \) si \( \alpha \in F \), es claro entonces que \( d \in \prod_{\alpha \in \mathbb{A}} D_\alpha \).
+    Por lo tanto, \( D \subseteq \prod_{\alpha \in \mathbb{A}} D_\alpha \).
+\end{proof}
 
 \begin{ejercicio}{2}
     Sea \( P = \prod_{n \in \N} (X_n, \tau_n) \) dotado de la topología producto \( \tau_P \).
@@ -153,14 +164,50 @@
         \item Muestre que no pasa lo mismo con Lindelöff.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Veamos que si todos los \( X_n \) son \( N_2 \) entonces \( P \) también lo es. Dado \( \mathbf{x} = {(x_n)}_{n \in \N} \in P \) y \( U \in \mathcal{O}^a(\mathbf{x}) \) entonces \( U = \prod_{n \in F} U_n \times \prod_{n \in F^c} X_n \) con \( F \in \pf{(\N)} \) y \( U_n \in \mathcal{O}^a_{\tau_n}(x_n) \) para cada \( n \in F \).
+    Luego, como \( X_n \) es \( N_2 \) entonces \( \exists V_n \in \mathcal{O}^a_{\tau_n}(x_n) \) tal que \( V_n \subseteq U_n \) para cada \( n \in F \). Entonces, \( V = \prod_{n \in F} V_n \times \prod_{n \in F^c} X_n \in \mathcal{O}^a(\mathbf{x}) \) y \( V \subseteq U \).
+    Por lo tanto, \( P \) es \( N_2 \) pues construyo la base numerable \[
+        \mathcal{B} = \left \{ \prod_{n \in F} V_n \times \prod_{n \in F^c} X_n : F \in \pf{(\N)}, V_n \in \mathcal{O}^a_{\tau_n}(x_n) \text{ con } V_n \subseteq U_n \text{ para cada } n \in F, U_n \in \mathcal{O}^a_{\tau_n}(x_n) \right \}
+    \]
+    pues \( \pf{(\N)} \) es numerable y cada \( \mathcal{O}^a_{\tau_n}(x_n) \) tiene una base numerable.
+
+    Para el segundo punto, si cada \( X_n \) es \( N_1 \) entonces cada para cada \( {(x_n)}_{n \in \N} \in P \), la coordenada \( x_n \in X_n \) tiene una base numerable de entornos \( \mathcal{B}_n \).
+    Luego, \[
+        \mathcal{B} = \left \{ \prod_{n \in F} U_n \times \prod_{n \in F^c} X_n : F \in \pf{(\N)}, U_n \in \mathcal{B}_n \text{ para cada } n \in F \right \}
+    \] es una base numerable de entornos de \( {(x_n)}_{n \in \N} \) y por lo tanto \( P \) es \( N_1 \). Por otro lado, si cada uno de los \( X_n \) es separable, significa que \( \exists D_n \subseteq X_n \)
+    tal que \( \cl{D_n} = X_n \quad \forall n \in \N \). Luego, como \[
+        \cl{\prod_{n \in \N} D_n} = \prod_{n \in \N} \cl{D_n} = \prod_{n \in \N} X_n = P
+    \] entonces \( P \) es separable tomando \( D = \prod_{n \in \N} D_n \).
+
+    Para ver que no vale con Lindelöff ver \emph{La máquina de generar contraejemplos} del apunte de Demetrio.
+\end{proof}
+
+\clearpage
 
 \begin{ejercicio}{3}
     Sea \( f : \R \to \R^{\N} \) definida por \( f(t) = (t, t, t, \ldots) \). ¿Es continua si se considera en \( \R \) la topología usual y en \( \R^{\N} \) la topología caja?
 \end{ejercicio}
+\begin{proof}
+    Consideremos \( \tau_d \) la topología usual de \( \R \) y \( \tau_b \) la topología de la caja en \( \R^{\N} \).
+    Veamos primero que \( f \) no es continua en \( \tau_b \). Para ello, consideremos el abierto \( U = \prod_{n \in \N} (t - 1/n, t + 1/n) \) con \( t \in \R \). Entonces, \( f^{-1}(U) = \{t\} \) que no es un abierto de \( \R \). Por lo tanto, \( f \) no es continua.
+    Sin embargo, veamos que \( f \) es continua en \( \tau_d \). Para ello, dada una sucesión \( {(t_i)}_{i \in \N} \) que converge a \( t \) en \( \tau_d \) entonces \( t_i \to t \) en la topología usual de \( \R \). Por lo tanto, \( f(t_i) = (t_i, t_i, t_i, \ldots) \to (t, t, t, \ldots) = f(t) \) en la topología de la caja pues cada coordenada converge a \( t \). Por lo tanto, \( f \) es continua.
+\end{proof}
 
 \begin{ejercicio}{4}
     Sea \( L \) el subconjunto de \( \R^{\N} \) formado por los \( (x_1, x_2, \ldots) \) con una cantidad finita de componentes no nulas. ¿Cuál es la clausura de \( L \) en \( \R^{\N} \) con la topología producto y con la topología caja?
 \end{ejercicio}
+\begin{proof}
+    Sea \[ L = \left \{ (x_1, x_2, \ldots) \in \R^\N : \exists n_1, \ldots, n_k \in \N \, | \, x_{n_i} \neq 0 \text { para } i = 1, \ldots, k \text{ y } x_n = 0 \text{ para } n \notin \{n_1, \ldots, n_k\} \right \} \]
+    Queremos encontrar \( \cl{L} \) con la topología producto y con la topología caja.
+    En primer lugar, consideremos \( \tau_P \) la topología producto en \( \R^\N \). Podemos ver que \( \cl{L} = \R^\N \) tomando un abierto \( U = \prod_{\alpha \in F} U_\alpha \times \prod_{\alpha \notin F} X_\alpha \).
+    Luego, tomamos el elemento de \( L \) que tiene en las finitas coordenadas \( \alpha \in F \) valores de \( U_\alpha \) y \( 0 \) en el resto de coordenadas.
+    Ese elemento de \( L \) pertenece a \( U \) y por lo tanto \( U \cap L \neq \varnothing \quad \forall U \in \tau_P \therefore \cl{L} = \R^\N \) con la topología producto.
+
+    En la topología caja tenemos que \( \cl{L} = L \). En efecto, veamos que \( X \setminus L \) es abierto. Sea \( (x_1, x_2, \ldots) \in X \setminus L \).
+    Tenemos que existen solo finitas coordenadas donde \( x_n \neq 0 \). Si \( x_i = 0 \implies U_i = \R \), si \( x_i \neq 0 \implies U_i = (x_i - \varepsilon, x_i + \varepsilon) \) con \( \varepsilon > 0 \) tal que el entorno no contenga al cero.
+    Luego, es fácil ver que \( x \in U = \prod_{i \in \N} U_i \subseteq X \setminus L \) por lo que todo punto es interior y \( X \setminus L \) es abierto \( \therefore L \) es cerrado.
+\end{proof}
 
 \begin{ejercicio}{5}
     Sea \( \Gamma \) un conjunto no-numerable. Se define
