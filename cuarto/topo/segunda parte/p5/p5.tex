@@ -293,10 +293,42 @@
         d_1(x, y) = |x - y| \qquad \text{y} \qquad d_2(x, y) = |f(x) - f(y)| \quad \text{siendo } f(t) = \frac{t}{1 + |t|}
     \]
 \end{ejercicio}
+\begin{proof}
+    Veamos que no son equivalentes (a secas) i.e que no existen \[ m, M \in \R \quad : \quad \forall x, y \in \R \quad m d_2(x, y) \leq d_1(x, y) \leq M d_2(x, y) \] Para ello, consideremos
+    \( d_1(x, x+1) = 1 \) y \( d_2(x, x+1) = \dfrac{1}{(1+x)(2+x)} \) si \( x > 0 \). Luego, es fácil ver que \( d_2(x, x+1) \to 0 \) cuando \( x \to +\infty \) por lo que ningún \( M > 0 \) puede cumplir el lado derecho de la ecuación.
+
+    Para ver que son topológicamente equivalentes, consideremos la sucesión \( {(x_n)}_{n \in \N} \subseteq \R \) y \( x \in \R \), luego si \[
+        d_1(x_n, x) = | x_n - x | \to 0
+    \]
+    \begin{align*}
+        d_2(x_n, x) & = \left| \frac{x_n}{1+ |x_n|} - \frac{x}{1+|x|} \right | = \left| \frac{x_n + x_n | x | - (x + x | x_n |)}{(1 + |x_n|)(1 + |x|)} \right| \\
+                    & \leq \left| (x_n - x) + x_n |x| - x |x_n| \right |                                                                                       \\
+                    & \leq \left| (x_n - x) + x_n |x| - x_n |x_n| + x_n |x_n| - x |x_n| \right|                                                                \\
+                    & \leq \left| x_n - x \right| + \left| x_n \right| \cdot \left| |x| - |x_n| \right| + \left| x_n - x \right| \cdot |x_n|                   \\
+                    & \leq \left| x_n - x \right| + \left| x_n \right| \cdot \left| x - x_n \right| + \left| x_n - x \right| \cdot |x_n|                       \\
+                    & \leq d(x_n, x) + 2 |x_n| \cdot d(x_n, x)                                                                                                 \\
+                    & \leq d(x_n, x) (1 + 2 |x_n|)                                                                                                             \\
+                    & \leq d(x_n, x) (1 + 2 K) \quad \text{ pues \( x_n \to x \) entonces \( |x_n| \) es acotada por alguna \( K > 0 \) }
+    \end{align*}
+    que tiende a \( 0 \) pues \( d_1(x_n, x) \to 0 \). Ahora, si \( d_2(x_n, x) \to 0 \) entonces \( \dfrac{x_n}{1 + |x_n|} \to \dfrac{x}{1 + |x|} \). Si \( x = 0 \) entonces \( x_n \to 0 \) y por lo tanto \( d_1(x_n, x) \to 0 \). Si \( x \neq 0 \) entonces \( x_n \to x \) y por lo tanto \( d_1(x_n, x) \to 0 \). Por lo tanto, son topológicamente equivalentes.
+
+    Para ver que \( (\R, d_2) \) no es completo, consideremos la sucesión \( {(x_n)}_{n \in \N} \subseteq \R \) dada por \( x_n = n \). Entonces, \( d_2(x_n, x_m) = \dfrac{|n - m|}{(1 + n)(1 + m)} \to 0 \) cuando \( n, m \to +\infty \) por lo que \( {(x_n)}_{n \in \N} \) es de Cauchy. Sin embargo, no converge a ningún punto de \( \R \) pues \( d_2(x_n, x) = \left| \dfrac{n}{1 + n} - \dfrac{x}{1 + |x|} \right| \to 1 - \dfrac{x}{1 + |x|} > 0 \) para todo \( x \in \R \). Por lo tanto, \( (\R, d_2) \) no es completo.
+\end{proof}
 
 \begin{ejercicio}{2}
     Dado un conjunto \( X \) se define \( d(x, y) = \begin{cases} 1 & x \neq y \\ 0 & x = y \end{cases} \). Mostrar que \( d \) es una métrica. ¿Cuál es la topología \( \tau_d \)?
 \end{ejercicio}
+\begin{proof}
+    Es claro que \( d \geq 0 \), \( d(x, y) = 0 \iff x = y \) por definición, \( d(x, y) = d(y, x) \) por simetría de la definición, y \( d(x, z) \leq d(x, y) + d(y, z) \) pues \( d(x, z) \) sólo puede ser \( 0 \) ó \( 1 \) y \( d(x, y) + d(y, z) \) sólo puede ser \( 0 \), \( 1 \) ó \( 2 \) y siempre se cumple la desigualdad triangular. Por lo tanto, \( d \) es una métrica.
+
+    Para ver cómo es la topología \( \tau_d \) nos preguntamos que forma tienen las bolas de radio \( r \) con centro en \( x \). Entonces, dado \(  0 < r \leq 1 \) y \( x \in X \) entonces \[
+        B(x, r) = \{ y \in X : d(x, y) < r \} = \{ x \}
+    \]
+    y si \( r > 1 \) entonces \[
+        B(x, r) = \{ y \in X : d(x, y) < r \} = X
+    \]
+    Por lo tanto, la topología \( \tau_d \) es la topología discreta.
+\end{proof}
 
 \begin{ejercicio}{3}
     Mostrar que si \( (X, \tau) \) y \( (Y, \sigma) \) son homeomorfos y \( \tau \) es metrizable entonces \( \sigma \) también.
