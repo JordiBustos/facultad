@@ -223,9 +223,10 @@
 \end{proof}
 
 \begin{ejercicio}{6}
-    Sea \( X \) un espacio topológico y \( g : X \to Y \) suryectiva. ¿Cuál es la topología más pequeña en \( Y \) que hace que \( g \) sea continua?
+    Sea \( (X, \tau) \) un espacio topológico y \( g : X \to Y \) suryectiva. ¿Cuál es la topología más pequeña en \( Y \) que hace que \( g \) sea continua?
 \end{ejercicio}
 \begin{proof}
+    La topología más pequeña en \( Y \) que hace que \( g \) sea continua es \( \tau_{\text{ind}} = \{ \varnothing, Y \} \).
 \end{proof}
 
 \begin{ejercicio}{7}
@@ -237,10 +238,30 @@
         \item Mostrar que \( g \) no es cerrada.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Dada \( g : \R \to S^1 \) dada por \( g(t) = e^{i2\pi t} \).
+    \begin{enumerate}
+        \item Dado \( t, s \in \R \) entonces \( g(t+s) = e^{i2\pi (t+s)} = e^{i 2 \pi t} e^{i 2 \pi s} = g(t) g(s) \) por lo que \( g \) es un morfismo.
+        \item Veamos que \( \ker(g) = \Z \). Dado \( t \in \R \) entonces \( g(t) = 1 \iff e^{i 2 \pi t} = 1 \iff i 2 \pi t = 2 \pi k i \) con \( k \in \Z \), por lo que \( t = k \in \Z \). Por lo tanto, \( \ker(g) = \Z \). Además, la relación de equivalencia dada por \( g \) es la congruencia módulo \( \Z \) pues \( t \equiv s \mod \Z \iff t - s \in \Z \iff g(t) = g(s) \).
+        \item TODO
+        \item Consideremos \[ A = \{ 1/n + n : n \in \N \} \subseteq \R \] que es cerrado por ser un conjunto formado por puntos aislados con distancia creciente entre ellos. Sin embargo, \[
+                  g(A) = \{ e^{i 2 \pi (1/n + n)} = e^{i 2 \pi / n} : n \geq 2 \}
+              \] que no es cerrado pues \( e^{i 2 \pi / n } \to 1 \) pero \( 1 \notin g(A) \).
+    \end{enumerate}
+\end{proof}
 
 \begin{ejercicio}{8}
     Mostrar que existen funciones abiertas que no son cerradas y funciones cerradas que no son abiertas.
 \end{ejercicio}
+\begin{proof}
+    La \( g \) del punto anterior es abierta, pero no es cerrada. Para una ejemplo de una función cerrada que no es abierta, consideremos \( f : \R \to \R \) dada por \[
+        f(x) = \begin{cases}
+            0 & x \leq 0 \\
+            1 & x > 0
+        \end{cases}
+    \]
+    Claramente no es abierta pues \( f((-\varepsilon, \varepsilon)) = \{0, 1\} \) que no es un abierto de \( \R \). Sin embargo, es cerrada pues para todo cerrado \( F \subseteq \R \) \( f(F) = \{ 0 \} \) ó \( f(F) = \{ 1 \} \) ó bien \( f(F) = \{ 0, 1 \} \) que son cerrados en \( \R \).
+\end{proof}
 
 \begin{ejercicio}{9}
     Sean \( Y = \{(x, y) : x = 0 \text{ ó } y = 0\} \) y \( g : \R^2 \to Y \) definida por
@@ -249,6 +270,20 @@
     \]
     Mostrar que \( g \) es suryectiva y que la topología cociente asociada \( \tau_g \) no es Hausdorff (\( \R^2 \) con la topología usual).
 \end{ejercicio}
+\begin{proof}
+    Es claro que \( g \) es suryectiva pues dado \( (x, y) \in Y \) entonces \( g(x, 0) = (x, 0) \) si \( x \neq 0 \) y \( g(0, y) = (0, y) \) si \( x = 0 \).
+    Para ver que \[ \tau_g = \{ U \subseteq Y : g^{-1}(U) \in \tau \} \] no es Hausdorff, tomemos \( (0, 1), (0, 2) \in Y \)
+    y supongamos que existen \( U, V \in \tau_g \) con \( (0, 1) \in U \), \( (0, 2) \in V \) y \( U \cap V = \varnothing \). Entonces,
+    \( g^{-1}(U) \) es un abierto de \( \R^2 \) que contiene a \( (0, 1) \) y \( g^{-1}(V) \) es un abierto de \( \R^2 \) que contiene a \( (0, 2) \). Como estamos en la topología usual,
+    podemos decir que \[
+        \exists \varepsilon > 0 : B((0, 1), \varepsilon) \subseteq g^{-1}(U) \quad \text{y} \quad \exists \delta > 0 : B((0, 2), \delta) \subseteq g^{-1}(V)
+    \]
+    Tomando \( 0 < x_0 < \min \{\varepsilon, \delta \} \) entonces el punto \( (x_0, 1) \in B((0, 1), \varepsilon) \) y \( (x_0, 2) \in B((0, 2), \delta) \).
+    Sin embargo, \( g(x_0, 1) = (x_0, 0) = g(x_0, 2) \) lo que implica que \( (x_0, 1) \in g^{-1}(U) \cap g^{-1}(V) \) y por lo tanto \( U \cap V \neq \varnothing \). Por lo tanto, \( \tau_g \) no es Hausdorff.
+
+\end{proof}
+
+\clearpage
 
 \section*{Métricas}
 
@@ -296,6 +331,8 @@
 \begin{ejercicio}{8}
     Mostrar que \( X \) es separable respecto a dos métricas \( d_1 \) y \( d_2 \) si y sólo si es separable respecto a la métrica \( d = \max\{d_1, d_2\} \).
 \end{ejercicio}
+
+\clearpage
 
 \section*{Funciones Continuas (Lema de Urysohn/Teorema de Tietze)}
 
