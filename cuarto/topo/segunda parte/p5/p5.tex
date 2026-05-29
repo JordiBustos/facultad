@@ -333,10 +333,51 @@
 \begin{ejercicio}{3}
     Mostrar que si \( (X, \tau) \) y \( (Y, \sigma) \) son homeomorfos y \( \tau \) es metrizable entonces \( \sigma \) también.
 \end{ejercicio}
+\begin{proof}
+    Tenemos por hipótesis que existe un homeomorfismo \( f : X \to Y \) y una métrica \( d \) en \( X \) tal que \( \tau = \tau_d \).
+    Entonces, definamos \( d' : Y \times Y \to \R \) dada por \( d'(y_1, y_2) = d(f^{-1}(y_1), f^{-1}(y_2)) \). Es fácil ver que \( d' \) es una métrica pues \( d' \geq 0 \), \( d'(y_1, y_2) = 0 \iff f^{-1}(y_1) = f^{-1}(y_2) \iff y_1 = y_2 \), \( d'(y_1, y_2) = d(f^{-1}(y_1), f^{-1}(y_2)) = d(f^{-1}(y_2), f^{-1}(y_1)) = d'(y_2, y_1) \), y \( d'(y_1, y_3) = d(f^{-1}(y_1), f^{-1}(y_3)) \leq d(f^{-1}(y_1), f^{-1}(y_2)) + d(f^{-1}(y_2), f^{-1}(y_3)) = d'(y_1, y_2) + d'(y_2, y_3) \).
+
+    Finalmente, veamos que \( \tau_{d'} = \sigma \). Dado \( y \in Y \) y \( r > 0 \) entonces \( B_{d'}(y, r) = \{ z \in Y : d'(y, z) < r \} = \{ z \in Y : d(f^{-1}(y), f^{-1}(z)) < r \} = f(B_d(f^{-1}(y), r)) \) que es un abierto de \( Y \) pues \( f \) es un homeomorfismo. Por lo tanto, \( B_{d'}(y, r) \in \sigma \) y por lo tanto \( \tau_{d'} \subseteq \sigma \). Por otro lado, dado \( U \in \sigma \) entonces \( f^{-1}(U) \in \tau_d \) por ser \( f \) un homeomorfismo. Luego, dado \( x \in f^{-1}(U) \) y \( r > 0 \) tal que \( B_d(x, r) \subseteq f^{-1}(U) \) entonces \( f(B_d(x, r)) = B_{d'}(f(x), r) \subseteq U \) por lo que \( U \in \tau_{d'} \) y por lo tanto \( \sigma \subseteq \tau_{d'} \). Por lo tanto, \( \tau_{d'} = \sigma \) y \( \sigma \) es metrizable.
+\end{proof}
 
 \begin{ejercicio}{4}
     Sea \( P = \prod_{n \in \N} (X_n, \tau_n) \) dotado de la topología producto \( \tau_P \). Si cada \( \tau_n \) proviene de una métrica \( d_n \) en \( X_n \) entonces existe una métrica \( d_P \) en \( P \) tal que \( \tau_P = \tau_{d_P} \).
 \end{ejercicio}
+\begin{proof}
+    Cabe hacer la aclaración de que si la métrica \( d_n \) en \( X_n \) genera a \( \tau_n \) entonces la métrica \( d_n' = \min \{ d_n, 1 \} \) es una métrica que también genera a \( \tau_n \).
+    Entonces, dado \( P \) como arriba, podemos definir \( d_P : P \times P \to \R \) dada por \[
+        d_P({(x_n)}_{n \in \N}, {(y_n)}_{n \in \N}) = \sum_{n \geq 1} \frac{d_n'(x_n, y_n)}{2^n}
+    \]
+    Veamos que \( d_P \) es una métrica. Es claro que \( d_P \geq 0 \) y \( d_P({(x_n)}, {(y_n)}) = 0 \iff d_n'(x_n, y_n) = 0 \quad \forall n \in \N \iff x_n = y_n \quad \forall n \in \N \iff {(x_n)} = {(y_n)} \). Además, \( d_P({(x_n)}, {(y_n)}) = d_P({(y_n)}, {(x_n)}) \) por simetría de cada \( d_n' \). Finalmente, dado \( {(x_n)}, {(y_n)}, {(z_n)} \in P \) entonces \( d_P({(x_n)}, {(z_n)}) = \sum_{n \geq 1} \frac{d_n'(x_n, z_n)}{2^n} \leq \sum_{n \geq 1} \frac{d_n'(x_n, y_n) + d_n'(y_n, z_n)}{2^n} = d_P({(x_n)}, {(y_n)}) + d_P({(y_n)}, {(z_n)}) \). Por lo tanto, \( d_P \) es una métrica.
+
+    Demostremos ahora la inclusión de topologías \( \tau_P \subseteq \tau_{d_P} \). Sea \( U = \prod_{n \in F} U_n \times \prod_{n \notin F} X_n \) un abierto básico de la topología producto, donde \( F \subset \mathbb{N} \) es un conjunto finito y \( U_n \in \tau_n \) para cada \( n \in F \). Sea \( {(x_n)} \in U \), lo que implica que \( x_n \in U_n \) para todo \( n \in F \). Dado que cada \( \tau_n \) está generada por \( d_n' \), para cada \( n \in F \) existe un \( r_n > 0 \) tal que \( B_{d_n'}(x_n, r_n) \subseteq U_n \). Tomando \( r = \min_{n \in F} \frac{r_n}{2^n} \), que es estrictamente mayor que cero por ser \( F \) finito, afirmamos que \( B_{d_P}({(x_n)}, r) \subseteq U \). En efecto, si \( {(y_n)} \in B_{d_P}({(x_n)}, r) \), se tiene que:
+    \[
+        \sum_{n=1}^{\infty} \frac{d_n'(x_n, y_n)}{2^n} < r
+    \]
+    Luego, para cualquier \( k \in F \):
+    \[
+        \frac{d_k'(x_k, y_k)}{2^k} \leq \sum_{n=1}^{\infty} \frac{d_n'(x_n, y_n)}{2^n} < r \leq \frac{r_k}{2^k}
+    \]
+    De donde se deduce que \( d_k'(x_k, y_k) < r_k \), es decir, \( y_k \in B_{d_k'}(x_k, r_k) \subseteq U_k \). Como esto se cumple para todo \( k \in F \), concluimos que \( {(y_n)} \in U \). Así, \( B_{d_P}({(x_n)}, r) \subseteq U \), lo que prueba que \( U \in \tau_{d_P} \) y por lo tanto \( \tau_P \subseteq \tau_{d_P} \).
+
+    Para ver la otra inclusión, \( \tau_{d_P} \subseteq \tau_P \), consideremos una bola abierta \( B_{d_P}({(x_n)}, r) \) con \( r > 0 \). Dado que la serie \( \sum_{n=1}^{\infty} \frac{1}{2^n} \) converge, existe un \( N \in \mathbb{N} \) suficientemente grande tal que:
+    \[
+        \sum_{n=N+1}^{\infty} \frac{1}{2^n} < \frac{r}{2}
+    \]
+    Definamos \( \delta = \frac{r}{2N} > 0 \) y consideremos el siguiente entorno abierto básico en la topología producto:
+    \[
+        V = B_{d_1'}(x_1, \delta) \times B_{d_2'}(x_2, \delta) \times \cdots \times B_{d_N'}(x_N, \delta) \times \prod_{n=N+1}^{\infty} X_n
+    \]
+    Es evidente que \( {(x_n)} \in V \in \tau_P \). Veamos ahora que \( V \subseteq B_{d_P}({(x_n)}, r) \). Si \( {(y_n)} \in V \), podemos acotar su distancia a \( {(x_n)} \) separando la serie en dos partes:
+    \[
+        d_P({(x_n)}, {(y_n)}) = \sum_{n=1}^{N} \frac{d_n'(x_n, y_n)}{2^n} + \sum_{n=N+1}^{\infty} \frac{d_n'(x_n, y_n)}{2^n}
+    \]
+    Para los primeros \( N \) términos, usamos que \( d_n'(x_n, y_n) < \delta \); para el resto, usamos el hecho de que \( d_n' \leq 1 \):
+    \[
+        d_P({(x_n)}, {(y_n)}) < \sum_{n=1}^{N} \frac{\delta}{2^n} + \sum_{n=N+1}^{\infty} \frac{1}{2^n} < \sum_{n=1}^{N} \delta + \frac{r}{2} = N\delta + \frac{r}{2} = N\left(\frac{r}{2N}\right) + \frac{r}{2} = r
+    \]
+    Por lo tanto, \( {(y_n)} \in B_{d_P}({(x_n)}, r) \), lo que demuestra que \( V \subseteq B_{d_P}({(x_n)}, r) \). Esto prueba que \( B_{d_P}({(x_n)}, r) \in \tau_P \), de donde \( \tau_{d_P} \subseteq \tau_P \). Finalmente, concluimos que \( \tau_P = \tau_{d_P} \).
+\end{proof}
 
 \begin{ejercicio}{5}
     Sea \( L \) el subconjunto de \( \R^{\N} \) formado por las sucesiones con una cantidad finita de componentes no nulas. ¿Cuál es la clausura en \( \R^{\N} \) respecto a la topología uniforme?
