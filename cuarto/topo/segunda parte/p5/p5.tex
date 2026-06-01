@@ -502,6 +502,24 @@
         \item La red \( \{\mathbf{x}, \mathbf{y}\} = {(\{x_i, y_j\})}_{(i,j) \in I \times J} \) cumple \( \{\mathbf{x}, \mathbf{y}\} \evto{U} \) para todo abierto \( U \subseteq X \times X \) tal que \( \Delta \subseteq U \). El orden en \( I \times J \) es en las dos entradas a la vez: \( (i,j) \leq (k,l) \iff i \leq_I k \) y \( j \leq_J l \).
     \end{itemize}
 \end{ejercicio}
+\begin{proof}
+    Sea \( \Delta = \{ (x, x) : x \in X \} \) la diagonal de \( X \times X \). Dado \( (x, y) \in X \times X \), entonces \( (x, y) \in \Delta \) si y sólo si \( x = y \).
+
+    \( (\implies) \) Supongamos que las dos redes tienen el mismo límite \( z \). Sea \( U \subseteq X \times X \) un abierto tal que \( \Delta \subseteq U \). Como \( (z, z) \in \Delta \subseteq U \), tenemos que \( (z, z) \in U \).
+    Por definición de la topología producto, existen abiertos \( W_1, W_2 \subseteq X \) tales que \( (z, z) \in W_1 \times W_2 \subseteq U \). Sea \( W = W_1 \cap W_2 \). Entonces \( W \) es un entorno abierto de \( z \) y \( W \times W \subseteq U \).
+    Dado que ambas redes convergen a \( z \), existen índices \( i_0 \in I \) y \( j_0 \in J \) tales que \( x_i \in W \) para toda \( i \geq i_0 \) y \( y_j \in W \) para toda \( j \geq j_0 \). Por lo tanto, si \( (i, j) \geq (i_0, j_0) \), se tiene que \( (x_i, y_j) \in W \times W \subseteq U \). Esto demuestra que \( \{\mathbf{x}, \mathbf{y}\} \evto{U} \).
+
+    \( (\impliedby) \) Supongamos que \( \{\mathbf{x}, \mathbf{y}\} \evto{U} \) para todo abierto \( U \subseteq X \times X \) tal que \( \Delta \subseteq U \). Por hipótesis, ambas redes son convergentes. Sean \( x_i \to a \) y \( y_j \to b \). Queremos demostrar que \( a = b \).
+
+    Supongamos por el absurdo que \( a \neq b \). Asumiendo que los puntos son cerrados (es decir, el espacio es \( T_1 \) y por ser regular resulta Hausdorff), existen entornos abiertos disjuntos \( V_a \) y \( V_b \) de \( a \) y \( b \) respectivamente.
+    Dado que \( X \) es regular, existe un entorno abierto \( W_a \) de \( a \) tal que \( \cl{W_a} \subseteq V_a \), y un entorno abierto \( W_b \) de \( b \) tal que \( \cl{W_b} \subseteq V_b \). Como \( V_a \cap V_b = \emptyset \), entonces \( \cl{W_a} \cap \cl{W_b} = \emptyset \).
+
+    Consideremos el conjunto \( U = (X \times X) \setminus (\cl{W_a} \times \cl{W_b}) \). Como \( \cl{W_a} \) y \( \cl{W_b} \) son cerrados, su producto cartesiano es cerrado en \( X \times X \), por lo que \( U \) es un conjunto abierto.
+    Además, como \( \cl{W_a} \cap \cl{W_b} = \emptyset \), no existe ningún \( x \in X \) tal que \( (x, x) \in \cl{W_a} \times \cl{W_b} \). En consecuencia, \( \Delta \subseteq U \).
+
+    Por hipótesis, la red \( \{\mathbf{x}, \mathbf{y}\} \) está eventualmente en \( U \). Sin embargo, como \( x_i \to a \) y \( y_j \to b \), eventualmente se tiene que \( x_i \in W_a \subseteq \cl{W_a} \) y \( y_j \in W_b \subseteq \cl{W_b} \). Es decir, eventualmente \( (x_i, y_j) \in \cl{W_a} \times \cl{W_b} \), lo que implica que la red está eventualmente fuera de \( U \).
+    Esta contradicción proviene de suponer \( a \neq b \). Por lo tanto, \( a = b \), y las dos redes tienen el mismo límite.
+\end{proof}
 
 \begin{ejercicio}{5}
     Sea \( X \) un espacio regular con una base numerable. Sea \( U \) un abierto de \( X \).
