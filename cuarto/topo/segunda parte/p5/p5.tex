@@ -382,6 +382,13 @@
 \begin{ejercicio}{5}
     Sea \( L \) el subconjunto de \( \R^{\N} \) formado por las sucesiones con una cantidad finita de componentes no nulas. ¿Cuál es la clausura en \( \R^{\N} \) respecto a la topología uniforme?
 \end{ejercicio}
+\begin{proof}
+    Propongo que \( \cl{L} = c_0 = \{ \text{sucesiones convergentes a 0} \} \). En efecto,
+    veamos que \( \cl{L} \subseteq c_0 \). Dados \( f \in \cl{L} \) y \( \varepsilon > 0 \) existe \( g \in L \) tal que \( d_\infty(f, g) < \varepsilon \). Dado que \( g \) tiene sólo finitas componentes no nulas,
+    existe un \( n_0 \in \N \) tal que \( g(n) = 0 \quad \forall n \geq n_0 \). Luego, para todo \( n \geq n_0 \) se tiene que \( |f(n)| = |f(n) - g(n)| < \varepsilon \) por lo que \( f(n) \to 0 \) y por lo tanto \( f \in c_0 \).
+
+    Por último, veamos que \( c_0 \subseteq \cl{L} \). Dado \( f \in c_0 \) y \( \varepsilon > 0 \) existe un \( n_0 \in \N \) tal que \( |f(n)| < \varepsilon \quad \forall n \geq n_0 \). Entonces, la función \( g : \N \to \R \) dada por \( g(n) = f(n) \) si \( n < n_0 \) y \( g(n) = 0 \) si \( n \geq n_0 \) es una función con sólo finitas componentes no nulas, es decir, \( g \in L \). Además, \( d_\infty(f, g) = \sup_{n} |f(n) - g(n)| = \sup_{n} |f(n)| < \varepsilon \). Por lo tanto, \( f \in B_\infty(g, \varepsilon) \cap L \neq \varnothing \), lo que implica que \( f \in \cl{L} \). Por lo tanto, \( c_0 = \cl{L} \).
+\end{proof}
 
 \begin{ejercicio}{6}
     Considerando las funciones \( E, F : C([0,1], \R) \to \R \) definidas por
@@ -396,13 +403,39 @@
               \]
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Como estamos en espacios métricos para probar la continuidad de las funciones \( E, F \) podemos aplicar un argumento de \( \varepsilon \)-\( \delta \). Entonces, fijado \( f \in C([0, 1]) \) y \( \varepsilon > 0 \), tomando
+    \( \delta = \varepsilon \) se tiene que si: \[ d_\infty(f, g) = \sup_{t \in [0, 1]} |f(t) - g(t)| < \delta = \varepsilon \] entonces \[
+        |E(f) - E(g)| = |f(0) - g(0)| < d_\infty(f, g) < \varepsilon
+    \]
+    por lo tanto \( E \) es continua. Además, si \( d_\infty(f, g) < \varepsilon \) entonces \[
+        |F(f) - F(g)| = \left| \int_0^1 f(t)\, \mathrm{d}t - \int_0^1 g(t)\, \mathrm{d}t \right| = \left| \int_0^1 (f(t) - g(t))\, \mathrm{d}t \right| \leq \int_0^1 |f(t) - g(t)|\, \mathrm{d}t < d_\infty(f, g) < \varepsilon
+    \]
+    por lo que \( F \) es continua.
+
+    Si ahora utilizamos la métrica \( d_1 \) entonces, dado \( f \in C([0, 1]) \) y \( \varepsilon > 0 \), tomando \( \delta = \varepsilon \) se tiene que si: \[
+        d_1(f, g) = \int_0^1 |f(t) - g(t)|\, dt < \delta = \varepsilon
+    \]
+    entonces \[
+        |F(f) - F(g)| = \left| \int_0^1 f(t)\, \mathrm{d}t - \int_0^1 g(t)\, \mathrm{d}t \right| = \left| \int_0^1 (f(t) - g(t))\, \mathrm{d}t \right| \leq \int_0^1 |f(t) - g(t)|\, \mathrm{d}t = d_1(f, g) < \varepsilon
+    \]
+    por lo que \( F \) es continua. Sin embargo, \( E \) no es continua respecto de \( d_1 \). Para ver esto, fijada la \( f \in C([0, 1]) \) y \( \varepsilon > 0 \), para cualquier \( \delta > 0 \) se puede construir una función tal que
+    \[
+        |E(f) - E(g)| = |f(0) - g(0)| \geq \varepsilon
+    \]
+    sin embargo \( d_1(f, g) < \delta \). Esta función se construye tomando un punto inicial lo suficientemente lejos, pero luego tomando un pico lo suficientemente empinado tal que la integral de la diferencia entre \( f \) y \( g \) sea menor que \( \delta \).
+    Para ello sólo necesitamos que la función \( g \) tenga un pico cuya diferencia con \( f \) sea de altura \( \varepsilon \) y base \( \frac{\delta}{\varepsilon} \) y luego se pegue a \( f \) en el resto del intervalo.
+\end{proof}
 
 \begin{ejercicio}{7}
     Mostrar que en un espacio métrico, la propiedad `separable' es hereditaria.
 \end{ejercicio}
+\begin{proof}
+    Si \( X \) es un espacio métrico separable por la \textbf{Proposición 2.4.2} es es \( N_2 \), luego por la \textbf{Proposición 2.4.15} \( N_2 \) es hereditario y entonces \( Y \) es \( N_2 \). Pero \( Y \) es subespacio también métrico, entonces de nuevo por la \textbf{Proposición 2.4.2} es separable.
+\end{proof}
 
 \begin{ejercicio}{8}
-    Mostrar que \( X \) es separable respecto a dos métricas \( d_1 \) y \( d_2 \) si y sólo si es separable respecto a la métrica \( d = \max\{d_1, d_2\} \).
+    Mostrar que \( X \) es separable respecto a dos métricas \( d_1 \) y \( d_2 \) si y sólo si es separable respecto a la métrica \( d = \max \{ d_1, d_2 \} \).
 \end{ejercicio}
 
 \clearpage
