@@ -437,6 +437,12 @@
 \begin{ejercicio}{8}
     Mostrar que \( X \) es separable respecto a dos métricas \( d_1 \) y \( d_2 \) si y sólo si es separable respecto a la métrica \( d = \max \{ d_1, d_2 \} \).
 \end{ejercicio}
+\begin{proof}
+    \( (\impliedby) \) Por hipótesis existe un \( A \subseteq X \) denso y numerable. Dado \( \varepsilon > 0 \) y \( x \in X \) entonces \( \exists a \in A \, : \, d(x, a) < \varepsilon \implies d_1(x, a) < \varepsilon \) y \( d_2(x, a) < \varepsilon \therefore A \) es denso numerable con respecto a \( d_1, d_2 \).
+
+    \( (\implies) \) Por hipótesis \( X \) es un espacio métrico separable respecto a \( d_1 \) y a \( d_2 \). Entonces, \( X \) es \( N_2 \) con respecto a ambas métricas y esto nos dice que existen \( \mathcal{B}_1, \mathcal{B}_2  \) bases numerables de \( X \) con respecto a \( d_1 \) y \( d_2 \) respectivamente. Entonces, es fácil ver que \( \mathcal{B} = \{ B_1 \cap B_2 : B_1 \in \mathcal{B}_1, B_2 \in \mathcal{B}_2 \} \) es una base numerable de \( X \) con respecto a \( d \).
+    Por lo tanto, \( X \) es \( N_2 \) y finalmente separable con respecto a \( d \).
+\end{proof}
 
 \clearpage
 
@@ -450,21 +456,44 @@
         \item El producto de espacios completamente regulares sigue siendo completamente regular.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Para ver que normal implica CR quiero ver que para todo par \( (x, U) \in X \times \tau \) con \( x \in U \) existe una función continua \( f : X \to [0, 1] \) tal que \( f(x) = 1 \) y \( f(y) = 0 \) para todo \( y \notin U \).
+    Dado \( (x, U) \in X \times \tau \) con \( x \in U \), como \( X \) es normal, en particular \( T_1 \) entonces \( \{ x \} \) es cerrado y \( U^c \) también por ser complemento de un abierto.
+    Luego, por el \emph{Lema de Urysohn} existe una función continua \( f : X \to [0, 1] \) tal que \( f(x) = 1 \) y \( f(y) = 0 \) para todo \( y \notin U \). Por lo tanto, \( X \) es completamente regular.
+
+    Para ver que CR es hereditaria, consideremos \( Y \subseteq X \) un subespacio de \( X \) y \( (y, U) \in Y \times \tau_Y \) con \( y \in U \).
+    Entonces, existe un \( V \in \tau \) tal que \( U = V \cap Y \). Dado que \( X \) es CR, existe una función continua \( f : X \to [0, 1] \) tal que \( f(y) = 1 \) y \( f(x) = 0 \) para todo \( x \notin V \).
+    Entonces, la función \( f|_Y : Y \to [0, 1] \) dada por \( f|_Y(z) = f(z) \) es continua pues es la restricción de una función continua a un subespacio. Además, \( f|_Y(y) = f(y) = 1 \) y \( f|_Y(z) = f(z) = 0 \) para todo \( z \notin U \). Por lo tanto, \( Y \) es completamente regular.
+
+    Sean \( X_1, X_2 \) completamente regulares, veamos que \( X_1 \times X_2 \) es completamente regular. En efecto, dado \( x = (x_1, x_2) \) y \( U = U_1 \times U_2 \) con \( x \in U \) entonces \( x_1 \in U_1 \) y \( x_2 \in U_2 \). Dado que \( X_1, X_2 \) son completamente regulares, existen funciones continuas \( f_1 : X_1 \to [0, 1] \) y \( f_2 : X_2 \to [0, 1] \) tal que \( f_1(x_1) = 1 \), \( f_1(y) = 0 \) para todo \( y \notin U_1 \), \( f_2(x_2) = 1 \), y \( f_2(z) = 0 \) para todo \( z \notin U_2 \). Entonces, la función \( f : X_1 \times X_2 \to [0, 1] \) dada por \( f(z, w) = f_1(z) f_2(w) \) es continua pues es el producto de funciones continuas. Además, \( f(x) = f(x_1, x_2) = f_1(x_1) f_2(x_2) = 1\cdot 1 = 1 \), y si \( (z, w) \notin U = U_1 \times U_2 \), entonces o bien \( z \notin U_1 \) o bien \( w \notin U_2 \). En el primer caso, se tiene que \( f(z, w) = f_1(z)f_2(w) = 0\cdot f_2(w) = 0\), y en el segundo caso se tiene que \( f(z, w) = f_1(z)f_2(w) = f_1(z)\cdot 0 = 0\). Por lo tanto, \( X_1\times X_2 \) es completamente regular.
+\end{proof}
 
 \begin{ejercicio}{2}
     Sea \( (X, \tau) \) un espacio topológico completamente regular.
     \begin{enumerate}
-        \item Probar que dada una red \( \mathbf{x} = \{x_i\}_{i \in I} \) en \( X \) y \( x \in X \) se cumple
+        \item Probar que dada una red \( \mathbf{x} = {\{x_i\}}_{i \in I} \) en \( X \) y \( x \in X \) se cumple
               \[
                   x_i \xrightarrow{i \in I} x \iff f(x_i) \xrightarrow{i \in I} f(x) \quad \text{para toda } f \in C(X, [0,1])
               \]
         \item Probar que la topología original \( \tau \) en \( X \) no es otra que la topología inicial asociada a \( C(X, [0,1]) \).
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    La ida es clara, si \( x_i \to x \) entonces \( f(x_i) \to f(x) \) para toda \( f \in C(X, [0,1]) \) por continuidad de \( f \). Para la vuelta, supongamos que \( f(x_i) \to f(x) \) para toda \( f \in C(X, [0,1]) \) pero \( x_i \not\to x \). Entonces, existe un abierto \( U \) con \( x \in U \) tal que \( x_i \notin U \) para toda \( i \in I \). Dado que \( X \) es completamente regular, existe \( f \in C(X, [0, 1]) \) tal que \( f(x) = 1 \) y \( f(y) = 0 \) para todo \( y \notin U \). Entonces, \( f(x_i) = 0 \) para toda \( i \in I \) pues los \( x_i \notin U \), pero \( f(x) = 1 \), lo que contradice la hipótesis de que \( f(x_i) \to f(x) \). Por lo tanto, \( x_i \to x \).
+\end{proof}
 
 \begin{ejercicio}{3}
     Sea \( X \) un espacio topológico completamente regular. Considerando \( C(X, \R) \subseteq \R^X \) demostrar que \( C(X, \R) \) es denso respecto de la topología producto en \( \R^X \).
 \end{ejercicio}
+\begin{proof}
+    Para ver que \( C(X, \R) \) es denso con respecto a la topología producto, dado \( f \in \R^X \) y un entorno abierto básico \[ U = \prod_{x \in F} U_x \times \prod_{x \notin F} \R \] con \( F \subseteq X \) finito y
+    \( U_x \subseteq \R \) abierto para cada \( x \in F \), quiero encontrar una función \( g \in C(X, \R) \) tal que \( g \in U \). Dado que \( X \) es CR, para cada \( x \in F \) existe una función continua
+    \( f_x : X \to [0, 1] \) tal que \( f_x(x) = 1 \) y \( f_x(y) = 0 \) para todo \( y \neq x \). Entonces, la función \( g : X \to \R \) dada por
+    \[
+        g(z) = \sum_{x \in F} f_x(z) f(x)
+    \]
+    es continua pues es una suma finita de funciones continuas. Además, si \( z \in F \) entonces \( g(z) = f(z) \) pues \( f_x(z) = 1 \) para \( x = z \) y \( f_x(z) = 0 \) para \( x \neq z \). Por lo tanto, \( g(z) \in U_z \) para cada \( z \in F \), lo que implica que \( g \in U \). Así, \( C(X, \R) \cap U \neq \varnothing \), lo que demuestra que \( C(X, \R) \) es denso en \( \R^X \).
+\end{proof}
 
 \begin{ejercicio}{4}
     Sea \( (X, \tau) \) un espacio topológico regular y sean \( \mathbf{x} = {(x_i)}_{i \in I} \) e \( \mathbf{y} = {(y_j)}_{j \in J} \) dos redes en \( X \) ambas convergentes. Entonces son equivalentes:
