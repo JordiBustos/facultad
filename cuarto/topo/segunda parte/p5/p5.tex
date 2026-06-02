@@ -528,23 +528,92 @@
         \item Mostrar que existe una \( f \in C(X, [0,1]) \) tal que \( f(x) > 0 \) para los \( x \in U \) y \( f(x) = 0 \) para los \( x \notin U \).
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Dado \( U \in \tau \), como \( X \) es regular, para cada \( x \in U \) existe un entorno abierto \( V_x \) de \( x \) tal que \( x \in V_x \subseteq \cl{V_x} \subseteq U \). Luego, como tengo una base numerable
+    existe \( x \in B_{n_x} \subseteq V_x \) para algún \( n_x \in \N \). Entonces, \( x \in \cl{B_{n_x}} \subseteq \cl{V_x} \subseteq U \). Por lo tanto, \[
+        U = \bigcup_{x \in U} \cl{B_{n_x}}
+    \]
+    y cada \( \cl{B_{n_x}} \) es un conjunto cerrado de \( X \). Además, como \( B_{n_x} \) pertenece a una base numerable, entonces \( n_x \) sólo puede tomar valores en un subconjunto numerable de \( \N \), lo que implica que la unión anterior es numerable.
+
+    Para ver la segunda parte, dado \( U \in \tau \), por la primera parte existe una sucesión \( (F_n)_{n \in \N} \) de conjuntos cerrados de \( X \) tal que \( U = \bigcup_{n \in \N} F_n \). Entonces, la función \( f : X \to [0, 1] \) dada por
+    \[
+        f(x) = \sum_{n=1}^{\infty} \frac{\chi_{F_n}(x)}{2^n}
+    \] es continua pues es la suma de una serie de funciones continuas (cada \( \chi_{F_n} \) es continua por ser la función característica de un conjunto cerrado). Además, si \( x \in U \) entonces \( x \in F_{n_0} \) para algún \( n_0 \in \N \), lo que implica que \( f(x) \geq \frac{1}{2^{n_0}} > 0 \). Por otro lado, si \( x \notin U \) entonces \( x \notin F_n \) para todo \( n \in \N \), lo que implica que \( f(x) = 0 \). Por lo tanto, \( f \) es la función continua que cumple las condiciones requeridas.
+\end{proof}
 
 \begin{ejercicio}{6}
     Demostrar el \emph{Teorema Fuerte de Urysohn}: Dados \( A \) y \( B \) conjuntos cerrados disjuntos de un espacio topológico normal. Entonces existe \( f \in C(X, [0,1]) \) tal que \( f^{-1}(0) = A \) y \( f^{-1}(1) = B \) si y sólo si \( A \) y \( B \) son \( G_\delta \) conjuntos en \( X \).
 
-    \textit{Definición}: \( G_\delta \) conjunto de \( X \) es aquel que puede escribirse como intersección numerable de conjuntos abiertos.
+    \textit{Definición}: Un conjunto \( G_\delta \) de \( X \) es aquel que puede escribirse como intersección numerable de conjuntos abiertos.
 \end{ejercicio}
+
+\begin{proof}
+    Supongamos primero que existe \( f \in C(X, [0, 1]) \) tal que \( f^{-1}(0) = A \) y \( f^{-1}(1) = B \), y veamos que \( A \) y \( B \) son \( G_\delta \) conjuntos. Para cada \( n \in \N \), definamos los conjuntos:
+    \[
+        U_n = f^{-1}\left( \left[ 0, \frac{1}{n} \right) \right) \quad \text{y} \quad V_n = f^{-1}\left( \left( 1 - \frac{1}{n}, 1 \right] \right)
+    \]
+    Como \( f \) es continua y los intervalos son abiertos en la topología subespacio de \( [0,1] \), \( U_n \) y \( V_n \) son abiertos en \( X \). Luego, \( A = \bigcap_{n=1}^{\infty} U_n \) y \( B = \bigcap_{n=1}^{\infty} V_n \), lo que implica que \( A \) y \( B \) son conjuntos \( G_\delta \).
+
+    Veamos ahora la otra implicación. Supongamos que
+    \[
+        A = \bigcap_{n=1}^{\infty} U_n \quad \text{y} \quad B = \bigcap_{n=1}^{\infty} V_n \quad \text{con } U_n, V_n \in \tau \, (\forall n \in \N)
+    \]
+    y veamos que existe \( f \in C(X, [0, 1]) \) tal que \( f^{-1}(0) = A \) y \( f^{-1}(1) = B \).
+
+    Primero, construimos una función que se anule exactamente en \( A \). Como \( A \subseteq U_n \), el conjunto \( X \setminus U_n \) es un cerrado disjunto de \( A \). Por el Lema de Urysohn (ya que \( X \) es normal), para cada \( n \in \N \) existe \( g_n \in C(X, [0, 1]) \) tal que \( g_n(A) = \{0\} \) y \( g_n(X \setminus U_n) = \{1\} \). Definimos la función \( g : X \to [0, 1] \) como:
+    \[
+        g(x) = \sum_{n=1}^{\infty} \frac{g_n(x)}{2^n}
+    \]
+    Esta función es continua por ser suma de una serie uniformemente convergente de funciones continuas (Weierstrass). Si \( x \in A \), entonces \( g_n(x) = 0 \) para todo \( n \in \N \), luego \( g(x) = 0 \). Si \( x \notin A \), existe \( n_0 \in \N \) tal que \( x \notin U_{n_0} \), por lo que \( g_{n_0}(x) = 1 \). En consecuencia, \( g(x) \geq \frac{1}{2^{n_0}} > 0 \). Por lo tanto, \( g^{-1}(0) = A \).
+
+    De manera análoga, construimos una función \( h : X \to [0, 1] \) para el conjunto \( B \). Para cada \( n \in \N \), separamos \( B \) de \( X \setminus V_n \) obteniendo funciones \( h_n \), y definimos \( h(x) = \sum_{n=1}^{\infty} \frac{h_n(x)}{2^n} \), lo que nos garantiza que \( h \) es continua y \( h^{-1}(0) = B \).
+
+    Finalmente, definimos \( f : X \to [0,1] \) como:
+    \[
+        f(x) = \frac{g(x)}{g(x) + h(x)}
+    \]
+    Como \( A \cap B = \emptyset \), no existe ningún \( x \in X \) donde \( g(x) = 0 \) y \( h(x) = 0 \) simultáneamente. Por ende, el denominador nunca se anula y \( f \) es continua.
+
+    Evaluando los conjuntos de nivel:
+    Si \( x \in A \), entonces \( g(x) = 0 \) y \( h(x) > 0 \), por lo que \( f(x) = 0 \). Si \( f(x) = 0 \), debe ser \( g(x) = 0 \), luego \( x \in A \). Así, \( f^{-1}(0) = A \).
+    Si \( x \in B \), entonces \( h(x) = 0 \) y \( g(x) > 0 \), por lo que \( f(x) = \frac{g(x)}{g(x)} = 1 \). Si \( f(x) = 1 \), entonces \( g(x) = g(x) + h(x) \implies h(x) = 0 \implies x \in B \). Así, \( f^{-1}(1) = B \).
+\end{proof}
 
 \begin{ejercicio}{7}
     Mostrar que el \emph{Teorema de Tietze} implica el \emph{Lema de Urysohn}.
 \end{ejercicio}
 
+\begin{proof}
+    Recordemos que el \emph{Lema de Urysohn} establece que si \( X \) es un espacio normal y \( A, B \subseteq X \) son conjuntos cerrados disjuntos, entonces existe una función continua \( f : X \to [0, 1] \) tal que \( f(A) = \{0\} \) y \( f(B) = \{1\} \).
+
+    Por otro lado, el \emph{Teorema de Tietze} establece que si \( X \) es un espacio normal y \( C \subseteq X \) es un conjunto cerrado, entonces cualquier función continua y acotada \( g : C \to [-1, 1] \) se puede extender a una función continua \( f : X \to [-1, 1] \) tal que \( f|_C = g \) y \( \left\| f \right\|_\infty = \left\| g \right\|_\infty \). Es importante notar que esto aplica equivalentemente para cualquier intervalo cerrado, en particular \( [0, 1] \).
+
+    Teniendo la hipótesis de que \( X \) es normal, tomemos \( A \) y \( B \) los conjuntos cerrados disjuntos del \emph{Lema de Urysohn} y construyamos la función \( f \) utilizando el \emph{Teorema de Tietze}.
+
+    Como \( A \) y \( B \) son cerrados, su unión \( C = A \cup B \) también es un conjunto cerrado en \( X \). Definamos la función \( g : A \cup B \to [0, 1] \) dada por:
+    \[
+        g(x) = \begin{cases}
+            0 & \text{si } x \in A \\
+            1 & \text{si } x \in B
+        \end{cases}
+    \]
+    Esta función es continua pues \( A \) y \( B \) son conjuntos cerrados disjuntos, por lo que podemos aplicar el \emph{Lema del pegoteo}. Claramente, \( g \) es acotada ya que su imagen está contenida en el intervalo \( [0, 1] \).
+
+    Por el \emph{Teorema de Tietze}, existe una función continua \( f : X \to [0, 1] \) tal que \( f|_{A \cup B} = g \) y \( \left\| f \right\|_\infty = \left\| g \right\|_\infty \). En particular, por la definición de \( g \), tenemos que \( f(A) = \{0\} \) y \( f(B) = \{1\} \), lo que demuestra el \emph{Lema de Urysohn}.
+\end{proof}
+
 \begin{ejercicio}{8}
     Demostrar que un espacio topológico normal y conexo con más de un punto es no-numerable.
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \begin{ejercicio}{9}
-    Mostrar que si \( Y \) es normal y \( \mathcal{B} \) es una base de su topología. Entonces existe un embedding de \( Y \) en \( [0,1]^J \) siendo \( J \) algún subconjunto de \( \mathcal{B} \times \mathcal{B} \).
+    Mostrar que si \( Y \) es normal y \( \mathcal{B} \) es una base de su topología. Entonces existe un embedding de \( Y \) en \( {[0,1]}^J \) siendo \( J \) algún subconjunto de \( \mathcal{B} \times \mathcal{B} \).
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \end{document}
