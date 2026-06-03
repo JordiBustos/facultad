@@ -1,0 +1,291 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                      % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Net convergence/accumulation notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}   % Frequently in
+\newcommand{\nnevto}[1]{\not\!\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\nnfrto}[1]{\not\!\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica V}
+\author{Bustos Jordi\\Compactos}
+
+\maketitle
+
+\section*{Compactos}
+
+\begin{ejercicio}{1}
+    Demostrar que si X es un espacio topológico compacto y Hausdorff bajo dos topologías y entonces \( \tau=\sigma \) o bien no son comparables entre sí.
+\end{ejercicio}
+\begin{proof}
+    Supongamos que las topologías \( \tau \) y \( \sigma \) son comparables. Sin pérdida de generalidad, podemos asumir que una está contenida en la otra; supongamos que \( \sigma \subseteq \tau \).
+
+    Consideremos la aplicación identidad:
+    \[ id: (X, \tau) \longrightarrow (X, \sigma) \]
+    definida por \( id(x) = x \) para todo \( x \in X \).
+
+    A partir de las hipótesis de nuestro problema, observamos lo siguiente:
+    \begin{enumerate}
+        \item \( id \) es claramente una función inyectiva (y sobreyectiva).
+        \item \( id \) es continua, ya que para cualquier abierto \( U \in \sigma \), su preimagen es \( id^{-1}(U) = U \), y como por suposición \( \sigma \subseteq \tau \), se cumple que \( U \in \tau \).
+        \item El espacio de partida \( (X, \tau) \) es compacto por hipótesis.
+        \item El espacio de llegada \( (X, \sigma) \) es Hausdorff por hipótesis.
+    \end{enumerate}
+
+    Utilizando la \textbf{Proposición 6.2.7} del apunte de Demetrio (si \( f: K \to X \) es continua e inyectiva con \( K \) compacto y \( X \) Hausdorff, entonces \( f: K \to f(K) \) es un homeomorfismo), y dado que la imagen de nuestra función es todo el espacio de llegada (\( id(X) = X \)), concluimos que:
+    \[ id: (X, \tau) \longrightarrow (X, \sigma) \]
+    es un homeomorfismo.
+
+    Al ser un homeomorfismo, \( id \) es una aplicación abierta. Esto significa que si tomamos cualquier conjunto abierto \( V \in \tau \), su imagen \( id(V) = V \) debe ser un abierto en \( \sigma \), lo que demuestra la inclusión inversa \( \tau \subseteq \sigma \).
+
+    Como ya teníamos que \( \sigma \subseteq \tau \) y ahora hemos probado que \( \tau \subseteq \sigma \), se deduce que \( \tau = \sigma \). Por lo tanto, si las topologías son comparables entre sí, obligatoriamente deben ser iguales, lo que demuestra que \( \tau = \sigma \) o bien no son comparables.
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{2 (Lema del tubo)}
+    Sean X, Y espacios topológicos y supongamos que Y es compacto. Sea U un abierto de \( X \times Y \) (respecto de la topología producto) que contiene a la recta vertical \( x_{0}\times Y \). Demostrar que \( \exists W \in \mathcal{O}_{X}^{a}(x_{0}) \) tal que \( W \times Y \subset U \).
+\end{ejercicio}
+\begin{proof}
+    Dado \( U \in \tau_P \) con \( \{ x_0 \} \times Y \subseteq U \), tenemos que para cada punto \( (x_0, y) \in \{ x_0 \} \times Y \) existen dos abiertos \( U_{y} \in \mathcal{O}_X^a(x_0) \) y \( V_{y} \in \mathcal{O}_Y^a(y) \) tales que \( (x_0, y) \in U_{y} \times V_{y} \subseteq U \).
+
+    La familia de conjuntos \( {\{ V_{y} \}}_{y \in Y} \) forma un cubrimiento abierto para \( Y \). Como \( Y \) es compacto, podemos extraer un subcubrimiento finito, es decir, existen \( y_1, \ldots, y_n \in Y \) tales que \( Y \subseteq \bigcup_{i = 1}^n V_{y_i} \).
+
+    Definimos \( W = \bigcap_{i = 1}^n U_{y_i} \). Como \( W \) es una intersección finita de abiertos en \( X \) que contienen a \( x_0 \), resulta que \( W \in \mathcal{O}_X^a(x_0) \).
+
+    Finalmente, veamos que cumple \( W \times Y \subseteq U \). Sea \( (x, y) \in W \times Y \). Como los \( V_{y_i} \) cubren a \( Y \), existe algún \( i \in \{1, \ldots, n\} \) tal que \( y \in V_{y_i} \). Por otro lado, como \( x \in W \) y \( W \) es la intersección de todos los \( U_{y_j} \), en particular se tiene que \( x \in U_{y_i} \).
+
+    Por lo tanto, \( (x, y) \in U_{y_i} \times V_{y_i} \subseteq U \). Como esto vale para cualquier punto de \( W \times Y \), concluimos que \( W \times Y \subset U \).
+\end{proof}
+
+\begin{ejercicio}{3}
+    Sea \( \mathcal{F} \) una familia de conjuntos con la PIF en \( X \).
+    \begin{enumerate}
+        \item[(a)] Dada \( f : X \rightarrow Y \) mostrar que la familia \( f(\mathcal{F}) \) tiene la PIF en Y.
+        \item[(b)] Existe una familia \( M \) en \( X \) con la PIF, tal que \( \mathcal{F}\subseteq\mathcal{M} \) y \( \mathcal{M} \) maximal.
+        \item[(c)] Si \( \mathcal{F} \) es maximal, entonces
+              \begin{enumerate}
+                  \item[i.] Si \( A \) y \( B \) pertenecen a \( \mathcal{F} \) entonces \(A \cap B \) pertenece a \( \mathcal{F} \).
+                  \item[ii.] Si \( A \cap F \ne\varnothing \) para todo \(F\in\mathcal{F}\) entonces \(A\in\mathcal{F}\).
+              \end{enumerate}
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sea \( \mathcal{F} = {\{ F_i \}}_{i \in I} \) con la PIF en \( X \).
+    \begin{enumerate}
+        \item Tenemos que dado \( \mathbb{F} \subseteq I \) finito, vale que \( \bigcap_{i \in \mathbb{F}} X \cap F_i \neq \varnothing \) por lo que \( \exists a \in X \cap F_i \quad \forall i \in \mathbb{F} \).
+              Esto nos dice que, dado \( \bigcap_{i \in \mathbb{F}} Y \cap f(F_i) \neq \varnothing \) tomando \( f(a) \therefore {\{ f(F_i) \}}_{i \in I} \) tiene la PIF en \( Y \).
+        \item Definamos el siguiente conjunto de familias:
+              \[ P := \{ \mathcal{A} \subseteq \mathcal{P}(X) : \mathcal{F} \subseteq \mathcal{A} \text{ y } \mathcal{A} \text{ tiene la PIF} \} \]
+
+              Ordenado por la inclusión (\( \subseteq \)). Primero, notemos que \( \mathcal{F} \in P \neq \emptyset \).
+
+              Para aplicar el Lema de Zorn, debemos verificar que toda cadena en \( P \) tiene una cota superior en \( P \).
+              Sea \( C = {\{ \mathcal{A}_i \}}_{i \in I} \) una cadena totalmente ordenada en \( P \). Proponemos como cota superior a la unión de todos los elementos de la cadena:
+              \[ \mathcal{U} = \bigcup_{i \in I} \mathcal{A}_i \]
+
+              Veamos que \( \mathcal{U} \in P \):
+              \begin{enumerate}
+                  \item Es claro que \( \mathcal{F} \subseteq \mathcal{U} \).
+                  \item Veamos que \( \mathcal{U} \) tiene la PIF en \( X \). Sean \( A_1, A_2, \ldots, A_n \in \mathcal{U} \).
+                        Por definición de la unión, cada \( A_k \) pertenece a alguna familia \( \mathcal{A}_{i_k} \) de la cadena \( C \).
+                        Como \( C \) es totalmente ordenada, dados finitos elementos de la cadena, siempre existe uno que los contiene a todos (el máximo entre ellos respecto a la inclusión).
+                        Sea \( \mathcal{A}^* \in C \) esa familia tal que \( A_1, \ldots, A_n \in \mathcal{A}^* \).
+
+                        Como \( \mathcal{A}^* \in P \), sabemos que \( \mathcal{A}^* \) tiene la PIF en \( X \). Por lo tanto, la intersección de estos finitos conjuntos es no vacía:
+                        \[ \bigcap_{k=1}^n A_k \neq \emptyset \]
+                        Esto prueba que \( \mathcal{U} \) tiene la PIF en \( X \).
+              \end{enumerate}
+
+              Al tener \( \mathcal{U} \in P \) y ser \( \mathcal{A}_i \subseteq \mathcal{U} \) para todo \( i \in I \), resulta que \( \mathcal{U} \) es cota superior de la cadena \( C \).
+
+              Como toda cadena en \( P \) está acotada superiormente, por el Lema de Zorn, el conjunto \( P \) posee un elemento maximal \( \mathcal{M} \).
+
+              Por pertenecer a \( P \), \( \mathcal{M} \) es una familia con la PIF que contiene a \( \mathcal{F} \). Por ser maximal en \( P \), es una familia maximal con la PIF (si existiera una familia más grande con la PIF, esta también contendría a \( \mathcal{F} \), estaría en \( P \) y contradiría la maximalidad de \( \mathcal{M} \)).
+        \item Supongamos ahora que \( \mathcal{F} \) es maximal. Es fácil ver que si \( A, B \in \mathcal{F} \) y \( A \cap B \notin \mathcal{F} \) entonces \( \mathcal{F} \cup \{ A \cap B \} \) tiene la PIF y, por lo tanto, \( \mathcal{F} \) no es maximal.
+              Para la otra procedemos exactamente igual, si \( A \notin \mathcal{F} \) vale que \( \mathcal{F} \subseteq \{ A \} \cup \mathcal{F} \) y es fácil ver que esta extensión tiene la PIF en \( X \), por lo tanto \( \mathcal{F} \) no es maximal.
+    \end{enumerate}
+\end{proof}
+
+\begin{ejercicio}{4}
+    Dados X e Y espacios topológicos con Y compacto. Entonces la proyección \( \pi_{x}:X\times Y\rightarrow X \) es cerrada.
+\end{ejercicio}
+\begin{proof}
+    Sea \( C \subseteq X \times Y \) cerrado y una red \( {\{x_i\}}_{i \in I} \subseteq \pi_x(C) \) tal que \( x_i \longrightarrow x \) en \( X \). Queremos ver que \( x \in \pi_x(C) \).
+
+    Dado que cada \( x_i \in \pi_x(C) \), para cada \( i \in I \) existe al menos un elemento \( y_i \in Y \) tal que \( (x_i, y_i) \in C \).
+    Esto nos permite construir una red \( {\{ y_i \}}_{i \in I} \) en \( Y \).
+
+    Como \( Y \) es compacto por hipótesis, existe una subred \( {\{y_{i_j}\}}_{j \in J} \) de \( {\{y_i\}}_{i \in I} \) tal que \( y_{i_j} \longrightarrow y \in Y \).
+
+    Ahora consideramos la subred correspondiente en el espacio producto \( X \times Y \), dada por \( {\{(x_{i_j}, y_{i_j})\}}_{j \in J} \).
+
+    Como la red original \( {\{x_i\}}_{i \in I} \) converge a \( x \), cualquier subred suya también debe converger al mismo límite, lo que nos asegura que \( x_{i_j} \longrightarrow x \).
+
+    Por las propiedades de la topología producto, una red de pares converge si y solo si converge en cada una de sus coordenadas por separado.
+    Como \( x_{i_j} \longrightarrow x \) e \( y_{i_j} \longrightarrow y \), se deduce que:
+    \[ (x_{i_j}, y_{i_j}) \longrightarrow (x, y) \quad \text{en } X \times Y \]
+
+    Puesto que \( (x_{i_j}, y_{i_j}) \in C \) para todo \( j \in J \) y el conjunto \( C \) es cerrado, el límite de esta subred también debe pertenecer a \( C \).
+    De este modo, concluimos que \( (x, y) \in C \).
+
+    Finalmente, aplicando la proyección a este punto límite, obtenemos:
+    \[ \pi_x(x, y) = x \in \pi_x(C) \]
+
+    Esto demuestra que \( \pi_x(C) \) contiene a todos sus puntos de acumulación y, por lo tanto, es un conjunto cerrado en \( X \).
+\end{proof}
+
+\begin{ejercicio}{5}
+    Sea \( f : X \rightarrow Y \) donde X e Y son espacios topológicos con Y Hausdorff.
+    Ya hemos visto (práctica 2) que \( f \in C(X,Y) \implies Gr_{f} = \{(x,f(x)):x\in X\} \) es cerrado en \( X \times Y \).
+
+    Probar que la recíproca es cierta si Y es compacto.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{6}
+    Dado un X cualquiera dotado de la topología co-finita, entonces \( (X, \tau_{CF}) \) es compacto.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{7}
+    Demostrar que A es totalmente acotado \( \iff \cl{A} \) es totalmente acotado.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{8}
+    Dar un ejemplo de 2 abiertos (con la topología usual) que cubran \( (0,1) \) y que no tengan un \( \delta \) de Lebesgue.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{9}
+    Dados X e Y espacios métricos. Demostrar las siguientes proposiciones
+    \begin{enumerate}
+        \item[(a)] Si la función \( f : X \rightarrow Y \) es Lipschitz entonces es uniformemente continua.
+        \item[(b)] La función \( f : \R \rightarrow \R \) dada por \( f(t)=t^{2} \) es continua pero no es uniformemente continua.
+        \item[(c)] Lo mismo para la función \( g : (0,1) \rightarrow \R \) dada por \( g(t) = \frac{1}{t} \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{10}
+    Decidir la compacidad del conjunto \( [0, 1] \) respecto a la topología \[ \tau_c = \{ A : [0,1] \setminus A  \text{ es a lo sumo numerable o es todo} [0, 1] \} \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{11}
+    \begin{enumerate}
+        \item[(a)] Sea \( C \) una componente conexa de un espacio topológico Hausdorff compacto \( X \). Entonces \( C \) es la intersección de los subconjuntos clopen de \( X \) que lo contienen.
+        \item[(b)] Sea \( X \) un espacio topológico conexo, compacto y de Hausdorff; \( x \in X \) y \( C \) una componente conexa de \( X - \{ x \} \), entonces \( x \in \cl{C} \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\section{Compactificaciones}
+
+\begin{ejercicio}{12}
+    Sea \( \tilde{X} \) la compactificación de Alexandrov del espacio topológico X.
+    \begin{enumerate}
+        \item[(a)] Tomando \( X=\mathbb{R} \) con la topología usual, probar que \( \tilde{X}\cong S^{1} \).
+        \item[(b)] Tomando \( X=\mathbb{N} \) con la topología discreta, mostrar que los únicos compactos de \( \mathbb{N} \) son los finitos. Mostrar que \( X\cong\left\{\frac{1}{n}:n\in\mathbb{N}\right\}\cup\{0\} \) (con la topología usual de \( \mathbb{R} \)).
+        \item[(c)] Tomando \( X=(0,1)\cup(2,3) \) con la topología usual, probar que \( \tilde{X} \) es homeomorfo a ocho en \( \mathbb{R}^{2} \).
+        \item[(d)] Mostrar que para el caso \( X=\mathbb{Q} \) sucede que \( \tilde{X} \) no es ni Hausdorff, a diferencia de todos los ejemplos anteriores donde \( \tilde{X} \) resultó metrizable.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{13}
+    Mostrar que si dos espacios topológicos son homeomorfos entonces también son homeomorfos sus compactificaciones de Alexandrov.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{14}
+    Sea \( X \) un espacio topológico de Tychonoff y sea \( RU(X) \) el conjunto de todas sus redes universales.
+    \begin{enumerate}
+        \item[(a)] Dada \( x=(x_{i})_{i\in I}\in RU(X) \) e \( f\in C_{b}(X) \), probar que existe un \( x_{f}\in\mathbb{C} \) tal que \( f(x_{i})\longrightarrow_{i\in I}x_{f} \).
+        \item[(b)] Sean \( \mathcal{F}_{1} \), \( B(X) \) y \( F \) según la construcción que se hace en los apuntes. Mostrar que \( F \) separa puntos de \( B(X) \).
+        \item[(c)] Probar que \( (B(X),\tau_{\mathcal{F}}) \) es Hausdorff, donde \( \tau_{\mathcal{F}} \) es la topología inicial dada por \( F \).
+        \item[(d)] Probar que la función \( G:X\rightarrow B(X) \) dada por \( G(x)=\overline{c_{x}} \), donde \( c_{x} \) es la sucesión constante igual a \( x \), es un embedding.
+        \item[(e)] Probar que \( (B(X),\tau_{\mathcal{F}}) \) es un compacto Hausdorff y que el par \( (B(X),G) \) es una H-compactificación de \( X \) que es isomorfa a la de Stone-Čech.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{15}
+    Sea \( X \) discreto y \( (F,\beta(X)) \) su compactificación de Stone-Čech.
+    \begin{enumerate}
+        \item[(a)] Para \( A\subseteq X \), entonces \( \overline{F(A)} \) y \( \overline{F(A^{C})} \) son disjuntos.
+        \item[(b)] Si \( U \) es abierto en \( \beta(X) \), entonces \( \overline{U} \) es abierto de \( \beta(X) \).
+        \item[(c)] \( \beta(X) \) es totalmente disconexo.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{16}
+    Probar que un espacio Tychonoff es conexo \( \iff \) su compactificación de Stone-Čech es conexa.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
