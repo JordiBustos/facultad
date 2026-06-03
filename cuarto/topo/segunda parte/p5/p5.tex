@@ -599,21 +599,62 @@
     \]
     Esta función es continua pues \( A \) y \( B \) son conjuntos cerrados disjuntos, por lo que podemos aplicar el \emph{Lema del pegoteo}. Claramente, \( g \) es acotada ya que su imagen está contenida en el intervalo \( [0, 1] \).
 
-    Por el \emph{Teorema de Tietze}, existe una función continua \( f : X \to [0, 1] \) tal que \( f|_{A \cup B} = g \) y \( \left\| f \right\|_\infty = \left\| g \right\|_\infty \). En particular, por la definición de \( g \), tenemos que \( f(A) = \{0\} \) y \( f(B) = \{1\} \), lo que demuestra el \emph{Lema de Urysohn}.
+    Por el \emph{Teorema de Tietze}, existe una función continua \( f : X \to [0, 1] \) tal que \( f|_{A \cup B} = g \) y \( \left \| f \right \|_\infty = \left \| g \right \|_\infty \). En particular, por la definición de \( g \), tenemos que \( f(A) = \{0\} \) y \( f(B) = \{1\} \), lo que demuestra el \emph{Lema de Urysohn}.
 \end{proof}
 
 \begin{ejercicio}{8}
     Demostrar que un espacio topológico normal y conexo con más de un punto es no-numerable.
 \end{ejercicio}
 \begin{proof}
-
+    Sea \( X \) un espacio topológico normal y conexo con más de un punto. Supongamos por el absurdo que \( X \) es numerable.
+    Dado que \( X \) tiene más de dos puntos distintos, entonces puedo tomar \( x, y \in X \) con \( x \neq y \). Como \( X \) es normal, es \( T_1 \) y los singueletes son cerrados. Por lo tanto, aplicando el
+    \emph{Lema de Urysohn} para los conjuntos cerrados disjuntos \( \{ x \} \) y \( \{ y \} \), existe una función continua \( f : X \to [0, 1] \) tal que \( f(x) = 0 \) y \( f(y) = 1 \). Como \( X \) es conexo,
+    la imagen de \( f \) también lo es, lo que implica que \( f(X) \) es un intervalo conectado que contiene a \( 0 \) y a \( 1 \), pero esto solo puede ocurrir si \( f(X) = [0, 1] \). Sin embargo, \( X \) es numerable,
+    lo que implica que \( f(X) \) es numerable, lo que contradice el hecho de que \( f(X) = [0, 1] \) es no numerable. Por lo tanto, \( X \) no puede ser numerable.
 \end{proof}
 
 \begin{ejercicio}{9}
     Mostrar que si \( Y \) es normal y \( \mathcal{B} \) es una base de su topología. Entonces existe un embedding de \( Y \) en \( {[0,1]}^J \) siendo \( J \) algún subconjunto de \( \mathcal{B} \times \mathcal{B} \).
 \end{ejercicio}
 \begin{proof}
+    Definimos el conjunto de índices \( J \) como:
+    \[
+        J := \{ (U, V) \in \mathcal{B} \times \mathcal{B} : \cl{U} \subseteq V \}
+    \]
+    Para cada par \( (U,V) \in J \), los conjuntos \( \cl{U} \) y \( Y \setminus V \) son cerrados y disjuntos en Y. Por el \emph{Lema de Urysohn}, existe una función continua \( f_{U,V} : Y \to [0,1] \) tal que \( f_{U,V}(\cl{U}) = \{0\} \) y \( f_{U,V}(Y \setminus V) = \{1\} \).
 
+    Definimos la función \( F : Y \to {[0, 1]}^J \) dada por \( F(y) = {\left( f_{U, V}(y) \right)}_{(U, V) \in J} \).
+    Dado que cada función coordenada \( f_{U, V} \) se sigue que \( F \) es continua.
+
+    1. Inyectividad de \( F \):
+    Sean \( y, z \in Y \), \( y \neq z \). Como \( Y \) es \( T_1 \), el conjunto \( Y \setminus \{ z \} \) es un abierto que contiene a \( y \).
+    Por ser \( Y \) un espacio regular, existe un abierto \( W \) tal que \( y \in W \subseteq \cl{W} \subseteq Y \setminus \{z\} \).
+
+    Como \( \mathcal{B} \) es base, existe un elemento \( V \in \mathcal{B} \) tal que \( y \in V \subseteq W \), lo que implica que \( \cl{V} \subseteq \cl{W} \subseteq Y \setminus \{z\} \implies z \notin \cl{V} \).
+
+    Aplicando nuevamente la regularidad al abierto \( V \) que contiene a \( y \), existe un abierto un abierto \( O \) tal que \( y \in O \subseteq \cl{O} \subseteq V \).
+    Tomando un elemento de la base \( U \in \mathcal{B} \) con \( y \in U \subseteq O \), obtenemos que \( \cl{U} \subseteq \cl{O} \subseteq V \).
+
+    Esto demuestra que el par \( (U, V) \) pertenece a \( J \). Además, por construcción:
+    \begin{itemize}
+        \item \( y \in U \implies f_{U, V}(y) = 0 \).
+        \item \( z \notin \cl{V} \implies z \in Y \setminus V \implies f_{U, V}(z) = 1 \).
+    \end{itemize}
+    Como \( f_{U, V}(y) \neq f_{U, V}(z) \), se tiene que \( F(y) \neq F(z) \), lo que prueba que \( F \) es inyectiva.
+
+    2. \( F \) es un homeomorfismo sobre su imagen:
+    Para ver que \( F : Y \to F(Y) \) es abierta, basta demostrar que para cualquier abierto básico \( W \in \mathcal{B} \) y cualquier \( y \in W \), existe un abierto \( H \) en la topología producto de \( {[0, 1]}^J \) tal que \( y \in F^{-1}(H) \subseteq W \).
+
+    Dado \( y \in W \in \mathcal{B} \), por la regularidad de \( Y \) existen \( U, V \in \mathcal{B} \) tales que \( y \in U \subseteq \cl{U} \subseteq V \subseteq \cl{V} \subseteq W \). Así, \( (U, V) \in J \) y además \( f_{U, V}(y) = 0 \).
+
+    Consideremos el abierto subbásico en el producto definido por:
+    \[
+        H = \{ x \in {[0, 1]}^J : x_{(U, V)} < 1 \}
+    \]
+    Su preimagen bajo \( F \) es \( F^{-1}(H) = \{ z \in Y : f_{U, V}(z) < 1 \} \).
+    Si \( z \notin W \), entonces \( z \notin V \) (ya que \( V \subseteq W \)), lo que significa que \( z \in Y \setminus V \) y por lo tanto \( f_{U, V}(z) = 1 \). De este modo, si \( f_{U, V}(z) < 1 \), necesariamente \( z \in W \).
+
+    Esto demuestra que \( y \in F^{-1}(H) \subseteq W \). Por lo tanto, la topología de \( Y \) coincide con la del subespacio \( F(Y) \), concluyendo que \( F \) es un embedding.
 \end{proof}
 
 \end{document}
