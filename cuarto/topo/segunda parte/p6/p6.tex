@@ -368,10 +368,45 @@
 \end{proof}
 
 \begin{ejercicio}{10}
-    Decidir la compacidad del conjunto \( [0, 1] \) respecto a la topología \[ \tau_c = \{ A : [0,1] \setminus A  \text{ es a lo sumo numerable o es todo } [0, 1] \} \]
+    Decidir la compacidad del conjunto \( [0, 1] \) respecto a la topología
+    \[ \tau_c = \{ A : [0,1] \setminus A \text{ es a lo sumo numerable o es todo } [0, 1] \} \]
 \end{ejercicio}
 \begin{proof}
+    El conjunto \( [0, 1] \) dotado de la topología co-numerable \( \tau_c \) \textbf{no es compacto}.
 
+    Para demostrarlo, basta con exhibir un cubrimiento abierto que no posea ningún subcubrimiento finito. Tomemos un subconjunto infinito numerable cualquiera de \( [0, 1] \), por ejemplo, una enumeración de los racionales en dicho intervalo, o simplemente una sucesión de puntos distintos:\[
+        C = \{ x_n \}_{n \in \mathbb{N}} \subseteq [0, 1]
+    \]
+
+    Para cada \( n \in \mathbb{N} \), definimos el conjunto:\[
+        U_n = [0, 1] \setminus (C \setminus \{ x_n \})
+    \]
+
+    Veamos primero que cada \( U_n \) es un abierto en \( \tau_c \). En efecto, su complemento es:\[
+        [0, 1] \setminus U_n = C \setminus \{ x_n \}
+    \]
+    Como \( C \) es numerable, cualquier subconjunto suyo también lo es. Por lo tanto, \( [0, 1] \setminus U_n \) es numerable, lo que implica que \( U_n \in \tau_c \).
+
+    A continuación, probemos que la familia \( {\{ U_n \}}_{n \in \mathbb{N}} \) es un cubrimiento de \( [0, 1] \). Sea \( x \in [0, 1] \), tenemos dos casos:
+    \begin{itemize}
+        \item Si \( x \notin C \), entonces \( x \in [0, 1] \setminus C \subseteq U_1 \), por lo que está cubierto (de hecho, pertenece a todos los \( U_n \)).
+        \item Si \( x \in C \), entonces existe un índice \( k \in \mathbb{N} \) tal que \( x = x_k \). Por definición, \( x_k \notin C \setminus \{ x_k \} \), lo que implica de forma directa que \( x_k \in U_k \).
+    \end{itemize}
+    De este modo, todo elemento de \( [0, 1] \) está en algún \( U_n \), por lo que \( [0, 1] \subseteq \bigcup_{n=1}^\infty U_n \).
+
+    Finalmente, veamos que de este cubrimiento no se puede extraer un subcubrimiento finito. Supongamos por el absurdo que existen finitos índices \( n_1, n_2, \dots, n_k \) tales que:\[
+        [0, 1] \subseteq \bigcup_{i=1}^k U_{n_i}
+    \]
+
+    Dado que tenemos infinitos elementos en la sucesión \( C \) y solo tomamos una cantidad finita de índices para el subcubrimiento, podemos elegir un índice \( m \in \mathbb{N} \) tal que \( m \neq n_i \) para todo \( i = 1, \dots, k \).
+
+    Consideremos el punto \( x_m \in C \). Para que sea un subcubrimiento válido, \( x_m \) debería pertenecer a algún \( U_{n_i} \). Sin embargo, como \( m \neq n_i \), resulta que el punto \( x_m \) sí pertenece al conjunto \( C \setminus \{ x_{n_i} \} \). Pero esto significa que:\[
+        x_m \notin [0, 1] \setminus (C \setminus \{ x_{n_i} \}) = U_{n_i}
+    \]
+
+    Como esto ocurre para todo \( i = 1, \dots, k \), concluimos que \( x_m \) no está en la unión de esos finitos abiertos. Esto contradice que sea un subcubrimiento de \( [0, 1] \).
+
+    Por lo tanto, hemos construido un cubrimiento abierto que no admite ningún subcubrimiento finito, lo que demuestra que el espacio no es compacto.
 \end{proof}
 
 \begin{ejercicio}{11}
