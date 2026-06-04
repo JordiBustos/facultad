@@ -174,50 +174,201 @@
 \end{proof}
 
 \begin{ejercicio}{5}
-    Sea \( f : X \rightarrow Y \) donde X e Y son espacios topológicos con Y Hausdorff.
-    Ya hemos visto (práctica 2) que \( f \in C(X,Y) \implies Gr_{f} = \{(x,f(x)):x\in X\} \) es cerrado en \( X \times Y \).
+    Sea \( f : X \to Y \) donde \( X \) e \( Y \) son espacios topológicos con \( Y \) Hausdorff. Ya hemos visto (práctica 2) que \( f \in C(X,Y) \implies Gr_f = \{ (x, f(x)) : x \in X\} \) es cerrado en \( X \times Y \).
 
     Probar que la recíproca es cierta si Y es compacto.
 \end{ejercicio}
 \begin{proof}
+    Supongamos que \( Y \) es un espacio compacto y Hausdorff, y que el gráfico de la función, \( Gr_f \), es cerrado en \( X \times Y \).
+    Queremos probar que \( f \) es continua.
 
+    Para ello, veamos que para cada cerrado \( F \subseteq Y \), \( f^{-1}(F) \) es cerrada en \( X \).
+
+    Sea \( F \subseteq Y \) un conjunto cerrado cualquiera. Consideremos las proyecciones naturales del espacio producto:
+    \[ \pi_x : X \times Y \longrightarrow X \quad \text{y} \quad \pi_y : X \times Y \longrightarrow Y \]
+
+    Observamos que el conjunto \( X \times F \) es cerrado en \( X \times Y \) por definición de la topología producto.
+
+    Como la intersección de dos conjuntos cerrados es cerrada, el conjunto:
+    \[ Gr_f \cap (X \times F) \]
+    es un cerrado en \( X \times Y \). Notemos qué elementos componen esta intersección:
+    \[ Gr_f \cap (X \times F) = \{ (x, f(x)) \in X \times Y : f(x) \in F \} \]
+
+    Ahora aplicamos la proyección en la primera coordenada, \( \pi_x \), a dicho conjunto.
+    Por el \textbf{Ejercicio 4}, dado que \( Y \) es compacto, sabemos que la proyección \( \pi_x \) es una aplicación cerrada.
+    Por lo tanto, la imagen de nuestro cerrado bajo \( \pi_x \) debe ser un cerrado en \( X \):
+    \[ \pi_x \big( Gr_f \cap (X \times F) \big) = \{ x \in X : f(x) \in F \} = f^{-1}(F) \]
+
+    Como \( f^{-1}(F) \) es la imagen de un cerrado bajo una aplicación cerrada, concluimos que \( f^{-1}(F) \) es un conjunto cerrado en \( X \).
+
+    Al ser \( F \) un cerrado arbitrario de \( Y \), queda demostrado que \( f \) es una función continua.
 \end{proof}
 
 \begin{ejercicio}{6}
-    Dado un X cualquiera dotado de la topología co-finita, entonces \( (X, \tau_{CF}) \) es compacto.
+    Dado un \( X \) cualquiera dotado de la topología co-finita, entonces \( (X, \tau_{CF}) \) es compacto.
 \end{ejercicio}
 \begin{proof}
+    Recordemos que la topología co-finita en \( X \) se define como:
+    \[ \tau_{CF} = \{ U \subseteq X \, : \, X \setminus U \text{ es finito} \} \cup \{ \varnothing \} \]
 
+    Sea \( {\{ U_i \}}_{i \in I} \) un cubrimiento abierto arbitrario de \( X \). Si \( X = \varnothing \), el espacio es trivialmente compacto. Supongamos entonces que \( X \neq \varnothing \).
+
+    Como los \( U_i \) cubren a \( X \), debe existir al menos un conjunto en el cubrimiento que sea no vacío. Elijamos uno de ellos y llamémoslo \( U_{i_0} \), con \( i_0 \in I \).
+
+    Por pertenecer a \( \tau_{CF} \) y ser distinto de vacío, por definición sabemos que su complemento \( X \setminus U_{i_0} \) es un conjunto finito. Supongamos entonces que tiene \( n \) elementos:
+    \[ X \setminus U_{i_0} = \{ x_1, x_2, \dots, x_n \} \]
+
+    Dado que la familia original \( {\{ U_i \}}_{i \in I} \) cubría a todo \( X \), en particular cubre a estos \( n \) puntos. Por lo tanto, para cada \( k \in \{1, \dots, n\} \), podemos elegir un índice \( i_k \in I \) tal que \( x_k \in U_{i_k} \).
+
+    Consideremos ahora la subfamilia formada por \( U_{i_0} \) y los conjuntos que acabamos de elegir:
+    \[ \{ U_{i_0}, U_{i_1}, U_{i_2}, \dots, U_{i_n} \} \]
+
+    Esta familia finita es un subcubrimiento de \( X \). En efecto, si tomamos cualquier \( x \in X \), tenemos dos opciones:
+    \begin{itemize}
+        \item Si \( x \in U_{i_0} \), ya está cubierto por \( U_{i_0} \).
+        \item Si \( x \notin U_{i_0} \), entonces \( x \in X \setminus U_{i_0} \), por lo que \( x = x_k \) para algún \( k \), y en consecuencia \( x \in U_{i_k} \).
+    \end{itemize}
+
+    Por lo tanto:
+    \[ X \subseteq U_{i_0} \cup \left( \bigcup_{k=1}^n U_{i_k} \right) \]
+
+    Como de un cubrimiento abierto cualquiera hemos podido extraer un subcubrimiento finito, concluimos que \( (X, \tau_{CF}) \) es compacto.
 \end{proof}
 
 \begin{ejercicio}{7}
-    Demostrar que A es totalmente acotado \( \iff \cl{A} \) es totalmente acotado.
+    Demostrar que \( A \) es totalmente acotado \( \iff \cl{A} \) es totalmente acotado.
 \end{ejercicio}
 \begin{proof}
+    La vuelta es sencilla, si \( \forall \varepsilon > 0 \) vale que \( \exists x_1, \ldots, x_n \in X \, : \, \cl{A} \subseteq \bigcup_{i = 1}^n B_\varepsilon(x_i) \), como \( A \subseteq \cl{A} \) tomamos el mismo cubrimiento.
 
+    Para la ida supongamos que \( A \) es un subconjunto totalmente acotado. Sea \( \varepsilon > 0 \) queremos probar que \( \cl{A} \) puede ser cubierto por una cantidad finita de bolas de radio \( \varepsilon \).
+
+    Como \( A \) es totalmente acotado, para el radio \( \frac{\varepsilon}{2} \) existen \( x_1, \dots, x_n \in X \) tales que:
+    \[ A \subseteq \bigcup_{i=1}^n B_{\frac{\varepsilon}{2}}(x_i) \]
+
+    Sea \( y \in \cl{A} \) un punto cualquiera. Por definición de clausura, todo entorno de \( y \) interseca a \( A \).
+    En particular, la bola \( B_{\frac{\varepsilon}{2}}(y) \) interseca a \( A \), lo que significa que existe un punto \( z \in A \) tal que:
+    \[ d(y, z) < \frac{\varepsilon}{2} \]
+
+    Como \( z \in A \), sabemos que \( z \) debe pertenecer a alguna de las bolas de nuestro subcubrimiento finito original. Por lo tanto, existe un índice \( i \in \{1, \dots, n\} \) tal que:
+    \[ z \in B_{\frac{\varepsilon}{2}}(x_i) \implies d(z, x_i) < \frac{\varepsilon}{2} \]
+
+    Utilizando la desigualdad triangular, podemos acotar la distancia entre \( y \) y el centro \( x_i \):
+    \[ d(y, x_i) \leq d(y, z) + d(z, x_i) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon \]
+
+    Esto nos dice que \( y \in B_{\varepsilon}(x_i) \). Como \( y \) era un punto arbitrario de \( \cl{A} \), hemos demostrado que todo punto de la clausura está a distancia menor a \( \varepsilon \) de alguno de los \( n \) centros originales. Es decir:
+    \[ \cl{A} \subseteq \bigcup_{i=1}^n B_{\varepsilon}(x_i) \]
+
+    Como para todo \( \varepsilon > 0 \) hemos encontrado un cubrimiento finito por bolas de radio \( \varepsilon \), concluimos que \( \cl{A} \) es totalmente acotado.
 \end{proof}
+
+\begin{definition}
+    Sea \( (X, d) \) un espacio métrico. Un número \( \delta > 0 \) se llama \textbf{número de Lebesgue} para un cubrimiento abierto \( \mathcal{U} \) de \( X \) si para cada subconjunto \( A \subseteq X \) con diámetro menor a \( \delta \), existe un conjunto \( U \in \mathcal{U} \) tal que \( A \subseteq U \).
+\end{definition}
 
 \begin{ejercicio}{8}
-    Dar un ejemplo de 2 abiertos (con la topología usual) que cubran \( (0,1) \) y que no tengan un \( \delta \) de Lebesgue.
+    Dar un ejemplo de 2 abiertos (con la topología usual) que cubran \( (0, 1) \) y que no tengan un \( \delta \) de Lebesgue.
 \end{ejercicio}
 \begin{proof}
+    Definimos la sucesión de puntos \( x_n = \frac{1}{n} \) para \( n \ge 2 \). Notemos que el conjunto \( C = \left \{ \frac{1}{n} : n \ge 2 \right \} \) es cerrado en la topología de subespacio de \( (0, 1) \), ya que su único punto de acumulación en \( \mathbb{R} \) es el \( 0 \), que no pertenece a \( (0, 1) \).
 
+    Definimos nuestro primer abierto \( U \) como todo el espacio salvo esos puntos:
+    \[ U = (0, 1) \setminus C \]
+
+    Para cubrir los puntos de \( C \), definimos nuestro segundo abierto \( V \) como una unión infinita de intervalitos centrados en cada \( \frac{1}{n} \) (nuestros solapamientos), pero con radios que se achican muy rápidamente, por ejemplo, al cubo:
+    \[ V = \bigcup_{n=2}^\infty \left( \frac{1}{n} - \frac{1}{n^3}, \frac{1}{n} + \frac{1}{n^3} \right) \cap (0, 1) \]
+
+    Como \( V \) es unión de intervalos abiertos, es abierto. Además, es claro que \( U \cup V = (0, 1) \), puesto que \( U \) cubre todo \( (0, 1) \) excepto los puntos de \( C \), y \( V \) cubre explícitamente cada punto de \( C \). Por lo tanto, \( \{U, V\} \) es un cubrimiento de 2 abiertos de \( (0, 1) \).
+
+    Veamos por absurdo que no tiene número de Lebesgue. Supongamos que existe un \( \delta > 0 \) tal que todo conjunto de diámetro menor a \( \delta \) está completamente contenido en \( U \) o completamente contenido en \( V \).
+
+    Por la propiedad arquimediana, podemos elegir un \( N \in \mathbb{N} \) lo suficientemente grande tal que:
+    \[ \frac{2}{N^3} < \delta \]
+    (Además, tomamos \( N \) lo bastante grande para que los intervalos de \( V \) no se intersequen entre sí, lo cual ocurre para todo \( N \ge 3 \)).
+
+    Consideremos el conjunto \( A \) dado por un pequeño intervalo cerrado que contiene un punto de \( C \) y se excede apenas del solapamiento:\[
+        A = \left[ \frac{1}{N} - \frac{2}{N^3}, \frac{1}{N} \right]
+    \]
+
+    Calculamos el diámetro de \( A \):
+    \[ \text{diam}(A) = \frac{2}{N^3} < \delta \]
+
+    Según la definición del número de Lebesgue, \( A \) debería estar contenido enteramente en \( U \) o en \( V \). Analicemos ambas opciones:
+    \begin{enumerate}
+        \item \( A \subseteq U \): No, porque el punto \( \frac{1}{N} \in A \), pero por construcción de nuestro primer abierto, \( \frac{1}{N} \notin U \).
+        \item \( A \subseteq V \): No, el único componente de \( V \) que contiene al punto \( \frac{1}{N} \) es el intervalo \( \left( \frac{1}{N} - \frac{1}{N^3}, \frac{1}{N} + \frac{1}{N^3} \right) \). Sin embargo, el extremo inferior de \( A \) es \( \frac{1}{N} - \frac{2}{N^3} \), que es estrictamente menor al límite del intervalo \( \frac{1}{N} - \frac{1}{N^3} \). Por ende, \( A \) no cabe dentro de \( V \).
+    \end{enumerate}
+
+    Hemos encontrado un conjunto \( A \) con diámetro menor a \( \delta \) que no está contenido en ninguno de los dos abiertos (siempre necesitamos los dos para cubrirlo). Esto contradice que \( \delta \) sea un número de Lebesgue.
+
+    Por lo tanto, el cubrimiento \( \{U, V\} \) no posee número de Lebesgue.
 \end{proof}
 
+\begin{definition}[Liptschitz continua]
+    Una función \( f : X \to Y \) es Liptschitz continua \( \iff \) existe \( L > 0 \) tal que para todo \( x_1, x_2 \in X \) vale que \( d_Y(f(x_1), f(x_2)) \leq L \cdot d_X(x_1, x_2) \).
+\end{definition}
+\begin{definition}[Uniformemente continua]
+    Una función \( f : X \to Y \) es uniformemente continua \( \iff \) \( \forall \varepsilon > 0 \) existe \( \delta > 0 \) tal que \( \forall x_1, y_1 \in X \) se cumple que si \( d_X(x_1, x_2) < \delta \implies d_Y(f(x_1), f(x_2)) < \varepsilon \).
+\end{definition}
+
 \begin{ejercicio}{9}
-    Dados X e Y espacios métricos. Demostrar las siguientes proposiciones
+    Dados \( X \) e \( Y \) espacios métricos. Demostrar las siguientes proposiciones:
     \begin{enumerate}
-        \item[(a)] Si la función \( f : X \rightarrow Y \) es Lipschitz entonces es uniformemente continua.
-        \item[(b)] La función \( f : \R \rightarrow \R \) dada por \( f(t)=t^{2} \) es continua pero no es uniformemente continua.
-        \item[(c)] Lo mismo para la función \( g : (0,1) \rightarrow \R \) dada por \( g(t) = \frac{1}{t} \).
+        \item[(a)] Si la función \( f : X \to Y \) es Lipschitz entonces es uniformemente continua.
+        \item[(b)] La función \( f : \mathbb{R} \to \mathbb{R} \) dada por \( f(t) = t^{2} \) es continua pero no es uniformemente continua.
+        \item[(c)] Lo mismo para la función \( g : (0, 1) \to \mathbb{R} \) dada por \( g(t) = \frac{1}{t} \).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Si \( f \) es Lipschitz, existe una constante \( L \ge 0 \) tal que \( d_Y(f(x_1), f(x_2)) \leq L \cdot d_X(x_1, x_2) \) para todo par de puntos en \( X \). Si \( L = 0 \), la función es constante y trivialmente uniformemente continua.
 
+    Asumamos \( L > 0 \). Dado \( \varepsilon > 0 \), basta tomar \( \delta = \frac{\varepsilon}{L} \). Entonces, para todo \( x_1, x_2 \in X \) que cumplan \( d_X(x_1, x_2) < \delta \), vale que:
+    \[
+        d_Y(f(x_1), f(x_2)) \leq L \cdot d_X(x_1, x_2) < L \cdot \frac{\varepsilon}{L} = \varepsilon
+    \]
+    Por lo tanto, \( f \) es uniformemente continua.
+
+    \vspace{0.3cm}
+    Que la función \( f(t) = t^2 \) es continua en \( \mathbb{R} \) es un resultado conocido (producto de funciones continuas).
+
+    Supongamos por absurdo que \( f \) es uniformemente continua. Luego, para todo \( \varepsilon > 0 \) existe \( \delta > 0 \) tal que:
+    \[
+        | x - y | < \delta \implies |x^2 - y^2| < \varepsilon
+    \]
+    En particular, esto debe valer para \( \varepsilon = 1 \). Consideremos para un \( x \in \mathbb{R} \) cualquiera el punto \( y = x + \frac{\delta}{2} \). Verificamos que la distancia en el dominio cumple:
+    \[
+        |x - y| = \left| x - \left( x + \frac{\delta}{2} \right) \right| = \left| -\frac{\delta}{2} \right| = \frac{\delta}{2} < \delta
+    \]
+    Por nuestra suposición, debería cumplirse que \( |x^2 - y^2| < 1 \). Evaluamos:
+    \[
+        |x^2 - y^2| = \left| x^2 - {\left(x+\frac{\delta}{2}\right)}^2 \right| = \left| x^2 - \left( x^2 + x\delta + \frac{\delta^2}{4} \right) \right| = \left| x\delta + \frac{\delta^2}{4} \right|
+    \]
+    Necesitamos que \( \left| x\delta + \frac{\delta^2}{4} \right| < 1 \). Pero como el dominio es \( \mathbb{R} \) y \( \delta > 0 \) está fijo, podemos elegir un \( x \) lo suficientemente grande (por ejemplo \( x > \frac{1}{\delta} \)) para que esta expresión sea estrictamente mayor a 1, violando la implicación. Por lo tanto, \( f \) no es uniformemente continua.
+
+    \vspace{0.3cm}
+    La función \( g(t) = \frac{1}{t} \) es continua en \( (0, 1) \) por ser cociente de continuas con denominador no nulo.
+
+    Supongamos que \( g \) es uniformemente continua en \( (0,1) \). Luego, para \( \varepsilon = 1 \) debe existir un \( \delta > 0 \) tal que:
+    \[
+        |x - y| < \delta \implies \left| \frac{1}{x} - \frac{1}{y} \right| < 1
+    \]
+    Consideremos las sucesiones \( x_n = \frac{1}{n+1} \) e \( y_n = \frac{1}{n+2} \). Para todo \( n \ge 1 \), ambas sucesiones están en el intervalo \( (0, 1) \). Calculamos la distancia entre ellas:
+    \[
+        |x_n - y_n| = \left| \frac{1}{n+1} - \frac{1}{n+2} \right| = \frac{1}{(n+1)(n+2)}
+    \]
+    Como \( \lim_{n \to \infty} \frac{1}{(n+1)(n+2)} = 0 \), por definición de límite existe un \( n_0 \in \mathbb{N} \) lo suficientemente grande tal que:
+    \[
+        |x_{n_0} - y_{n_0}| < \delta
+    \]
+    Sin embargo, si evaluamos la distancia de sus imágenes, obtenemos:
+    \[
+        |g(x_{n_0}) - g(y_{n_0})| = | (n_0+1) - (n_0+2) | = |-1| = 1
+    \]
+    Para que se cumpliera la continuidad uniforme, debíamos tener que \( |g(x_{n_0}) - g(y_{n_0})| < \varepsilon = 1 \), pero hemos obtenido \( 1 < 1 \), lo cual es un absurdo. En consecuencia, \( g \) no es uniformemente continua.
 \end{proof}
 
 \begin{ejercicio}{10}
-    Decidir la compacidad del conjunto \( [0, 1] \) respecto a la topología \[ \tau_c = \{ A : [0,1] \setminus A  \text{ es a lo sumo numerable o es todo} [0, 1] \} \]
+    Decidir la compacidad del conjunto \( [0, 1] \) respecto a la topología \[ \tau_c = \{ A : [0,1] \setminus A  \text{ es a lo sumo numerable o es todo } [0, 1] \} \]
 \end{ejercicio}
 \begin{proof}
 
