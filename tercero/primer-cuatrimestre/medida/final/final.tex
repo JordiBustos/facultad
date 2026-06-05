@@ -419,9 +419,9 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
         m(E_{\varepsilon, n}) \leq (3^k + 1) \cdot \frac{1}{\varepsilon n}
     \]
     donde el lado izquierdo de la desigualdad es independiente de \( n \). Luego,\[
-        \{ Tf \geq 2 \varepsilon \} = \bigcap_{n \geq 1} E_{\varepsilon, n}
+        \{ Tf \geq 2 \varepsilon \} \subseteq \bigcap_{n \geq 1} E_{\varepsilon, n}
     \]
-    Como \( m(E_{\varepsilon, n}) \to 0 \) cuando \( n \to \infty \), se concluye que \( m(\bigcap_{n \geq 1} E_{\varepsilon, n}) = 0 \) y, como la medida de Lebesgue es completa, en el sentido de que si
+    Como \( m(E_{\varepsilon, n}) \to 0 \) cuando \( n \to \infty \) y \( m(E_{\varepsilon, 1}) < \infty \), se concluye que \( m(\bigcap_{n \geq 1} E_{\varepsilon, n}) = 0 \) y, como la medida de Lebesgue es completa, en el sentido de que si
     \( A \subseteq B \) con \( B \) medible y \( m(B) = 0 \), entonces \( A \) es medible y \( m(A) = 0 \), se concluye que \( m(\{ Tf > 2\varepsilon \}) = 0 \).
     Como el \( \varepsilon > 0 \) era arbitrario, se concluye que \( m(\{ Tf > 0 \}) = 0 \) y, por lo tanto, \( Tf(x) = 0 \) para casi todo \( x \in \R^k \).
 \end{proof}
