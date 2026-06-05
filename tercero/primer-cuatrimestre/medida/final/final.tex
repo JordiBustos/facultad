@@ -245,12 +245,24 @@ Para estudiar la existencia de este límite y las propiedades de la función \( 
         \mu(B(x,r)) = t m(B(x,r))
     \]
     para algún \( t > \lambda \). Además, existe \( \delta > 0 \) tal que:\[
-        {(r+\delta)}^k < \frac{t}{\lambda} r^k
+        {(r+\delta)}^k < \frac{t}{\lambda} r^k \implies \lambda < \frac{t \cdot r^k}{{(r+\delta)}^k} \implies t {\left(\frac{r}{r+\delta}\right)}^k
     \]
-    Si \( \| y - x \| < \delta \implies B(x,r) \subset B(y, r+\delta) \) y, por lo tanto, \[
-        \mu(B(y, r+\delta)) \geq t m(B(x,r)) = t {\left( \frac{r}{r+\delta} \right)}^k m(B(y, r+\delta)) > \lambda m(B(y, r+\delta))
+    Pues \( \frac{t}{\lambda} > 1 \implies r^k < \frac{t}{\lambda} \cdot r^k \) y, por continuidad de la función \( r \mapsto r^k \), existe \( \delta > 0 \) tal que \( {(r+\delta)}^k < \frac{t}{\lambda} r^k \).
+
+    Si \( \| y - x \| < \delta \implies B(x,r) \subset B(y, r+\delta) \) y, por lo tanto, \begin{align*}
+        \mu(B(y, r+\delta)) \geq \mu(B(x, r)) & = t m(B(x,r))                                               \\
+                                              & = t {\left( \frac{r}{r+\delta} \right)}^k m(B(y, r+\delta)) \\
+                                              & > \lambda m(B(y, r+\delta))
+    \end{align*}
+    Esto implica que \( y \in E \), notar que para la última igualdad utilizamos que:\begin{align*}
+        m(B(x, r))        & = V_k r^k            \\
+        m(B(y, r+\delta)) & = V_k {(r+\delta)}^k
+    \end{align*}
+    donde \( V_k \) es el volumen de la bola unitaria en \( \R^k \).
+    Luego, despejando \( V_k = \frac{m(B(y, r+\delta))}{{(r+\delta)}^k} \) y sustituyendo en la expresión de \( m(B(x, r)) \) obtenemos que:\[
+        m(B(x, r)) = \frac{m(B(y, r+\delta))}{{(r+\delta)}^k} \cdot r^k = {\left( \frac{r}{r+\delta} \right)}^k m(B(y, r+\delta))
     \]
-    Luego, \( B(x, \delta) \subset E \) y \( E \) es abierto.
+    Finalmente, \( B(x, \delta) \subset E \) y \( E \) es abierto \( \therefore M \mu \) es medible.
 \end{proof}
 
 Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
@@ -279,8 +291,6 @@ Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
     \]
     lo que concluye la demostración.
 \end{proof}
-
-\clearpage
 
 \begin{definicion}[Variación total]
     Sea \( \mu \) una medida compleja (o con signo) en una \( \sigma \)-álgebra \( \mathfrak{M} \). La \textbf{variación total} de \( \mu \), denotada por \( |\mu| \), es una medida positiva definida para cada conjunto \( E \in \mathfrak{M} \) como:
