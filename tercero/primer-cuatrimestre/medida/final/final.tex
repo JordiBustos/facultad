@@ -140,7 +140,7 @@
 % --- PORTADA PROFESIONAL ---
 \thispagestyle{empty}
 \begin{center}
-    \vspace*{1cm}
+    \includegraphics[width=4cm]{logo_unlp.png}
 
     \textcolor{darkblue}{\rule{\linewidth}{2pt}}
 
@@ -164,10 +164,11 @@
     \vspace{2.5cm}
 
     {\normalsize
-        \begin{tabular}{ll}
-            \textbf{Autor:}   & Jordi Bustos               \\
-            \textbf{Fecha:}   & \today                     \\
-            \textbf{Carrera:} & Licenciatura en Matemática
+        \renewcommand{\arraystretch}{1.3} % Da un poco más de aire a las filas
+        \begin{tabular}{>{\bfseries\color{darkblue}}l l}
+            Autor:   & Jordi Bustos               \\
+            Fecha:   & \today                     \\
+            Carrera: & Licenciatura en Matemática
         \end{tabular}
     }
 
@@ -231,6 +232,21 @@ Para estudiar la existencia de este límite y las propiedades de la función \( 
     M \mu (x) = \sup_{0 < r < \infty} Q_r \mu (x)
 \]
 
+\begin{definicion}[Variación total]
+    Sea \( \mu \) una medida compleja (o con signo) en una \( \sigma \)-álgebra \( \mathfrak{M} \). La \textbf{variación total} de \( \mu \), denotada por \( |\mu| \), es una medida positiva definida para cada conjunto \( E \in \mathfrak{M} \) como:
+    \[
+        |\mu|(E) = \sup \sum_{i=1}^{\infty} |\mu(E_i)|
+    \]
+    donde el supremo se toma sobre todas las particiones numerables \( {\{E_i\}}_{i=1}^\infty \) de \( E \) en conjuntos medibles (es decir, los \( E_i \) son disjuntos dos a dos y su unión es \( E \)).
+
+    En el caso particular donde \( \mu \) es una medida positiva, se tiene que \( |\mu| = \mu \). El valor \( |\mu|(\R^k) \) representa la masa total del espacio bajo esta medida de variación.
+\end{definicion}
+
+Si \( \mu \) es una medida con signo o compleja tomamos: \[
+    M \mu(x) = \sup_{0 < r < \infty} \frac{|\mu|(B(x, r))}{m(B(x, r))}
+\]
+donde \( |\mu| \) es la de antes.
+
 \begin{definicion}
     Dada una función \( f: \R^k \to \R \cup \{ \infty \} \), se dice que \( f \) es \textbf{semi-continua inferiormente} si para cada \( t \in \R \), el conjunto \( \{ x : f(x) > t \} \) es abierto.
 \end{definicion}
@@ -265,6 +281,8 @@ Para estudiar la existencia de este límite y las propiedades de la función \( 
     Finalmente, \( B(x, \delta) \subset E \) y \( E \) es abierto \( \therefore M \mu \) es medible.
 \end{proof}
 
+\clearpage
+
 Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
 \begin{lemma}
     Sea \( W \) la unión finita de bolas abiertas de la forma \( B(x_i, r_i) \) para \( i = 1, \dots, n \). Entonces, existe un subconjunto \( S \subseteq \{ 1, \dots, n \} \) tal que las bolas \( B(x_i, r_i) \) para \( i \in S \) son disjuntas dos a dos, \( W \subseteq \bigcup_{i \in S} B(x_i, 3r_i) \) y \( m(W) \leq 3^k \sum_{i \in S} m(B(x_i, r_i)) \).
@@ -292,16 +310,6 @@ Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
     lo que concluye la demostración.
 \end{proof}
 
-\begin{definicion}[Variación total]
-    Sea \( \mu \) una medida compleja (o con signo) en una \( \sigma \)-álgebra \( \mathfrak{M} \). La \textbf{variación total} de \( \mu \), denotada por \( |\mu| \), es una medida positiva definida para cada conjunto \( E \in \mathfrak{M} \) como:
-    \[
-        |\mu|(E) = \sup \sum_{i=1}^{\infty} |\mu(E_i)|
-    \]
-    donde el supremo se toma sobre todas las particiones numerables \( \{E_i\}_{i=1}^\infty \) de \( E \) en conjuntos medibles (es decir, los \( E_i \) son disjuntos dos a dos y su unión es \( E \)).
-
-    En el caso particular donde \( \mu \) es una medida positiva, se tiene que \( |\mu| = \mu \). El valor \( |\mu|(\R^k) \) representa la masa total del espacio bajo esta medida de variación.
-\end{definicion}
-
 El siguiente teorema nos dice que la función maximal no puede ser grande en un conjunto grande.
 
 \begin{teorema}[Teorema Maximal]
@@ -311,7 +319,6 @@ El siguiente teorema nos dice que la función maximal no puede ser grande en un 
     \]
     donde \( |\mu| \) es la variación total de \( \mu \).
 \end{teorema}
-
 \begin{proof}
     Fijado \( \mu \) y \( \lambda > 0 \), consideremos \( K \) un conjunto compacto contenido en el abierto \( \{ M \mu > \lambda \} \).
     Para cada \( x \in K \), existe \( r_x > 0 \) tal que \( Q_{r_x} \mu(x) > \lambda \). Por lo tanto, \( K \subseteq \bigcup_{x \in K} B(x, r_x) \). Como \( K \) es compacto, existe una subcolección finita de bolas \( {\{ B(x_i, r_i) \}}_{i = 1}^n \) que cubre a \( K \).
@@ -320,9 +327,9 @@ El siguiente teorema nos dice que la función maximal no puede ser grande en un 
     \[
         m(K) \leq 3^k \sum_{i \in S} m(B(x_i, r_i)) < \frac{3^k}{\lambda} \sum_{i \in S} |\mu|(B(x_i, r_i)) \leq \frac{3^k}{\lambda} |\mu|(\R^k)
     \]
-    (Nota: utilizamos \( |\mu| \) en lugar de \( \mu \) porque \( |\mu(B)| \leq |\mu|(B) \) para cualquier bola).
+    (Nota: utilizamos \( |\mu| \) en lugar de \( \mu \) porque \( |\mu(B)| \leq |\mu|(B) \) para cualquier bola y que \( |\mu|(B(x_i, r_i))/m(B(x_i, r_i)) > \lambda \)).
 
-    Como la medida de Lebesgue \( m \) es regular por dentro sobre conjuntos medibles, el supremo de las medidas de los compactos contenidos en el conjunto abierto nos da la medida del conjunto:
+    Recordemos que con la medida de Lebesgue \( m \) podemos aproximar la medida de un conjunto abierto a través de de compactos contenidos en él i.e el supremo de las medidas de los compactos contenidos en el conjunto abierto nos da la medida del conjunto:
     \[
         m(\{ M \mu > \lambda \}) = \sup \{ m(K) : K \subseteq \{ M \mu > \lambda \}, K \text{ compacto} \} \leq \frac{3^k}{\lambda} |\mu|(\R^k)
     \]
