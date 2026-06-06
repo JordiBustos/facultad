@@ -588,14 +588,14 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
         =
         \frac{1}{m(B(x,r))}\int_{B(x,r)} f\,\mathrm dm.
     \]
-    Por el Teorema de Diferenciación de Lebesgue, el miembro derecho converge a \( f(x) \) para \( m \)-casi todo \( x \). Por consiguiente,
+    Dado que las bolas \( B(x,r) \) se contraen adecuadamente a \( x \) (con \( \alpha=1 \) en la definición), el Teorema de Diferenciación de Lebesgue implica que este cociente converge a \( f(x) \) para todo punto de Lebesgue de \( f \). Como casi todo \( x\in\R^k \) es punto de Lebesgue de \( f \), se concluye que
     \[
         D\mu_a(x)=f(x)
         \qquad m\text{-c.t.p.}
     \]
 
     \textbf{Paso 2. Parte singular.}
-    Basta tratar el caso \( \mu_s\ge 0 \); para una medida con signo o compleja se aplica el argumento a sus partes de Jordan (o a la variación total).
+    Basta tratar el caso \( \mu_s\ge 0 \); para una medida compleja o con signo se reemplaza \( \mu_s \) por su variación total \( |\mu_s| \) y se usa que \( |D\mu_s(x)| \le D|\mu_s|(x) \).
 
     Como \( \mu_s\perp m \), existe un boreliano \( A \subset \R^k \) tal que
     \[
@@ -607,13 +607,13 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
     \[
         \mu_\varepsilon(E)=\mu_s(E\cap V).
     \]
-    Si \( x\in K \), como \( V \) es abierto, para \( r>0 \) suficientemente pequeño se tiene \( B(x,r)\subset V \), y por lo tanto
+    Si \( x\in K \), como \( V \) es abierto, existe \( r_0>0 \) tal que \( B(x,r)\subset V \) para todo \( r<r_0 \). Por lo tanto, para \( r<r_0 \):
     \[
-        \mu_s(B(x,r))=\mu_\varepsilon(B(x,r)).
+        Q_r\mu_s(x)=Q_r\mu_\varepsilon(x).
     \]
-    De aquí,
+    Tomando \( \limsup_{r\to 0} \), se obtiene
     \[
-        D\mu_s(x)\le M\mu_\varepsilon(x), \qquad x\in K.
+        D\mu_s(x) = \limsup_{r\to 0} Q_r\mu_s(x) = \limsup_{r\to 0} Q_r\mu_\varepsilon(x) \le M\mu_\varepsilon(x), \qquad x\in K.
     \]
     Para \( \lambda>0 \), definimos
     \[
@@ -628,11 +628,9 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
         m\big( \{ x \in K: D\mu_s(x) > \lambda \} \big) = 0.
     \]
 
-    Ahora definimos \( G_n=(\R^k\setminus A)\cap B(0,n) \). Como \( m \) es regular en \( \R^k \), sea \( \mathcal{G}_n = \{ x \in G_n : D\mu_s(x) > \lambda \} \). Entonces,
+    Definimos ahora \( G_n=(\R^k\setminus A)\cap B(0,n) \) y \( \mathcal{G}_n = \{ x \in G_n : D\mu_s(x) > \lambda \} \). Para cada compacto \( K\subset \mathcal{G}_n \), se tiene \( K\subset \R^k\setminus A \) y todo punto de \( K \) satisface \( D\mu_s(x)>\lambda \), luego \( \{x\in K: D\mu_s(x)>\lambda\}=K \). Por lo ya demostrado, \( m(K)=0 \). Aplicando regularidad interior de \( m \) al conjunto medible \( \mathcal{G}_n \):
     \[
-        m \big( \mathcal{G}_n \big)
-        =
-        \sup\big \{ m(\{ x \in K: D\mu_s(x)>\lambda \}): K \subset G_n,\ K \text{ compacto} \big \} = 0.
+        m(\mathcal{G}_n)=\sup \{m(K): K\subset \mathcal{G}_n,\ K \text{ compacto}\}=0.
     \]
     Tomando unión en \( n \), se obtiene
     \[
@@ -646,7 +644,7 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
     Luego \( D\mu_s(x)=0 \) \( m \)-c.t.p.
 
     \textbf{Paso 3. Conclusión.}
-    En el conjunto de medida total donde existen ambas derivadas parciales,
+    Para todo \( r>0 \) se cumple \( Q_r\mu(x)=Q_r\mu_a(x)+Q_r\mu_s(x) \). En el conjunto de medida plena donde existen los límites de ambos cocientes (garantizado por los pasos anteriores), tomando \( r\to 0 \):
     \[
         D\mu(x)=D\mu_a(x)+D\mu_s(x)=f(x)+0=f(x).
     \]
