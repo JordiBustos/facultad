@@ -415,9 +415,13 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     Por lo tanto, \[
         \{ Tf > 2\varepsilon \} \subseteq \{ Mh > \varepsilon \} \cup \{ |h| > \varepsilon \} = E_{\varepsilon, n}
     \]
-    Dado que \( \| h \|_1 < \frac{1}{n} \), por el Teorema Maximal y la desigualdad de la observación anterior, se cumple que:\[
-        m(E_{\varepsilon, n}) \leq (3^k + 1) \cdot \frac{1}{\varepsilon n}
-    \]
+    Dado que \( \| h \|_1 < \frac{1}{n} \), por el Teorema Maximal y la desigualdad de la observación anterior, se cumple que: \begin{align*}
+        m(E_{\varepsilon, n}) & \leq m(\{ Mh > \varepsilon \}) + m(\{ |h| > \varepsilon \})                                                                          \\
+                              & \leq \frac{3^k}{\varepsilon} \|h\|_1 + \int_{\{ |h| > \varepsilon \}} 1 \, \mathrm{d} m                                              \\
+                              & < \frac{3^k}{\varepsilon \cdot n} + \int_{\{ |h| > \varepsilon \}} |h|/\varepsilon \, \mathrm{d} m                                   \\
+                              & < \frac{3^k}{\varepsilon \cdot n} + \frac{\|h\|_1}{\varepsilon} \leq \frac{3^k}{\varepsilon \cdot n} + \frac{1}{\varepsilon \cdot n} \\
+                              & < (3^k + 1) \cdot \frac{1}{\varepsilon n}
+    \end{align*}
     donde el lado izquierdo de la desigualdad es independiente de \( n \). Luego,\[
         \{ Tf \geq 2 \varepsilon \} \subseteq \bigcap_{n \geq 1} E_{\varepsilon, n}
     \]
@@ -425,6 +429,19 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     \( A \subseteq B \) con \( B \) medible y \( m(B) = 0 \), entonces \( A \) es medible y \( m(A) = 0 \), se concluye que \( m(\{ Tf > 2\varepsilon \}) = 0 \).
     Como el \( \varepsilon > 0 \) era arbitrario, se concluye que \( m(\{ Tf > 0 \}) = 0 \) y, por lo tanto, \( Tf(x) = 0 \) para casi todo \( x \in \R^k \).
 \end{proof}
+
+\begin{observacion}
+    Si \( x \in \R^k \) es un punto de Lebesgue de \( f \in L_1(\R^k) \), entonces:\[
+        \lim_{r \to 0} \frac{1}{m(B(x, r))} \int_{B(x, r)} |f(y) - f(x)| \, \mathrm{d} m(y) = 0 \\
+    \]
+    Si acotamos la diferencia entre:\begin{align*}
+        \left | \left( \frac{1}{m(B(x, r))} \int_{B(x, r)} f(y) \, \mathrm{d} m(y) \right) - f(x) \right | & = \left | \frac{1}{m(B(x, r))} \int_{B(x, r)} (f(y) - f(x)) \, \mathrm{d} m(y) \right | \\
+                                                                                                           & \leq \frac{1}{m(B(x, r))} \int_{B(x, r)} |f(y) - f(x)| \, \mathrm{d} m(y)
+    \end{align*}
+    El lado derecho de la desigualdad tiende a \( 0 \) si \( r \to 0 \) pues \( x \) es un punto de Lebesgue de \( f \). Esto implica que:\[
+        \lim_{r \to 0} \frac{1}{m(B(x, r))} \int_{B(x, r)} f(y) \, \mathrm{d} m(y) = f(x)
+    \]
+\end{observacion}
 
 \begin{teorema}\label{thm:radon-nikodym}
     Sea \( \mu \) una medida de Borel compleja (o con signo) en \( \R^k \) tal que \( \mu \ll m \). Sea \( f \) la derivada de Radon-Nikodym de \( \mu \) con respecto a \( m \).
