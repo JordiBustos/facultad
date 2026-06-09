@@ -424,21 +424,124 @@
 \begin{ejercicio}{12}
     Sea \( \tilde{X} \) la compactificación de Alexandrov del espacio topológico X.
     \begin{enumerate}
-        \item[(a)] Tomando \( X=\mathbb{R} \) con la topología usual, probar que \( \tilde{X}\cong S^{1} \).
-        \item[(b)] Tomando \( X=\mathbb{N} \) con la topología discreta, mostrar que los únicos compactos de \( \mathbb{N} \) son los finitos. Mostrar que \( X\cong\left\{\frac{1}{n}:n\in\mathbb{N}\right\}\cup\{0\} \) (con la topología usual de \( \mathbb{R} \)).
-        \item[(c)] Tomando \( X=(0,1)\cup(2,3) \) con la topología usual, probar que \( \tilde{X} \) es homeomorfo a ocho en \( \mathbb{R}^{2} \).
-        \item[(d)] Mostrar que para el caso \( X=\mathbb{Q} \) sucede que \( \tilde{X} \) no es ni Hausdorff, a diferencia de todos los ejemplos anteriores donde \( \tilde{X} \) resultó metrizable.
+        \item[(a)] Tomando \( X=\R \) con la topología usual, probar que \( \tilde{X}\cong S^{1} \).
+        \item[(b)] Tomando \( X=\N \) con la topología discreta, mostrar que los únicos compactos de \( \N \) son los finitos. Mostrar que \( \tilde{X} \cong \left \{ \frac{1}{n} : n \in \N \right \} \cup \{ 0 \} \) (con la topología usual de \( \R \)).
+        \item[(c)] Tomando \( X=(0,1)\cup(2,3) \) con la topología usual, probar que \( \tilde{X} \) es homeomorfo a ocho en \( \R^{2} \).
+        \item[(d)] Mostrar que para el caso \( X=\Q \) sucede que \( \tilde{X} \) no es ni Hausdorff, a diferencia de todos los ejemplos anteriores donde \( \tilde{X} \) resultó metrizable.
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Para el inciso (a), recordemos primero que \( \R \cong (a, b) \) para cualesquiera \( a < b \) en \( \R \) vía la función homeomorfismo dada por:
+    \[ f : \R \longrightarrow (a, b), \quad f(x) = a + \frac{b - a}{\pi} \left( \arctan(x) + \frac{\pi}{2} \right) \]
+    Luego, tenemos que \( S^1 \setminus \{ (1, 0) \} \cong (0, 1) \) mediante la función de homeomorfismo:
+    \[ g : (0, 1) \longrightarrow S^1 \setminus \{ (1, 0) \}, \quad g(t) = e^{2\pi i t} \]
+    Componiendo ambos homeomorfismos, obtenemos que \( \R \cong S^1 \setminus \{ (1, 0) \} \). Si construimos la compactificación de Alexandrov de \( \R \),
+    obtenemos el espacio \( \tilde{X} = \R \cup \{ \infty \} \) con la topología \( \tau_\infty = \tau \cup \tau' \), donde \( \tau \) es la topología usual
+    de \( \R \) y \[
+        \tau' = \{ U \cup \infty : \R \setminus U \text{ es compacto y } U \in \tau \}
+    \]
+    Queremos mostrar que \( \tilde{X} \cong S^1 \). Para ello, definamos la función:
+    \[ h : \tilde{X} \longrightarrow S^1, \quad h(x) = \begin{cases}
+            g(f(x)) & \text{si } x \in \R   \\
+            (1, 0)  & \text{si } x = \infty
+        \end{cases} \]
+    Es fácil verificar que \( h \) es un homeomorfismo. En efecto, \( h \) es claramente biyectiva, ya que \( f \) y \( g \) lo son.
+    Para mostrar que \( h \) es continua, basta con verificar la continuidad en el punto \( \infty \), ya que en el resto de los puntos es la composición
+    de funciones continuas. Dado un entorno abierto \( V \) de \( (1, 0) \) en \( S^1 \), su preimagen bajo \( h \) es:
+    \[ h^{-1}(V) = \{ x \in \R : g(f(x)) \in V \} \cup \{ \infty \} \]
+    Dado que \( g \) es un homeomorfismo, \( g^{-1}(V) \) es un entorno abierto de \( 0 \) en \( (0, 1) \). Luego
+    \[ f^{-1}(g^{-1}(V)) \] es un entorno abierto de \( \infty \) en \( \R \). Además, el complemento de \( f^{-1}(g^{-1}(V)) \) es compacto, ya que
+    es homeomorfo a un subconjunto compacto de \( (0, 1) \). Por lo tanto, \( h^{-1}(V) \) es un entorno abierto de \( \infty \) en \( \tilde{X} \), lo que demuestra la continuidad de \( h \).
+    Para mostrar que \( h^{-1} \) es continua, basta con verificar la continuidad en el punto \( (1, 0) \). Dado un entorno abierto \( U \) de \( \infty \) en \( \tilde{X} \), su preimagen bajo \( h^{-1} \) es:
+    \[ h^{-1}(U) = \{ z \in S^1 : h^{-1}(z) \in U \} \]
+    Dado que \( h^{-1} \) es un homeomorfismo, \( h^{-1}(U) \) es un entorno abierto de \( (1, 0) \) en \( S^1 \). Esto demuestra la continuidad de \( h^{-1} \). Por lo tanto, \( h \) es un homeomorfismo entre
+    \( \tilde{X} \) y \( S^1 \).
 
+    Para el iniciso (b), si \( A \subseteq \N \) es un conjunto finito, para cualquier cubrimiento de abiertos \( \rho \) de \( A \) basta con tomar
+    para cada \( a \in A \) un abierto \( U_a \in \rho \) tal que \( a \in U_a \). Entonces, la familia \( \{ U_a : a \in A \} \) es un
+    subcubrimiento finito de \( A \implies A \) es compacto. Si \( A \) es infinito, consideremos la familia de abiertos \( \{ \{ n \} : n \in A \} \).
+    Esta familia es un cubrimiento de \( A \) que no admite ningún subcubrimiento finito, ya que cada abierto solo cubre un punto y \( A \) tiene infinitos.
+    Por lo tanto, los únicos compactos de \( \N \) son los finitos. Veamos ahora que \( \tilde{X} \cong \{ \frac{1}{n} : n \in \N \} \cup \{ 0 \} \).
+    Para ello, definamos la función \( f : \N \to \{ \frac{1}{n} : n \in \N \} \) dada por:\[
+        f(n) = \frac{1}{n}
+    \]
+    Sea \( \tau \) la topología discreta y \( \tau' = \{ U \cup \infty : U^c \text{ es finito y } U \in \tau \} \) la topología de los entornos de \( \infty \)
+    entonces \( \tau_\infty = \tau \cup \tau' \) es la topología de \( \tilde{X} \). Definamos la extensión de \( f \) a \( \tilde{X} \) por:
+    \[
+        \tilde{f} : \tilde{X} \longrightarrow \left \{ \frac{1}{n} : n \in \N \right \} \cup \{ 0 \}, \quad \tilde{f}(x) = \begin{cases}
+            f(x) & \text{si } x \in \N   \\
+            0    & \text{si } x = \infty
+        \end{cases}
+    \]
+    Análogamente, \( \tilde{f} \) es biyectiva y para mostrar que es un homeomorfismo basta con verificar la continuidad en el punto \( \infty \).
+    Dado un entorno abierto \( V \) de \( 0 \) en \( \{ \frac{1}{n} : n \in \N \} \cup \{ 0 \} \), existe un \( N \in \N \) tal que \( V \) contiene a todos los puntos \( \frac{1}{n} \) con \( n > N \).
+    Por lo tanto, el complemento de \( \tilde{f}^{-1}(V) \) es finito, ya que solo puede contener a los puntos \( 1, \frac{1}{2}, \dots, \frac{1}{N} \).
+    Esto implica que \( \tilde{f}^{-1}(V) \) es un entorno abierto de \( \infty \) en \( \tilde{X} \), lo que demuestra la continuidad de \( \tilde{f} \).
+    De manera similar, la continuidad de \( \tilde{f}^{-1} \) se verifica en el punto \( 0 \). Por lo tanto, \( \tilde{f} \) es un homeomorfismo entre \( \tilde{X} \) y \( \{ \frac{1}{n} : n \in \N \} \cup \{ 0 \} \).
+
+    Para el inciso (c), notemos que \( X = (0, 1) \cup (2, 3) \) está formado por dos componentes conexas.
+    Podemos ver al ocho geométrico como el subespacio de \(\R^2\) formado por dos circunferencias tangentes en el origen \((0,0)\).
+    Llamemos \(C_1\) a la circunferencia superior y \(C_2\) a la inferior. Sabemos que: \( (0,1) \cong C_1 \setminus \{(0,0)\} \) y \((2,3) \cong C_2 \setminus \{(0,0)\} \).
+    Por lo tanto, existe un homeomorfismo \(f: X \to (C_1 \cup C_2) \setminus \{(0,0)\} \).
+    Al construir la compactificación de Alexandrov \(\tilde{X}\), le agregamos el punto \(\infty \). Definimos la función \(h: \tilde{X} \to C_1 \cup C_2\) (el ocho) como \(h(x) = f(x)\) si \(x \in X\), y \(h(\infty) = (0,0)\).
+    Dado que el complemento de cualquier entorno abierto del \((0,0)\) en el ocho es un conjunto compacto que no contiene al origen (son porciones cerradas de las circunferencias), su preimagen bajo \(f^{-1}\) será un compacto en \(X\).
+    Esto garantiza que los entornos de \(\infty \) en \(\tilde{X}\) se corresponden con los entornos de \((0,0)\) en el ocho, haciendo de \(h\) un homeomorfismo.
+
+    Para el inciso (d), supongamos por el absurdo que \( \tilde{X} \) es Hausdorff. Entonces, dado un punto \( p \in \Q \),
+    existen entornos abiertos disjuntos \( U \) y \( V \) en \( \tilde{X} \) tales que \( p \in U \) y \( \infty \in V \).
+    Como \( V \) es un entorno abierto de \( \infty \), por definición de la topología de Alexandrov, \( \Q \setminus V \)
+    debe ser un conjunto compacto en \( \Q \).
+    Como \( U \) y \( V \) son disjuntos, tenemos que \( U \subseteq \Q \setminus V \). Al ser \( U \) un abierto en \( \tilde{X} \) que no contiene a
+    \( \infty \), \( U \) es un abierto no vacío en \( \Q \).
+    Esto implicaría que el compacto \(\Q \setminus V\) contiene un conjunto abierto no vacío de \(\Q \). Sin embargo, \( {(\Q \setminus V)}^\circ = \varnothing \implies U^\circ = U \subseteq \varnothing \) absurdo.
+    Por lo tanto, ningún compacto de \(\Q \) puede contener un abierto no vacío de \( \Q \).
+    Llegamos a una contradicción. En conclusión, \( \tilde{X} \) no es Hausdorff.
 \end{proof}
 
 \begin{ejercicio}{13}
     Mostrar que si dos espacios topológicos son homeomorfos entonces también son homeomorfos sus compactificaciones de Alexandrov.
 \end{ejercicio}
 \begin{proof}
+    Sea \( X \) un espacio topológico y \( \tilde{X} = X \cup \{ \infty \} \) su compactificación de Alexandrov. Supongamos que \( Y \) es otro espacio topológico tal que \( X \cong Y \) mediante un homeomorfismo \( f : X \to Y \).
 
+    Queremos mostrar que \( \tilde{X} \cong \tilde{Y} \). Para ello, definamos la extensión \( \tilde{f} : \tilde{X} \to \tilde{Y} \) por:
+    \[
+        \tilde{f}(x) = \begin{cases}
+            f(x)    & \text{si } x \in X    \\
+            \infty' & \text{si } x = \infty
+        \end{cases}
+    \]
+    Donde \( \infty' \) es el punto agregado en \( \tilde{Y} \). Es evidente que \( \tilde{f} \) es biyectiva ya que \( f \) es biyectiva y \( \tilde{f}(\infty) = \infty' \).
+
+    Probemos que \( \tilde{f} \) es continua. Sea \( V \) un abierto en \( \tilde{Y} \). Por la definición de la topología de Alexandrov, tenemos dos casos:
+    \begin{itemize}
+        \item \textbf{Caso 1:} \( \infty' \notin V \). Entonces \( V \) es un abierto de \( Y \). Su preimagen es \( \tilde{f}^{-1}(V) = f^{-1}(V) \). Como \( f \) es continua, \( f^{-1}(V) \) es abierto en \( X \), y por ende también es abierto en \( \tilde{X} \).
+        \item \textbf{Caso 2:} \( \infty' \in V \). Entonces \( V = W \cup \{ \infty' \} \), donde \( W \) es un abierto de \( Y \) tal que \( Y \setminus W \) es un compacto en \( Y \). Su preimagen bajo \( \tilde{f} \) es:
+              \[
+                  \tilde{f}^{-1}(V) = f^{-1}(W) \cup \{ \infty \}
+              \]
+              Como \( f \) es un homeomorfismo, \( f^{-1}(W) \) es un abierto de \( X \). Además, su complemento en \( X \) cumple que:
+              \[
+                  X \setminus f^{-1}(W) = f^{-1}(Y \setminus W)
+              \]
+              Como \( Y \setminus W \) es compacto en \( Y \) y \( f^{-1} \) es continua, la imagen inversa \( f^{-1}(Y \setminus W) \) es compacta en \( X \). Por lo tanto, por definición de la topología de Alexandrov, \( \tilde{f}^{-1}(V) \) es un abierto en \( \tilde{X} \).
+    \end{itemize}
+    Esto demuestra que \( \tilde{f} \) es continua.
+
+    Para concluir que es un homeomorfismo, veamos de manera análoga que \( \tilde{f} \) es una función abierta. Sea \( U \) un abierto en \( \tilde{X} \):
+    \begin{itemize}
+        \item \textbf{Caso 1:} \( \infty \notin U \). Entonces \( U \) es un abierto en \( X \). Su imagen es \( \tilde{f}(U) = f(U) \), que es abierta en \( Y \) (y por tanto en \( \tilde{Y} \)) porque \( f \) es una función abierta.
+        \item \textbf{Caso 2:} \( \infty \in U \). Entonces \( U = A \cup \{ \infty \} \), donde \( A \) es un abierto de \( X \) tal que \( X \setminus A \) es compacto en \( X \). Su imagen es:
+              \[
+                  \tilde{f}(U) = f(A) \cup \{ \infty' \}
+              \]
+              Como \( f \) es homeomorfismo, \( f(A) \) es abierto en \( Y \). Evaluando el complemento en \( Y \) obtenemos:
+              \[
+                  Y \setminus f(A) = f(X \setminus A)
+              \]
+              Puesto que \( X \setminus A \) es compacto en \( X \) y \( f \) es continua, \( f(X \setminus A) \) es un compacto en \( Y \). Esto significa que \( \tilde{f}(U) \) cumple con las condiciones para ser un abierto de \( \tilde{Y} \).
+    \end{itemize}
+    Al ser \( \tilde{f} \) biyectiva, continua y abierta, concluimos que \( \tilde{f} : \tilde{X} \to \tilde{Y} \) es un homeomorfismo, por lo que \( \tilde{X} \cong \tilde{Y} \).
 \end{proof}
 
 \begin{ejercicio}{14}
