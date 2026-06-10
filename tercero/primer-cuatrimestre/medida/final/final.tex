@@ -377,7 +377,7 @@ Demostraremos un resultado muy útil respecto a la medida de Lebesgue que nos ay
     Un subconjunto \( E \subseteq \R^k \) con \( m^*(E) = 0 \) se llama un \textbf{conjunto de Lebesgue nulo}.
 \end{definicion}
 
-\begin{proposicion}
+\begin{proposicion}\label{proposicion:conjuntos-nulos}
     Si \( E \subseteq \R^k \) es un conjunto de Lebesgue nulo, entonces \( E \) es medible Lebesgue y \( m(E) = 0 \). Es más, todo subconjunto de \( E \) es medible y tiene medida cero.
 \end{proposicion}
 \begin{proof}
@@ -396,38 +396,70 @@ Demostraremos un resultado muy útil respecto a la medida de Lebesgue que nos ay
 El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para funciones en \( L_1 \).
 
 \begin{teorema}
-    Si \( f \in L_1(\R^k) \), entonces casi todo punto de \( x \in \R^k \) es un punto de Lebesgue de \( f \).
+    Si \( f \in L_1(\mathbb{R}^k) \), entonces casi todo punto \( x \in \mathbb{R}^k \) es un punto de Lebesgue de \( f \).
 \end{teorema}
 \begin{proof}
-    Consideremos: \[
-        (T_r f)(x) = \frac{1}{m(B(x, r))} \int_{B(x, r)} |f(y) - f(x)| \, \mathrm{d} m(y)
+    Consideremos la función de los promedios para \( x \in \mathbb{R}^k \) y \( r > 0 \):
+    \[
+        (T_r f)(x) = \frac{1}{m(B(x,r))} \int_{B(x,r)} |f(y) - f(x)| \, \mathrm{d}m(y)
     \]
-    para \( x \in \R^k \) y \( r > 0 \) fijo. Definamos:\[
-        Tf(x) = \limsup_{r \to 0} (T_r f)(x)
+    Como a priori no conocemos si el límite ordinario cuando \( r \to 0 \) existe,
+    definimos el operador utilizando el límite superior, el cual está siempre bien definido en la recta real extendida:
+    \[
+        Tf(x) = \limsup_{r \to 0} \, (T_r f)(x)
     \]
-    Queremos mostrar que \( Tf(x) = 0 \) para casi todo \( x \in \R^k \). Consideremos \( \varepsilon > 0 \) y \( n \in \N \). Dado que \( C_c(\R^k) \) es denso en \( L_1(\R^k) \), existe
-    \( g \in C_c(\R^k) \) tal que \( \|f - g\|_1 < \frac{1}{n} \). Tomemos \( h = f - g \), como \( g \) es continua, \( Tg \equiv 0 \). Además,\[
-        (T_r h)(x) \leq \frac{1}{m(B(x, r))} \int_{B(x, r)} |h(y)| \, \mathrm{d} m(y) + |h(x)| \leq Mh(x) + |h(x)|
+    Nuestro objetivo es probar que \(Tf(x) = 0\) para casi todo punto.
+    Dado que \((T_r f)(x) \ge 0\) para todo \(r\), demostrar que su límite superior es menor o igual a cero implicará,
+    por el Teorema del Sándwich, que el límite ordinario existe y vale cero.
+
+    Fijemos \(\varepsilon > 0\) y sea \(n \in \mathbb{N}\).
+    Dado que el espacio de las funciones continuas con soporte compacto \(C_c(\mathbb{R}^k)\) es denso en \(L_1(\mathbb{R}^k)\),
+    existe una función \(g \in C_c(\mathbb{R}^k)\) tal que \( \|f - g\|_1 < \frac{1}{n}\).
+
+    \begin{observacion}
+        Es crucial exigir que \(g\) tenga soporte compacto y no simplemente que sea continua. Como \(f \in L_1(\mathbb{R}^k)\), para que la diferencia \(h = f - g\) pertenezca a \(L_1(\mathbb{R}^k)\) (requisito indispensable para aplicar el Teorema Maximal), se necesita obligatoriamente que \(g \in L_1(\mathbb{R}^k)\). Una función continua arbitraria en \(\mathbb{R}^k\) podría tener integral infinita, mientras que el soporte compacto garantiza la finitud de su integral.
+    \end{observacion}
+
+    Definamos \(h = f - g\), de modo que \(f = g + h\). Por la desigualdad triangular en el integrando de los promedios, es inmediato que:
+    \[
+        |f(y) - f(x)| \le |g(y) - g(x)| + |h(y) - h(x)|
     \]
-    Dado que \( T_r f \leq T_r g + T_r h \) se cumple que \[
-        Tf \leq Mh + |h|
+    Integrando sobre la bola \(B(x,r)\) y dividiendo por su medida, obtenemos la subaditividad para cada promediación fija:
+    \[
+        (T_r f)(x) \le (T_r g)(x) + (T_r h)(x)
     \]
-    Por lo tanto, \[
-        \{ Tf > 2\varepsilon \} \subseteq \{ Mh > \varepsilon \} \cup \{ |h| > \varepsilon \} = E_{\varepsilon, n}
+    Aplicando la propiedad fundamental de subaditividad del límite superior (\(\limsup(A+B) \le \limsup A + \limsup B\)) al tomar \(r \to 0\), deducimos:
+    \[
+        Tf(x) \le Tg(x) + Th(x)
     \]
-    Dado que \( \| h \|_1 < \frac{1}{n} \), por el Teorema Maximal y la desigualdad de la observación anterior, se cumple que: \begin{align*}
-        m(E_{\varepsilon, n}) & \leq m(\{ Mh > \varepsilon \}) + m(\{ |h| > \varepsilon \})                                                                          \\
-                              & \leq \frac{3^k}{\varepsilon} \|h\|_1 + \int_{\{ |h| > \varepsilon \}} 1 \, \mathrm{d} m                                              \\
-                              & < \frac{3^k}{\varepsilon \cdot n} + \int_{\{ |h| > \varepsilon \}} |h|/\varepsilon \, \mathrm{d} m                                   \\
-                              & < \frac{3^k}{\varepsilon \cdot n} + \frac{\|h\|_1}{\varepsilon} \leq \frac{3^k}{\varepsilon \cdot n} + \frac{1}{\varepsilon \cdot n} \\
-                              & < (3^k + 1) \cdot \frac{1}{\varepsilon n}
+    Como \(g\) es una función continua, vale que \(Tg(x) = 0\) pues \( x \) es punto de Lebesgue para \( g \) (\(\forall x \in \R^k \)). Por lo tanto:
+    \[
+        Tf(x) \le Th(x)
+    \]
+    Por otro lado, podemos acotar el operador \((T_r h)(x)\) utilizando la función maximal \(Mh(x)\):
+    \[
+        (T_r h)(x) \le \frac{1}{m(B(x,r))} \int_{B(x,r)} |h(y)| \, \mathrm{d}m(y) + |h(x)| \le Mh(x) + |h(x)|
+    \]
+    Tomando el límite superior cuando \(r \to 0\) en dicha desigualdad, resulta que \(Tf(x) \le Th(x) \le Mh(x) + |h(x)|\).
+
+    En consecuencia, si para un punto \(x\) se cumple que \(Tf(x) > 2\varepsilon \), necesariamente debe ocurrir que \(Mh(x) > \varepsilon \) o bien \(|h(x)| > \varepsilon \). Esto nos permite realizar la siguiente inclusión de conjuntos:
+    \[
+        \{x \in \mathbb{R}^k : Tf(x) > 2\varepsilon \} \subseteq \{x \in \mathbb{R}^k : Mh(x) > \varepsilon \} \cup \{x \in \mathbb{R}^k : |h(x)| > \varepsilon \}
+    \]
+    Tomando la medida exterior de Lebesgue \(m^*\) en ambos miembros, y aplicando la subaditividad de la misma junto con el Teorema Maximal para \(Mh\) y la desigualdad de Chebyshev para \(|h|\), obtenemos:
+    \begin{align*}
+        m^*(\{Tf > 2\varepsilon \}) & \le m(\{Mh > \varepsilon \}) + m(\{|h| > \varepsilon \})            \\
+                                    & \le \frac{3^k}{\varepsilon} \|h\|_1 + \frac{1}{\varepsilon} \|h\|_1 \\
+                                    & = \frac{3^k + 1}{\varepsilon} \|h\|_1                               \\
+                                    & < \frac{3^k + 1}{\varepsilon \cdot n}
     \end{align*}
-    donde el lado izquierdo de la desigualdad es independiente de \( n \). Luego,\[
-        \{ Tf \geq 2 \varepsilon \} \subseteq \bigcap_{n \geq 1} E_{\varepsilon, n}
+    Notemos que el conjunto del miembro izquierdo, \( \{Tf > 2\varepsilon \} \), es un conjunto fijo e independiente de la elección de \(n\). Como la cadena de desigualdades es válida para cualquier \(n \in \mathbb{N}\) arbitrario, podemos tomar el límite cuando \(n \to \infty \), concluyendo con seguridad que:
+    \[
+        m^*(\{Tf > 2\varepsilon \}) = 0
     \]
-    Como \( m(E_{\varepsilon, n}) \to 0 \) cuando \( n \to \infty \) y \( m(E_{\varepsilon, 1}) < \infty \), se concluye que \( m(\bigcap_{n \geq 1} E_{\varepsilon, n}) = 0 \) y, como la medida de Lebesgue es completa, en el sentido de que si
-    \( A \subseteq B \) con \( B \) medible y \( m(B) = 0 \), entonces \( A \) es medible y \( m(A) = 0 \), se concluye que \( m(\{ Tf > 2\varepsilon \}) = 0 \).
-    Como el \( \varepsilon > 0 \) era arbitrario, se concluye que \( m(\{ Tf > 0 \}) = 0 \) y, por lo tanto, \( Tf(x) = 0 \) para casi todo \( x \in \R^k \).
+    Por la arbitrariedad de \(\varepsilon > 0\), si definimos el conjunto de los puntos que no son de Lebesgue como \(E = \{Tf > 0\} \), se observa que \(E = \bigcup_{j=1}^{\infty} \{Tf > \frac{1}{j}\} \). Por la subaditividad numerable de la medida exterior, obtenemos que \(m^*(E) = 0\).
+
+    Finalmente, por la \textbf{Proposición\( \, \)\ref{proposicion:conjuntos-nulos}} de nuestro desarrollo (completitud de la medida de Lebesgue), al ser \(E\) un subconjunto con medida exterior nula, concluimos que \(E\) es un conjunto Lebesgue medible y su medida es efectivamente \(m(E) = 0\). Esto demuestra que \(Tf(x) = 0\) para casi todo punto, evitando la necesidad de demostrar previamente la medibilidad de la función límite \(Tf\).
 \end{proof}
 
 \begin{observacion}
