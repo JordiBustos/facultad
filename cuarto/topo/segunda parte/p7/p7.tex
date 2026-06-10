@@ -1,0 +1,123 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                      % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Net convergence/accumulation notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}   % Frequently in
+\newcommand{\nnevto}[1]{\not\!\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\nnfrto}[1]{\not\!\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica VII}
+\author{Bustos Jordi\\Espacios localmente compactos}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sea \( X \) un espacio topológico LKH. Probar que:
+    \begin{enumerate}
+        \item[(a)] \( C_{K}(X,\C) \subseteq C_{0}(X, \C) \subseteq C_{b}(X, \C) \) y son métricos con la \( d_{\infty} \).
+        \item[(b)] \( C_{K}(X,\C) \) es \( d_{\infty} \)-denso en \( C_{0}(X,\C) \).
+        \item[(c)] Dada \( f \in C_{0}(X,\C) \) y \( \varepsilon > 0 \), el conjunto \( \{x \in X : |f(x)| \ge \varepsilon \} \) es compacto en \( X \).
+        \item[(d)] Si \( X \) es métrico entonces toda \( f \in C_{0}(X,\C) \) es uniformemente continua.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{2}
+    Sean \( X \) e \( Y \) dos espacios topológicos. Considerar en \( C(X,Y) \) la topología compacto-abierta. Demostrar que si \( Y \) es Hausdorff (o regular) entonces \( C(X,Y) \) es Hausdorff (o regular).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{3}
+    Sea \( (X, \tau) \) un espacio topológico. Probar que si \( X \) es compacto entonces es PK. Además, si \( X \) es unión disjunta de subconjuntos abiertos y PK's, entonces \( X \) es PK.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{4}
+    Sea \( (X, \tau) \) espacio PK. Probar lo siguiente:
+    \begin{enumerate}
+        \item[(a)] Todo \( F \subseteq X \) que sea cerrado queda PK con la topología inducida.
+        \item[(b)] Si \( Y \) es otro espacio que es compacto entonces \( X \times Y \) es PK.
+        \item[(c)] En general, \( X \times X \) no es PK.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{5}
+    Sea \( X \) un espacio topológico LKH. Dada una familia \( \mathcal{F} \subseteq C_{0}(X) \) se tiene que \( \mathcal{F} \) es totalmente acotada \( \iff \) \( \mathcal{F} \) es acotada, equicontinua y se anula uniformemente en el \( \infty \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{6}
+    Sea \( X \) un espacio topológico LK y \( f \in C(X,Y) \) suryectiva y abierta. Probar que:
+    \begin{enumerate}
+        \item[(a)] \( Y \) es LK.
+        \item[(b)] Si \( Y \) es Hausdorff entonces todo compacto \( C \) de \( Y \) es de la forma \( f(K)=C \) para algún \( K \) compacto de \( X \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{7}
+    Sea \( X \) un PKH. Sea \( \mathcal{C} \) una familia de conjuntos de \( X \) y para cada \( C \in \mathcal{C} \) sea un número \( \varepsilon_{C} > 0 \). Si \( \mathcal{C} \) es LF entonces existe \( f:X \rightarrow \mathbb{R} \) continua tal que \( f(x) > 0 \) para todo \( x \in X \) y \( f(x) \le \varepsilon_{C} \) para todo \( x \in C \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{ejercicio}{8}
+    Dado \( A \) no numerable, mostrar que no es PK, considerando el producto de las topologías discretas \( \prod_{a \in A} \mathbb{N} \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
