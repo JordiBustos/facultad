@@ -547,15 +547,46 @@
 \begin{ejercicio}{14}
     Sea \( X \) un espacio topológico de Tychonoff y sea \( RU(X) \) el conjunto de todas sus redes universales.
     \begin{enumerate}
-        \item[(a)] Dada \( x=(x_{i})_{i\in I}\in RU(X) \) e \( f\in C_{b}(X) \), probar que existe un \( x_{f}\in\mathbb{C} \) tal que \( f(x_{i})\longrightarrow_{i\in I}x_{f} \).
-        \item[(b)] Sean \( \mathcal{F}_{1} \), \( B(X) \) y \( F \) según la construcción que se hace en los apuntes. Mostrar que \( F \) separa puntos de \( B(X) \).
-        \item[(c)] Probar que \( (B(X),\tau_{\mathcal{F}}) \) es Hausdorff, donde \( \tau_{\mathcal{F}} \) es la topología inicial dada por \( F \).
+        \item[(a)] Dada \( x={(x_{i})}_{i\in I}\in RU(X) \) e \( f\in C_{b}(X) \), probar que existe un \( x_{f} \in \mathbb{C} \) tal que \( f(x_{i})\longrightarrow_{i\in I}x_{f} \).
+        \item[(b)] Sean \( \mathcal{F}_{1} \), \( B(X) \) y \( \mathcal{F} \) según la construcción que se hace en los apuntes. Mostrar que \( \mathcal{F} \) separa puntos de \( B(X) \).
+        \item[(c)] Probar que \( (B(X),\tau_{\mathcal{F}}) \) es Hausdorff, donde \( \tau_{\mathcal{F}} \) es la topología inicial dada por \( \mathcal{F} \).
         \item[(d)] Probar que la función \( G:X\rightarrow B(X) \) dada por \( G(x)=\overline{c_{x}} \), donde \( c_{x} \) es la sucesión constante igual a \( x \), es un embedding.
         \item[(e)] Probar que \( (B(X),\tau_{\mathcal{F}}) \) es un compacto Hausdorff y que el par \( (B(X),G) \) es una H-compactificación de \( X \) que es isomorfa a la de Stone-Čech.
     \end{enumerate}
 \end{ejercicio}
-\begin{proof}
 
+\begin{proof}
+    Para el inciso (a) notemos que \( {(f(x_i))}_{i \in I} \) es una RU y por ser \( f \) acotada vale que \( \{ f(x_i) : i \in I \} \subseteq \{ z \in \mathbb{C} : |z| \leq M \} \) para algún \( M \geq 0 \).
+    El disco cerrado en \( \mathbb{C} \) es compacto, por lo que la RU \( {(f(x_i))}_{i \in I} \) converge a un punto \( x_f \) en dicho disco.
+
+    Recordemos que \( B(X) \) es el conjunto de todas las clases de equivalencia de RU's en \( X \), \( \mathcal{F}_1 = C_b(X) \) y para cada \( f \in \mathcal{F}_1 \) se define la función \( \varphi_f : B(X) \to \mathbb{C} \), dada por:
+    \[
+        \varphi_f([x]) = x_f
+    \]
+    donde \( x_f \) es el límite de \( {(f(x_i))}_{i \in I} \) para cualquier representante de la clase \( [x] \). Luego, \( \mathcal{F} = \{ \varphi_f : f \in C_b(X) \} \).
+    Sean \( [x], [y] \in B(X) \) con \( [x] \neq [y] \). Entonces, por definición de la relación de equivalencia, existe una función \( f \in C_b(X) \) tal que
+    \( x_f \neq y_f \implies \varphi_f([x]) = x_f \neq y_f = \varphi_f([y]) \). Por lo tanto, \( \mathcal{F} \) separa puntos de \( B(X) \).
+
+    Para el inciso (c), dado \( [x], [y] \in B(X) \) con \( [x] \neq [y] \), por el inciso (b) existe una función \( \varphi_f \in \mathcal{F} \) tal que \( \varphi_f([x]) \neq \varphi_f([y]) \).
+    Dado que \( \mathbb{C} \) es Hausdorff, existen entornos abiertos disjuntos \( U \) y \( V \) en \( \mathbb{C} \) tales que \( \varphi_f([x]) \in U \) y \( \varphi_f([y]) \in V \).
+    Por la definición de la topología inicial, \( \varphi_f^{-1}(U) \in \mathcal{O}^a([x]) \) y \( \varphi_f^{-1}(V) \in \mathcal{O}^a([y]) \) son disjuntos. Por lo tanto, \( (B(X), \tau_{\mathcal{F}}) \) es Hausdorff.
+
+    Para ver que \( G \) es un embedding veamos en primer lugar que es inyectiva. Si \( G(x) = G(y) \), entonces \( \overline{c_x} = \overline{c_y} \). Supongamos que \( x \neq y \).
+    La igualdad implica que \( c_x \sim c_y \), es decir, para toda \( f \in C_b(X) \) vale que \( f(x) = \lim_{i \in I} f(c_x(i)) = \lim_{i \in I} f(c_y(i)) = f(y) \).
+    Dado que \( X \) es Tychonoff y \( x \neq y \) existe una función \( f \in C_b(X) \) tal que \( f(x) \neq f(y) \), lo que contradice la igualdad anterior. Por lo tanto, \( G \) es inyectiva.
+
+    Para ver que \( G \) es continua, sea \( U \) un entorno abierto de \( G(x) \) en \( B(X) \).
+    Por la definición de la topología inicial, existe una función \( \varphi_f \in \mathcal{F} \) y un entorno abierto \( V \) de \( \varphi_f(G(x)) \) en \( \mathbb{C} \) tal que \( G(x) \in \varphi_f^{-1}(V) \subseteq U \).
+    Dado que \( \varphi_f(G(x)) = \varphi_f(\overline{c_x}) = x_f = \lim_{i \in I} f(c_x(i)) = f(x) \), el conjunto \( f^{-1}(V) \) es un entorno abierto de \( x \) en \( X \) tal que \( G(f^{-1}(V)) \subseteq \varphi_f^{-1}(V) \subseteq U \),
+    lo que demuestra la continuidad de \( G \).
+
+    Para demostrar que \( G \) es un homeomorfismo sobre su imagen, probaremos que \( G^{-1} : G(X) \to X \) es continua preservando la convergencia de redes. Si \( {(G(x_i))}_{i \in I} \) es una red en \( G(X) \) que converge a \( G(x) \), por definición de la topología inicial se tiene que para toda \( \varphi_f \in \mathcal{F} \), \( \varphi_f(G(x_i)) \longrightarrow \varphi_f(G(x)) \). Esto equivale a decir que \( f(x_i) \longrightarrow f(x) \) para toda \( f \in C_b(X) \). Dado que \( X \) es un espacio de Tychonoff, su topología coincide con la inicial inducida por \( C_b(X) \), por lo que \( x_i \longrightarrow x \) en \( X \). Esto demuestra que \( G^{-1} \) es continua y, por consiguiente, \( G \) es un embedding.
+
+    Finalmente, para el inciso (e), veamos primero que \( B(X) \) es compacto. Al tener la topología inicial dada por \( \mathcal{F} \), podemos definir la aplicación de evaluación \( E: B(X) \to \prod_{f \in C_b(X)} D_f \) dada por \( E([x]) = {(\varphi_f([x]))}_{f \in C_b(X)} \), donde \( D_f = \{ z \in \mathbb{C} : |z| \leq \|f\|_\infty \} \). Como \( \mathcal{F} \) separa puntos, \( E \) es inyectiva, y por la topología inicial resulta ser un homeomorfismo sobre su imagen. Por el Teorema de Tychonoff, el producto \( \prod D_f \) es compacto. Como todo elemento de la clausura de la imagen de \( E \) proviene de la convergencia de una red universal en \( X \), la imagen es cerrada y por lo tanto \( B(X) \) es compacto.
+
+    Además, \( G(X) \) es denso en \( B(X) \). Si \( [x] \in B(X) \), tomamos su red universal representante \( {(x_i)}_{i \in I} \). Para cualquier entorno subbásico de \( [x] \) dado por \( \varphi_f \), se tiene que \( \varphi_f(G(x_i)) = f(x_i) \longrightarrow x_f = \varphi_f([x]) \). Así, \( G(x_i) \longrightarrow [x] \) en la topología de \( B(X) \), concluyendo que \( \overline{G(X)} = B(X) \). Esto prueba que \( (B(X), G) \) es una H-compactificación.
+
+    Para ver que es isomorfa a la de Stone-Čech, notemos que toda \( f \in C_b(X) \) admite una extensión continua a \( B(X) \). En efecto, la función \( \varphi_f \in \mathcal{F} \) cumple que \( \varphi_f(G(x)) = \varphi_f(\overline{c_x}) = f(x) \) para todo \( x \in X \). Al satisfacer esta propiedad universal de extensión, la compactificación \( B(X) \) es homeomorfa a \( \beta X \).
 \end{proof}
 
 \begin{ejercicio}{15}
@@ -567,14 +598,25 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Para el inciso (a), al ser \( X \) un espacio discreto, cualquier función definida sobre \( X \) es continua. Definamos la función indicadora \( f: X \to \mathbb{R} \) dada por \( f(x) = 0 \) si \( x \in A \) y \( f(x) = 1 \) si \( x \in A^c \). Esta función es continua y acotada, por lo que, por la propiedad universal de la compactificación de Stone-Čech, admite una extensión continua \( \tilde{f}: \beta(X) \to \mathbb{R} \) tal que \( \tilde{f} \circ F = f \).
+    Notemos que \( \tilde{f}(F(A)) = \{0\} \) y \( \tilde{f}(F(A^c)) = \{1\} \). Como \( \tilde{f} \) es continua, las preimágenes de los cerrados \( \{0\} \) y \( \{1\} \), es decir \( \tilde{f}^{-1}(\{0\}) \) y \( \tilde{f}^{-1}(\{1\}) \), son conjuntos cerrados disjuntos en \( \beta(X) \). Dado que \( F(A) \subseteq \tilde{f}^{-1}(\{0\}) \) y \( F(A^c) \subseteq \tilde{f}^{-1}(\{1\}) \), sus clausuras deben respetar esta contención, obteniendo que \( \overline{F(A)} \subseteq \tilde{f}^{-1}(\{0\}) \) y \( \overline{F(A^c)} \subseteq \tilde{f}^{-1}(\{1\}) \). Por lo tanto, \( \overline{F(A)} \cap \overline{F(A^c)} = \varnothing \).
 
+    Para el inciso (b), sea \( U \) un abierto en \( \beta(X) \) y consideremos \( A = F^{-1}(U) \subseteq X \). Como \( X = A \cup A^c \) y \( F(X) \) es denso en \( \beta(X) \), tenemos que \( \beta(X) = \overline{F(X)} = \overline{F(A) \cup F(A^c)} = \overline{F(A)} \cup \overline{F(A^c)} \). Por el inciso (a), \( \overline{F(A)} \) y \( \overline{F(A^c)} \) son cerrados disjuntos cuya unión es todo el espacio, por lo que ambos son conjuntos abiertos y cerrados (clopen).
+    Por otro lado, como \( U \) es abierto y \( F(X) \) es denso, la clausura de \( U \) coincide con la clausura de su intersección con el denso: \( \overline{U} = \overline{U \cap F(X)} \). Pero \( U \cap F(X) = F(F^{-1}(U)) = F(A) \). En consecuencia, \( \overline{U} = \overline{F(A)} \). Al haber probado que \( \overline{F(A)} \) es abierto, concluimos que \( \overline{U} \) es un abierto de \( \beta(X) \).
+
+    Para el inciso (c), un espacio compacto Hausdorff es totalmente disconexo si y solo si posee una base de conjuntos clopen. Si tomamos un abierto cualquiera \( U \) en \( \beta(X) \), por el inciso anterior sabemos que su clausura \( \overline{U} \) es abierta y cerrada (clopen). Dado que \( \beta(X) \) es un espacio regular (por ser compacto Hausdorff), los conjuntos clopen separan puntos y forman una base para la topología, lo que implica que la única componente conexa de cada punto es el punto mismo. Luego, \( \beta(X) \) es totalmente disconexo.
 \end{proof}
 
 \begin{ejercicio}{16}
     Probar que un espacio Tychonoff es conexo \( \iff \) su compactificación de Stone-Čech es conexa.
 \end{ejercicio}
 \begin{proof}
+    \( (\implies) \) Supongamos que \( X \) es conexo. Dado que la inmersión \( F: X \to \beta(X) \) es continua, la imagen \( F(X) \) es un conjunto conexo en \( \beta(X) \). En cualquier espacio topológico, la clausura de un conjunto conexo sigue siendo conexa. Como \( F(X) \) es denso en \( \beta(X) \), tenemos que \( \overline{F(X)} = \beta(X) \). Por lo tanto, \( \beta(X) \) es conexo.
 
+    \( (\Longleftarrow) \) Lo demostraremos por contrarrecíproco. Supongamos que \( X \) es disconexo. Entonces existen dos conjuntos abiertos, no vacíos y disjuntos \( A, B \subseteq X \) tales que \( X = A \cup B \). Al ser \( X \) unión disjunta de dos abiertos, \( A \) y \( B \) también son cerrados.
+    Definimos la función indicadora \( f: X \to \mathbb{R} \) dada por \( f(x) = 0 \) si \( x \in A \) y \( f(x) = 1 \) si \( x \in B \). Como \( A \) y \( B \) son abiertos y cerrados, \( f \) es continua. Además, es acotada. Por la propiedad de extensión de la compactificación de Stone-Čech, existe una función continua \( \tilde{f}: \beta(X) \to \mathbb{R} \) tal que \( \tilde{f} \circ F = f \).
+    Dado que \( f(X) = \{0, 1\} \), la imagen de la clausura debe estar contenida en la clausura de la imagen. Así, \( \tilde{f}(\beta(X)) = \tilde{f}(\overline{F(X)}) \subseteq \overline{\tilde{f}(F(X))} = \overline{f(X)} = \{0, 1\} \).
+    Como \( A \) y \( B \) son no vacíos, tanto \( 0 \) como \( 1 \) pertenecen a la imagen de \( \tilde{f} \). Luego, \( \beta(X) \) se puede escribir como la unión disjunta de las preimágenes \( \tilde{f}^{-1}(\{0\}) \) y \( \tilde{f}^{-1}(\{1\}) \), que son conjuntos cerrados (por la continuidad de \( \tilde{f} \)), abiertos (por ser complemento uno del otro) y no vacíos. Esto demuestra que \( \beta(X) \) es disconexo, concluyendo la prueba.
 \end{proof}
 
 \end{document}
