@@ -28,7 +28,6 @@
 
 % Useful shortcuts
 \newcommand{\imp}{\implies}                      % Implies
-\newcommand{\setdiff}{\smallsetminus}            % Set difference
 
 % Net convergence/accumulation notation
 \newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
@@ -52,14 +51,52 @@
 \begin{ejercicio}{1}
     Sea \( X \) un espacio topológico LKH. Probar que:
     \begin{enumerate}
-        \item[(a)] \( C_{K}(X,\C) \subseteq C_{0}(X, \C) \subseteq C_{b}(X, \C) \) y son métricos con la \( d_{\infty} \).
-        \item[(b)] \( C_{K}(X,\C) \) es \( d_{\infty} \)-denso en \( C_{0}(X,\C) \).
-        \item[(c)] Dada \( f \in C_{0}(X,\C) \) y \( \varepsilon > 0 \), el conjunto \( \{x \in X : |f(x)| \ge \varepsilon \} \) es compacto en \( X \).
-        \item[(d)] Si \( X \) es métrico entonces toda \( f \in C_{0}(X,\C) \) es uniformemente continua.
+        \item[(a)] \( C_{K}(X,\mathbb{C}) \subseteq C_{0}(X, \mathbb{C}) \subseteq C_{b}(X, \mathbb{C}) \) y son métricos con la \( d_{\infty} \).
+        \item[(b)] \( C_{K}(X,\mathbb{C}) \) es \( d_{\infty} \)-denso en \( C_{0}(X,\mathbb{C}) \).
+        \item[(c)] Dada \( f \in C_{0}(X,\mathbb{C}) \) y \( \varepsilon > 0 \), el conjunto \( \{x \in X : |f(x)| \ge \varepsilon \} \) es compacto en \( X \).
+        \item[(d)] Si \( X \) es métrico entonces toda \( f \in C_{0}(X,\mathbb{C}) \) es uniformemente continua.
     \end{enumerate}
 \end{ejercicio}
-\begin{proof}
 
+\begin{proof}
+    Para (a), dada \( f \in C_{K}(X, \mathbb{C}) \) existe un compacto \( K \subseteq X \) tal que \( f(x) = 0 \) para todo \( x \in X \setminus K \). Por lo tanto, para todo \( \varepsilon > 0 \) si tomo \( K_\varepsilon = K \), entonces
+    \( |f(x)| = 0 < \varepsilon \) para todo \( x \notin K_\varepsilon \), es decir, \( f \in C_{0}(X, \mathbb{C}) \).
+
+    Además, \( C_{0}(X, \mathbb{C}) \subseteq C_{b}(X, \mathbb{C}) \) porque si \( f \in C_{0}(X, \mathbb{C}) \) entonces existe un compacto \( K_1 \subseteq X \) tal que \( |f(x)| < 1 \) para todo \( x \notin K_1 \).
+    Como \( f \) es continua y \( K_1 \) es compacto, alcanza un máximo en \( K_1 \). Por lo tanto, \( |f(x)| < 1 + M \) para todo \( x \in X \), donde \( M = \max_{x\in K_1} |f(x)| < +\infty \).
+
+    Finalmente, la métrica \( d_{\infty} \) es la misma en los tres espacios y los hace métricos. En efecto, sean \( f, g \in C_b(X, \mathbb{C}) \), \( d_{\infty}(f,g) = \sup_{x \in X} |f(x) - g(x)| \), luego:
+    \[
+        d_{\infty}(f,g) = 0 \iff f(x) = g(x) \quad \forall x \in X \iff f = g
+    \]
+    Además, \( d_{\infty}(f,g) = d_{\infty}(g,f) \) y por desigualdad triangular en \( \mathbb{C} \), \( d_{\infty}(f,h) \le d_{\infty}(f,g) + d_{\infty}(g,h) \) para todo \( f, g, h \in C_b(X, \mathbb{C}) \).
+
+    Para el inciso (b), dado \( f \in C_0(X, \mathbb{C}) \) y \( \varepsilon > 0 \), existe un compacto \( K_\varepsilon \subseteq X \) tal que \( |f(x)| < \varepsilon \) para todo \( x \notin K_\varepsilon \).
+    Como \( X \) es un espacio LKH, por el Lema de Urysohn existe una función continua con soporte compacto \( h: X \to [0,1] \) tal que \( h(x) = 1 \) para todo \( x \in K_\varepsilon \).
+    Definimos \( g = f \cdot h \). Como \( g \) es producto de continuas es continua, y al ser \( h \) de soporte compacto, \( g \) también lo es, luego \( g \in C_K(X, \mathbb{C}) \). Evaluemos la distancia:
+    \[
+        d_{\infty}(f,g) = \sup_{x\in X} |f(x) - f(x)h(x)| = \sup_{x\in X} |f(x)| |1 - h(x)|
+    \]
+    Si \( x \in K_\varepsilon \), \( h(x) = 1 \implies |f(x)||1 - h(x)| = 0 \). Si \( x \notin K_\varepsilon \), sabemos que \( |f(x)| < \varepsilon \) y como \( 0 \le h(x) \le 1 \), entonces \( |1 - h(x)| \le 1 \). Por lo tanto:
+    \[
+        d_{\infty}(f,g) \le \sup_{x \notin K_\varepsilon} |f(x)| < \varepsilon
+    \]
+    Concluyendo que \( C_K(X, \mathbb{C}) \) es \( d_{\infty} \)-denso en \( C_0(X, \mathbb{C}) \).
+
+    Para el inciso (c), dada \( f \in C_0(X, \mathbb{C}) \) y \( \varepsilon > 0 \), existe un compacto \( K_\varepsilon \subseteq X \) tal que \( |f(x)| < \varepsilon \) para todo \( x \notin K_\varepsilon \).
+    Esto implica que el conjunto \( K = \{ x \in X : |f(x)| \geq \varepsilon \} \) está contenido en \( K_\varepsilon \). Como \( f \) es continua, \( K \) es la preimagen del conjunto cerrado \( \{ z \in \mathbb{C} : |z| \ge \varepsilon \} \), por lo que \( K \) es cerrado en \( X \). Al ser un subconjunto cerrado dentro del compacto \( K_\varepsilon \), \( K \) es compacto.
+
+    Para el inciso (d), sea \( X \) métrico y \( f \in C_0(X, \mathbb{C}) \). Dado \( \varepsilon > 0 \), por el inciso anterior sabemos que el conjunto \( K = \{ x \in X : |f(x)| \ge \varepsilon/2 \} \) es compacto.
+    Por la continuidad de \( f \), para cada \( x \in K \) existe un radio \( \delta_x > 0 \) tal que si \( d(y,x) < 2\delta_x \), entonces \( |f(y) - f(x)| < \varepsilon/2 \).
+    La familia de bolas \( {\{ B(x, \delta_x) \}}_{x \in K} \) es un cubrimiento abierto del compacto \( K \), por lo que admite un subcubrimiento finito \( B(x_1, \delta_1), \dots, B(x_n, \delta_n) \).
+    Tomemos \( \delta = \min \{ \delta_1, \dots, \delta_n \} > 0 \). Sean \( y, z \in X \) con \( d(y,z) < \delta \). Tenemos dos casos:
+    \begin{itemize}
+        \item Caso 1: Ninguno de los puntos pertenece a \( K \). Entonces \( |f(y)| < \varepsilon/2 \) y \( |f(z)| < \varepsilon/2 \), lo que implica \( |f(y) - f(z)| \le |f(y)| + |f(z)| < \varepsilon \).
+        \item Caso 2: Al menos uno de los puntos pertenece a \( K \). Supongamos sin pérdida de generalidad que \( y \in K \). Entonces existe algún \( i \in \{1,\dots,n\} \) tal que \( y \in B(x_i, \delta_i) \), es decir \( d(y, x_i) < \delta_i \).
+              Por la desigualdad triangular, \( d(z, x_i) \le d(z, y) + d(y, x_i) < \delta + \delta_i \le 2\delta_i \).
+              Como tanto \( y \) como \( z \) están a distancia menor a \( 2\delta_i \) de \( x_i \), evaluando en la función obtenemos \( |f(y) - f(x_i)| < \varepsilon/2 \) y \( |f(z) - f(x_i)| < \varepsilon/2 \). Sumando ambas desigualdades resulta \( |f(y) - f(z)| < \varepsilon \).
+    \end{itemize}
+    En cualquier caso, si \( d(y,z) < \delta \), entonces \( |f(y) - f(z)| < \varepsilon \), lo que demuestra que \( f \) es uniformemente continua en \( X \).
 \end{proof}
 
 \begin{ejercicio}{2}
