@@ -103,14 +103,89 @@
     Sean \( X \) e \( Y \) dos espacios topológicos. Considerar en \( C(X,Y) \) la topología compacto-abierta. Demostrar que si \( Y \) es Hausdorff (o regular) entonces \( C(X,Y) \) es Hausdorff (o regular).
 \end{ejercicio}
 \begin{proof}
+    Veamos primero el caso en que \( Y \) es Hausdorff.
+    Dadas \( f, g \in C(X, Y) \) con \( f \neq g \), existe \( x \in X \) tal que
+    \( f(x) \neq g(x) \). Como \( Y \) es Hausdorff, existen \( U \in \mathcal{O}^a_{\tau_{KA}}(f(x)) \) y \( V \in \mathcal{O}^a_{\tau_{KA}}(g(x)) \) con \( U \cap V = \varnothing \).
+    Si consideramos el compacto \( K = \{ x \} \subseteq X \), entonces \[
+        S_{KU} = \{ h \in C(X, Y) : h(x) \in U \} \quad \text{y} \quad S_{KV} = \{ h \in C(X, Y) : h(x) \in V \}
+    \]
+    Claramente, \( f \in S_{KU} \) y \( g \in S_{KV} \). Además, \( S_{KU} \cap S_{KV} = \varnothing \) porque si \( h \in S_{KU} \cap S_{KV} \), entonces \( h(x) \in U \cap V = \varnothing \), lo que es una contradicción. Por lo tanto, \( C(X, Y) \) es Hausdorff.
 
+
+    Veamos el caso en que \( Y \) es regular. Sabemos que todo espacio regular es Hausdorff, por lo que \( C(X,Y) \) es de Hausdorff (y en particular es \( T_1 \)).
+
+    Utilizaremos la caracterización de regularidad por bases de entornos: mostraremos que para toda \( f \in C(X, Y) \) y todo entorno abierto \( \mathcal{W} \) de \( f \), existe un entorno abierto \( \mathcal{V} \) de \( f \) tal que \( \overline{\mathcal{V}} \subseteq \mathcal{W} \).
+
+    Por la definición de la topología compacto-abierta, existe un abierto básico contenido en \( \mathcal{W} \) que contiene a \( f \). Es decir, existen compactos \( K_1, \dots, K_n \subseteq X \) y abiertos \( U_1, \dots, U_n \subseteq Y \) tales que:
+    \[
+        f \in \bigcap_{i=1}^n S_{K_i, U_i} \subseteq \mathcal{W}
+    \]
+
+    Para cada \( i \in \{1, \dots, n\} \), tenemos que \( f \in S_{K_i, U_i} \), lo que significa que \( f(K_i) \subseteq U_i \). Como \( f \) es continua y \( K_i \) es compacto, la imagen \( f(K_i) \) es un subconjunto compacto de \( Y \).
+
+    Dado que \( Y \) es regular, podemos separar el compacto \( f(K_i) \) del cerrado \( U_i^c \). En un espacio regular, todo conjunto compacto puede separarse de un cerrado disjunto: para cada \( y \in f(K_i) \), existen entornos abiertos disjuntos de \( y \) y de \( U_i^c \); por compacidad, podemos extraer un subcubrimiento finito para \( f(K_i) \) y tomar la unión de esos entornos. En consecuencia, existe un abierto \( V_i \subseteq Y \) tal que:
+    \[
+        f(K_i) \subseteq V_i \subseteq \overline{V_i} \subseteq U_i
+    \]
+
+    Definimos entonces nuestro nuevo entorno básico \( \mathcal{V} \) en \( C(X, Y) \) como:
+    \[
+        \mathcal{V} = \bigcap_{i=1}^n S_{K_i, V_i}
+    \]
+    Es claro que \( f \in \mathcal{V} \) ya que \( f(K_i) \subseteq V_i \) para todo \( i \).
+
+    Probemos ahora el siguiente lema auxiliar: \( \overline{S_{K, V}} \subseteq S_{K, \overline{V}} \).
+    Sea \( g \in \overline{S_{K, V}} \). Supongamos, por el absurdo, que existe \( x \in K \) tal que \( g(x) \notin \overline{V} \). Entonces \( g(x) \in Y \setminus \overline{V} \), el cual es un conjunto abierto en \( Y \).
+    Consideremos el entorno abierto de \( g \) dado por \( S_{\{x\}, Y \setminus \overline{V}} \).
+    Como \( g \in \overline{S_{K, V}} \), todo entorno de \( g \) interseca a \( S_{K, V} \). Luego, existe una función \( h \) tal que:
+    \[
+        h \in S_{\{x\}, Y \setminus \overline{V}} \cap S_{K, V}
+    \]
+    Esto implica que \( h(x) \in Y \setminus \overline{V} \). Pero al mismo tiempo, como \( x \in K \) y \( h(K) \subseteq V \), tenemos que \( h(x) \in V \subseteq \overline{V} \), lo cual es una contradicción. Por lo tanto, deducimos que \( \overline{S_{K, V}} \subseteq S_{K, \overline{V}} \).
+
+    Finalmente, aplicando el lema obtenemos:
+    \[
+        \overline{\mathcal{V}} = \overline{\bigcap_{i=1}^n S_{K_i, V_i}} \subseteq \bigcap_{i=1}^n \overline{S_{K_i, V_i}} \subseteq \bigcap_{i=1}^n S_{K_i, \overline{V_i}} \subseteq \bigcap_{i=1}^n S_{K_i, U_i} \subseteq \mathcal{W}
+    \]
+    Hemos encontrado un entorno \( \mathcal{V} \) de \( f \) tal que su clausura está completamente contenida en \( \mathcal{W} \). Esto concluye la demostración de que \( C(X, Y) \) es regular.
 \end{proof}
+
+\begin{definition}
+    Sea \( (X, \tau) \) espacio topológico. Una familia \( \sigma \subseteq \mathcal{P}(X) \) de \( X \) es
+    localmente finita si para cada \( x \in X \) existe un entorno \( U \in \mathcal{O}^a(x) \) tal que \[
+        \{ V \in \sigma : V \cap U \neq \varnothing \} \text{ es finito}
+    \]
+\end{definition}
 
 \begin{ejercicio}{3}
     Sea \( (X, \tau) \) un espacio topológico. Probar que si \( X \) es compacto entonces es PK. Además, si \( X \) es unión disjunta de subconjuntos abiertos y PK's, entonces \( X \) es PK.
 \end{ejercicio}
 \begin{proof}
+    Sea \( X \) compacto, entonces dado \( \rho \) un cubrimiento de \( X \) por abiertos, existe un subcubrimiento
+    finito \( \sigma = \{ U_1, \ldots, U_n \} \subseteq \rho \) tal que \( X = \bigcup_{i = 1}^n U_i \).
+    Veamos que \( \sigma \) es localmente finito y un refinamiento de \( \rho \). En efecto, \( \forall U_i \in \sigma \) vale que \( \exists U \in \rho \) tal que \( U_i \subseteq U \), tomando \( U = U_i \), luego \( \sigma \) es un refinamiento.
+    Es claro que \( \forall V \in \tau \) se cumple que \( \{ U_i \in \sigma : U_i \cap V \neq \varnothing \} \) es finito pues la familia \( \sigma \) es finita. Por lo tanto es LF y, finalmente, \( X \) es paracompacto.
 
+    Ahora supongamos que \( X \) es unión disjunta de subconjuntos abiertos y paracompactos, es decir, \[
+        X = \bigsqcup_{i \in I} X_i
+    \]
+    donde cada \( X_i \) es un subconjunto abierto de \( X \) y es paracompacto.
+    Dado \( \rho \) un cubrimiento de \( X \) por abiertos, para cada \( i \in I \) defino el cubrimiento de \( X_i \) como el conjunto \[
+        \rho_i = \{ U \cap X_i : U \in \rho \}
+    \]
+    Al ser \( X_i \) paracompacto, existe un refinamiento \( \sigma_i \) de \( \rho_i \) que es localmente finito en \( X_i \). Es decir,
+    \( \forall U \in \sigma_i \) existe \( V \in \rho_i \) tal que \( U \subseteq V \), y para cada \( x \in X_i \) existe un entorno \( W_x \subseteq X_i \) tal que \( \{ U \in \sigma_i : U \cap W_x \neq \varnothing \} \) es finito.
+
+    Consideremos el conjunto \( \sigma = \bigcup_{i \in I} \sigma_i \). Veamos que \( \sigma \) es un refinamiento de \( \rho \). Dado \( U \in \sigma \), existe \( i \in I \)
+    tal que \( U \in \sigma_i \). Como \( \sigma_i \) es un refinamiento de \( \rho_i \), existe \( V \in \rho_i \) tal que \( U \subseteq V \). Por la definición de \( \rho_i \), existe \( W \in \rho \) tal que \( V = W \cap X_i \). Por lo tanto, \( U \subseteq W \cap X_i \subseteq W \), lo que demuestra que \( U \) está contenido en un elemento de \( \rho \). Así, \( \sigma \) es un refinamiento de \( \rho \).
+
+    Finalmente, veamos que \( \sigma \) es localmente finito en \( X \).
+    Sea \( x \in X \implies x \in X_i \) para un único \( i \in I \). Como \( \sigma_i \) es localmente finito en \( X_i \), existe un entorno abierto (en \( X_i \)) \( W_x \subseteq X_i \) de \( x \) tal que \( \{ V \in \sigma_i : V \cap W_x \neq \varnothing \} \) es finito.
+    Como \( X_i \) es abierto en \( X \), \( W_x \) también es un entorno abierto de \( x \) en \( X \).
+    Entonces, al ser los componentes disjuntos, \( W_x \) no interseca a ningún elemento de \( \sigma_j \) con \( j \neq i \). Por lo tanto: \[
+        \{ V \in \sigma : V \cap W_x \neq \varnothing \} = \{ V \in \sigma_i : V \cap W_x \neq \varnothing \}
+    \]
+    lo cual sabemos que es finito. Por lo tanto, \( \sigma \) es localmente finito y \( X \) es paracompacto.
 \end{proof}
 
 \begin{ejercicio}{4}
