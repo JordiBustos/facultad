@@ -284,7 +284,7 @@ donde \( |\mu| \) es la de antes.
 \clearpage
 
 Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
-\begin{lemma}
+\begin{lemma}[Lema de cubrimiento finito de Vitali]
     Sea \( W \) la unión finita de bolas abiertas de la forma \( B(x_i, r_i) \) para \( i = 1, \dots, n \). Entonces, existe un subconjunto \( S \subseteq \{ 1, \dots, n \} \) tal que las bolas \( B(x_i, r_i) \) para \( i \in S \) son disjuntas dos a dos, \( W \subseteq \bigcup_{i \in S} B(x_i, 3r_i) \) y \( m(W) \leq 3^k \sum_{i \in S} m(B(x_i, r_i)) \).
 \end{lemma}
 
@@ -462,7 +462,7 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     Finalmente, por la \textbf{Proposición\( \, \)\ref{proposicion:conjuntos-nulos}} de nuestro desarrollo (completitud de la medida de Lebesgue), al ser \(E\) un subconjunto con medida exterior nula, concluimos que \(E\) es un conjunto Lebesgue medible y su medida es efectivamente \(m(E) = 0\). Esto demuestra que \(Tf(x) = 0\) para casi todo punto, evitando la necesidad de demostrar previamente la medibilidad de la función límite \(Tf\).
 \end{proof}
 
-\begin{observacion}
+\begin{observacion}\label{obs:promedios-lebesgue}
     Si \( x \in \R^k \) es un punto de Lebesgue de \( f \in L_1(\R^k) \), entonces:\[
         \lim_{r \to 0} \frac{1}{m(B(x, r))} \int_{B(x, r)} |f(y) - f(x)| \, \mathrm{d} m(y) = 0 \\
     \]
@@ -526,9 +526,9 @@ Notemos que en la defición no se requiere que \( x \in E_i \) o, ni siquiera, q
     \[
         \lim_{i \to \infty} \frac{1}{m(E_i(x))} \int_{E_i(x)} |f - f(x)| \, \mathrm{d} m = 0
     \]
-    Luego, utilizando que la integral es lineal:
+    Luego, análogamente a la Observación\( \, \)\ref{obs:promedios-lebesgue} que hicimos se obtiene:
     \[
-        \lim_{i \to \infty} \frac{1}{m(E_i(x))} \int_{E_i(x)} f \, \mathrm{d} m = \lim_{i \to \infty} \frac{1}{m(E_i(x))} \int_{E_i(x)} (f - f(x)) \, \mathrm{d} m + f(x) = f(x)
+        \lim_{i \to \infty} \frac{1}{m(E_i(x))} \int_{E_i(x)} f \, \mathrm{d} m = f(x) \quad m\text{-c.t.p.}
     \]
     lo que concluye la demostración.
 
