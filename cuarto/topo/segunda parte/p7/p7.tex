@@ -197,7 +197,25 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Para el inciso (a), sea \( F \subseteq X \) cerrado. Dado \( \rho \) un cubrimiento de \( F \) por abiertos, para cada \( U \in \rho \) existe un abierto \( V_U \subseteq X \) tal que \( U = V_U \cap F \).
+    Consideremos el cubrimiento \( \rho' = \{ V_U : U \in \rho \} \cup \{ X \setminus F \} \) de \( X \) por abiertos. Como \( X \) es paracompacto, existe un refinamiento abierto \( \sigma' \) de \( \rho' \) que es localmente finito.
+    Definamos \( \sigma = \{ W \cap F : W \in \sigma', W \cap F \neq \varnothing \} \). Es claro que \( \sigma \) es un cubrimiento abierto de \( F \) en la topología inducida. Veamos que \( \sigma \) es un refinamiento de \( \rho \). Dado un elemento \( W \cap F \in \sigma \), sabemos que \( W \in \sigma' \). Como \( \sigma' \) es un refinamiento de \( \rho' \), existe algún elemento en \( \rho' \) que contiene a \( W \). Este elemento no puede ser \( X \setminus F \) (pues asumimos que \( W \cap F \neq \varnothing \)), por lo que debe ser de la forma \( V_U \) para algún \( U \in \rho \). Entonces, \( W \subseteq V_U \), de donde deducimos que \( W \cap F \subseteq V_U \cap F = U \). Por lo tanto, cada elemento de \( \sigma \) está contenido en un elemento de \( \rho \), lo que demuestra que \( \sigma \) es un refinamiento.
+    Veamos ahora que \( \sigma \) es localmente finito en \( F \). Sea \( x \in F \). Como \( \sigma' \) es localmente finito en \( X \), existe un entorno \( V \) de \( x \) en \( X \) tal que interseca solamente a una cantidad finita de elementos de \( \sigma' \). Entonces, \( V \cap F \) es un entorno de \( x \) en \( F \) que intersecará a lo sumo a esa misma cantidad finita de elementos de \( \sigma \). Por lo tanto, \( \sigma \) es localmente finito en \( F \) y, en consecuencia, \( F \) es paracompacto.
 
+    Para el inciso (b), aplicaremos el Lema del Tubo. Sea \( \rho \) un cubrimiento de \( X \times Y \) por conjuntos abiertos.
+    Para cada \( x \in X \), el subespacio \( \{x\} \times Y \) es homeomorfo a \( Y \), por lo que es compacto. Luego, existe una subfamilia finita de \( \rho \), digamos \( \{ U_{x,1}, \dots, U_{x,n_x} \} \), que cubre a \( \{x\} \times Y \).
+    Por el Lema del Tubo, dado que \( Y \) es compacto, existe un entorno abierto \( V_x \) de \( x \) en \( X \) tal que \( V_x \times Y \subseteq \bigcup_{i=1}^{n_x} U_{x,i} \).
+    La familia \( \{ V_x : x \in X \} \) conforma entonces un cubrimiento abierto de \( X \). Como \( X \) es paracompacto, existe un refinamiento abierto y localmente finito \( \sigma \) de este cubrimiento.
+    Para cada \( W \in \sigma \), por definición de refinamiento, existe algún punto \( x(W) \in X \) tal que \( W \subseteq V_{x(W)} \).
+    Definimos ahora la familia \( \gamma = \{ (W \times Y) \cap U_{x(W),i} : W \in \sigma, 1 \leq i \leq n_{x(W)} \} \). Verifiquemos que \( \gamma \) hace que \( X \times Y \) sea paracompacto probando tres propiedades:
+    \begin{itemize}
+        \item \textbf{Es un cubrimiento de \( X \times Y \):} Dado \( (a,b) \in X \times Y \), como \( \sigma \) cubre a \( X \), existe \( W \in \sigma \) con \( a \in W \). Luego \( (a,b) \in W \times Y \subseteq V_{x(W)} \times Y \subseteq \bigcup_{i} U_{x(W),i} \), lo que implica que \( (a,b) \) pertenece a \( (W \times Y) \cap U_{x(W),i} \) para algún \( i \).
+        \item \textbf{Es un refinamiento de \( \rho \):} Directamente por la definición de la intersección, \( (W \times Y) \cap U_{x(W),i} \subseteq U_{x(W),i} \in \rho \).
+        \item \textbf{Es localmente finito:} Sea \( (a,b) \in X \times Y \). Como \( \sigma \) es localmente finito en \( X \), existe un entorno \( O_a \) de \( a \) que interseca solo a una cantidad finita de elementos \( W \in \sigma \). El entorno \( O_a \times Y \) de \( (a,b) \) en el espacio producto solo puede intersecar a los elementos de \( \gamma \) que provienen de esa cantidad finita de conjuntos \( W \). Como para cada \( W \) elegido hay solamente un número finito de índices \( i \), concluimos que \( O_a \times Y \) interseca a una cantidad finita de elementos de \( \gamma \).
+    \end{itemize}
+    Por lo tanto, \( \gamma \) es un refinamiento abierto y localmente finito de \( \rho \), de modo que \( X \times Y \) es paracompacto.
+
+    Para el inciso (c) ver el \textbf{Ejemplo 8.2.1} del apunte de Demetrio.
 \end{proof}
 
 \begin{ejercicio}{5}
