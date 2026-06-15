@@ -14,6 +14,7 @@
 \usepackage{array}
 \usepackage{tcolorbox}
 \usepackage{titlesec}
+\usepackage{comment}
 
 % --- Configuración de Página ---
 \geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
@@ -232,17 +233,16 @@ Para estudiar la existencia de este límite y las propiedades de la función \( 
     M \mu (x) = \sup_{0 < r < \infty} Q_r \mu (x)
 \]
 
-\begin{definicion}[Variación total]
-    Sea \( \mu \) una medida compleja (o con signo) en una \( \sigma \)-álgebra \( \mathfrak{M} \). La \textbf{variación total} de \( \mu \), denotada por \( |\mu| \), es una medida positiva definida para cada conjunto \( E \in \mathfrak{M} \) como:
-    \[
-        |\mu|(E) = \sup \sum_{i=1}^{\infty} |\mu(E_i)|
-    \]
-    donde el supremo se toma sobre todas las particiones numerables \( {\{E_i\}}_{i=1}^\infty \) de \( E \) en conjuntos medibles (es decir, los \( E_i \) son disjuntos dos a dos y su unión es \( E \)).
+\begin{teorema}[Descomposición de Hahn]
+    Si \( \lambda \) es una medida con signo en \( \mathfrak{X} \) entonces existen dos conjuntos \( P, N \in \mathfrak{X} \) con \( X = P \cup N \) y
+    \( P \cap N = \varnothing \) tal que \( \lambda(E \cap P) \geq 0 \) y \( \lambda(E \cap N) \leq 0 \) para cada \( E \in \mathfrak{X} \).
+\end{teorema}
 
-    En el caso particular donde \( \mu \) es una medida positiva, se tiene que \( |\mu| = \mu \). El valor \( |\mu|(\R^k) \) representa la masa total del espacio bajo esta medida de variación.
+\begin{definicion}[Variación total]
+    Sea \( \lambda \) una medida con signo o carga en \( \R^k \). Sean \( P, N \) la descomposición de Hahn de \( \lambda \). La descomposición positiva y negativa de \( \lambda \) son las medidas finitas \( \lambda^+ \) y \( \lambda^- \) respectivamente, definidas por \( \lambda^+(E) = \lambda(E \cap P) \) y \( \lambda^-(E) = -\lambda(E \cap N) \) para cada boreliano \( E \). La variación total de \( \lambda \) es la medida finita \( |\lambda| = \lambda^+ + \lambda^- \).
 \end{definicion}
 
-Si \( \mu \) es una medida con signo o compleja tomamos: \[
+Si \( \mu \) es una medida con signo o carga tomamos: \[
     M \mu(x) = \sup_{0 < r < \infty} \frac{|\mu|(B(x, r))}{m(B(x, r))}
 \]
 donde \( |\mu| \) es la de antes.
@@ -313,7 +313,7 @@ Probaremos el siguiente lemma que nos ayudará a demostrar el Teorema Maximal.
 El siguiente teorema nos dice que la función maximal no puede ser grande en un conjunto grande.
 
 \begin{teorema}[Teorema Maximal]
-    Si \( \mu \) es una medida de Borel compleja (o con signo) en \( \R^k \) y \( \lambda > 0 \), entonces:
+    Si \( \mu \) es una medida de Borel con signo o carga en \( \R^k \) y \( \lambda > 0 \), entonces:
     \[
         m\left(\{ x \in \R^k \, : \, (M\mu)(x) > \lambda \}\right) \leq \frac{3^k}{\lambda} |\mu|(\R^k)
     \]
@@ -476,7 +476,7 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
 \end{observacion}
 
 \begin{teorema}\label{thm:radon-nikodym}
-    Sea \( \mu \) una medida de Borel compleja (o con signo) en \( \R^k \) tal que \( \mu \ll m \). Sea \( f \) la derivada de Radon-Nikodym de \( \mu \) con respecto a \( m \).
+    Sea \( \mu \) una medida de Borel con signo o carga en \( \R^k \) tal que \( \mu \ll m \). Sea \( f \) la derivada de Radon-Nikodym de \( \mu \) con respecto a \( m \).
     Entonces \( D \mu(x) = f(x) \) \( m \)-c.t.p y \[
         \mu(E) = \int_E D \mu \, \mathrm{d} m
     \]
@@ -535,6 +535,7 @@ Notemos que en la defición no se requiere que \( x \in E_i \) o, ni siquiera, q
     Cabe destacar que en la demostración no se está pidiendo ninguna relación entre los conjuntos que se contraen adecuadamente a puntos diferentes, es decir, cada punto \( x \in \R^k \) puede tener su propia familia de conjuntos de Borel que se contrae adecuadamente a \( x \).
 \end{proof}
 
+\begin{comment}
 \newpage
 \section{Descomposición de Lebesgue y diferenciación de medidas}
 
@@ -593,7 +594,7 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
 \end{proof}
 
 \begin{teorema}[Diferenciación de Medidas de Borel]
-    Sea \( \mu \) una medida de Borel compleja en \( \R^k \) y sea \( \mu = \mu_a + \mu_s \) su descomposición de Lebesgue respecto a la medida de Lebesgue \( m \) (con \( \mu_a \ll m \) y \( \mu_s \perp m \)).
+    Sea \( \mu \) una medida de Borel con signo o carga en \( \R^k \) y sea \( \mu = \mu_a + \mu_s \) su descomposición de Lebesgue respecto a la medida de Lebesgue \( m \) (con \( \mu_a \ll m \) y \( \mu_s \perp m \)).
 
     Sea \( f \in L_1(\R^k) \) la derivada de Radon-Nikodym de \( \mu_a \) (es decir, \( \mathrm{d}\mu_a = f \, \mathrm{d}m \)). Entonces, la derivada simétrica \( D\mu(x) \) existe \( m \)-casi en todo punto y satisface:
     \[
@@ -627,7 +628,7 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
     \]
 
     \textbf{Paso 2. Parte singular.}
-    Basta tratar el caso \( \mu_s\ge 0 \); para una medida compleja o con signo se reemplaza \( \mu_s \) por su variación total \( |\mu_s| \) y se usa que \( |D\mu_s(x)| \le D|\mu_s|(x) \).
+    Basta tratar el caso \( \mu_s\ge 0 \); para una medida con signo o carga se reemplaza \( \mu_s \) por su variación total \( |\mu_s| \) y se usa que \( |D\mu_s(x)| \le D|\mu_s|(x) \).
 
     Como \( \mu_s\perp m \), existe un boreliano \( A \subset \R^k \) tal que
     \[
@@ -686,6 +687,7 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
     \]
     para todo boreliano \( E \).
 \end{proof}
+\end{comment}
 
 \newpage
 
