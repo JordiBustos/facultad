@@ -218,11 +218,31 @@
     Para el inciso (c) ver el \textbf{Ejemplo 8.2.1} del apunte de Demetrio.
 \end{proof}
 
+\begin{definition}
+    \( \mathcal{F} \subseteq C(X, Y) \) se anula uniformemente en el \( \infty \) si para cada \( \varepsilon > 0 \) existe un compacto \( K_\varepsilon \subseteq X \) tal que \( |f(x)| < \varepsilon \) para todo \( x \notin K_\varepsilon \) y toda \( f \in \mathcal{F} \).
+\end{definition}
+
 \begin{ejercicio}{5}
-    Sea \( X \) un espacio topológico LKH. Dada una familia \( \mathcal{F} \subseteq C_{0}(X) \) se tiene que \( \mathcal{F} \) es totalmente acotada \( \iff \) \( \mathcal{F} \) es acotada, equicontinua y se anula uniformemente en el \( \infty \).
+    Sea \( X \) un ET LKH. Dada una familia \( \mathcal{F} \subseteq C_{0}(X) \) se tiene que \( \mathcal{F} \) es totalmente acotada \( \iff \) \( \mathcal{F} \) es acotada, equicontinua y se anula uniformemente en el \( \infty \).
 \end{ejercicio}
 \begin{proof}
+    Sea \( X \) un ET LKH y \( \mathcal{F} \subseteq C_0(X) \). Consideramos la compactificación de Alexandrov \( \overline{X} = X \cup \{ \infty \} \).
+    Toda función \( f \in \mathcal{F} \) se extiende a una única función continua \( \tilde{f} : \overline{X} \to \mathbb{C} \) definiendo \( \tilde{f}(\infty) = 0 \).
+    Definimos entonces \( \tilde{\mathcal{F}} = \{ \tilde{f} : f \in \mathcal{F} \} \subseteq C(\overline{X}) \).
 
+    Como \( \overline{X} \) es un espacio compacto Hausdorff, por el Teorema de Arzelà-Ascoli, la familia \( \tilde{\mathcal{F}} \) es totalmente acotada en \( C(\overline{X}) \) si y solo si es acotada y equicontinua en \( \overline{X} \).
+
+    Dado que el paso de \( f \) a \( \tilde{f} \) preserva la norma supremo, \( \tilde{\mathcal{F}} \) es totalmente acotada (respectivamente, acotada) si y solo si \( \mathcal{F} \) es totalmente acotada (respectivamente, acotada) en \( C_0(X) \).
+
+    Solo resta traducir la equicontinuidad. Decir que \( \tilde{\mathcal{F}} \) es equicontinua en todo \( \overline{X} \) significa que lo es en cada \( x \in X \) (lo cual equivale a la equicontinuidad de \( \mathcal{F} \)) y que también lo es en el punto \( \infty \).
+
+    Por definición, \( \tilde{\mathcal{F}} \) es equicontinua en \( \infty \) si dado \( \varepsilon > 0 \), existe un entorno \( V \) de \( \infty \) en \( \overline{X} \) tal que para todo \( x \in V \) y toda \( \tilde{f} \in \tilde{\mathcal{F}} \):
+    \[ | \tilde{f}(x) - \tilde{f}(\infty) | < \varepsilon \]
+
+    Como \( \tilde{f}(\infty) = 0 \) y los entornos básicos de \( \infty \) son de la forma \( V = (X \setminus K) \cup \{ \infty \} \) con \( K \subseteq X \) compacto, esto significa que existe un compacto \( K \) tal que para todo \( x \notin K \) y toda \( f \in \mathcal{F} \):
+    \[ | f(x) | < \varepsilon \]
+
+    Esto es exactamente la definición de que la familia \( \mathcal{F} \) se anule uniformemente en el infinito. En conclusión, las propiedades se trasladan y el enunciado queda demostrado.
 \end{proof}
 
 \begin{ejercicio}{6}
