@@ -249,11 +249,41 @@
     Sea \( X \) un espacio topológico LK y \( f \in C(X,Y) \) suryectiva y abierta. Probar que:
     \begin{enumerate}
         \item[(a)] \( Y \) es LK.
-        \item[(b)] Si \( Y \) es Hausdorff entonces todo compacto \( C \) de \( Y \) es de la forma \( f(K)=C \) para algún \( K \) compacto de \( X \).
+        \item[(b)] Si además \( Y \) es Hausdorff, todo compacto \( C \) de \( Y \) es de la forma \( f(K)=C \) para algún \( K \) compacto de \( X \).
     \end{enumerate}
+
+    Sugerencia del apunte de Demetrio: Subir, cubrir, bajar y elegir, pero con entornos compactos.
 \end{ejercicio}
 \begin{proof}
+    Para el inciso (a), queremos ver que todo \( y \in Y \) admite un entorno compacto.
+    Dado \( y \in Y \), como \( f \) es suryectiva, existe \( x \in X \) tal que \( f(x) = y \).
+    Como \( X \) es LK, existe un entorno compacto \( K \) de \( x \). Esto significa por definición que existe un abierto \( V \subseteq X \) tal que \( x \in V \subseteq K \).
 
+    Por ser \( f \) continua, la imagen \( f(K) \) es un conjunto compacto en \( Y \). Además, por ser \( f \) una aplicación abierta, \( f(V) \) es un conjunto abierto en \( Y \).
+    Como \( y = f(x) \in f(V) \subseteq f(K) \), resulta que el compacto \( f(K) \) contiene un entorno abierto de \( y \), por lo que \( f(K) \) es efectivamente un entorno compacto de \( y \). Por lo tanto, \( Y \) es LK.
+
+    Para el inciso (b), aplicamos la sugerencia. Sea \( C \subseteq Y \) un compacto.
+
+    \textbf{Subir y Cubrir:} Para cada \( y \in C \), tomamos \( x_y \in X \) tal que \( f(x_y) = y \). Como \( X \) es LK, existe un entorno compacto \( K_y \) de \( x_y \), es decir, existe un abierto \( V_y \) tal que \( x_y \in V_y \subseteq K_y \).
+
+    \textbf{Bajar:} Como \( f \) es abierta, \( U_y = f(V_y) \) es un abierto en \( Y \) que contiene a \( y \). Así, la familia \( \{ U_y : y \in C \} \) forma un cubrimiento abierto del compacto \( C \).
+
+    \textbf{Elegir:} Por compacidad de \( C \), existe un subcubrimiento finito \( \{ U_{y_1}, \dots, U_{y_n} \} \).
+    Definimos el compacto \( K' = K_{y_1} \cup \dots \cup K_{y_n} \) en \( X \). Tenemos que:
+    \[
+        C \subseteq U_{y_1} \cup \dots \cup U_{y_n} \subseteq f(K_{y_1}) \cup \dots \cup f(K_{y_n}) = f(K')
+    \]
+
+    Hemos encontrado un compacto \( K' \) tal que \( C \subseteq f(K') \). Para ver la doble inclusión definimos \( K = K' \cap f^{-1}(C) \).
+
+    Como \( Y \) es Hausdorff, \( C \) es cerrado en \( Y \), por lo que \( f^{-1}(C) \) es cerrado en \( X \) debido a la continuidad de \( f \). Al ser \( K \) la intersección de un conjunto compacto (\( K' \)) con un cerrado (\( f^{-1}(C) \)), deducimos que \( K \) es compacto.
+
+    Finalmente, comprobamos la doble inclusión para \( f(K) = C \):
+    \begin{itemize}
+        \item Si \( x \in K \), entonces \( x \in f^{-1}(C) \implies f(x) \in C \). Luego, \( f(K) \subseteq C \).
+        \item Si \( y \in C \), como \( C \subseteq f(K') \), existe \( x \in K' \) tal que \( f(x) = y \). Pero al ser \( f(x) \in C \), resulta que \( x \in f^{-1}(C) \). Por lo tanto, \( x \in K' \cap f^{-1}(C) = K \). Así, \( y \in f(K) \), lo que implica \( C \subseteq f(K) \).
+    \end{itemize}
+    Concluimos que \( f(K) = C \).
 \end{proof}
 
 \begin{ejercicio}{7}
@@ -264,7 +294,7 @@
 \end{proof}
 
 \begin{ejercicio}{8}
-    Dado \( A \) no numerable, mostrar que no es PK, considerando el producto de las topologías discretas \( \prod_{a \in A} \mathbb{N} \).
+    Dado \( A \) no numerable, mostrar que \( \prod_{a \in A} \mathbb{N} \) no es PK, considerando el producto de las topologías discretas.
 \end{ejercicio}
 \begin{proof}
 
