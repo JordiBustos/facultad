@@ -355,6 +355,8 @@ Para cada \( f \in L^1(\R^k) \) asociamos la función maximal \( Mf: \R^k \to [0
     Mf(x) = \sup_{0 < r < \infty} \frac{1}{m(B(x, r))} \int_{B(x, r)} |f| \, \mathrm{d} m
 \]
 
+Notemos que si pensamos a \( M \) como un operador, este no mapea funciones de \( L_1 \) a funciones de \( L_1 \) débil, es decir, \( Mf \) puede no ser integrable.
+
 Si identificamos \( f \) con la medida \( \mu \) dada por \( d \mu = f d m \), entonces \( Mf = M \mu \). Por lo tanto, el Teorema Maximal implica que \( Mf \) es una función
 de \( L_1 \) débil, es decir, existe una constante \( C > 0 \) tal que para todo \( \lambda > 0 \):
 \[
@@ -446,7 +448,7 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     \[
         \{x \in \mathbb{R}^k : Tf(x) > 2\varepsilon \} \subseteq \{x \in \mathbb{R}^k : Mh(x) > \varepsilon \} \cup \{x \in \mathbb{R}^k : |h(x)| > \varepsilon \}
     \]
-    Tomando la medida exterior de Lebesgue \(m^*\) en ambos miembros, y aplicando la subaditividad de la misma junto con el Teorema Maximal para \(Mh\) y la desigualdad de Chebyshev para \(|h|\), obtenemos:
+    Tomando la medida exterior de Lebesgue \(m^*\) en ambos miembros, y aplicando la subaditividad de la misma junto con el Teorema Maximal para \( Mh \in L_1 \) débil y la desigualdad de Chebyshev para \(|h|\), obtenemos:
     \begin{align*}
         m^*(\{Tf > 2\varepsilon \}) & \le m(\{Mh > \varepsilon \}) + m(\{|h| > \varepsilon \})            \\
                                     & \le \frac{3^k}{\varepsilon} \|h\|_1 + \frac{1}{\varepsilon} \|h\|_1 \\
