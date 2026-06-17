@@ -279,6 +279,8 @@ donde \( |\mu| \) es la de antes.
         m(B(x, r)) = \frac{m(B(y, r+\delta))}{{(r+\delta)}^k} \cdot r^k = {\left( \frac{r}{r+\delta} \right)}^k m(B(y, r+\delta))
     \]
     Finalmente, \( B(x, \delta) \subset E \) y \( E \) es abierto \( \therefore M \mu \) es medible.
+
+    Si \( \mu \) es una carga entonces vale pues \( |\mu| \geq 0 \) y \( M \mu = M |\mu| \).
 \end{proof}
 
 \clearpage
@@ -487,7 +489,7 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     Es decir, la derivada de Radon-Nikodym se puede obtener como el límite de los cocientes \( Q_r \mu(x) \) cuando \( r \to 0 \) para casi todo punto \( x \in \R^k \).
 \end{teorema}
 \begin{proof}
-    El teorema de Radon-Nikodym nos asegura que existe \( f \in L_1(\R^k) \) tal que \[
+    Como \( \mu \) es carga, entonces \( |\mu|(\R^k) < \infty \) y el teorema de Radon-Nikodym nos asegura que existe \( f \in L_1(\R^k) \) tal que \[
         \mu(E) = \int_E f \, \mathrm{d} m
     \]
     para todo \( E \) Boreliano de \( \R^k \). Sea \( x \in \R^k \) un punto de Lebesgue de \( f \), entonces:\[
