@@ -693,6 +693,93 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
 \end{proof}
 \end{comment}
 
+\section{Extras}
+
+\begin{teorema}
+    Si \( 1 \leq p < \infty \) y \( f \in L_p(\R^k) \), dado \( \varepsilon > 0 \)
+    existe \( \varphi \in L_p \) simple tal que \( \| f - \varphi \|_p < \varepsilon \).
+\end{teorema}
+\begin{proof}
+    Supongamos primero que \( f \geq 0 \). Por hipótesis \[
+        \int f^p < \infty
+    \]
+    y que existe \( {(\varphi_n)}_{n \in \N} \) una sucesión de funciones simples, no negativas, monótonamente crecientes tal que \[
+        f(x) = \lim \varphi_n(x)
+    \]
+    Como \( \varphi_n \leq f \), se cumple que \( \varphi_n^p \leq f^p \quad \forall n \in \N \) y entonces \( \int \varphi_n^p \leq \int f < \infty \implies \varphi_n \in L_p \quad \forall n \in \N \).
+    Finalmente, como \( 0 \leq {(f - \varphi_n)}^p \leq f^p \) por TCD: \[
+        \lim \int {(f - \varphi_n)}^p = \int \lim {(f - \varphi_n)}^p = 0
+    \]
+    O sea que \( \lim \| f - \varphi_n \|_p = 0 \), lo que implica que existe \( n_0 \in \N \) tal que \( \| f - \varphi_{n_0} \|_p < \varepsilon \).
+    Para el caso donde \( f \) no es necesariamente no negativa, recordemos que \( f = f^+ - f^- \) con \( f^+, f^- \geq 0 \)
+    Por lo tanto, elijo \( \| f^+ - \varphi_1 \| < \varepsilon / 2 \) y \( \| f^- - \varphi_2 \| < \varepsilon/2 \) y tomando \( \varphi = \varphi_1 - \varphi_2 \) vale.
+\end{proof}
+
+\begin{teorema}
+    Análogo al teorema anterior, pero con \( \varphi \) continua en lugar de simple.
+\end{teorema}
+\begin{proof}
+    El objetivo es aproximar a una función simple por funciones continuas. Si \( f = \chi_{E} \) con \( m(E) < \infty \) para que \( f \in L_p \).
+    Dado \( \varepsilon > 0 \), existe \( F \) cerrado y \( G \) abierto tales que \( F \subseteq E \subseteq G \) y
+    \( m(G \setminus F) < \varepsilon^p \).
+    Defino: \[
+        g(x) = \dfrac{d(x, G^c)}{d(x, F) + d(x, G^c)}
+    \]
+    Notar que el numerador se anula sii \( x \in G^c \). Como \( F \subseteq G \), la distancia a ambos conjuntos no puede ser simultáneamente cero, por lo que el denominador no se anula y \( 0 \leq g \leq 1 \) resulta en una función continua.
+    Además, \( g(x) = 1 \) para \( x \in F \) y \( g(x) = 0 \) para \( x \in G^c \). Por lo tanto: \[
+        \| \chi_E - g \|_p^p = \int_{\R^n} |\chi_E - g|^p = \int_{G \setminus F} |\chi_E - g|^p \leq m(G \setminus F) < \varepsilon^p
+    \]
+    Finalmente: \[
+        \| \chi_E - g \|_p \leq \varepsilon
+    \]
+    Si \( \varphi \) es simple entonces: \[
+        \varphi = \sum_{i=1}^n a_i \chi_{E_i} \implies |\varphi|^p = \sum_{i=1}^n |a_i|^p \chi_{E_i}
+    \]
+    Vale que: \[
+        \| \varphi \|_p^p = \sum_{i=1}^n |a_i|^p m(E_i) < \infty
+    \]
+    Por lo anterior, para cada \( i \in \{ 1, \ldots, n \} \) existe \( g_i \in L_p \) continua tal que:\[
+        \| \chi_{E_i} - g_i \|_p < \varepsilon
+    \]
+    Sea \( g = \sum_{i=1}^n a_i g_i \), entonces \( g \) es continua y: \[
+        \| \varphi - g \|_p = \left \| \sum_{i=1}^n a_i (\chi_{E_i} - g_i) \right \|_p \leq \sum_{i=1}^n |a_i| \| \chi_{E_i} - g_i \|_p < \varepsilon \sum_{i=1}^n |a_i|
+    \]
+    Por lo tanto, las funciones simples (que son densas) se pueden aproximar por funciones continuas.
+\end{proof}
+
+\begin{definicion}
+    El soporte de una función \( f : \R^k \to \R \) es el conjunto: \[
+        sop(f) = \overline{\{ x \in \R^k : f(x) \neq 0 \}}
+    \]
+    y \( C_c(\R^k) \) es el conjunto de funciones continuas con soporte compacto.
+\end{definicion}
+
+\begin{teorema}
+    El espacio \( C_c(\R^k) \) es denso en \( L_p(\R^k) \) para \( 1 \leq p < \infty \).
+\end{teorema}
+\begin{proof}
+    Dado \( f \in L_p \) y \( \varepsilon > 0 \), existe \( g \in L_p \) continua tal que \( \| f - g \|_p < \varepsilon / 2 \).
+    Quiero aproximar a \( g \) por una función continua de soporte compacto que también esté en \( L_p \). Defino: \[
+        \psi_k(x) = \dfrac{d(x, {B(0, 2k)}^c)}{d(x, B(0, k)) + d(x, {B(0, 2k)}^c)}
+    \]
+    Análogo al caso anterior, \( \psi_k \) es continua, \( 0 \leq \psi_k \leq 1 \), \( \psi_k(x) = 1 \) para \( x \in B(0, k) \) y
+    \( \psi_k(x) = 0 \) para \( x \in {B(0, 2k)}^c \). Por lo tanto, \( \psi_k \) tiene soporte compacto. Defino: \[
+        g_k = \psi_k \cdot g
+    \]
+    Que tiene soporte compacto pues: \[
+        \operatorname{sop}(g_k) \subseteq \operatorname{sop}(\psi_k) \cap \operatorname{sop}(g) \subseteq \overline{B}(0, 2k) \cap \operatorname{sop}(g)
+    \]
+    Veamos que las \( g_k \) aproximan a \( g \) en \( L_p \). Sabemos que: \[
+        |g - g_k|^p = |g - \psi_k g|^p = |(1 - \psi_k) g|^p \leq |g|^p
+    \]
+    Como \( g \in L_p \) se tiene que \( |g|^p \in L_1 \), luego, por convergencia dominada: \[
+        \lim \| g - g_k \|_p^p = \lim \int |g - g_k|^p = \int \lim |g - g_k|^p = \int \lim |(1 - \psi_k) g|^p = 0
+    \]
+    pues \( \lim \psi_k = 1 \). Luego, existe un \( k_0 \in \N \) tal que \( \| g - g_{k_0} \|_p < \varepsilon / 2 \). Finalmente, tomando \( h = g_{k_0} \) se tiene que \( h \in C_c(\R^k) \) y: \[
+        \| f - h \|_p \leq \| f - g \|_p + \| g - h \|_p < \varepsilon
+    \]
+\end{proof}
+
 \newpage
 
 % --- BIBLIOGRAFÍA ---
