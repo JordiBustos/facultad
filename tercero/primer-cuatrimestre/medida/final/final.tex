@@ -499,25 +499,27 @@ El siguiente teorema nos dice que casi todo punto es un punto de Lebesgue para f
     \]
 \end{proof}
 
-\newpage
 \section{Diferenciación sobre familias que se contraen}
 
 \begin{definicion}[Conjuntos que se contraen adecuadamente]
     Dado \( x \in \R^k \). Una familia de conjuntos de Borel en \( \R^k \) \( {\{ E_i \}}_{i \in \N} \) se dice que se \textbf{contrae adecuadamente} a \( x \)
     si existe \( \alpha > 0 \) tal que existe una sucesión de bolas \( B(x, r_i) \) con \( r_i \to 0 \) tal que \( E_i \subseteq B(x, r_i) \) y \[
-        m(E_i) \geq \alpha \cdot m(B(x, r_i))
+        m(E_i) \geq \alpha \cdot m(B(x, r_i)) \quad \forall i \in \N
     \]
-    para \( i = 1, 2, \ldots \).
 \end{definicion}
 
 Notemos que en la defición no se requiere que \( x \in E_i \) o, ni siquiera, que \( x \in \overline{E_i} \) para cada \( i \in \N \).
+
+Veamos un ejemplo de conjuntos que se contraen adecuadamente a un punto \( x \in \R^2 \) y que no son bolas.
+Consideremos los cuadrados de \( \R^2 \) inscritos en las bolas \( B(x, r) \) con \( r \to 0 \). Estos conjuntos se contraen adecuadamente a \( x \) pues se puede ver que cada cuadrado tiene lado \( r \sqrt{2} \) y, por lo tanto,
+la medida de Lebesgue de cada cuadrado es \( 2 r^2 \) mientras que la medida de Lebesgue de la bola es \( \pi r^2 \). Tomando \( \alpha = \frac{2}{\pi} \) se cumple la condición de la definición.
 
 \begin{teorema}[Teorema de Diferenciación de Lebesgue]
     Asociemos a cada \( x \in \R^k \) una sucesión de conjuntos de Borel \( {\{ E_i(x) \}}_{i \in \N} \) que se contrae adecuadamente a \( x \). Si \( f \in L_1(\R^k) \), entonces:
     \[
         f(x) = \lim_{i \to \infty} \frac{1}{m(E_i(x))} \int_{E_i(x)} f \, \mathrm{d} m
     \]
-    para todo \( x \in \R^k \) que sea un punto de Lebesgue de \( f \) (es decir, para casi todo punto respecto a la medida de Lebesgue \( m \)).
+    para todo \( x \in \R^k \) que sea un punto de Lebesgue de \( f \).
 \end{teorema}
 
 \begin{proof}
@@ -774,8 +776,6 @@ El teorema anterior nos da una versión más fuerte del Teorema\( \, \)\ref{thm:
         \| f - h \|_p \leq \| f - g \|_p + \| g - h \|_p < \varepsilon
     \]
 \end{proof}
-
-\newpage
 
 % --- BIBLIOGRAFÍA ---
 \section*{Referencias Bibliográficas}
