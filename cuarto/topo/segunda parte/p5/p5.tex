@@ -529,16 +529,25 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
-    Dado \( U \in \tau \), como \( X \) es regular, para cada \( x \in U \) existe un entorno abierto \( V_x \) de \( x \) tal que \( x \in V_x \subseteq \cl{V_x} \subseteq U \). Luego, como tengo una base numerable
-    existe \( x \in B_{n_x} \subseteq V_x \) para algún \( n_x \in \N \). Entonces, \( x \in \cl{B_{n_x}} \subseteq \cl{V_x} \subseteq U \). Por lo tanto, \[
+    Dado \( U \in \tau \), como \( X \) es regular, para cada \( x \in U \) existe un entorno abierto \( V_x \) de \( x \) tal que \( x \in V_x \subseteq \cl{V_x} \subseteq U \). Luego, como tengo una base numerable, existe \( x \in B_{n_x} \subseteq V_x \) para algún \( n_x \in \N \). Entonces, \( x \in \cl{B_{n_x}} \subseteq \cl{V_x} \subseteq U \). Por lo tanto, 
+    \[
         U = \bigcup_{x \in U} \cl{B_{n_x}}
     \]
     y cada \( \cl{B_{n_x}} \) es un conjunto cerrado de \( X \). Además, como \( B_{n_x} \) pertenece a una base numerable, entonces \( n_x \) sólo puede tomar valores en un subconjunto numerable de \( \N \), lo que implica que la unión anterior es numerable.
 
-    Para ver la segunda parte, dado \( U \in \tau \), por la primera parte existe una sucesión \( (F_n)_{n \in \N} \) de conjuntos cerrados de \( X \) tal que \( U = \bigcup_{n \in \N} F_n \). Entonces, la función \( f : X \to [0, 1] \) dada por
+    Para ver la segunda parte, dado \( U \in \tau \), por la primera parte existe una sucesión \( (F_n)_{n \in \N} \) de conjuntos cerrados de \( X \) tal que \( U = \bigcup_{n \in \N} F_n \). Como \( X \) es un espacio regular con base numerable, \( X \) es Lindelöf, y todo espacio regular y Lindelöf es normal.
+
+    Para cada \( n \in \N \), notemos que \( F_n \) y el complemento \( X \setminus U \) son conjuntos cerrados y disjuntos (pues \( F_n \subseteq U \)). Por el Lema de Urysohn, existe una función continua \( f_n : X \to [0, 1] \) tal que \( f_n(F_n) = \{1\} \) y \( f_n(X \setminus U) = \{0\} \).
+
+    Consideremos la función \( f : X \to [0, 1] \) dada por
     \[
-        f(x) = \sum_{n=1}^{\infty} \frac{\chi_{F_n}(x)}{2^n}
-    \] es continua pues es la suma de una serie de funciones continuas (cada \( \chi_{F_n} \) es continua por ser la función característica de un conjunto cerrado). Además, si \( x \in U \) entonces \( x \in F_{n_0} \) para algún \( n_0 \in \N \), lo que implica que \( f(x) \geq \frac{1}{2^{n_0}} > 0 \). Por otro lado, si \( x \notin U \) entonces \( x \notin F_n \) para todo \( n \in \N \), lo que implica que \( f(x) = 0 \). Por lo tanto, \( f \) es la función continua que cumple las condiciones requeridas.
+        f(x) = \sum_{n=1}^{\infty} \frac{f_n(x)}{2^n}
+    \]
+    Como \( 0 \leq f_n(x) \leq 1 \) para todo \( x \in X \), los términos de la serie están acotados por \( \frac{1}{2^n} \). Por el test M de Weierstrass, la serie de funciones converge uniformemente, lo que garantiza que el límite \( f \) es una función continua. 
+
+    Además, si \( x \in U \) entonces \( x \in F_{n_0} \) para algún \( n_0 \in \N \), lo que implica que \( f_{n_0}(x) = 1 \). Como todos los términos de la serie son no negativos, \( f(x) \geq \frac{1}{2^{n_0}} > 0 \). Por otro lado, si \( x \notin U \) entonces \( x \in X \setminus U \), lo que implica que \( f_n(x) = 0 \) para todo \( n \in \N \). Por lo tanto, \( f(x) = 0 \). 
+    
+    En conclusión, \( f \) es la función continua que cumple las condiciones requeridas.
 \end{proof}
 
 \begin{ejercicio}{6}
