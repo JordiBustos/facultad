@@ -168,4 +168,77 @@
     Sea \((X, d)\) un EM completo y sea \({(F_n)}_{n \geq 1}\) una sucesión decreciente de subconjuntos cerrados no vacíos de \(X\) tal que \(\mathrm{diam}(F_n) \to 0\). Demostrar que \(\bigcap_{n \geq 1} F_n\) es no vacío y tiene exactamente un punto. (Teorema de Cantor de intersección anidada.)
 \end{ejercicio}
 
+\clearpage
+
+\section{Segunda Mitad: Continuidad, Compactos y Compacidad Local}
+
+\begin{ejercicio}{13}
+    Sean \(X\) e \(Y\) espacios topológicos con \(Y\) Hausdorff, \(D \subseteq X\) denso y \(f, g : X \to Y\) continuas.
+    \begin{enumerate}
+        \item Demostrar que el conjunto \(A = \{x \in X : f(x) = g(x)\}\) es cerrado en \(X\).
+        \item Si \(f|_D = g|_D\), deducir que \(f = g\) en todo \(X\).
+        \item Dar un contraejemplo que muestre que la conclusión puede fallar si \(Y\) no es Hausdorff.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{14}
+    Sea \(X\) un ET y para cada \(n \in \N\) sea \(f_n : X \to \R\) una función continua. Definimos
+    \[
+        F : X \to \R^{\N}, \qquad F(x) = (f_1(x), f_2(x), \dots).
+    \]
+    \begin{enumerate}
+        \item Demostrar que \(F\) es continua cuando \(\R^{\N}\) lleva la topología producto.
+        \item Aplicar el punto anterior al caso \(f_n = f\) para una misma función continua \(f : X \to \R\).
+        \item Analizar si la conclusión del punto (a) sigue siendo cierta si en \(\R^{\N}\) se considera la topología caja. En caso negativo, dar un contraejemplo explícito.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{15}
+    Sea \(X\) un ET Hausdorff y \(K \subseteq X\) compacto.
+    \begin{enumerate}
+        \item Demostrar que para todo \(x \in X \setminus K\) existen abiertos disjuntos \(U, V \subseteq X\) tales que \(x \in U\) y \(K \subseteq V\).
+        \item Deducir que todo compacto de \(X\) es cerrado.
+        \item Sea \(f : X \to Y\) continua y biyectiva, donde \(X\) es compacto e \(Y\) es Hausdorff. Probar que \(f\) es un homeomorfismo.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{16}
+    Sea \(X\) un ET compacto y \(\mathcal{F}\) una familia de cerrados de \(X\).
+    \begin{enumerate}
+        \item Demostrar que si \(\mathcal{F}\) tiene la propiedad de intersección finita, entonces \(\bigcap_{F \in \mathcal{F}} F \neq \varnothing\).
+        \item Deducir que toda sucesión decreciente \(K_1 \supseteq K_2 \supseteq \cdots\) de compactos no vacíos de \(X\) tiene intersección no vacía.
+        \item Mostrar mediante un ejemplo que la conclusión del punto (b) puede fallar si se reemplaza ``compactos'' por ``cerrados'' en un espacio no compacto.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{17}
+    Sea \(X\) un espacio localmente compacto Hausdorff.
+    \begin{enumerate}
+        \item Demostrar que todo subespacio abierto de \(X\) es localmente compacto.
+        \item Demostrar que todo subespacio cerrado de \(X\) es localmente compacto.
+        \item Si \(K \subseteq U \subseteq X\), con \(K\) compacto y \(U\) abierto, probar que existe un abierto \(V\) tal que
+        \[
+            K \subseteq V \subseteq \cl{V} \subseteq U
+        \]
+        y \(\cl{V}\) es compacto.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{18}
+    Sea \(C(X,Y)\) el conjunto de funciones continuas de \(X\) en \(Y\), dotado de la topología compacto-abierta.
+    \begin{enumerate}
+        \item Fijado \(x \in X\), demostrar que la aplicación de evaluación
+        \[
+            ev_x : C(X,Y) \to Y, \qquad ev_x(f) = f(x)
+        \]
+        es continua.
+        \item Si \(K \subseteq X\) es compacto y \(F \subseteq Y\) es cerrado, demostrar que
+        \[
+            A_{K,F} = \{f \in C(X,Y) : f(K) \subseteq F\}
+        \]
+        es cerrado en \(C(X,Y)\).
+        \item Analizar qué se puede afirmar sobre \(A_{K,U} = \{f \in C(X,Y) : f(K) \subseteq U\}\) cuando \(U \subseteq Y\) es abierto.
+    \end{enumerate}
+\end{ejercicio}
+
 \end{document}
