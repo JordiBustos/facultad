@@ -179,79 +179,277 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \( p \) el revestimiento y \( e_0 \in E \) tal que \( p(e_0) = b_0 \).
+    \begin{enumerate}
+        \item Queremos ver que \( p_* \) es un monomorfismo, veremos que \( \ker(p_*) = \{ [c_{e_0}] \} \).
 
+              Dada \( [\gamma] \in \pi_1(E, e_0) \, : \, [\gamma] \in \ker(p_*) \). Entonces:
+              \[ p_*({[\gamma]}) = [p \circ \gamma] = [c_{b_0}] \]
+              donde \( c_{b_0} \) es el rulo constante en \( b_0 \).
+
+              Que \( [p \circ \gamma] = [c_{b_0}] \) significa que existe una \( p \)-homotopía \( H : I \times I \rightarrow B \) entre el camino \( p \circ \gamma \) y el camino constante \( c_{b_0} \). Esta homotopía cumple las siguientes condiciones:
+              \[
+                  \begin{cases}
+                      H(t,0) = (p \circ \gamma)(t) \\
+                      H(t,1) = b_0                 \\
+                      H(0,s) = b_0 \quad \text{y} \quad H(1,s) = b_0 \quad \forall s \in I
+                  \end{cases}
+              \]
+
+              Como \( p \) es un revestimiento existe una única homotopía levantada \( \hat{H} : I \times I \rightarrow E \) tal que \( p \circ \hat{H} = H \) y cuyo camino inicial es \( \hat{H}(t,0) = \gamma(t) \).
+
+              Estudiemos el comportamiento de \( \hat{H} \) en los extremos del intervalo:
+              \begin{enumerate}
+                  \item[1.] Para el extremo inicial \( t=0 \), el camino \( s \mapsto \hat{H}(0,s) \) se proyecta mediante \( p \) en el punto constante \( H(0,s) = b_0 \). Dado que las fibras de un revestimiento son espacios discretos y el intervalo \( I \) es conexo, la imagen de este camino debe ser un único punto. Como sabemos que empieza en \( \hat{H}(0,0) = \gamma(0) = e_0 \), concluimos que \( \hat{H}(0,s) = e_0 \) para todo \( s \in I \).
+                  \item[2.] Aplicando exactamente el mismo argumento para el extremo final \( t=1 \), como \( H(1,s) = b_0 \) y \( \hat{H}(1,0) = \gamma(1) = e_0 \), se deduce que \( \hat{H}(1,s) = e_0 \) para todo \( s \in I \).
+              \end{enumerate}
+              Esto nos asegura que \( \hat{H} \) es una \( p \)-homotopía válida en \( E \) (mantiene los extremos fijos en \( e_0 \)).
+
+              Finalmente, analicemos qué ocurre en el tiempo \( s=1 \). Por construcción, tenemos que \( p(\hat{H}(t,1)) = H(t,1) = b_0 \). Esto significa que el camino \( t \mapsto \hat{H}(t,1) \) es una levantada del camino constante \( c_{b_0} \) que comienza en \( \hat{H}(0,1) = e_0 \). Por la unicidad del levantamiento de caminos, la única levantada posible es el propio rulo constante en \( e_0 \), es decir, \( \hat{H}(t,1) = c_{e_0}(t) \).
+
+              Por lo tanto, \( \hat{H} \) es una \( p \)-homotopía en \( E \) entre \( \gamma \) y \( c_{e_0} \), lo que demuestra que:
+              \[ {[\gamma]} = [c_{e_0}] \]
+
+              Como el único elemento en el núcleo es la clase de la identidad, concluimos que \( \ker(p_*) = \{ [c_{e_0}] \} \), lo que prueba que \( p_* \) es inyectiva y, por lo tanto, un monomorfismo.
+
+        \item \( (\implies) \) Supongamos que \( [\gamma] \in H \). Por definición de la imagen, existe un \( e_0 \)-rulo \( f \) en \( E \) (es decir, \( f(0)=f(1)=e_0 \)) tal que \( p_*([f]) = [\gamma] \).
+
+              Por la definición del morfismo inducido, esto significa que los caminos \( p \circ f \) y \( \gamma \) son p-homotópicos en \( B \):
+              \[ {[p \circ f]} = [\gamma] \]
+
+              Sea \( \hat{\gamma} \) la única levantada de \( \gamma \) que comienza en \( \hat{\gamma}(0) = e_0 \).
+              Por otro lado, notemos que \( f \) es, por definición, la única levantada del camino \( p \circ f \) que comienza en \( e_0 \).
+
+              Por el teorema de levantamiento de homotopías de caminos, como los caminos \( p \circ f \) y \( \gamma \) son homotópicos en la base y sus levantadas \( f \) y \( \hat{\gamma} \) comienzan en el mismo punto \( e_0 \), estas levantadas deben terminar exactamente en el mismo punto.
+
+              Es decir:
+              \[ \hat{\gamma}(1) = f(1) \]
+
+              Pero como \( f \) es un \( e_0 \)-rulo, sabemos que \( f(1) = e_0 \). En consecuencia, \( \hat{\gamma}(1) = e_0 \).
+              Como \( \hat{\gamma}(0) = \hat{\gamma}(1) = e_0 \), concluimos que \( \hat{\gamma} \) es un rulo en \( E \).
+
+              \vspace{0.5cm}
+              \( (\impliedby) \) Supongamos ahora que \( \gamma \) se levanta a un rulo \( \hat{\gamma} \) en \( E \) que comienza en \( e_0 \). Que sea un rulo significa que \( \hat{\gamma}(0) = \hat{\gamma}(1) = e_0 \), de modo que define un elemento válido para el grupo fundamental del espacio total, es decir, \( [\hat{\gamma}] \in \pi_1(E, e_0) \).
+
+              Por la definición de levantada, sabemos que \( p \circ \hat{\gamma} = \gamma \). Si aplicamos el morfismo inducido \( p_* \) a la clase de \( \hat{\gamma} \), obtenemos:
+              \[ p_*({[\hat{\gamma}]}) = [p \circ \hat{\gamma}] = [\gamma] \]
+              Dado que \( [\gamma] \) es la imagen de un elemento de \( \pi_1(E, e_0) \) bajo \( p_* \), por definición de imagen concluimos que \( [\gamma] \in \text{Im}(p_*) = H \).
+
+        \item TODO
+        \item TODO
+        \item TODO
+    \end{enumerate}
 \end{proof}
 
 \vspace{1cm}
 
 \begin{ejercicio}{7}
-    Considerar \( p:\mathbb{R}\times\mathbb{R}^{+}\rightarrow\mathbb{R}^{2}-\{(0,0)\} \) dado por \( p(t,r) = (r\cos(t), r\sin(t)) \). Asumiendo que \( p \) es un revestimiento, encontrar levantadas de las siguientes funciones: \( f(t)=(2-t,0) \) y \( g(t)=((1+t)\cos(t), (1+t)\sin(t)) \). Graficar las funciones y las levantadas.
+    Considerar \( p:\R \times \R^{+} \rightarrow \R^2 - \{(0,0)\} \) dado por \( p(t,r) = (r\cos(t), r\sin(t)) \).
+
+    Asumiendo que \( p \) es un revestimiento, encontrar levantadas de las siguientes funciones: \( f(t)=(2-t,0) \) y \( g(t)=((1+t)\cos(t), (1+t)\sin(t)) \).
+    Graficar las funciones y las levantadas.
 \end{ejercicio}
 \begin{proof}
+    Buscamos funciones continuas \( \hat{f}(t) = (\theta(t), r(t)) \) y \( \hat{g}(t) = (\theta(t), r(t)) \) en \( E \) tales que \( p \circ \hat{f} = f \) y \( p \circ \hat{g} = g \). Supondremos el dominio estándar para caminos \( t \in [0,1] \).
 
+    1. Levantadas de \( f(t) = (2-t, 0) \):
+    Notemos que para \( t \in [0,1] \), el valor \( 2-t \) es estrictamente positivo (\( 1 \le 2-t \le 2 \)), por lo que el camino nunca toca el origen \( (0,0) \).
+
+    Queremos encontrar \( \hat{f}(t) = (\theta(t), r(t)) \) tal que:
+    \[ p(\theta(t), r(t)) = (r(t)\cos(\theta(t)), r(t)\sin(\theta(t))) = (2-t, 0) \]
+
+    De la segunda componente del vector obtenemos:
+    \[ r(t)\sin(\theta(t)) = 0 \]
+    Como \( r(t) \in \mathbb{R}^{+} \), sabemos que \( r(t) > 0 \). Esto nos obliga a que \( \sin(\theta(t)) = 0 \), lo que significa que el ángulo debe ser un múltiplo entero de \( \pi \), es decir, \( \theta(t) = k\pi \) para algún \( k \in \mathbb{Z} \). Por continuidad de la función \( \theta \), este valor de \( k \) debe ser constante a lo largo de todo el camino.
+
+    Sustituyendo esto en la primera componente:
+    \[ r(t)\cos(k\pi) = 2-t \]
+    Dado que tanto \( r(t) \) como \( 2-t \) son estrictamente mayores que cero para todo \( t \in [0,1] \), el signo de \( \cos(k\pi) \) debe ser positivo. Esto fuerza a que \( \cos(k\pi) = 1 \), lo cual solo ocurre si \( k \) es un número entero par. Definimos entonces \( k = 2m \) con \( m \in \mathbb{Z} \).
+
+    Como \( \cos(2m\pi) = 1 \), despejamos el radio y obtenemos \( r(t) = 2-t \). Así, obtenemos una familia infinita de levantadas discretas indexadas por \( m \):
+    \[ \hat{f}_m(t) = (2m\pi, 2-t), \quad \text{con } m \in \mathbb{Z} \]
+
+    2. Levantadas de \( g(t) = ((1+t)\cos(t), (1+t)\sin(t)) \):
+    Para \( t \in [0,1] \), la expresión \( 1+t \) también es estrictamente positiva (\( 1 \le 1+t \le 2 \)). Buscamos \( \hat{g}(t) = (\theta(t), r(t)) \) tal que:
+    \[ (r(t)\cos(\theta(t)), r(t)\sin(\theta(t))) = ((1+t)\cos(t), (1+t)\sin(t)) \]
+
+    Para hallar la componente del radio, podemos calcular la norma euclídea en ambos lados de la ecuación:
+    \[ r(t) = \sqrt{{(1+t)}^2\cos^2(t) + {(1+t)}^2\sin^2(t)} = \sqrt{{(1+t)}^2} = |1+t| = 1+t \]
+
+    Sustituyendo ahora \( r(t) = 1+t \) en nuestro sistema original y dividiendo ambos miembros por el factor común \( 1+t \), obtenemos de manera directa:
+    \[ \cos(\theta(t)) = \cos(t) \quad \text{y} \quad \sin(\theta(t)) = \sin(t) \]
+    La solución general para este sistema trigonométrico nos indica que los ángulos deben diferir en múltiplos enteros de una vuelta completa. Por lo tanto, \( \theta(t) = t + 2k\pi \) para algún \( k \in \mathbb{Z} \) fijo por continuidad.
+
+    De este modo, obtenemos la familia infinita de levantadas para \( g(t) \):
+    \[ \hat{g}_k(t) = (t + 2k\pi, 1+t), \quad \text{con } k \in \mathbb{Z} \]
+
+    Para realizar los gráficos requeridos, la descripción del comportamiento de las curvas es la siguiente:
+    \begin{itemize}
+        \item \textbf{En el espacio base \( B = \R^2 - \{(0,0)\} \):}
+              El camino \( f(t) \) es simplemente un segmento de recta horizontal situado sobre el eje \( x \) positivo que se recorre de derecha a izquierda, comenzando en el punto \( (2,0) \) y terminando en \( (1,0) \).
+              El camino \( g(t) \) representa un arco de una espiral de Arquímedes. Comienza en el punto \( (1,0) \) cuando \( t=0 \) y va girando en sentido antihorario a la vez que se aleja del origen, finalizando en el punto \( (2\cos(1), 2\sin(1)) \) cuando \( t=1 \).
+
+        \item \textbf{En el espacio total \( E = \R \times \R^{+} \) (visto como un plano cartesiano donde el eje horizontal es \( t \) y el eje vertical es \( r \)):}
+              Las levantadas \( \hat{f}_m(t) \) son infinitos segmentos de recta completamente verticales localizados sobre las abscisas \( t = 2m\pi \). A medida que \( t \) avanza de \( 0 \) a \( 1 \), estas líneas descienden verticalmente desde la altura \( r=2 \) hasta la altura \( r=1 \).
+              Las levantadas \( \hat{g}_k(t) \) son infinitos segmentos de recta oblicuos que tienen una pendiente exacta de 45 grados (ya que tanto la coordenada angular como el radio aumentan linealmente a la misma velocidad con respecto a \( t \)). Cada una de estas líneas rectas comienza en el punto \( (2k\pi, 1) \) y avanza hacia la derecha y hacia arriba hasta alcanzar el punto \( (1+2k\pi, 2) \).
+    \end{itemize}
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{8}
     Probar que dos espacios homeomorfos son homotópicamente equivalentes; pero no vale la recíproca.
 \end{ejercicio}
 \begin{proof}
+    Que dos espacios \( X \) e \( Y \) sean homeomorfos significa que existe un homeomorfismo \( f : X \to Y \) tal que \( f \) es continua, biyectiva y su inversa \( f^{-1} \) también es continua.
+    Para demostrar que son homotópicamente equivalentes, es decir, que existen funciones continuas \( g : X \to Y \) e \( h : Y \to X \)
+    tales que \( h \circ g \simeq id_X \) y \( g \circ h \simeq id_Y \), podemos tomar \( g = f \) y \( h = f^{-1} \).
+    Entonces:
+    \[
+        h \circ g = f^{-1} \circ f = id_X \quad \text{y} \quad g \circ h = f \circ f^{-1} = id_Y
+    \]
+    Como \( id_X \) y \( id_Y \) son triviales, se concluye que \( X \) e \( Y \) son homotópicamente equivalentes.
 
+    La recíproca no vale pues \( \R^n \) es contractil y, por lo tanto, homotópicamente equivalente a un punto, pero no es homeomorfo a un punto.
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
+
+\begin{definition}
+    Sea \( A \subseteq X \) un subespacio. Decimos que \( A \) es un retracto por deformación de \( X \) si existe una homotopía \( H : X \times [0,1] \to X \) tal que:
+    \begin{enumerate}
+        \item \( H(x,0) = id_X(x) = x \) para todo \( x \in X \).
+        \item \( H(x,1) \in A \) para todo \( x \in X \).
+        \item \( H(a,t) = a \) para todo \( a \in A \) y todo \( t \in [0,1] \).
+    \end{enumerate}
+\end{definition}
 
 \begin{ejercicio}{9}
     El ecuador de la esfera \( S^{2} \) es un retracto por deformación de la esfera sin sus 2 polos.
 \end{ejercicio}
 \begin{proof}
+    Sea \( X = S^2 \setminus \{N, S\} \) la esfera sin los polos, donde \( N = (0,0,1) \) y \( S = (0,0,-1) \).
+    El ecuador es el subespacio \( E = \{ (x,y,0) \in S^2 \} \).
 
+    La idea geométrica es empujar la coordenada \( z \) hacia cero progresivamente, al mismo tiempo que normalizamos el vector resultante para que la imagen permanezca en la esfera. Definimos la homotopía como:
+    \[
+        H((x,y,z), t) = \frac{ (x, y, (1-t)z) }{ \left \| (x, y, (1-t)z) \right \| }
+    \]
+
+    Verifiquemos que \( H \) está bien definida y cumple las propiedades:
+    \begin{itemize}
+        \item \textbf{Continuidad y buena definición:} Como el punto de partida \( (x,y,z) \) pertenece a \( X \), sabemos que no es ninguno de los polos, lo que implica que \( x^2 + y^2 > 0 \). Por lo tanto, para cualquier \( t \in [0,1] \), el denominador cumple que \( \sqrt{x^2+y^2+(1-t)^2z^2} \ge \sqrt{x^2+y^2} > 0 \), y nunca se anula. Como la norma de \( H((x,y,z),t) \) es exactamente 1 por construcción, la imagen cae en \( S^2 \). Finalmente, como las primeras dos coordenadas no pueden ser ambas simultáneamente cero, la imagen nunca puede ser \( (0,0,\pm 1) \), asegurando que cae en \( X \).
+
+        \item \textbf{Condición inicial (\( t=0 \)):}
+              \[ H((x,y,z), 0) = \frac{(x,y,z)}{\sqrt{x^2+y^2+z^2}} = (x,y,z) \]
+              Esto se debe a que, como \( (x,y,z) \) está en la esfera, \( x^2+y^2+z^2 = 1 \).
+
+        \item \textbf{Condición final (\( t=1 \)):}
+              \[ H((x,y,z), 1) = \left( \frac{x}{\sqrt{x^2+y^2}}, \frac{y}{\sqrt{x^2+y^2}}, 0 \right) \]
+              La coordenada \( z \) se hace cero, por lo que la imagen claramente pertenece al ecuador \( E \).
+
+        \item \textbf{Puntos fijos en el ecuador (\( z=0 \)):} Si tomamos un punto que ya está en el ecuador, su coordenada \( z \) es nula, y además \( x^2+y^2=1 \). Evaluando para cualquier tiempo \( t \):
+              \[ H((x,y,0), t) = \left( \frac{x}{\sqrt{x^2+y^2}}, \frac{y}{\sqrt{x^2+y^2}}, 0 \right) = (x,y,0) \]
+    \end{itemize}
+    Por lo tanto, \( H \) es un retracto por deformación de \( X \) en \( E \).
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{10}
     Dadas \( f \) y \( g \in C(X,S^{2}) \). Probar que si \( |f(x)-g(x)|<2 \) para todo \( x\in X \) entonces \( f \) y \( g \) son homotópicas.
 \end{ejercicio}
 \begin{proof}
-
+    El hecho de que \( |f(x) - g(x)| < 2 \) para todo \( x \in X \) implica que \( f(x) \) y \( g(x) \) no son antipodales en la esfera \( S^2 \).
+    Esto nos permite definir una homotopía lineal entre \( f \) y \( g \) a lo largo del segmento de línea que conecta \( f(x) \) y \( g(x) \) en el espacio euclidiano \( \R^3 \).
+    Defino: \( F : X \times [0, 1] \to S^2 \) por:
+    \[
+        F(x, t) = \frac{(1-t)f(x) + t g(x)}{\| (1-t)f(x) + t g(x) \| }
+    \]
+    Donde \( F(x, 0) = f(x) \) y \( F(x, 1) = g(x) \).
+    La condición \( |f(x) - g(x)| < 2 \) asegura que el vector \( (1-t)f(x) + t g(x) \) nunca es cero, por lo que la normalización es válida y \( F \) es continua.
+    Por lo tanto, \( F \) es una homotopía entre \( f \) y \( g \), demostrando que son homotópicas.
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{11}
     Si \( X \) es un RD de \( Y \) e \( Y \) es un RD de \( Z \) entonces \( X \) es un RD de \( Z \).
 \end{ejercicio}
 \begin{proof}
+    Notemos que como \( X \) es RD de \( Y \) existe una homotopía \( H_1 : Y \times [0, 1] \to Y \) tal que \( H_1(y,0) = y \), \( H_1(y,1) \in X \) y \( H_1(x,t) = x \) para todo \( x \in X \).
+    De manera análoga, como \( Y \) es RD de \( Z \), existe una homotopía \( H_2 : Z \times [0, 1] \to Z \) tal que \( H_2(z,0) = z \), \( H_2(z,1) \in Y \) y \( H_2(y,t) = y \) para todo \( y \in Y \).
 
+    Consideremos la homotopía compuesta \( H : Z \times [0, 1] \to Z \) definida por:
+    \[
+        H(z, t) = \begin{cases}
+            H_2(z, 2t)             & \text{si } 0 \le t \le \frac{1}{2} \\
+            H_1(H_2(z, 1), 2t - 1) & \text{si } \frac{1}{2} < t \le 1
+        \end{cases}
+    \]
+    Verifiquemos que \( H \) cumple las condiciones de un retracto por deformación de \( Z \) en \( X \):
+    \begin{itemize}
+        \item Para \( t=0 \), \( H(z, 0) = H_2(z, 0) = z \), cumpliendo la condición inicial.
+        \item Para \( t=1 \), \( H(z, 1) = H_1(H_2(z, 1), 1) \). Como \( H_2(z, 1) \in Y \), aplicando \( H_1 \) nos lleva a \( H_1(H_2(z, 1), 1) \in X \), cumpliendo la condición final.
+        \item Para \( x \in X \), notemos que \( H_2(x, t) = x \) para todo \( t \), ya que \( x \in X \subseteq Y \). Por lo tanto, \( H(x, t) = H_1(x, 2t - 1) = x \) para \( t > \frac{1}{2} \), y para \( t \le \frac{1}{2} \), \( H(x, t) = H_2(x, 2t) = x \). En ambos casos, \( H(x, t) = x \), cumpliendo la condición de puntos fijos en \( X \).
+    \end{itemize}
+    Por lo tanto, \( H \) es una homotopía que demuestra que \( X \) es un retracto por deformación de \( Z \).
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{12}
     El disco unidad es un RD de \(\R^n\).
 \end{ejercicio}
 \begin{proof}
-
+    Como venimos haciendo, consideremos la siguiente homotopía y veamos que cumple la definición de retracto por deformación:
+    \[
+        H : \R^n \times [0, 1] \to \R^n, \quad H(x, t) = (1-t)x + t\frac{x}{\|x\|}
+    \]
+    Verifiquemos que \( H \) cumple las condiciones de un retracto por deformación:
+    \begin{itemize}
+        \item Para \( t=0 \), \( H(x, 0) = x \), cumpliendo la condición inicial.
+        \item Para \( t=1 \), \( H(x, 1) = \frac{x}{\|x\|} \), que pertenece al disco unidad, cumpliendo la condición final.
+        \item Para \( x \) en el disco unidad \( \| x \| = 1 \implies H(x, t) = x \) para todo \( t \), cumpliendo la condición de puntos fijos.
+    \end{itemize}
+    Por lo tanto, \( H \) es una homotopía que demuestra que el disco unidad es un retracto por deformación de \(\R^n\).
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{13}
     Si \( Y \) y \( Y^{\prime} \) son RD de \( X \) y \( X^{\prime} \) respectivamente, entonces \( Y\times Y^{\prime} \) es un RD de \( X\times X^{\prime} \).
 \end{ejercicio}
 \begin{proof}
+    Sea \( H : X \times [0, 1] \to X \) una homotopía que demuestra que \( Y \) es un retracto por deformación de \( X \), y sea \( H' : X' \times [0, 1] \to X' \) una homotopía que demuestra que \( Y' \) es un retracto por deformación de \( X' \).
 
+    Definimos la homotopía \( K : (X \times X') \times [0, 1] \to X \times X' \) por:
+    \[
+        K((x, x'), t) = (H(x, t), H'(x', t))
+    \]
+
+    Verifiquemos que \( K \) cumple las condiciones de un retracto por deformación:
+    \begin{itemize}
+        \item Es continua pues lo es coordenada a coordenada.
+        \item Para \( t=0 \), \( K((x, x'), 0) = (H(x, 0), H'(x', 0)) = (x, x') \), cumpliendo la condición inicial.
+        \item Para \( t=1 \), \( K((x, x'), 1) = (H(x, 1), H'(x', 1)) \in Y \times Y' \), cumpliendo la condición final.
+        \item Para \( (y, y') \in Y \times Y' \), tenemos:
+              \[
+                  K((y, y'), t) = (H(y, t), H'(y', t)) = (y, y')
+              \]
+              para todo \( t \in [0, 1] \), cumpliendo la condición de puntos fijos.
+    \end{itemize}
+
+    Por lo tanto, \( K \) es una homotopía que demuestra que \( Y\times Y^{\prime} \) es un retracto por deformación de \( X\times X^{\prime} \).
 \end{proof}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{ejercicio}{14}
     Probar que si \( f:S^{n}\rightarrow S^{n} \) es continua y no tiene puntos fijos entonces \( f \) es homotópica a la simetría \( x\rightarrow-x \).
 \end{ejercicio}
 \begin{proof}
-
+    TODO
 \end{proof}
 
 \end{document}
