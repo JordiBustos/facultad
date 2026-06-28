@@ -1,0 +1,257 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Topology operators
+\newcommand{\cl}[1]{\overline{#1}}              % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                % Interior
+\newcommand{\bd}{\partial}                      % Boundary
+\newcommand{\Ent}[1]{\mathcal{O}(#1)}           % Neighborhoods (Entornos)
+\newcommand{\pf}{\mathcal{P}_F}                 % Finite parts
+\newcommand{\partes}{\mathcal{P}}               % Power set
+
+% Useful shortcuts
+\newcommand{\imp}{\implies}                      % Implies
+
+% Net convergence/accumulation notation
+\newcommand{\evto}[1]{\stackrel{E}{\hookrightarrow} #1}   % Eventually in
+\newcommand{\frto}[1]{\stackrel{F}{\hookrightarrow} #1}   % Frequently in
+\newcommand{\nnevto}[1]{\not\!\stackrel{E}{\hookrightarrow} #1}
+\newcommand{\nnfrto}[1]{\not\!\stackrel{F}{\hookrightarrow} #1}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Topología: Práctica VIII}
+\author{Bustos Jordi\\Homotopías}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Probar que cualesquiera dos rotaciones en \( S^{1} \) son homotópicas.
+\end{ejercicio}
+\begin{proof}
+    Sabemos que una rotación en \( S^1 \) se puede representar como \( R_\theta(z) = e^{i\theta}z \) para algún ángulo \( \theta \). Sea \( R_{\theta_1} \) y \( R_{\theta_2} \) dos rotaciones en \( S^1 \). Definimos una homotopía \( H: S^1 \times [0,1] \to S^1 \) por:
+    \[
+        H(z, t) = e^{i((1-t)\theta_1 + t\theta_2)}z
+    \]
+    Para \( t=0 \), tenemos \( H(z, 0) = e^{i\theta_1}z = R_{\theta_1}(z) \), y para \( t=1 \), tenemos \( H(z, 1) = e^{i\theta_2}z = R_{\theta_2}(z) \). Además, \( H \) es continua en ambos argumentos, por lo que \( H \) es una homotopía entre \( R_{\theta_1} \) y \( R_{\theta_2} \). Por lo tanto, cualquier par de rotaciones en \( S^1 \) son homotópicas.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    \( X \) es contractible si \( id_X \) es homotópica a una función constante.
+\end{definition}
+
+\begin{ejercicio}{2}
+    Probar que toda \( f : X \rightarrow S^{2} \) continua que no es suryectiva es homotópicamente nula.
+\end{ejercicio}
+\begin{proof}
+    Como \( f \) no es sobreyectiva, existe algún punto \( p \in S^{2} \) tal que \( p \notin \text{Im}(f) \). Por lo tanto, la imagen de \( f \) está contenida en \( S^{2} \setminus \{p\} \).
+
+    Sabemos que la esfera menos un punto, \( S^{2} \setminus \{p\} \), es homeomorfa al plano \( \R^{2} \) mediante la proyección estereográfica desde el polo \( p \). Sea \( \phi : S^{2} \setminus \{p\} \rightarrow \R^{2} \) dicho homeomorfismo.
+
+    Podemos considerar la composición \( g = \phi \circ f \), que es una función continua de \( X \) en \( \R^{2} \). Dado que \( \R^{2} \) es un conjunto convexo (y por ende, contractible), toda función continua hacia \( \R^{2} \) es homotópicamente nula. En particular, podemos definir la homotopía de línea recta (o combinación convexa) hacia el origen:
+    \[ H : X \times {[0 , 1]} \rightarrow \R^{2} \quad \text{dada por} \quad H(x,t) = (1-t)g(x) \]
+    Notemos que \( H(x,0) = g(x) \) y \( H(x,1) = 0 \) para todo \( x \in X \).
+
+    Para llevar esta homotopía de regreso a la esfera, definimos \( F : X \times [0,1] \rightarrow S^{2} \) como:
+    \[ F(x,t) = \phi^{-1}(H(x,t)) \]
+    La función \( F \) es continua por ser composición de funciones continuas. Además, tenemos que:
+    \[ F(x,0) = \phi^{-1}(H(x,0)) = \phi^{-1}(g(x)) = \phi^{-1}(\phi(f(x))) = f(x) \]
+    \[ F(x,1) = \phi^{-1}(H(x,1)) = \phi^{-1}(0) = c \]
+    donde \( c \in S^{2} \) es el punto antípoda a \( p \) (que corresponde al origen bajo \( \phi \)).
+
+    Por lo tanto, \( F \) es una homotopía entre \( f \) y la función constante \( c \), lo que demuestra que \( f \) es homotópicamente nula.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Un espacio \( X \) es simplemente conexo si es conexo por caminos y el grupo fundamental \( \pi_1(X, x_0) \) es trivial para algún \( x_0 \) y, por lo tanto, para todo \( x_0 \in X \).
+\end{definition}
+
+\begin{ejercicio}{3}
+    Probar que, en un espacio simplemente conexo, dos curvas cualesquiera con los mismos puntos inicial y final son \( p \)-homotópicas.
+\end{ejercicio}
+\begin{proof}
+    Sean \( \gamma \) y \( \rho \) curvas en \( X \) simplemente conexo con \( \gamma(0) = \rho(0) \) y \( \gamma(1) = \rho(1) \).
+    Por ser \( X \) simplemente conexo vale que:
+    \[
+        [\gamma] \ast [\overline{\rho}] = [c_{\gamma(0)}] \in \pi_1(X, \gamma(0)) \implies [\gamma] = [\rho] \in \pi_1(X, \gamma(0))
+    \]
+    Por lo tanto, \( \gamma \) y \( \rho \) son \( p \)-homotópicas.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Decimos que \( p : E \to B \) es un revestimiento si \( p \) es continua, suryectiva y \( \forall b \in B \) existe
+    un entorno \( U \) de \( b \) tal que \( p^{-1}(U) = \bigsqcup_{\alpha} V_\alpha \) tal que \( p|_{V_\alpha} \) es hómeo de \( V_\alpha \) con \( U \).
+    Cada \( V_\alpha \) es una feta.
+\end{definition}
+
+\begin{ejercicio}{4}
+    Dado \( p : E \rightarrow B \) un revestimiento. Mostrar que si \( B \) es compacto y \( p^{-1}(b) \) es finito para todo \( b \in B \) entonces \( E \) es compacto.
+\end{ejercicio}
+\begin{proof}
+    Sea \( {\{ O_\lambda \}}_{\lambda \in \Lambda} \) un recubrimiento abierto cualquiera de \( E \). Queremos extraer un subrecubrimiento finito.
+
+    Fijemos un punto \( b \in B \). Por hipótesis, la fibra \( p^{-1}(b) \) es finita, digamos \( p^{-1}(b) = \{ e_1, \ldots, e_n \} \).
+    Para cada \( i \in \{1, \ldots, n\} \), como los \( O_\lambda \) cubren \( E \), existe algún \( O_{\lambda_i} \) tal que \( e_i \in O_{\lambda_i} \).
+
+    Como \( p \) es un revestimiento, existe un entorno abierto \( U \subseteq B \) de \( b \) tal que \( p^{-1}(U) = \bigsqcup_{i=1}^{n} V_i \), donde cada \( V_i \) es un abierto de \( E \) con \( e_i \in V_i \), y \( p|_{V_i} : V_i \rightarrow U \) es un homeomorfismo.
+
+    Para cada \( i \), consideremos la intersección \( W_i = V_i \cap O_{\lambda_i} \). Notemos que \( W_i \) es un entorno abierto de \( e_i \) en \( E \).
+    Como \( p|_{V_i} \) es un homeomorfismo (y por lo tanto una función abierta), su imagen \( p(W_i) \) es un abierto en \( B \) que contiene a \( b \).
+
+    Definimos \( N_b = \bigcap_{i=1}^{n} p(W_i) \). Como es una intersección finita de abiertos que contienen a \( b \), \( N_b \) es un entorno abierto de \( b \) en \( B \). Además, \( N_b \subseteq U \).
+
+    Observemos qué ocurre al tomar preimagen de \( N_b \):
+    \[ p^{-1}(N_b) = \bigsqcup_{i=1}^{n} {(p|_{V_i})}^{-1}(N_b) \]
+    Por construcción, para cada \( i \), se tiene que \( {(p|_{V_i})}^{-1}(N_b) \subseteq {(p|_{V_i})}^{-1}(p(W_i)) = W_i \subseteq O_{\lambda_i} \).
+    Es decir, toda la preimagen \( p^{-1}(N_b) \) está cubierta por la colección finita de abiertos \( \{ O_{\lambda_1}, \ldots, O_{\lambda_n} \} \).
+
+    Repitiendo este proceso para cada \( b \in B \), obtenemos un recubrimiento abierto \( {\{ N_b \}}_{b \in B} \) del espacio base \( B \).
+    Como \( B \) es compacto podemos extraer un subrecubrimiento finito \( \{ N_{b_1}, \ldots, N_{b_m} \} \).
+
+    Finalmente, como estos abiertos cubren \( B \), sus preimágenes cubren \( E \):
+    \[ E = p^{-1}(B) = p^{-1}\left( \bigcup_{j=1}^{m} N_{b_j} \right) = \bigcup_{j=1}^{m} p^{-1}(N_{b_j}) \]
+    Cada \( p^{-1}(N_{b_j}) \) está cubierto por una cantidad finita de abiertos de nuestro recubrimiento original \( {\{ O_\lambda \}}_{\lambda \in \Lambda} \). Como hay una cantidad finita de estos conjuntos (\( m \) en total), concluimos que todo \( E \) se puede cubrir con una cantidad finita de abiertos de la familia original.
+
+    Por lo tanto, \( E \) es compacto.
+\end{proof}
+
+\clearpage
+
+\begin{ejercicio}{5}
+    Dado \( p:E\rightarrow B \) un revestimiento con \( p(e_{0})=b_{0} \). Sean \( \gamma \) y \( \beta \) dos caminos en \( B \) tales que \( \gamma(1)=\beta(0) \).
+    \begin{enumerate}
+        \item Si \( \hat{\gamma} \) es la levantada de \( \gamma \) tal que \( \hat{\gamma}(0)=e_{0} \), \( \hat{\beta} \) es la levantada de \( \beta \) tal que \( \hat{\beta}(0)=\hat{\gamma}(1) \) y \( \widehat{\gamma*\beta} \) es la levantada de \( \gamma*\beta \) tal que \( \widehat{\gamma*\beta}(0)=e_{0} \) entonces \( \widehat{\gamma*\beta}=\hat{\gamma}*\hat{\beta} \).
+        \item Si \( \hat{\gamma} \) es la levantada de \( \gamma \) tal que \( \hat{\gamma}(0)=e_{0} \) y \( \widehat{\gamma^{-1}} \) es la levantada de \( \gamma^{-1} \) tal que \( \widehat{\gamma^{-1}}(0)=\hat{\gamma}(1) \) entonces \( \hat{\gamma}*\widehat{\gamma^{-1}} \) es un \( e_{0} \)-rulo en \( E \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sabemos que \( p(\hat{\gamma} \ast \hat{\beta}) = p(\hat{\gamma}) \ast p(\hat{\beta}) = \gamma \ast \beta \). Por la unicidad del levantamiento, pues comparten punto inicial, concluimos que \( \widehat{\gamma*\beta} = \hat{\gamma}*\hat{\beta} \).
+
+    Para el segundo inciso, para que el camino \( \hat{\gamma}*\widehat{\gamma^{-1}} \) sea un \( e_0 \)-rulo en \( E \), debemos verificar que empieza y termina en \( e_0 \).
+    El punto inicial es claro: \( (\hat{\gamma}*\widehat{\gamma^{-1}})(0) = \hat{\gamma}(0) = e_0 \).
+    Para hallar el punto final, que es \( \widehat{\gamma^{-1}}(1) \), consideremos el camino \( \hat{\gamma} \) recorrido en sentido inverso, es decir, \( \hat{\gamma}^{-1}(t) = \hat{\gamma}(1-t) \).
+    Notemos que \( p(\hat{\gamma}^{-1}(t)) = p(\hat{\gamma}(1-t)) = \gamma(1-t) = \gamma^{-1}(t) \), lo que significa que \( \hat{\gamma}^{-1} \) es una levantada de \( \gamma^{-1} \).
+    Además, su punto inicial es \( \hat{\gamma}^{-1}(0) = \hat{\gamma}(1) \).
+    Nuevamente, por la unicidad del levantamiento, la única levantada de \( \gamma^{-1} \) que empieza en \( \hat{\gamma}(1) \) es \( \widehat{\gamma^{-1}} \), por lo que \( \widehat{\gamma^{-1}} = \hat{\gamma}^{-1} \).
+    En consecuencia, el punto final de nuestro camino es \( \widehat{\gamma^{-1}}(1) = \hat{\gamma}^{-1}(1) = \hat{\gamma}(0) = e_0 \).
+    Como empieza y termina en \( e_0 \), concluimos que \( \hat{\gamma}*\widehat{\gamma^{-1}} \) es efectivamente un \( e_0 \)-rulo en \( E \).
+\end{proof}
+
+\vspace{.5cm}
+
+\begin{ejercicio}{6}
+    Sea \( p:E\rightarrow B \) un revestimiento con \( p(e_{0})=b_{0} \). Probar que:
+    \begin{enumerate}
+        \item El morfismo \( p_{*}:\pi_{1}(E,e_{0})\longrightarrow\pi_{1}(B,b_{0}) \) es un monomorfismo.
+        \item Sea \( H \) la imagen por \( p_{*} \). Dado un \( b_{0} \)-rulo \( \gamma \) en \( B \), probar la equivalencia: \( [\gamma]\in H \iff \gamma \) se levanta a un rulo en \( E \).
+        \item La \textit{correspondencia de levantamiento} induce una función inyectiva \[ \Phi:\frac{\pi_{1}(B,b_{0})}{H}\longrightarrow p^{-1}(b_{0}) \] que también será sobreyectiva en el caso que \( E \) sea arco-conexo.
+        \item Si \( E \) es arco-conexo, puede definirse en \( p^{-1}(b_{0}) \) una estructura de grupo.
+        \item Si \( E \) es simplemente conexo entonces el grupo \( p^{-1}(b_{0}) \) es isomorfo a \( \pi_{1}(B,b_{0}) \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{7}
+    Considerar \( p:\mathbb{R}\times\mathbb{R}^{+}\rightarrow\mathbb{R}^{2}-\{(0,0)\} \) dado por \( p(t,r) = (r\cos(t), r\sin(t)) \). Asumiendo que \( p \) es un revestimiento, encontrar levantadas de las siguientes funciones: \( f(t)=(2-t,0) \) y \( g(t)=((1+t)\cos(t), (1+t)\sin(t)) \). Graficar las funciones y las levantadas.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{8}
+    Probar que dos espacios homeomorfos son homotópicamente equivalentes; pero no vale la recíproca.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{9}
+    El ecuador de la esfera \( S^{2} \) es un retracto por deformación de la esfera sin sus 2 polos.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{10}
+    Dadas \( f \) y \( g \in C(X,S^{2}) \). Probar que si \( |f(x)-g(x)|<2 \) para todo \( x\in X \) entonces \( f \) y \( g \) son homotópicas.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{11}
+    Si \( X \) es un RD de \( Y \) e \( Y \) es un RD de \( Z \) entonces \( X \) es un RD de \( Z \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{12}
+    El disco unidad es un RD de \(\R^n\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{13}
+    Si \( Y \) y \( Y^{\prime} \) son RD de \( X \) y \( X^{\prime} \) respectivamente, entonces \( Y\times Y^{\prime} \) es un RD de \( X\times X^{\prime} \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{1cm}
+
+\begin{ejercicio}{14}
+    Probar que si \( f:S^{n}\rightarrow S^{n} \) es continua y no tiene puntos fijos entonces \( f \) es homotópica a la simetría \( x\rightarrow-x \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
