@@ -73,7 +73,8 @@
 
     Sabemos que la esfera menos un punto, \( S^{2} \setminus \{p\} \), es homeomorfa al plano \( \R^{2} \) mediante la proyección estereográfica desde el polo \( p \). Sea \( \phi : S^{2} \setminus \{p\} \rightarrow \R^{2} \) dicho homeomorfismo.
 
-    Podemos considerar la composición \( g = \phi \circ f \), que es una función continua de \( X \) en \( \R^{2} \). Dado que \( \R^{2} \) es un conjunto convexo (y por ende, contractible), toda función continua hacia \( \R^{2} \) es homotópicamente nula. En particular, podemos definir la homotopía de línea recta (o combinación convexa) hacia el origen:
+    Podemos considerar la composición \( g = \phi \circ f \), que es una función continua de \( X \) en \( \R^{2} \). Dado que \( \R^{2} \) es un conjunto convexo (y por ende, contractible), toda función continua hacia \( \R^{2} \) es homotópicamente nula.
+    En particular, podemos definir la homotopía de línea recta hacia el origen:
     \[ H : X \times {[0 , 1]} \rightarrow \R^{2} \quad \text{dada por} \quad H(x,t) = (1-t)g(x) \]
     Notemos que \( H(x,0) = g(x) \) y \( H(x,1) = 0 \) para todo \( x \in X \).
 
@@ -87,7 +88,7 @@
     Por lo tanto, \( F \) es una homotopía entre \( f \) y la función constante \( c \), lo que demuestra que \( f \) es homotópicamente nula.
 \end{proof}
 
-\vspace{0.5cm}
+\clearpage
 
 \begin{definition}
     Un espacio \( X \) es simplemente conexo si es conexo por caminos y el grupo fundamental \( \pi_1(X, x_0) \) es trivial para algún \( x_0 \) y, por lo tanto, para todo \( x_0 \in X \).
@@ -450,6 +451,30 @@
 \end{ejercicio}
 \begin{proof}
     TODO
+\end{proof}
+
+De la práctica de 2025.
+
+\begin{ejercicio}{15}
+    Sean \(f, g \in C(X, \C \setminus \{ 0 \}) \) tales que \( |f(x) - g(x)| < |f(x)| \quad \forall x \in X \implies f \) homotópica a \( g \).
+\end{ejercicio}
+\begin{proof}
+    Consideremos la homotopía \( H : X \times [0, 1] \to \C \setminus \{ 0 \} \) dada por:
+    \[
+        H(x, t) = (1-t)f(x) + t g(x)
+    \]
+    Sólo debemos chequear que \( H(x, t) \neq 0 \) para todo \( x \in X \) y \( t \in [0, 1] \).
+    En efecto, como \begin{align*}
+        |H(x, t)| & = |(1-t)f(x)+t g(x)|        \\
+                  & = |f(x) + t(g(x) - f(x))|   \\
+                  & \ge |f(x)| - t|g(x) - f(x)| \\
+                  & = |f(x)| - t|f(x) - g(x)|   \\
+    \end{align*}
+    Como \( |f(x) - g(x)| < |f(x)| \) y \( t \in [0, 1] \), se deduce que:
+    \[
+        |H(x, t)| > |f(x)| - |f(x) - g(x)| > 0
+    \]
+    Por lo tanto, \( H(x, t) \in \C \setminus \{ 0 \} \) para todo \( x \in X \) y \( t \in [0, 1] \), lo que demuestra que \( f \) es homotópica a \( g \).
 \end{proof}
 
 \end{document}
