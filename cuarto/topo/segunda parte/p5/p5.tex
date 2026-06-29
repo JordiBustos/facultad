@@ -486,13 +486,63 @@
     Sea \( X \) un espacio topológico completamente regular. Considerando \( C(X, \R) \subseteq \R^X \) demostrar que \( C(X, \R) \) es denso respecto de la topología producto en \( \R^X \).
 \end{ejercicio}
 \begin{proof}
-    Para ver que \( C(X, \R) \) es denso con respecto a la topología producto, dado \( f \in \R^X \) y un entorno abierto básico \[ U = \prod_{x \in F} U_x \times \prod_{x \notin F} \R \] con \( F \subseteq X \) finito y
-    \( U_x \subseteq \R \) abierto para cada \( x \in F \), quiero encontrar una función \( g \in C(X, \R) \) tal que \( g \in U \). Dado que \( X \) es CR, para cada \( x \in F \) si considero el abierto \( U = {(F \setminus \{ x \})}^c \in \tau \)
-    entonces existe una función continua \( f_x : X \to [0, 1] \) tal que \( f_x(x) = 1 \) y \( f_x(y) = 0 \) para todo \( y \notin U \). Entonces, definamos la función \( g : X \to \R \) dada por
+    Para demostrar que el conjunto de funciones continuas \(C(X, \R)\)
+    es denso en el espacio de todas las funciones \(\R^X\) provisto de la topología producto, debemos probar que cualquier entorno abierto básico y no vacío de \(\R^X\) contiene al menos un elemento de \(C(X, \R)\).
+
+    Sea \(U \subseteq \R^X\) un conjunto abierto básico y no vacío en la topología producto. Sabemos que \( U \) es de la forma:
     \[
-        g(z) = \sum_{x \in F} f_x(z) f(x)
+        U = \{f \in \R^X \mid f(x_i) \in V_i \text{ para } i = 1, \dots, n\}
     \]
-    es continua pues es una suma finita de funciones continuas. Además, si \( z \in F \) entonces \( g(z) = f(z) \) pues \( f_x(z) = 1 \) para \( x = z \) y \( f_x(z) = 0 \) para \( x \neq z \). Por lo tanto, \( g(z) \in U_z \) para cada \( z \in F \), lo que implica que \( g \in U \). Así, \( C(X, \R) \cap U \neq \varnothing \), lo que demuestra que \( C(X, \R) \) es denso en \( \R^X \).
+    donde \( x_1, \dots, x_n \) son puntos distintos en \( X \), y \(V_1, \dots, V_n\) son conjuntos abiertos y no vacíos en \( \R \).
+
+    Para demostrar la densidad, necesitamos construir una función \(g \in C(X, \R)\) tal que \(g \in U\). Esto equivale a exigir que \(g(x_i) \in V_i\) para todo \({i = 1, \dots, n}\).
+
+    Como cada \(V_i\) es no vacío, podemos elegir arbitrariamente un valor \(y_i \in V_i\) para cada \(i\). Nuestro objetivo ahora se reduce a construir una función continua \(g\) tal que:
+    \[
+        g(x_i) = y_i \quad \text{para todo } i = 1, \dots, n
+    \]
+
+    Fijado un índice \( i \in \{1, \dots, n\} \), definimos el conjunto \(F_i\) conformado por las demás coordenadas:
+    \[
+        F_i = \{x_j \in X \mid j \neq i, 1 \leq j \leq n\} \quad \text{ que es cerrado en } X.
+    \]
+    Es evidente que \(x_i \notin F_i\).
+
+    Definimos el entorno abierto \(U_i\) para el punto \(x_i\) como el complemento de este conjunto cerrado:
+    \[
+        x_i \in U_i = X \setminus F_i \in \tau
+    \]
+
+    Por la definición de espacio completamente regular, para el par \( (x_i, U_i) \), se garantiza la existencia de una función continua \(h_i \in C(X, [0, 1])\) tal que:
+    \begin{enumerate}
+        \item \(h_i(x_i) = 1\)
+        \item \(h_i \big|_{X \setminus U_i} = 0\)
+    \end{enumerate}
+
+    Dado que \(X \setminus U_i = F_i\), la función se anula en todos los demás puntos \( x_j \) elegidos. Por lo tanto:
+    \[
+        h_i(x_i) = 1 \quad \text{y} \quad h_i(x_j) = 0 \quad \text{para todo } j \neq i
+    \]
+
+    Finalmente, definimos la función \( g: X \to \R \) como:
+    \[
+        g(x) = \sum_{i=1}^{n} y_i h_i(x)
+    \]
+    Analicemos las propiedades de esta función:
+    \begin{itemize}
+        \item Claramente \( g \) es continua.
+        \item \textbf{Pertenece a \(U\):} Evaluemos la función \(g\) en cualquier punto \(x_k\) de nuestro conjunto finito de coordenadas:
+              \[
+                  g(x_k) = \sum_{i=1}^{n} y_i h_i(x_k) = y_k h_k(x_k) + \sum_{i \neq k} y_i h_i(x_k)
+              \]
+              Aplicando las propiedades de las funciones \(h_i\), sabemos que \(h_k(x_k) = 1\) y que \(h_i(x_k) = 0\) toda vez que \(i \neq k\). Sustituyendo estos valores obtenemos:
+              \[
+                  g(x_k) = y_k(1) + 0 = y_k
+              \]
+    \end{itemize}
+    Como habíamos seleccionado originalmente \(y_k \in V_k\), se cumple que \(g(x_k) \in V_k\) para todo \(k = 1, \dots, n\).
+
+    Hemos construido una función continua \(g \in C(X, \mathbb{R})\) que cumple simultáneamente con todas las restricciones impuestas por el entorno abierto básico \(U\). Esto prueba que la intersección \(U \cap C(X, \mathbb{R})\) es no vacía, por lo tanto, \(C(X, \R)\) es denso en \(\R^X\).
 \end{proof}
 
 \begin{ejercicio}{4}
