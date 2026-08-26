@@ -220,8 +220,14 @@
             ]
             % Grafo 1 (Q3)
             \begin{scope}[shift={(0,0)}]
-                \node (a1) at (0,0) {}; \node (a2) at (2,0) {}; \node (a3) at (2,2) {}; \node (a4) at (0,2) {};
-                \node (b1) at (0.5,0.5) {}; \node (b2) at (1.5,0.5) {}; \node (b3) at (1.5,1.5) {}; \node (b4) at (0.5,1.5) {};
+                \node[label=below left:4]  (a1) at (0,0) {};
+                \node[label=below right:3] (a2) at (2,0) {};
+                \node[label=above right:2] (a3) at (2,2) {};
+                \node[label=above left:1] (a4) at (0,2) {};
+                \node[label=above right:8] (b1) at (0.5,0.5) {};
+                \node[label=above left:7] (b2) at (1.5,0.5) {};
+                \node[label=above left:6] (b3) at (1.5,1.5) {};
+                \node[label=above right:5] (b4) at (0.5,1.5) {};
                 \draw[thick] (a1) -- (a2) -- (a3) -- (a4) -- (a1);
                 \draw[thick] (b1) -- (b2) -- (b3) -- (b4) -- (b1);
                 \draw[thick] (a1) -- (b1); \draw[thick] (a2) -- (b2); \draw[thick] (a3) -- (b3); \draw[thick] (a4) -- (b4);
@@ -229,7 +235,7 @@
 
             % Grafo 2 (Q3 con cruces)
             \begin{scope}[shift={(5,1)}]
-                \node (a1) at (-1, 1) {};
+                \node(a1) at (-1, 1) {};
                 \node (a2) at (1, 1) {};
                 \node (a3) at (1, -1) {};
                 \node (a4) at (-1, -1) {};
@@ -251,7 +257,28 @@
     \end{center}
 \end{ejercicio}
 \begin{proof}
+    Notemos que si \( G_1 \) y \( G_2 \) son los dos grafos, luego \( G_1 \) y \( \overline{G_2} \) son dos \( Q_3 \) grafos. Es decir, tienen \( 8 \) vértices y \( 12 \) aristas cada uno y exactamente tres aristas inciden en cada vértice.
 
+    Consideremos la función biyectiva \( f : V(G_1) \to V(\overline{G_2}) \) dada por: \[
+        f = \begin{cases}
+            1 & \mapsto 6, \quad 2 \mapsto 1, \\
+            3 & \mapsto 7, \quad 4 \mapsto 4, \\
+            5 & \mapsto 8, \quad 6 \mapsto 3, \\
+            7 & \mapsto 2, \quad 8 \mapsto 5  \\
+        \end{cases}
+    \]
+
+    Aplicando esta función, obtenemos:  \[
+        \begin{cases}
+            12 & \mapsto 61, \quad 23 \mapsto 17, \\
+            34 & \mapsto 74, \quad 41 \mapsto 46, \\
+            56 & \mapsto 83, \quad 67 \mapsto 32, \\
+            78 & \mapsto 25, \quad 85 \mapsto 58, \\
+            15 & \mapsto 68, \quad 26 \mapsto 13, \\
+            37 & \mapsto 72, \quad 48 \mapsto 45.
+        \end{cases}
+    \]
+    Obteniendo el isomorfismo entre las aristas de \( G_1 \) y \( \overline{G_2} \).
 \end{proof}
 
 \vspace{0.5cm}
