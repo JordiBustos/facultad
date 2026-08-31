@@ -1,0 +1,293 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                        % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                          % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                           % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                 % Normed space (E, ||.||); use \EN or \EN[F]
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Práctica I}
+\author{Bustos Jordi\\Espacios normados}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sea \( \EN \) un \( \K \)-espacio vectorial normado.
+    \begin{enumerate}
+        \item Demostrar que la función \( d:E\times E\to\R \) dada por
+              \[
+                  d(x,y):=\norm{x-y} \quad \text{para todo } x,y\in E,
+              \]
+              es una métrica.
+        \item Probar que las siguientes funciones son continuas con la topología asociada a \(d\), la cual hace de \(E\) un Espacio Vectorial Topológico.
+              \begin{enumerate}
+                  \item Las traslaciones \(T_x:E\to E\) dadas por \(T_x(y)=x+y\) para \(x,y\in E\) (\(x\) fijo).
+                  \item La multiplicación por un escalar \(M_x:\K\to E\) dada por \(M_x(\alpha)=\alpha x\) para \(x\in E\) y \( \alpha \in \K \) (\(x\) fijo).
+                  \item La norma, \(\norm{\cdot}:E\to\R^+\) dada por \(x\mapsto \norm{x}\). Mostrar que además vale la siguiente desigualdad:
+                        \[
+                            \big|\norm{x}-\norm{y}\big|\leq\norm{x-y}=d(x,y) \quad \text{para todo } x,y\in E.
+                        \]
+              \end{enumerate}
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sea \( \EN \) un \( \mathbb{K} \)-espacio vectorial normado.
+    \begin{enumerate}
+        \item Es claro que \( d(x, x) = \norm{x-x} = \norm{0} = 0 \) para todo \( x \in E \). Además \[
+                  d(x, y) = \norm{x-y} = \norm{y-x} = d(y, x) \quad \text{para todo } x, y \in E.
+              \]
+              La desigualdad triangular se cumple porque vale para la norma y, por lo tanto, \( d \) es una métrica.
+        \item Para demostrar la continuidad de las traslaciones, sea \( x \in E \) y consideremos \( T_x(y) = x + y \). Dado \( \epsilon > 0 \), si \( d(y_1, y_2) < \epsilon \), entonces
+              \[
+                  d(T_x(y_1), T_x(y_2)) = d(x + y_1, x + y_2) = \norm{(x + y_1) - (x + y_2)} = \norm{y_1 - y_2} = d(y_1, y_2) < \epsilon,
+              \]
+              lo que prueba la continuidad de \( T_x \).
+
+              Para la multiplicación por un escalar, sea \( x \in E \) y consideremos \( M_x(\alpha) = \alpha x \). Dado \( \epsilon > 0 \), si \( |\alpha_1 - \alpha_2| < \frac{\epsilon}{\norm{x}} \), entonces
+              \[
+                  d(M_x(\alpha_1), M_x(\alpha_2)) = d(\alpha_1 x, \alpha_2 x) = \norm{\alpha_1 x - \alpha_2 x} = |\alpha_1 - \alpha_2| \norm{x} < \epsilon,
+              \]
+              lo que prueba la continuidad de \( M_x \).
+
+              La continuidad de la norma se sigue de la desigualdad
+              \[
+                  \big|\norm{x}-\norm{y}\big|\leq\norm{x-y}=d(x,y) \quad \text{para todo } x,y\in E.
+              \]
+    \end{enumerate}
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sean \(E\) un espacio vectorial y \(\tilde{d}\) una métrica que verifica
+    \begin{itemize}
+        \item \(\tilde{d}(\lambda x,\lambda y)=|\lambda|\tilde{d}(x,y)\) para todo \(x,y\in E\) (homogeneidad).
+        \item \(\tilde{d}(x+v,y+v)=\tilde{d}(x,y)\) para todo \(x,y,v\in E\) (invarianza por traslaciones).
+    \end{itemize}
+    Demostrar que \(\tilde{d}\) proviene de una norma.
+\end{ejercicio}
+\begin{proof}
+    Definamos la siguiente norma \[
+        \norm{x} := \tilde{d}(x, 0)
+    \]
+    Es fácil verificar que esta definición cumple con las propiedades de una norma:
+    \begin{itemize}
+        \item \(\norm{x} = 0 \iff \tilde{d}(x, 0) = 0 \iff x = 0\).
+        \item \(\norm{\lambda x} = \tilde{d}(\lambda x, 0) = |\lambda| \tilde{d}(x, 0) = |\lambda| \norm{x}\).
+        \item \(\norm{x+y} = \tilde{d}(x+y, 0) = \tilde{d}(x, -y) = \tilde{d}(x, 0 + (-y)) \leq \tilde{d}(x, 0) + \tilde{d}(-y, 0) = \norm{x} + \norm{y}\).
+    \end{itemize}
+    Por lo tanto, \(\norm{\cdot}\) es una norma y \(\tilde{d}(x,y) = \norm{x-y}\) para todo \(x,y \in E\).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Dar un ejemplo de una distancia que no proviene de una norma.
+\end{ejercicio}
+\begin{proof}
+    Un ejemplo clásico de una distancia que no proviene de una norma es la distancia discreta en un conjunto \(X\) con al menos dos elementos:
+    \[
+        d(x,y) = \begin{cases}
+            0 & \text{si } x = y,    \\
+            1 & \text{si } x \neq y.
+        \end{cases}
+    \]
+    Esta distancia no puede provenir de una norma, ya que si existiera una norma \(\norm{\cdot}\) tal que \(d(x,y) = \norm{x-y}\), entonces para cualquier \(x \neq y\) tendríamos \(\norm{x-y} = 1\). Sin embargo, para cualquier \(x \neq y\), \(\norm{2(x-y)} = 2\norm{x-y} = 2\), lo cual contradice la definición de la distancia discreta.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \(E\) un espacio normado. Probar que si \( {\{x_n\}}_{n\in\N}\) es una sucesión de Cauchy de elementos no nulos de \(E\) que no converge a cero, entonces \( {\left \{ \dfrac{x_n}{\norm{x_n}} \right \}}_{n\in\N}\) es también una sucesión de Cauchy.
+\end{ejercicio}
+\begin{proof}
+    Sea \( \epsilon > 0 \), \( \exists n_0 \in \N \) tal que \[
+        \norm{x_n - x_m} < \epsilon \quad \forall n,m \geq n_0
+    \]
+    Luego, \begin{align*}
+        \norm{ \dfrac{x_n}{\norm{x_n}} - \dfrac{x_m}{\norm{x_m}} } & = \norm{ \dfrac{x_n}{\norm{x_n}} - \dfrac{x_m}{\norm{x_m}} + \dfrac{x_n}{\norm{x_m}} - \dfrac{x_n}{\norm{x_m}} }                           \\
+                                                                   & \leq \norm{ \dfrac{x_n}{\norm{x_n}} - \dfrac{x_n}{\norm{x_m}}} + \norm{x_n - x_m} \cdot \dfrac{1}{\norm{x_m}}                              \\
+                                                                   & = \norm{ \dfrac{x_n \cdot \norm{x_m} - x_n \cdot \norm{x_n}}{\norm{x_n} \cdot \norm{x_m}} } + \norm{x_n - x_m} \cdot \dfrac{1}{\norm{x_m}} \\
+                                                                   & = \dfrac{1}{\norm{x_n}\norm{x_m}} \cdot \norm{x_n \cdot (\norm{x_n} - \norm{x_m})} + \norm{x_n - x_m} \cdot \dfrac{1}{\norm{x_m}}          \\
+                                                                   & = \dfrac{1}{\norm{x_n}\norm{x_m}} \cdot \norm{x_n} \cdot |\norm{x_n} - \norm{x_m}| + \norm{x_n - x_m} \cdot \dfrac{1}{\norm{x_m}}          \\
+                                                                   & = \dfrac{|\norm{x_n} - \norm{x_m}|}{\norm{x_m}} + \dfrac{\norm{x_n - x_m}}{\norm{x_m}}                                                     \\
+                                                                   & \leq \dfrac{\norm{x_n - x_m}}{\norm{x_m}} + \dfrac{\norm{x_n - x_m}}{\norm{x_m}}                                                           \\
+                                                                   & = 2 \cdot \dfrac{\norm{x_n - x_m}}{\norm{x_m}}                                                                                             \\
+                                                                   & \leq 2 \cdot \dfrac{\epsilon}{\norm{x_m}}.
+    \end{align*}
+    Además, como \( \norm{x_n} \not\to 0 \), existe \( c > 0 \) tal que \( \norm{x_n} \geq c \) para todo \( n \) suficientemente grande. Por lo tanto, para \( n,m \) suficientemente grandes,
+    \[
+        \norm{ \dfrac{x_n}{\norm{x_n}} - \dfrac{x_m}{\norm{x_m}} } \leq 2 \cdot \dfrac{\epsilon}{\norm{x_m}} \leq 2 \cdot \dfrac{\epsilon}{c}.
+    \]
+    Como \( \epsilon > 0 \) era arbitrario, se concluye que \( {\left \{ \dfrac{x_n}{\norm{x_n}} \right \}}_{n\in\N} \) es una sucesión de Cauchy.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Probar que cada uno de los siguientes espacios es normado sobre \( \R \) y decidir si es un espacio de Banach.
+    \begin{enumerate}
+        \item \(\ell^1:=\left \{ x={\{x_n\}}_{n\in\N}\subset\R \text{ tales que } \sum_{n\in\N}|x_n|<\infty\right \} \) con \(\norm{x}_1=\sum_{n\in\N}|x_n|\).
+        \item \(\ell^\infty:=\left \{ x={\{x_n\}}_{n\in\N}\subset\R \text{ tales que } \sup_{n\in\N}|x_n|<\infty\right \} \) con \(\norm{x}_\infty=\sup_{n\in\N}|x_n|\).
+        \item \(c_0:=\{x={\{x_n\}}_{n\in\N}\subset\R \text{ que convergen a } 0\} \) con \(\norm{x}_\infty=\sup_{n\in\N}|x_n|\).
+        \item \(B[a,b]\) con \(\norm{f}_\infty=\sup_{x\in[a,b]}|f(x)|\).
+        \item \(C[a,b]\) con \(\norm{f}_\infty=\sup_{x\in[a,b]}|f(x)|\).
+        \item \( C^1[a,b]:=\{f:[a,b]\to\R \text{ tales que } f \text{ es de clase } C^1\} \) con
+              \[
+                  \norm{f}=\sup_{x\in[a,b]}|f(x)|+\sup_{x\in[a,b]}|f'(x)|.
+              \]
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Sea \( \EN \) un espacio vectorial normado. Demostrar que son equivalentes:
+    \begin{enumerate}
+        \item \(E\) es un espacio de Banach.
+        \item La bola cerrada \(B_E=\{x\in E:\norm{x}\leq 1\} \) es completa.
+        \item La cáscara \( S_E=\{x\in E:\norm{x}=1\} \) es completa.
+        \item Para toda sucesión \( {\{x_n\}}_{n\in\N}\subset E\) tal que \( \sum_{n\in\N} \norm{x_n} < \infty \), se tiene que \(\sum_{n\in\N}x_n\) converge en \(E\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Probar que si \( \EN \) es un espacio vectorial normado y \(F\) es un subespacio de \(E\), entonces \(\cl{F}\) también lo es.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Sean \(N_1(\cdot)\) y \(N_2(\cdot)\) dos normas sobre un espacio vectorial \(E\). Probar que las siguientes expresiones definen una norma sobre \(E\).
+    \begin{enumerate}
+        \item \(\alpha N_1(\cdot)+\beta N_2(\cdot)\) para \(\alpha,\beta>0\).
+        \item \( \max \{ N_1(\cdot),N_2(\cdot)\} \).
+    \end{enumerate}
+    Calcular la bola unidad cerrada en \(\R^2\) de la norma \(\norm{\cdot}:=\dfrac{1}{2}\norm{\cdot}_1+\dfrac{1}{2}\norm{\cdot}_\infty \). Graficar.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+    Sea \(E\) un espacio normado no trivial. Probar que la clausura de cualquier bola abierta es la correspondiente bola cerrada, que el diámetro de \(\bola{a}{r}\) es \(2r\) y que si \(\bola{a}{r}\subset\bola{b}{s}\), entonces \(r\leq s\) y \(\norm{a-b}\leq s-r\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+    Demostrar que en un espacio de Banach, toda sucesión encajada de bolas cerradas \({\{B_n\}}_{n\in\N}\) no vacías con radios \(r_n\to 0\), tiene un punto en común.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+    En el espacio \( \ell^\infty \) definimos
+    \[
+        \norm{x}_Q=\limsup_{n\to\infty}|x_n|, \quad x=(x_n)\in\ell^\infty.
+    \]
+    \begin{enumerate}
+        \item Probar que \(\norm{\cdot}_Q\) es una seminorma en \( \ell^\infty \) y \(\norm{x}_Q=0\) si y sólo si \(x\in c_0\).
+        \item Probar que \(\norm{x}_Q=\norm{Qx}\) para todo \(x\in\ell^\infty \), donde \(Q:\ell^\infty\to\ell^\infty/c_0\) denota la proyección al cociente, y probar que este espacio está equipado con la norma cociente.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{12}
+    Sean \(E\) un espacio normado y \(F\) un subespacio de \(E\). Probar que si \(F\) y \(E/F\) son completos, entonces \(E\) también lo es.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{13}
+    Sean \(E\) un espacio normado y \(F\) un subespacio cerrado de \(E\). Probar:
+    \begin{enumerate}
+        \item Si \(E\) es separable entonces también lo es \(E/F\).
+        \item Si \(F\) y \(E/F\) son separables entonces también lo es \(E\).
+        \item Dar un ejemplo en el cual \(E/F\) sea separable pero \(E\) no.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{14}
+    Sean \(E\) un espacio vectorial normado y \(F\subset E\) un subespacio de dimensión finita. Probar que para todo \(x\notin F\) existe \(y_0\in F\) que realiza la distancia, es decir,
+    \[
+        \norm{x-y_0}=\inf_{y\in F}\norm{x-y}.
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{15}
+    Dar un ejemplo de dos subespacios cerrados de un espacio de Banach tal que su suma no sea cerrada.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
