@@ -6,6 +6,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 
 \theoremstyle{plain}
 \newtheorem{proposicion}{Proposición}[section]
@@ -531,15 +532,218 @@
 
 \vspace{0.5cm}
 
+\begin{definition}
+    Un grafo de Petersen es un grafo simple cuyos vértices son subconjuntos de dos elementos de un conjunto de cinco elementos tales que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+\end{definition}
+Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco elementos \( \{1,2,3,4,5\} \) y considerando todos los subconjuntos de dos elementos como vértices. Dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+\begin{center}
+    \begin{tikzpicture}[
+            vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt},
+        ]
+
+        \def\R{2.8}
+        \def\r{1.3}
+
+        \node[vertex] (o1) at (90:\R) {};
+        \node[above=3pt] at (o1) {12};
+
+        \node[vertex] (o2) at (18:\R) {};
+        \node[above right=2pt] at (o2) {34};
+
+        \node[vertex] (o3) at (306:\R) {};
+        \node[below right=2pt] at (o3) {51};
+
+        \node[vertex] (o4) at (234:\R) {};
+        \node[below left=2pt] at (o4) {23};
+
+        \node[vertex] (o5) at (162:\R) {};
+        \node[above left=2pt] at (o5) {45};
+
+        \node[vertex] (i1) at (90:\r) {};
+        \node[right=3pt] at (i1) {35};
+
+        \node[vertex] (i2) at (18:\r) {};
+        \node[below right=2pt] at (i2) {52};
+
+        \node[vertex] (i3) at (306:\r) {};
+        \node[left=3pt] at (i3) {24};
+
+        \node[vertex] (i4) at (234:\r) {};
+        \node[below right] at (i4) {41};
+
+        \node[vertex] (i5) at (162:\r) {};
+        \node[above right=2pt] at (i5) {13};
+
+        \draw[thick] (o1) -- (o2) -- (o3) -- (o4) -- (o5) -- (o1);
+
+        \draw[thick] (i1) -- (i3) -- (i5) -- (i2) -- (i4) -- (i1);
+
+        \foreach \x in {1,...,5} {
+                \draw[thick] (o\x) -- (i\x);
+            }
+
+    \end{tikzpicture}
+\end{center}
+
 \begin{ejercicio}{11}
     Probar que los grafos de abajo son isomorfos al grafo de Petersen. Hacerlo asociándole a los vértices conjuntos de dos elementos de manera tal que la regla de adyacencia entre vértices sea la misma que en la definición del grafo de Petersen.
     \begin{center}
-        \includegraphics[width=0.9\linewidth]{grafos_11.png}
+        \begin{tikzpicture}[
+                scale=.75,
+                vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt}
+            ]
+
+            \begin{scope}
+                \def\R{2.5}
+                \def\r{0.8}
+
+                \node[vertex, label=above:$15$] (v1) at (120:\R) {};
+                \node[vertex, label=above:$24$] (v2) at (60:\R) {};
+                \node[vertex, label=above right:$13$] (v3) at (0:\R) {};
+                \node[vertex, label=below right:$25$] (v4) at (300:\R) {};
+                \node[vertex, label=below left:$14$] (v5) at (240:\R) {};
+                \node[vertex, label=above left:$23$] (v6) at (180:\R) {};
+
+                \node[vertex, label=above:$12$] (c)   at (0,0) {};       % Centro
+                \node[vertex, label=above left: $35$] (tli) at (150:\r) {};    % Arriba-Izquierda interior
+                \node[vertex, label=above right: $34$] (tri) at (30:\r) {};     % Arriba-Derecha interior
+                \node[vertex, label=below: $45$] (bi)  at (270:\r) {};    % Abajo interior
+
+                \draw[thick] (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v1);
+
+                \draw[thick] (c) -- (tli);
+                \draw[thick] (c) -- (tri);
+                \draw[thick] (c) -- (bi);
+
+                \draw[thick] (tli) -- (v2);
+                \draw[thick] (tli) -- (v5);
+
+                \draw[thick] (tri) -- (v1);
+                \draw[thick] (tri) -- (v4);
+
+                \draw[thick] (bi) -- (v6);
+                \draw[thick] (bi) -- (v3);
+            \end{scope}
+            \begin{scope}[xshift=7cm, scale=1.5, yshift=-.5cm]
+
+                % Definir coordenadas clave
+                \def\radius{2.0} % Radio para los vértices exteriores
+
+                % Vértices exteriores (un triángulo equilátero)
+                \coordinate (Top) at (90:\radius);
+                \coordinate (Left) at (210:\radius);
+                \coordinate (Right) at (330:\radius);
+
+                % Puntos medios de los lados exteriores
+                \coordinate (MLeft)  at ($(Top)!0.5!(Left)$);
+                \coordinate (MRight) at ($(Top)!0.5!(Right)$);
+                \coordinate (MBottom) at ($(Left)!0.5!(Right)$);
+
+                % Vértices interiores
+                \coordinate (ITop)   at (90:0.8);  % Arriba en el eje vertical
+                \coordinate (ILeft)  at (210:0.8); % Izquierda
+                \coordinate (IRight) at (330:0.8); % Derecha
+                \coordinate (ICenter) at (0,0);     % Centro
+
+                % Punto de intersección entre la base exterior y la línea central
+                \coordinate (BaseCenter) at ($(MBottom)!1!(ICenter)$);
+
+                % --- Dibujar nodos (vértices) ---
+                \node[vertex, label=above:$15$] (v1) at (Top)   {};
+                \node[vertex, label=below left:$13$] (v2) at (Left)  {};
+                \node[vertex, label=below right:$14$] (v3) at (Right) {};
+
+                \node[vertex, label=above left: $24$] (v4) at (MLeft) {};
+                \node[vertex, label=above right: $23$] (v5) at (MRight) {};
+                \node[vertex, label=below: $25$] (v6) at (MBottom) {};
+
+                \node[vertex, label=above left: $34$] (v7) at (ITop) {};
+                \node[vertex, label=above: $45$] (v8) at (ILeft) {};
+                \node[vertex, label=below: $35$] (v9) at (IRight) {};
+
+                \node[vertex, label=above left: $12$] (v10) at (ICenter) {};
+
+                % --- Dibujar aristas ---
+                % Lados del triángulo exterior
+                \draw[thick] (v1) -- (v2);
+                \draw[thick] (v1) -- (v3);
+                \draw[thick] (v2) -- (v3);
+
+                % Líneas rectas interiores radiales
+                \draw[thick] (v1) -- (v10);
+                \draw[thick] (v2) -- (v10);
+                \draw[thick] (v3) -- (v10);
+
+                \draw[thick] (v6) to[in=-30] (v7);
+                \draw[thick] (v5) to[out=-15, in=-15] (v8);
+                \draw[thick] (v4) to[out=15, in=15] (v9);
+            \end{scope}
+
+            \begin{scope}[xshift=14cm]
+                \def\R{2.5}
+
+                \node[vertex, label=above:12] (v0) at (90:\R) {};   % Arriba
+                \node[vertex, label=above right:35] (v7) at (45:\R) {};   % Arriba-Derecha
+                \node[vertex, label=right:24] (v6) at (0:\R) {};    % Medio-Derecha
+                \node[vertex, label=below right:13] (v5) at (315:\R) {};  % Abajo-Derecha
+                \node[vertex, label=below:45] (v4) at (270:\R) {};  % Abajo
+                \node[vertex, label=below left:23] (v3) at (225:\R) {};  % Abajo-Izquierda
+                \node[vertex, label=left:15] (v2) at (180:\R) {};  % Medio-Izquierda
+                \node[vertex, label=above left:34] (v1) at (135:\R) {};  % Arriba-Izquierda
+
+                \node[vertex, label=below left:25] (i1) at (-0.9, -0.65) {}; % Interior Izquierdo
+                \node[vertex, label=below right:14] (i2) at (0.9, -0.65) {};  % Interior Derecho
+
+                \draw[thick] (v0) -- (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v7) -- (v0);
+
+                \draw[thick] (v0) -- (v4); % Línea vertical central
+                \draw[thick] (v2) -- (v6); % Línea horizontal central
+
+                \draw[thick] (i1) -- (i2);
+
+                \draw[thick] (i1) -- (v1);
+                \draw[thick] (i2) -- (v7);
+
+                \draw[thick] (i1) -- (v5);
+                \draw[thick] (i2) -- (v3);
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}[
+                scale=.75,
+                vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt}
+            ]
+            \def\R{2.5}
+
+            \foreach \i in {0,...,8} {
+                    \node[vertex] (v\i) at (90 - \i * 40:\R) {};
+                }
+
+            \node[vertex, label={above:34}]        (v0) at (90:\R) {};   % Arriba
+            \node[vertex, label={above right:15}]  (v1) at (50:\R) {};   % Arriba-Derecha
+            \node[vertex, label={right:23}]        (v2) at (10:\R) {};   % Derecha-Arriba
+            \node[vertex, label={below right:45}]  (v3) at (330:\R) {};  % Derecha-Abajo
+            \node[vertex, label={below:13}]        (v4) at (290:\R) {};  % Abajo-Derecha
+            \node[vertex, label={below:24}]        (v5) at (250:\R) {};  % Abajo-Izquierda
+            \node[vertex, label={below left:35}]   (v6) at (210:\R) {};  % Izquierda-Abajo
+            \node[vertex, label={left:14}]         (v7) at (170:\R) {};  % Izquierda-Arriba
+            \node[vertex, label={above left:25}]   (v8) at (130:\R) {};  % Arriba-Izquierda
+
+            \node[vertex, label={below:12}] (c) at (0,0) {};
+
+            \draw[thick] (v0) -- (v1) -- (v2) -- (v3) -- (v4) -- (v5) -- (v6) -- (v7) -- (v8) -- (v0);
+
+            \draw[thick] (c) -- (v0); % Hacia el nodo superior
+            \draw[thick] (c) -- (v3); % Hacia el nodo inferior-derecho
+            \draw[thick] (c) -- (v6); % Hacia el nodo inferior-izquierdo
+
+            \draw[thick] (v7) -- (v2); % Línea horizontal que pasa apenas por encima del centro
+            \draw[thick] (v8) -- (v4); % Línea que cruza desde arriba-izquierda hacia abajo-derecha
+            \draw[thick] (v1) -- (v5); % Línea que cruza desde arriba-derecha hacia abajo-izquierda
+        \end{tikzpicture}
     \end{center}
 \end{ejercicio}
-\begin{proof}
-
-\end{proof}
 
 \vspace{0.5cm}
 
