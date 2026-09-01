@@ -146,9 +146,9 @@
 \begin{proof}
     Sea \( V(G) = \{ v_1, \ldots, v_n \} \) y \( E(G) = \{ e_1, \ldots, e_m \} \).
 
-    Luego, si suponemos que \( v = v_i \) para \( i \in \{ 1, \ldots, n \} \) y \( e = e_j \) para \( j \in \{ 1, \ldots, m \} \), entonces la matriz de adyacencia de \( G - v \) es la matriz \( A(G) \) con la \( i \)-ésima fila y la \( i \)-ésima columna eliminadas, por otro lado, la matriz de adyacencia de \( G - e \) es la matriz \( A(G) \) con la \( j \)-ésima fila y la \( j \)-ésima columna correspondientes a los vértices incidentes a \( e_j \) ajustadas a 0.
+    Luego, si suponemos que \( v = v_i \) para \( i \in \{ 1, \ldots, n \} \) y \( e = e_j = v_p v_q \) para \( j \in \{ 1, \ldots, m \} \), entonces la matriz de adyacencia de \( G - v \) es la matriz \( A(G) \) con la \( i \)-ésima fila y la \( i \)-ésima columna eliminadas. Por otro lado, la matriz de adyacencia de \( G - e \) es la matriz \( A(G) \) con las entradas \( a_{pq} \) y \( a_{qp} \) (correspondientes a los dos vértices incidentes a \( e_j \)) puestas en 0, dejando el resto de la matriz sin cambios, ya que las demás aristas incidentes a \( v_p \) y \( v_q \) siguen presentes en \( G-e \).
 
-    De manera análoga, sea \( B(G) \) la matriz de incidencia de \( G \implies \) la matriz de incidencia de \( G - v \) es la matriz \( B(G) \) con la fila correspondiente a \( v \) eliminada, y la matriz de incidencia de \( G - e \) es la matriz \( B(G) \) con la columna correspondiente a \( e \) eliminada.
+    De manera análoga, sea \( B(G) \) la matriz de incidencia de \( G \implies \) la matriz de incidencia de \( G - v \) es la matriz \( B(G) \) con la fila correspondiente a \( v \) eliminada, junto con las columnas correspondientes a las aristas incidentes a \( v \) (pues dichas aristas dejan de existir en \( G - v \)), y la matriz de incidencia de \( G - e \) es la matriz \( B(G) \) con la columna correspondiente a \( e \) eliminada.
 \end{proof}
 
 \vspace{0.5cm}
@@ -527,7 +527,7 @@
             \end{scope}
         \end{tikzpicture}
     \end{center}
-    Nos basta con notar que ambos complementos se pueden llevar al mismo ciclo de 7 vértices, lo que demuestra que \( \overline{G_1} \) es isomorfo a \( \overline{G_5} \) y, por el \emph{Ejercicio 8}, se concluye que \( G_1 \) es isomorfo a \( G_5 \).
+    Nos basta con notar que ambos complementos se pueden llevar al mismo grafo de 7 vértices, lo que demuestra que \( \overline{G_1} \) es isomorfo a \( \overline{G_5} \) y, por el \emph{Ejercicio 8}, se concluye que \( G_1 \) es isomorfo a \( G_5 \).
 \end{proof}
 
 \vspace{0.5cm}
