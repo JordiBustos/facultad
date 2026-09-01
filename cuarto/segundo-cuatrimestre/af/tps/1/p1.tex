@@ -162,7 +162,7 @@
         \item \(\ell^1:=\left \{ x={\{x_n\}}_{n\in\N}\subset\R \text{ tales que } \sum_{n\in\N}|x_n|<\infty\right \} \) con \(\norm{x}_1=\sum_{n\in\N}|x_n|\).
         \item \(\ell^\infty:=\left \{ x={\{x_n\}}_{n\in\N}\subset\R \text{ tales que } \sup_{n\in\N}|x_n|<\infty\right \} \) con \(\norm{x}_\infty=\sup_{n\in\N}|x_n|\).
         \item \(c_0:=\{x={\{x_n\}}_{n\in\N}\subset\R \text{ que convergen a } 0\} \) con \(\norm{x}_\infty=\sup_{n\in\N}|x_n|\).
-        \item \(B[a,b]\) con \(\norm{f}_\infty=\sup_{x\in[a,b]}|f(x)|\).
+        \item \(B[a,b] = \{ f : [a,b]\to\R \text{ acotadas} \} \) con \( \norm{f}_\infty = \sup_{x\in[a,b]} |f(x)| \).
         \item \(C[a,b]\) con \(\norm{f}_\infty=\sup_{x\in[a,b]}|f(x)|\).
         \item \( C^1[a,b]:=\{f:[a,b]\to\R \text{ tales que } f \text{ es de clase } C^1\} \) con
               \[
@@ -170,8 +170,104 @@
               \]
     \end{enumerate}
 \end{ejercicio}
-\begin{proof}
 
+\begin{proof}
+    \begin{enumerate}
+        \item \textbf{Espacio \( \ell^1 \):}
+
+              \textit{Es espacio normado:}
+              Para \( x, y \in \ell^1 \) y \( \alpha \in \R \):
+              \begin{itemize}
+                  \item Positividad: \( \norm{x}_1 = \sum_{n\in\N} |x_n| \geq 0 \). Si \( \norm{x}_1 = 0 \), entonces cada término \( |x_n| = 0 \), lo que implica \( x_n = 0 \) para todo \( n \), luego \( x = 0 \).
+                  \item Homogeneidad: \( \norm{\alpha x}_1 = \sum_{n\in\N} |\alpha x_n| = |\alpha| \sum_{n\in\N} |x_n| = |\alpha| \norm{x}_1 \).
+                  \item Desigualdad triangular: \( \norm{x+y}_1 = \sum_{n\in\N} |x_n + y_n| \leq \sum_{n\in\N} (|x_n| + |y_n|) = \norm{x}_1 + \norm{y}_1 \).
+              \end{itemize}
+
+              \textit{Es de Banach:}
+              Sea \( {\{x_n\}}_{n\in\N} \) una sucesión de Cauchy en \( \ell^1 \), donde \( x_n = (x_n^{(1)}, x_n^{(2)}, \dots) \).
+              Para todo \( \epsilon>0 \), existe \( N\in\N \) tal que para todo \( m,n\geq N \),
+              \[
+                  \norm{x_n - x_m}_1 = \sum_{k\in\N} |x_n^{(k)} - x_m^{(k)}| < \epsilon.
+              \]
+              En particular, para cada \( k\in\N \) fijo, \( |x_n^{(k)} - x_m^{(k)}| < \epsilon \), por lo que \( {\{x_n^{(k)}\}}_{n\in\N} \) es de Cauchy en \( \R \) y converge a un límite \( x^{(k)} \in \R \). Sea \( x := (x^{(1)}, x^{(2)}, \dots) \).
+
+              Dado \( \epsilon>0 \), tomamos \( N \) de la condición de Cauchy. Para cualquier entero \( M \geq 1 \) y \( m,n \geq N \):
+              \[
+                  \sum_{k=1}^M |x_n^{(k)} - x_m^{(k)}| \leq \sum_{k=1}^\infty |x_n^{(k)} - x_m^{(k)}| < \epsilon.
+              \]
+              Tomando el límite cuando \( m\to\infty \), obtenemos:
+              \[
+                  \sum_{k=1}^M |x_n^{(k)} - x^{(k)}| \leq \epsilon.
+              \]
+              Como esto vale para cualquier \( M \), tomamos el supremo (o límite cuando \( M\to\infty \)) para obtener \( \sum_{k=1}^\infty |x_n^{(k)} - x^{(k)}| \leq \epsilon \). Esto prueba que \( x_n - x \in \ell^1 \) (y por ende \( x \in \ell^1 \)) y que \( x_n \to x \) en la norma \( \norm{\cdot}_1 \). Luego, \( \ell^1 \) es de Banach.
+
+        \item \textbf{Espacio \( \ell^\infty \):}
+
+              \textit{Es espacio normado:}
+              Para \( x, y \in \ell^\infty \) y \( \alpha \in \R \):
+              \begin{itemize}
+                  \item Positividad: \( \norm{x}_\infty = \sup_{n\in\N} |x_n| \geq 0 \). Si \( \norm{x}_\infty = 0 \), entonces \( \sup |x_n| = 0 \implies x_n = 0 \) para todo \( n \implies x = 0 \).
+                  \item Homogeneidad: \( \norm{\alpha x}_\infty = \sup_{n\in\N} |\alpha x_n| = |\alpha| \sup_{n\in\N} |x_n| = |\alpha| \norm{x}_\infty \).
+                  \item Desigualdad triangular: \( \norm{x+y}_\infty = \sup_{n\in\N} |x_n + y_n| \leq \sup_{n\in\N} (|x_n| + |y_n|) \leq \sup_{n\in\N} |x_n| + \sup_{n\in\N} |y_n| = \norm{x}_\infty + \norm{y}_\infty \).
+              \end{itemize}
+
+              \textit{Es de Banach:}
+              Sea \( {\{x_n\}}_{n\in\N} \) sucesión de Cauchy en \( \ell^\infty \). Para cada coordenada \( k \), \( {\{x_n^{(k)}\}}_{n\in\N} \) es de Cauchy en \( \R \) y converge a \( x^{(k)} \).
+              Dado \( \epsilon>0 \), existe \( N \) tal que para \( n,m \geq N \), \( |x_n^{(k)} - x_m^{(k)}| < \epsilon \) para todo \( k \). Tomando límite con \( m \to \infty \) se obtiene \( |x_n^{(k)} - x^{(k)}| \leq \epsilon \) para todo \( k \), lo que implica \( \sup_{k} |x_n^{(k)} - x^{(k)}| \leq \epsilon \). Esto prueba que \( x \in \ell^\infty \) y que hay convergencia en norma.
+
+        \item \textbf{Espacio \( c_0 \):}
+
+              \textit{Es espacio normado:} Las propiedades de norma se heredan directamente de \( \ell^\infty \), al ser \( c_0 \subset \ell^\infty \).
+
+              \textit{Es de Banach:} Basta notar que \( c_0 \) es un subespacio cerrado de \( \ell^\infty \). Si \( x_n \to x \) en \( \ell^\infty \) y cada \( x_n \in c_0 \), para cada \( \epsilon>0 \) existe \( N \) tal que \( \norm{x_N - x}_\infty < \epsilon/2 \). Como \( x_N \in c_0 \), existe \( M \) tal que para \( k \geq M \), \( |x_N^{(k)}| < \epsilon/2 \). Luego \( |x^{(k)}| \leq |x^{(k)} - x_N^{(k)}| + |x_N^{(k)}| < \epsilon \), mostrando que \( x \in c_0 \). Todo subespacio cerrado de un Banach es Banach.
+
+        \item \textbf{Espacio \( B[a,b] \):}
+
+              \textit{Es espacio normado:}
+              \begin{itemize}
+                  \item Positividad: \( \norm{f}_\infty = \sup_{x\in[a,b]} |f(x)| \geq 0 \). Si es \( 0 \), \( f(x)=0 \) para todo \( x \implies f=0 \).
+                  \item Homogeneidad: \( \norm{\alpha f}_\infty = \sup_{x\in[a,b]} |\alpha f(x)| = |\alpha| \norm{f}_\infty \).
+                  \item Desigualdad triangular: Idéntica a \( \ell^\infty \), usando el supremo sobre \( [a,b] \).
+              \end{itemize}
+
+              \textit{Es de Banach:}
+              Si \( {\{f_n\}} \) es de Cauchy en \( B[a,b] \), converge puntualmente a una función \( f(x) \). Por el mismo argumento que en \( \ell^\infty \), la convergencia es uniforme (\( \norm{f_n - f}_\infty \to 0 \)). Al ser cada \( f_n \) acotada y converger uniformemente, \( f \) resulta acotada, por lo que \( B[a,b] \) es completo.
+
+        \item \textbf{Espacio \( C[a,b] \):}
+
+              \textit{Es espacio normado:} Se hereda al ser un subespacio de \( B[a,b] \) (toda función continua en un compacto es acotada).
+
+              \textit{Es de Banach:} \( C[a,b] \) es cerrado en \( B[a,b] \). El límite uniforme de una sucesión de funciones continuas es continuo, por lo que si \( f_n \to f \) en norma infinito con \( f_n \in C[a,b] \), entonces \( f \in C[a,b] \). Por lo tanto, es completo.
+
+        \item \textbf{Espacio \( C^1[a,b] \):}
+
+              \textit{Es espacio normado:}
+              \begin{itemize}
+                  \item Positividad: \( \norm{f} = \norm{f}_\infty + \norm{f'}_\infty \geq 0 \). Si \( \norm{f} = 0 \), entonces en particular \( \norm{f}_\infty = 0 \implies f=0 \).
+                  \item Homogeneidad: \( \norm{\alpha f} = \norm{\alpha f}_\infty + \norm{\alpha f'}_\infty = |\alpha|\norm{f}_\infty + |\alpha|\norm{f'}_\infty = |\alpha|\norm{f} \).
+                  \item Desigualdad triangular: \( \norm{f+g} = \norm{f+g}_\infty + \norm{f'+g'}_\infty \leq \norm{f}_\infty + \norm{g}_\infty + \norm{f'}_\infty + \norm{g'}_\infty = \norm{f} + \norm{g} \).
+              \end{itemize}
+
+              \textit{Es de Banach:}
+              Sea \( {\{f_n\}}_{n\in\N} \) una sucesión de Cauchy en \( C^1[a,b] \). Dado \( \epsilon>0 \), existe \( N \) tal que para \( m,n \geq N \):
+              \[
+                  \norm{f_n - f_m}_{C^1} = \norm{f_n - f_m}_\infty + \norm{f'_n - f'_m}_\infty < \epsilon
+              \]
+              Esto implica que \( \norm{f_n - f_m}_\infty < \epsilon \) y \( \norm{f'_n - f'_m}_\infty < \epsilon \).
+
+              Por lo tanto, \( {\{f_n\}} \) y \( {\{f'_n\}} \) son sucesiones de Cauchy en el espacio de Banach \( C[a,b] \) (con la norma infinito). Existen entonces funciones \( f, g \in C[a,b] \) tales que \( f_n \to f \) y \( f'_n \to g \) uniformemente.
+
+              Por el Teorema Fundamental del Cálculo, para cada \( x \in [a,b] \):
+              \[
+                  f_n(x) = f_n(a) + \int_a^x f'_n(t) dt
+              \]
+              Como la convergencia \( f'_n \to g \) es uniforme en \( [a,b] \), podemos intercambiar límite e integral:
+              \[
+                  \lim_{n\to\infty} f_n(x) = \lim_{n\to\infty} f_n(a) + \lim_{n\to\infty} \int_a^x f'_n(t) dt \implies f(x) = f(a) + \int_a^x g(t) dt
+              \]
+              Al ser \( g \) continua, \( f \) es derivable con derivada \( f' = g \). Como \( g \in C[a,b] \), concluimos que \( f \in C^1[a,b] \).
+              Finalmente, \( \norm{f_n - f}_{C^1} = \norm{f_n - f}_\infty + \norm{f'_n - g}_\infty \to 0  \therefore \) el espacio es completo.
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
