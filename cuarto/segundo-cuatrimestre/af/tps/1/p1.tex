@@ -28,6 +28,7 @@
 \newcommand{\sii}{\iff}                          % Si y sólo si
 \newcommand{\imp}{\implies}                      % Implies
 \newcommand{\setdiff}{\smallsetminus}            % Set difference
+\newcommand{\diam}{\text{diam}}
 
 % Exercise environment
 \newenvironment{ejercicio}[1]{\begin{trivlist}
@@ -275,14 +276,25 @@
 \begin{ejercicio}{6}
     Sea \( \EN \) un espacio vectorial normado. Demostrar que son equivalentes:
     \begin{enumerate}
-        \item \(E\) es un espacio de Banach.
-        \item La bola cerrada \(B_E=\{x\in E:\norm{x}\leq 1\} \) es completa.
-        \item La cáscara \( S_E=\{x\in E:\norm{x}=1\} \) es completa.
-        \item Para toda sucesión \( {\{x_n\}}_{n\in\N}\subset E\) tal que \( \sum_{n\in\N} \norm{x_n} < \infty \), se tiene que \(\sum_{n\in\N}x_n\) converge en \(E\).
+        \item[(a)] \(E\) es un espacio de Banach.
+        \item[(b)] La bola cerrada \(B_E=\{x\in E:\norm{x}\leq 1\} \) es completa.
+        \item[(c)] La cáscara \( S_E=\{x\in E:\norm{x}=1\} \) es completa.
+        \item[(d)] Para toda sucesión \( {\{x_n\}}_{n\in\N}\subset E\) tal que \( \sum_{n\in\N} \norm{x_n} < \infty \), se tiene que \(\sum_{n\in\N}x_n\) converge en \(E\).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    \( a \iff d \) está demostrado en la \textbf{Proposición 1.1.13} del apunte de Demetrio. Haremos el siguiente camino para demostrar las equivalencias: \( a \iff b \) y \( b \implies c \).
 
+    Veamos que \( a \implies b \), sea \( E \) un espacio de Banach i.e completo y normado es claro que \( B_E \) es normado. Veamos que es completo, para ello, dada una sucesión \( { \{ x_n \} }_{n\geq 1} \subset B_E \) de Cauchy, veamos que tiene límite en \( B_E \). Como \( { \{ x_n \} }_{n\geq1} \subset B_E \subseteq E \) y \( E \) es completo sabemos que \( x_n \to x \in E \), queremos ver que efectivamente \( x \in B_E \), es decir, que \( \norm{x} \leq 1 \).
+    Como \( \norm{x_n} \leq 1 \quad \forall n \in \N \) y la norma es una función continua, vale que \[
+        \lim_{n \to \infty} \norm{x_n} = \norm{x}.
+    \]
+    Por lo tanto, \( \norm{x} \leq 1 \) y \( x \in B_E \), lo que demuestra que \( B_E \) es completo.
+
+    Para la recíproca, supongamos que \( B_E \) es completo. Sea \( {\{ x_n \}}_{n \geq 1} \) de Cauchy en \( E \), supongamos sin pérdida de generalidad que no tiene términos nulos y \( x_n \not \to 0 \). Por el \textbf{Ejercicio 4} la sucesión \( {\left \{ \frac{x_n}{\norm{x_n}} \right \}}_{n\geq1} \) es de Cauchy en \( B_E \) y, por lo tanto, \( \frac{x_n}{\norm{x_n}} \to L \in B_E \).
+    Como \( x_n \) es de Cauchy, \( \norm{x_n} \) también lo es pues es una sucesión de números reales, por lo tanto \( \norm{x_n} \to \ell \) para algún \( \ell \geq 0 \). Así, \( x_n = \norm{x_n} \frac{x_n}{\norm{x_n}} \to \ell L \in E \), lo que demuestra que \( E \) es completo.
+
+    Que \( b \implies c \) sale de que \( S_E \) es un subespacio cerrado de \( B_E \) y, por lo tanto, completo.
 \end{proof}
 
 \vspace{0.5cm}
@@ -291,7 +303,16 @@
     Probar que si \( \EN \) es un espacio vectorial normado y \(F\) es un subespacio de \(E\), entonces \(\cl{F}\) también lo es.
 \end{ejercicio}
 \begin{proof}
+    Para demostrar que \( \cl{F} \) es subespacio debemos ver que: \begin{enumerate}
+        \item \( 0 \in \cl{F} \).
+        \item Si \( x,y \in \cl{F} \), entonces \( x+y \in \cl{F} \).
+        \item Si \( \alpha \in \R \) y \( x \in \cl{F} \), entonces \( \alpha x \in \cl{F} \).
+    \end{enumerate}
+    La primera propiedad sale trivialmente pues \( 0 \in F \subseteq \cl{F} \).
 
+    Para ver que la suma es cerrada separemos en casos, recordemos que la clausura de un conjunto es el conjunto unión sus puntos de acumulación, por lo tanto puede ocurrir que \( x, y \in F \), \( x \in F \) e \( y \in \cl{F} \setminus F \) o \( x,y \in \cl{F} \setminus F \). Si \( x,y \in F \) es claro que \( x+y \in F \subseteq \cl{F} \), si \( x \in F \) e \( y \in \cl{F} \setminus F \), entonces \( y \) es un punto de acumulación de \( F \) y por lo tanto \( x+y \) también lo es, así que \( x+y \in \cl{F} \). Finalmente, si \( x,y \in \cl{F} \setminus F \), ambos son puntos de acumulación de \( F \) y por lo tanto \( x+y \) también lo es, así que \( x+y \in \cl{F} \). La propiedad de la multiplicación por escalares se demuestra de manera análoga considerando los casos \( x \in F \) y \( x \in \cl{F} \setminus F \).
+
+    Por lo tanto, \( \cl{F} \) es un subespacio de \( E \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -305,16 +326,94 @@
     Calcular la bola unidad cerrada en \(\R^2\) de la norma \(\norm{\cdot}:=\dfrac{1}{2}\norm{\cdot}_1+\dfrac{1}{2}\norm{\cdot}_\infty \). Graficar.
 \end{ejercicio}
 \begin{proof}
+    Veamos que \(\alpha N_1(\cdot)+\beta N_2(\cdot)\) define una norma. Sean \(x,y \in E\) y \( \lambda \in \R \). Entonces:
+    \begin{enumerate}
+        \item \((\alpha N_1+\beta N_2)(x) = \alpha N_1(x) + \beta N_2(x) \geq 0\), y es cero si y sólo si \(x=0\).
+        \item \((\alpha N_1+\beta N_2)(x+y) = \alpha N_1(x+y) + \beta N_2(x+y) \leq \alpha (N_1(x)+N_1(y)) + \beta (N_2(x)+N_2(y)) = (\alpha N_1+\beta N_2)(x) + (\alpha N_1+\beta N_2)(y)\).
+        \item \((\alpha N_1+\beta N_2)(\lambda x) = \alpha N_1(\lambda x) + \beta N_2(\lambda x) = |\lambda| (\alpha N_1(x) + \beta N_2(x)) = |\lambda| (\alpha N_1+\beta N_2)(x)\).
+    \end{enumerate}
+    Luego, \(\alpha N_1+\beta N_2\) cumple con las tres propiedades de una norma, y por lo tanto es una norma sobre \(E\).
 
+    \vspace{0.1cm}
+
+    Veamos ahora que \( \max \{ N_1(\cdot),N_2(\cdot)\} \) define una norma. Sean \(x,y \in E\) y \( \lambda \in \R \). Entonces:
+    \begin{enumerate}
+        \item \(\max \{ N_1(x),N_2(x) \} \geq 0\), y es cero si y sólo si \(x=0\).
+        \item \begin{align*}
+                  \max \{ N_1(x+y),N_2(x+y) \} & \leq \max \{ N_1(x)+N_1(y),N_2(x)+N_2(y) \}              \\
+                                               & \leq \max \{ N_1(x),N_2(x) \} + \max \{ N_1(y),N_2(y) \}
+              \end{align*}
+        \item \(\max \{ N_1(\lambda x),N_2(\lambda x) \} = \max \{ |\lambda| N_1(x),|\lambda| N_2(x) \} = |\lambda| \max \{ N_1(x),N_2(x) \} \).
+    \end{enumerate}
+    Luego, \( \max \{ N_1(\cdot),N_2(\cdot)\} \) cumple con las tres propiedades de una norma, y por lo tanto es una norma sobre \(E\).
+
+    Finalmente, para la norma \( \norm{\cdot}:=\dfrac{1}{2}\norm{\cdot}_1+\dfrac{1}{2}\norm{\cdot}_\infty \), basta notar que es de la forma \(\alpha N_1+\beta N_2\) con \(\alpha=\beta=\frac{1}{2}\), que ya vimos que define una norma.
+    La bola unidad cerrada en \(\R^2\) de esta norma se puede calcular considerando los puntos \((x,y)\) tales que \(\frac{1}{2}(|x|+|y|) + \frac{1}{2} \max \{|x|,|y|\} \leq 1\). Esto se puede simplificar a \(|x|+|y| \leq 2\) y \( \max \{|x|,|y|\} \leq 2\), y graficando se obtiene un octógono centrado en el origen con vértices en \((\pm 2,0)\), \((0,\pm 2)\) y \((\pm 1,\pm 1)\).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{9}
-    Sea \(E\) un espacio normado no trivial. Probar que la clausura de cualquier bola abierta es la correspondiente bola cerrada, que el diámetro de \(\bola{a}{r}\) es \(2r\) y que si \(\bola{a}{r}\subset\bola{b}{s}\), entonces \(r\leq s\) y \(\norm{a-b}\leq s-r\).
+    Sea \(E\) un espacio normado no trivial. Probar: \begin{enumerate}
+        \item La clausura de cualquier bola abierta es la correspondiente bola cerrada.
+        \item El diámetro de \(\bola{a}{r}\) es \(2r\).
+        \item Si \(\bola{a}{r}\subset\bola{b}{s}\), entonces \(r\leq s\) y \(\norm{a-b}\leq s-r\).
+    \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \( E \) un EN no trivial.
+    \begin{enumerate}
+        \item Veamos que \( \cl{\bola{a}{r}} = \{ x \in E : \norm{x-a} \leq r \} \).
+              Primero probaremos la inclusión \( \subseteq \). Sea \( x \in \cl{\bola{a}{r}} \). Entonces existe una sucesión \( {\{x_n\}}_{n\geq 1} \subset \bola{a}{r} \) tal que \( x_n \to x \) (es decir, \( \norm{x_n - x} \to 0 \)). Por la desigualdad triangular:
+              \[
+                  \norm{x - a} \leq \norm{x - x_n} + \norm{x_n - a} < \norm{x - x_n} + r
+              \]
+              Tomando el límite cuando \( n \to \infty \), se obtiene \( \norm{x - a} \leq r \). Por lo tanto, \( \cl{\bola{a}{r}} \subseteq \{ x \in E : \norm{x-a} \leq r \} \).
 
+              Para la inclusión \( \supseteq \), sea \( x \in E \) tal que \( \norm{x-a} \leq r \). Si \( \norm{x-a} < r \), entonces trivialmente \( x \in \bola{a}{r} \subseteq \cl{\bola{a}{r}} \). Si \( \norm{x-a} = r \), definimos la sucesión \( x_n = a + \left(1 - \frac{1}{n}\right)(x-a) \) para \( n \geq 1 \). Notemos que:
+              \[
+                  \norm{x_n - a} = \left(1 - \frac{1}{n}\right)\norm{x-a} = \left(1 - \frac{1}{n}\right)r < r
+              \]
+              Luego, \( x_n \in \bola{a}{r} \) para todo \( n \). Además, \( \norm{x_n - x} = \frac{1}{n}\norm{x-a} \to 0 \) cuando \( n \to \infty \). Como construimos una sucesión en la bola abierta que converge a \( x \), concluimos que \( x \in \cl{\bola{a}{r}} \).
+
+        \item Dados \( x, y \in \bola{a}{r} \), por desigualdad triangular tenemos:
+              \[
+                  \norm{x - y} \leq \norm{x - a} + \norm{a - y} < r + r = 2r
+              \]
+              Esto implica que \( \diam(\bola{a}{r}) = \sup_{x,y \in \bola{a}{r}} \norm{x-y} \leq 2r \).
+
+              Para ver la otra desigualdad, como el espacio \( E \) es no trivial, existe un vector \( v \in E \) con \( v \neq 0 \). Sea \( u = \frac{v}{\norm{v}} \). Para cualquier \( 0 < t < r \), consideramos los puntos:
+              \[
+                  x_t = a + tu \quad \text{y} \quad y_t = a - tu
+              \]
+              Como \( \norm{x_t - a} = t < r \) y \( \norm{y_t - a} = t < r \), ambos puntos pertenecen a \( \bola{a}{r} \). La distancia entre ellos es \( \norm{x_t - y_t} = \norm{2tu} = 2t \).
+              Como el diámetro es el supremo de las distancias, \( \diam(\bola{a}{r}) \geq 2t \) para todo \( t \in (0, r) \). Haciendo \( t \to r^- \), obtenemos \( \diam(\bola{a}{r}) \geq 2r \), de donde se concluye la igualdad.
+
+        \item Si \( a = b \), la hipótesis es \( \bola{a}{r} \subset \bola{a}{s} \), lo cual implica directamente (tomando puntos a distancia \( t < r \)) que \( r \leq s \). Además, \( \norm{a-b} = 0 \leq s - r \).
+
+              Si \( a \neq b \), consideramos el vector unitario \( u = \frac{a-b}{\norm{a-b}} \) que apunta desde \( b \) hacia \( a \). Para cualquier \( t \in (0, r) \), definimos el punto:
+              \[
+                  x_t = a + tu
+              \]
+              Es claro que \( \norm{x_t - a} = t < r \), luego \( x_t \in \bola{a}{r} \). Por hipótesis, \( x_t \in \bola{b}{s} \), por lo que \( \norm{x_t - b} < s \). Calculamos esta distancia:
+              \begin{align*}
+                  x_t - b & = (a - b) + t\frac{a-b}{\norm{a-b}}            \\
+                          & = (a-b)\left( 1 + \frac{t}{\norm{a-b}} \right)
+              \end{align*}
+              Tomando norma a ambos lados, como el escalar en el paréntesis es positivo:
+              \[
+                  \norm{x_t - b} = \norm{a-b} \left( 1 + \frac{t}{\norm{a-b}} \right) = \norm{a-b} + t
+              \]
+              Sustituyendo esto en la condición \( \norm{x_t - b} < s \), obtenemos:
+              \[
+                  \norm{a-b} + t < s
+              \]
+              Como esta desigualdad vale para todo \( 0 < t < r \), podemos tomar el límite cuando \( t \to r^- \), lo que resulta en:
+              \[
+                  \norm{a-b} + r \leq s
+              \]
+              Reordenando los términos se obtiene la desigualdad buscada \( 0 \leq \norm{a-b} \leq s - r \).
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -323,7 +422,15 @@
     Demostrar que en un espacio de Banach, toda sucesión encajada de bolas cerradas \({\{B_n\}}_{n\in\N}\) no vacías con radios \(r_n\to 0\), tiene un punto en común.
 \end{ejercicio}
 \begin{proof}
-
+    Sea \({\{B_n\}}_{n\in\N}\) una sucesión encajada de bolas cerradas no vacías con radios \(r_n\to 0\). Es decir,
+    \[
+        B_1 \supset B_2 \supset \cdots \supset B_n \supset \cdots, \quad B_n = \cl{\bola{a_n}{r_n}} \neq \varnothing, \quad r_n \to 0.
+    \]
+    Como cada \(B_n\) es no vacía, podemos elegir un punto \(x_n \in B_n\). La sucesión \({x_n}\) es de Cauchy, ya que para \(m > n\),
+    \[
+        \norm{x_m - x_n} \leq \norm{x_m - a_m} + \norm{a_m - a_n} + \norm{a_n - x_n} \leq r_m + \norm{a_m - a_n} + r_n.
+    \]
+    Como \(r_n \to 0\), basta mostrar que \(\norm{a_m - a_n} \to 0\). Pero \(a_n \in B_n \subset B_m\) para \(m \leq n\), luego \(\norm{a_n - a_m} \leq r_m \to 0\). Por lo tanto, \({x_n}\) es de Cauchy y converge a algún punto \(x \in E\). Finalmente, como \(B_n\) son cerradas y \({x_n} \in B_n\), se tiene \(x \in B_n\) para todo \(n\), es decir, \(x\) es un punto en común.
 \end{proof}
 
 \vspace{0.5cm}
