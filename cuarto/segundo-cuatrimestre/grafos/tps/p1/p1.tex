@@ -73,16 +73,26 @@
     \]
 \end{proof}
 
+\begin{definition}
+    Un grafo \( G \) se dice \textbf{conexo} si, para todo par de vértices \( u \) y \( v \) de \( G \), existe una sucesión de vértices que comienza en \( u \), termina en \( v \) y tal que vértices consecutivos son adyacentes. Caso contrario, diremos que \( G \) es \textbf{disconexo}.
+\end{definition}
+
+\begin{definition}
+    Una \textbf{componente conexa} de un grafo \( G \) es un subgrafo conexo maximal de \( G \), es decir, un subgrafo conexo que no está contenido en ningún subgrafo conexo más grande de \( G \).
+\end{definition}
+
 \begin{ejercicio}{3}
-    Un grafo \( G \) se dice conexo si, para todo par de vértices \( u \) y \( v \) de \( G \), existe una sucesión de vértices que comienza en \( u \), termina en \( v \) y tal que vértices consecutivos son adyacentes. Caso contrario, diremos que \( G \) es disconexo. Analizar si es verdadero o falso: el complemento de un grafo simple disconexo es conexo.
+    Analizar si es verdadero o falso: el complemento de un grafo simple disconexo es conexo.
 \end{ejercicio}
 \begin{proof}
-    Llamemos \( G \) a un grafo simple disconexo. Esto significa que existes al menos dos vértices \( u \) y \( v \) en \( G \) que no están conectados por ninguna sucesión de vértices adyacentes.
+    \emph{Claim}: El complemento de un grafo simple disconexo es conexo.
 
-    Consideremos el complemento \( \overline{G} \) de \( G \). En \( \overline{G} \) es claro que si \( u \) y \( v \) no están conectados en \( G \) van a estar conectados en \( \overline{G} \) por una arista directa, ya que la arista que no existe en \( G \) sí existe en \( \overline{G} \).
-    Si ahora consideramos cualquier par de vértices \( x \) e \( y \) en \( G \) tales que están conectados en \( G \), entonces en \( \overline{G} \) no estarán conectados por una arista directa. Sin embargo, dado que \( G \) es disconexo, podemos encontrar un vértice \( z \) que no esté conectado a \( x \) ni a \( y \) y que si esté conectado a ambos en \( \overline{G} \). Por lo tanto, podemos formar una sucesión de vértices que conecta \( x \) e \( y \) a través de \( z \).
-
-    En conclusión, para cualquier par de vértices \( u \) y \( v \) en \( G \), podemos encontrar una sucesión de vértices en \( \overline{G} \) que los conecta, lo que demuestra que \( \overline{G} \) es conexo. Por lo tanto, la afirmación es verdadera.
+    Sea \( G \) un grafo simple disconexo y sea \( \overline{G} \) su complemento. Como \( G \) es disconexo, sus vértices se reparten en al menos dos componentes conexas distintas. Veamos que \( \overline{G} \) es conexo, es decir, que para cualquier par de vértices \( x \) e \( y \) de \( G \) existe una sucesión de vértices adyacentes en \( \overline{G} \) que los conecta. Puede ocurrir:
+    \begin{enumerate}
+        \item \( x \) e \( y \) pertenecen a componentes distintas de \( G \). Como no puede haber aristas entre vértices de componentes distintas de \( G \), \( x \) e \( y \) no son adyacentes en \( G \). Luego la arista \( xy \) sí pertenece a \( \overline{G} \), y \( x \) e \( y \) quedan conectados directamente en \( \overline{G} \).
+        \item \( x \) e \( y \) pertenecen a la misma componente de \( G \). Como \( G \) es disconexo, existe otra componente distinta de la cual tomamos un vértice \( z \). Por el caso anterior aplicado a los pares \( x,z \) y \( z,y \), las aristas \( xz \) y \( zy \) pertenecen a \( \overline{G} \). Así, \( x - z - y \) es una sucesión de vértices adyacentes en \( \overline{G} \) que conecta a \( x \) con \( y \).
+    \end{enumerate}
+    En ambos casos hallamos una sucesión de vértices adyacentes en \( \overline{G} \) que conecta a \( x \) con \( y \). Como \( x \) e \( y \) eran arbitrarios, concluimos que \( \overline{G} \) es conexo. Por lo tanto, la afirmación es verdadera.
 \end{proof}
 
 \vspace{0.5cm}
