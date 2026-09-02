@@ -157,8 +157,8 @@
     Escribir todas las posibles matrices de adyacencia y de incidencia de \( P_3 \).
 \end{ejercicio}
 \begin{proof}
-    Recordemos que el grafo \( P_3 \) viene dado por:
-    \vspace{1cm}
+    Recordemos que la estructura del grafo camino \( P_3 \) consiste en 3 vértices y 2 aristas, donde siempre hay un vértice central (de grado 2) y dos extremos (de grado 1).
+    \vspace{0.5cm}
     \begin{center}
         \begin{tikzpicture}[
                 every node/.style={circle, draw, fill=black, inner sep=1.5pt},
@@ -169,23 +169,30 @@
             \draw[thick] (v1) -- (v2) -- (v3);
         \end{tikzpicture}
     \end{center}
-    \vspace{1cm}
-    Si consideramos \( P_3 \) con vértices \( v_1, v_2, v_3 \) y aristas \( e_1 = v_1v_2 \), \( e_2 = v_2v_3 \), entonces la matriz de adyacencia de \( P_3 \) es:
-    \[
-        A(P_3) = \begin{pmatrix}
-            0 & 1 & 0 \\
-            1 & 0 & 1 \\
-            0 & 1 & 0
-        \end{pmatrix},
-    \]
-    y la matriz de incidencia de \( P_3 \) es:
-    \[
-        B(P_3) = \begin{pmatrix}
-            1 & 0 \\
-            1 & 1 \\
-            0 & 1
-        \end{pmatrix}.
-    \]
+    \vspace{0.5cm}
+    Las diferentes matrices surgen al permutar las etiquetas de los vértices \( \{v_1, v_2, v_3\} \) y de las aristas \( \{e_1, e_2\} \).
+
+    \textbf{Matrices de adyacencia:} \par
+    Dependen únicamente de qué vértice se elija como el vértice central (el de grado 2). Existen \(\binom{3}{1} = 3\) posibilidades:
+    \begin{itemize}
+        \item Si el centro es \( v_2 \) (el camino es \( v_1 - v_2 - v_3 \)):
+              \[ A_1 = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix} \]
+        \item Si el centro es \( v_1 \) (el camino es \( v_2 - v_1 - v_3 \)):
+              \[ A_2 = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix} \]
+        \item Si el centro es \( v_3 \) (el camino es \( v_1 - v_3 - v_2 \)):
+              \[ A_3 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} \]
+    \end{itemize}
+
+    \textbf{Matrices de incidencia:} \par
+    Para cada una de las 3 elecciones del vértice central, existen \( 2! = 2 \) formas de ordenar las etiquetas de las aristas en las columnas. Esto nos da un total de 6 matrices posibles:
+    \begin{itemize}
+        \item Con \( v_2 \) como centro (\( e_1 \) y \( e_2 \) incidentes a \( v_2 \)):
+              \[ B_1 = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 0 & 1 \end{pmatrix}, \quad B_2 = \begin{pmatrix} 0 & 1 \\ 1 & 1 \\ 1 & 0 \end{pmatrix} \]
+        \item Con \( v_1 \) como centro (\( e_1 \) y \( e_2 \) incidentes a \( v_1 \)):
+              \[ B_3 = \begin{pmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad B_4 = \begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix} \]
+        \item Con \( v_3 \) como centro (\( e_1 \) y \( e_2 \) incidentes a \( v_3 \)):
+              \[ B_5 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}, \quad B_6 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \\ 1 & 1 \end{pmatrix} \]
+    \end{itemize}
 \end{proof}
 
 \begin{definition}
