@@ -1,0 +1,350 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usetikzlibrary{calc}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Teoría de Grafos}
+\author{Bustos Jordi\\Práctica II}
+
+\maketitle
+
+\begin{definition}
+    Un \textbf{recorrido} (o paseo) de longitud \( k \) en un grafo \( G \) es una sucesión alternada de vértices y aristas \( v_0, e_1, v_1, e_2, \ldots, e_k, v_k \) tal que, para todo \( i \in \{1, \ldots, k\} \), los extremos de \( e_i \) son \( v_{i-1} \) y \( v_i \). El recorrido se dice \textbf{cerrado} si \( v_0 = v_k \).
+\end{definition}
+
+\begin{definition}
+    Una \textbf{cadena} es un recorrido en el que no se repite ninguna arista.
+\end{definition}
+
+\begin{definition}
+    Un \textbf{camino} es un recorrido en el que no se repite ningún vértice (y, por lo tanto, tampoco ninguna arista).
+\end{definition}
+
+\begin{definition}
+    Un \textbf{ciclo} es una cadena cerrada no trivial (es decir, con al menos una arista) en la que no se repite ningún vértice, salvo el primero y el último, que coinciden.
+\end{definition}
+
+\begin{definition}\label{def:k4}
+    El ciclo \( K_1 \) diremos que es el loop y el ciclo \( K_2 \) es el ciclo de dos vértices con dos aristas.
+    Dado \( n \geq 3 \), el \textbf{grafo completo} \( K_n \) es el grafo simple de \( n \) vértices en el que cada par de vértices distintos es adyacente.
+\end{definition}
+
+\begin{center}
+    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node[label=above left:1] (v1) at (0,2) {};
+        \node[label=above right:2] (v2) at (2,2) {};
+        \node[label=below right:3] (v3) at (2,0) {};
+        \node[label=below left:4] (v4) at (0,0) {};
+
+        \draw[thick] (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+        \draw[thick] (v1) -- (v3);
+        \draw[thick] (v2) -- (v4);
+    \end{tikzpicture}
+    \\[.25cm]
+    El grafo completo \( K_4 \).
+\end{center}
+
+\begin{ejercicio}{1}
+    Determinar si las siguientes afirmaciones son verdaderas o falsas. Justificar en cada caso:
+    \begin{enumerate}
+        \item \( K_4 \) contiene un recorrido que no es una cadena.
+        \item \( K_4 \) contiene una cadena que no es cerrada y no es un camino.
+        \item \( K_4 \) contiene una cadena cerrada no trivial (con al menos una arista) que no es un ciclo.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sea \( K_4 \) el grafo como en \textbf{Definición\,\ref{def:k4}}.\begin{enumerate}
+        \item \( K_4 \) contiene un recorrido que no es una cadena, por ejemplo, un recorrido que repite una arista \( 12 - 21 \).
+        \item \( K_4 \) contiene una cadena que no es cerrada y no es un camino, por ejemplo, una cadena que repite un vértice pero no una arista \( 12 - 23 - 31 - 14 \).
+        \item Para que una cadena cerrada no trivial no sea un ciclo, la cadena debe repetir algún vértice (además del primero y el último). Si un recorrido pasa por un vértice, utiliza dos aristas distintas \( \implies \) Para que un vértice se repita en una cadena, debe tener grado al menos 4 dentro del subgrafo formado por el recorrido. Como en \( K_4 \) el grado máximo de cualquier vértice es 3 no puede existir ningún vértice con al menos 4 aristas incidentes y es imposible visitarlo más de una vez sin repetir aristas \( \therefore \) (c) es falsa.
+    \end{enumerate}
+\end{proof}
+
+\clearpage
+
+\begin{definition}
+    El grado de un vértice \( v \) en un grafo \( G \), denotado \( \deg(v) \), es el número de aristas incidentes a \( v \).
+\end{definition}
+
+\begin{definition}
+    La longitud de un recorrido, cadena o camino en un grafo es el número de aristas que contiene. Si \( R \) es el recorrido, notaremos \( \ell(R) \) a su longitud.
+\end{definition}
+
+\begin{definition}
+    Un grafo de Petersen es un grafo simple cuyos vértices son subconjuntos de dos elementos de un conjunto de cinco elementos tales que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+\end{definition}
+Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco elementos \( P = \{1,2,3,4,5\} \) y considerando todos los subconjuntos de dos elementos como vértices. Dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+\begin{center}
+    \begin{tikzpicture}[
+            vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt},
+        ]
+
+        \def\R{2.8}
+        \def\r{1.3}
+
+        \node[vertex] (o1) at (90:\R) {};
+        \node[above=3pt] at (o1) {12};
+
+        \node[vertex] (o2) at (18:\R) {};
+        \node[above right=2pt] at (o2) {34};
+
+        \node[vertex] (o3) at (306:\R) {};
+        \node[below right=2pt] at (o3) {51};
+
+        \node[vertex] (o4) at (234:\R) {};
+        \node[below left=2pt] at (o4) {23};
+
+        \node[vertex] (o5) at (162:\R) {};
+        \node[above left=2pt] at (o5) {45};
+
+        \node[vertex] (i1) at (90:\r) {};
+        \node[right=3pt] at (i1) {35};
+
+        \node[vertex] (i2) at (18:\r) {};
+        \node[below right=2pt] at (i2) {52};
+
+        \node[vertex] (i3) at (306:\r) {};
+        \node[left=3pt] at (i3) {24};
+
+        \node[vertex] (i4) at (234:\r) {};
+        \node[below right] at (i4) {41};
+
+        \node[vertex] (i5) at (162:\r) {};
+        \node[above right=2pt] at (i5) {13};
+
+        \draw[thick] (o1) -- (o2) -- (o3) -- (o4) -- (o5) -- (o1);
+
+        \draw[thick] (i1) -- (i3) -- (i5) -- (i2) -- (i4) -- (i1);
+
+        \foreach \x in {1,...,5} {
+                \draw[thick] (o\x) -- (i\x);
+            }
+
+    \end{tikzpicture}
+\end{center}
+
+\begin{ejercicio}{2}
+    Probar que el grafo de Petersen no tiene ciclos de longitud 7.
+\end{ejercicio}
+\begin{proof}
+    Es fácil ver que el grafo de Petersen no puede contener cíclos de longitud 3 pues por como está construido tener un ciclo de longitud 3 implicaría tener 3 subconjuntos dos a dos disjuntos de 2 elementos del conjunto \( P = \{1,2,3,4,5\} \), lo cual es imposible.
+
+    Para ver que no puede haber un ciclo de longitud 4, supongamos que existe uno de la forma \( u - v - w - x - u \). Por la definición de adyacencia, los vértices consecutivos deben ser conjuntos disjuntos. Sin pérdida de generalidad, supongamos que \( u = \{1, 2\} \). Como \( v \) es adyacente a \( u \), debe ser disjunto, por lo que podemos asumir que \( v = \{3, 4\} \).
+
+    El vértice \( w \) debe ser adyacente a \( v \), lo que implica que \( w \cap \{3, 4\} = \varnothing \). Por lo tanto, los dos elementos de \( w \) deben elegirse del conjunto restante \( \{1, 2, 5\} \). Además, \( w \neq u \) (pues son vértices distintos del ciclo), lo que nos obliga a que \( w \) contenga al 5 y a un elemento de \( u \). Supongamos s.p.d.g que \( w = \{1, 5\} \).
+
+    Finalmente, el vértice \( x \) debe cerrar el ciclo, por lo que debe ser adyacente tanto a \( w = \{1, 5\} \) como a \( u = \{1, 2\} \). Esto exige que \( x \) sea disjunto de ambos conjuntos, lo que significa que \( x \) no puede contener a los elementos 1, 2 ni 5.
+
+    Los únicos elementos disponibles en \( P \) para formar el subconjunto de dos elementos \( x \) son el 3 y el 4, forzando a que \( x = \{3, 4\} \). Pero esto implica que \( x = v \), lo cual es una contradicción porque un ciclo de longitud 4 requiere cuatro vértices distintos. Por lo tanto, no puede existir un ciclo de longitud 4.
+
+    Sea \( G \) el grafo de Petersen. Notemos en primer lugar que \( G \) es tal que todo vértice tiene grado 3.
+
+    Supongamos por el absurdo que existe un ciclo \( C \) de longitud 7 en \( G \). Sea \( S = V(G) \setminus V(C) \). Como el ciclo tiene 7 vértices y \( G \) tiene 10, debe ocurrir que \( |S| = 3 \).
+
+    Dado que \( \forall v \in V(G) \) vale que \( \deg(v) = 3 \), cada vértice \( v \in V(C) \) utiliza dos de sus tres aristas incidentes para formar el ciclo \( C \). La arista restante de cada vértice de \( C \) no puede conectar con otro vértice de \( C \), ya que esto dividiría al ciclo en ciclos más pequeños de longitud 3 o 4 lo cual no es posible. Por lo tanto, esas 7 aristas deben conectar necesariamente con vértices de \( S \).
+
+    Entonces tenemos 7 aristas que van desde \( C \) hacia los 3 vértices de \( S \). Sabemos que la suma de los grados de los vértices de \( S \) es \( 3 \times 3 = 9 \). Definamos \( k \) como el número de aristas internas en \( S \) (las que conectan dos vértices de \( S \)). Cada una de estas aristas internas consume 2 aristas del total disponible en el conjunto. Es decir, la cantidad de aristas que van de \( S \) a \( C \) está dada por \( 9 - 2k \). Igualando, tenemos \( 9 - 2k = 7 \implies 2k = 2 \implies k = 1 \).
+
+    Esto implica que en \( S \) hay exactamente una arista interna, por lo que uno de los vértices de \( S \) es aislado dentro de ese subconjunto. Sea \( z \) este vértice aislado en \( S \). Sabemos que las 3 aristas de \( z \) van directamente a parar a \( C \), conectando a \( z \) con 3 vértices distintos del ciclo.
+
+    Si enumeramos \( v_1, v_2, \ldots, v_7 \) a los vértices del ciclo en orden, entonces \( z \) debe estar conectado a tres de ellos, digamos \( v_i, v_j, v_k \). Sin pérdida de generalidad supongamos \( 1 \leq i < j < k \leq 7 \). Estas conexiones dividen al ciclo en 3 caminos sobre su contorno, cuyas longitudes son \( a = j-i \), \( b = k-j \), y \( c = 7 - k + i \).
+
+    La suma de las longitudes de estos caminos es \( a + b + c = 7 \). Como los tres son enteros positivos, si todos fueran mayores o iguales a 3, su suma sería al menos 9. Por lo tanto, obligatoriamente alguno de estos caminos debe tener longitud 1 o 2.
+    \begin{itemize}
+        \item Si un camino tiene longitud 1, los dos vértices en \( C \) son adyacentes y, junto con \( z \), forman un ciclo de longitud 3.
+        \item Si un camino tiene longitud 2, los vértices en \( C \) están separados por un solo vértice intermedio y, junto con \( z \), forman un ciclo de longitud 4.
+    \end{itemize}
+    Ambas situaciones son imposibles en el grafo de Petersen. Por lo tanto, no puede existir un ciclo de longitud 7.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Demostrar que, si todos los vértices de un grafo \( G \) simple y conexo tienen grado 2, entonces \( G \) es un ciclo. ¿Vale la misma conclusión si el grafo no es simple?
+\end{ejercicio}
+\begin{proof}
+    Consideremos un camino maximal en \(G\), dado por la sucesión de vértices \(P = v_1, v_2, \ldots, v_k\).
+    Analicemos el último vértice del camino, \(v_k\). Como \(\deg(v_k) = 2\), tiene exactamente dos aristas incidentes. Una de ellas lo conecta con \(v_{k-1}\). La otra arista debe conectarlo necesariamente con algún vértice que ya pertenece al camino \(P\). Si lo conectara con un vértice \(w \notin V(P)\), el camino podría extenderse a \(v_1, \ldots, v_k, w\), lo cual contradice que \(P\) sea un camino maximal.
+
+    Sea \(v_j\) (con \(1 \leq j \leq k-2\)) ese vértice de \(P\) adyacente a \(v_k\). La unión de esta arista con la porción del camino forma un ciclo \(C = v_j, v_{j+1}, \ldots, v_k, v_j\).
+
+    Ahora veamos que este ciclo abarca todo el grafo. Cada vértice en el subgrafo \(C\) ya tiene grado 2 utilizando únicamente las aristas que pertenecen al ciclo (una de entrada desde el vértice anterior y otra de salida hacia el siguiente). Como la hipótesis general indica que el grado de todo vértice en \(G\) es exactamente 2, ningún vértice de \(C\) puede tener aristas incidentes adicionales que lo conecten con vértices fuera de \(C\).
+
+    Dado que \(G\) es un grafo conexo, es imposible que existan vértices de \(G\) desconectados de \(C\). Por lo tanto, no hay vértices fuera del ciclo, de modo que \(V(G) = V(C)\) y \(E(G) = E(C)\). En consecuencia, \(G\) es exactamente el ciclo \(C\).
+
+    Si el grafo no es simple y contiene un lazo, entonces ese lazo por sí solo ya cumple con la condición de que el vértice involucrado tiene grado 2, pero como también es conexo, el grafo solo puede consistir en ese lazo, por lo tanto se concluye que el grafo es un ciclo de longitud 1. Un razonamiento análogo se puede aplicar a si contiene una arista múltiple.
+\end{proof}
+
+\clearpage
+
+\begin{algorithm}
+    \caption{Bubble Sort}
+    \label{alg:bubblesort}
+    \begin{algorithmic}[1] % El [1] es para enumerar cada línea
+        \Procedure{BubbleSort}{$A, n$}
+        \State \textbf{Entrada:} Una lista $A$ de $n$ elementos.
+        \State \textbf{Salida:} La lista $A$ ordenada de forma ascendente.
+        \vspace{0.2cm}
+        \For{$i \gets 1$ \textbf{hasta} $n-1$}
+        \For{$j \gets 1$ \textbf{hasta} $n-i$}
+        \If{$A[j] > A[j+1]$}
+        \State Intercambiar $A[j]$ y $A[j+1]$
+        \EndIf
+        \EndFor
+        \EndFor
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{ejercicio}{4}
+    Sea \( G_n \) el grafo cuyos vértices son las permutaciones de \( \{1, 2, \ldots, n\} \), con dos permutaciones adyacentes si y sólo si difieren en un intercambio de un par de elementos consecutivos. Probar que \( G_n \) es conexo.
+\end{ejercicio}
+\begin{proof}
+    La demostración es sencilla pues si demostramos que cualquier vértice del grafo está conectado al vértice correspondiente a la permutación identidad \( (1, 2, \ldots, n) \), entonces todos los vértices estarán conectados entre sí, lo que implica que el grafo es conexo.
+
+    Sea cualquier permutación \( \sigma = (\sigma(1), \sigma(2), \ldots, \sigma(n)) \) de \( \{1, 2, \ldots, n\} \). Queremos mostrar que existe un camino en \( G_n \) que conecta \( \sigma \) con la permutación identidad \( (1, 2, \ldots, n) \).  Pero esto es muy sencillo pues si aplicamos el algoritmo Bubble Sort a \( \sigma \), cada intercambio de elementos consecutivos corresponde a una arista en \( G_n \), y al finalizar el algoritmo obtenemos la permutación identidad. Por lo tanto, existe un camino en \( G_n \) desde cualquier vértice hasta la permutación identidad, lo que demuestra que \( G_n \) es conexo.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Una \textbf{componente conexa} de un grafo \( G \) es un subgrafo conexo maximal de \( G \), es decir, un subgrafo conexo que no está contenido en ningún subgrafo conexo más grande de \( G \).
+\end{definition}
+
+\begin{ejercicio}{5}
+    Sea \( G \) el grafo simple con conjunto de vértices \( \{1, 2, \ldots, 15\} \) tal que \( i \) y \( j \) son adyacentes si y sólo si su máximo común divisor es mayor que 1. Contar las componentes conexas de \( G \) y hallar un camino de longitud máxima en \( G \).
+\end{ejercicio}
+\begin{proof}
+    Analicemos si \( G \) posee vértices aislados, es decir, vértices que no son adyacentes a ningún otro vértice. Un vértice \( i \) será aislado si y sólo si \(\gcd(i,j) = 1\) para todo \( j \neq i \). Observemos que los números primos mayores que 7 (es decir, 11, 13) serán aislados, ya que no tienen divisores comunes con ningún otro vértice en el conjunto \( \{1, 2, \ldots, 15\} \). Por lo tanto, los vértices aislados son \( 11 \) y \( 13 \). Como \( \gcd(i, 1) = 1 \) para todo \( i \neq 1 \), el vértice 1 es aislado.
+
+    Ahora consideremos los vértices no aislados: \( \{2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15\} \). Podemos agruparlos según sus divisores primos:
+    \begin{itemize}
+        \item Múltiplos de 2: \(2, 4, 6, 8, 10, 12, 14\)
+        \item Múltiplos de 3: \(3, 6, 9, 12, 15\)
+        \item Múltiplos de 5: \(5, 10, 15\)
+        \item Múltiplos de 7: \(7, 14\)
+    \end{itemize}
+
+    Como algunos vértices pertenecen a más de un grupo, estos vértices actúan como puentes que conectan los diferentes subgrupos. Por ejemplo, el vértice 6 conecta los múltiplos de 2 y 3, el vértice 10 conecta los múltiplos de 2 y 5, y el vértice 14 conecta los múltiplos de 2 y 7. Por lo tanto, todos los vértices no aislados están conectados entre sí, formando una única componente conexa.
+
+    En conclusión, \( G \) tiene 4 componentes conexas: \( \{ 1 \} \), \( \{11\} \), \( \{13\} \) y \( \{2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15\} \).
+
+    Un camino de longitud máxima en la componente conexa grande puede ser \[ 7 - 14 - 2 - 4 - 8 - 10 - 5 - 15 - 3 - 9 - 6 - 12 \]
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Probar que un grafo es conexo si y sólo si, para cada partición de sus vértices en dos conjuntos no vacíos, existe una arista con extremos en ambos conjuntos.
+\end{ejercicio}
+\begin{proof}
+    (\( \Rightarrow \)) Supongamos que \( G \) es conexo y consideremos una partición cualquiera de sus vértices en dos conjuntos no vacíos \( A \) y \( B \). Tomemos un vértice \( u \in A \) y un vértice \( v \in B \). Como \( G \) es conexo, existe un camino que une \( u \) con \( v \).
+
+    Al recorrer los vértices de este camino partiendo desde \( u \in A \) hasta llegar a \( v \in B \), tiene que existir un primer vértice en el camino que pertenezca a \( B \). Llamémoslo \( y \). El vértice inmediatamente anterior a \( y \) en el camino, llamémoslo \( x \), debe estar en \( A \) por ser \( y \) el primero en \( B \). La arista que une a \( x \) con \( y \) es la arista buscada, ya que tiene un extremo en \( A \) y otro en \( B \).
+
+    (\( \Leftarrow \)) Supongamos que para cada partición de \( V(G) \) en dos conjuntos disjuntos y no vacíos, existe al menos una arista que los conecta. Queremos probar que \( G \) es conexo.
+
+    Sea \( u \in V(G) \). Definamos al conjunto \( A \) como la componente conexa de \( u \), es decir, el conjunto de todos los vértices de \( G \) a los que se puede llegar desde \( u \) mediante algún camino (notemos que \( u \in A \), por lo que \( A \neq \varnothing \)).
+
+    Supongamos por el absurdo que \( G \) no es conexo. Entonces existe al menos un vértice al que no se puede llegar desde \( u \), lo que implica que el conjunto \( B = V(G) \setminus A \) es no vacío. Tenemos entonces una partición de \( V(G) \) en dos conjuntos no vacíos \( A \) y \( B \).
+
+    Por hipótesis, debe existir una arista con un extremo \( x \in A \) y otro extremo \( y \in B \). Sin embargo, como \( x \in A \), existe un camino desde \( u \) hasta \( x \). Si a ese camino le agregamos la arista \( x-y \), obtenemos un camino desde \( u \) hasta \( y \). Esto significa que \( y \) es alcanzable desde \( u \), por lo que \( y \in A \), lo cual contradice que \( y \in B \).
+
+    Esta contradicción proviene de suponer que \( B \) era no vacío. Por lo tanto, \( B = \varnothing \), lo que implica que \( A = V(G) \). Como todos los vértices son alcanzables desde \( u \), el grafo es conexo.
+
+    \vspace{0.1cm}
+
+    Entiendo que la recíproca se podría demostrar de una manera más sencilla en grafos finitos eligiendo la partición \( V(G) = \{ u \} \cup V(G) \setminus \{ u \} \). Tomando el vértice que cumple la hipótesis \( w_1 \in V(G) \setminus \{ u \} \) y aplicando inductivamente el argumento a \( A = V(G) \setminus \{ u, w_1 \} \) y \( B = \{ u, w_1\} \) hasta agotar todos los vértices del grafo o dar con \( v \). Pero no vale en grafos con vértices infinitos pues podríamos no terminar de recorrer todos los vértices.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Sean \( P \) y \( Q \) caminos de máxima longitud en un grafo conexo. Probar que \( P \) y \( Q \) tienen un vértice en común.
+\end{ejercicio}
+\begin{proof}
+    Supongamos por el absurdo que \( P \) y \( Q \) no tienen ningún vértice en común y ambos son caminos de máxima longitud \( k \) en el grafo conexo \( G \). Dado que \( G \) es conexo, debe existir un camino que conecte algún vértice de \( P \) con algún vértice de \( Q \).
+
+    Sean \( u \in P \) y \( v \in Q \) los extremos del camino más corto que conecta a \( P \) y \( Q \). El vértice \( u \) divide a \( P \) en dos subcaminos; tomemos el que tenga mayor o igual longitud (el cual medirá al menos \( k/2 \)). Análogamente, el vértice \( v \) divide a \( Q \) en dos subcaminos; tomemos también el de mayor o igual longitud (que medirá al menos \( k/2 \)).
+
+    Entonces, al unir el subcamino de mayor longitud de \( P \) que termina en \( u \), el camino que conecta \( u \) con \( v \) (cuya longitud es al menos 1), y el subcamino de mayor longitud de \( Q \) que empieza en \( v \), obtenemos un nuevo camino simple cuya longitud es al menos \( k/2 + 1 + k/2 = k + 1 \). Esto es estrictamente mayor que \( k \), lo cual contradice la maximalidad de las longitudes de \( P \) y \( Q \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Dado un grafo \( G \), el \textbf{complemento} de \( G \), denotado \( \overline{G} \), es el grafo con el mismo conjunto de vértices que \( G \) en el que dos vértices distintos son adyacentes si y sólo si no lo son en \( G \).
+\end{definition}
+
+\begin{definition}
+    Un \textbf{vértice de corte} de un grafo conexo \( G \) es un vértice \( v \) tal que \( G - v \) tiene más de una componente conexa que \( G \).
+\end{definition}
+
+\begin{ejercicio}{8}
+    Sea \( v \) un vértice de corte de un grafo simple \( G \). Probar que \( \overline{G} - v \) es conexo.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Dos grafos simples \( G \) y \( H \) son \textbf{isomorfos} \( \iff \) existe una biyección \( f : V(G) \to V(H) \) tal que \( \{u,v\} \in E(G) \iff \{f(u), f(v)\} \in E(H) \) para todo \( u,v \in V(G) \).
+\end{definition}
+
+\begin{definition}
+    Un grafo \( G \) se dice \textbf{auto-complementario} si es isomorfo a su complemento \( \overline{G} \).
+\end{definition}
+
+\begin{ejercicio}{9}
+    Sea \( G \) un grafo auto-complementario (es isomorfo a su complemento). Probar que \( G \) tiene un vértice de corte si y sólo si \( G \) tiene un vértice de grado 1.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+    Dado un grafo \( G \) y un subconjunto de vértices \( S \subseteq V(G) \), el \textbf{subgrafo inducido} por \( S \), denotado \( G[S] \), es el grafo con conjunto de vértices \( S \) cuyas aristas son exactamente las aristas de \( G \) con ambos extremos en \( S \).
+\end{definition}
+
+\begin{definition}
+    Un vértice \( v \) de un grafo \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \).
+\end{definition}
+
+\begin{ejercicio}{10}
+    Sea \( G \) un grafo simple sin vértices aislados y con ningún subgrafo inducido que posea exactamente dos aristas. Probar que \( G \) es completo.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
