@@ -1,0 +1,269 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                        % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                          % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                           % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                 % Normed space (E, ||.||); use \EN or \EN[F]
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                          % Si y sólo si
+\newcommand{\imp}{\implies}                      % Implies
+\newcommand{\setdiff}{\smallsetminus}            % Set difference
+\newcommand{\diam}{\text{diam}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Práctica II}
+\author{Bustos Jordi\\Funcionales y Operadores en espacios de Banach}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sea \(E\) un espacio vectorial. Demostrar que si \(\varphi:E\to\C\) es un funcional lineal no nulo entonces \(\operatorname{im}(\varphi)=\C\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sean \(E\) un espacio vectorial normado sobre \(\R\) y \(\varphi:E\to\R\) un funcional lineal. Probar
+    \begin{enumerate}
+        \item Si \(\varphi\) no es acotado entonces toma todos los valores reales en cualquier entorno del \(0\).
+        \item Si \(\varphi\) no es acotado entonces \(\ker(\varphi)\) es denso.
+        \item \(\varphi\) es continuo si, y sólo si, \(\forall c\in\R\) los conjuntos \(\{x:\varphi(x)<c\}\) y \(\{x:\varphi(x)>c\}\) son abiertos.
+        \item Si \(A\subseteq E\) tiene interior no vacío y existe \(a\in\R\) tal que \(\varphi(x)\geq a\) para todo \(x\in A\), entonces \(\varphi\) es continuo.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Probar que los siguientes funcionales son lineales, continuos y hallar sus normas.
+    \begin{enumerate}
+        \item \(\varphi:c\to\C\), \(\varphi(x):=\displaystyle\lim_{n\to\infty}x_n\).
+        \item \(\varphi:L^2([-1,1])\to\C\), \(\varphi(f):=\displaystyle\int_{-1}^1 tf(t)\,dt\).
+        \item \(\varphi:\ell^\infty\to\C\), \(\varphi(x):=x_1+x_2\).
+        \item \(\varphi:\ell^2\to\C\), \(\varphi(x):=x_1+x_2\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \(\varphi:(C[0,1],\norm{\cdot}_\infty)\to\R\) dada por
+    \[
+        \varphi(f)=\int_0^1 f(x)\,dx - f\left(\frac12\right).
+    \]
+    \begin{enumerate}
+        \item Probar que \(\varphi\) es acotado y hallar su norma.
+        \item Justificar, si existe o no, \(f\in C[0,1]\) tal que \(\norm{f}_\infty=1\) y \(|\varphi(f)|=2\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Probar que la siguiente aplicación lineal \(T:\ell^p\to\ell^p\), \(1\leq p\leq\infty\), es continua y calcular su norma:
+    \[
+        T(x_1,x_2,x_3,\dots)=(x_n,x_{n-1},\dots,x_2,x_1,x_{n+1},x_{n+2},\dots).
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Sea \(T:\ell^1\to\ell^1\) un operador lineal definido por
+    \[
+        T(x_1,x_2,x_3,\dots)=\left(2x_2,\frac32 x_3,\frac43 x_4,\dots\right).
+    \]
+    \begin{enumerate}
+        \item Probar que \(T\) es acotado y hallar su norma.
+        \item Más aún, hallar \(T^n(x_1,x_2,x_3,\dots)\) explícitamente y calcular \(\norm{T^n}\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Sea \(\{a_n\}_{n\in\N}\) una sucesión acotada en un espacio de Banach \(E\). Demostrar que la aplicación \(T:\ell^1\to E\) definida por
+    \[
+        T(x)=\sum_{n\in\N} a_n x_n,
+    \]
+    es lineal, continua y \(\norm{T}=\sup_{n\in\N}\norm{a_n}\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Sea \(E\) un espacio vectorial normado, probar que si \(\varphi,\psi\in E'\) son tales que \(\varphi\cdot\psi\equiv 0\), entonces \(\varphi\equiv 0\) o \(\psi\equiv 0\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+    Operadores shift. Sea \(1\leq p<\infty\). Consideremos los operadores \(S,T:\ell^p\to\ell^p\) dados por
+    \[
+        S(x_1,x_2,x_3,\dots)=(0,x_1,x_2,x_3,\dots) \quad \text{(shift a derecha)}.
+    \]
+    \[
+        T(x_1,x_2,x_3,\dots)=(x_2,x_3,x_4,\dots) \quad \text{(shift a izquierda)}.
+    \]
+    \begin{enumerate}
+        \item Probar que \(S\in L(\ell^p)\) y es inyectivo. Calcular su norma.
+        \item Probar que \(T\in L(\ell^p)\) y es suryectivo. Calcular su norma.
+        \item Probar que \(TS=I\) pero \(ST\neq I\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+    Operadores multiplicación.
+    \begin{enumerate}
+        \item Sea \(\varphi\in C([0,1])\). Consideremos el operador \(M_\varphi:C([0,1])\to C([0,1])\) dado por
+              \[
+                  M_\varphi(f)=\varphi f.
+              \]
+              Probar que \(M_\varphi\in L(C([0,1]))\) y calcular su norma.
+        \item Sea \(\varphi\in L^\infty([0,1])\). Consideremos el operador \(M_\varphi:L^2([0,1])\to L^2([0,1])\) dado por
+              \[
+                  M_\varphi(f)=\varphi f.
+              \]
+              Probar que \(M_\varphi\in L(L^2([0,1]))\) y que
+              \[
+                  M_\varphi^2=M_\varphi \iff \varphi \text{ es una función característica.}
+              \]
+        \item Sea \(\{a_n\}_{n\in\N}\) una sucesión de números complejos. Si \(1\leq p<\infty\), definimos el operador \(A:\ell^p\to\ell^p\) dado por \(A(\{x_n\}_n)=\{x_n a_n\}_n\). Probar que:
+              \begin{enumerate}
+                  \item El operador \(A\) está bien definido si, y sólo si, \(\{a_n\}_{n\in\N}\in\ell^\infty\).
+                  \item El operador \(A\) es inyectivo si, y sólo si, \(a_n\neq 0,\ \forall n\geq 1\).
+                  \item \(A\) es un isomorfismo si, y sólo si, \(\{1/a_n\}_{n\in\N}\in\ell^\infty\).
+              \end{enumerate}
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+    Operadores integrales.
+    \begin{enumerate}
+        \item Sea \(E\) un espacio de Banach y \(T\in L(E)\). Probar que
+              \begin{enumerate}
+                  \item Si \(T\) está acotado inferiormente entonces \(R(T)\) es cerrado.
+                  \item \(T\) está acotado inferiormente y es suryectivo si, y sólo si, \(T\) es inversible.
+                  \item Si \(V:L^2[0,1]\to L^2[0,1]\) es el operador de Volterra dado por
+                        \[
+                            Vf(x)=\int_0^x f(t)\,dt,
+                        \]
+                        probar que \(V\) no está acotado inferiormente.
+              \end{enumerate}
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{12}
+    Sea \(E\) un espacio de Banach. Consideremos \(A,B\in L(E)\) y las sucesiones \(\{A_n\}_{n\in\N}\), \(\{B_n\}_{n\in\N}\in L(E)\). Probar que:
+    \begin{enumerate}
+        \item \(\norm{AB}\leq\norm{A}\norm{B}\).
+        \item Si \(A_n\xrightarrow[n\to\infty]{} A\) y \(B_n\xrightarrow[n\to\infty]{} B\) entonces \(A_nB_n\xrightarrow[n\to\infty]{} AB\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{13}
+    Sea \(E\) un espacio de Banach y sea \(A\in L(E)\) tal que \(\norm{A}<1\). Demostrar que \(I-A\) es inversible con
+    \[
+        (I-A)^{-1}=\sum_{n=0}^\infty A^n \quad \text{y} \quad \norm{(I-A)^{-1}}\leq\frac{1}{1-\norm{A}}.
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{14}
+    Sea \(E\) un espacio de Banach. Probar que \(Gl(E):=\{T\in L(E):T \text{ es inversible}\}\) es abierto en \(L(E)\).
+
+    \textit{Sugerencia}: sea \(A\in L(E)\) un operador inversible, probar que \(\bola{A}{\frac{1}{\norm{A^{-1}}}}\subset Gl(E)\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{15}
+    Sea \(E\) un espacio de Banach. Consideremos una sucesión \(\{A_n\}_{n\in\N}\in L(E)\) de operadores inversibles tal que \(A_n\xrightarrow[n\to\infty]{} A\), para \(A\in L(E)\) no inversible. Probar que
+    \[
+        \norm{A_n^{-1}}\xrightarrow[n\to\infty]{}\infty.
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
