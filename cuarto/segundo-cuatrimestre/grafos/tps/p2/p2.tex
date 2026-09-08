@@ -312,9 +312,23 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     Sea \( v \) un vértice de corte de un grafo simple \( G \). Probar que \( \overline{G} - v \) es conexo.
 \end{ejercicio}
 \begin{proof}
+    Como \( v \) es un vértice de corte de \( G \), el subgrafo \( G - v \) tiene al menos dos componentes conexas. Sean \( C_1, C_2, \dots, C_k \) los conjuntos de vértices de dichas componentes conexas, con \( k \ge 2 \).
 
+    Sean \( x, y \in V(\overline{G} - v) \) dos vértices distintos cualesquiera. Como \( V(\overline{G} - v) = V(G) \setminus \{v\} \), sabemos que \( x \) e \( y \) son vértices de \( G - v \). Veamos que existe un camino entre ellos en \( \overline{G} - v \) analizando dos casos:
+
+    \begin{enumerate}
+        \item[I:] \( x \) e \( y \) pertenecen a distintas componentes conexas de \( G - v \).
+              Supongamos sin pérdida de generalidad que \( x \in C_1 \) e \( y \in C_2 \). Al pertenecer a componentes conexas distintas de \( G - v \), no existe ninguna arista que los una en \( G - v \), y por lo tanto tampoco existe en \( G \). Por la definición de grafo complemento, la arista \( xy \) debe existir en \( \overline{G} \). Como ni \( x \) ni \( y \) son el vértice \( v \), la arista \( xy \) se preserva en \( \overline{G} - v \). Así, \( x \) e \( y \) son adyacentes y están directamente conectados.
+        \item[II:] \( x \) e \( y \) pertenecen a la misma componente conexa de \( G - v \).
+              Supongamos que \( x, y \in C_1 \). Como \( k \ge 2 \), existe al menos otra componente conexa \( C_2 \) en \( G - v \). Tomemos un vértice cualquiera \( z \in C_2 \).
+              Aplicando el razonamiento del anterior, como \( x \in C_1 \) y \( z \in C_2 \), la arista \( xz \) existe en \( \overline{G} - v \). De manera análoga, como \( y \in C_1 \) y \( z \in C_2 \), la arista \( yz \) también existe en \( \overline{G} - v \).
+              Por lo tanto, existe el camino \( x - z - y \) en \( \overline{G} - v \), lo que demuestra que \( x \) e \( y \) están conectados.
+    \end{enumerate}
+
+    En ambos casos hemos encontrado un camino que conecta a \( x \) e \( y \) en \( \overline{G} - v \). Como \( x \) e \( y \) eran arbitrarios, vale que \( \overline{G} - v \) es conexo.
+
+    Notar que el razonamiento es análogo al \textbf{Ejercicio 3} de la Práctica I.
 \end{proof}
-
 \vspace{0.5cm}
 
 \begin{definition}
@@ -326,25 +340,55 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 \end{definition}
 
 \begin{ejercicio}{9}
-    Sea \( G \) un grafo auto-complementario (es isomorfo a su complemento). Probar que \( G \) tiene un vértice de corte si y sólo si \( G \) tiene un vértice de grado 1.
+    Sea \( G \) un grafo auto-complementario. Probar que \( G \) tiene un vértice de corte si y sólo si \( G \) tiene un vértice de grado 1.
 \end{ejercicio}
 \begin{proof}
+    Notar que para ser auto-complementario no trivial, \( G \) debe tener al menos 4 vértices.
 
+    \( (\implies) \) Sea \( v \) un vértice de corte de \( G \). Entonces \( G - v \) es disconexo y sus vértices se particionan en las componentes conexas \( C_1, C_2, \dots, C_k \) con \( k \ge 2 \).
+    En \( \overline{G} \), cualquier vértice de \( C_i \) es adyacente a todos los vértices de \( C_j \quad \forall i \neq j \).
+    Debido a que el isomorfismo preserva la estructura, \( \overline{G} \) debe tener un vértice de corte. Sea \( w \) dicho vértice de corte en \( \overline{G} \).
+    Si eliminamos \( w \) de \( \overline{G} \), los vértices restantes de \( V(G) \setminus \{v, w\} \) siguen formando un subgrafo conexo, ya entre los \( C_i \) asegura que exista un camino entre cualquier par de vértices (como \( n \ge 4 \), siempre hay suficientes vértices para mantener la conexión).
+    Por lo tanto, la única forma en que la eliminación de \( w \) pueda desconectar a \( \overline{G} \) es si \( w \) aísla a \( v \) del resto del grafo. Esto implica que \( v \) está conectado únicamente a \( w \) en \( \overline{G} \), lo que significa que el grado de \( v \) en \( \overline{G} \) es 1. Al ser \( G \) y \( \overline{G} \) isomorfos, \( G \) también debe tener un vértice de grado 1.
+
+    \( (\impliedby) \) Sea \( x \) un vértice de grado 1 en \( G \), y sea \( u \) su único vecino.
+    Como \( G \) es auto-complementario no trivial, su cantidad de vértices es \( n \ge 4 \).
+    Consideremos el subgrafo \( G - u \). Al eliminar el vértice \( u \), el vértice \( x \) pierde su única arista incidente, quedando aislado.
+    Dado que originalmente el grafo tenía al menos 4 vértices, \( G - u \) contiene a \( x \) y al menos a otros dos vértices. Por lo tanto, \( G - u \) se descompone en al menos dos componentes conexas \( \therefore u \) es un vértice de corte en \( G \).
 \end{proof}
+
+\clearpage
 
 \begin{definition}
     Dado un grafo \( G \) y un subconjunto de vértices \( S \subseteq V(G) \), el \textbf{subgrafo inducido} por \( S \), denotado \( G[S] \), es el grafo con conjunto de vértices \( S \) cuyas aristas son exactamente las aristas de \( G \) con ambos extremos en \( S \).
 \end{definition}
 
 \begin{definition}
-    Un vértice \( v \) de un grafo \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \).
+    Un vértice \( v \) de un grafo \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \) i.e no tiene vecinos.
 \end{definition}
 
 \begin{ejercicio}{10}
     Sea \( G \) un grafo simple sin vértices aislados y con ningún subgrafo inducido que posea exactamente dos aristas. Probar que \( G \) es completo.
 \end{ejercicio}
-\begin{proof}
 
+\begin{proof}
+    Supongamos por el absurdo que \( G \) no es completo. Entonces, existen al menos dos vértices \( u, v \in V(G) \) tal que \( uv \notin E(G) \). Como \( G \) no tiene vértices aislados, \( \exists x \in V(G) \setminus \{ u, v\} \) adyacente a \( u \), y \( \exists y \in V(G) \setminus \{ u, v\} \) adyacente a \( v \).
+
+    \textbf{Caso 1}: \( u \) y \( v \) tienen un vecino en común. \\
+    Sea \( w \) un vértice adyacente tanto a \( u \) como a \( v \). Consideremos el subgrafo inducido por el conjunto de vértices \( S = \{u, v, w\} \). Las únicas aristas en este subgrafo son \( uw \) y \( vw \) (ya que \( uv \notin E(G) \)). Por lo tanto, \( G[S] \) tiene exactamente dos aristas, lo cual contradice la hipótesis.
+
+    \textbf{Caso 2}: \( u \) y \( v \) no tienen vecinos en común. \\
+    Como no comparten vecinos, el vértice \( x \) (vecino de \( u \)) no es adyacente a \( v \), y el vértice \( y \) (vecino de \( v \)) no es adyacente a \( u \). Notemos también que obligatoriamente \( x \neq y \). Consideremos si \( x \) e \( y \) son adyacentes entre sí:
+
+    \begin{itemize}
+        \item \textbf{Subcaso 2.1}: \( xy \notin E(G) \). \\
+              Consideremos el subgrafo inducido por \( S = \{u, v, x, y\} \). Las únicas aristas presentes en este subgrafo son \( ux \) y \( vy \). Este subgrafo tiene exactamente dos aristas, lo cual es una contradicción.
+
+        \item \textbf{Subcaso 2.2}: \( xy \in E(G) \). \\
+              Consideremos el subgrafo inducido por \( S = \{u, x, y\} \). Sabemos que \( ux \in E(G) \) y \( xy \in E(G) \). Además, sabemos que \( uy \notin E(G) \) (porque \( u \) y \( v \) no comparten vecinos, e \( y \) es un vecino de \( v \)). Este subgrafo de tres vértices tiene exactamente dos aristas \( ux \) y \( xy \), contradiciendo la hipótesis.
+    \end{itemize}
+
+    En todos los casos posibles, la suposición de que \( G \) no es completo nos lleva a encontrar un subgrafo inducido con exactamente dos aristas \( \therefore G \) debe ser completo.
 \end{proof}
 
 \end{document}
