@@ -446,7 +446,49 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Recordemos que el cociente de un espacio normado \( E \) con un subespacio cerrado \( F \) es el espacio \( E/F \) con la norma cociente definida por:
+    \[
+        \norm{\pi(x)} = d(x, F) = \inf_{y \in F} \norm{x - y}
+    \]
 
+    Veamos que \( \norm{\cdot}_Q \) es una seminorma. Sean \( x, y \in \ell^\infty \) y \( \alpha \in \R \) (o \( \C \)):
+    \begin{enumerate}
+        \item Positividad: \( \norm{x}_Q = \limsup_{n\to\infty} |x_n| \geq 0 \).
+        \item Homogeneidad: \( \norm{\alpha x}_Q = \limsup_{n\to\infty} |\alpha x_n| = |\alpha| \limsup_{n\to\infty} |x_n| = |\alpha| \norm{x}_Q \).
+        \item Desigualdad triangular: \( \norm{x+y}_Q = \limsup_{n\to\infty} |x_n + y_n| \leq \limsup_{n\to\infty} (|x_n| + |y_n|) \leq \limsup_{n\to\infty} |x_n| + \limsup_{n\to\infty} |y_n| = \norm{x}_Q + \norm{y}_Q \).
+    \end{enumerate}
+    Además, \( \norm{x}_Q = 0 \) si y sólo si \( \limsup_{n\to\infty} |x_n| = 0 \), lo que equivale a decir que \( x_n \to 0 \), es decir, \( x \in c_0 \).
+
+    Probaremos que \( \norm{Qx} = \norm{x}_Q \) mostrando ambas desigualdades. Sea \( L = \norm{x}_Q = \limsup_{n\to\infty} |x_n| \).
+
+    Por un lado, para cualquier sucesión \( c = (c_n) \in c_0 \), como \( c_n \to 0 \), los límites superiores coinciden:
+    \[
+        \limsup_{n \to \infty} |x_n - c_n| = \limsup_{n \to \infty} |x_n| = L
+    \]
+    Dado que el supremo de una sucesión siempre acota superiormente a su límite superior, tenemos \( \norm{x - c}_\infty \ge L \). Tomando el ínfimo sobre todo \( c \in c_0 \), obtenemos \( \norm{Qx} \ge L = \norm{x}_Q \).
+
+    Por otro lado, construyamos un \( c \in c_0 \) específico. Definimos \( c_n \) como:
+    \[
+        c_n = \begin{cases}
+            x_n - L \frac{x_n}{|x_n|} & \text{si } |x_n| > L   \\
+            0                         & \text{si } |x_n| \le L
+        \end{cases}
+    \]
+    Veamos que \( c \in c_0 \): dado \( \varepsilon > 0 \), por definición de límite superior, existe un \( N \in \N \) tal que para todo \( n \ge N \), \( |x_n| < L + \varepsilon \).
+    Para estos \( n \), si \( |x_n| > L \) entonces \( |c_n| = |x_n| - L < \varepsilon \). Si \( |x_n| \le L \), entonces \( |c_n| = 0 < \varepsilon \). En cualquier caso, \( |c_n| < \varepsilon \) para \( n \ge N \), por lo que \( c \in c_0 \).
+
+    Ahora, estimemos la norma infinito de \( x - c \):
+    \[
+        x_n - c_n = \begin{cases}
+            L \frac{x_n}{|x_n|} & \text{si } |x_n| > L   \\
+            x_n                 & \text{si } |x_n| \le L
+        \end{cases}
+    \]
+    En ambos casos, \( |x_n - c_n| \le L \). Por lo tanto, \( \norm{x - c}_\infty \le L \).
+
+    Como hemos encontrado un elemento en \( c_0 \) cuya distancia a \( x \) es \( \le L \), concluimos que \[ \norm{Qx} = \inf_{c \in c_0} \norm{x - c}_\infty \le L = \norm{x}_Q \]
+
+    De ambas desigualdades se sigue que \( \norm{Qx} = \norm{x}_Q \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -455,7 +497,39 @@
     Sean \(E\) un espacio normado y \(F\) un subespacio de \(E\). Probar que si \(F\) y \(E/F\) son completos, entonces \(E\) también lo es.
 \end{ejercicio}
 \begin{proof}
+    Usaremos el criterio del \textbf{Ejercicio 6(d)}: basta ver que toda serie absolutamente convergente en \(E\) converge en \(E\).
 
+    Sea \( {\{x_n\}}_{n\in\N} \subset E \) tal que \( \sum_{n\in\N} \norm{x_n} < \infty \). Como la norma cociente satisface
+    \[
+        \norm{\pi(x)} = \inf_{y\in F} \norm{x-y} \leq \norm{x-0} = \norm{x} \quad \text{para todo } x \in E,
+    \]
+    tenemos \( \norm{\pi(x_n)} \leq \norm{x_n} \) para todo \(n\), luego \( \sum_{n\in\N} \norm{\pi(x_n)} \leq \sum_{n\in\N} \norm{x_n} < \infty \).
+
+    Como \(E/F\) es completo, por el Ejercicio 6(d) aplicado a \(E/F\), la serie \( \sum_{n\in\N} \pi(x_n) \) converge en \(E/F\) a algún \( \xi \in E/F \).
+
+    Sea \( s_N := \sum_{n=1}^N x_n \) la sucesión de sumas parciales en \(E\). Como \( \pi \) es lineal, \( \pi(s_N) \to \xi \) en \(E/F\). Elijamos \( x \in E \) tal que \( \pi(x) = \xi \) (posible pues \( \pi \) es sobreyectiva). Entonces
+    \[
+        \norm{\pi(s_N - x)} = \norm{\pi(s_N) - \xi} \to 0, \quad \text{es decir,} \quad d(s_N - x, F) \to 0.
+    \]
+
+    Para cada \(N\), por definición de ínfimo, elijamos \( y_N \in F \) tal que
+    \[
+        \norm{s_N - x - y_N} < d(s_N - x, F) + \frac{1}{N} =: \epsilon_N \xrightarrow{N\to\infty} 0.
+    \]
+
+    Veamos que \( {\{y_N\}} \) es de Cauchy en \(F\). Para \( M < N \):
+    \begin{align*}
+        \norm{y_N - y_M} & \leq \norm{y_N - (s_N-x)} + \norm{(s_N-x)-(s_M-x)} + \norm{(s_M-x)-y_M}                            \\
+                         & < \epsilon_N + \norm{s_N - s_M} + \epsilon_M = \epsilon_N + \epsilon_M + \norm{\sum_{n=M+1}^N x_n} \\
+                         & \leq \epsilon_N + \epsilon_M + \sum_{n=M+1}^N \norm{x_n}.
+    \end{align*}
+    Como \( \epsilon_N \to 0 \) y la cola de la serie \( \sum \norm{x_n} \) tiende a \(0\), el lado derecho tiende a \(0\) cuando \( M,N \to \infty \), por lo que \( {\{y_N\}} \) es de Cauchy en \(F\).
+
+    Como \(F\) es completo, \( y_N \to y \) para algún \( y \in F \). Finalmente,
+    \[
+        \norm{s_N - (x+y)} \leq \norm{s_N - x - y_N} + \norm{y_N - y} < \epsilon_N + \norm{y_N - y} \xrightarrow{N\to\infty} 0,
+    \]
+    por lo que \( s_N \to x+y \in E \). Esto muestra que \( \sum_{n\in\N} x_n \) converge en \(E\), y por el Ejercicio 6(d), \(E\) es completo.
 \end{proof}
 
 \vspace{0.5cm}
@@ -469,7 +543,31 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    \begin{enumerate}
+        \item Sea \( D = {\{d_n\}}_{n\in\N} \) un conjunto numerable denso en \(E\). Como vimos en el Ejercicio 12, la proyección al cociente satisface \( \norm{\pi(x)} \leq \norm{x} \) para todo \( x \in E \), es decir, \( \pi \) es \(1\)-Lipschitz.
 
+              Sea \( \xi \in E/F \), digamos \( \xi = \pi(x) \) con \( x \in E \), y sea \( \epsilon > 0 \). Como \(D\) es denso, existe \( d_n \in D \) tal que \( \norm{x - d_n} < \epsilon \). Luego
+              \[
+                  \norm{\xi - \pi(d_n)} = \norm{\pi(x - d_n)} \leq \norm{x-d_n} < \epsilon.
+              \]
+              Por lo tanto \( \pi(D) = {\{\pi(d_n)\}}_{n\in\N} \) es un conjunto numerable denso en \(E/F\), es decir, \(E/F\) es separable.
+
+        \item Sea \( D_F \) un conjunto numerable denso en \(F\) y sea \( {\{\pi(x_n)\}}_{n\in\N} \) (con \( x_n \in E \)) numerable denso en \(E/F\). Definamos
+              \[
+                  D := \{ x_n + f : n \in \N,\ f \in D_F \},
+              \]
+              que es numerable por ser unión numerable de conjuntos numerables. Veamos que \(D\) es denso en \(E\).
+
+              Sea \( x \in E \) y \( \epsilon > 0 \). Como \( {\{\pi(x_n)\}} \) es denso en \(E/F\), existe \(n\) tal que \( \norm{\pi(x) - \pi(x_n)} = \norm{\pi(x-x_n)} = d(x - x_n, F) < \epsilon/2 \). Por definición de ínfimo, existe \( y \in F \) tal que \( \norm{(x - x_n) - y} < \epsilon/2 \). Como \(D_F\) es denso en \(F\), existe \( f \in D_F \) tal que \( \norm{y - f} < \epsilon/2 \). Luego
+              \[
+                  \norm{x - (x_n + f)} \leq \norm{x - x_n - y} + \norm{y - f} < \epsilon.
+              \]
+              Por lo tanto \(D\) es denso numerable en \(E\), es decir, \(E\) es separable.
+
+        \item Sea \( E = \ell^\infty \), que no es separable. Por Hahn Banach, existe un funcional lineal acotado no nulo \( f: E \to \R \) (basta extender un funcional no nulo de un subespacio de dimensión \(1\)). Sea \( F := \ker f \), que es un subespacio cerrado de codimensión \(1\) (por ser \(f\) continuo y no nulo).
+
+              Entonces \( E/F \) tiene dimensión \(1\) (es isomorfo a \( \R \) vía el mapa inducido por \(f\)), y todo espacio de dimensión finita es separable. Sin embargo, \( E = \ell^\infty \) no es separable. Este es el ejemplo buscado.
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -481,7 +579,19 @@
     \]
 \end{ejercicio}
 \begin{proof}
+    Fijemos \( x \notin F \) y sea \( d := \inf_{y\in F} \norm{x-y} \). Por definición de ínfimo, existe una sucesión \( {\{y_n\}}_{n\in\N} \subset F \) tal que \( \norm{x - y_n} \to d \).
 
+    Veamos que \( {\{y_n\}} \) está acotada. Para \(n\) suficientemente grande, \( \norm{x-y_n} < d+1 \), y por la desigualdad triangular,
+    \[
+        \norm{y_n} \leq \norm{y_n - x} + \norm{x} < d + 1 + \norm{x} =: R.
+    \]
+    Por lo tanto, salvo finitos términos, \( {\{y_n\}} \subset \cl{\bola{0}{R}} \cap F \).
+
+    Como \(F\) tiene dimensión finita \( \cl{\bola{0}{R}} \cap F \) es compacto. Luego, existe una subsucesión \( {\{y_{n_k}\}}_{k\in\N} \) que converge a algún \( y_0 \in F \). Por la continuidad de la norma,
+    \[
+        \norm{x - y_0} = \lim_{k\to\infty} \norm{x - y_{n_k}} = d,
+    \]
+    ya que \( {\{\norm{x-y_{n_k}}\}} \) es una subsucesión de \( {\{\norm{x-y_n}\}} \), que converge a \(d\). Por lo tanto, \( y_0 \) realiza la distancia de \(x\) a \(F\).
 \end{proof}
 
 \vspace{0.5cm}
@@ -490,7 +600,31 @@
     Dar un ejemplo de dos subespacios cerrados de un espacio de Banach tal que su suma no sea cerrada.
 \end{ejercicio}
 \begin{proof}
+    Sea \( H := \ell^2 \oplus \ell^2 \), con la norma \( \norm{(x,y)}^2 = \norm{x}_2^2 + \norm{y}_2^2 \), que es un espacio de Banach. Definamos el operador \( T:\ell^2\to\ell^2 \) dado por
+    \[
+        T(x_1,x_2,x_3,\dots) := \left(x_1, \frac{x_2}{2}, \frac{x_3}{3}, \dots\right).
+    \]
+    Como \( \norm{Tx}_2^2 = \sum_{n\in\N} \frac{x_n^2}{n^2} \leq \sum_{n\in\N} x_n^2 = \norm{x}_2^2 \), el operador \(T\) es lineal, acotado (con \( \norm{T}\leq 1 \)) e inyectivo.
 
+    El rango de \(T\) es \( \operatorname{Ran}(T) = \{ y=(y_n) \in \ell^2 : (n y_n)_{n} \in \ell^2 \} \), que contiene a todas las sucesiones de soporte finito y, por lo tanto, es denso en \( \ell^2 \). Sin embargo, \( \operatorname{Ran}(T) \neq \ell^2 \): por ejemplo, la sucesión \( y = (1/n)_{n\in\N} \in \ell^2 \) (pues \( \sum 1/n^2 <\infty \)) no está en \( \operatorname{Ran}(T) \), ya que requeriría \( x_n = n y_n = 1 \) para todo \(n\), y \( (1,1,1,\dots) \notin \ell^2 \). Por lo tanto, \( \operatorname{Ran}(T) \) es denso pero no cerrado en \( \ell^2 \).
+
+    Definamos ahora los subespacios de \(H\):
+    \[
+        M := \ell^2 \times \{0\}, \qquad N := \{ (x, Tx) : x \in \ell^2 \} \quad (\text{el gráfico de } T).
+    \]
+    \(M\) es cerrado por ser un sumando directo de \(H\). \(N\) también es cerrado: si \( (x_n, Tx_n) \to (x,y) \) en \(H\), entonces \( x_n \to x \) y \( Tx_n \to y \); pero por continuidad de \(T\), \( Tx_n \to Tx \), luego \( y = Tx \) y \( (x,y) \in N \).
+
+    Calculemos la suma:
+    \[
+        M + N = \{ (x,0) + (z,Tz) : x,z \in \ell^2 \} = \{ (x+z, Tz) : x,z \in \ell^2 \}.
+    \]
+    Para \(z\) fijo, como \(x\) recorre todo \( \ell^2 \), la primera coordenada \( x+z \) también recorre todo \( \ell^2 \). Por lo tanto,
+    \[
+        M+N = \ell^2 \times \operatorname{Ran}(T).
+    \]
+    Como \( \operatorname{Ran}(T) \) es denso pero no cerrado en \( \ell^2 \), el conjunto \( M+N = \ell^2 \times \operatorname{Ran}(T) \) es denso en \(H\) (su clausura es \( \ell^2 \times \ell^2 = H \)) pero no es cerrado, pues \( \operatorname{Ran}(T) \neq \ell^2 \).
+
+    Así, \(M\) y \(N\) son subespacios cerrados del espacio de Banach \(H\) cuya suma \(M+N\) no es cerrada.
 \end{proof}
 
 \end{document}
