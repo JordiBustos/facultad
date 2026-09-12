@@ -45,25 +45,77 @@
 \maketitle
 
 \begin{ejercicio}{1}
-    Sea \(E\) un espacio vectorial. Demostrar que si \(\varphi:E\to\C\) es un funcional lineal no nulo entonces \(\operatorname{im}(\varphi)=\C\).
+    Sea \(E\) un espacio vectorial. Demostrar que si \( \varphi:E\to\C \) es un funcional lineal no nulo entonces \( \operatorname{Im}(\varphi)=\C \).
 \end{ejercicio}
 \begin{proof}
-
+    Es claro que como \( \varphi \) es no nulo existe al menos un \(v \in E\) tal que \(\varphi(v) \neq 0\). Sea \( \lambda \in \C \). Consideremos \(w = \frac{\lambda}{\varphi(v)} v\). Entonces
+    \[
+        \varphi(w) = \varphi\left(\frac{\lambda}{\varphi(v)} v\right) = \frac{\lambda}{\varphi(v)} \varphi(v) = \lambda.
+    \]
+    Por lo tanto \(\lambda \in \operatorname{Im}(\varphi)\). Como \( \lambda \) era arbitrario, se concluye que \(\  \operatorname{Im}(\varphi) = \C \).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{2}
-    Sean \(E\) un espacio vectorial normado sobre \(\R\) y \(\varphi:E\to\R\) un funcional lineal. Probar
+    Sean \(E\) un espacio vectorial normado sobre \( \R \) y \( \varphi:E\to\R \) un funcional lineal. Probar
     \begin{enumerate}
-        \item Si \(\varphi\) no es acotado entonces toma todos los valores reales en cualquier entorno del \(0\).
-        \item Si \(\varphi\) no es acotado entonces \(\ker(\varphi)\) es denso.
-        \item \(\varphi\) es continuo si, y sólo si, \(\forall c\in\R\) los conjuntos \(\{x:\varphi(x)<c\}\) y \(\{x:\varphi(x)>c\}\) son abiertos.
-        \item Si \(A\subseteq E\) tiene interior no vacío y existe \(a\in\R\) tal que \(\varphi(x)\geq a\) para todo \(x\in A\), entonces \(\varphi\) es continuo.
+        \item Si \( \varphi \) no es acotado entonces toma todos los valores reales en cualquier entorno del \(0\).
+        \item Si \( \varphi \) no es acotado entonces \( \ker(\varphi) \) es denso.
+        \item \( \varphi \) es continuo si, y sólo si, \( \forall c\in\R \) los conjuntos \( \{x:\varphi(x)c\} \) son abiertos.
+        \item Si \( A\subseteq E \) tiene interior no vacío y existe \( a\in\R \) tal que \( \varphi(x)\geq a \) para todo \( x\in A \), entonces \( \varphi \) es continuo.
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \(E\) un EN sobre \( \R \) y \( \varphi:E\to\R \) un funcional lineal.
+    \begin{enumerate}
+        \item Sea \(V \subseteq E\) un entorno de \(0\). Existe \(r > 0\) tal que \(B_r(0) \subseteq V\). Queremos ver que \(\varphi(B_r(0)) = \R \). Sea \(\alpha \in \R \).
+              \begin{itemize}
+                  \item Si \(\alpha = 0\), se tiene que \(\varphi(0) = 0 \in \varphi(B_r(0))\).
+                  \item Si \(\alpha \neq 0\), como \( \varphi \) no es acotado, existe \(y \in E\) con \( \|y\| = 1 \) tal que \(|\varphi(y)| > \frac{|\alpha|}{r}\).
+              \end{itemize}
+              Definimos \(z = \frac{\alpha}{\varphi(y)} y\). Notemos que
+              \[
+                  \|z\| = \left \| \frac{\alpha}{\varphi(y)} y \right \| = \frac{|\alpha|}{|\varphi(y)|} \|y\| < \frac{|\alpha|}{\frac{|\alpha|}{r}} \cdot 1 = r,
+              \]
+              lo que implica que \(z \in B_r(0)\). Además, \( \varphi(z) = \varphi\left(\frac{\alpha}{\varphi(y)} y\right) = \frac{\alpha}{\varphi(y)} \varphi(y) = \alpha \).
+              Por lo tanto, \(\alpha \in \varphi(B_r(0)) \subseteq \varphi(V)\), y como \( \alpha \) era arbitrario, concluimos que \( \varphi(V) = \R \).
 
+        \item Dado \(x \in E\) y \(\varepsilon > 0\):
+              \begin{itemize}
+                  \item Si \(x \in \ker(\varphi)\), basta tomar \(z = x \in \ker(\varphi)\) y se cumple \( \|x - z\| = 0 < \varepsilon \).
+                  \item Si \(x \notin \ker(\varphi)\), entonces \(\varphi(x) \neq 0\). Como \( \varphi \) no es acotado, existe \(y \in E\) con \( \|y\| = 1 \) tal que \(|\varphi(y)| > \frac{|\varphi(x)|}{\varepsilon}\).
+                        Tomamos \(z = x - \frac{\varphi(x)}{\varphi(y)} y\). Se verifica que \(\varphi(z) = \varphi(x) - \frac{\varphi(x)}{\varphi(y)} \varphi(y) = 0\), de modo que \(z \in \ker(\varphi)\), y además:
+                        \[
+                            \|x - z\| = \left \| \frac{\varphi(x)}{\varphi(y)} y \right \| = \frac{|\varphi(x)|}{|\varphi(y)|} \|y\| < \frac{|\varphi(x)|}{\frac{|\varphi(x)|}{\varepsilon}} \cdot 1 = \varepsilon.
+                        \]
+              \end{itemize}
+              Por lo tanto, \(\ker(\varphi)\) es denso en \(E\).
+
+        \item
+              \begin{itemize}
+                  \item[(\( \Rightarrow \))] Si \( \varphi \) es continuo, para cualquier \( c \in \R \), los conjuntos \( \{x \in E : \varphi(x) > c\} = \varphi^{-1}((c, +\infty))\) y \( \{x \in E : \varphi(x) < c\} = \varphi^{-1}((-\infty, c))\) son abiertos por ser la preimagen mediante una función continua de conjuntos abiertos en \( \R \).
+                  \item[(\( \Leftarrow \))] Supongamos que \(A_c = \{x : \varphi(x) > c\} \) y \(B_c = \{x : \varphi(x) < c\} \) son abiertos para todo \(c \in \R \). Dado un intervalo abierto arbitrario \((a, b) \subset \R \), se tiene que
+                        \[
+                            \varphi^{-1}((a, b)) = \varphi^{-1}((a, +\infty)) \cap \varphi^{-1}((-\infty, b)) = A_a \cap B_b.
+                        \]
+                        Al ser intersección finita de conjuntos abiertos, \(\varphi^{-1}((a, b))\) es abierto en \(E\). Como todo abierto de \(\R \) se escribe como unión de intervalos abiertos, su preimagen mediante \(\varphi \) es una unión de abiertos en \(E\), y por ende es abierta. Esto demuestra que \(\varphi \) es continuo.
+              \end{itemize}
+
+        \item Sea \(A \subseteq E\) con interior no vacío y supongamos que existe \(a \in \R \) tal que \(\varphi(x) \geq a\) para todo \(x \in A\).
+              Como \(\operatorname{int}(A) \neq \emptyset \), existe \(x_0 \in \operatorname{int}(A)\) y un radio \(r > 0\) tal que \(B_r(x_0) \subseteq A\).
+              Para todo \(u \in B_r(0)\), se tiene que \(x_0 + u \in B_r(x_0) \subseteq A\). Por linealidad:
+              \[
+                  \varphi(x_0 + u) = \varphi(x_0) + \varphi(u) \geq a \implies \varphi(u) \geq a - \varphi(x_0).
+              \]
+              Sea \(K = |a - \varphi(x_0)|\). Luego, \(\varphi(u) \geq -K\) para todo \(u \in B_r(0)\).
+              Puesto que \(u \in B_r(0) \iff -u \in B_r(0)\), aplicando la desigualdad a \(-u\):
+              \[
+                  \varphi(-u) \geq -K \implies -\varphi(u) \geq -K \implies \varphi(u) \leq K.
+              \]
+              Combinando ambas desigualdades se deduce que \(|\varphi(u)| \leq K\) para todo \(u \in B_r(0)\).
+              Al estar \(\varphi \) acotado en una bola centrada en el origen, se concluye que \(\varphi \) es continuo.
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -71,42 +123,159 @@
 \begin{ejercicio}{3}
     Probar que los siguientes funcionales son lineales, continuos y hallar sus normas.
     \begin{enumerate}
-        \item \(\varphi:c\to\C\), \(\varphi(x):=\displaystyle\lim_{n\to\infty}x_n\).
-        \item \(\varphi:L^2([-1,1])\to\C\), \(\varphi(f):=\displaystyle\int_{-1}^1 tf(t)\,dt\).
-        \item \(\varphi:\ell^\infty\to\C\), \(\varphi(x):=x_1+x_2\).
-        \item \(\varphi:\ell^2\to\C\), \(\varphi(x):=x_1+x_2\).
+        \item \( \varphi:c\to\C \), \(\varphi(x):=\displaystyle\lim_{n\to\infty}x_n\).
+        \item \( \varphi:L^2([-1,1])\to\C \), \(\varphi(f):=\displaystyle\int_{-1}^1 tf(t)\,dt\).
+        \item \( \varphi:\ell^\infty\to\C \), \(\varphi(x):=x_1+x_2\).
+        \item \( \varphi:\ell^2\to\C \), \(\varphi(x):=x_1+x_2\).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Veamos primero que son funcionales lineales.\begin{enumerate}
+        \item Sea \( \alpha \in \C \) y \( x, y \in c \). Entonces
+              \[
+                  \varphi(\alpha x + y) = \lim_{n\to\infty} (\alpha x_n + y_n) = \alpha \lim_{n\to\infty} x_n + \lim_{n\to\infty} y_n = \alpha \varphi(x) + \varphi(y),
+              \]
+              lo que demuestra la linealidad de \( \varphi \) en \(c\).
+        \item Sea \( \alpha \in \C \) y \( f, g \in L^2([-1,1]) \). Entonces
+              \[
+                  \varphi(\alpha f + g) = \int_{-1}^1 t(\alpha f(t) + g(t))\,dt = \alpha \int_{-1}^1 t f(t)\,dt + \int_{-1}^1 t g(t)\,dt = \alpha \varphi(f) + \varphi(g),
+              \]
+              lo que demuestra la linealidad de \( \varphi \) en \(L^2([-1,1])\).
+        \item Sea \( \alpha \in \C \) y \( x, y \in \ell^\infty \). Entonces
+              \[
+                  \varphi(\alpha x + y) = (\alpha x_1 + y_1) + (\alpha x_2 + y_2) = \alpha (x_1 + x_2) + (y_1 + y_2) = \alpha \varphi(x) + \varphi(y),
+              \]
+              lo que demuestra la linealidad de \( \varphi \) en \(\ell^\infty \).
+        \item Sea \( \alpha \in \C \) y \( x, y \in \ell^2 \). Entonces
+              \[
+                  \varphi(\alpha x + y) = (\alpha x_1 + y_1) + (\alpha x_2 + y_2) = \alpha (x_1 + x_2) + (y_1 + y_2) = \alpha \varphi(x) + \varphi(y),
+              \]
+              lo que demuestra la linealidad de \( \varphi \) en \(\ell^2\).
+    \end{enumerate}
 
+    Por la \textbf{Proposición 1.1.5} del apunte de Demetrio sabemos que dado \( E \) un EN y \( \varphi \) un funcional lineal vale que \( \varphi \) es continuo \( \iff \) \( \norm{\varphi} = \norm{\varphi}_{E^*} := \sup_{x \in B_E} |\varphi(x)| < +\infty \iff \exists M \in \R : |\varphi(x)| \le M \norm{x} \quad \forall x \in E \).
+    Luego, vale que \[
+        \norm{\varphi} = \sup_{\norm{x} = 1} |\varphi(x)| < +\infty.
+    \]
+    \begin{enumerate}
+        \item Para \( \varphi:c\to\C \), \(\varphi(x):=\displaystyle\lim_{n\to\infty}x_n\), tenemos
+              \[
+                  |\varphi(x)| = \left|\lim_{n\to\infty} x_n\right| \leq \sup_{n\in\N} |x_n| = \norm{x}_\infty,
+              \]
+              por lo que \( \varphi \) es acotado y \( \norm{\varphi} \leq 1 \). Considerando \( x = (1,1,1,\dots) \), se obtiene \( \norm{\varphi} = 1 \).
+        \item Para \( \varphi:L^2([-1,1])\to\C \), \(\varphi(f):=\displaystyle\int_{-1}^1 t f(t)\,dt\), utilizando la desigualdad de H\"older se obtiene:\[
+                  |\varphi(f)| = \norm{t f(t)}_1 \leq \norm{t}_2 \norm{f}_2 = \sqrt{2/3} \norm{f}_2
+              \]
+              Esto implica, \( \norm{\varphi} \leq \sqrt{2/3} \). Considero \( f_0(t) = \sqrt{3/2} \, t \). Entonces \( \norm{f_0}_2 = 1 \) y
+              \[
+                  |\varphi(f_0)| = \left|\int_{-1}^1 t \cdot \sqrt{3/2} \, t \, dt\right| = \sqrt{3/2} \int_{-1}^1 t^2 \, dt = \sqrt{3/2} \cdot \frac{2}{3} = \sqrt{2/3}.
+              \]
+              Por lo tanto, \( \norm{\varphi} = \sqrt{2/3} \).
+        \item Para \( \varphi:\ell^\infty\to\C \), \(\varphi(x):=x_1 + x_2\), tenemos
+              \[
+                  |\varphi(x)| = |x_1 + x_2| \leq |x_1| + |x_2| \leq 2 \sup_{n\in\N} |x_n| = 2 \norm{x}_\infty,
+              \]
+              por lo que \( \varphi \) es acotado y \( \norm{\varphi} \leq 2 \). Considerando \( x = (1,1,0,0,\dots) \), se obtiene \( \norm{\varphi} = 2 \).
+        \item Finalmente, para \( \varphi:\ell^2\to\C \), \(\varphi(x):=x_1\), tenemos
+              \[
+                  |\varphi(x)| = |x_1| \leq \sqrt{|x_1|^2} \leq \sqrt{\sum_{n=1}^\infty |x_n|^2} = 1 \cdot \norm{x}_2,
+              \]
+              por lo que \( \varphi \) es acotado y \( \norm{\varphi} \leq 1 \). Considerando \( x = (1,0,0,\dots) \), se obtiene \( \norm{\varphi} = 1 \).
+    \end{enumerate}
+
+    Esto demuestra que para cada uno de los funcionales lineales considerados, hemos encontrado su norma exacta y, en particular, que los funcionales son acotados y continuos.
 \end{proof}
 
-\vspace{0.5cm}
+\clearpage
 
 \begin{ejercicio}{4}
-    Sea \(\varphi:(C[0,1],\norm{\cdot}_\infty)\to\R\) dada por
+    Sea \( \varphi:(C[0,1],\norm{\cdot}_\infty)\to\R \) dada por
     \[
         \varphi(f)=\int_0^1 f(x)\,dx - f\left(\frac12\right).
     \]
     \begin{enumerate}
-        \item Probar que \(\varphi\) es acotado y hallar su norma.
+        \item Probar que \( \varphi \) es acotado y hallar su norma.
         \item Justificar, si existe o no, \(f\in C[0,1]\) tal que \(\norm{f}_\infty=1\) y \(|\varphi(f)|=2\).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \(f \in C[0,1]\).
+    \begin{enumerate}
+        \item Por propiedad del valor absoluto e integral:
+              \[
+                  |\varphi(f)| = \left| \int_0^1 f(x) \, dx - f\left(\frac12\right) \right| \leq \int_0^1 |f(x)| \, dx + \left| f\left(\frac12\right) \right| \leq \norm{f}_\infty + \norm{f}_\infty = 2 \norm{f}_\infty.
+              \]
+              Esto prueba que \( \varphi \) es un funcional lineal acotado y que \(\norm{\varphi} \leq 2\).
 
+              Para probar que \(\norm{\varphi} = 2\), construimos una sucesión \( {(f_n)}_{n \geq 3} \subseteq C[0,1]\) de norma \(\norm{f_n}_\infty = 1\). Definimos \(f_n\) como:
+              \[
+                  f_n(x) = \begin{cases}
+                      1                                           & \text{si } x \in \left[0, \frac{1}{2} - \frac{1}{n}\right] \cup \left[\frac{1}{2} + \frac{1}{n}, 1\right], \\[1ex]
+                      -1 + n \left|x - \frac{1}{2}\right| \cdot 2 & \text{si } x \in \left(\frac{1}{2} - \frac{1}{n}, \frac{1}{2} + \frac{1}{n}\right).
+                  \end{cases}
+              \]
+              Es decir, \(f_n(x) = 1\) salvo en un entorno de longitud \(\frac{2}{n}\) centrado en \(\frac{1}{2}\), donde decrece linealmente hasta alcanzar \(-1\) en \(x = \frac{1}{2}\). Por construcción, \(\norm{f_n}_\infty = 1\).
+
+              Calculando la integral de \(f_n\):
+              \[
+                  \int_0^1 f_n(x) \, dx = \left(1 - \frac{2}{n}\right) \cdot 1 + 0 = 1 - \frac{2}{n}.
+              \]
+              Luego, evaluando el funcional:
+              \[
+                  \varphi(f_n) = \int_0^1 f_n(x) \, dx - f_n\left(\frac{1}{2}\right) = 1 - \frac{2}{n} - (-1) = 2 - \frac{2}{n}.
+              \]
+              Tomando límite cuando \( n \to \infty \):
+              \[
+                  \lim_{n \to \infty} \varphi(f_n) = 2 \implies \norm{\varphi} \geq 2.
+              \]
+              Por lo tanto, concluyendo con ambas cotas, \(\norm{\varphi} = 2\).
+
+        \item \textbf{No existe} ninguna función \(f \in C[0,1]\) tal que \(\norm{f}_\infty = 1\) y \(|\varphi(f)| = 2\).
+
+              Supongamos por el absurdo que existe tal función \(f\). Sin pérdida de generalidad, asumiendo \(\varphi(f) = 2\) (el caso \(\varphi(f) = -2\) es análogo considerando \(-f\)):
+              \[
+                  2 = \varphi(f) = \int_0^1 f(x) \, dx - f\left(\frac{1}{2}\right) \leq \int_0^1 f(x) \, dx + \left(-f\left(\frac{1}{2}\right)\right).
+              \]
+              Como \(\norm{f}_\infty = 1\), se tiene que \(\int_0^1 f(x) \, dx \leq 1\) y \(-f\left(\frac{1}{2}\right) \leq 1\). Para que la suma sea 2, se requiere que ambos términos alcancen su valor máximo simultáneamente:
+              \[
+                  \int_0^1 f(x) \, dx = 1 \quad \text{y} \quad f\left(\frac{1}{2}\right) = -1.
+              \]
+              Puesto que \(f(x) \leq 1\) para todo \(x \in [0,1]\), la condición \(\int_0^1 (1 - f(x)) \, dx = 0\) junto con la continuidad de \(f\) implica que \(f(x) = 1\) para todo \(x \in [0,1]\).
+
+              Sin embargo, si \(f(x) = 1\) para todo \(x\), entonces \(f\left(\frac{1}{2}\right) = 1 \neq -1\), lo cual es una contradicción. Por lo tanto, el supremo no se alcanza en ningún elemento de la esfera unidad.
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-    Probar que la siguiente aplicación lineal \(T:\ell^p\to\ell^p\), \(1\leq p\leq\infty\), es continua y calcular su norma:
+    Probar que la siguiente aplicación lineal \(T:\ell^p\to\ell^p\), \( 1\leq p\leq\infty \), es continua y calcular su norma:
     \[
-        T(x_1,x_2,x_3,\dots)=(x_n,x_{n-1},\dots,x_2,x_1,x_{n+1},x_{n+2},\dots).
+        T(x_1,x_2,\dots,x_n,x_{n+1},\dots)=(x_n,x_{n-1},\dots,x_1,x_{n+1},\dots).
     \]
 \end{ejercicio}
 \begin{proof}
+    Sea \( n \in \N \) el entero fijo que define la permutación de los primeros \(n\) términos.
 
+    \begin{itemize}
+        \item Para \( 1 \le p < \infty \), dado \(x = (x_k)_{k \geq 1} \in \ell^p\), calculamos la norma de \(Tx\):
+              \[
+                  \|Tx\|_p^p = |x_n|^p + |x_{n-1}|^p + \cdots + |x_1|^p + \sum_{k=n+1}^\infty |x_k|^p = \sum_{k=1}^\infty |x_k|^p = \|x\|_p^p.
+              \]
+              Por lo tanto, \( \|Tx\|_p = \|x\|_p \) para todo \(x \in \ell^p\).
+
+        \item Para \( p = \infty \), dado \( x = {(x_k)}_{k \geq 1} \in \ell^\infty \):
+              \[
+                  \|Tx\|_\infty = \sup \{ |x_n|, |x_{n-1}|, \dots, |x_1|, |x_{n+1}|, |x_{n+2}|, \dots \} = \sup_{k \geq 1} |x_k| = \|x\|_\infty.
+              \]
+              Por lo tanto, \( \|Tx\|_\infty = \|x\|_\infty \) para todo \( x \in \ell^\infty \).
+    \end{itemize}
+
+    En ambos casos, \(T\) es una isometría (preserva la norma), de lo cual se deduce directamente que:
+    \[
+        \|T\| = \sup_{\|x\|_p = 1} \|Tx\|_p = \sup_{\|x\|_p = 1} 1 = 1.
+    \]
+    Al ser un operador lineal acotado, concluimos que \(T\) es continuo.
 \end{proof}
 
 \vspace{0.5cm}
@@ -122,20 +291,88 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \(x = (x_1,x_2,x_3,\dots) \in \ell^1\).
+    \begin{enumerate}
+        \item Notemos que la \(k\)-ésima componente de \(Tx\) viene dada por \((Tx)_k = \frac{k+1}{k} x_{k+1}\). Luego:
+              \[
+                  \|T x\|_1 = \sum_{k=1}^\infty \left| \frac{k+1}{k} x_{k+1} \right| = \sum_{k=1}^\infty \frac{k+1}{k} |x_{k+1}|.
+              \]
+              Haciendo el cambio de índice \(m = k+1\):
+              \[
+                  \|T x\|_1 = \sum_{m=2}^\infty \frac{m}{m-1} |x_m| \leq 2 \sum_{m=2}^\infty |x_m| \leq 2 \|x\|_1,
+              \]
+              donde usamos que \(\frac{m}{m-1} \leq 2\) para todo \(m \ge 2\). Por lo tanto, \(T\) es acotado y \( \|T\| \leq 2 \).
 
+              Para ver que \( \|T\| = 2 \), consideramos el vector canónico \(e_2 = (0,1,0,0,\dots) \in \ell^1\), que satisface \( \|e_2\|_1 = 1 \). Entonces:
+              \[
+                  \|T e_2\|_1 = \| (2,0,0,\dots) \|_1 = 2 = 2 \| e_2 \|_1.
+              \]
+              Concluimos que \( \|T\| = 2 \).
+
+        \item Probemos por inducción sobre \(n \ge 1\) que la \(k\)-ésima componente de \(T^n x\) es:
+              \[
+                  {(T^n x)}_k = \frac{k+n}{k} x_{k+n} \quad \forall k \ge 1.
+              \]
+              El caso base \(n=1\) es inmediato. Supuesto válido para \(n\), para \(n+1\) tenemos:
+              \[
+                  {(T^{n+1} x)}_k = (T(T^n x))_k = \frac{k+1}{k} (T^n x)_{k+1} = \frac{k+1}{k} \cdot \frac{(k+1)+n}{k+1} x_{(k+1)+n} = \frac{k+n+1}{k} x_{k+n+1},
+              \]
+              lo que completa la inducción. En forma explícita:
+              \[
+                  T^n(x_1,x_2,x_3,\dots) = \left((n+1)x_{n+1}, \frac{n+2}{2}x_{n+2}, \frac{n+3}{3}x_{n+3}, \dots \right).
+              \]
+
+              Para hallar \( \|T^n\| \), calculamos su norma en \(\ell^1\):
+              \[
+                  \|T^n x\|_1 = \sum_{k=1}^\infty \frac{k+n}{k} |x_{k+n}| = \sum_{m=n+1}^\infty \frac{m}{m-n} |x_m|,
+              \]
+              donde realizamos el cambio de índice \(m = k+n\). Dado que la sucesión de coeficientes \(c_m = \frac{m}{m-n} = 1 + \frac{n}{m-n}\) es estrictamente decreciente para \(m \ge n+1\), se tiene que \(\frac{m}{m-n} \le \frac{n+1}{1} = n+1\). Luego:
+              \[
+                  \|T^n x\|_1 \le (n+1) \sum_{m=n+1}^\infty |x_m| \le (n+1) \|x\|_1 \implies \|T^n\| \le n+1.
+              \]
+              Finalmente, considerando el vector canónico \(e_{n+1} = (0,\dots,0,\underbrace{1}_{n+1},0,\dots) \in \ell^1\), se verifica que:
+              \[
+                  T^n(e_{n+1}) = (n+1, 0, 0, \dots) \implies \|T^n(e_{n+1})\|_1 = n+1 = (n+1)\|e_{n+1}\|_1,
+              \]
+              lo que demuestra que \( \|T^n\| \ge n+1 \). Por lo tanto, \( \|T^n\| = n+1 \).
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
-    Sea \(\{a_n\}_{n\in\N}\) una sucesión acotada en un espacio de Banach \(E\). Demostrar que la aplicación \(T:\ell^1\to E\) definida por
+    Sea \({\{a_n\}}_{n\in\N}\) una sucesión acotada en un espacio de Banach \(E\). Demostrar que la aplicación \(T:\ell^1\to E\) definida por
     \[
         T(x)=\sum_{n\in\N} a_n x_n,
     \]
     es lineal, continua y \(\norm{T}=\sup_{n\in\N}\norm{a_n}\).
 \end{ejercicio}
 \begin{proof}
+    Sea \( M = \sup_{n\in\N} \|a_n\| < \infty \).
 
+    \begin{enumerate}
+        \item La linealidad es trivial a partir de la definición de \(T\).
+        \item Dado \( x = {(x_n)}_{n \in \N} \in \ell^1\), la serie de las normas satisface:
+              \[
+                  \sum_{n=1}^\infty \|a_n x_n\| = \sum_{n=1}^\infty \|a_n\| |x_n| \le M \sum_{n=1}^\infty |x_n| = M \|x\|_1 < \infty.
+              \]
+              Como la serie es absolutamente convergente y \(E\) es un espacio de Banach, la serie \(\sum_{n=1}^\infty a_n x_n\) converge en \(E\), por lo que \(T(x)\) está bien definida. Además, aplicando la desigualdad triangular para series convergentes:
+              \[
+                  \|T(x)\| = \left \| \sum_{n=1}^\infty a_n x_n \right \| \le \sum_{n=1}^\infty \|a_n x_n\| \le M \|x\|_1.
+              \]
+              Esto demuestra que \(T\) es un operador acotado y que \( \|T\| \le \sup_{n\in\N} \|a_n\| \).
+
+        \item Para hallar la cota inferior, evaluamos \(T\) en el vector canónico \(e_n = (0, \dots, 0, \underbrace{1}_{n}, 0, \dots) \in \ell^1\), que verifica \( \|e_n\|_1 = 1\). Se tiene que:
+              \[
+                  T(e_n) = a_n \implies \|T(e_n)\| = \|a_n\| = \|a_n\| \|e_n\|_1.
+              \]
+              Tomando el supremo sobre todo \( n \in \N \):
+              \[
+                  \|T\| = \sup_{\|x\|_1 = 1} \|T(x)\| \ge \sup_{n\in\N} \|T(e_n)\| = \sup_{n\in\N} \|a_n\|.
+              \]
+    \end{enumerate}
+
+    Combinando ambas desigualdades se concluye que \( \|T\| = \sup_{n\in\N} \|a_n\| \). Finalmente, al ser un operador lineal acotado, \(T\) es continuo.
 \end{proof}
 
 \vspace{0.5cm}
@@ -144,13 +381,21 @@
     Sea \(E\) un espacio vectorial normado, probar que si \(\varphi,\psi\in E'\) son tales que \(\varphi\cdot\psi\equiv 0\), entonces \(\varphi\equiv 0\) o \(\psi\equiv 0\).
 \end{ejercicio}
 \begin{proof}
-
+    Supongamos que \(\varphi \not\equiv 0\) y \(\psi \not\equiv 0\). Entonces existen \(x_0, y_0 \in E\) tales que \(\varphi(x_0) \neq 0\) y \(\psi(y_0) \neq 0\). Se tiene que:\begin{align*}
+        (\varphi \cdot \psi)(x_0+y_0) & = \varphi(x_0+y_0) \psi(x_0+y_0)                                                                \\
+                                      & = (\varphi(x_0) + \varphi(y_0)) (\psi(x_0) + \psi(y_0))                                         \\
+                                      & = \varphi(x_0)\psi(x_0) + \varphi(x_0)\psi(y_0) + \varphi(y_0)\psi(x_0) + \varphi(y_0)\psi(y_0) \\
+                                      & = 0 + 2\varphi(x_0)\psi(y_0) + 0                                                                \\
+                                      & = 2\varphi(x_0)\psi(y_0)                                                                        \\
+                                      & \neq 0
+    \end{align*}
+    Absurdo, pues \( (\varphi \cdot \psi)(x_0+y_0) = 0 \) por lo tanto o \( \varphi \equiv 0 \) o \( \psi \equiv 0 \).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{9}
-    Operadores shift. Sea \(1\leq p<\infty\). Consideremos los operadores \(S,T:\ell^p\to\ell^p\) dados por
+    Operadores shift. Sea \( 1\leq p<\infty \). Consideremos los operadores \(S,T:\ell^p\to\ell^p\) dados por
     \[
         S(x_1,x_2,x_3,\dots)=(0,x_1,x_2,x_3,\dots) \quad \text{(shift a derecha)}.
     \]
