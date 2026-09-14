@@ -103,7 +103,7 @@
               \end{itemize}
 
         \item Sea \(A \subseteq E\) con interior no vacío y supongamos que existe \(a \in \R \) tal que \(\varphi(x) \geq a\) para todo \(x \in A\).
-              Como \(\operatorname{int}(A) \neq \emptyset \), existe \(x_0 \in \operatorname{int}(A)\) y un radio \(r > 0\) tal que \(B_r(x_0) \subseteq A\).
+              Como \(\operatorname{Int}(A) \neq \varnothing \), existe \(x_0 \in \operatorname{Int}(A)\) y un radio \(r > 0\) tal que \(B_r(x_0) \subseteq A\).
               Para todo \(u \in B_r(0)\), se tiene que \(x_0 + u \in B_r(x_0) \subseteq A\). Por linealidad:
               \[
                   \varphi(x_0 + u) = \varphi(x_0) + \varphi(u) \geq a \implies \varphi(u) \geq a - \varphi(x_0).
@@ -395,7 +395,7 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{9}
-    Operadores shift. Sea \( 1\leq p<\infty \). Consideremos los operadores \(S,T:\ell^p\to\ell^p\) dados por
+    Operadores shift. Sea \( 1\leq p < \infty \). Consideremos los operadores \( S,T : \ell^p \to \ell^p \) dados por
     \[
         S(x_1,x_2,x_3,\dots)=(0,x_1,x_2,x_3,\dots) \quad \text{(shift a derecha)}.
     \]
@@ -409,7 +409,19 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
-
+    Que tanto \( S \) como \( T \) son operadores lineales es trivial.\begin{enumerate}
+        \item Veamos que \( S \) es inyectivo. Sea \( \mathbf{x} \in \ker(S) \) vale que \( \mathbf{x} \in \ell^p \) y que \( S(\mathbf{x}) = 0 \). Supongamos que \( \mathbf{x} = {(x_n)}_{n \ge 1} \) entonces \( S(\mathbf{x}) = (0, x_1, x_2, \dots) = 0 \) implica que \( x_1 = x_2 = \cdots = 0 \), por lo tanto \( \mathbf{x} = 0 \) y \( S \) es inyectivo. Ahora calculemos su norma, si \( \norm{\mathbf{x}}_p = 1 \) entonces:
+              \[
+                  \norm{S(\mathbf{x})}_p^p = \sum_{n=1}^{\infty} |{(S(\mathbf{x}))}_n|^p = \sum_{n=1}^{\infty} |x_{n-1}|^p = \sum_{n=0}^{\infty} |x_n|^p = \norm{\mathbf{x}}_p^p = 1,
+              \]
+              por lo tanto \( \norm{S(\mathbf{x})}_p = \norm{\mathbf{x}}_p \) y \(\norm{S} = 1\). Más aún \( S \) es una isometría. Finalmente, como \( S \) está acotado es un operador continuo.
+        \item Sea \( \mathbf{y} = {(y_n)}_{n \ge 1} \in \ell^p \) entonces considero \( \mathbf{x} = (0, y_1, y_2, \ldots) \) tal que \( T\mathbf{x} = \mathbf{y} \implies T \) es suryectivo. Sea \( \mathbf{x} \in \ell^p \) tal que \( \norm{\mathbf{x}} = 1 \) entonces:
+              \[
+                  \norm{T(\mathbf{x})}_p^p = \sum_{n=1}^{\infty} |{(T(\mathbf{x}))}_n|^p = \sum_{n=1}^{\infty} |x_{n+1}|^p \le \sum_{n=1}^{\infty} |x_n|^p = \norm{\mathbf{x}}_p^p,
+              \]
+              por lo tanto \( \norm{T(\mathbf{x})}_p \le \norm{\mathbf{x}}_p \) y \(\norm{T} \le 1\). Más aún, tomando \( \mathbf{x} = (0, 1,0,\dots) \) se obtiene \( \norm{T(\mathbf{x})}_p = 1 \) y \( \norm{\mathbf{x}}_p = 1 \), por lo tanto \( \norm{T} = 1 \). Luego, \( T \) es un operador continuo.
+        \item Notemos que dado \( \mathbf{x} = {(x_n)}_{n\ge1} \in \ell^p \) vale que \( T(S(\mathbf{x})) = T((0, x_1, x_2, \ldots)) = (x_1, x_2, \ldots) = \mathbf{x} \implies TS = I \). Para ver que \( ST \neq I \) basta con hacer \( S(T(1,0,\ldots)) = S(0) = 0 \neq (1, 0, \ldots) \therefore ST \neq I \).
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -430,16 +442,73 @@
               \[
                   M_\varphi^2=M_\varphi \iff \varphi \text{ es una función característica.}
               \]
-        \item Sea \(\{a_n\}_{n\in\N}\) una sucesión de números complejos. Si \(1\leq p<\infty\), definimos el operador \(A:\ell^p\to\ell^p\) dado por \(A(\{x_n\}_n)=\{x_n a_n\}_n\). Probar que:
+        \item Sea \({\{a_n\}}_{n\in\N}\) una sucesión de números complejos. Si \( 1 \leq p < \infty \), definimos el operador \(A:\ell^p\to\ell^p\) dado por \(A ({\{x_n\}}_n) = {\{x_n a_n\}}_n\). Probar que:
               \begin{enumerate}
-                  \item El operador \(A\) está bien definido si, y sólo si, \(\{a_n\}_{n\in\N}\in\ell^\infty\).
-                  \item El operador \(A\) es inyectivo si, y sólo si, \(a_n\neq 0,\ \forall n\geq 1\).
-                  \item \(A\) es un isomorfismo si, y sólo si, \(\{1/a_n\}_{n\in\N}\in\ell^\infty\).
+                  \item El operador \(A\) está bien definido si, y sólo si, \({\{a_n\}}_{n\in\N} \in \ell^\infty \).
+                  \item El operador \(A\) es inyectivo si, y sólo si, \( a_n \neq 0,\ \forall n \geq 1 \).
+                  \item \(A\) es un isomorfismo si, y sólo si, \( {\{1/a_n\}}_{n\in\N} \in \ell^\infty \).
               \end{enumerate}
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Consideremos en \(C([0, 1])\) la norma infinito: \(\norm{f}_\infty = \sup_{x\in[0,1]} |f(x)|\).
+    \begin{enumerate}
+        \item Como el producto de dos funciones continuas en un compacto es continuo, \(\varphi f \in C([0,1])\) para toda \(f \in C([0,1])\). Para \( \alpha, \beta \in \C \) y \(f, g \in C([0,1])\):
+              \[
+                  M_\varphi(\alpha f + \beta g) = \varphi(\alpha f + \beta g) = \alpha \varphi f + \beta \varphi g = \alpha M_\varphi(f) + \beta M_\varphi(g)
+              \]
+              Para cualquier \(f \in C([0,1])\):
+              \[
+                  \|M_\varphi(f)\|_\infty = \sup_{x \in [0,1]} |\varphi(x) f(x)| \le \sup_{x \in [0,1]} |\varphi(x)| \sup_{x \in [0,1]} |f(x)| = \| \varphi \|_\infty \|f\|_\infty
+              \]
+              Esto prueba que \(M_\varphi \in L(C([0,1]))\) y que \( \norm{M_\varphi} \le \norm{\varphi}_\infty \).
 
+              Para probar la igualdad, consideramos \(f_0(x) = 1\) para todo \(x \in [0,1]\). Claramente \(f_0 \in C([0,1])\) y \( \|f_0\|_\infty = 1 \). Entonces:
+              \[
+                  \|M_\varphi(f_0)\|_\infty = \|\varphi \cdot 1\|_\infty = \norm{\varphi}_\infty
+              \]
+              Por lo tanto, \(\norm{M_\varphi} \ge \norm{M_\varphi(f_0)}_\infty = \norm{\varphi}_\infty \), de donde \(\norm{M_\varphi} = \norm{\varphi}_\infty \).
+
+        \item Para \(f \in L^2([0,1])\), se tiene:
+              \[
+                  \norm{M_\varphi(f)}_2^2 = \int_0^1 |\varphi(x) f(x)|^2 dx \le \norm{\varphi}_\infty^2 \int_0^1 |f(x)|^2 dx = \norm{\varphi}_\infty^2 \norm{f}_2^2
+              \]
+              Así, \(\norm{M_\varphi(f)}_2 \le \norm{\varphi}_\infty \norm{f}_2\), lo que muestra que \(M_\varphi \in L(L^2([0,1]))\).
+              Para la caracterización de idempotencia, notemos que \(M_\varphi^2(f) = \varphi^2 f\):
+              \begin{itemize}
+                  \item [\((\Rightarrow)\)] Si \(M_\varphi^2 = M_\varphi \), para toda \(f \in L^2([0,1])\) se cumple \((\varphi^2 - \varphi) f = 0\) c.t.p. Tomando \(f(x) = 1 \in L^2([0,1])\), se tiene \(\varphi(x)^2 - \varphi(x) = 0\) c.t.p., lo que equivale a \( \varphi(x) \in \{0, 1\} \) c.t.p. Por lo tanto, \(\varphi = \chi_E\) c.t.p., donde \(E = \{x \in [0,1] : \varphi(x) = 1\} \).
+
+                  \item [\((\Leftarrow)\)] Si \(\varphi = \chi_E\) c.t.p., entonces \({\varphi(x)}^2 = {\chi_E(x)}^2 = \chi_E(x) = \varphi(x)\) c.t.p., luego \(M_\varphi^2(f) = \varphi^2 f = \varphi f = M_\varphi(f)\).
+              \end{itemize}
+
+        \item \begin{enumerate}
+                  \item \textbf{\(A\) está bien definido \(\iff {\{a_n\}}_{n\in\mathbb{N}} \in \ell^\infty \):}
+                        \begin{itemize}
+                            \item [\((\Leftarrow)\)] Si \(M = \norm{\{a_n\}}_\infty = \sup_{n \ge 1} |a_n| < \infty \), para \(x = {\{x_n\}}_n \in \ell^p\):
+                                  \[
+                                      \|A(x)\|_p^p = \sum_{n=1}^\infty |a_n x_n|^p \le M^p \sum_{n=1}^\infty |x_n|^p = M^p \|x\|_p^p < \infty
+                                  \]
+                            \item [\((\Rightarrow)\)] Si \(A\) está bien definido, por el Teorema del Gráfico Cerrado, \(A\) es acotado (\( \|A\| < \infty \)). Evaluando en los vectores de la base canónica \(e_k\) (\(\norm{e_k}_p = 1\)), se tiene:
+                                  \[
+                                      |a_k| = \norm{a_k e_k}_p = \norm{A(e_k)}_p \le \|A\| \norm{e_k}_p = \|A\| \quad \forall k \ge 1
+                                  \]
+                                  Luego, \( \sup_{k \ge 1} |a_k| \le \|A\| < \infty \), es decir, \( {\{a_n\}}_{n\in\mathbb{N}} \in \ell^\infty \).
+                        \end{itemize}
+
+                  \item \textbf{\(A\) es inyectivo \(\iff a_n \neq 0, \forall n \ge 1\):}
+                        \begin{itemize}
+                            \item [\((\Leftarrow)\)] Si \(a_n \neq 0\) para todo \(n \ge 1\), entonces \(A(x) = 0 \implies a_n x_n = 0 \quad \forall n \implies x_n = 0 \quad \forall n \implies x = 0\). Luego, \(\ker(A) = \{ 0 \} \).
+                            \item [\((\Rightarrow)\)] Si existe \(k \ge 1\) tal que \(a_k = 0\), se tiene \(e_k \neq 0\) pero \(A(e_k) = 0\), por lo que \(A\) no es inyectivo.
+                        \end{itemize}
+
+                  \item \textbf{\(A\) es un isomorfismo \(\iff {\{ 1/a_n \}}_{ n\in\N} \in \ell^\infty \):}
+                        \begin{itemize}
+                            \item [\((\Leftarrow)\)] Si \(b_n = 1/a_n\) satisface \({\{b_n\}}_{n\in\N} \in \ell^\infty \), entonces \(a_n \neq 0\) para todo \(n\). Definimos \( B({\{y_n\}}_n) = {\{b_n y_n\}}_n\). Por la parte (a), \(B\) está bien definido y es acotado en \(\ell^p\), y satisface \(B = A^{-1}\). Así, \(A\) es un isomorfismo.
+                            \item [\((\Rightarrow)\)] Si \(A\) es un isomorfismo, por el Teorema de la Aplicación Abierta su inversa \(A^{-1}\) es continua. \(A\) es inyectivo, por lo que \( a_n \neq 0 \) para todo \( n \). La inversa es \( A^{-1}({\{y_n\}}_n) = \{{y_n / a_n\}}_n\). Aplicando la parte (a) a \(A^{-1}\), resulta \({\{1/a_n\}}_{n\in\mathbb{N}} \in \ell^\infty \).
+                        \end{itemize}
+
+              \end{enumerate}
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -451,7 +520,7 @@
               \begin{enumerate}
                   \item Si \(T\) está acotado inferiormente entonces \(R(T)\) es cerrado.
                   \item \(T\) está acotado inferiormente y es suryectivo si, y sólo si, \(T\) es inversible.
-                  \item Si \(V:L^2[0,1]\to L^2[0,1]\) es el operador de Volterra dado por
+                  \item Si \(V:L^2[0,1]\to L^2[0,1]\) es el \textbf{operador de Volterra} dado por
                         \[
                             Vf(x)=\int_0^x f(t)\,dt,
                         \]
