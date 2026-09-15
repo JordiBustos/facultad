@@ -550,7 +550,7 @@
               \]
               pero
               \begin{align*}
-                  \norm{Vf_n}_2^2 = \int_0^1 \left| \int_0^x f_n(t) \, dt \right|^2 dx & \le \int_0^1 \left( \int_0^x |f_n(t)| \, dt \right)^2 dx       \\
+                  \norm{Vf_n}_2^2 = \int_0^1 \left| \int_0^x f_n(t) \, dt \right|^2 dx & \le \int_0^1 {\left( \int_0^x |f_n(t)| \, dt \right)}^2 dx     \\
                                                                                        & \le \int_0^1 {\left( \int_0^{1/n} \sqrt{n} \, dt \right)}^2 dx \\
                                                                                        & = \int_0^1 {\left( \sqrt{n} \cdot \frac{1}{n} \right)}^2 dx    \\
                                                                                        & = \int_0^1 \frac{1}{n} \, dx = \frac{1}{n} \to 0.
@@ -586,13 +586,30 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{13}
-    Sea \(E\) un espacio de Banach y sea \(A\in L(E)\) tal que \(\norm{A}<1\). Demostrar que \(I-A\) es inversible con
+    Sea \(E\) un espacio de Banach y sea \(A \in L(E)\) tal que \(\norm{A} < 1\). Demostrar que \(I-A\) es inversible con
     \[
-        {(I-A)}^{-1}=\sum_{n=0}^\infty A^n \quad \text{y} \quad \norm{{(I-A)}^{-1}}\leq\frac{1}{1-\norm{A}}.
+        (I-A)^{-1} = \sum_{n=0}^{\infty} A^n \quad \text{y} \quad \norm*{(I-A)^{-1}} \leq \frac{1}{1-\norm{A}}.
     \]
 \end{ejercicio}
-\begin{proof}
 
+\begin{proof}
+    Como \(\norm{A} < 1\), la serie \(\sum_{n=0}^{\infty} A^n\) es absolutamente convergente en \(L(E)\), ya que
+    \[
+        \sum_{n=0}^{\infty} \norm{A^n} \leq \sum_{n=0}^{\infty} \norm{A}^n = \frac{1}{1-\norm{A}} < \infty.
+    \]
+    Dado que \(E\) es un espacio de Banach, su espacio de operadores acotados \(L(E)\) también lo es. En un espacio de Banach, toda serie absolutamente convergente es convergente, por lo que podemos definir \(S := \sum_{n=0}^{\infty} A^n\).
+
+    Para ver que \(S\) es la inversa de \(I-A\), analizamos las sumas parciales \(S_N = \sum_{n=0}^{N} A^n\):
+    \[
+        (I-A)S_N = S_N - A S_N = \sum_{n=0}^{N} A^n - \sum_{n=1}^{N+1} A^n = I - A^{N+1}.
+    \]
+    Como \( \norm{A^{N+1}} \leq \norm{A}^{N+1} \xrightarrow{N \to \infty} 0\), tenemos que \(A^{N+1} \to 0\). Tomando el límite cuando \(N \to \infty \), obtenemos \((I-A)S = I\). Análogamente, \(S_N(I-A) = I - A^{N+1} \implies S(I-A) = I\). Por lo tanto, \((I-A)\) es inversible y su inversa es \(S\).
+
+    Por último, acotamos la norma de la inversa:
+    \[
+        \norm{S} = \norm{ \sum_{n=0}^{\infty} A^n } \leq \sum_{n=0}^{\infty} \norm{A^n} \overset{(1)}{\leq} \sum_{n=0}^{\infty} \norm{A}^n = \frac{1}{1-\norm{A}}.
+    \]
+    Donde (1) vale por el \textbf{Ejercicio 12b}. Esto demuestra la cota deseada.
 \end{proof}
 
 \vspace{0.5cm}
