@@ -559,7 +559,7 @@
     \end{enumerate}
 \end{proof}
 
-\vspace{0.5cm}
+\clearpage
 
 \begin{ejercicio}{12}
     Sea \(E\) un espacio de Banach.
@@ -588,10 +588,9 @@
 \begin{ejercicio}{13}
     Sea \(E\) un espacio de Banach y sea \(A \in L(E)\) tal que \(\norm{A} < 1\). Demostrar que \(I-A\) es inversible con
     \[
-        (I-A)^{-1} = \sum_{n=0}^{\infty} A^n \quad \text{y} \quad \norm*{(I-A)^{-1}} \leq \frac{1}{1-\norm{A}}.
+        {(I-A)}^{-1} = \sum_{n=0}^{\infty} A^n \quad \text{y} \quad \norm{{(I-A)}^{-1}} \leq \frac{1}{1-\norm{A}}.
     \]
 \end{ejercicio}
-
 \begin{proof}
     Como \(\norm{A} < 1\), la serie \(\sum_{n=0}^{\infty} A^n\) es absolutamente convergente en \(L(E)\), ya que
     \[
@@ -612,27 +611,59 @@
     Donde (1) vale por el \textbf{Ejercicio 12b}. Esto demuestra la cota deseada.
 \end{proof}
 
-\vspace{0.5cm}
-
+\clearpage
 \begin{ejercicio}{14}
     Sea \(E\) un espacio de Banach. Probar que \( Gl(E) := \{ T \in L(E) : T \text{ es inversible} \} \) es abierto en \(L(E)\).
-
-    \textit{Sugerencia}: sea \(A\in L(E)\) un operador inversible, probar que \(\bola{A}{\frac{1}{\norm{A^{-1}}}}\subset Gl(E)\).
 \end{ejercicio}
 \begin{proof}
+    Lo que queremos ver es que dado un operador \(A \in Gl(E)\), existe una bola centrada en \(A\) de radio \(r = \frac{1}{\norm{A^{-1}}}\) que está contenida en \(Gl(E)\). Es decir, que todo punto de \(Gl(E)\) es interior.
 
+    En efecto, sea \(A \in Gl(E)\) un operador inversible y consideremos cualquier \(B \in L(E)\) tal que \(\norm{B-A} < \frac{1}{\norm{A^{-1}}}\). Veamos que \(B\) también es inversible. Escribimos \(B\) de la siguiente manera:
+    \[
+        B = A - (A-B) = A(I - A^{-1}(A-B)).
+    \]
+    Notemos que, por hipótesis, la norma del operador \(A^{-1}(A-B)\) está estrictamente acotada por \( 1 \):
+    \[
+        \norm{A^{-1}(A-B)} \leq \norm{A^{-1}} \norm{A-B} = \norm{A^{-1}} \norm{B-A} < 1.
+    \]
+    Por lo tanto, usando el \textbf{Ejercicio 13}, sabemos que el operador \(I - A^{-1}(A-B)\) es inversible.
+
+    Como \(B\) es la composición (o producto) de dos operadores inversibles (\( A \) y \( I - A^{-1}(A-B) \)), concluimos que \(B\) también es inversible. Esto demuestra que \( \bola{A}{\frac{1}{\norm{A^{-1}}}} \subset Gl(E) \), y por lo tanto \( Gl(E) \) es un conjunto abierto.
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{15}
-    Sea \(E\) un espacio de Banach. Consideremos una sucesión \( {\{A_n\}}_{n \in \N} \in L(E) \) de operadores inversibles tal que \(A_n\xrightarrow[n\to\infty]{} A\), para \( A \in L(E) \) no inversible. Probar que
+    Sea \(E\) un espacio de Banach. Consideremos una sucesión \( {\{A_n\}}_{n \in \N} \subset L(E) \) de operadores inversibles tal que \(A_n\xrightarrow[n\to\infty]{} A\), para \( A \in L(E) \) no inversible. Probar que
     \[
         \norm{A_n^{-1}}\xrightarrow[n\to\infty]{}\infty.
     \]
 \end{ejercicio}
 \begin{proof}
+    Procedamos por contradicción. Supongamos que \( \norm{A_n^{-1}} \not\to \infty \).
 
+    Entonces existe una subsucesión \({\{A_{n_k}\}}_{k \in \N}\) y una constante \(M > 0\) tal que
+    \[
+        \norm{A_{n_k}^{-1}} \leq M \quad \forall k \in \N.
+    \]
+    En consecuencia, para todo \( k \in \N \), se cumple que:
+    \[
+        \frac{1}{\norm{A_{n_k}^{-1}}} \geq \frac{1}{M} > 0.
+    \]
+
+    Por el \textbf{Ejercicio 14}, para cada \( k \in \N \), sabemos que la bola abierta
+    \[
+        B\left(A_{n_k}, \frac{1}{\norm{A_{n_k}^{-1}}}\right) \subset Gl(E).
+    \]
+
+    Por otra parte, como \(A_n \to A\), la subsucesión también converge a \(A\), es decir, \(\norm{A - A_{n_k}} \xrightarrow[k\to\infty]{} 0\). Por definición de límite, existe un \( k_0 \in \N \) tal que para todo \(k \geq k_0\):
+    \[
+        \norm{A - A_{n_k}} < \frac{1}{M} \leq \frac{1}{\norm{A_{n_k}^{-1}}}.
+    \]
+
+    Esto implica que \(A \in B\left(A_{n_{k_0}}, \frac{1}{\norm{A_{n_{k_0}}^{-1}}}\right) \subset Gl(E)\), lo que significa que \(A\) es un operador inversible.
+
+    Esto es una contradicción, pues por hipótesis \(A\) no es inversible. Por lo tanto, debemos tener que \(\norm{A_n^{-1}} \xrightarrow[n\to\infty]{} \infty \).
 \end{proof}
 
 \end{document}
