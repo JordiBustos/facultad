@@ -514,35 +514,73 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{11}
-    Operadores integrales.
+    Operadores integrales. Sea \(E\) un espacio de Banach y \(T\in L(E)\). Probar que
     \begin{enumerate}
-        \item Sea \(E\) un espacio de Banach y \(T\in L(E)\). Probar que
-              \begin{enumerate}
-                  \item Si \(T\) está acotado inferiormente entonces \(R(T)\) es cerrado.
-                  \item \(T\) está acotado inferiormente y es suryectivo si, y sólo si, \(T\) es inversible.
-                  \item Si \(V:L^2[0,1]\to L^2[0,1]\) es el \textbf{operador de Volterra} dado por
-                        \[
-                            Vf(x)=\int_0^x f(t)\,dt,
-                        \]
-                        probar que \(V\) no está acotado inferiormente.
-              \end{enumerate}
+        \item Si \(T\) está acotado inferiormente entonces \(R(T)\) es cerrado.
+        \item \(T\) está acotado inferiormente y es suryectivo si, y sólo si, \(T\) es inversible.
+        \item Si \(V:L^2[0,1]\to L^2[0,1]\) es el \textbf{operador de Volterra} dado por
+              \[
+                  Vf(x)=\int_0^x f(t)\,dt,
+              \]
+              probar que \(V\) no está acotado inferiormente.
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
-
+    Sea \( E \) un EB y \( T \in L(E) \).
+    \begin{enumerate}
+        \item Sea \( R(T) = \{ y \in E : \exists x \in E, \, y = Tx \} \) queremos ver que \( R(T) \) es cerrado. Para ello consideremos una sucesión \( {\{y_n\}}_{n\ge1} \subseteq R(T) \) tal que \( y_n \to y \in E \) y veamos que efectivamente \( y \in R(T) \). Como \( y_n \in R(T) \quad \forall n \in \N \) existe \( x_n \in E \) tal que \( T(x_n) = y_n \). Dado que \( T \) está acotado inferiormente, existe \( c > 0 \) tal que \( \norm{Tx} \ge c \norm{x} \) para todo \( x \in E \). Entonces
+              \[
+                  c \norm{x_n} \le \norm{T x_n} = \norm{y_n} \to \norm{y}.
+              \]
+              Veamos que \( {\{ x_n \}}_{n \ge 1} \) es de Cauchy. En efecto, para \( m,n \ge 1 \) se tiene: \[
+                  c \norm{x_n - x_m} \le \norm{T(x_n - x_m)} = \norm{y_n - y_m} \to 0 \quad \text{cuando } n,m \to \infty.
+              \]
+              Por lo tanto, \( {\{ x_n \}}_{n \ge 1} \) es de Cauchy y como \( E \) es completo, existe \( x \in E \) tal que \( x_n \to x \). Por la continuidad de \( T \) se tiene \( T(x_n) \to T(x) \), pero \( T(x_n) = y_n \to y \), luego \( T(x) = y \therefore y \in R(T) \). Esto prueba que \( R(T) \) es cerrado.
+        \item Supongamos que \( T \) está acotado inferiormente y es suryectivo, para ver que \( T \) es inversible veamos que \( T \) es inyectivo, dado \( x \in E \) si \( Tx = 0 \) entonces \( \norm{Tx} = 0 \ge c \norm{x} \implies \norm{x} = 0 \iff x = 0 \therefore T \) es inversible. Para la recíproca, si \( T \) es inversible claramente es suryectiva y para ver que está acotada inferiormente, podemos acotar a \( T \) con \( T^{-1} \), pues por \textbf{Teorema de la aplicación inversa} \( T^{-1} \in L(E) \), es decir, si \[
+                  \norm{T^{-1}y} \le \norm{T^{-1}} \norm{y} \implies \norm{T^{-1}y} \cdot \frac{1}{\norm{T^{-1}}} \le \norm{Tx} \implies \norm{x} \cdot \frac{1}{\norm{T^{-1}}} \le \norm{Tx}
+              \]
+              Luego, \( T \) está acotada inferiormente.
+        \item Sea \( V : L^2[0,1] \to L^2[0,1] \) dado por
+              \[
+                  Vf(x) = \int_0^x f(t)\,dt.
+              \]
+              el operador lineal de Volterra veamos que no está acotado inferiormente. Para ello, supongamos que está acotado inferiormente, es decir, existe \( c > 0 \) tal que \( \norm{Vf}_2 \ge c \norm{f}_2 \). Consideremos la sucesión \( f_n(x) = \sqrt{n} \chi_{[0,1/n]}(x) \), donde \( \chi_{[0,1/n]} \) es la función indicadora del intervalo \( [0,1/n] \). Entonces
+              \[
+                  \norm{f_n}_2^2 = \int_0^1 |f_n(x)|^2 \, dx = \int_0^{1/n} n \, dx = 1,
+              \]
+              pero
+              \begin{align*}
+                  \norm{Vf_n}_2^2 = \int_0^1 \left| \int_0^x f_n(t) \, dt \right|^2 dx & \le \int_0^1 \left( \int_0^x |f_n(t)| \, dt \right)^2 dx       \\
+                                                                                       & \le \int_0^1 {\left( \int_0^{1/n} \sqrt{n} \, dt \right)}^2 dx \\
+                                                                                       & = \int_0^1 {\left( \sqrt{n} \cdot \frac{1}{n} \right)}^2 dx    \\
+                                                                                       & = \int_0^1 \frac{1}{n} \, dx = \frac{1}{n} \to 0.
+              \end{align*}
+              Esto contradice la existencia de \( c > 0 \) tal que \( \norm{Vf}_2 \ge c \norm{f}_2 \), luego \( V \) no está acotado inferiormente.
+    \end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{12}
-    Sea \(E\) un espacio de Banach. Consideremos \(A,B\in L(E)\) y las sucesiones \(\{A_n\}_{n\in\N}\), \(\{B_n\}_{n\in\N}\in L(E)\). Probar que:
+    Sea \(E\) un espacio de Banach.
+
+    Consideremos \(A,B\in L(E)\) y las sucesiones \( {\{A_n\}}_{n\in\N}\), \( {\{B_n\}}_{n\in\N}\in L(E) \). Probar que:
     \begin{enumerate}
         \item \(\norm{AB}\leq\norm{A}\norm{B}\).
-        \item Si \(A_n\xrightarrow[n\to\infty]{} A\) y \(B_n\xrightarrow[n\to\infty]{} B\) entonces \(A_nB_n\xrightarrow[n\to\infty]{} AB\).
+        \item Si \( A_n\xrightarrow[n\to\infty]{} A \) y \( B_n\xrightarrow[n\to\infty]{} B \) entonces \( A_n B_n\xrightarrow[n\to\infty]{} AB \).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Consideremos \( A, B \in L(E) \) y sea \( x \in E \). Entonces, \[
+        \norm{(A \circ B)(x)} = \norm{A(B(x))} \le \norm{A} \norm{B(x)} \le \norm{A} \norm{B} \norm{x}.
+    \]
+    Por lo tanto, \( \norm{AB} \le \norm{A}\norm{B} \).
 
+    Sea \( { \{ A_n \} }_{n \ge 1}, { \{ B_n \} }_{n \ge 1} \) sucesiones en \( L(E) \) tales que \( A_n \xrightarrow[n\to\infty]{} A \) y \( B_n \xrightarrow[n\to\infty]{} B \). Entonces, \begin{align*}
+        \norm{A_n B_n - AB} & \le \norm{A_n B_n - A_n B} + \norm{A_n B - AB}           \\
+                            & \le \norm{A_n} \norm{B_n - B} + \norm{A_n - A} \norm{B}.
+    \end{align*}
+    Como \( A_n \to A \) y \( B_n \to B \), se tiene que \( \norm{A_n - A} \to 0 \) y \( \norm{B_n - B} \to 0 \). Además, \( \norm{A_n} \) y \( \norm{B_n} \) son acotados. Por lo tanto, \( \norm{A_n B_n - AB} \to 0 \), es decir, \( A_n B_n \to AB \) en norma.
 \end{proof}
 
 \vspace{0.5cm}
@@ -550,7 +588,7 @@
 \begin{ejercicio}{13}
     Sea \(E\) un espacio de Banach y sea \(A\in L(E)\) tal que \(\norm{A}<1\). Demostrar que \(I-A\) es inversible con
     \[
-        (I-A)^{-1}=\sum_{n=0}^\infty A^n \quad \text{y} \quad \norm{(I-A)^{-1}}\leq\frac{1}{1-\norm{A}}.
+        {(I-A)}^{-1}=\sum_{n=0}^\infty A^n \quad \text{y} \quad \norm{{(I-A)}^{-1}}\leq\frac{1}{1-\norm{A}}.
     \]
 \end{ejercicio}
 \begin{proof}
@@ -560,7 +598,7 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{14}
-    Sea \(E\) un espacio de Banach. Probar que \(Gl(E):=\{T\in L(E):T \text{ es inversible}\}\) es abierto en \(L(E)\).
+    Sea \(E\) un espacio de Banach. Probar que \( Gl(E) := \{ T \in L(E) : T \text{ es inversible} \} \) es abierto en \(L(E)\).
 
     \textit{Sugerencia}: sea \(A\in L(E)\) un operador inversible, probar que \(\bola{A}{\frac{1}{\norm{A^{-1}}}}\subset Gl(E)\).
 \end{ejercicio}
@@ -571,7 +609,7 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{15}
-    Sea \(E\) un espacio de Banach. Consideremos una sucesión \(\{A_n\}_{n\in\N}\in L(E)\) de operadores inversibles tal que \(A_n\xrightarrow[n\to\infty]{} A\), para \(A\in L(E)\) no inversible. Probar que
+    Sea \(E\) un espacio de Banach. Consideremos una sucesión \( {\{A_n\}}_{n \in \N} \in L(E) \) de operadores inversibles tal que \(A_n\xrightarrow[n\to\infty]{} A\), para \( A \in L(E) \) no inversible. Probar que
     \[
         \norm{A_n^{-1}}\xrightarrow[n\to\infty]{}\infty.
     \]
