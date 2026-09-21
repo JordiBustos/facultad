@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usetikzlibrary{calc}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Teoría de Grafos}
+\author{Bustos Jordi\\Práctica IV}
+
+\maketitle
+
+\begin{definition}
+    Dados \( m, n \geq 1 \), el \textbf{grafo bipartito completo} \( K_{m,n} \) es el grafo bipartito con bipartición \( A, B \) tal que \( |A| = m \), \( |B| = n \), y cada vértice de \( A \) es adyacente a cada vértice de \( B \) (en particular, \( |E(K_{m,n})| = mn \)).
+\end{definition}
+
+\begin{definition}
+    Un \textbf{circuito euleriano} de un grafo \( G \) es una cadena cerrada que contiene a todas las aristas de \( G \), es decir, que recorre cada arista de \( G \) exactamente una vez. Un grafo se dice \textbf{euleriano} si posee un circuito euleriano.
+\end{definition}
+
+\begin{ejercicio}{1}
+    Determinar los posibles valores de \( m \) y \( n \) para los que el grafo bipartito completo \( K_{m,n} \) sea euleriano.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Determinar si las siguientes afirmaciones son verdaderas o falsas:
+    \begin{itemize}
+        \item Todo grafo bipartito euleriano tiene un número par de aristas.
+        \item Todo grafo simple conexo y euleriano con un número par de vértices tiene un número par de aristas.
+        \item Si \( G \) es euleriano y \( v \) es un vértice de \( G \), entonces para cualquier par de aristas \( e \) y \( f \) que inciden en \( v \) existe un circuito euleriano en el cual \( e \) y \( f \) aparecen consecutivamente.
+    \end{itemize}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    \begin{enumerate}
+        \item Sea \( G \) un grafo con conjunto de aristas no vacío y tal que todos sus vértices son de grado par. Probar que \( G \) posee un ciclo.
+        \item Probar que un grafo conexo es euleriano si y sólo si puede expresarse como una unión \( C_1 \cup \cdots \cup C_n \) de ciclos que no comparten aristas.
+    \end{enumerate}
+\end{ejercicio}
+
+\clearpage
+
+\begin{definition}
+    Dos circuitos eulerianos se dicen \textbf{equivalentes} si tienen el mismo orden cíclico de sus aristas (para toda arista, sus aristas vecinas son las mismas en ambos circuitos, considerándose en cada circuito a la primera arista vecina de la última). Un ciclo, por ejemplo, tiene una única clase de equivalencia de circuitos eulerianos.
+\end{definition}
+
+\begin{ejercicio}{4}
+    ¿Cuántas clases de equivalencia de circuitos eulerianos hay en el siguiente grafo?
+\end{ejercicio}
+
+\begin{center}
+    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node (t) at (0,1.5) {};
+        \node (b) at (0,-1.5) {};
+        \node (l) at (-2.2,0) {};
+        \node (r) at (2.2,0) {};
+        \node (i1) at (-0.7,0) {};
+        \node (i2) at (0.7,0) {};
+
+        \draw[thick] (t) -- (l) -- (b) -- (r) -- (t);
+        \draw[thick] (t) -- (i1) -- (b);
+        \draw[thick] (t) -- (i2) -- (b);
+    \end{tikzpicture}
+\end{center}
+
+\begin{definition}
+    Una \textbf{descomposición en cadenas} de un grafo \( G \) es una colección de cadenas \( R_1, \ldots, R_k \) de \( G \) que no comparten aristas entre sí y tales que toda arista de \( G \) pertenece a alguna \( R_i \).
+\end{definition}
+
+\begin{ejercicio}{5}
+    ¿Cuál es el mínimo número \( k \) de cadenas que se necesitan para descomponer al grafo de Petersen? ¿Puede descomponerse también en \( k \) cadenas que sean caminos?
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    El \textbf{problema del cartero chino} consiste en, dado un grafo conexo \( G \), hallar un recorrido cerrado de longitud mínima que contenga a todas las aristas de \( G \), pudiendo repetir aristas de ser necesario.
+\end{definition}
+
+\begin{definition}
+    El \textbf{grafo de los puentes de Königsberg} es el multigrafo cuyos vértices son las cuatro regiones de tierra de la ciudad de Königsberg —las riberas norte (\( N \)) y sur (\( S \)) del río, y las islas \( K \) y \( O \)— y cuyas siete aristas se corresponden con los siete puentes que las conectaban: dos puentes entre \( N \) y \( K \), dos puentes entre \( S \) y \( K \), un puente entre \( K \) y \( O \), un puente entre \( N \) y \( O \), y un puente entre \( S \) y \( O \).
+\end{definition}
+
+\begin{center}
+    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node[label=above:$N$] (n) at (0,1.5) {};
+        \node[label=below:$S$] (s) at (0,-1.5) {};
+        \node[label=left:$K$] (k) at (-2,0) {};
+        \node[label=right:$O$] (o) at (2,0) {};
+
+        \draw[thick] (n) to[bend left=20] (k);
+        \draw[thick] (n) to[bend right=20] (k);
+        \draw[thick] (s) to[bend left=20] (k);
+        \draw[thick] (s) to[bend right=20] (k);
+        \draw[thick] (n) -- (o);
+        \draw[thick] (s) -- (o);
+        \draw[thick] (k) -- (o);
+    \end{tikzpicture}
+    \\[.25cm]
+    El grafo de los puentes de Königsberg.
+\end{center}
+
+\begin{ejercicio}{6}
+    Resolver el problema del cartero chino en el grafo de los puentes de Königsberg.
+\end{ejercicio}
+
+\end{document}

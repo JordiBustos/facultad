@@ -1,0 +1,195 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usetikzlibrary{calc}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Teoría de Grafos}
+\author{Bustos Jordi\\Práctica III}
+
+\maketitle
+
+\begin{definition}
+    Un \textbf{conjunto independiente} de un grafo \( G \) es un subconjunto \( S \subseteq V(G) \) tal que no hay dos vértices de \( S \) que sean adyacentes en \( G \).
+\end{definition}
+
+\begin{definition}
+    Un grafo \( G \) es \textbf{bipartito} si existe una partición de \( V(G) \) en dos conjuntos no vacíos \( A \) y \( B \) (a la que llamaremos una \textbf{bipartición} de \( G \)) tal que toda arista de \( G \) tiene un extremo en \( A \) y el otro en \( B \). Equivalentemente, \( A \) y \( B \) son conjuntos independientes de \( G \).
+\end{definition}
+
+\begin{ejercicio}{1}
+    Determinar si el grafo de Petersen es bipartito y encontrar un conjunto independiente máximo en él, justificando por qué no se puede encontrar uno mayor.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Un \textbf{subgrafo} de un grafo \( G \) es un grafo \( H \) tal que \( V(H) \subseteq V(G) \), \( E(H) \subseteq E(G) \), y los extremos de cada arista de \( H \) son los mismos que tiene en \( G \).
+\end{definition}
+
+\begin{ejercicio}{2}
+    En cada uno de los grafos de abajo, encontrar un subgrafo bipartito con cantidad máxima de aristas. Justificar por qué no hay un subgrafo bipartito con mayor cantidad de aristas que él y determinar si hay algún otro subgrafo bipartito con la misma cantidad de aristas.
+\end{ejercicio}
+
+\begin{center}
+    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node (l) at (0,0) {};
+        \node (d1) at (1,0) {};
+        \node (d2) at (2,0) {};
+        \node (d3) at (3,0) {};
+        \node (d4) at (4,0) {};
+        \node (r) at (5,0) {};
+        \node (t) at (2,1.2) {};
+        \node (b) at (2,-1.2) {};
+
+        \draw[thick] (l) -- (d1) -- (d2) -- (d3) -- (d4) -- (r);
+        \draw[thick] (l) -- (t) -- (r);
+        \draw[thick] (l) -- (b) -- (r);
+        \draw[thick] (t) -- (d2) -- (b);
+    \end{tikzpicture}
+    \hspace{1.5cm}
+    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node (t1) at (0,1) {};
+        \node (t2) at (1,1) {};
+        \node (t3) at (2,1) {};
+        \node (t4) at (3,1) {};
+        \node (b1) at (0,0) {};
+        \node (b2) at (1,0) {};
+        \node (b3) at (2,0) {};
+        \node (b4) at (3,0) {};
+
+        \draw[thick] (t1) -- (t2);
+        \draw[thick] (t3) -- (t4);
+        \draw[thick] (b1) -- (b2);
+        \draw[thick] (b3) -- (b4);
+        \draw[thick] (t1) -- (b1);
+        \draw[thick] (t2) -- (b2);
+        \draw[thick] (t3) -- (b3);
+        \draw[thick] (t4) -- (b4);
+        \draw[thick] (t2) -- (b3);
+        \draw[thick] (t3) -- (b2);
+        \draw[thick] (t1) to[bend left=40] (t4);
+        \draw[thick] (b1) to[bend right=40] (b4);
+    \end{tikzpicture}
+\end{center}
+
+\begin{ejercicio}{3}
+    Sea \( A \) la familia de los grafos que son caminos, \( B \) la familia de los ciclos, \( C \) la familia de los grafos completos y \( D \) la familia de los grafos bipartitos. Hallar todas las clases de grafos isomorfos que están en la intersección de cada par de esas familias.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \( G \) el grafo cuyos vértices son las \( k \)-uplas de ceros y unos, con \( x \) adyacente a \( y \) si y sólo si difieren en una posición. Determinar si \( G \) es bipartito.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Sea \( G_n \) el grafo cuyos vértices son las permutaciones de \( \{1, \ldots, n\} \), siendo dos permutaciones \( a_1, \ldots, a_n \) y \( b_1, \ldots, b_n \) adyacentes si una puede obtenerse de la otra intercambiando la posición de dos elementos. Probar que \( G_n \) es bipartito. (Pista: para cada permutación \( a \), contar los pares \( i, j \) tales que \( i < j \) y \( a_i > a_j \).)
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Probar que un grafo \( G \) es bipartito si y sólo si todo subgrafo \( H \) de \( G \) posee un conjunto independiente con al menos la mitad de los vértices que \( H \) tiene.
+\end{ejercicio}
+
+\clearpage
+
+\begin{definition}
+    Un \textbf{lazo} (o \emph{loop}) de un grafo \( G \) es una arista cuyos dos extremos coinciden en un mismo vértice.
+\end{definition}
+
+\begin{ejercicio}{7}
+    Sea \( G \) un grafo sin loops y con \( m \) aristas. Probar que \( G \) posee un subgrafo bipartito con al menos \( \frac{m}{2} \) aristas.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Probar que un grafo bipartito tiene una única bipartición si y sólo si es conexo. Para ello, si se tiene una bipartición \( A, B \), considerar a \( B, A \) como la misma bipartición.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Dado \( n \geq 1 \), notamos \( P_n \) al camino con \( n \) vértices (y, por lo tanto, con \( n-1 \) aristas).
+\end{definition}
+
+\begin{ejercicio}{9}
+    Sea \( G \) un grafo simple y conexo que no tiene a \( P_4 \) ni a \( K_3 \) como subgrafos inducidos. Probar que \( G \) es un grafo bipartito completo.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Dados grafos \( G_1, \ldots, G_k \) con el mismo conjunto de vértices \( V \), la \textbf{unión} \( G_1 \cup \cdots \cup G_k \) es el grafo con conjunto de vértices \( V \) y conjunto de aristas \( E(G_1) \cup \cdots \cup E(G_k) \).
+\end{definition}
+
+\begin{ejercicio}{10}
+    \begin{enumerate}
+        \item Dados \( n \) y \( k \) números naturales tales que \( n \leq 2^k \), codificar los vértices de \( K_n \) con \( k \)-uplas y usar esto para construir \( k \) grafos bipartitos cuya unión es \( K_n \).
+        \item Recíprocamente, si \( K_n \) es la unión de \( k \) grafos bipartitos \( G_1, \ldots, G_k \), codificar convenientemente los vértices de \( K_n \) con \( k \)-uplas binarias y probar así que \( n \leq 2^k \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+    Dado un grafo \( G \) conexo y un vértice inicial \( v \), consideremos la siguiente variante de BFS donde a los vértices les asignamos un 1 o un -1.
+\end{ejercicio}
+
+\begin{algorithm}[h]
+    \caption{BFS con signos}
+    \label{alg:bfs-bipartito}
+    \begin{algorithmic}[1]
+        \Procedure{BFSBipartito}{$G, v$}
+        \State \textbf{Entrada:} Un grafo conexo $G$ y un vértice inicial $v$.
+        \State \textbf{Salida:} Una asignación de signos $\pm 1$ a los vértices de $G$, o la conclusión de que $G$ no es bipartito.
+        \vspace{0.2cm}
+        \State Introducir a $v$ en la cola y asignarle el número 1.
+        \While{la cola no esté vacía}
+        \State Considerar el primer vértice $w$ de la cola y removerlo de ella.
+        \For{cada vecino $x$ de $w$}
+        \If{$x$ ya tiene un número asignado}
+        \State Chequear que sea el opuesto al de $w$. En caso contrario, finalizar y concluir que $G$ no es bipartito.
+        \Else
+        \State Asignarle a $x$ el número opuesto al de $w$ y colocar a $x$ en la cola.
+        \EndIf
+        \EndFor
+        \EndWhile
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+Demostrar que este algoritmo funciona, es decir, si \( G \) es bipartito hallará una partición del conjunto de vértices que lo demuestra y, si \( G \) no es bipartito, alcanzará tal conclusión.
+
+\end{document}
