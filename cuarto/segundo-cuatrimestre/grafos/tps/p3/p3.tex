@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{xparse}
+\usepackage{etoolbox}
 \usetikzlibrary{calc}
 
 \theoremstyle{plain}
@@ -29,6 +31,48 @@
 
 \setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
 
+% Coloreamos las etiquetas A/B para resaltar visualmente el 2-coloreo del Ejercicio 1
+\newcommand{\vlab}[1]{%
+    \ifstrequal{#1}{A}{\textcolor{blue!60!black}{\textbf{A}}}{%
+    \ifstrequal{#1}{B}{\textcolor{red!60!black}{\textbf{B}}}{#1}}%
+}
+
+% Un paso del algoritmo BFS del Ejercicio 11 sobre el grafo de Petersen: recibe
+% las etiquetas de los 5 vértices exteriores o1,...,o5 (#1) y de los 5
+% vértices interiores i1,...,i5 (#2), como listas separadas por comas, y
+% dibuja el grafo con esas etiquetas, evitando repetir el mismo dibujo cuatro veces.
+\NewDocumentCommand{\PetersenPaso}{ m m }{%
+    \begin{tikzpicture}[vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt}]
+        \def\R{2.6}
+        \def\r{1.2}
+
+        \foreach [count=\i] \lab in {#1} {
+            \ifcase\i\relax
+            \or \node[vertex] (o1) at (90:\R) {}; \node[above=3pt] at (o1) {\vlab{\lab}};
+            \or \node[vertex] (o2) at (18:\R) {}; \node[above right=1pt] at (o2) {\vlab{\lab}};
+            \or \node[vertex] (o3) at (306:\R) {}; \node[below right=1pt] at (o3) {\vlab{\lab}};
+            \or \node[vertex] (o4) at (234:\R) {}; \node[below left=1pt] at (o4) {\vlab{\lab}};
+            \or \node[vertex] (o5) at (162:\R) {}; \node[above left=1pt] at (o5) {\vlab{\lab}};
+            \fi
+        }
+        \foreach [count=\i] \lab in {#2} {
+            \ifcase\i\relax
+            \or \node[vertex] (i1) at (90:\r) {}; \node[right=2pt] at (i1) {\vlab{\lab}};
+            \or \node[vertex] (i2) at (18:\r) {}; \node[below right=1pt] at (i2) {\vlab{\lab}};
+            \or \node[vertex] (i3) at (306:\r) {}; \node[left=2pt] at (i3) {\vlab{\lab}};
+            \or \node[vertex] (i4) at (234:\r) {}; \node[below right=1pt] at (i4) {\vlab{\lab}};
+            \or \node[vertex] (i5) at (162:\r) {}; \node[above right=1pt] at (i5) {\vlab{\lab}};
+            \fi
+        }
+
+        \draw[thick] (o1) -- (o2) -- (o3) -- (o4) -- (o5) -- (o1);
+        \draw[thick] (i1) -- (i3) -- (i5) -- (i2) -- (i4) -- (i1);
+        \foreach \x in {1,...,5} {
+                \draw[thick] (o\x) -- (i\x);
+            }
+    \end{tikzpicture}%
+}
+
 \begin{document}
 
 \title{Teoría de Grafos}
@@ -47,6 +91,47 @@
 \begin{ejercicio}{1}
     Determinar si el grafo de Petersen es bipartito y encontrar un conjunto independiente máximo en él, justificando por qué no se puede encontrar uno mayor.
 \end{ejercicio}
+\begin{proof}
+    Propongo que el grafo de Petersen no es bipartito. Aplicaremos el algoritmo del \textbf{Ejercicio 11} partiendo del vértice \( v = 12 \), recordando que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+
+    \begin{center}
+        \resizebox{\textwidth}{!}{%
+            \begin{tabular}{cccc}
+                \PetersenPaso{A,34,51,23,45}{35,52,24,41,13} &
+                \PetersenPaso{A,B,51,23,B}{B,52,24,41,13}    &
+                \PetersenPaso{A,B,51,A,B}{B,52,24,41,A}      &
+                \PetersenPaso{A,B,B,A,B}{B,52,24,41,A}                                                                            \\
+                \footnotesize Paso 1                         & \footnotesize Paso 2 & \footnotesize Paso 3 & \footnotesize Paso 4
+            \end{tabular}%
+        }
+    \end{center}
+
+    \begin{itemize}
+        \item \textbf{Paso 1:} etiquetamos al vértice inicial \( 12 \) con \( A \).
+        \item \textbf{Paso 2:} sus tres vecinos, \( 34 \), \( 45 \) y \( 35 \) (los únicos subconjuntos disjuntos de \( \{1,2\} \) entre los adyacentes a \( 12 \)), reciben el signo opuesto \( B \).
+        \item \textbf{Paso 3:} procesamos el vecino \( 45 \); sus vecinos aún no etiquetados, \( 23 \) y \( 13 \), reciben el signo opuesto \( A \).
+        \item \textbf{Paso 4:} procesamos el vecino \( 23 \) (con signo \( A \)); su vecino \( 51 \) recibe el signo opuesto \( B \). Pero \( 51 \) es también vecino de \( 34 \) (pues \( \{5,1\} \cap \{3,4\} = \varnothing \)), que ya tenía asignado el signo \( B \).
+    \end{itemize}
+
+    Encontramos así dos vértices adyacentes, \( 34 \) y \( 51 \), a los que el algoritmo asignó el mismo signo. Por lo que podemos concluir que el grafo de Petersen no es bipartito.
+
+    \vspace{0.3cm}
+
+    Encontremos ahora un conjunto independiente máximo. Consideremos
+    \[
+        S = \{12, 13, 14, 15\},
+    \]
+    es decir, todos los subconjuntos de dos elementos que contienen al \( 1 \). Es claro que dos elementos de \( S \) no son adyacentes en el grafo de Petersen. Así, \( S \) es un conjunto independiente de tamaño \( 4 \).
+
+    Veamos que no existe un conjunto independiente de tamaño \( 5 \). Como los vértices del grafo de Petersen son los subconjuntos de dos elementos de \( \{1,\ldots,5\} \) y dos de ellos son no adyacentes si y sólo si se intersecan, un conjunto independiente se corresponde exactamente con una familia \( \mathcal{F} \) de subconjuntos de dos elementos de \( \{1,\ldots,5\} \) que se intersecan dos a dos. Pensemos a cada elemento de \( \mathcal{F} \) como una arista del grafo completo \( K_5 \) con vértices \( \{1,\ldots,5\} \); la condición dice entonces que dos aristas cualesquiera de \( \mathcal{F} \) comparten un extremo.
+
+    \begin{itemize}
+        \item Si todas las aristas de \( \mathcal{F} \) tienen un vértice \( x \) en común (\( \mathcal{F} \) es una \emph{estrella} centrada en \( x \)), entonces \( |\mathcal{F}| \leq 4 \), pues en \( K_5 \) hay exactamente 4 aristas incidentes a \( x \).
+        \item Si no hay un vértice común a todas, tomemos \( e_1 = \{a,b\} \in \mathcal{F} \) y otra arista que la interseque, digamos \( e_2 = \{b,c\} \) con \( c \neq a \). Como no todas las aristas contienen a \( b \), existe \( e_3 \in \mathcal{F} \) con \( b \notin e_3 \). Para intersecar a \( e_1 \) sin usar \( b \), \( e_3 \) debe contener a \( a \); para intersecar a \( e_2 \) sin usar \( b \), debe contener a \( c \). Luego \( e_3 = \{a,c\} \), y \( e_1, e_2, e_3 \) forman un triángulo sobre \( \{a,b,c\} \). Cualquier otra arista de \( \mathcal{F} \) con un extremo fuera de \( \{a,b,c\} \) dejaría de intersecar a alguna de las tres, por lo que en este caso \( |\mathcal{F}| \leq 3 \).
+    \end{itemize}
+
+    En ambos casos \( |\mathcal{F}| \leq 4 \), de modo que no puede haber un conjunto independiente de \( 5 \) vértices. Concluimos que \( S \) es un conjunto independiente máximo del grafo de Petersen.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -100,29 +185,182 @@
     \end{tikzpicture}
 \end{center}
 
+\begin{proof}
+    Por el \textbf{Teorema 1.2.18} del West \( G \) es bipartito \( \iff \) no contiene ciclos de longitud impar.
+
+    El primer grafo de 11 aristas contiene ciclos de longitud impar (e.g \(l-t-r-d_4-d_3-d_2-d_1-l\)). Eliminemos la mínima cantidad de aristas tal que se rompan todos los ciclos impares. Removiendo \( \{d_4, r\} \) obtenemos un subgrafo bipartito de 10 aristas. Como el grafo original no es bipartito, el subgrafo resultante es maximal. No es único, ya que eliminar \( \{d_3, d_4\} \) o \( \{d_2, d_3\} \) produce subgrafos bipartitos de 10 aristas.
+
+    El segundo grafo de 12 aristas también posee múltiples ciclos impares disjuntos en aristas, lo que significa que eliminar una sola arista no será suficiente para volverlo bipartito. Debemos eliminar al menos dos. Si eliminamos las dos aristas cruzadas del centro (\( \{t_2, b_3\} \) y \( \{t_3, b_2\} \)), el grafo resultante no tiene ciclos impares y por lo tanto es bipartito, conservando 10 aristas. Este subgrafo es maximal. Tampoco es único: eliminando las dos aristas \( \{t_1, t_4\} \) y \( \{b_1, b_4\} \) obtendríamos otro subgrafo bipartito diferente de 10 aristas.
+
+    \begin{center}
+        \begin{tikzpicture}[
+                vertex/.style={circle, draw, fill=black, inner sep=1.5pt},
+                every label/.style={font=\footnotesize}
+            ]
+            \node[vertex, label=left:\(l\)] (l) at (0,0) {};
+            \node[vertex, label=below:\(d_1\)] (d1) at (1,0) {};
+            \node[vertex, label=45:\(d_2\)] (d2) at (2,0) {};
+            \node[vertex, label=below:\(d_3\)] (d3) at (3,0) {};
+            \node[vertex, label=above left:\(d_4\)] (d4) at (4,0) {};
+            \node[vertex, label=right:\(r\)] (r) at (5,0) {};
+            \node[vertex, label=above:\(t\)] (t) at (2,1.2) {};
+            \node[vertex, label=below:\(b\)] (b) at (2,-1.2) {};
+
+            % Se mantiene d4, pero se elimina la arista (d4)--(r)
+            \draw[thick] (l) -- (d1) -- (d2) -- (d3) -- (d4);
+            \draw[thick] (l) -- (t) -- (r);
+            \draw[thick] (l) -- (b) -- (r);
+            \draw[thick] (t) -- (d2) -- (b);
+        \end{tikzpicture}
+        \hspace{1.5cm}
+        \begin{tikzpicture}[
+                vertex/.style={circle, draw, fill=black, inner sep=1.5pt},
+                every label/.style={font=\footnotesize}
+            ]
+            \node[vertex, label=135:\(t_1\)] (t1) at (0,1) {};
+            \node[vertex, label=above:\(t_2\)] (t2) at (1,1) {};
+            \node[vertex, label=above:\(t_3\)] (t3) at (2,1) {};
+            \node[vertex, label=45:\(t_4\)] (t4) at (3,1) {};
+            \node[vertex, label=225:\(b_1\)] (b1) at (0,0) {};
+            \node[vertex, label=below:\(b_2\)] (b2) at (1,0) {};
+            \node[vertex, label=below:\(b_3\)] (b3) at (2,0) {};
+            \node[vertex, label=315:\(b_4\)] (b4) at (3,0) {};
+
+            \draw[thick] (t1) -- (t2);
+            \draw[thick] (t3) -- (t4);
+            \draw[thick] (b1) -- (b2);
+            \draw[thick] (b3) -- (b4);
+            \draw[thick] (t1) -- (b1);
+            \draw[thick] (t2) -- (b2);
+            \draw[thick] (t3) -- (b3);
+            \draw[thick] (t4) -- (b4);
+            % Aristas cruzadas eliminadas
+            \draw[thick] (t1) to[bend left=40] (t4);
+            \draw[thick] (b1) to[bend right=40] (b4);
+        \end{tikzpicture}
+    \end{center}
+\end{proof}
+
+\begin{definition}
+    Un \textbf{camino} es un recorrido en el que no se repite ningún vértice (y, por lo tanto, tampoco ninguna arista).
+\end{definition}
+
+\begin{definition}
+    Un \textbf{ciclo} es una cadena cerrada no trivial (es decir, con al menos una arista) en la que no se repite ningún vértice, salvo el primero y el último, que coinciden.
+\end{definition}
+
+\begin{definition}
+    Un \textbf{grafo completo} es un grafo en el que cada par de vértices distintos está conectado por una arista.
+\end{definition}
+
 \begin{ejercicio}{3}
     Sea \( A \) la familia de los grafos que son caminos, \( B \) la familia de los ciclos, \( C \) la familia de los grafos completos y \( D \) la familia de los grafos bipartitos. Hallar todas las clases de grafos isomorfos que están en la intersección de cada par de esas familias.
 \end{ejercicio}
+\begin{proof}
+    Analicemos cada intersección de familias de grafos:
+    \begin{itemize}
+        \item \(\mathbf{A \cap B}\): La intersección de caminos y ciclos es vacía. Por definición, en un camino no se repiten vértices, mientras que en un ciclo el primer y último vértice deben coincidir. Notar que un ciclo exige al menos una arista, descartando al grafo trivial.
 
-\vspace{0.5cm}
+        \item \(\mathbf{A \cap C}\): La intersección de caminos y grafos completos contiene únicamente a \(K_1\) y \(K_2\). El grafo de un vértice sin aristas (\(K_1\)) es trivialmente un camino y completo. El grafo de dos vértices unidos por una arista (\(K_2\)) también lo es. Cualquier grafo completo \(K_n\) con \(n \geq 3\) tiene vértices de grado \(n-1 \geq 2\) y contiene ciclos (como \(K_3\)), por lo tanto no puede ser un camino.
+
+        \item \(\mathbf{A \cap D}\): La intersección de caminos y grafos bipartitos es la clase de todos los caminos (\(A\)). Como ya dijimos en el ejercicio anterior, un grafo es bipartito si y sólo si no contiene ciclos de longitud impar. Como los caminos no contienen ningún ciclo, todos los caminos son bipartitos.
+
+        \item \(\mathbf{B \cap C}\): La intersección de ciclos y grafos completos contiene únicamente a \(K_3\) (el triángulo). En un ciclo, todo vértice tiene grado exactamente 2. En un grafo completo \(K_n\), todo vértice tiene grado \(n-1\). Igualando ambas condiciones (\(n-1 = 2\)) obtenemos \(n = 3\). Para \(n > 3\), aparecerían diagonales (aristas que no pertenecen al ciclo de la frontera) rompiendo la estructura de ciclo.
+
+        \item \(\mathbf{B \cap D}\): La intersección de ciclos y grafos bipartitos son todos los ciclos de longitud par (\(C_{2k}\) con \(k \geq 2\)). Esto se deduce directamente de la caracterización de los grafos bipartitos (un grafo es bipartito si y sólo si no contiene ciclos de longitud impar).
+
+        \item \(\mathbf{C \cap D}\): La intersección de grafos completos y bipartitos contiene únicamente a \(K_1\) y \(K_2\). Sabemos que un grafo bipartito no puede contener ciclos impares. Cualquier grafo completo \(K_n\) con \(n \geq 3\) contiene a \(K_3\) como subgrafo, que es un ciclo de longitud 3 \( \therefore \) sólo \(K_1\) y \(K_2\) pertenecen a esta intersección.
+    \end{itemize}
+\end{proof}
 
 \begin{ejercicio}{4}
     Sea \( G \) el grafo cuyos vértices son las \( k \)-uplas de ceros y unos, con \( x \) adyacente a \( y \) si y sólo si difieren en una posición. Determinar si \( G \) es bipartito.
 \end{ejercicio}
+\begin{proof}
+    Sea \( k \in \N \). El grafo \(G\) es efectivamente bipartito. Definimos los conjuntos:
+    \[
+        \begin{aligned}
+            X & = \{ v \in V(G) : \text{la cantidad de unos en } v \text{ es par} \},   \\
+            Y & = \{ v \in V(G) : \text{la cantidad de unos en } v \text{ es impar} \}.
+        \end{aligned}
+    \]
+    Claramente, \( X \cap Y = \varnothing \) y \(X \cup Y = V(G)\), por lo que conforman una partición válida de los vértices.
+
+    Ahora debemos verificar que no existen aristas con ambos extremos en el mismo conjunto. Supongamos que dos vértices \(u\) y \(v\) son adyacentes en \(G\). Por definición, sus \(k\)-uplas difieren en exactamente una posición.
+
+    Esto implica que la cantidad total de unos en \(u\) y \(v\) difiere exactamente en 1. En consecuencia, si \(u\) tiene una cantidad par de unos, \(v\) tendrá necesariamente una cantidad impar, y viceversa. Es decir, toda arista conecta un vértice de \(X\) con un vértice de \(Y\).
+
+    Por lo tanto, no hay aristas internas en los conjuntos, \((X, Y)\) es una bipartición válida \( \therefore G \) es bipartito.
+\end{proof}
 
 \vspace{0.5cm}
+
+\begin{algorithm}
+    \caption{Bubble Sort}
+    \label{alg:bubblesort}
+    \begin{algorithmic}[1] % El [1] es para enumerar cada línea
+        \Procedure{BubbleSort}{$A, n$}
+        \State \textbf{Entrada:} Una lista $A$ de $n$ elementos.
+        \State \textbf{Salida:} La lista $A$ ordenada de forma ascendente.
+        \vspace{0.2cm}
+        \For{$i \gets 1$ \textbf{hasta} $n-1$}
+        \For{$j \gets 1$ \textbf{hasta} $n-i$}
+        \If{$A[j] > A[j+1]$}
+        \State Intercambiar $A[j]$ y $A[j+1]$
+        \EndIf
+        \EndFor
+        \EndFor
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
 
 \begin{ejercicio}{5}
     Sea \( G_n \) el grafo cuyos vértices son las permutaciones de \( \{1, \ldots, n\} \), siendo dos permutaciones \( a_1, \ldots, a_n \) y \( b_1, \ldots, b_n \) adyacentes si una puede obtenerse de la otra intercambiando la posición de dos elementos. Probar que \( G_n \) es bipartito. (Pista: para cada permutación \( a \), contar los pares \( i, j \) tales que \( i < j \) y \( a_i > a_j \).)
 \end{ejercicio}
+\begin{proof}
+    Dada una permutación \(a = a_1, \ldots, a_n\), definimos su número de inversiones \( I(a) \) como la cantidad de pares \((i, j)\) tales que \(i < j\) y \(a_i > a_j\).
 
-\vspace{0.5cm}
+    El algoritmo Bubble Sort ordena un arreglo realizando únicamente intercambios de elementos \emph{adyacentes}. Es un hecho conocido que cada intercambio de dos elementos adyacentes altera el número de inversiones \(I(a)\) en exactamente \(+1\) o \(-1\). En particular, cada intercambio adyacente cambia la paridad de \(I(a)\).
+
+    En nuestro grafo \(G_n\), dos permutaciones son adyacentes si difieren por un intercambio de \emph{cualesquiera} dos posiciones \(i\) y \(j\) (asumamos \(i < j\)). Un intercambio general entre las posiciones \(i\) y \(j\) se puede simular algorítmicamente mediante una secuencia de intercambios adyacentes (``burbujeando'' el elemento de la posición \(i\) hasta la \(j\), y luego llevando el elemento original de la \(j\) hasta la posición \(i\)). Esto requiere exactamente \((j-i) + (j-i-1) = 2(j-i) - 1\) intercambios adyacentes.
+
+    Como \(2(j-i) - 1\) es siempre un número \textbf{impar}, cualquier arista en \(G_n\) (un intercambio general) equivale a aplicar una cantidad impar de intercambios adyacentes. Como cada uno invierte la paridad de \(I(a)\), deducimos que toda arista de \(G_n\) conecta necesariamente una permutación con un número par de inversiones con una permutación con un número impar de inversiones.
+
+    Si ejecutáramos el \textbf{Algoritmo \ref{alg:bfs-bipartito} (BFS con signos)} (es fácil ver que \( G_n \) es conexo) partiendo del vértice correspondiente a la permutación identidad \( id \) (la cual tiene \(I(id) = 0\), par), el algoritmo le asignaría el número 1. En cada iteración, al cruzar una arista, la paridad de las inversiones necesariamente cambia. Por lo tanto, el BFS asignará sistemáticamente:
+    \begin{itemize}
+        \item El signo 1 a las permutaciones con \( I(a)\) \textbf{par} (el conjunto \(X\)).
+        \item El signo -1 a las permutaciones con \(I(a)\) \textbf{impar} (el conjunto \(Y\)).
+    \end{itemize}
+
+    La condición de fallo del algoritmo (línea 9) ocurre si encuentra una arista entre dos vértices con el mismo signo. Pero acabamos de demostrar que toda arista conecta una permutación par con una impar. Por lo tanto, el chequeo de la línea 9 nunca fallará.
+
+    El algoritmo particionará exitosamente el conjunto de vértices de \(G_n\) en dos conjuntos disjuntos \(X\) e \(Y\) sin aristas internas, demostrando que \(G_n\) es bipartito.
+\end{proof}
+
+\clearpage
 
 \begin{ejercicio}{6}
     Probar que un grafo \( G \) es bipartito si y sólo si todo subgrafo \( H \) de \( G \) posee un conjunto independiente con al menos la mitad de los vértices que \( H \) tiene.
 \end{ejercicio}
+\begin{proof}
+    (\( \Longrightarrow \)) Sea \(G\) un grafo bipartito con bipartición \((X, Y)\). Para cualquier subgrafo \(H\) de \(G\), los conjuntos \(A = X \cap V(H)\) y \(B = Y \cap V(H)\) forman una partición de \(V(H)\). Como \(X\) e \(Y\) son conjuntos independientes en \(G\), \(A\) y \(B\) también lo son en \(H\). Como \(|A| + |B| = |V(H)|\), al menos uno de los dos conjuntos debe tener un tamaño mayor o igual a \(|V(H)|/2\). Por lo tanto, \(H\) posee un conjunto independiente con al menos la mitad de sus vértices.
 
-\clearpage
+    (\( \Longleftarrow \)) Supongamos que todo subgrafo \(H\) de \(G\) posee un conjunto independiente con al menos la mitad de sus vértices, pero que \(G\) no es bipartito.
+
+    Como \(G\) no es bipartito contiene al menos un ciclo de longitud impar. Sea \( H = C_{2k+1} \) dicho subgrafo.
+
+    Analicemos el tamaño máximo de un conjunto independiente en \(H\). Como los vértices forman un ciclo, no podemos elegir dos vértices adyacentes. Lo máximo que podemos hacer es seleccionar vértices alternados. Al ser una cantidad impar de vértices, el conjunto independiente más grande posible tendrá exactamente \(k\) vértices.
+
+    Sin embargo, por nuestra hipótesis inicial, \(H\) debería tener un conjunto independiente de tamaño al menos:
+    \[
+        \frac{|V(H)|}{2} = \frac{2k+1}{2} = k + \frac{1}{2}
+    \]
+    Como la cardinalidad de un conjunto debe ser un número entero, el conjunto independiente debería tener al menos \(k+1\) vértices, lo cual es imposible en \(C_{2k+1}\).
+
+    Por lo tanto, \(G\) no puede contener ciclos impares y es bipartito.
+\end{proof}
+
+\vspace{0.5cm}
 
 \begin{definition}
     Un \textbf{lazo} (o \emph{loop}) de un grafo \( G \) es una arista cuyos dos extremos coinciden en un mismo vértice.
@@ -131,12 +369,69 @@
 \begin{ejercicio}{7}
     Sea \( G \) un grafo sin loops y con \( m \) aristas. Probar que \( G \) posee un subgrafo bipartito con al menos \( \frac{m}{2} \) aristas.
 \end{ejercicio}
+\begin{proof}
+    La idea es la siguiente: de entre todas las particiones posibles de \(V(G)\) en dos conjuntos, elegimos una que maximice la cantidad de aristas ``cruzadas'' (con un extremo en cada conjunto). Esta partición, por ser óptima, ya debe tener al menos \(m/2\) aristas cruzadas: si tuviera menos, podríamos mejorarla moviendo un único vértice de un conjunto al otro, contradiciendo que ya era la mejor posible.
+
+    Formalicemos esta idea. Como \(G\) tiene finitos vértices, hay finitas particiones \((X, Y)\) de \(V(G)\) (permitiendo conjuntos vacíos), así que existe una que maximiza la cantidad de aristas con un extremo en \(X\) y el otro en \(Y\). Fijemos una tal partición \((X, Y)\) y sea \(H\) el subgrafo formado exactamente por esas aristas cruzadas. Por construcción, ninguna arista de \(H\) tiene ambos extremos del mismo lado, así que \(H\) es bipartito con bipartición \((X, Y)\).
+
+    Veamos que todo vértice \(v \in V(G)\) tiene, dentro de \(H\), al menos la mitad de sus aristas originales. Supongamos que no: digamos \(v \in X\) (el caso \(v \in Y\) es análogo) y que \(v\) tiene más vecinos de su mismo lado (\(d_X(v)\) de ellos en \(X\)) que del lado opuesto (\(d_Y(v)\) en \(Y\)), es decir \(d_X(v) > d_Y(v)\). Si moviéramos a \(v\) de \(X\) a \(Y\):
+    \begin{itemize}
+        \item perderíamos las \(d_Y(v)\) aristas cruzadas que \(v\) ya aportaba (sus vecinos en \(Y\) dejarían de estar del lado opuesto),
+        \item pero ganaríamos \(d_X(v)\) aristas cruzadas nuevas (sus vecinos que quedaron en \(X\) ahora sí quedan del lado opuesto a \(v\)).
+    \end{itemize}
+    Como \(d_X(v) > d_Y(v)\), este cambio aumentaría estrictamente la cantidad de aristas cruzadas, contradiciendo que \((X,Y)\) ya era óptima. Luego, para todo vértice \(v\) debe valer que su cantidad de vecinos del lado opuesto es al menos su cantidad de vecinos del mismo lado, es decir, \(v\) tiene al menos \(\deg(v)/2\) aristas en \(H\):
+    \[
+        \deg_H(v) \geq \frac{\deg(v)}{2} \qquad \text{para todo } v \in V(G).
+    \]
+
+    Sumando esta desigualdad sobre todos los vértices y usando que \(\sum_{v} \deg(v) = 2m\) (cada arista de \(G\) se cuenta dos veces, una por cada extremo):
+    \[
+        \sum_{v \in V(G)} \deg_H(v) \geq \sum_{v \in V(G)} \frac{\deg(v)}{2} = \frac{1}{2} \sum_{v \in V(G)} \deg(v) = m.
+    \]
+    Pero el lado izquierdo es, por la misma razón, exactamente \(2|E(H)|\) (cada arista de \(H\) se cuenta dos veces). Se sigue que \(2|E(H)| \geq m\), es decir:
+    \[
+        |E(H)| \geq \frac{m}{2}.
+    \]
+    Concluimos que \(H\) es el subgrafo bipartito buscado.
+\end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}
+    Definimos la diferencia simétrica de dos conjuntos \(A\) y \(B\) como
+    \[
+        A \triangle B = (A \setminus B) \cup (B \setminus A).
+    \]
+    Son los elementos que pertenecen a \( A \) o a \( B \), pero no a ambos.
+\end{definition}
 
 \begin{ejercicio}{8}
     Probar que un grafo bipartito tiene una única bipartición si y sólo si es conexo. Para ello, si se tiene una bipartición \( A, B \), considerar a \( B, A \) como la misma bipartición.
 \end{ejercicio}
+\begin{proof}
+    (\( \Longrightarrow \)) Procederemos por el contrarrecíproco. Supongamos que \(G\) no es conexo. Entonces, existe una componente conexa de \(G\) cuyo conjunto de vértices llamaremos \(C\), tal que \( C \neq \varnothing \) y \(C \neq V(G)\).
+
+    Sea \((A, B)\) una bipartición válida de \(G\). Consideremos los conjuntos \(A' = A \triangle C\) y \(B' = B \triangle C\). Veamos que \((A', B')\) es también una bipartición de \(G\). Es fácil ver que \( A' \cup B' = V(G) \) y \( A' \cap B' = \varnothing \).
+
+    Toda arista de \(G\) tiene o bien ambos extremos en \(C\), o bien ninguno en \(C\) (pues no hay aristas entre distintas componentes conexas).
+    \begin{itemize}
+        \item Si una arista no toca \(C\), sus extremos mantienen los mismos conjuntos que en la partición original, por lo que sigue cruzando entre \(A'\) y \(B'\).
+        \item Si una arista tiene sus extremos en \(C\), originalmente uno estaba en \(A \cap C\) y el otro en \(B \cap C\). Por definición de la diferencia simétrica, los vértices de \(A \cap C\) pasan a \(B'\) y los de \(B \cap C\) pasan a \(A'\). La arista sigue teniendo sus extremos en conjuntos distintos.
+    \end{itemize}
+    Por lo tanto, \((A', B')\) es una bipartición. Además, como \( C \neq \varnothing \) y \(C \neq V(G)\), hemos invertido los conjuntos solo para una porción propia del grafo. Esto garantiza que \((A', B')\) no es igual a \((A, B)\) ni a \((B, A)\), contradiciendo así la unicidad. Deducimos entonces que si la bipartición es única, \(G\) debe ser conexo.
+
+    \vspace{0.3cm}
+
+    (\( \Longleftarrow \)) Supongamos que \(G\) es conexo y sean \((A, B)\) y \((A', B')\) dos biparticiones de \(G\). Tomemos un vértice arbitrario \(v_0 \in V(G)\). Sin pérdida de generalidad (intercambiando los nombres de los conjuntos \(A'\) y \(B'\) si fuera necesario), podemos asumir que \(v_0 \in A\) y \(v_0 \in A'\).
+
+    Dado cualquier otro vértice \(u \in V(G)\), como \(G\) es conexo, existe un camino desde \(v_0\) hasta \(u\). Demostraremos por inducción sobre la longitud \(k\) del camino más corto (la distancia) que el conjunto al que pertenece \(u\) está unívocamente determinado.
+    \begin{itemize}
+        \item \textbf{Caso base (\(k=0\)):} \(u = v_0\), y por nuestra suposición, pertenece a \(A\) y a \(A'\).
+        \item \textbf{Paso inductivo:} Supongamos que todo vértice a distancia \(k\) pertenece al mismo conjunto en ambas biparticiones. Sea \(u\) un vértice a distancia \(k+1\), y sea \(w\) su predecesor en el camino mínimo (que está a distancia \(k\)).
+              Por hipótesis inductiva, \(w\) tiene la misma asignación en ambas particiones (supongamos que está en \(A\) y \(A'\)). Como \(u\) es adyacente a \(w\) y estamos en un grafo bipartito, \(u\) debe pertenecer forzosamente al conjunto opuesto a \(w\) en ambas particiones. Es decir, \(u \in B\) y \(u \in B'\).
+    \end{itemize}
+    Como esto vale para todo vértice \(u \in V(G)\), concluimos que \(A = A'\) y \(B = B'\). Por lo tanto, la bipartición es única (salvo el orden de los conjuntos).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -144,14 +439,37 @@
     Dado \( n \geq 1 \), notamos \( P_n \) al camino con \( n \) vértices (y, por lo tanto, con \( n-1 \) aristas).
 \end{definition}
 
+\begin{definition}
+    Un grafo bipartito completo es un grafo bipartito cuya partición \((A, B)\) cumple que todo vértice de \(A\) está conectado con todos los vértices de \(B\) y viceversa.
+\end{definition}
+
 \begin{ejercicio}{9}
     Sea \( G \) un grafo simple y conexo que no tiene a \( P_4 \) ni a \( K_3 \) como subgrafos inducidos. Probar que \( G \) es un grafo bipartito completo.
 \end{ejercicio}
+\begin{proof}
+    Primero demostraremos que \(G\) es bipartito. Supongamos por el absurdo que \(G\) no lo es, por lo que debe contener al menos un ciclo de longitud impar. Como \(G\) no contiene a \(K_3\) (un ciclo de longitud 3) como subgrafo inducido, el ciclo impar más corto de \(G\) debe tener longitud al menos 5.
+
+    Sea \(C = v_1 v_2 \ldots v_{2k+1} v_1\), con \(k \geq 2\), un ciclo impar de longitud mínima en \(G\). Consideremos los primeros cuatro vértices de este ciclo: \(v_1, v_2, v_3, v_4\). Como no hay un \(P_4\) inducido en \(G\), el camino \(v_1 v_2 v_3 v_4\) no puede ser inducido, por lo que debe existir al menos una arista entre estos vértices. Las únicas posibles son \(v_1v_3\), \(v_2v_4\) o \(v_1v_4\).
+    \begin{itemize}
+        \item Si existe \(v_1v_3\), los vértices \(v_1, v_2, v_3\) forman un ciclo de longitud 3, es decir, un \(K_3\) inducido, lo cual es una contradicción.
+        \item Si existe \(v_2v_4\), análogamente se forma un \(K_3\) inducido en \(v_2, v_3, v_4\), otra contradicción.
+        \item Si existe \(v_1v_4\), entonces \(v_1 v_4 v_5 \ldots v_{2k+1} v_1\) forma un ciclo de longitud \((2k+1) - 2 = 2k-1\). Al ser \(k \geq 2\), este es un ciclo impar estrictamente menor que \(C\), contradiciendo la minimalidad de \(C\).
+    \end{itemize}
+    En cualquier caso llegamos a un absurdo. Por lo tanto, \(G\) no tiene ciclos impares y es un grafo bipartito con alguna partición \((A, B)\).
+
+    Ahora probaremos que \(G\) es bipartito completo. Supongamos por el absurdo que no lo es. Entonces existen vértices \(a \in A\) y \(b \in B\) tales que no son adyacentes (\(ab \notin E(G)\)). Como \(G\) es conexo, existe un camino entre \(a\) y \(b\). Consideremos el \emph{camino mínimo} entre ellos.
+
+    Al estar \(a\) y \(b\) en conjuntos opuestos de la bipartición, cualquier camino entre ellos debe alternar entre \(A\) y \(B\), por lo que su longitud (cantidad de aristas) debe ser impar. Como no son adyacentes, la longitud de este camino mínimo debe ser al menos 3, lo que implica que recorre al menos 4 vértices.
+
+    Sean \(x_1, x_2, x_3, x_4\) los primeros cuatro vértices de este camino mínimo (con \(x_1 = a\)). Por definición de camino mínimo, no puede haber aristas que conecten vértices no consecutivos dentro de él (de lo contrario, habría un camino más corto). Por lo tanto, el subgrafo inducido por \( \{x_1, x_2, x_3, x_4\} \) es exactamente un \( P_4 \), absurdo.
+
+    Por lo tanto, \(G\) es un grafo bipartito completo.
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{definition}
-    Dados grafos \( G_1, \ldots, G_k \) con el mismo conjunto de vértices \( V \), la \textbf{unión} \( G_1 \cup \cdots \cup G_k \) es el grafo con conjunto de vértices \( V \) y conjunto de aristas \( E(G_1) \cup \cdots \cup E(G_k) \).
+    Dados grafos \( G_1, \ldots, G_k \), la \textbf{unión} \( G_1 \cup \cdots \cup G_k \) es el grafo con conjunto de vértices \( V(G_1) \cup \cdots \cup V(G_k) \) y conjunto de aristas \( E(G_1) \cup \cdots \cup E(G_k) \).
 \end{definition}
 
 \begin{ejercicio}{10}
@@ -160,6 +478,34 @@
         \item Recíprocamente, si \( K_n \) es la unión de \( k \) grafos bipartitos \( G_1, \ldots, G_k \), codificar convenientemente los vértices de \( K_n \) con \( k \)-uplas binarias y probar así que \( n \leq 2^k \).
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    (\( \Longrightarrow \)) Como \(n \leq 2^k\), podemos asignar a cada vértice de \(K_n\) una \(k\)-upla binaria \((x_1, \ldots, x_k) \in {\{0,1\}}^k\) única.
+    Para cada \( i \in \{1, \ldots, k\} \), definimos un grafo \(G_i\) sobre el mismo conjunto de vértices \(V(K_n)\). Particionamos los vértices en dos conjuntos según el valor de su \(i\)-ésima coordenada:
+    \begin{align*}
+        A_i & = \{ v \in V(K_n) : \text{la } i\text{-ésima coordenada de } v \text{ es } 0 \}, \\
+        B_i & = \{ v \in V(K_n) : \text{la } i\text{-ésima coordenada de } v \text{ es } 1 \}
+    \end{align*}
+    Declaramos que \(G_i\) contiene exactamente todas las aristas de \(K_n\) que conectan un vértice de \(A_i\) con uno de \(B_i\). Por construcción, no hay aristas internas en los conjuntos, luego cada \(G_i\) es bipartito.
+
+    Para ver que \(K_n = \bigcup_{i=1}^k G_i\), tomemos dos vértices distintos cualesquiera \(u, v \in V(K_n)\). Al tener \(k\)-uplas únicas, deben diferir en al menos una coordenada, digamos la coordenada \(j\). Esto implica que uno pertenece a \(A_j\) y el otro a \(B_j\). Luego, la arista \(uv\) pertenece a \(G_j\). Como toda arista de \(K_n\) está presente en al menos un \(G_i\), la unión de todos los subgrafos cubre \(K_n\).
+
+    \vspace{0.3cm}
+
+    (\( \Longleftarrow \)) Supongamos que \(K_n = \bigcup_{i=1}^k G_i\), donde cada \(G_i\) es un grafo bipartito.
+    Cada \(G_i\) admite una bipartición. Si hay vértices de \(K_n\) que no tienen aristas en un determinado \(G_i\) (vértices aislados en ese subgrafo), podemos ubicarlos arbitrariamente en cualquiera de los dos conjuntos de su bipartición sin generar aristas internas. De este modo, podemos garantizar que cada \(G_i\) posee una bipartición \((A_i, B_i)\) tal que \(A_i \cup B_i = V(K_n)\).
+
+    Asignamos a cada vértice \(v \in V(K_n)\) una \(k\)-upla binaria \((x_1, \ldots, x_k)\), usando la siguiente regla para cada coordenada \(i\):
+    \[
+        x_i = 0 \text{ si } v \in A_i, \quad x_i = 1 \text{ si } v \in B_i
+    \]
+    Supongamos por reducción al absurdo que \(n > 2^k\). Por el principio del palomar, al haber estrictamente más vértices que \(k\)-uplas binarias posibles (que son exactamente \(2^k\)), al menos dos vértices distintos \(u\) y \(v\) deben recibir la misma tupla.
+
+    Tener el mismo código significa que, para todo \(i = 1, \ldots, k\), ambos vértices caen del mismo lado de la partición (ambos en \(A_i\) o ambos en \(B_i\)). Como los conjuntos son independientes, la arista \(uv\) no pertenece a \(G_i\) para ningún \(i\). En consecuencia, la arista \(uv\) no pertenece a la unión \(\bigcup_{i=1}^k G_i\).
+
+    Pero esto es una contradicción, ya que la unión de los subgrafos compone el grafo completo \(K_n\), donde la arista \(uv\) obligatoriamente debe existir.
+
+    Esta contradicción proviene de suponer \(n > 2^k\). Concluimos entonces que todas las tuplas de los vértices deben ser distintas, por lo que \(n \leq 2^k\).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -191,5 +537,21 @@
 \end{algorithm}
 
 Demostrar que este algoritmo funciona, es decir, si \( G \) es bipartito hallará una partición del conjunto de vértices que lo demuestra y, si \( G \) no es bipartito, alcanzará tal conclusión.
+\begin{proof}
+    Sea \(G\) un grafo conexo (y finito). Analizaremos los dos posibles resultados del algoritmo:
+
+    Si el algoritmo termina sin encontrar contradicciones, significa que ha asignado signos a todos (gracias a la conexidad) los vértices de manera consistente. En este caso, podemos definir los conjuntos \( A = \{ u \in V(G) : \text{sign}(u) = 1 \} \) y \( B = \{ u \in V(G) : \text{sign}(u) = -1 \} \), obteniendo así una bipartición válida de \(G\). El propio algoritmo nos dice que todos los vecinos de un vértice tienen signos opuestos, lo que garantiza que no existen aristas dentro de \(A\) ni dentro de \(B\).
+
+    Si el algoritmo falla se concluye que \(G\) no es bipartito. Esto ocurre únicamente si al explorar los vecinos de un vértice \(w\), se encuentra un vecino \(x\) que ya tiene asignado el mismo signo que \(w\).
+
+    Notemos que el signo que el BFS le asigna a un vértice \(u\) depende exclusivamente de su distancia al vértice inicial \(v\). Específicamente, el signo alterna en cada paso, por lo que \(\text{sign}(u) = {(-1)}^{d(v, u)}\).
+    Si \(w\) y \(x\) tienen el mismo signo, esto implica que sus distancias al vértice inicial, \(d(v, w)\) y \(d(v, x)\), tienen la misma paridad.
+
+    Consideremos el recorrido cerrado formado por: el camino más corto de \(v\) a \(w\) (longitud \(d(v,w)\)), la arista \(wx\) (longitud 1), y el camino más corto de \(x\) de regreso a \(v\) (longitud \(d(v,x)\)). La longitud total de este recorrido cerrado es:
+    \[
+        L = d(v, w) + 1 + d(v, x)
+    \]
+    Como \(d(v, w)\) y \(d(v, x)\) tienen la misma paridad, su suma es un número par. Al sumarle 1 (la arista \(wx\)), obtenemos que \(L\) es impar. Sabemos que un recorrido cerrado de longitud impar garantiza la existencia de un \textbf{ciclo de longitud impar} en \(G \implies G \) no es bipartito.
+\end{proof}
 
 \end{document}
