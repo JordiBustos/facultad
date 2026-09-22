@@ -47,6 +47,19 @@
 \begin{ejercicio}{1}
     Determinar los posibles valores de \( m \) y \( n \) para los que el grafo bipartito completo \( K_{m,n} \) sea euleriano.
 \end{ejercicio}
+\begin{proof}
+    Recordemos que un grafo conexo posee un circuito euleriano si y sólo si todos sus vértices tienen grado par.
+
+    Consideremos el grafo bipartito completo y conexo \(K_{m,n}\) con particiones \(A\) y \(B\), donde \(|A| = m\) y \(|B| = n\). Por definición, cada vértice de un conjunto está adyacente a todos los vértices del otro conjunto. Entonces, tenemos que:
+    \begin{itemize}
+        \item Todo vértice \(v \in A\) está conectado a los \(n\) vértices de \(B\), por lo que \(\text{deg}(v) = n\).
+        \item Todo vértice \(u \in B\) está conectado a los \(m\) vértices de \(A\), por lo que \(\text{deg}(u) = m\).
+    \end{itemize}
+
+    Para que exista un circuito euleriano, la condición necesaria y suficiente es que todos los vértices del grafo tengan grado par. Según lo anterior, esto equivale a exigir que tanto \(n\) como \(m\) sean números pares.
+
+    Concluimos entonces que \(K_{m,n}\) es euleriano si y sólo si \(m\) y \(n\) son ambos números pares.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -58,6 +71,34 @@
         \item Si \( G \) es euleriano y \( v \) es un vértice de \( G \), entonces para cualquier par de aristas \( e \) y \( f \) que inciden en \( v \) existe un circuito euleriano en el cual \( e \) y \( f \) aparecen consecutivamente.
     \end{itemize}
 \end{ejercicio}
+\begin{proof}
+    Las proposiciones son: verdadera, falsa y falsa respectivamente.
+    \begin{itemize}
+        \item Sea \((A, B)\) la bipartición del grafo \(G\). Como \(G\) es euleriano, el grado de todo vértice es par. En un grafo bipartito, toda arista tiene exactamente un extremo en el conjunto \(A\). Por lo tanto, si sumamos los grados de todos los vértices en \(A\), estaremos contando cada arista de \(G\) exactamente una vez. Es decir, la cantidad total de aristas \(|E|\) es:
+              \[
+                  |E| = \sum_{u \in A} \text{deg}(u)
+              \]
+              Como cada vértice \(u \in A\) tiene grado par (\(\text{deg}(u) = 2k\) para algún \( k \in \N \)), la suma está compuesta exclusivamente por números pares, por lo que el total de aristas \(|E|\) es un número par.
+
+        \item Como contraejemplo consideremos un grafo formado por la unión de un ciclo de 3 vértices (\(C_3\)) y un ciclo de 4 vértices (\(C_4\)) que comparten exactamente un vértice \(v\) (y ninguna otra arista ni vértice).
+              \begin{itemize}
+                  \item El grafo es conexo.
+                  \item El vértice compartido \(v\) tiene grado 4, y los restantes vértices tienen grado 2. Como todos los grados son pares, el grafo es euleriano.
+                  \item La cantidad total de vértices es 6.
+                  \item La cantidad total de aristas es  7.
+              \end{itemize}
+              Esto contradice la afirmación.
+
+        \item Como contraejemplo consideremos el grafo formado por dos ciclos de 3 vértices (\(T_1\) y \(T_2\)) que comparten un único vértice \(v\). Este grafo es conexo y todos sus vértices tienen grado par, por lo que es euleriano.
+              Sean \(e\) y \(f\) las dos aristas del ciclo \(T_1\) que inciden en el vértice \(v\).
+
+              Supongamos por el absurdo que existe un circuito euleriano donde \(e\) y \(f\) aparecen consecutivamente.
+              Esto significa que el circuito llega a \(v\) por \(e\) e inmediatamente sale por \(f\). Como los otros extremos de \(e\) y \(f\) (llamémoslos \(x\) e \(y\)) tienen grado 2 y están conectados entre sí por la tercera arista de \(T_1\), el circuito, al llegar a \(y\) a través de \(f\), se ve forzado a tomar la arista \(yx\) y luego regresar a \(v\).
+
+              En este punto, el recorrido se queda sin aristas sin visitar en \(T_1\) para poder salir de allí. Como el circuito nunca cruzó hacia \(T_2\), no puede ser un circuito euleriano (no recorrió todas las aristas). Por lo tanto, \(e\) y \(f\) no pueden ser recorridas consecutivamente.
+
+    \end{itemize}
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -67,11 +108,34 @@
         \item Probar que un grafo conexo es euleriano si y sólo si puede expresarse como una unión \( C_1 \cup \cdots \cup C_n \) de ciclos que no comparten aristas.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    \begin{enumerate}
+        \item Como el conjunto de aristas es no vacío, existe al menos una componente conexa de \(G\) con aristas. Al ser todos los grados pares, los vértices de esta componente deben tener grado mayor o igual a 2 (no hay vértices de grado 1).
 
-\clearpage
+              Sea \(P = v_0, v_1, \ldots, v_k\) un camino de longitud máxima en esta componente. Consideremos el último vértice del camino, \(v_k\). Como su grado es al menos 2, es incidente a al menos otra arista además de \(v_{k-1}v_k\). Por la maximalidad del camino \(P\), \(v_k\) no puede ser adyacente a ningún vértice fuera de \(P\), ya que en ese caso podríamos extender el camino y \(P\) no sería maximal.
+
+              Por lo tanto, todos los vecinos de \(v_k\) ya pertenecen a \(P\). Sea \(v_i\) uno de esos vecinos con \(i < k-1\). La arista \(v_k v_i\) junto con la porción del camino \(P\) que va desde \(v_i\) hasta \(v_k\) forman un ciclo. Luego, \(G\) posee al menos un ciclo.
+
+        \item (\( \Longrightarrow \)) Supongamos que \(G\) es conexo y euleriano. Procederemos por inducción fuerte sobre la cantidad de aristas \(m\).
+              Como \(G\) es euleriano, todos sus vértices tienen grado par. Por el ítem 1, al tener aristas y grados pares, \(G\) posee al menos un ciclo \(C_1\).
+              Si \(G = C_1\), la prueba termina. Si no, consideremos el grafo \(G' = G - E(C_1)\) que se obtiene al eliminar las aristas de \(C_1\).
+
+              Al quitar un ciclo, el grado de todo vértice que pertenece al ciclo se reduce exactamente en 2, y el de los demás vértices no se altera. Por lo tanto, todos los vértices de \(G'\) siguen teniendo grado par. Aunque \(G'\) podría ya no ser conexo, cada una de sus componentes conexas tiene vértices de grado par y estrictamente menos de \(m\) aristas. Por hipótesis inductiva, cada componente con aristas se puede descomponer en una unión de ciclos disjuntos en aristas. Juntando todos estos ciclos con nuestro \(C_1\) original, obtenemos una colección de ciclos \(C_1, \ldots, C_k\) disjuntos en aristas cuya unión es \(G\).
+
+              (\( \Longleftarrow \)) Supongamos que el grafo conexo \(G\) puede expresarse como una unión de ciclos disjuntos en aristas \(G = C_1 \cup \cdots \cup C_n\).
+              Queremos ver que \(G\) es euleriano. Para ello, basta con calcular el grado de cada vértice. Si tomamos un vértice arbitrario \(v \in V(G)\), su grado total en \(G\) será la suma de los grados que le aporta cada ciclo en el que participa.
+              Como todo vértice en un ciclo tiene grado exactamente 2 dentro de ese ciclo, cada vez que \(v\) pertenece a algún \(C_i\), este ciclo contribuye con un \(+2\) al grado total de \(v\).
+              Como los ciclos no comparten aristas, la contribución es aditiva, por lo que el grado de \(v\) será \(2 \times (\text{cantidad de ciclos que contienen a } v)\), que es un número par.
+              Al ser un grafo conexo donde todos los vértices tienen grado par, por el teorema fundamental, \(G\) es un grafo euleriano.
+    \end{enumerate}
+\end{proof}
+
+\vspace{0.5cm}
 
 \begin{definition}
-    Dos circuitos eulerianos se dicen \textbf{equivalentes} si tienen el mismo orden cíclico de sus aristas (para toda arista, sus aristas vecinas son las mismas en ambos circuitos, considerándose en cada circuito a la primera arista vecina de la última). Un ciclo, por ejemplo, tiene una única clase de equivalencia de circuitos eulerianos.
+    Dos circuitos eulerianos se dicen equivalentes si tienen el mismo orden cíclico
+    de sus aristas (para toda arista, sus aristas vecinas son las mismas en ambos circuitos, considerándose en cada circuito a la primera arista vecina de la
+    última). Un ciclo, por ejemplo, tiene una única clase de equivalencia de circuitos eulerianos.
 \end{definition}
 
 \begin{ejercicio}{4}
@@ -79,19 +143,46 @@
 \end{ejercicio}
 
 \begin{center}
-    \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
-        \node (t) at (0,1.5) {};
-        \node (b) at (0,-1.5) {};
-        \node (l) at (-2.2,0) {};
-        \node (r) at (2.2,0) {};
-        \node (i1) at (-0.7,0) {};
-        \node (i2) at (0.7,0) {};
+    \begin{tikzpicture}[vertice/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \node[vertice, label=above:\(y\)] (t) at (0,1.5) {};
+        \node[vertice, label=below:\(x\)] (b) at (0,-1.5) {};
+        \node[vertice, label=left:\(a\)] (l) at (-2.2,0) {};
+        \node[vertice, label=right:\(d\)] (r) at (2.2,0) {};
+        \node[vertice, label=left:\(b\)] (i1) at (-0.7,0) {};
+        \node[vertice, label=right:\(c\)] (i2) at (0.7,0) {};
 
         \draw[thick] (t) -- (l) -- (b) -- (r) -- (t);
         \draw[thick] (t) -- (i1) -- (b);
         \draw[thick] (t) -- (i2) -- (b);
     \end{tikzpicture}
 \end{center}
+\begin{proof}
+    El grafo es conexo y todos sus vértices tienen grado par (\(y\) y \(x\) tienen grado 4; \(a, b, c\) y \(d\) tienen grado 2), por lo que es euleriano.
+
+    Notemos que \(y\) y \(x\) están unidos por exactamente cuatro caminos internamente disjuntos de longitud 2: \(y\text{-}a\text{-}x\), \(y\text{-}b\text{-}x\), \(y\text{-}c\text{-}x\) y \(y\text{-}d\text{-}x\). Como los vértices \(a, b, c, d\) tienen grado 2, cualquier circuito euleriano que entre a uno de ellos debe salir inmediatamente. Por lo tanto, cada camino se comporta estructuralmente como una única arista indivisible entre \(y\) y \(x\).
+
+    Cualquier circuito euleriano asume la forma de una secuencia alternada entre los polos:
+    \[
+        y \xrightarrow{\,e_{\sigma(1)}\,} x \xrightarrow{\,e_{\sigma(2)}\,} y \xrightarrow{\,e_{\sigma(3)}\,} x \xrightarrow{\,e_{\sigma(4)}\,} y,
+    \]
+    para alguna permutación \( \sigma \) de \( \{a,b,c,d\} \). Dado que no hay restricciones de adyacencia adicionales, cualquiera de las \(4! = 24\) permutaciones genera un circuito euleriano válido.
+
+    Para agrupar estas 24 secuencias en clases de equivalencia, debemos considerar cuándo dos secuencias representan el mismo recorrido. Dos permutaciones son equivalentes si difieren solo en el vértice de inicio o en el sentido del recorrido.
+
+    Como los caminos alternan estrictamente entre \(y\) y \(x\), una rotación impar de la secuencia (ej. pasar de \((a,b,c,d)\) a \((b,c,d,a)\)) invierte los roles de \(x\) e \(y\), alterando qué caminos se emparejan en cada vértice y generando así un circuito distinto. En consecuencia, cada circuito está representado por exactamente 4 permutaciones equivalentes:
+    \begin{itemize}
+        \item La secuencia original.
+        \item Su rotación de 2 posiciones (que preserva los emparejamientos en \(y\) y \(x\)).
+        \item Su reflexión (recorrer el circuito en sentido opuesto).
+        \item La rotación de 2 posiciones de su reflexión.
+    \end{itemize}
+
+    Dividiendo el total de secuencias posibles por la cantidad de representaciones equivalentes, obtenemos la cantidad de clases de equivalencia:
+    \( \frac{24}{4} = 6 \)
+
+    Concluimos que el grafo tiene exactamente 6 clases de equivalencia de circuitos eulerianos.
+\end{proof}
+
 
 \begin{definition}
     Una \textbf{descomposición en cadenas} de un grafo \( G \) es una colección de cadenas \( R_1, \ldots, R_k \) de \( G \) que no comparten aristas entre sí y tales que toda arista de \( G \) pertenece a alguna \( R_i \).
