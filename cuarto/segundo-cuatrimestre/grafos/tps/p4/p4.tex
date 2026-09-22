@@ -183,6 +183,11 @@
     Concluimos que el grafo tiene exactamente 6 clases de equivalencia de circuitos eulerianos.
 \end{proof}
 
+\vspace{0.5cm}
+
+\begin{definition}
+    Una cadena de un grafo \( G \) es una secuencia de aristas \( (e_1, e_2, \ldots, e_k) \) tal que cada par de aristas consecutivas \( e_i \) y \( e_{i+1} \) comparten un vértice, y ninguna arista se repite en la secuencia.
+\end{definition}
 
 \begin{definition}
     Una \textbf{descomposición en cadenas} de un grafo \( G \) es una colección de cadenas \( R_1, \ldots, R_k \) de \( G \) que no comparten aristas entre sí y tales que toda arista de \( G \) pertenece a alguna \( R_i \).
@@ -191,6 +196,109 @@
 \begin{ejercicio}{5}
     ¿Cuál es el mínimo número \( k \) de cadenas que se necesitan para descomponer al grafo de Petersen? ¿Puede descomponerse también en \( k \) cadenas que sean caminos?
 \end{ejercicio}
+\begin{proof}
+    Sea \( G \) el grafo de Petersen. Por definición, \(|V(G)| = 10\) y \( \forall v \in V(G)\), \(\text{deg}(v) = 3\).
+
+    Sea \( P = \{P_1, P_2, \dots, P_k\} \) una partición del conjunto de aristas \(E(G)\) en \(k\) cadenas.
+
+    Para cualquier vértice \(v \in V(G)\), su grado total en \(G\) es exactamente la suma de los grados que tiene en cada subgrafo inducido por las cadenas \(P_i\). Es decir:
+    \[
+        \text{deg}_G(v) = 3 = \sum_{i=1}^k \text{deg}_{P_i}(v)
+    \]
+
+    Para cada cadena \(P_i\), consideremos la paridad del grado que aporta a un vértice \(v\):
+    \begin{itemize}
+        \item Si \(P_i\) es una cadena \emph{cerrada}, entonces \(\text{deg}_{P_i}(v)\) es par para todo \(v\), ya que cada paso por \(v\) como vértice interno aporta \(2\) a su grado.
+        \item Si \(P_i\) es una cadena con extremos distintos \(a_i \ne b_i\), entonces \(\text{deg}_{P_i}(v)\) es impar si y solo si \( v \in \{a_i, b_i\} \), pues cada paso interno aporta \(2\) y solo el pasaje por un extremo aporta \(1\).
+    \end{itemize}
+
+    Como \(\deg_G(v) = 3\) es impar para todo \(v\), y esta suma es la de los \(\deg_{P_i}(v)\), debe haber una cantidad impar (en particular, al menos una) de sumandos impares. Por lo anterior, esto significa que todo vértice \(v \in V(G)\) debe ser extremo de \emph{al menos una} cadena abierta \(P_i \in P\).
+
+    Esto nos dice que los 10 vértices de \(G\) deben ser el extremo de al menos una cadena en la descomposición de \(G\).
+
+    Sea \( \alpha \) el número total de extremos disponibles en la partición \(P\). Dado que cada cadena tiene a lo sumo 2 extremos, el número total de extremos es:
+    \[
+        \alpha \le 2k
+    \]
+
+    Como necesitamos cubrir los 10 vértices de \(G\) con al menos un extremo cada uno, el número total de extremos en la partición debe ser mayor o igual a 10. Por lo tanto:
+    \begin{align*}
+        2k & \ge 10 \\
+        k  & \ge 5
+    \end{align*}
+    Queda demostrado que se requieren al menos 5 cadenas para realizar la descomposición.
+
+    Veamos que la cota \(k=5\) se alcanza, incluso con caminos simples, lo que responde también la segunda pregunta.
+    \begin{center}
+        \begin{tikzpicture}[
+                vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt},
+                legend/.style={font=\small},
+            ]
+
+            \def\R{2.8}
+            \def\r{1.3}
+
+            % --- Vértices ---
+            \node[vertex] (o1) at (90:\R) {};
+            \node[above=3pt] at (o1) {12};
+
+            \node[vertex] (o2) at (18:\R) {};
+            \node[above right=2pt] at (o2) {34};
+
+            \node[vertex] (o3) at (306:\R) {};
+            \node[below right=2pt] at (o3) {51};
+
+            \node[vertex] (o4) at (234:\R) {};
+            \node[below left=2pt] at (o4) {23};
+
+            \node[vertex] (o5) at (162:\R) {};
+            \node[above left=2pt] at (o5) {45};
+
+            \node[vertex] (i1) at (90:\r) {};
+            \node[right=3pt] at (i1) {35};
+
+            \node[vertex] (i2) at (18:\r) {};
+            \node[below right=2pt] at (i2) {52};
+
+            \node[vertex] (i3) at (306:\r) {};
+            \node[left=3pt] at (i3) {24};
+
+            \node[vertex] (i4) at (234:\r) {};
+            \node[below right] at (i4) {41};
+
+            \node[vertex] (i5) at (162:\r) {};
+            \node[above right=2pt] at (i5) {13};
+
+            % --- Cadenas coloreadas (cubren las 15 aristas exactamente una vez) ---
+            \draw[red, very thick]    (o2) -- (o1) -- (i1) -- (i3); % C1: 34-12-35-24
+            \draw[blue, very thick]   (o3) -- (o2) -- (i2) -- (i4); % C2: 51-34-52-41
+            \draw[teal, very thick]   (o4) -- (o3) -- (i3) -- (i5); % C3: 23-51-24-13
+            \draw[orange, very thick] (o5) -- (o4) -- (i4) -- (i1); % C4: 45-23-41-35
+            \draw[violet, very thick] (o1) -- (o5) -- (i5) -- (i2); % C5: 12-45-13-52
+
+            % --- Leyenda ---
+            \begin{scope}[shift={(4.6,0)}, legend]
+                \draw[red, very thick] (0,1.6) -- (0.8,1.6);
+                \node[right] at (0.8,1.6) {$C_1: 34\text{-}12\text{-}35\text{-}24$};
+
+                \draw[blue, very thick] (0,0.8) -- (0.8,0.8);
+                \node[right] at (0.8,0.8) {$C_2: 51\text{-}34\text{-}52\text{-}41$};
+
+                \draw[teal, very thick] (0,0) -- (0.8,0);
+                \node[right] at (0.8,0) {$C_3: 23\text{-}51\text{-}24\text{-}13$};
+
+                \draw[orange, very thick] (0,-0.8) -- (0.8,-0.8);
+                \node[right] at (0.8,-0.8) {$C_4: 45\text{-}23\text{-}41\text{-}35$};
+
+                \draw[violet, very thick] (0,-1.6) -- (0.8,-1.6);
+                \node[right] at (0.8,-1.6) {$C_5: 12\text{-}45\text{-}13\text{-}52$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}
+
+    Lo anterior muestra que el número mínimo de cadenas necesarias para cubrir todas las aristas del grafo exactamente una vez es cinco y que se alcanza con una colección de caminos disjuntos que cubren todas las aristas.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -199,7 +307,7 @@
 \end{definition}
 
 \begin{definition}
-    El \textbf{grafo de los puentes de Königsberg} es el multigrafo cuyos vértices son las cuatro regiones de tierra de la ciudad de Königsberg —las riberas norte (\( N \)) y sur (\( S \)) del río, y las islas \( K \) y \( O \)— y cuyas siete aristas se corresponden con los siete puentes que las conectaban: dos puentes entre \( N \) y \( K \), dos puentes entre \( S \) y \( K \), un puente entre \( K \) y \( O \), un puente entre \( N \) y \( O \), y un puente entre \( S \) y \( O \).
+    El \textbf{grafo de los puentes de Königsberg} es el grafo múltiple cuyos vértices son las cuatro regiones de tierra de la ciudad de Königsberg —las riberas norte (\( N \)) y sur (\( S \)) del río, y las islas \( K \) y \( O \)— y cuyas siete aristas se corresponden con los siete puentes que las conectaban: dos puentes entre \( N \) y \( K \), dos puentes entre \( S \) y \( K \), un puente entre \( K \) y \( O \), un puente entre \( N \) y \( O \), y un puente entre \( S \) y \( O \).
 \end{definition}
 
 \begin{center}
@@ -224,5 +332,34 @@
 \begin{ejercicio}{6}
     Resolver el problema del cartero chino en el grafo de los puentes de Königsberg.
 \end{ejercicio}
+\begin{proof}
+    Notemos que el problema equivale a agregar la mínima cantidad de aristas posibles tal que todos los vértices resulten de grado par. Esto se puede hacer de la siguiente forma:
+
+    \begin{center}
+        \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
+            \node[label=above:\(N\)] (n) at (0,1.5) {};
+            \node[label=below:\(S\)] (s) at (0,-1.5) {};
+            \node[label=left:\(K\)] (k) at (-2,0) {};
+            \node[label=right:\(O\)] (o) at (2,0) {};
+
+            \draw[thick] (n) to[bend left=20] (k);
+            \draw[thick] (n) to[bend right=20] (k);
+            \draw[thick] (s) to[bend left=20] (k);
+            \draw[thick] (s) to[bend right=20] (k);
+            \draw[thick] (n) -- (o);
+            \draw[thick] (s) -- (o);
+            \draw[thick] (k) -- (o);
+            \draw[red, thick] (n) to[bend left=20] (o);
+            \draw[red, thick] (s) to[bend left=60] (k);
+        \end{tikzpicture}
+    \end{center}
+
+    Logrando que: \(\text{deg}(K) = 6\), \(\text{deg}(N) = \text{deg}(S) = \text{deg}(O) = 4\). Como todos los vértices tienen grado par y el grafo es claramente conexo se puede encontrar un circuito euleriano.
+
+    Finalmente el camino buscado es el recorrido euleriano que pasa por las 9 aristas exactamente una vez, dado por:
+    \[
+        N \to K \to S \to K \to S \to O \to N \to O \to K \to N
+    \]
+\end{proof}
 
 \end{document}
