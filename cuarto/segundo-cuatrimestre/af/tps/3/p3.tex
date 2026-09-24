@@ -1,0 +1,263 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                       % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                         % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                          % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                                  % Si y sólo si
+\newcommand{\imp}{\implies}                              % Implies
+\newcommand{\setdiff}{\smallsetminus}                    % Set difference
+\newcommand{\diam}{\text{diam}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Trabajo Práctico N°3 - 2026}
+\author{Los teoremas: Hahn-Banach, Principio de Acotación Uniforme,\\Teorema del Gráfico cerrado y de la Imagen Abierta}
+
+\maketitle
+
+\begin{ejercicio}{1}
+    Sean \(E\) un espacio vectorial normado, \( S\subseteq E \) un subespacio y \(x_0 \in E\) tales que \(d = d(x_{0},S) > 0\). Probar lo siguiente:
+    \begin{enumerate}
+        \item Existe un funcional lineal \(\phi\in E^{*}\) que verifica \(\norm{\phi}\le1\), \(\phi(x_{0})=d\) y \(\phi|_{S}\equiv0\).
+        \item Si \(S\) no es denso en \(E\) entonces existe \(\phi\in E^{*}\) no nulo tal que \(\phi|_{S}\equiv0\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sea \( \EN \), \( S \subseteq E \) un subespacio y \( x_0 \in E \) tal que \( d = d(x_0, S) > 0 \).\begin{enumerate}
+        \item Quiero definir un funcional lineal \( \phi \) que cumpla las condiciones del enunciado y extenderlo mediante el teorema de Hahn-Banach para obtener un funcional en \( E^* \) que siga cumpliendo las propiedades. Definamos con esta idea entonces  \( \phi_0: \text{span}\{x_0\} + S \to \R \) por
+              \[
+                  \phi_0(\alpha x_0 + s) = \alpha d, \quad \forall \alpha \in \R, \ s \in S.
+              \]
+              Es claro que \( \phi_0 \equiv 0 \) en \( S \) y que \( \phi_0(x_0) = d \). Además, \( \norm{\phi_0} \le 1 \) pues \( |\phi_0(\alpha x_0 + s)| = |\alpha| d \le |\alpha| \norm{x_0 - (-\frac{s}{\alpha})} = \norm{\alpha x_0 + s} \) para todo \( \alpha \in \R \) y \( s \in S \). Por el teorema de Hahn-Banach, existe una extensión \( \phi \in E^* \) de \( \phi_0 \) que cumple \( \norm{\phi} = \norm{\phi_0} \le 1 \) y \( \phi|_S \equiv 0 \) con \( \phi(x_0) = d \).
+        \item Si \( S \) no es denso en \( E \), entonces existe \( x_0 \in E \) tal que \( d(x_0, S) > 0 \). Aplicando el ítem anterior, existe un funcional lineal \( \phi \in E^* \) no nulo tal que \( \phi|_S \equiv 0 \).
+    \end{enumerate}
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sean \(E\) un espacio vectorial normado y \(S\) un subespacio de \(E\). Probar que \[ \cl{S}= \bigcap \left \{ \ker(\phi):\phi\in E^{*},S\subseteq \ker(\phi) \right \} \]
+\end{ejercicio}
+\begin{proof}
+    Llamemos \( K = \bigcap \left \{ \ker(\phi):\phi\in E^{*},S\subseteq \ker(\phi) \right \} \). Queremos probar que \( \cl{S} = K \). En primer lugar notemos que como cada \( \phi \) es continua entonces \( \ker \phi \) es cerrado y la intersección contable de cerrados es cerrada \( \implies K \) es cerrado. Como \( S \subseteq \ker(\phi) \) para todo \( \phi \) que aparece en la intersección, se tiene que \( S \subseteq K \) y por lo tanto \( \cl{S} \subseteq K \). Pues la clausura es el menor cerrado que contiene a \( S \).
+
+    Para la otra contención vayamos por el contrarrecíproco. Supongamos que \( x \notin \cl{S} \). Entonces \( d(x, \cl{S}) > 0 \) pues \( \cl{S} \) es cerrado, por el \textbf{Ejercicio 1} existe un funcional lineal \( \phi \in E^* \) no nulo tal que \( \phi|_{\cl{S}} \equiv 0 \) y \( \phi(x) \neq 0 \implies x \notin \ker \phi \implies x \notin K \). Esto prueba que \( K \subseteq \cl{S} \) y concluimos que \( \cl{S} = K \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Sean \( \EN \) y \( {\{x_n\}}_{n\in\N}\) una sucesión de elementos de \(E\). Probar que \(y_0 \in E\) es límite de combinaciones lineales de la forma \( \sum_{j=1}^N c_j x_j\) si, y sólo si, para todo \(\phi\in E^{*}\) tal que \(\phi(x_n) = 0 \ (\forall n\ge1)\), vale que \(\phi(y_0)=0\).
+
+    \textit{Sugerencia: Usar el ejercicio 2.}
+\end{ejercicio}
+\begin{proof}
+    Siguiendo la sugerencia de utilizar el ejercicio anterior, definamos el siguiente conjunto: \[
+        S := \text{span}\{ x_n : n \in \N \}
+    \]
+    y obtenemos que:
+    \[
+        y_0 \in \cl{S} \iff \forall \phi \in E^* : S \subseteq \ker(\phi) \Rightarrow \phi(y_0) = 0
+    \]
+    lo cual es precisamente lo que queríamos probar.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \(G\subseteq l^{1}\) dado por \( G={\{(x_{n})}_{n\in\N}\in l^{1}:x_{1}=x_{3}=x_{5}= \cdots =0 \} \). Probar que toda funcional continua lineal no nula en \(G\) tiene infinitas extensiones de Hahn-Banach.
+\end{ejercicio}
+\begin{proof}
+    Sabemos que el dual de \( l^1 \) es isométricamente isomorfo a \( l^{\infty} \). Esto nos dice que cualquier funcional lineal continuo en \( l^1 \) puede representarse de manera única con un elemento de \( l^{\infty} \) tal que: \[
+        \phi(x) = \sum_{n=1}^{\infty} x_n y_n, \quad {(y_n)}_{n\ge1} \in l^{\infty}, \quad x = {(x_n)}_{n\ge1} \in l^1.
+    \]
+    Además, \( \norm{\phi}_{{(l^1)}^*} = \norm{(y_n)}_{l^{\infty}} = \sup_{n \ge 1} |y_n|\). Si \( x \in G \implies x_{2k+1} = 0 \quad \forall k \ge 0 \), al extender por Hahn-Banach a \( \phi \in G^* \) se debe cumplir que:\begin{itemize}
+        \item \( \Phi(x) = \phi(x) = \sum_{n=1}^{\infty} x_n y_n =  \sum_{k=1}^{\infty} x_{2k} y_{2k} \) para todo \( x \in G \).
+        \item \( \norm{\Phi} = \norm{\phi} = \sup_{n \ge 1} |y_n| \).
+    \end{itemize}
+
+    Esto muestra que cualquier funcional lineal continuo no nulo en \( G \) tiene infinitas extensiones de Hahn-Banach pues en las coordenadas impares podemos elegir los valores de manera arbitraria (menores o iguales que \( \norm{\phi} \)) sin afectar la restricción a \( G \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Sea \(G=\{(x_1,x_2,\dots)\in l_{1}:x_{1}-3x_{2}=0\} \) y \(f:G\to\R \) el funcional definido por \( f(x_1, x_2, \ldots) = x_1 \).
+    \begin{enumerate}
+        \item Probar que \(\norm{f}=\frac{3}{4}\).
+        \item Probar que \(f\) tiene una única extensión de Hahn-Banach dado por \(g(x_{1},x_{2}\dots)=\frac{3}{4}x_{1}+\frac{3}{4}x_{2}\) para todo \((x_{1},x_{2},\dots)\in l_{1}\). En otras palabras, si \(g\) es tal que \(g(x)=f(x)\) para todo \(x\in G\) y \(\norm{f}=\norm{g}\) entonces \(g\) está dado por esa expresión.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Sean \( G \) y \( f \) como en el enunciado. Primero, notemos que cualquier \( x \in G \) cumple \( x_1 = 3x_2 \), por lo que \( f(x) = x_1 = 3x_2 \). Por lo tanto, para todo \( x \in G \) tenemos \( \norm{x}_1 = |x_1| + |x_2| + \sum_{n=3}^{\infty} |x_n| = 4|x_2| + \sum_{n=3}^{\infty} |x_n| \le 1 \implies |x_2| \le \frac{1}{4} \). De esto se sigue que \(\norm{f} = \sup_{x \in G, \norm{x}_1 \le 1} |f(x)| = 3 \sup_{x \in G, \norm{x}_1 \le 1} |x_2| \le 3 \cdot \frac{1}{4} = \frac{3}{4}\). La igualdad se obtiene a través de \( (3/4, 1/4, 0, \ldots) \) pues para este elemento \( \norm{x}_1 = 3/4 + 1/4 = 1 \) y \( f(x) = 3/4 \).
+
+    Veamos primero que la \( g \) dada es una extensión válida. Para todo \( x \in G \) tenemos \( x_1 = 3x_2 \), por lo que
+    \[
+        g(x) = \frac{3}{4}x_1 + \frac{3}{4}x_2 = \frac{3}{4} \cdot 3x_2 + \frac{3}{4}x_2 = 3x_2 = x_1 = f(x),
+    \]
+    lo que muestra que \( g \) extiende a \( f \). Además, para todo \( x \in l_1 \) se tiene
+    \[
+        |g(x)| = \left|\frac{3}{4}x_1 + \frac{3}{4}x_2\right| \le \frac{3}{4}(|x_1| + |x_2|) \le \frac{3}{4} \norm{x}_1,
+    \]
+    por lo que \( \norm{g} \le \frac{3}{4} = \norm{f} \). Esto muestra que \( g \) es efectivamente una extensión de Hahn-Banach de \( f \).
+
+    Para ver la unicidad sigamos un razonamiento análogo al del ejercicio anterior, sea \( h \) una extensión de Hahn-Banach de \( f \) sabemos que:\[
+        h(x) = \sum_{n\ge1} x_n y_n, \quad \text{para algún } {(y_n)}_{n\ge1} \in l_\infty, \text{ y } \norm{h} = \norm{f} = \frac{3}{4}.
+    \]
+    Es decir, \( \sup_{n\ge1} |y_n| = 3/4 \) y \( h(x) = x_1 \quad \forall x \in G \). Es claro que \( h(e_n) = f(e_n) = 0 \), es decir \( y_n = 0 \) si \( n \ge 3 \). Veamos ahora cuánto valen \( y_1 \) e \( y_2 \), \( h(x) = f(x) = x_1 = 3x_2 \) para \( x \in G \) y \( h(x) = x_1 y_1 + x_2 y_2 = 3x_2 y_1 + x_2 y_2 = x_2 (3 y_1 + y_2) \) según nuestra representación, igualando las dos ecuaciones se obtiene que \( 3 y_1 + y_2 = 3 \), además \( |y_1| \le 3/4 \) y \( |y_2| \le 3/4 \). Resolviendo el sistema se obtiene \( y_1 = y_2 = 3/4 \), por lo que \( h(x) = \frac{3}{4}x_1 + \frac{3}{4}x_2 = g(x) \), mostrando la unicidad.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Probar que toda funcional lineal continua en \(c_{0}\) tiene una única extensión de Hahn-Banach en \(l^{\infty}\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Sean \(E, F\) espacios de Banach y \(T\in L(E,F)\) suryectiva. Probar que existe una constante \(M>0\) tal que, para todo \(y\in F\) existe \(x\in E\), tal que \(T(x)=y\) y \(\norm{x}_{E}\le M\norm{y}_{F}\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Dar un ejemplo de un espacio de Banach \(V\), un espacio normado \(W\), un operador lineal acotado suryectivo \(T:V\to W\) y un conjunto abierto \(G\subseteq V\), tal que \(T(G)\) no es abierto en \(W\).
+
+    \textit{Sugerencia: Considerar \(V=(C[0,1],\norm{\cdot}_{\infty})\), \(W=(C[0,1],\norm{\cdot}_{1})\), \(T:V\to W\) dado por \(Tf=f\) y \(G=B_{\infty}(0,1)\).}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+    Sea \(E\) un espacio vectorial. Sean \(\norm{\cdot}_{1}\) y \(\norm{\cdot}_{2}\) normas en \(E\) tales que \(E\) es un espacio de Banach equipado con cualquiera de estas normas. Probar que si existe \( c\in\R \) tal que, para todo \(x\in E\), \(\norm{x}_{1}\le c\norm{x}_{2}\), entonces existe \( d\in\R \) tal que, para todo \(x\in E\), \(\norm{x}_{2}\le d\norm{x}_{1}\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+    Sean \(E\) y \(F\) espacios de Banach y \(A:E\to F\) un operador lineal. Probar que el gráfico de \(A\) es cerrado si, y sólo si, cuando \(x_{n}\to0\) y \(A(x_{n})\xrightarrow{n\to\infty}y\) se tiene que \(y=0\).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+    Consideremos los espacios \(C^{1}([0,1])\) y \(C([0,1])\) con la norma infinito y sea \(d: C^{1}([0,1])\to C([0,1])\) dado por \(d(f)=f^{\prime}\). Probar que el gráfico de \(d\) es cerrado, pero el operador \(d\) no es acotado. ¿Por qué esto no contradice el teorema del gráfico cerrado?
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{12}
+    Sea \( \lambda \) la medida de Lebesgue en el intervalo \([0,1]\), \(1\le p<\infty\) y \(X\subseteq L^{p}(\lambda)\) un subespacio cerrado tal que \(X\subseteq L_{\infty}(\lambda)\).
+    \begin{enumerate}
+        \item Probar usando el Teorema del Gráfico Cerrado que el operador inclusión \(i:X\to L_{\infty}(\lambda)\) es continuo.
+        \item Probar usando el ítem anterior que existe una constante real \( M>0 \) tal que \(\norm{f}_{\infty}\le M\norm{f}_{2}\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{13}
+    \begin{definition}
+        Un operador lineal \(T\) es cerrado si su gráfico \(Gr(T)\) es cerrado en \(X\times Y\).
+    \end{definition}
+
+    Sean \(X\) e \(Y\) espacios de Banach y \(T:X\to Y\) un operador lineal.
+    \begin{enumerate}
+        \item Probar que si \(T\) es cerrado y \(S\) es continuo entonces \(T+S\) es cerrado.
+        \item Probar que todo operador cerrado \(T\) se puede representar como \(T=SW^{-1}\) donde \(S\) y \(W\) son operadores continuos.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{14}
+    \begin{definition}
+        Sean \(E\) y \(F\) espacios de Banach, \(T\in L(E,F)\) y \( {\{T_{n} \}}_{n\in\N}\) una sucesión de operadores en \(L(E,F)\). Decimos que \(T_{n}\) converge fuertemente a \(T\) si para todo \(x\in E\) se tiene que \(T_{n}(x)\xrightarrow{n\to\infty}T(x)\).
+    \end{definition}
+
+    Sean \(E_{i}\) espacios de Banach con \(i=1,2,3\); \(S, T\in L(E_{1},E_{2})\), \(R\in L(E_{2},E_{3})\); \( {\{S_{n}\}}_{n\in\N}\) y \( {\{T_{n}\}}_{n\in\N}\) sucesiones de operadores en \(L(E_{1},E_{2})\) y \( {\{R_{n}\}}_{n\in\N}\) una sucesión de operadores en \(L(E_{2},E_{3})\). Probar que:
+    \begin{enumerate}
+        \item Si \(T_{n}\) tiende fuertemente a \(T\) y \(x_{n}\to x\) entonces \(T_{n}(x_{n})\xrightarrow{n\to\infty}T(x)\).
+        \item Si \(R_{n}\) tiende fuertemente a \(R\) y \(S_{n}\) tiende fuertemente a \(S\), entonces \(R_{n}S_{n}\xrightarrow{n\to\infty} RS\) fuertemente.
+        \item Supongamos que para cada \(x\in E_{1}\) la sucesión \( {\{T_{n}(x)\}}_{n}\) es de Cauchy. Probar que existe un operador \(\tilde{T}\in L(E_{1},E_{2})\) tal que \(T_{n}\) tiende fuertemente a \(\tilde{T}\).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{15}
+    Sea \(c_{0}\subset l^{\infty}\) el subespacio de las sucesiones complejas que convergen a cero y sea \(y={\{y_{n}\}}_{n\in\N}\) una sucesión tal que \(\sum_{n\in\N}x_{n}y_{n}\) converge para todo \(x={\{x_{n}\}}_{n\in\N}\in c_{0}\). Probar que \( \sum_{n\in\N}|y_{n}|<\infty \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{16}
+    Sean \(X\) e \(Y\) espacios de Banach y \( f:X\times Y\to\C \) un funcional continuo en cada componente; es decir, si \(x_{n}\to x\) e \(y_{n}\xrightarrow{n\to\infty}y\) entonces \(f(x_{n},y)\xrightarrow{n\to\infty}f(x,y)\) para todo \(y\in Y\), y \(f(x,y_{n})\xrightarrow{n\to\infty}f(x,y)\) para todo \(x\in X\). Probar que \(f\) es (conjuntamente) continuo.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\end{document}
