@@ -68,7 +68,7 @@
     Sean \(E\) un espacio vectorial normado y \(S\) un subespacio de \(E\). Probar que \[ \cl{S}= \bigcap \left \{ \ker(\phi):\phi\in E^{*},S\subseteq \ker(\phi) \right \} \]
 \end{ejercicio}
 \begin{proof}
-    Llamemos \( K = \bigcap \left \{ \ker(\phi):\phi\in E^{*},S\subseteq \ker(\phi) \right \} \). Queremos probar que \( \cl{S} = K \). En primer lugar notemos que como cada \( \phi \) es continua entonces \( \ker \phi \) es cerrado y la intersección contable de cerrados es cerrada \( \implies K \) es cerrado. Como \( S \subseteq \ker(\phi) \) para todo \( \phi \) que aparece en la intersección, se tiene que \( S \subseteq K \) y por lo tanto \( \cl{S} \subseteq K \). Pues la clausura es el menor cerrado que contiene a \( S \).
+    Llamemos \( K = \bigcap \left \{ \ker(\phi):\phi\in E^{*},S\subseteq \ker(\phi) \right \} \). Queremos probar que \( \cl{S} = K \). En primer lugar notemos que como cada \( \phi \) es continua entonces \( \ker \phi \) es cerrado y la intersección arbitraria de cerrados es cerrada \( \implies K \) es cerrado. Como \( S \subseteq \ker(\phi) \) para todo \( \phi \) que aparece en la intersección, se tiene que \( S \subseteq K \) y por lo tanto \( \cl{S} \subseteq K \). Pues la clausura es el menor cerrado que contiene a \( S \).
 
     Para la otra contención vayamos por el contrarrecíproco. Supongamos que \( x \notin \cl{S} \). Entonces \( d(x, \cl{S}) > 0 \) pues \( \cl{S} \) es cerrado, por el \textbf{Ejercicio 1} existe un funcional lineal \( \phi \in E^* \) no nulo tal que \( \phi|_{\cl{S}} \equiv 0 \) y \( \phi(x) \neq 0 \implies x \notin \ker \phi \implies x \notin K \). Esto prueba que \( K \subseteq \cl{S} \) y concluimos que \( \cl{S} = K \).
 \end{proof}
