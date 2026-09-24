@@ -1,0 +1,314 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Linear algebra operators
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\dimm}{dim}
+\newcommand{\gen}[1]{\overline{\{#1\}}}          % Span / subespacio generado
+\newcommand{\restr}[2]{{#1}\big|_{#2}}            % Restricción de un operador
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}
+\newcommand{\imp}{\implies}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Álgebra Lineal: Práctica de Repaso\\Preparación para el Final}
+\author{Bustos Jordi}
+
+\maketitle
+
+\noindent Esta guía está organizada según los temas del programa de la materia. Los ejercicios están inspirados en el estilo y la dificultad de exámenes finales anteriores, pero \textbf{no son copias} de ellos: la idea es entrenar las mismas técnicas e ideas que suelen tomarse, no memorizar enunciados. Todos los ejercicios son AI-generated.
+
+\tableofcontents
+
+\section{Espacios vectoriales}
+
+\begin{ejercicio}{1}
+    Sea $V$ un $\K$-espacio vectorial. Decidir si las siguientes afirmaciones son verdaderas o falsas. Justificar.
+    \begin{enumerate}
+        \item Si $U$ y $W$ son subespacios de $V$ con $V = U + W$ y $U \cap W = \{0\}$, entonces para cada $v \in V$ existen únicos $u \in U$, $w \in W$ tales que $v = u+w$.
+        \item Si $\{v_1,\ldots,v_n\}$ es una base de $V$ y $w \in V$ es no nulo, entonces existe $i \in \{1,\ldots,n\}$ tal que $\{v_1,\ldots,v_{i-1},w,v_{i+1},\ldots,v_n\}$ es también una base de $V$.
+        \item Si $U_1, U_2, U_3$ son subespacios de $V$ tales que $U_1 \cap U_2 = U_1 \cap U_3 = U_2 \cap U_3 = \{0\}$, entonces $U_1 + U_2 + U_3$ es una suma directa.
+        \item Si $W$ es un subespacio de $V$ con $\dimm(V) = n$ finita, entonces todo subespacio $W'$ tal que $W \oplus W' = V$ tiene la misma dimensión.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sean $U, W$ subespacios de un $\K$-espacio vectorial $V$ de dimensión finita.
+    \begin{enumerate}
+        \item Probar que la aplicación $\varphi : U \to (U+W)/W$, $\varphi(u) = u+W$, es lineal, sobreyectiva, y que $N(\varphi) = U \cap W$.
+        \item Deducir el \emph{segundo teorema de isomorfismo}: $U/(U\cap W) \cong (U+W)/W$.
+        \item Usar el punto anterior (sin apelar a la fórmula de Grassmann) para probar que $\dimm(U+W) = \dimm(U)+\dimm(W)-\dimm(U\cap W)$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita $n$ y $B = \{v_1,\ldots,v_n\}$, $B' = \{v_1',\ldots,v_n'\}$ dos bases de $V$. Sea $C \in \K^{n\times n}$ la matriz de cambio de base de $B'$ a $B$.
+    \begin{enumerate}
+        \item Probar que $C$ es inversible y que $C^{-1}$ es la matriz de cambio de base de $B$ a $B'$.
+        \item Si $W \subset V$ es un subespacio y $\{w_1,\ldots,w_k\} \subset B$ es una base de $W$, dar una condición necesaria y suficiente sobre $C$ para que $\{w_1,\ldots,w_k\}$ siga siendo (las mismas columnas de) una base de $W$ expresada en la base $B'$.
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Transformaciones lineales}
+
+\begin{ejercicio}{4}
+    Sean $V, W$ dos $\K$-espacios vectoriales de dimensión finita y $T \in L(V,W)$.
+    \begin{enumerate}
+        \item Probar que $\dimm(V) = \dimm(N(T)) + \dimm(\Ima(T))$.
+        \item Probar que $T$ es un isomorfismo si y sólo si $\dimm(V) = \dimm(W)$ y $T$ es inyectiva (o, equivalentemente, sobreyectiva).
+        \item Si $\dimm(V) = \dimm(W)$, probar que $T$ es inyectiva si y sólo si existe $S \in L(W,V)$ tal que $ST = I_V$, y en tal caso $S = T^{-1}$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sean $V$ y $W$ dos $\K$-espacios vectoriales de dimensión finita, y sean $T_1, T_2 \in L(V,W)$.
+    \begin{enumerate}
+        \item Probar que $N(T_2) \subseteq N(T_1)$ si y sólo si existe $S \in L(V)$ tal que $T_1 = T_2 S$.
+        \item Probar que $N(T_1) = N(T_2)$ si y sólo si existe $S \in L(V)$ \textbf{invertible} tal que $T_1 = T_2 S$.
+        \item ¿Es cierto que si $N(T_1) = N(T_2)$ entonces $\Ima(T_1) = \Ima(T_2)$? Justificar con una prueba o un contraejemplo.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{6}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita $n \geq 1$ y $B = \{v_1,\ldots,v_n\}$ una base de $V$. Dados $w_1,\ldots,w_n \in W$ (con $W$ otro $\K$-espacio vectorial) arbitrarios, probar que existe una única $T \in L(V,W)$ tal que $T(v_i) = w_i$ para $i=1,\ldots,n$ (propiedad universal de una base). Usar este hecho para probar que $\dimm L(V,W) = \dimm(V)\cdot \dimm(W)$.
+\end{ejercicio}
+
+\section{El álgebra lineal de polinomios}
+
+\begin{ejercicio}{7}
+    Sean $t_0, t_1, \ldots, t_n \in \K$ distintos dos a dos.
+    \begin{enumerate}
+        \item Probar que para cualesquiera $c_0,\ldots,c_n \in \K$ existe un único polinomio $p \in \K[x]$ de grado a lo sumo $n$ tal que $p(t_i) = c_i$ para todo $i$ (interpolación de Lagrange).
+        \item Deducir que la evaluación $\mathrm{ev}: \K[x]_{\leq n} \to \K^{n+1}$, $\mathrm{ev}(p) = (p(t_0),\ldots,p(t_n))$, es un isomorfismo de $\K$-espacios vectoriales.
+        \item Escribir explícitamente los polinomios de Lagrange asociados a $t_0=0, t_1=1, t_2=-1$ y usarlos para hallar $p \in \K[x]_{\leq 2}$ tal que $p(0)=1$, $p(1)=0$, $p(-1)=3$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{8}
+    Sea $I \subseteq \K[x]$ un ideal no nulo.
+    \begin{enumerate}
+        \item Probar que existe un único polinomio mónico $g \in \K[x]$ de grado mínimo tal que $I = (g) := \{g\cdot h : h \in \K[x]\}$.
+        \item Si $I = (p) + (q)$ para $p, q \in \K[x]$ no ambos nulos, probar que $g = \gcd(p,q)$ (a menos de asociados).
+        \item Sea $p \in \K[x]$ no constante. Probar que $p$ admite una factorización $p = c\, p_1^{e_1}\cdots p_k^{e_k}$ con $c \in \K$, $p_i$ irreducibles mónicos distintos y $e_i \geq 1$, y que dicha factorización es única salvo el orden de los factores.
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Formas canónicas elementales}
+
+\begin{ejercicio}{9}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita y $T \in L(V)$.
+    \begin{enumerate}
+        \item Si $W \subseteq V$ es $T$-invariante, probar que $\overline T \in L(V/W)$, $\overline T(v+W) := Tv+W$, está bien definido, y que si $p_T$, $p_{\restr{T}{W}}$ y $p_{\overline T}$ denotan los polinomios característicos de $T$, $\restr{T}{W}$ y $\overline T$ respectivamente, entonces $p_T = p_{\restr{T}{W}} \cdot p_{\overline T}$.
+        \item Deducir que si $\mu$ es autovalor de $\overline T$, entonces $\mu$ es autovalor de $T$.
+        \item Si $T$ tiene $n = \dimm(V)$ autovalores distintos, probar que $T$ es diagonalizable y que todo subespacio $T$-invariante de $V$ es suma directa de subespacios de la forma $\gen{v}$ con $v$ autovector de $T$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{10}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita y $T \in L(V)$ con polinomio minimal $m_T(x) = \prod_{i=1}^k (x-\lambda_i)^{r_i}$, con $\lambda_i \in \K$ distintos.
+    \begin{enumerate}
+        \item (Teorema de la descomposición prima) Probar que $V = W_1 \oplus \cdots \oplus W_k$, donde $W_i = N\big((T-\lambda_i I)^{r_i}\big)$, y que cada $W_i$ es $T$-invariante.
+        \item Probar que el polinomio minimal de $\restr{T}{W_i}$ es $(x-\lambda_i)^{r_i}$.
+        \item Si $N_i := \restr{(T-\lambda_i I)}{W_i}$, probar que $N_i$ es nilpotente y que $T = \bigoplus_i (\lambda_i I + N_i)$ (forma canónica de Jordan a nivel de bloques por autovalor).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{11}
+    Sea $N \in L(V)$ nilpotente, $\dimm(V) = n$, con $N^{m} = 0$ y $N^{m-1} \neq 0$.
+    \begin{enumerate}
+        \item Probar que existe $v \in V$ tal que $\{v, Nv, \ldots, N^{m-1}v\}$ es linealmente independiente.
+        \item Probar que el subespacio $\gen{v,Nv,\ldots,N^{m-1}v}$ es $N$-invariante (subespacio cíclico) y que la matriz de $\restr{N}{\gen{\ldots}}$ en esa base es un bloque de Jordan nilpotente de tamaño $m$.
+        \item Enunciar (sin demostrar) el Teorema de la Descomposición Cíclica para $N$ y explicar cómo se usa para obtener la forma de Jordan completa de un operador $T \in L(V)$ diagonalizable por bloques como en el Ejercicio 10.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{12}
+    Sea $T \in L(\R^4)$ el operador cuya matriz en la base canónica es
+    \[
+        A = \begin{pmatrix} 2 & 1 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ 0 & 0 & 2 & 1 \\ 0 & -1 & -1 & 3\end{pmatrix}.
+    \]
+    \begin{enumerate}
+        \item Calcular el polinomio característico y el polinomio minimal de $T$.
+        \item Hallar los autoespacios $E(\lambda)$ para cada autovalor $\lambda$ y sus dimensiones.
+        \item Determinar la forma de Jordan de $T$ y una base de $\R^4$ que la realice.
+        \item Escribir $\R^4$ como suma directa de subespacios $T$-cíclicos.
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Dualidad}
+
+\begin{ejercicio}{13}
+    Sea $V$ un $\K$-espacio vectorial con $\dimm(V) = n$ y $V^*$ su espacio dual.
+    \begin{enumerate}
+        \item Si $B = \{b_1,\ldots,b_n\}$ es una base de $V$, probar que la base dual $B^* = \{f_1,\ldots,f_n\}$ (definida por $f_i(b_j) = \delta_{ij}$) es en efecto una base de $V^*$.
+        \item Probar que la aplicación $\iota: V \to V^{**}$, $\iota(v)(f) = f(v)$, es un isomorfismo (natural, sin elegir base) cuando $\dimm(V) < \infty$.
+        \item Sea $S \subseteq V$ un subespacio con $\dimm(S) = k$ y sea $\{b_1,\ldots,b_k\}$ una base de $S$, completada a una base $B = \{b_1,\ldots,b_n\}$ de $V$. Probar que $\{f_{k+1},\ldots,f_n\} \subset B^*$ es una base del anulador $S^\circ := \{f \in V^* : f(s)=0\ \forall s \in S\}$, y concluir que $\dimm(S)+\dimm(S^\circ) = n$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{14}
+    Sea $V$ un $\K$-espacio vectorial con $\dimm(V) = n$ y $S_1, S_2 \subseteq V$ subespacios.
+    \begin{enumerate}
+        \item Probar que $(S_1+S_2)^\circ = S_1^\circ \cap S_2^\circ$.
+        \item Probar que $(S_1 \cap S_2)^\circ = S_1^\circ + S_2^\circ$.
+        \item Identificando $V \cong V^{**}$ (Ejercicio 13), probar que $(S^\circ)^\circ = S$ para todo subespacio $S \subseteq V$, y deducir que $S \mapsto S^\circ$ es una biyección entre subespacios de $V$ y subespacios de $V^*$ que invierte inclusiones.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{15}
+    Sean $V, W$ dos $\K$-espacios vectoriales de dimensión finita y $T \in L(V,W)$. Sea $T^t \in L(W^*,V^*)$ la transpuesta de $T$, definida por $T^t(f) = f \circ T$.
+    \begin{enumerate}
+        \item Probar que $\rg(T) = \rg(T^t)$.
+        \item Probar que $T$ es sobreyectiva si y sólo si $T^t$ es inyectiva.
+        \item Si $A$ es la matriz de $T$ en un par de bases $B, B'$, probar que la matriz de $T^t$ en las bases duales correspondientes es $A^t$ (la transpuesta usual de matrices).
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Espacios con producto interno}
+
+\begin{ejercicio}{16}
+    Sea $(V, \langle \cdot,\cdot\rangle)$ un $\K$-espacio vectorial con producto interno, $\dimm(V) = n$.
+    \begin{enumerate}
+        \item (Gram--Schmidt) Dada una base $\{v_1,\ldots,v_n\}$ de $V$, construir explícitamente una base ortonormal $\{e_1,\ldots,e_n\}$ tal que $\gen{e_1,\ldots,e_k} = \gen{v_1,\ldots,v_k}$ para todo $k$.
+        \item (Riesz) Probar que para toda $f \in V^*$ existe un único $w \in V$ tal que $f(v) = \langle v, w\rangle$ para todo $v \in V$.
+        \item Usar el punto anterior para definir, dado $T \in L(V)$, el operador adjunto $T^* \in L(V)$ y probar que está bien definido y que $(T^*)^* = T$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{17}
+    Sea $(V,\langle\cdot,\cdot\rangle)$ un $\C$-espacio vectorial de dimensión finita y $T \in L(V)$.
+    \begin{enumerate}
+        \item Probar que $T$ es normal ($TT^*=T^*T$) si y sólo si $\|Tv\| = \|T^*v\|$ para todo $v \in V$.
+        \item Suponiendo $T$ normal, probar (por inducción en $\dimm V$, usando que el ortogonal de un autoespacio de $T$ es $T$- y $T^*$-invariante) que existe una base ortonormal de $V$ formada por autovectores de $T$.
+        \item Exhibir una matriz $A \in \C^{2\times 2}$ que sea normal pero no autoadjunta ni unitaria, y hallar explícitamente una base ortonormal de autovectores de $A$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{18}
+    Sea $(V,\langle\cdot,\cdot\rangle)$ un espacio euclídeo ($\K=\R$) de dimensión $n$.
+    \begin{enumerate}
+        \item Probar que si $T \in L(V)$ es autoadjunto, entonces $\|T\| := \max\{\|Tv\| : \|v\|=1\}$ es igual a $\max\{|\lambda| : \lambda \text{ autovalor de } T\}$.
+        \item Si $T, S \in L(V)$ son autoadjuntos y $TS=ST$, probar que existe una base ortonormal de $V$ formada por autovectores comunes a $T$ y a $S$.
+        \item Usar el ítem anterior para describir todos los operadores autoadjuntos $S \in L(\R^3)$ que conmutan con el operador diagonal $T = \mathrm{diag}(1,1,2)$ (en la base canónica).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{19}
+    Sea $(V,\langle\cdot,\cdot\rangle)$ un $\C$-espacio con producto interno de dimensión finita y $U \in L(V)$ unitario ($U^*U = I$).
+    \begin{enumerate}
+        \item Probar que $\|Uv\| = \|v\|$ para todo $v \in V$, y recíprocamente, que todo operador que preserva la norma es unitario.
+        \item Probar que si $\lambda$ es autovalor de $U$ entonces $|\lambda| = 1$.
+        \item Probar que autovectores de $U$ asociados a autovalores distintos son ortogonales (esto también sigue del Ejercicio 17, dar una prueba directa).
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Formas bilineales}
+
+\begin{ejercicio}{20}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita $n$ y $\mathcal A \in \mathrm{Bil}(V)$.
+    \begin{enumerate}
+        \item Probar que toda forma bilineal se escribe de manera única como $\mathcal A = \mathcal A_s + \mathcal A_a$, con $\mathcal A_s$ simétrica y $\mathcal A_a$ antisimétrica (suponer $\mathrm{car}(\K) \neq 2$).
+        \item Si $B$ es una base de $V$ y $[\mathcal A]_B$ es la matriz asociada, probar que $\mathcal A$ es simétrica (resp. antisimétrica) si y sólo si $[\mathcal A]_B$ lo es.
+        \item Si $B'$ es otra base y $C$ es la matriz de cambio de base, probar que $[\mathcal A]_{B'} = C^t [\mathcal A]_B C$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{21}
+    Sea $V$ un $\R$-espacio vectorial de dimensión $n$ y $\mathcal A \in \mathrm{Bil}(V)$ simétrica, de rango $r$ y signatura $s$.
+    \begin{enumerate}
+        \item Probar que existe una base $B$ de $V$ en la que $[\mathcal A]_B$ es diagonal con entradas en $\{1,-1,0\}$ (Ley de inercia de Sylvester), y que la cantidad de $1$'s, $-1$'s y $0$'s no depende de la base diagonalizante elegida.
+        \item Probar que $\mathcal A$ es semidefinida positiva si y sólo si $s = r$, y semidefinida negativa si y sólo si $s = -r$.
+        \item Probar que $\mathcal A$ es definida positiva si y sólo si $r = s = n$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{22}
+    Sea $\mathcal A : \R^3 \times \R^3 \to \R$ la forma bilineal dada por
+    \[
+        \mathcal A\big((x_1,x_2,x_3),(y_1,y_2,y_3)\big) = 2x_1y_1 - x_2y_2 + x_3y_3 + x_1y_2+x_2y_1.
+    \]
+    \begin{enumerate}
+        \item Hallar la matriz de $\mathcal A$ en la base canónica y verificar que es simétrica.
+        \item Diagonalizar $\mathcal A$ (hallar una base $B$ tal que $[\mathcal A]_B$ sea diagonal) y determinar su rango y signatura.
+        \item Sea $S = \gen{(1,0,-1)}$. Hallar $S^\perp$ respecto de $\mathcal A$ y decidir si $S \oplus S^\perp = \R^3$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{23}
+    Sea $V$ un $\C$-espacio vectorial de dimensión finita. Una forma $h : V \times V \to \C$ es \textbf{hermitiana} si es lineal en la primera variable, $h(u,v) = \overline{h(v,u)}$ para todos $u,v$.
+    \begin{enumerate}
+        \item Probar que $h(v,v) \in \R$ para todo $v \in V$.
+        \item Probar que la matriz $[h]_B$ de $h$ en cualquier base $B$ satisface $[h]_B = \overline{[h]_B}^{\,t}$ (es hermitiana como matriz).
+        \item Enunciar el análogo de la Ley de inercia de Sylvester para formas hermitianas.
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Nociones de álgebra multilineal. Tensores}
+
+\begin{ejercicio}{24}
+    Sean $V, W$ dos $\K$-espacios vectoriales de dimensión finita.
+    \begin{enumerate}
+        \item Enunciar la propiedad universal del producto tensorial $V \otimes W$: dada cualquier aplicación bilineal $\beta : V \times W \to Z$, existe una única $T \in L(V\otimes W, Z)$ tal que $\beta(v,w) = T(v\otimes w)$.
+        \item Si $\{v_1,\ldots,v_n\}$ y $\{w_1,\ldots,w_m\}$ son bases de $V$ y $W$ respectivamente, probar que $\{v_i \otimes w_j : 1\leq i \leq n,\, 1 \leq j \leq m\}$ es una base de $V\otimes W$, y en particular que $\dimm(V\otimes W) = \dimm(V)\dimm(W)$.
+        \item Si $C$ y $D$ son las matrices de cambio de base en $V$ y $W$ respectivamente, describir cómo cambian las coordenadas de un tensor $t \in V \otimes W$ respecto de las bases $\{v_i\otimes w_j\}$ al cambiar de base (en términos de $C \otimes D$).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{25}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita.
+    \begin{enumerate}
+        \item Definir el espacio de tensores $r$ veces covariantes y $s$ veces contravariantes $T^r_s(V)$ y dar su dimensión en términos de $\dimm(V)$, $r$ y $s$.
+        \item Probar que $T^1_0(V) \cong V^*$ y $T^0_1(V) \cong V$ (usando que $\dimm(V) < \infty$).
+        \item Explicar por qué un tensor de tipo $(1,1)$ sobre $V$ se identifica naturalmente con un elemento de $L(V)$.
+    \end{enumerate}
+\end{ejercicio}
+
+\section{Grupos de matrices}
+
+\begin{ejercicio}{26}
+    Se define $SU(2) = \{A \in \C^{2\times 2} : A^*A = I,\ \det(A) = 1\}$.
+    \begin{enumerate}
+        \item Probar que $SU(2)$ es un grupo con el producto usual de matrices.
+        \item Probar que todo $A \in SU(2)$ se escribe como
+              \[
+                  A = \begin{pmatrix} a & -\overline b \\ b & \overline a\end{pmatrix}, \qquad a,b \in \C,\ |a|^2+|b|^2=1,
+              \]
+              y usar esta descripción para exhibir una biyección entre $SU(2)$ y la esfera $S^3 \subset \R^4$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{27}
+    Sea $V$ un $\K$-espacio vectorial de dimensión finita y $\mathcal A \in \mathrm{Bil}(V)$ no degenerada. Se define
+    \[
+        G(\mathcal A) := \{T \in L(V) : \mathcal A(Tv,Tw) = \mathcal A(v,w) \ \ \forall v,w \in V\}.
+    \]
+    \begin{enumerate}
+        \item Probar que $G(\mathcal A)$ es un grupo con la composición.
+        \item Si $\mathcal A$ es simétrica definida positiva ($\K = \R$), probar que $G(\mathcal A)$ es (isomorfo a) el grupo ortogonal correspondiente.
+        \item Si $\mathcal A$ es la forma bilineal estándar en $\R^{2}$ pero de signatura $(1,1)$ (por ejemplo $\mathcal A(x,y) = x_1y_1 - x_2y_2$), describir $G(\mathcal A)$ y comparar con el caso anterior.
+    \end{enumerate}
+\end{ejercicio}
+
+\end{document}
