@@ -139,10 +139,35 @@
 \vspace{0.5cm}
 
 \begin{ejercicio}{6}
-    Probar que toda funcional lineal continua en \(c_{0}\) tiene una única extensión de Hahn-Banach en \(l^{\infty}\).
+    Probar que todo funcional lineal continuo en \(c_0\) tiene una única extensión de Hahn-Banach en \(l^{\infty}\).
 \end{ejercicio}
 \begin{proof}
+    Sea \( f \in {(c_0)}^* \). Sabemos que como el dual de \( c_0 \) es isométricamente isomorfo a \( l^1 \), existe una única sucesión \( (a_n) \in l^1 \) tal que:
+    \[
+        f(x) = \sum_{n=1}^{\infty} a_n x_n, \quad \forall x = {(x_n)}_{n\ge1} \in c_0.
+    \]
+    Sea \( \tilde f \) la extensión de Hahn-Banach de \( f \) definida en \( l^\infty \) que coincide con \( f \) en \( c_0 \) y preserva la norma.
 
+    Sea \( g \) otra extensión de Hahn-Banach de \( f \) a \( l^\infty \). Veamos que \( g = \tilde f \) en todo \( l^\infty \).
+
+    Basta probarlo para \( x \in l^\infty \) con \( \norm{x} \le 1 \) y el caso general vale por homogeneidad. Para cada \( N \) escribamos \( x = x^{[N]} + r^{(N)} \) con \( x^{[N]} = \sum_{n=1}^N x_n e_n \in c_0 \) y \( r^{(N)} = \sum_{n>N} x_n e_n \).
+
+    Se puede demostrar que \( |g(r^{(N)})| \le \sum_{n>N} |a_n| \), para todo \( N \).
+
+    Notemos que, \( x^{[N]} \in c_0 \) y \( r^{(N)} \) es la cola de \( x \) a partir del índice \( N+1 \). Luego, \( g(x) = g(x^{[N]}) + g(r^{(N)}) \).
+
+    Como \( x^{[N]} \in c_0 \), se tiene \( g(x^{[N]}) = f(x^{[N]}) = \sum_{n=1}^N a_n x_n \). Por lo tanto,
+    \[
+        g(x) = \sum_{n=1}^N a_n x_n + g(r^{(N)}).
+    \]
+
+    Al hacer \( N\to\infty \): el primer término tiende a \( \sum_{n=1}^\infty a_n x_n=\tilde f(x) \), y el segundo tiende a \( 0 \) por el lema, ya que \( \sum_{n>N}|a_n|\to0 \). Por lo tanto
+    \[
+        g(x)=\tilde f(x)\qquad\text{para todo }x\text{ con }\|x\|_\infty\le1,
+    \]
+    y por homogeneidad, \( g=\tilde f \) en todo \( l^\infty \).
+
+    Esto prueba que \( \tilde f \) es la \textbf{única} extensión de Hahn-Banach de \( f \) a \( l^\infty \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -151,18 +176,32 @@
     Sean \(E, F\) espacios de Banach y \(T\in L(E,F)\) suryectiva. Probar que existe una constante \(M>0\) tal que, para todo \(y\in F\) existe \(x\in E\), tal que \(T(x)=y\) y \(\norm{x}_{E}\le M\norm{y}_{F}\).
 \end{ejercicio}
 \begin{proof}
+    Consideremos la bola abierta \(B_E\) centrada en cero de radio 1. Por TIA, \(T(B_E)\) es un abierto y \(\exists r > 0\) tal que \(B_F(0, r) \subseteq T(B_E)\).
 
+    Dado \(y \in F\), si \(y = 0\) basta tomar \(x = 0\), y se cumple que \(T(0) = 0\) con \(\norm{0}_E \le M \norm{0}_F\) para cualquier \(M\).
+
+    Si \(y \neq 0\), tomamos \(\tilde y = \frac{r}{2} \frac{y}{\norm{y}_F}\). Como \(\norm{\tilde y}_F = \frac{r}{2} < r\), entonces \(\tilde y \in B_F(0, r) \subseteq T(B_E)\), por lo que existe \(\tilde x \in B_E\) tal que \(T(\tilde x) = \tilde y\).
+
+    Definimos \(M = \frac{2}{r}\) y proponemos \(x = \frac{2\norm{y}_F}{r} \tilde x\). Por linealidad de \(T\), se verifica que:
+    \[
+        T(x) = T\left(\frac{2\norm{y}_F}{r} \tilde x\right) = \frac{2\norm{y}_F}{r} T(\tilde x) = \frac{2\norm{y}_F}{r} \left( \frac{r}{2\norm{y}_F} y \right) = y
+    \]
+    Además, como \(\tilde x \in B_E\) implica que \(\norm{\tilde x}_E < 1\), la norma de \(x\) satisface:
+    \[
+        \norm{x}_E = \norm{ \frac{2\norm{y}_F}{r} \tilde x }_E = \frac{2}{r} \norm{y}_F \norm{\tilde x}_E < \frac{2}{r} \norm{y}_F = M \norm{y}_F
+    \]
+    Lo que concluye la demostración.
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
     Dar un ejemplo de un espacio de Banach \(V\), un espacio normado \(W\), un operador lineal acotado suryectivo \(T:V\to W\) y un conjunto abierto \(G\subseteq V\), tal que \(T(G)\) no es abierto en \(W\).
-
-    \textit{Sugerencia: Considerar \(V=(C[0,1],\norm{\cdot}_{\infty})\), \(W=(C[0,1],\norm{\cdot}_{1})\), \(T:V\to W\) dado por \(Tf=f\) y \(G=B_{\infty}(0,1)\).}
 \end{ejercicio}
 \begin{proof}
+    Consideremos \( V = (C[0,1], \norm{\cdot}_{\infty}) \), \( W = (C[0,1],\norm{\cdot}_1) \), \(T:V\to W\) dado por \(Tf=f\) y \(G=B_{\infty}(0,1)\).
 
+    Claramente \( G \) es un abierto de \( V \). Veamos que \(T(G)\) no es abierto de \( W \). Es claro que \( 0 \in T(G) \). Queremos ver que 0 no es punto interior del conjunto, sea \( \varepsilon > 0 \) consideremos \( B_{1}(0, \varepsilon) \), veamos que la bola abierta de radio \( \varepsilon \) centrada en 0 contiene funciones tales que \( \norm{f}_1 < \varepsilon \), pero \( \norm{f}_{\infty} = 1 \). Por ejemplo, consideremos la función que vale \( f(0) = 1 \), luego es el segmento de recta que interseca el eje \( x \) en \( \varepsilon / 2 \) y luego se anula en el resto del intervalo. Es claro que \( f \in B_1(0, \varepsilon) \) pero \( f \notin T(G) \) pues \( \norm{f}_{\infty} = 1 \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -171,7 +210,7 @@
     Sea \(E\) un espacio vectorial. Sean \(\norm{\cdot}_{1}\) y \(\norm{\cdot}_{2}\) normas en \(E\) tales que \(E\) es un espacio de Banach equipado con cualquiera de estas normas. Probar que si existe \( c\in\R \) tal que, para todo \(x\in E\), \(\norm{x}_{1}\le c\norm{x}_{2}\), entonces existe \( d\in\R \) tal que, para todo \(x\in E\), \(\norm{x}_{2}\le d\norm{x}_{1}\).
 \end{ejercicio}
 \begin{proof}
-
+    Consideremos la identidad \( I:(E,\norm{\cdot}_2)\to(E,\norm{\cdot}_1) \) que es suryectiva. Por hipótesis, \( I \) es lineal y acotada, ya que existe \( c \) tal que \( \norm{x}_1\le c\norm{x}_2 \) para todo \( x\in E \). Como \( (E,\norm{\cdot}_2) \) y \( (E,\norm{\cdot}_1) \) son espacios de Banach, utilizando el \textbf{Ejercicio 7} \( \exists M > 0 \) tal que \( \norm{x}_2 \le M \norm{x}_1 \) para todo \( x \in E \). Definimos \( d = M \), y se tiene que \( \norm{x}_2 \le d \norm{x}_1 \) para todo \( x \in E \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -180,7 +219,13 @@
     Sean \(E\) y \(F\) espacios de Banach y \(A:E\to F\) un operador lineal. Probar que el gráfico de \(A\) es cerrado si, y sólo si, cuando \(x_{n}\to0\) y \(A(x_{n})\xrightarrow{n\to\infty}y\) se tiene que \(y=0\).
 \end{ejercicio}
 \begin{proof}
+    (\( \Longrightarrow \)) Supongamos que el gráfico de \(A\), denotado por \(\operatorname{Gr}(A)\), es cerrado en \(E \times F\). Si \(x_n \to 0\) y \(A(x_n) \to y\), entonces la sucesión \((x_n, A(x_n)) \subseteq \operatorname{Gr}(A)\) converge al punto \((0, y)\) en \(E \times F\). El límite de la sucesión debe pertenecer al gráfico, entonces \((0, y) \in \operatorname{Gr}(A) \implies y = A(0)\). Como \(A(0) = 0\), \(y = 0\).
 
+    (\( \Longleftarrow \)) Supongamos que siempre que \(x_n \to 0\) y \(A(x_n) \to y\), se cumple que \(y = 0\). Sea \({(x_n, A(x_n))}_{n\ge1} \subseteq \operatorname{Gr}(A)\) que converge a \((x, y) \in E \times F \implies x_n \to x\) y \(A(x_n) \to y\).
+
+    Definimos la sucesión \(z_n = x_n - x\). Es claro que \(z_n \to 0\). Tenemos que \(A(z_n) = A(x_n - x) = A(x_n) - A(x)\). Como \(A(x_n) \to y\), deducimos que \(A(z_n) \to y - A(x)\).
+
+    Aplicando la hipótesis a la sucesión \(z_n\), como \(z_n \to 0\) y sus imágenes convergen, el límite de estas imágenes debe ser nulo. Es decir, \(y - A(x) = 0\), de donde \(y = A(x) \therefore (x, y) \in \operatorname{Gr}(A)\) y es cerrado.
 \end{proof}
 
 \vspace{0.5cm}
@@ -189,29 +234,48 @@
     Consideremos los espacios \(C^{1}([0,1])\) y \(C([0,1])\) con la norma infinito y sea \(d: C^{1}([0,1])\to C([0,1])\) dado por \(d(f)=f^{\prime}\). Probar que el gráfico de \(d\) es cerrado, pero el operador \(d\) no es acotado. ¿Por qué esto no contradice el teorema del gráfico cerrado?
 \end{ejercicio}
 \begin{proof}
+    Veamos que el gráfico de \(d\) es cerrado. Sea \((f_n, d(f_n))\) una sucesión en el gráfico de \(d\) tal que \((f_n, d(f_n)) \to (f, g)\) en \(C^1([0,1]) \times C([0,1])\). Esto significa que \(f_n \to f\) uniformemente en la norma infinito y que \(d(f_n) = f'_n \to g\) uniformemente en \([0,1]\).
 
+    Por un teorema clásico de análisis real, si una sucesión de funciones derivables converge en al menos un punto y la sucesión de sus derivadas converge uniformemente a \(g\), entonces la función límite \(f\) es derivable y su derivada es \(f' = g\). Luego, concluimos que \(f \in C^1([0,1])\) y \(d(f) = g\), lo que demuestra que el gráfico de \(d\) es cerrado.
+
+    Veamos ahora que el operador \(d\) no es acotado. Consideremos la sucesión de funciones \(f_n(x) = x^n\) para \(n \ge 1\). Es claro que \(f_n \in C^1([0,1])\) y que su norma es \(\norm{f_n}_\infty = 1\) para todo \(n\). Al aplicar el operador, obtenemos \(d(f_n)(x) = n x^{n-1}\). La norma de esta derivada en el intervalo \([0,1]\) es \(\norm{d(f_n)}_\infty = n\).
+
+    Como \( \norm{d(f_n)}_\infty = n \to \infty \) mientras que \(\norm{f_n}_\infty = 1\), la imagen de la bola unitaria no está acotada. Por lo tanto, el operador \(d\) no es acotado.
+
+    El espacio de partida \((C^1([0,1]), \norm{\cdot}_\infty)\) no es un espacio de Banach, ya que no es completo con esta norma. Para verlo, basta tomar la sucesión \(f_n(x) = \sqrt{{(x - 1/2)}^2 + 1/n}\). Esta sucesión de funciones, que pertenecen a \(C^1([0,1])\), converge uniformemente en la norma infinito a la función \(f(x) = |x - 1/2|\). Luego, \(f \notin C^1([0,1])\), lo que demuestra que el espacio no es completo y no se puede aplicar el teorema.
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{12}
-    Sea \( \lambda \) la medida de Lebesgue en el intervalo \([0,1]\), \(1\le p<\infty\) y \(X\subseteq L^{p}(\lambda)\) un subespacio cerrado tal que \(X\subseteq L_{\infty}(\lambda)\).
+    Sea \( \lambda \) la medida de Lebesgue en el intervalo \([0,1]\), \( 1 \le p < \infty \) y \( X \subseteq L^{p}(\lambda)\) un subespacio cerrado tal que \(X\subseteq L_{\infty}(\lambda)\).
     \begin{enumerate}
         \item Probar usando el Teorema del Gráfico Cerrado que el operador inclusión \(i:X\to L_{\infty}(\lambda)\) es continuo.
         \item Probar usando el ítem anterior que existe una constante real \( M>0 \) tal que \(\norm{f}_{\infty}\le M\norm{f}_{2}\).
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    El teorema de la gráfica cerrada nos dice que si tenemos un operador lineal \( T: X \to Y \) entre dos espacios de Banach y su gráfico \( Gr(T) \) es cerrado en \( X \times Y \), entonces \( T \) es continuo. En nuestro caso, el operador inclusión \( i: X \to L_{\infty} \) es lineal. Veamos que su gráfico es cerrado con la hipotesis de que \( X \) es cerrado en \( L^p(\lambda) \).
 
+    Sea \( {(f_n, i(f_n))}_{n\ge1} \) una sucesión en el gráfico de \( i \) que converge a \( (f, g) \) en \( X \times L_{\infty}(\lambda) \) quiero ver que \( i(g) = f \). En efecto, como \( X \) es un subespacio cerrado de \( L_p \) y \( f_n \to f \) en \( L^p(\lambda) \) entonces \( f \in X \). Además, como \( i(f_n) \to g \) en \( L_{\infty}(\lambda) \) y \( i(f_n) = f_n \), se tiene que \( f_n \to g \) en \( L_{\infty}(\lambda) \). Entonces tenemos:\[
+        \norm{f_n - g}_\infty \to 0 \quad \text{y} \quad \norm{f_n - f}_p \to 0.
+    \]
+    Como la convergencia en \(L_{\infty}(\lambda)\) implica convergencia en \( L^p(\lambda) \) para \( 1 \le p < \infty \) en un espacio de medida finita (\( \lambda([0, 1]) = 1 \)), tenemos que \(f = g\). Por lo tanto, el gráfico de \(i\) es cerrado y, por el teorema de la gráfica cerrada, \(i\) es continuo.
+
+    Como \( i \) es continuo, vale que \( \norm{i}_{X} = \sup_{f \in X, f \neq 0} \frac{\norm{i(f)}_{\infty}}{\norm{f}_p} < \infty \). En particular, existe una constante real \( M > 0 \) tal que \(\norm{i(f)}_{\infty} \le M \norm{f}_p\) para todo \( f \in X \).
+    Tomando, \( p = 2 \) tenemos la desigualdad buscada:
+    \[
+        \norm{f}_{\infty} \le M \norm{f}_{2}, \quad \forall f \in X.
+    \]
 \end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{13}
-    \begin{definition}
-        Un operador lineal \(T\) es cerrado si su gráfico \(Gr(T)\) es cerrado en \(X\times Y\).
-    \end{definition}
+\begin{definition}
+    Un operador lineal \(T\) es cerrado si su gráfico \(Gr(T)\) es cerrado en \(X\times Y\).
+\end{definition}
 
+\begin{ejercicio}{13}
     Sean \(X\) e \(Y\) espacios de Banach y \(T:X\to Y\) un operador lineal.
     \begin{enumerate}
         \item Probar que si \(T\) es cerrado y \(S\) es continuo entonces \(T+S\) es cerrado.
@@ -219,16 +283,36 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sean \(X\) e \(Y\) espacios de Banach, \(T:X\to Y\) un operador lineal cerrado y \(S\) continuo. Notemos que
+    \[
+        \operatorname{Gr}(T+S) = \{(x, (T+S)(x)) : x \in X\} = \{(x, T(x) + S(x)) : x \in X\} = \{(x, y + S(x)) : (x, y) \in \operatorname{Gr}(T)\}.
+    \]
+    Como \(\operatorname{Gr}(T)\) es cerrado y \(S\) es continuo, veamos que \(\operatorname{Gr}(T+S)\) también lo es. Tomemos una sucesión \( {\{(x_n, y_n + S(x_n))\}}_{n\ge 1} \subseteq \operatorname{Gr}(T+S)\), con \((x_n,y_n)\in\operatorname{Gr}(T)\), que converge a un punto \((x,z) \in X\times Y\).
 
+    En particular \(x_n \to x\) en \(X\) y \(y_n + S(x_n) \to z\) en \(Y\). Como \(S\) es continua y \(x_n\to x\), se tiene \(S(x_n)\to S(x)\), y por lo tanto
+    \[
+        y_n = \left(y_n + S(x_n)\right) - S(x_n) \to z - S(x) =: y.
+    \]
+    Así, \((x_n,y_n)\to(x,y)\) en \(X\times Y\). Como \({\{(x_n,y_n)\}}_{n\ge1}\subseteq \operatorname{Gr}(T)\) y \(\operatorname{Gr}(T)\) es cerrado, concluimos que \((x,y)\in\operatorname{Gr}(T)\), es decir, \(T(x) = y\). Luego
+    \[
+        (T+S)(x) = T(x) + S(x) = y + S(x) = z,
+    \]
+    de donde \((x,z) \in \operatorname{Gr}(T+S)\). Esto prueba que \(\operatorname{Gr}(T+S)\) es cerrado, es decir, \(T+S\) es un operador cerrado.
+
+    Consideremos la norma \( \norm{(x,y)}_{X\times Y} = \norm{x}_X + \norm{y}_Y \) en \( X \times Y \). Sea \( \operatorname{Gr}(T) \) la gráfica del operador cerrado \( T \), considero los dos operadores:\[
+        W: \operatorname{Gr}(T) \to X, \quad W(x,Tx) = x, \quad
+        S: \operatorname{Gr}(T) \to Y, \quad S(x,Tx) = Tx.
+    \]
+    La linealidad y la continuidad son triviales y es claro que \( S W^{-1}(x) = S W^{-1}(x) = S(x, Tx) = T(x) \). Notemos que usamos que \( W \) es biyectivo y el Teorema de la aplicación inversa para garantizar que \( W^{-1} \) es continuo.
 \end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{14}
-    \begin{definition}
-        Sean \(E\) y \(F\) espacios de Banach, \(T\in L(E,F)\) y \( {\{T_{n} \}}_{n\in\N}\) una sucesión de operadores en \(L(E,F)\). Decimos que \(T_{n}\) converge fuertemente a \(T\) si para todo \(x\in E\) se tiene que \(T_{n}(x)\xrightarrow{n\to\infty}T(x)\).
-    \end{definition}
+\begin{definition}
+    Sean \(E\) y \(F\) espacios de Banach, \(T\in L(E,F)\) y \( {\{T_{n} \}}_{n\in\N}\) una sucesión de operadores en \(L(E,F)\). Decimos que \(T_{n}\) converge fuertemente a \(T\) si para todo \(x\in E\) se tiene que \(T_{n}(x)\xrightarrow{n\to\infty}T(x)\).
+\end{definition}
 
+\begin{ejercicio}{14}
     Sean \(E_{i}\) espacios de Banach con \(i=1,2,3\); \(S, T\in L(E_{1},E_{2})\), \(R\in L(E_{2},E_{3})\); \( {\{S_{n}\}}_{n\in\N}\) y \( {\{T_{n}\}}_{n\in\N}\) sucesiones de operadores en \(L(E_{1},E_{2})\) y \( {\{R_{n}\}}_{n\in\N}\) una sucesión de operadores en \(L(E_{2},E_{3})\). Probar que:
     \begin{enumerate}
         \item Si \(T_{n}\) tiende fuertemente a \(T\) y \(x_{n}\to x\) entonces \(T_{n}(x_{n})\xrightarrow{n\to\infty}T(x)\).
