@@ -1,0 +1,139 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usetikzlibrary{calc}
+
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Teoría de Grafos}
+\author{Bustos Jordi\\Práctica V}
+
+\maketitle
+
+\begin{definition}
+    Un \textbf{camino} de un grafo \( G \) es una secuencia de vértices \( v_1, v_2, \dots, v_k \) tal que \( v_i \) es adyacente a \( v_{i+1} \) para todo \( i = 1, \dots, k-1 \) y no se repiten vértices.
+\end{definition}
+
+\begin{definition}
+    Un \textbf{ciclo} de un grafo \( G \) es un camino cerrado que no repite vértices, excepto el vértice inicial y final.
+\end{definition}
+
+\begin{definition}
+    Un \textbf{ciclo hamiltoniano} de un grafo \( G \) es un ciclo que contiene a todos los vértices de \( G \). Un grafo se dice \textbf{hamiltoniano} si posee un ciclo hamiltoniano.
+\end{definition}
+
+\begin{ejercicio}{1}
+    Determinar si el siguiente grafo es hamiltoniano.
+\end{ejercicio}
+
+\begin{center}
+    \begin{tikzpicture}[vertice/.style={circle, draw, fill=black, inner sep=1.5pt}]
+        \def\R{2.3}
+        \def\r{1.05}
+        \foreach \k in {0,...,7} {
+                \node[vertice] (o\k) at ({22.5+45*\k}:\R) {};
+                \node[vertice] (i\k) at ({22.5+45*\k}:\r) {};
+            }
+        \foreach \k in {0,...,7} {
+                \pgfmathtruncatemacro{\next}{mod(\k+1,8)}
+                \draw[thick] (o\k) -- (o\next);
+                \draw[thick] (o\k) -- (i\k);
+            }
+        \foreach \k in {0,...,7} {
+                \pgfmathtruncatemacro{\next}{mod(\k+2,8)}
+                \draw[thick] (i\k) -- (i\next);
+            }
+    \end{tikzpicture}
+\end{center}
+
+\begin{proof}
+    Etiquetamos \( u_0, \ldots, u_7 \) los vértices exteriores en sentido antihorario y \( v_0, \ldots, v_7 \) los interiores también en sentido antihorario.
+    El camino:
+    \[ u_0 - v_0 - v_2 - u_2 - u_1 - v_1 - v_3 - u_3 - u_4 - v_4 - v_6 - u_6 - u_5 - v_5 - v_7 - u_7 - u_0 \]
+    Es un ciclo hamiltoniano.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Hallar un grafo simple y conexo, con a lo sumo 6 vértices y al menos una arista, que verifique cada una de las siguientes condiciones:
+    \begin{enumerate}
+        \item \( G \) es euleriano y hamiltoniano.
+        \item \( G \) es euleriano, pero no hamiltoniano.
+        \item \( G \) es hamiltoniano, pero no euleriano.
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Dados \( m, n \geq 1 \), el \textbf{grafo bipartito completo} \( K_{m,n} \) es el grafo bipartito con bipartición \( A, B \) tal que \( |A| = m \), \( |B| = n \), y cada vértice de \( A \) es adyacente a cada vértice de \( B \) (en particular, \( |E(K_{m,n})| = mn \)).
+\end{definition}
+
+\begin{ejercicio}{3}
+    Para \( n > 1 \), probar que \( K_{n,n} \) posee \( \dfrac{(n-1)!\,n!}{2} \) ciclos hamiltonianos.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{definition}
+    Un \textbf{camino hamiltoniano} de un grafo \( G \) es un camino \( P \) que contiene a todos los vértices de \( G \).
+\end{definition}
+
+\begin{ejercicio}{4}
+    Todo grafo con un ciclo hamiltoniano posee un camino hamiltoniano, pero no vale la recíproca (basta tomar un grafo camino como contraejemplo). Probar que un grafo \( G \) posee un camino hamiltoniano si y sólo si el grafo \( G' \) obtenido de \( G \) agregándole un vértice nuevo \( u \) y haciéndolo adyacente a todos los demás vértices posee un ciclo hamiltoniano.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Un ratón intenta comerse un cubo de 3x3x3 de queso. Empieza en una esquina y se come cada vez un cubo de 1x1x1 antes de pasar a uno adyacente (decimos que dos cubos son adyacentes cuando comparten cara). ¿Puede comerse el cubo central en último lugar?
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Elena y Dora invitan a 10 amigos a cenar. En este grupo de doce, todos conocen a al menos seis personas. Demostrar que pueden sentarse los doce alrededor de una mesa circular de modo que todo comensal conozca a las dos personas que están sentadas a su lado.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Probar que, para todo \( n > 2 \), existe un grafo simple conexo no hamiltoniano tal que todo vértice tiene grado al menos \( \left\lfloor \dfrac{n-1}{2} \right\rfloor \). Vemos así que el grado mínimo se puede acercar mucho a \( \dfrac{n}{2} \) sin que el grafo sea hamiltoniano.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Sea \( n \) un entero mayor o igual que 3. Probar que el máximo número posible de aristas de un grafo simple no hamiltoniano con \( n \) vértices es \( \dbinom{n-1}{2} + 1 \).
+
+    (Sugerencia: probar que, en un grafo con más aristas, \( d(u) + d(v) \geq n \) para todo par de vértices \( u \) y \( v \) no adyacentes. Alternativamente, probar por inducción que todo grafo con \( \dbinom{n-1}{2} + 2 \) aristas es hamiltoniano. Para esto último ayuda hallar cuáles son los posibles valores del máximo grado de un vértice).
+\end{ejercicio}
+
+\end{document}
