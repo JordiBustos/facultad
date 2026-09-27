@@ -321,7 +321,36 @@
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Para el primer inciso, como \(E_1\) es un espacio de Banach y \(T_n \to T\) fuertemente, por PAU existe \( M > 0 \) tal que \(\norm{T_n} \leq M\) para todo \( n \in \N \). Notemos que:
+    \begin{align*}
+        \norm{T_n(x_n) - T(x)} & = \norm{T_n(x_n) - T_n(x) + T_n(x) - T(x)}            \\
+                               & \leq \norm{T_n(x_n - x)} + \norm{T_n(x) - T(x)}       \\
+                               & \leq \norm{T_n} \norm{x_n - x} + \norm{T_n(x) - T(x)} \\
+                               & \leq M \norm{x_n - x} + \norm{T_n(x) - T(x)}
+    \end{align*}
+    Dado que \(x_n \to x\), el primer término \(M \norm{x_n - x} \to 0\). El segundo término también tiende a cero por la hipótesis de convergencia fuerte de \(T_n\) a \(T \therefore T_n(x_n) \to T(x)\).
 
+    Para el segundo inciso, sea \(x \in E_1\). Nuevamente por PAU aplicado a \(R_n\) en \(E_2\), existe \(M' > 0\) tal que \(\norm{R_n} \leq M'\) para todo \(n\). Evaluamos:
+    \begin{align*}
+        \norm{R_n S_n(x) - R S(x)} & = \norm{R_n(S_n(x)) - R_n(S(x)) + R_n(S(x)) - R(S(x))}            \\
+                                   & \leq \norm{R_n(S_n(x) - S(x))} + \norm{R_n(S(x)) - R(S(x))}       \\
+                                   & \leq \norm{R_n} \norm{S_n(x) - S(x)} + \norm{R_n(S(x)) - R(S(x))} \\
+                                   & \leq M' \norm{S_n(x) - S(x)} + \norm{R_n(S(x)) - R(S(x))}
+    \end{align*}
+    Como \(S_n \to S\) fuertemente, tenemos que \(\norm{S_n(x) - S(x)} \to 0\). Para el segundo término, llamemos \(y = S(x) \in E_2\); la convergencia fuerte de \(R_n\) a \(R\) implica directamente que \(\norm{R_n(y) - R(y)} \to 0\). En consecuencia, ambos términos tienden a cero y \(R_n S_n(x) \to R S(x)\).
+
+    Finalmente, si \({\{ T_n(x) \}}_{n\in\N}\) es de Cauchy para todo \(x \in E_1\), como \(E_2\) es completo, la sucesión converge. Definimos puntualmente el límite:
+    \[
+        \tilde T(x) := \lim_{n \to \infty} T_n(x).
+    \]
+    Por propiedades del límite, \(\tilde{T}\) hereda la linealidad de los \(T_n\). Queda probar que \(\tilde{T}\) es continuo (\(\tilde{T} \in L(E_1,E_2)\)). Como \( \{T_n(x)\} \) converge, está acotada para cada \(x \in E_1\). Por PAU, existe \(K > 0\) tal que \(\norm{T_n} \leq K\) para todo \(n\). Luego, por la continuidad de la norma:
+    \[
+        \norm{\tilde{T}(x)} = \norm{\lim_{n \to \infty} T_n(x)} = \lim_{n \to \infty} \norm{T_n(x)} \leq \limsup_{n \to \infty} \left( \norm{T_n} \norm{x} \right) \leq K \norm{x}.
+    \]
+    Esto prueba que \(\tilde{T}\) está acotado. La convergencia fuerte \(T_n \to \tilde T\) se deduce inmediatamente de la propia definición puntual de \(\tilde{T}\):
+    \[
+        \norm{T_n(x) - \tilde T(x)} \to 0 \quad \text{cuando } n \to \infty, \quad \forall x \in E_1.
+    \]
 \end{proof}
 
 \vspace{0.5cm}
@@ -330,7 +359,35 @@
     Sea \(c_{0}\subset l^{\infty}\) el subespacio de las sucesiones complejas que convergen a cero y sea \(y={\{y_{n}\}}_{n\in\N}\) una sucesión tal que \(\sum_{n\in\N}x_{n}y_{n}\) converge para todo \(x={\{x_{n}\}}_{n\in\N}\in c_{0}\). Probar que \( \sum_{n\in\N}|y_{n}|<\infty \).
 \end{ejercicio}
 \begin{proof}
+    Definamos los funcionales lineales \( \varphi_m : c_0 \to \C \) dados por:
+    \[
+        \varphi_m(x) := \sum_{n=1}^{m} x_n y_n, \quad x = {\{x_n\}}_{n\in\N} \in c_0.
+    \]
+    Es claro que cada \(\varphi_m \in L(c_0, \C)\). Por hipótesis, \(\varphi_m(x) \to \varphi(x)\) puntualmente para todo \(x \in c_0\), donde \(\varphi(x) := \sum_{n=1}^{\infty} x_n y_n\). Como \(c_0\) es un espacio de Banach, por PAU, la familia de funcionales \( {\{\varphi_m\}}_{m\in\N} \) está uniformemente acotada. Es decir, existe \(K > 0\) tal que:
+    \[
+        \norm{\varphi_m} \leq K, \quad \forall m \in \N.
+    \]
+    Para cada \( m \in \N \), definimos la sucesión \(x^{(m)} \in c_0\) en sus coordenadas mediante:
+    \[
+        x^{(m)}_n = \begin{cases}
+            \frac{\overline{y_n}}{|y_n|} & \text{si } n \leq m \text{ e } y_n \neq 0 \\
+            0                            & \text{en caso contrario}
+        \end{cases}
+    \]
+    Notemos que \(x^{(m)}\) tiene solo una cantidad finita de términos no nulos, por lo que trivialmente pertenece a \(c_0\). Además, su norma en dicho espacio es \(\norm{x^{(m)}}_{c_0} \leq 1\).
 
+    Evaluando \(\varphi_m\) en \(x^{(m)}\), obtenemos:
+    \[
+        \varphi_m(x^{(m)}) = \sum_{n=1}^{m} x^{(m)}_n y_n = \sum_{n=1}^{m} |y_n|.
+    \]
+    Por la acotación uniforme de la norma del funcional tenemos:
+    \[
+        \sum_{n=1}^{m} |y_n| = |\varphi_m(x^{(m)})| \leq \norm{\varphi_m} \norm{x^{(m)}}_{c_0} \leq K \cdot 1 = K.
+    \]
+    Finalmente, como esta cota \(K\) es independiente de \(m\), tomando el límite cuando \(m \to \infty\) se concluye que:
+    \[
+        \sum_{n=1}^{\infty} |y_n| \leq K < \infty.
+    \]
 \end{proof}
 
 \vspace{0.5cm}
@@ -339,7 +396,39 @@
     Sean \(X\) e \(Y\) espacios de Banach y \( f:X\times Y\to\C \) un funcional continuo en cada componente; es decir, si \(x_{n}\to x\) e \(y_{n}\xrightarrow{n\to\infty}y\) entonces \(f(x_{n},y)\xrightarrow{n\to\infty}f(x,y)\) para todo \(y\in Y\), y \(f(x,y_{n})\xrightarrow{n\to\infty}f(x,y)\) para todo \(x\in X\). Probar que \(f\) es (conjuntamente) continuo.
 \end{ejercicio}
 \begin{proof}
+    Por hipótesis, para cada \(y \in Y\) fijo, la aplicación \(x \mapsto f(x,y)\) es lineal y continua, por lo que pertenece a \(X^*\). Del mismo modo, para cada \(x \in X\) fijo, la aplicación \(y \mapsto f(x,y)\) pertenece a \(Y^*\).
 
+    Queremos ver que \(\exists M > 0\) tal que \(|f(x,y)| \leq M \norm{x}_X \norm{y}_Y \quad \forall (x,y) \in X \times Y\), lo cual implica la continuidad conjunta.
+
+    Sea \( B_Y = \{y \in Y : \norm{y}_Y \leq 1\} \). Para cada \(y \in B_Y\), definimos \( T_y : X \to \C \) dado por \(T_y(x) = f(x,y) \implies T_y \in X^*\).
+
+    Fijado \(x \in X\), evaluamos la familia de funcionales \({\{T_y\}}_{y \in B_Y}\) en \(x\):\[
+        \sup_{y \in B_Y} |T_y(x)| = \sup_{y \in B_Y} |f(x,y)|
+    \]
+    Por lo anterior, vale que \(\sup_{y \in B_Y} |f(x,y)| = \norm{f(x,\cdot)}_{Y^*} < \infty \).
+
+    Entonces \({\{T_y\}}_{y \in B_Y}\) está puntualmente acotada en \(X\). Por PAU existe una constante \(M > 0\) tal que:
+    \[
+        \norm{T_y}_{X^*} \leq M \quad \forall y \in B_Y.
+    \]
+    Luego, para cualesquiera \(x \in X\) y \(y \in B_Y\), tenemos que \(|f(x,y)| = |T_y(x)| \leq M \norm{x}_X\).
+
+    Para un \( y \in Y\setminus \{0\} \) cualquiera, notemos que \(\frac{y}{\norm{y}_Y} \in B_Y\). Aplicando la bilinealidad de \(f\):
+    \[
+        |f(x,y)| = \norm{y}_Y \left|f\left(x, \frac{y}{\norm{y}_Y}\right)\right| \leq M \norm{x}_X \norm{y}_Y.
+    \]
+    Si \( y = 0 \) es trivial.
+
+    Como \(f\) está acotada por \(M \norm{x}_X \norm{y}_Y\), probemos ahora la continuidad conjunta. Si \((x_n, y_n) \to (x, y)\) en \(X \times Y\), entonces \(\norm{x_n - x}_X \to 0\) y \(\norm{y_n - y}_Y \to 0\). Como toda sucesión convergente es acotada, existe \(K > 0\) tal que \(\norm{y_n}_Y \leq K\) para todo \(n\).
+
+    Usando la bilinealidad y la desigualdad triangular:
+    \begin{align*}
+        |f(x_n, y_n) - f(x, y)| & = |f(x_n - x, y_n) + f(x, y_n - y)|                                  \\
+                                & \leq |f(x_n - x, y_n)| + |f(x, y_n - y)|                             \\
+                                & \leq M \norm{x_n - x}_X \norm{y_n}_Y + M \norm{x}_X \norm{y_n - y}_Y \\
+                                & \leq M K \norm{x_n - x}_X + M \norm{x}_X \norm{y_n - y}_Y
+    \end{align*}
+    Cuando \( n \to \infty \), \(\norm{x_n - x}_X \to 0\) y \(\norm{y_n - y}_Y \to 0\). Por lo tanto, \(|f(x_n, y_n) - f(x, y)| \to 0\), concluyendo que \(f\) es conjuntamente continua en todo \(X \times Y\).
 \end{proof}
 
 \vspace{0.5cm}
