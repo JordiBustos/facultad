@@ -89,6 +89,14 @@
         \item \( G \) es hamiltoniano, pero no euleriano.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Para cada una de las condiciones, podemos construir un grafo que la cumpla:
+    \begin{enumerate}
+        \item Un ciclo de 6 vértices \( C_6 \) es euleriano y hamiltoniano.
+        \item Dos triángulos \( K_3 \) con un vértice en común son eulerianos (4 vértices de grado 2 y 1 de grado 4), pero es fácil ver que no es hamiltoniano.
+        \item El grafo \( K_{3, 3} \) cumple que es hamiltoniano (por el \textbf{Ejercicio 3}), pero no es euleriano pues todos sus vértices tienen grado 3.
+    \end{enumerate}
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -99,6 +107,9 @@
 \begin{ejercicio}{3}
     Para \( n > 1 \), probar que \( K_{n,n} \) posee \( \dfrac{(n-1)!\,n!}{2} \) ciclos hamiltonianos.
 \end{ejercicio}
+\begin{proof}
+    Sea \( G = K_{n, n} \).  Etiquetamos los vértices de las dos particiones como \( A = \{a_1, \ldots, a_n\} \subset V(G) \) y \( B = \{b_1, \ldots, b_n\} \subset V(G) \). Un ciclo hamiltoniano debe alternar entre vértices de \( A \) y \( B \), y podemos empezar en cualquier vértice de \( A \). Hay \( n! \) formas de ordenar los vértices de \( B \) y \( (n-1)! \) formas de ordenar los vértices restantes de \( A \) después de elegir el vértice inicial. Como cada ciclo se cuenta dos veces (una en cada dirección), el número total de ciclos hamiltonianos es \( \frac{(n-1)!\,n!}{2} \).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -109,24 +120,48 @@
 \begin{ejercicio}{4}
     Todo grafo con un ciclo hamiltoniano posee un camino hamiltoniano, pero no vale la recíproca (basta tomar un grafo camino como contraejemplo). Probar que un grafo \( G \) posee un camino hamiltoniano si y sólo si el grafo \( G' \) obtenido de \( G \) agregándole un vértice nuevo \( u \) y haciéndolo adyacente a todos los demás vértices posee un ciclo hamiltoniano.
 \end{ejercicio}
+\begin{proof}
+    Supongamos que \( G \) tiene un camino hamiltoniano \( P = v_1 - v_2 - \cdots - v_n \). Agregamos un vértice nuevo \( u \) y lo hacemos adyacente a todos los demás vértices para obtener \( G' \). Entonces \( u - v_1 - v_2 - \cdots - v_n - u \) es un ciclo hamiltoniano en \( G' \).
+
+    Recíprocamente, supongamos que \( G' \) tiene un ciclo hamiltoniano \( C \). Como \( u \) es adyacente a todos los demás vértices, \( C \) debe incluir a \( u \). Eliminando \( u \) de \( C \) obtenemos un camino hamiltoniano en \( G \).
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-    Un ratón intenta comerse un cubo de 3x3x3 de queso. Empieza en una esquina y se come cada vez un cubo de 1x1x1 antes de pasar a uno adyacente (decimos que dos cubos son adyacentes cuando comparten cara). ¿Puede comerse el cubo central en último lugar?
+    Un ratón intenta comerse un cubo de \( 3 \times 3 \times 3 \) de queso. Empieza en una esquina y se come cada vez un cubo de \( 1 \times 1 \times 1 \) antes de pasar a uno adyacente (decimos que dos cubos son adyacentes cuando comparten cara). ¿Puede comerse el cubo central en último lugar?
 \end{ejercicio}
+\begin{proof}
+    Podemos modelar el cubo de queso como un grafo bipartito \(Q\), equivalente a una grilla tridimensional de \(3 \times 3 \times 3\). Los vértices representan los 27 cubitos de \(1 \times 1 \times 1\), y las aristas conectan cubitos que comparten una cara.
+
+    Podemos dividir los vértices en dos conjuntos, \(A\) y \(B\), asignandolos alternadamente. Asignemos todas las esquinas al conjunto \( A \) y, luego:
+    \begin{itemize}
+        \item El conjunto \(A\) contendrá a los 8 cubos de las esquinas y a los 6 centros de las caras, sumando un total de 14 vértices.
+        \item El conjunto \(B\) contendrá a los 12 centros de las aristas y al único cubo central, sumando un total de 13 vértices.
+    \end{itemize}
+
+    Todo camino hamiltoniano en un grafo bipartito debe alternar estrictamente entre vértices de \(A\) y \(B\). Como el grafo tiene 27 vértices en total y \(|A| = 14\), cualquier camino hamiltoniano debe empezar obligatoriamente en un vértice de \(A\) y terminar obligatoriamente en otro vértice de \(A\) (la secuencia debe ser \(A \to B \to A \to \dots \to A\)).
+
+    Dado que el ratón empieza en una esquina (un vértice de \(A\)), debe terminar su recorrido en otro vértice de \(A\). Sin embargo, el cubo central pertenece al conjunto \(B\). Por lo tanto, es imposible que el cubo central sea el último en ser devorado.
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{6}
     Elena y Dora invitan a 10 amigos a cenar. En este grupo de doce, todos conocen a al menos seis personas. Demostrar que pueden sentarse los doce alrededor de una mesa circular de modo que todo comensal conozca a las dos personas que están sentadas a su lado.
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
     Probar que, para todo \( n > 2 \), existe un grafo simple conexo no hamiltoniano tal que todo vértice tiene grado al menos \( \left\lfloor \dfrac{n-1}{2} \right\rfloor \). Vemos así que el grado mínimo se puede acercar mucho a \( \dfrac{n}{2} \) sin que el grafo sea hamiltoniano.
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -135,5 +170,8 @@
 
     (Sugerencia: probar que, en un grafo con más aristas, \( d(u) + d(v) \geq n \) para todo par de vértices \( u \) y \( v \) no adyacentes. Alternativamente, probar por inducción que todo grafo con \( \dbinom{n-1}{2} + 2 \) aristas es hamiltoniano. Para esto último ayuda hallar cuáles son los posibles valores del máximo grado de un vértice).
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \end{document}
