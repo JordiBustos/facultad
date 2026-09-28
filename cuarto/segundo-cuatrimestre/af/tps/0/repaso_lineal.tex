@@ -1,0 +1,151 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Departamento de Matemática - Facultad de Ciencias Exactas - UNLP}
+\fancyfoot[L]{Análisis funcional 2026}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
+
+\begin{document}
+
+\begin{center}
+    {\Huge Análisis funcional}\\[0.15cm]
+    Práctica de repaso
+
+    \vspace{0.4cm}
+
+    {\Large Espacios vectoriales de dimensión finita}\\[0.1cm]
+    \textit{Recordando un poco de Álgebra Lineal}
+\end{center}
+
+\noindent \textbf{Notación:} Durante en toda la práctica vamos a considerar a \(\mathcal{V}\) un \(\K\)-espacio vectorial de dimensión finita. Denotaremos \(L(\mathcal{V})\) al espacio vectorial de operadores lineales \(A:\mathcal{V}\to\mathcal{V}\). Dado un \(A\in L(\mathcal{V})\), un número complejo \(\lambda\in\C\) se dice autovalor de \(A\) si existe \(x\in\mathcal{V}\) no nulo tal que \(Ax=\lambda x\). Al conjunto de autovalores lo denominaremos espectro y lo simbolizaremos \(\sigma(A)\). Y por medio de \(A^*\) se denotará al operador adjunto de \(A\).
+
+\begin{ejercicio}{1}
+    Dado \(A\in L(\mathcal{V})\), probar lo siguiente:
+    \begin{enumerate}
+        \item \(\displaystyle \norm{A} = \sup_{\substack{x\in\mathcal{V}\\x\neq0}} \frac{\norm{Ax}}{\norm{x}}\) es una norma en \(L(\mathcal{V})\).
+        \item Probar que \(\displaystyle \norm{A} = \sup_{\substack{x\in\mathcal{V}\\\norm{x}=1}} \norm{Ax} = \text{\'inf}\{c\in\R^+ : \norm{Ax}\leq c\norm{x}\}\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sea \((\mathcal{V}, \langle\cdot,\cdot\rangle)\) un espacio con producto interno, y sea \(\norm{\cdot}\) la norma que induce dicho producto, dada por
+    \[
+        \norm{x} = \langle x,x\rangle^{1/2}.
+    \]
+    Demostrar que, para cualquier \(A\in L(\mathcal{V})\), se verifica lo siguiente:
+    \begin{enumerate}
+        \item \(\displaystyle \norm{A} = \sup_{\substack{x,y\in\mathcal{V}\\\norm{x}=1,\norm{y}=1}} |\langle Ax,y\rangle|\).
+        \item \(\norm{A} = \norm{A^*}\).
+        \item Si \(A=A^*\) entonces \(\displaystyle \norm{A} = \sup_{\substack{x\in\mathcal{V}\\\norm{x}=1}} |\langle Ax,x\rangle| = \text{m\'ax}\{|\lambda| : \lambda\in\sigma(A)\}\).
+        \item \(\norm{A}^2 = \norm{A^*A} = \text{m\'ax}\{|\lambda| : \lambda\in\sigma(A^*A)\}\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    \begin{enumerate}
+        \item Considerar la matriz
+              \[
+                  M = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}
+              \]
+              Probar que \(M\) es la matriz asociada a la proyección lineal de \(\R^2\) en \(\R^2\) en la recta \(y=2x\).
+        \item Probar que esta matriz es una proyección ortogonal.
+        \item Sea \(T:\R^2\to\R^2\) dada por \(T(x,y) = (x,0)\). Encontrar la matriz \(P_1\) asociada a esta transformación lineal y probar que \(P_1 = P_1^2 = P_1^*\).
+        \item Sea
+              \[
+                  P_2 = \begin{pmatrix} 0 & 0 \\ 3 & 1 \end{pmatrix}
+              \]
+              Probar que \(P_2 = P_2^2\) pero \(P_2 \neq P_2^*\). Encontrar la transformación lineal asociada a la matriz \(P_2\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\noindent \textbf{Nota:} A partir de acá vamos a considerar \((\mathcal{V},\langle\cdot,\cdot\rangle)\) un espacio vectorial con producto interno y \(A\in L(\mathcal{V})\).
+
+\begin{ejercicio}{4}
+    Demostrar que \(R(A^*) = {(\ker A)}^\perp\) y que \(\ker A^* = {(R(A))}^\perp\).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Probar lo siguiente:
+    \begin{enumerate}
+        \item \(\ker(A^*A) = \ker(A)\).
+        \item Si \(A\) es normal entonces \(\ker(A^*) = \ker(A)\).
+        \item Si \(A\) es normal y nilpotente entonces \(A=0\).
+        \item Si \(A\) es normal y \(\sigma(A) = \{\lambda\}\) entonces \(A=\lambda I\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Sea \(\mathcal{S}\) un subespacio de \(\mathcal{V}\). Demostrar que si \(\mathcal{S}\) es invariante por \(A\) (\(A(\mathcal{S})\subset\mathcal{S}\)) entonces \(\mathcal{S}^\perp\) es invariante por \(A^*\).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Sea \(\norm{\cdot}\) la norma sobre \(\mathcal{V}\) inducida por el producto interno. Demostrar que \(U\in L(\mathcal{V})\) es unitario si y sólo si \(\norm{Ux} = \norm{x}\) para todo \(x\in\mathcal{V}\).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Probar que:
+    \begin{enumerate}
+        \item Si \(A\) es autoadjunto, entonces \(\sigma(A)\subseteq\R\). ¿Qué pasa si \(A\) es positivo?
+        \item Si \(A\) es unitario, entonces \(\sigma(A)\subseteq S^1\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+    Probar que las siguientes afirmaciones son equivalentes:
+    \begin{enumerate}
+        \item \(A\geq0\).
+        \item \(A=A^*\) y \(\sigma(A)\subseteq\R^+\).
+        \item Existe \(B\geq0\) tal que \(A=B^2\).
+        \item Existe \(C\in L(\mathcal{V})\) tal que \(A=C^*C\).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+    Sean \(A,B\in L(\mathcal{V})\). Demostrar que \(\sigma(AB)\setminus\{0\} = \sigma(BA)\setminus\{0\}\).
+\end{ejercicio}
+
+\end{document}
