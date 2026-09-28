@@ -1,41 +1,3 @@
-\documentclass{article}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage[spanish]{babel}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usetikzlibrary{calc}
-
-\theoremstyle{plain}
-\newtheorem{proposicion}{Proposición}[section]
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[section]
-
-% Number sets
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-
-% Exercise environment
-\newenvironment{ejercicio}[1]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
-
-\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
-
-\begin{document}
-
-\title{Teoría de Grafos}
-\author{Bustos Jordi\\Práctica V}
-
-\maketitle
-
 \begin{definition}
     Un \textbf{camino} de un grafo \( G \) es una secuencia de vértices \( v_1, v_2, \dots, v_k \) tal que \( v_i \) es adyacente a \( v_{i+1} \) para todo \( i = 1, \dots, k-1 \) y no se repiten vértices.
 \end{definition}
@@ -151,27 +113,52 @@
     Elena y Dora invitan a 10 amigos a cenar. En este grupo de doce, todos conocen a al menos seis personas. Demostrar que pueden sentarse los doce alrededor de una mesa circular de modo que todo comensal conozca a las dos personas que están sentadas a su lado.
 \end{ejercicio}
 \begin{proof}
+    Podemos modelar esta situación mediante un grafo simple \(G = (V,E)\), donde el conjunto de vértices \(V\) representa a las 12 personas (Elena, Dora y los 10 amigos), por lo que \(|V| = n = 12\). Existe una arista \(e = \{u,v\} \in E\) si y solo si las personas \(u\) y \(v\) se conocen mutuamente.
 
+    Queremos encontrar un ciclo que pase por todos los vértices del grafo exactamente una vez, i.e., un \textbf{ciclo hamiltoniano}.
+
+    Sabemos que cada persona conoce al menos a otras 6. Esto significa que el grado mínimo del grafo es \(\deg(G) \geq 6\).
+
+    Podemos aplicar entonces el \textbf{Teorema de Dirac}, el cual establece que si un grafo simple tiene \(n \ge 3\) vértices y su grado mínimo satisface \(\deg(G) \ge \frac{n}{2} \implies G \) hamiltoniano.
+
+    Como en nuestro grafo \(n = 12 \ge 3\) y \(\deg(G) \ge 6 = \frac{12}{2}\), se cumplen las hipótesis. Por lo tanto, \(G\) es hamiltoniano y el ciclo hamiltoniano nos da el orden exacto en el que deben sentarse.
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
-    Probar que, para todo \( n > 2 \), existe un grafo simple conexo no hamiltoniano tal que todo vértice tiene grado al menos \( \left\lfloor \dfrac{n-1}{2} \right\rfloor \). Vemos así que el grado mínimo se puede acercar mucho a \( \dfrac{n}{2} \) sin que el grafo sea hamiltoniano.
+    Probar que, para todo \(n > 2\), existe un grafo simple conexo no hamiltoniano tal que todo vértice tiene grado al menos \(\left\lfloor \frac{n-1}{2} \right\rfloor\). Vemos así que el grado mínimo se puede acercar mucho a \(\frac{n}{2}\) sin que el grafo sea hamiltoniano.
 \end{ejercicio}
 \begin{proof}
+    Construiremos grafos bipartitos completos para demostrar la afirmación, dividiendo el problema según la paridad de \(n\):
 
+    \textbf{Caso 1: \(n\) es impar.} Sea \(n = 2k + 1\) (con \(k \geq 1\) ya que \(n > 2\)).
+    Consideramos el grafo bipartito completo \(G = K_{k, k+1}\).
+    \begin{itemize}
+        \item Tiene exactamente \(k + (k+1) = 2k + 1 = n\) vértices.
+        \item Al ser \(k \ge 1\), las dos particiones son no vacías, por lo que \(G\) es conexo.
+        \item El grado de cualquier vértice en la primera partición es \(k+1\) y en la segunda es \(k\). Por lo tanto, el grado mínimo es \(\deg(G) = k\). Notemos que \(\left\lfloor \frac{n-1}{2} \right\rfloor = \left\lfloor \frac{2k}{2} \right\rfloor = k\), por lo que se cumple \(\deg(G) \ge \left\lfloor \frac{n-1}{2} \right\rfloor \).
+        \item Un grafo bipartito solo puede ser hamiltoniano si ambas particiones tienen la misma cantidad de vértices. Como \(k \neq k+1\), el grafo \textbf{no es hamiltoniano}.
+    \end{itemize}
+
+    \textbf{Caso 2: \(n\) es par.} Sea \(n = 2k\) (con \(k \geq 2\) ya que \(n > 2\)).
+    Consideramos el grafo bipartito completo \(G = K_{k-1, k+1}\).
+    \begin{itemize}
+        \item Tiene exactamente \((k-1) + (k+1) = 2k = n\) vértices.
+        \item Al ser \(k \ge 2\), tenemos \(k-1 \ge 1\), por lo que ambas particiones son no vacías y el grafo es conexo.
+        \item El grado mínimo es \(\deg(G) = k-1\). Computando la cota: \(\left\lfloor \frac{n-1}{2} \right\rfloor = \left\lfloor \frac{2k-1}{2} \right\rfloor = \left\lfloor k - 0.5 \right\rfloor = k - 1\). Por lo tanto, cumple \(\deg(G) \ge \left\lfloor \frac{n-1}{2} \right\rfloor \).
+        \item Análogamente al caso anterior, como las particiones tienen distinto tamaño (\(k-1 \neq k+1\)), \(G\) \textbf{no es hamiltoniano}.
+    \end{itemize}
+    Queda así demostrado para todo \(n>2\).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
-    Sea \( n \) un entero mayor o igual que 3. Probar que el máximo número posible de aristas de un grafo simple no hamiltoniano con \( n \) vértices es \( \dbinom{n-1}{2} + 1 \).
+    Sea \(n\) un entero mayor o igual que 3. Probar que el máximo número posible de aristas de un grafo simple no hamiltoniano con \(n\) vértices es \(\binom{n-1}{2} + 1\).
 
     (Sugerencia: probar que, en un grafo con más aristas, \( d(u) + d(v) \geq n \) para todo par de vértices \( u \) y \( v \) no adyacentes. Alternativamente, probar por inducción que todo grafo con \( \dbinom{n-1}{2} + 2 \) aristas es hamiltoniano. Para esto último ayuda hallar cuáles son los posibles valores del máximo grado de un vértice).
 \end{ejercicio}
 \begin{proof}
-
+    TODO
 \end{proof}
-
-\end{document}

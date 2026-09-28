@@ -1,88 +1,4 @@
-\documentclass{article}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage[spanish]{babel}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{xparse}
-\usepackage{etoolbox}
-\usetikzlibrary{calc}
-
-\theoremstyle{plain}
-\newtheorem{proposicion}{Proposición}[section]
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[section]
-
-% Number sets
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-
-% Exercise environment
-\newenvironment{ejercicio}[1]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
-
-\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
-
-% Coloreamos las etiquetas A/B para resaltar visualmente el 2-coloreo del Ejercicio 1
-\newcommand{\vlab}[1]{%
-    \ifstrequal{#1}{A}{\textcolor{blue!60!black}{\textbf{A}}}{%
-    \ifstrequal{#1}{B}{\textcolor{red!60!black}{\textbf{B}}}{#1}}%
-}
-
-% Un paso del algoritmo BFS del Ejercicio 11 sobre el grafo de Petersen: recibe
-% las etiquetas de los 5 vértices exteriores o1,...,o5 (#1) y de los 5
-% vértices interiores i1,...,i5 (#2), como listas separadas por comas, y
-% dibuja el grafo con esas etiquetas, evitando repetir el mismo dibujo cuatro veces.
-\NewDocumentCommand{\PetersenPaso}{ m m }{%
-    \begin{tikzpicture}[vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt}]
-        \def\R{2.6}
-        \def\r{1.2}
-
-        \foreach [count=\i] \lab in {#1} {
-            \ifcase\i\relax
-            \or \node[vertex] (o1) at (90:\R) {}; \node[above=3pt] at (o1) {\vlab{\lab}};
-            \or \node[vertex] (o2) at (18:\R) {}; \node[above right=1pt] at (o2) {\vlab{\lab}};
-            \or \node[vertex] (o3) at (306:\R) {}; \node[below right=1pt] at (o3) {\vlab{\lab}};
-            \or \node[vertex] (o4) at (234:\R) {}; \node[below left=1pt] at (o4) {\vlab{\lab}};
-            \or \node[vertex] (o5) at (162:\R) {}; \node[above left=1pt] at (o5) {\vlab{\lab}};
-            \fi
-        }
-        \foreach [count=\i] \lab in {#2} {
-            \ifcase\i\relax
-            \or \node[vertex] (i1) at (90:\r) {}; \node[right=2pt] at (i1) {\vlab{\lab}};
-            \or \node[vertex] (i2) at (18:\r) {}; \node[below right=1pt] at (i2) {\vlab{\lab}};
-            \or \node[vertex] (i3) at (306:\r) {}; \node[left=2pt] at (i3) {\vlab{\lab}};
-            \or \node[vertex] (i4) at (234:\r) {}; \node[below right=1pt] at (i4) {\vlab{\lab}};
-            \or \node[vertex] (i5) at (162:\r) {}; \node[above right=1pt] at (i5) {\vlab{\lab}};
-            \fi
-        }
-
-        \draw[thick] (o1) -- (o2) -- (o3) -- (o4) -- (o5) -- (o1);
-        \draw[thick] (i1) -- (i3) -- (i5) -- (i2) -- (i4) -- (i1);
-        \foreach \x in {1,...,5} {
-                \draw[thick] (o\x) -- (i\x);
-            }
-    \end{tikzpicture}%
-}
-
-\begin{document}
-
-\title{Teoría de Grafos}
-\author{Bustos Jordi\\Práctica III}
-
-\maketitle
-
-\begin{definition}
-    Un \textbf{conjunto independiente} de un grafo \( G \) es un subconjunto \( S \subseteq V(G) \) tal que no hay dos vértices de \( S \) que sean adyacentes en \( G \).
-\end{definition}
+Recordemos la noción de conjunto independiente (Definición~\ref{def:conjunto-independiente} de la Práctica~I).
 
 \begin{definition}
     Un grafo \( G \) es \textbf{bipartito} si existe una partición de \( V(G) \) en dos conjuntos no vacíos \( A \) y \( B \) (a la que llamaremos una \textbf{bipartición} de \( G \)) tal que toda arista de \( G \) tiene un extremo en \( A \) y el otro en \( B \). Equivalentemente, \( A \) y \( B \) son conjuntos independientes de \( G \).
@@ -92,7 +8,7 @@
     Determinar si el grafo de Petersen es bipartito y encontrar un conjunto independiente máximo en él, justificando por qué no se puede encontrar uno mayor.
 \end{ejercicio}
 \begin{proof}
-    Propongo que el grafo de Petersen no es bipartito. Aplicaremos el algoritmo del \textbf{Ejercicio 11} partiendo del vértice \( v = 12 \), recordando que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
+    Propongo que el grafo de Petersen no es bipartito. Aplicaremos el algoritmo del \textbf{Ejercicio 11} de la Práctica I partiendo del vértice \( v = 12 \), recordando que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
 
     \begin{center}
         \resizebox{\textwidth}{!}{%
@@ -241,17 +157,7 @@
     \end{center}
 \end{proof}
 
-\begin{definition}
-    Un \textbf{camino} es un recorrido en el que no se repite ningún vértice (y, por lo tanto, tampoco ninguna arista).
-\end{definition}
-
-\begin{definition}
-    Un \textbf{ciclo} es una cadena cerrada no trivial (es decir, con al menos una arista) en la que no se repite ningún vértice, salvo el primero y el último, que coinciden.
-\end{definition}
-
-\begin{definition}
-    Un \textbf{grafo completo} es un grafo en el que cada par de vértices distintos está conectado por una arista.
-\end{definition}
+Recordemos las nociones de camino (Definición~\ref{def:camino}), ciclo (Definición~\ref{def:ciclo}) y grafo completo (Definición~\ref{def:k4}), todas de la Práctica~II.
 
 \begin{ejercicio}{3}
     Sea \( A \) la familia de los grafos que son caminos, \( B \) la familia de los ciclos, \( C \) la familia de los grafos completos y \( D \) la familia de los grafos bipartitos. Hallar todas las clases de grafos isomorfos que están en la intersección de cada par de esas familias.
@@ -295,24 +201,7 @@
 
 \vspace{0.5cm}
 
-\begin{algorithm}
-    \caption{Bubble Sort}
-    \label{alg:bubblesort}
-    \begin{algorithmic}[1] % El [1] es para enumerar cada línea
-        \Procedure{BubbleSort}{$A, n$}
-        \State \textbf{Entrada:} Una lista $A$ de $n$ elementos.
-        \State \textbf{Salida:} La lista $A$ ordenada de forma ascendente.
-        \vspace{0.2cm}
-        \For{$i \gets 1$ \textbf{hasta} $n-1$}
-        \For{$j \gets 1$ \textbf{hasta} $n-i$}
-        \If{$A[j] > A[j+1]$}
-        \State Intercambiar $A[j]$ y $A[j+1]$
-        \EndIf
-        \EndFor
-        \EndFor
-        \EndProcedure
-    \end{algorithmic}
-\end{algorithm}
+Recordemos el algoritmo Bubble Sort (Algoritmo~\ref{alg:bubblesort} de la Práctica~II).
 
 \begin{ejercicio}{5}
     Sea \( G_n \) el grafo cuyos vértices son las permutaciones de \( \{1, \ldots, n\} \), siendo dos permutaciones \( a_1, \ldots, a_n \) y \( b_1, \ldots, b_n \) adyacentes si una puede obtenerse de la otra intercambiando la posición de dos elementos. Probar que \( G_n \) es bipartito. (Pista: para cada permutación \( a \), contar los pares \( i, j \) tales que \( i < j \) y \( a_i > a_j \).)
@@ -553,5 +442,3 @@ Demostrar que este algoritmo funciona, es decir, si \( G \) es bipartito hallar�
     \]
     Como \(d(v, w)\) y \(d(v, x)\) tienen la misma paridad, su suma es un número par. Al sumarle 1 (la arista \(wx\)), obtenemos que \(L\) es impar. Sabemos que un recorrido cerrado de longitud impar garantiza la existencia de un \textbf{ciclo de longitud impar} en \(G \implies G \) no es bipartito.
 \end{proof}
-
-\end{document}

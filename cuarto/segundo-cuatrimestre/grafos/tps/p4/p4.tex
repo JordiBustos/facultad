@@ -1,42 +1,5 @@
-\documentclass{article}
 
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage[spanish]{babel}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usetikzlibrary{calc}
-
-\theoremstyle{plain}
-\newtheorem{proposicion}{Proposición}[section]
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[section]
-
-% Number sets
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-
-% Exercise environment
-\newenvironment{ejercicio}[1]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
-
-\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
-
-\begin{document}
-
-\title{Teoría de Grafos}
-\author{Bustos Jordi\\Práctica IV}
-
-\maketitle
-
-\begin{definition}
+\begin{definition}\label{def:kmn}
     Dados \( m, n \geq 1 \), el \textbf{grafo bipartito completo} \( K_{m,n} \) es el grafo bipartito con bipartición \( A, B \) tal que \( |A| = m \), \( |B| = n \), y cada vértice de \( A \) es adyacente a cada vértice de \( B \) (en particular, \( |E(K_{m,n})| = mn \)).
 \end{definition}
 
@@ -361,5 +324,3 @@
         N \to K \to S \to K \to S \to O \to N \to O \to K \to N
     \]
 \end{proof}
-
-\end{document}

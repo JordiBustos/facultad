@@ -1,0 +1,162 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Geometría y Cabeceras ---
+\usepackage[margin=1in, headheight=14pt]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{Teoría de Grafos}}
+\fancyhead[R]{\textit{Bustos Jordi}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- Matemática e Idioma ---
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish, es-tabla]{babel}
+
+% --- Tipografía para XeLaTeX ---
+% Libertinus es excelente para matemática moderna y muy estética.
+\usepackage{unicode-math}
+
+% --- Cajas y Colores ---
+\usepackage[dvipsnames]{xcolor}
+\usepackage[many]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+% --- TikZ y Estilos para Grafos ---
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, arrows.meta}
+
+% Definimos estilos globales para que todos los grafos se vean iguales
+\tikzset{
+    % Estilo para vértices normales
+    vertex/.style={circle, draw=black!80, fill=gray!10, thick, inner sep=2pt, minimum size=6mm, font=\small\sffamily},
+    % Estilo para aristas
+    edge/.style={thick, draw=black!70},
+    % Estilo para grafos dirigidos
+    directed/.style={edge, ->, >={Stealth[length=2.5mm]}},
+    % Vértices coloreados para 2-coloreos
+    vertex A/.style={vertex, fill=blue!15, draw=blue!70!black},
+    vertex B/.style={vertex, fill=red!15, draw=red!70!black}
+}
+
+% --- Algoritmos ---
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xparse}
+\usepackage{etoolbox}
+
+% --- Entornos Matemáticos ---
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+\newtheorem{teorema}{Teorema}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% --- Entorno de Ejercicio Estético ---
+\newtcolorbox{ejercicio}[1]{
+    colback=blue!2!white,      % Fondo súper sutil
+    colframe=blue!40!black,    % Borde elegante
+    fonttitle=\bfseries,
+    title=Ejercicio #1,
+    arc=3mm,                   % Bordes redondeados
+    boxrule=0.8pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% --- Macros y Atajos ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+% Comando de colores para etiquetas en texto
+\newcommand{\vlab}[1]{%
+    \ifstrequal{#1}{A}{\textcolor{blue!70!black}{\textbf{A}}}{%
+    \ifstrequal{#1}{B}{\textcolor{red!70!black}{\textbf{B}}}{#1}}%
+}
+
+% Un paso del algoritmo BFS del Ejercicio 11 sobre el grafo de Petersen: recibe
+% las etiquetas de los 5 vértices exteriores o1,...,o5 (#1) y de los 5
+% vértices interiores i1,...,i5 (#2), como listas separadas por comas, y
+% dibuja el grafo con esas etiquetas, evitando repetir el mismo dibujo cuatro veces.
+\NewDocumentCommand{\PetersenPaso}{ m m }{%
+    \begin{tikzpicture}[vertex/.style={circle, draw, fill=black, inner sep=1.5pt, outer sep=0pt}]
+        \def\R{2.6}
+        \def\r{1.2}
+
+        \foreach [count=\i] \lab in {#1} {
+            \ifcase\i\relax
+            \or \node[vertex] (o1) at (90:\R) {}; \node[above=3pt] at (o1) {\vlab{\lab}};
+            \or \node[vertex] (o2) at (18:\R) {}; \node[above right=1pt] at (o2) {\vlab{\lab}};
+            \or \node[vertex] (o3) at (306:\R) {}; \node[below right=1pt] at (o3) {\vlab{\lab}};
+            \or \node[vertex] (o4) at (234:\R) {}; \node[below left=1pt] at (o4) {\vlab{\lab}};
+            \or \node[vertex] (o5) at (162:\R) {}; \node[above left=1pt] at (o5) {\vlab{\lab}};
+            \fi
+        }
+        \foreach [count=\i] \lab in {#2} {
+            \ifcase\i\relax
+            \or \node[vertex] (i1) at (90:\r) {}; \node[right=2pt] at (i1) {\vlab{\lab}};
+            \or \node[vertex] (i2) at (18:\r) {}; \node[below right=1pt] at (i2) {\vlab{\lab}};
+            \or \node[vertex] (i3) at (306:\r) {}; \node[left=2pt] at (i3) {\vlab{\lab}};
+            \or \node[vertex] (i4) at (234:\r) {}; \node[below right=1pt] at (i4) {\vlab{\lab}};
+            \or \node[vertex] (i5) at (162:\r) {}; \node[above right=1pt] at (i5) {\vlab{\lab}};
+            \fi
+        }
+
+        \draw[thick] (o1) -- (o2) -- (o3) -- (o4) -- (o5) -- (o1);
+        \draw[thick] (i1) -- (i3) -- (i5) -- (i2) -- (i4) -- (i1);
+        \foreach \x in {1,...,5} {
+                \draw[thick] (o\x) -- (i\x);
+            }
+    \end{tikzpicture}%
+}
+
+% --- Hipervínculos ---
+\usepackage[colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black, citecolor=blue!60!black]{hyperref}
+
+\begin{document}
+
+% --- Portada Personalizada ---
+\begin{titlepage}
+    \centering
+    \vspace*{4cm}
+    {\Huge\bfseries Teoría de Grafos\par}
+    \vspace{1.5cm}
+    {\Large Resolución de Prácticas I -- V\par}
+    \vspace{1.5cm}
+    {\large \textbf{Autor:}\\ Bustos Jordi\par}
+    \vfill
+    {\large Universidad Nacional de La Plata\par}
+    {\large \today\par}
+\end{titlepage}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Práctica I}
+\input{p1/p1.tex}
+\clearpage
+
+\section{Práctica II}
+\input{p2/p2.tex}
+\clearpage
+
+\section{Práctica III}
+\input{p3/p3.tex}
+\clearpage
+
+\section{Práctica IV}
+\input{p4/p4.tex}
+\clearpage
+
+\section{Práctica V}
+\input{p5/p5.tex}
+
+\end{document}

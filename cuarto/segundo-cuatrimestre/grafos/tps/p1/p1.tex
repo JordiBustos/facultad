@@ -1,39 +1,3 @@
-\documentclass{article}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage[spanish]{babel}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-
-\theoremstyle{plain}
-\newtheorem{proposicion}{Proposición}[section]
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[section]
-
-% Number sets
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\C}{\mathbb{C}}
-
-% Exercise environment
-\newenvironment{ejercicio}[1]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
-
-\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
-
-\begin{document}
-
-\title{Teoría de Grafos}
-\author{Bustos Jordi\\Práctica I}
-
-\maketitle
-
 \begin{definition}
     Un grafo \( G \) es simple \( \iff \) cada par de vértices distintos está conectado por como máximo una arista y no tiene lazos.
 \end{definition}
@@ -51,7 +15,7 @@
 
 \vspace{0.5cm}
 
-\begin{definition}
+\begin{definition}\label{def:grado}
     Definimos el grado de un vértice \( v \) en un grafo \( G \) como el número de aristas incidentes a \( v \). Se denota por \( \deg(v) \).
 \end{definition}
 
@@ -77,7 +41,7 @@
     Un grafo \( G \) se dice \textbf{conexo} si, para todo par de vértices \( u \) y \( v \) de \( G \), existe una sucesión de vértices que comienza en \( u \), termina en \( v \) y tal que vértices consecutivos son adyacentes. Caso contrario, diremos que \( G \) es \textbf{disconexo}.
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:componente-conexa}
     Una \textbf{componente conexa} de un grafo \( G \) es un subgrafo conexo maximal de \( G \), es decir, un subgrafo conexo que no está contenido en ningún subgrafo conexo más grande de \( G \).
 \end{definition}
 
@@ -101,7 +65,7 @@
     Un \textbf{clique} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que cada par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un clique es un subgrafo completo de \( G \).
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:conjunto-independiente}
     Un \textbf{conjunto independiente} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que ningún par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un conjunto independiente es un subgrafo sin aristas.
 \end{definition}
 
@@ -128,8 +92,6 @@
 
     Contrariamente, para formar un conjunto independiente maximal, no podemos tomar ni el polo norte ni el polo sur, ya que ambos están conectados con todos los vértices. Por lo tanto, si elegimos un vértice del conjunto de 4 vértices que están en el medio, no podemos elegir su adyacente, pero sí podemos elegir el otro vértice que está en el medio y que no es adyacente al vértice que ya elegimos. Sin embargo, no podemos elegir ningún otro vértice del centro pues estará conectado a uno de los vértices que ya elegimos. Por lo tanto, el tamaño máximo de un conjunto independiente es 2.
 \end{proof}
-
-\clearpage
 
 \begin{ejercicio}{5}
     Probar que cada conjunto de 6 personas contiene al menos 3 mutuamente familiares o 3 mutuamente no familiares.
@@ -205,11 +167,11 @@
     \end{itemize}
 \end{proof}
 
-\begin{definition}
+\begin{definition}\label{def:isomorfos}
     Diremos que dos grafos simples \( G \) y \( H \) son isomorfos \( \iff \) existe una biyección \( f : V(G) \to V(H) \) tal que \( \{u,v\} \in E(G) \iff \{f(u), f(v)\} \in E(H)\) para todo \( u,v \in V(G) \).
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:complemento}
     Sea \( G \) un grafo, notaremos \( \overline{G} \) al grafo complemento de \( G \), es decir, el grafo con los mismos vértices que \( G \) y con aristas \( \{u,v\} \) tales que \( \{u,v\} \notin E(G) \) para todo \( u,v \in V(G) \).
 \end{definition}
 
@@ -547,7 +509,7 @@
 
 \vspace{0.5cm}
 
-\begin{definition}
+\begin{definition}\label{def:petersen}
     Un grafo de Petersen es un grafo simple cuyos vértices son subconjuntos de dos elementos de un conjunto de cinco elementos tales que dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
 \end{definition}
 Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco elementos \( \{1,2,3,4,5\} \) y considerando todos los subconjuntos de dos elementos como vértices. Dos vértices son adyacentes si y sólo si los subconjuntos correspondientes son disjuntos.
@@ -759,7 +721,3 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
         \end{tikzpicture}
     \end{center}
 \end{ejercicio}
-
-\vspace{0.5cm}
-
-\end{document}
