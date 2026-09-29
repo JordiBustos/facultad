@@ -45,9 +45,9 @@
     Una \textbf{componente conexa} de un grafo \( G \) es un subgrafo conexo maximal de \( G \), es decir, un subgrafo conexo que no está contenido en ningún subgrafo conexo más grande de \( G \).
 \end{definition}
 
-\begin{ejercicio}{3}
+\begin{ejercicioEntregar}{3}
     Analizar si es verdadero o falso: el complemento de un grafo simple disconexo es conexo.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     \emph{Claim}: El complemento de un grafo simple disconexo es conexo.
 
@@ -93,9 +93,9 @@
     Contrariamente, para formar un conjunto independiente maximal, no podemos tomar ni el polo norte ni el polo sur, ya que ambos están conectados con todos los vértices. Por lo tanto, si elegimos un vértice del conjunto de 4 vértices que están en el medio, no podemos elegir su adyacente, pero sí podemos elegir el otro vértice que está en el medio y que no es adyacente al vértice que ya elegimos. Sin embargo, no podemos elegir ningún otro vértice del centro pues estará conectado a uno de los vértices que ya elegimos. Por lo tanto, el tamaño máximo de un conjunto independiente es 2.
 \end{proof}
 
-\begin{ejercicio}{5}
+\begin{ejercicioEntregar}{5}
     Probar que cada conjunto de 6 personas contiene al menos 3 mutuamente familiares o 3 mutuamente no familiares.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Notemos que podemos modelar la situación como un grafo \( G \) donde cada persona es un vértice y hay una arista entre dos vértices si las personas correspondientes son familiares. Entonces, el problema se reduce a demostrar que en cualquier grafo de 6 vértices, existe un clique de tamaño 3 (3 personas mutuamente familiares) o un conjunto independiente de tamaño 3 (3 personas mutuamente no familiares).
 
@@ -112,9 +112,9 @@
     Sea \( G \) un grafo con conjunto de vértices \( V(G) = \{ v_1, \ldots, v_n \} \) y conjunto de aristas \( E(G) = \{ e_1, \ldots, e_m \} \). La matriz de incidencia \( B(G) \) es una matriz \( n \times m \) donde el elemento \( b_{ij} \) es 1 si el vértice \( v_i \) está incidente a la arista \( e_j \) y 0 en caso contrario.
 \end{definition}
 
-\begin{ejercicio}{6}
+\begin{ejercicioEntregar}{6}
     Sea \( G \) un grafo. Para \( v \in V(G) \) y \( e \in E(G) \), describir las matrices de adyacencia e incidencia de \( G-v \) y \( G-e \) en términos de las correspondientes matrices de \( G \).
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Sea \( V(G) = \{ v_1, \ldots, v_n \} \) y \( E(G) = \{ e_1, \ldots, e_m \} \).
 
@@ -562,7 +562,7 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     \end{tikzpicture}
 \end{center}
 
-\begin{ejercicio}{11}
+\begin{ejercicioEntregar}{11}
     Probar que los grafos de abajo son isomorfos al grafo de Petersen. Hacerlo asociándole a los vértices conjuntos de dos elementos de manera tal que la regla de adyacencia entre vértices sea la misma que en la definición del grafo de Petersen.
     \begin{center}
         \begin{tikzpicture}[
@@ -720,4 +720,4 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
             \draw[thick] (v1) -- (v5); % Línea que cruza desde arriba-derecha hacia abajo-izquierda
         \end{tikzpicture}
     \end{center}
-\end{ejercicio}
+\end{ejercicioEntregar}

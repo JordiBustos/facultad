@@ -55,9 +55,9 @@ Recordemos la noción de conjunto independiente (Definición~\ref{def:conjunto-i
     Un \textbf{subgrafo} de un grafo \( G \) es un grafo \( H \) tal que \( V(H) \subseteq V(G) \), \( E(H) \subseteq E(G) \), y los extremos de cada arista de \( H \) son los mismos que tiene en \( G \).
 \end{definition}
 
-\begin{ejercicio}{2}
+\begin{ejercicioEntregar}{2}
     En cada uno de los grafos de abajo, encontrar un subgrafo bipartito con cantidad máxima de aristas. Justificar por qué no hay un subgrafo bipartito con mayor cantidad de aristas que él y determinar si hay algún otro subgrafo bipartito con la misma cantidad de aristas.
-\end{ejercicio}
+\end{ejercicioEntregar}
 
 \begin{center}
     \begin{tikzpicture}[every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
@@ -179,9 +179,9 @@ Recordemos las nociones de camino (Definición~\ref{def:camino}), ciclo (Definic
     \end{itemize}
 \end{proof}
 
-\begin{ejercicio}{4}
+\begin{ejercicioEntregar}{4}
     Sea \( G \) el grafo cuyos vértices son las \( k \)-uplas de ceros y unos, con \( x \) adyacente a \( y \) si y sólo si difieren en una posición. Determinar si \( G \) es bipartito.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Sea \( k \in \N \). El grafo \(G\) es efectivamente bipartito. Definimos los conjuntos:
     \[
@@ -294,9 +294,9 @@ Recordemos el algoritmo Bubble Sort (Algoritmo~\ref{alg:bubblesort} de la Práct
     Son los elementos que pertenecen a \( A \) o a \( B \), pero no a ambos.
 \end{definition}
 
-\begin{ejercicio}{8}
+\begin{ejercicioEntregar}{8}
     Probar que un grafo bipartito tiene una única bipartición si y sólo si es conexo. Para ello, si se tiene una bipartición \( A, B \), considerar a \( B, A \) como la misma bipartición.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     (\( \Longrightarrow \)) Procederemos por el contrarrecíproco. Supongamos que \(G\) no es conexo. Entonces, existe una componente conexa de \(G\) cuyo conjunto de vértices llamaremos \(C\), tal que \( C \neq \varnothing \) y \(C \neq V(G)\).
 
@@ -332,9 +332,9 @@ Recordemos el algoritmo Bubble Sort (Algoritmo~\ref{alg:bubblesort} de la Práct
     Un grafo bipartito completo es un grafo bipartito cuya partición \((A, B)\) cumple que todo vértice de \(A\) está conectado con todos los vértices de \(B\) y viceversa.
 \end{definition}
 
-\begin{ejercicio}{9}
+\begin{ejercicioEntregar}{9}
     Sea \( G \) un grafo simple y conexo que no tiene a \( P_4 \) ni a \( K_3 \) como subgrafos inducidos. Probar que \( G \) es un grafo bipartito completo.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Primero demostraremos que \(G\) es bipartito. Supongamos por el absurdo que \(G\) no lo es, por lo que debe contener al menos un ciclo de longitud impar. Como \(G\) no contiene a \(K_3\) (un ciclo de longitud 3) como subgrafo inducido, el ciclo impar más corto de \(G\) debe tener longitud al menos 5.
 
@@ -361,12 +361,12 @@ Recordemos el algoritmo Bubble Sort (Algoritmo~\ref{alg:bubblesort} de la Práct
     Dados grafos \( G_1, \ldots, G_k \), la \textbf{unión} \( G_1 \cup \cdots \cup G_k \) es el grafo con conjunto de vértices \( V(G_1) \cup \cdots \cup V(G_k) \) y conjunto de aristas \( E(G_1) \cup \cdots \cup E(G_k) \).
 \end{definition}
 
-\begin{ejercicio}{10}
+\begin{ejercicioEntregar}{10}
     \begin{enumerate}
         \item Dados \( n \) y \( k \) números naturales tales que \( n \leq 2^k \), codificar los vértices de \( K_n \) con \( k \)-uplas y usar esto para construir \( k \) grafos bipartitos cuya unión es \( K_n \).
         \item Recíprocamente, si \( K_n \) es la unión de \( k \) grafos bipartitos \( G_1, \ldots, G_k \), codificar convenientemente los vértices de \( K_n \) con \( k \)-uplas binarias y probar así que \( n \leq 2^k \).
     \end{enumerate}
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     (\( \Longrightarrow \)) Como \(n \leq 2^k\), podemos asignar a cada vértice de \(K_n\) una \(k\)-upla binaria \((x_1, \ldots, x_k) \in {\{0,1\}}^k\) única.
     Para cada \( i \in \{1, \ldots, k\} \), definimos un grafo \(G_i\) sobre el mismo conjunto de vértices \(V(K_n)\). Particionamos los vértices en dos conjuntos según el valor de su \(i\)-ésima coordenada:

@@ -43,14 +43,14 @@
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{2}
+\begin{ejercicioEntregar}{2}
     Hallar un grafo simple y conexo, con a lo sumo 6 vértices y al menos una arista, que verifique cada una de las siguientes condiciones:
     \begin{enumerate}
         \item \( G \) es euleriano y hamiltoniano.
         \item \( G \) es euleriano, pero no hamiltoniano.
         \item \( G \) es hamiltoniano, pero no euleriano.
     \end{enumerate}
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Para cada una de las condiciones, podemos construir un grafo que la cumpla:
     \begin{enumerate}
@@ -66,9 +66,9 @@
     Dados \( m, n \geq 1 \), el \textbf{grafo bipartito completo} \( K_{m,n} \) es el grafo bipartito con bipartición \( A, B \) tal que \( |A| = m \), \( |B| = n \), y cada vértice de \( A \) es adyacente a cada vértice de \( B \) (en particular, \( |E(K_{m,n})| = mn \)).
 \end{definition}
 
-\begin{ejercicio}{3}
+\begin{ejercicioEntregar}{3}
     Para \( n > 1 \), probar que \( K_{n,n} \) posee \( \dfrac{(n-1)!\,n!}{2} \) ciclos hamiltonianos.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Sea \( G = K_{n, n} \).  Etiquetamos los vértices de las dos particiones como \( A = \{a_1, \ldots, a_n\} \subset V(G) \) y \( B = \{b_1, \ldots, b_n\} \subset V(G) \). Un ciclo hamiltoniano debe alternar entre vértices de \( A \) y \( B \), y podemos empezar en cualquier vértice de \( A \). Hay \( n! \) formas de ordenar los vértices de \( B \) y \( (n-1)! \) formas de ordenar los vértices restantes de \( A \) después de elegir el vértice inicial. Como cada ciclo se cuenta dos veces (una en cada dirección), el número total de ciclos hamiltonianos es \( \frac{(n-1)!\,n!}{2} \).
 \end{proof}
@@ -79,9 +79,9 @@
     Un \textbf{camino hamiltoniano} de un grafo \( G \) es un camino \( P \) que contiene a todos los vértices de \( G \).
 \end{definition}
 
-\begin{ejercicio}{4}
+\begin{ejercicioEntregar}{4}
     Todo grafo con un ciclo hamiltoniano posee un camino hamiltoniano, pero no vale la recíproca (basta tomar un grafo camino como contraejemplo). Probar que un grafo \( G \) posee un camino hamiltoniano si y sólo si el grafo \( G' \) obtenido de \( G \) agregándole un vértice nuevo \( u \) y haciéndolo adyacente a todos los demás vértices posee un ciclo hamiltoniano.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Supongamos que \( G \) tiene un camino hamiltoniano \( P = v_1 - v_2 - \cdots - v_n \). Agregamos un vértice nuevo \( u \) y lo hacemos adyacente a todos los demás vértices para obtener \( G' \). Entonces \( u - v_1 - v_2 - \cdots - v_n - u \) es un ciclo hamiltoniano en \( G' \).
 
@@ -90,9 +90,9 @@
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{5}
+\begin{ejercicioEntregar}{5}
     Un ratón intenta comerse un cubo de \( 3 \times 3 \times 3 \) de queso. Empieza en una esquina y se come cada vez un cubo de \( 1 \times 1 \times 1 \) antes de pasar a uno adyacente (decimos que dos cubos son adyacentes cuando comparten cara). ¿Puede comerse el cubo central en último lugar?
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Podemos modelar el cubo de queso como un grafo bipartito \(Q\), equivalente a una grilla tridimensional de \(3 \times 3 \times 3\). Los vértices representan los 27 cubitos de \(1 \times 1 \times 1\), y las aristas conectan cubitos que comparten una cara.
 

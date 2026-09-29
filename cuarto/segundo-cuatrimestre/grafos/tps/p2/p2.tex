@@ -112,9 +112,9 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     \end{tikzpicture}
 \end{center}
 
-\begin{ejercicio}{2}
+\begin{ejercicioEntregar}{2}
     Probar que el grafo de Petersen no tiene ciclos de longitud 7.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Es fácil ver que el grafo de Petersen no puede contener cíclos de longitud 3 pues por como está construido tener un ciclo de longitud 3 implicaría tener 3 subconjuntos dos a dos disjuntos de 2 elementos del conjunto \( P = \{1,2,3,4,5\} \), lo cual es imposible.
 
@@ -148,9 +148,9 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{3}
+\begin{ejercicioEntregar}{3}
     Demostrar que, si todos los vértices de un grafo \( G \) simple y conexo tienen grado 2, entonces \( G \) es un ciclo. ¿Vale la misma conclusión si el grafo no es simple?
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Consideremos un camino maximal en \(G\), dado por la sucesión de vértices \(P = v_1, v_2, \ldots, v_k\).
     Analicemos el último vértice del camino, \(v_k\). Como \(\deg(v_k) = 2\), tiene exactamente dos aristas incidentes. Una de ellas lo conecta con \(v_{k-1}\). La otra arista debe conectarlo necesariamente con algún vértice que ya pertenece al camino \(P\). Si lo conectara con un vértice \(w \notin V(P)\), el camino podría extenderse a \(v_1, \ldots, v_k, w\), lo cual contradice que \(P\) sea un camino maximal.
@@ -198,9 +198,9 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     Una \textbf{componente conexa} de un grafo \( G \) es un subgrafo conexo maximal de \( G \), es decir, un subgrafo conexo que no está contenido en ningún subgrafo conexo más grande de \( G \).
 \end{definition}
 
-\begin{ejercicio}{5}
+\begin{ejercicioEntregar}{5}
     Sea \( G \) el grafo simple con conjunto de vértices \( \{1, 2, \ldots, 15\} \) tal que \( i \) y \( j \) son adyacentes si y sólo si su máximo común divisor es mayor que 1. Contar las componentes conexas de \( G \) y hallar un camino de longitud máxima en \( G \).
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Analicemos si \( G \) posee vértices aislados, es decir, vértices que no son adyacentes a ningún otro vértice. Un vértice \( i \) será aislado si y sólo si \(\gcd(i,j) = 1\) para todo \( j \neq i \). Observemos que los números primos mayores que 7 (es decir, 11, 13) serán aislados, ya que no tienen divisores comunes con ningún otro vértice en el conjunto \( \{1, 2, \ldots, 15\} \). Por lo tanto, los vértices aislados son \( 11 \) y \( 13 \). Como \( \gcd(i, 1) = 1 \) para todo \( i \neq 1 \), el vértice 1 es aislado.
 
@@ -221,9 +221,9 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{6}
+\begin{ejercicioEntregar}{6}
     Probar que un grafo es conexo si y sólo si, para cada partición de sus vértices en dos conjuntos no vacíos, existe una arista con extremos en ambos conjuntos.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     (\( \Rightarrow \)) Supongamos que \( G \) es conexo y consideremos una partición cualquiera de sus vértices en dos conjuntos no vacíos \( A \) y \( B \). Tomemos un vértice \( u \in A \) y un vértice \( v \in B \). Como \( G \) es conexo, existe un camino que une \( u \) con \( v \).
 
@@ -326,9 +326,9 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     Un vértice \( v \) de un grafo \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \) i.e no tiene vecinos.
 \end{definition}
 
-\begin{ejercicio}{10}
+\begin{ejercicioEntregar}{10}
     Sea \( G \) un grafo simple sin vértices aislados y con ningún subgrafo inducido que posea exactamente dos aristas. Probar que \( G \) es completo.
-\end{ejercicio}
+\end{ejercicioEntregar}
 
 \begin{proof}
     Supongamos por el absurdo que \( G \) no es completo. Entonces, existen al menos dos vértices \( u, v \in V(G) \) tal que \( uv \notin E(G) \). Como \( G \) no tiene vértices aislados, \( \exists x \in V(G) \setminus \{ u, v\} \) adyacente a \( u \), y \( \exists y \in V(G) \setminus \{ u, v\} \) adyacente a \( v \).

@@ -7,9 +7,9 @@
     Un \textbf{circuito euleriano} de un grafo \( G \) es una cadena cerrada que contiene a todas las aristas de \( G \), es decir, que recorre cada arista de \( G \) exactamente una vez. Un grafo se dice \textbf{euleriano} si posee un circuito euleriano.
 \end{definition}
 
-\begin{ejercicio}{1}
+\begin{ejercicioEntregar}{1}
     Determinar los posibles valores de \( m \) y \( n \) para los que el grafo bipartito completo \( K_{m,n} \) sea euleriano.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Recordemos que un grafo conexo posee un circuito euleriano si y sólo si todos sus vértices tienen grado par.
 
@@ -26,14 +26,14 @@
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{2}
+\begin{ejercicioEntregar}{2}
     Determinar si las siguientes afirmaciones son verdaderas o falsas:
     \begin{itemize}
         \item Todo grafo bipartito euleriano tiene un número par de aristas.
         \item Todo grafo simple conexo y euleriano con un número par de vértices tiene un número par de aristas.
         \item Si \( G \) es euleriano y \( v \) es un vértice de \( G \), entonces para cualquier par de aristas \( e \) y \( f \) que inciden en \( v \) existe un circuito euleriano en el cual \( e \) y \( f \) aparecen consecutivamente.
     \end{itemize}
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Las proposiciones son: verdadera, falsa y falsa respectivamente.
     \begin{itemize}
@@ -65,12 +65,12 @@
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{3}
+\begin{ejercicioEntregar}{3}
     \begin{enumerate}
         \item Sea \( G \) un grafo con conjunto de aristas no vacío y tal que todos sus vértices son de grado par. Probar que \( G \) posee un ciclo.
         \item Probar que un grafo conexo es euleriano si y sólo si puede expresarse como una unión \( C_1 \cup \cdots \cup C_n \) de ciclos que no comparten aristas.
     \end{enumerate}
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     \begin{enumerate}
         \item Como el conjunto de aristas es no vacío, existe al menos una componente conexa de \(G\) con aristas. Al ser todos los grados pares, los vértices de esta componente deben tener grado mayor o igual a 2 (no hay vértices de grado 1).
@@ -156,9 +156,9 @@
     Una \textbf{descomposición en cadenas} de un grafo \( G \) es una colección de cadenas \( R_1, \ldots, R_k \) de \( G \) que no comparten aristas entre sí y tales que toda arista de \( G \) pertenece a alguna \( R_i \).
 \end{definition}
 
-\begin{ejercicio}{5}
+\begin{ejercicioEntregar}{5}
     ¿Cuál es el mínimo número \( k \) de cadenas que se necesitan para descomponer al grafo de Petersen? ¿Puede descomponerse también en \( k \) cadenas que sean caminos?
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
     Sea \( G \) el grafo de Petersen. Por definición, \(|V(G)| = 10\) y \( \forall v \in V(G)\), \(\text{deg}(v) = 3\).
 

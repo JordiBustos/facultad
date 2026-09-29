@@ -117,6 +117,17 @@
     \end{tikzpicture}%
 }
 
+\newtcolorbox{ejercicioEntregar}[1]{
+    colback=teal!5!white,       % Fondo verde/azulado muy sutil
+    colframe=teal!60!black,     % Borde más oscuro y distintivo
+    fonttitle=\bfseries,
+    % El \hfill empuja el texto "Para entregar" hacia la derecha de la caja
+    title={Ejercicio #1 \hfill \normalfont\itshape \(\star\) Seleccionado para entregar},
+    arc=3mm,
+    boxrule=1.2pt,              % Borde un pelín más grueso para que destaque
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
 % --- Hipervínculos ---
 \usepackage[colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black, citecolor=blue!60!black]{hyperref}
 
