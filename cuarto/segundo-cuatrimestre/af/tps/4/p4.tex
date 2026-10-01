@@ -1,0 +1,172 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                       % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                         % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                          % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                                  % Si y sólo si
+\newcommand{\imp}{\implies}                              % Implies
+\newcommand{\setdiff}{\smallsetminus}                    % Set difference
+\newcommand{\diam}{\text{diam}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Trabajo Práctico N°4 - 2026}
+\author{El adjunto de un operador lineal sobre un espacio de Banach}
+\date{}
+
+\maketitle
+
+\vspace{0.8cm}
+
+\begin{ejercicio}{1}
+    Fijado \( 1 \le p < \infty \) sean \( S \in L(\ell^p) \) y \( T \in L(\ell^p) \) los shifts a izquierda y derecha, respectivamente, y sea \( J: \ell^2 \to c_0 \) definido por \( J(x) = x \). Probar que \( J \in L(\ell^2, c_0) \) y calcular \( S^* \), \( T^* \) y \( J^* \).
+\end{ejercicio}
+\begin{proof}
+    Primero, veamos que \( J \in L(\ell^2, c_0) \). Sea \( x = {(x_n)}_{n \in \N} \in \ell^2 \). Como la serie converge, es decir \( \sum_{n=1}^{\infty} |x_n|^2 < \infty \), necesariamente el término general tiende a cero: \( \lim_{n \to \infty} x_n = 0 \). Por lo tanto, \( J(x) = x \in c_0 \), lo que muestra que el operador \( J \) está bien definido.
+
+    Para ver que es acotado, notemos que:
+    \[ \norm{J(x)}_{\infty} = \sup_{n \ge 1} |x_n| \le {\left( \sum_{n=1}^{\infty} |x_n|^2 \right)}^{1/2} = \norm{x}_2 \]
+    Por lo tanto, \( J \) es un operador lineal acotado con \( \norm{J} \le 1 \).
+
+    Ahora, calculemos los operadores adjuntos. Recordemos que el espacio dual de \( \ell^p \) se identifica con \( \ell^q \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \).
+
+    Para el shift a izquierda \( S^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
+    \[ S^*(y)(x) = y(Sx) = \sum_{n=1}^{\infty} (Sx)_n y_n = \sum_{n=1}^{\infty} x_{n+1} y_n = \sum_{k=2}^{\infty} x_k y_{k-1} \]
+    Esto es equivalente a la acción funcional de aplicar un shift a derecha al vector \( y \). Así, \( S^* \) resulta ser el shift a derecha actuando en \( \ell^q \).
+
+    Para el shift a derecha \( T^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
+    \[ T^*(y)(x) = y(Tx) = \sum_{n=1}^{\infty} {(Tx)}_n y_n = 0 \cdot y_1 + \sum_{n=2}^{\infty} x_{n-1} y_n = \sum_{k=1}^{\infty} x_k y_{k+1} \]
+    Esto es equivalente a la acción funcional de aplicar un shift a izquierda al vector \( y \). Por lo tanto, \( T^* \) resulta ser el shift a izquierda actuando en \( \ell^q \).
+
+    Para \( J^* \), sabemos que el espacio dual de \( c_0 \) se identifica isométricamente con \( \ell^1 \), y el dual de \( \ell^2 \) es \( \ell^2 \). Entonces tenemos que \( J^*: \ell^1 \to \ell^2 \).
+    Dados \( y \in \ell^1 \) y \( x \in \ell^2 \):
+    \[ J^*(y)(x) = y(Jx) = \sum_{n=1}^{\infty} y_n {(Jx)}_n = \sum_{n=1}^{\infty} y_n x_n \]
+    Como funcional en \( (\ell^2)^* \cong \ell^2 \), esta expresión se identifica con el vector \( y \) mismo, ya que \( \ell^1 \subset \ell^2 \). Así, \( J^*(y) = y \), lo cual significa que \( J^* \) es simplemente el operador de inclusión canónica de \( \ell^1 \) en \( \ell^2 \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sea \( E = \ell^p(\N) \), con \( p \in (1, \infty) \) e identifiquemos \( E^* \) con \( \ell^q(\N) \) en la forma usual. Fijado un \( a \in \ell^{\infty}(\N) \) consideremos el operador multiplicación \( M_a \in L(E) \) producido por \( M_a x = {(a_n x_n)}_{n \in \N} \in \ell^p \) para cada \( x = {(x_n)}_{n \in \N} \in \ell^p \). Probar que su adjunto \( M_a^* \in L(E^*) = L(\ell^q(\N)) \) es el mismo \( M_a \) actuando ahora en \( \ell^q(\N) \).
+\end{ejercicio}
+\begin{proof}
+    Sean \( x = {(x_n)}_{n \in \N} \in \ell^p \) e \( y = {(y_n)}_{n \in \N} \in \ell^q \). Queremos encontrar la forma explícita del operador adjunto \( M_a^*: \ell^q \to \ell^q \), el cual está caracterizado por la siguiente relación de dualidad:
+    \[ M_a^*(y)(x) = y(M_a x) \]
+    Calculamos la acción del funcional \( y \) sobre el vector \( M_a x \):
+    \[ y(M_a x) = \sum_{n=1}^{\infty} {(M_a x)}_n y_n = \sum_{n=1}^{\infty} (a_n x_n) y_n \]
+    Dado que el producto de números reales (o complejos) es conmutativo y asociativo, podemos agrupar los términos y reescribir esta serie como:
+    \[ \sum_{n=1}^{\infty} x_n (a_n y_n) = \sum_{n=1}^{\infty} x_n {(M_a y)}_n \]
+    Esta última expresión es exactamente la definición de la acción del funcional generado por el vector \( M_a y \in \ell^q \) sobre el vector \( x \in \ell^p \). Por lo tanto, deducimos que:
+    \[ M_a^*(y) = M_a y = {(a_n y_n)}_{n \in \N} \]
+    Esto demuestra que el operador adjunto \( M_a^* \) coincide exactamente con el operador de multiplicación \( M_a \) generado por la sucesión \( a \), pero actuando en el espacio dual \( \ell^q(\N) \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Sean \( \Omega \subset \tilde{\Omega} \) dos conjuntos medibles de \( \R^{n} \). Se definen \( \rho:L^{p}(\tilde{\Omega})\rightarrow L^{p}(\Omega) \) como \( \rho(u)=u_{|\Omega} \) y \( e:L^{p}(\Omega)\rightarrow L^{p}(\tilde{\Omega}) \) dado por
+    \[
+        e(u)(t) =
+        \begin{cases}
+            u(t) & \text{si } t \in \Omega    \\
+            0    & \text{si } t \notin \Omega
+        \end{cases}
+    \]
+    Probar que \( \rho \) y \( e \) son acotados, calcular sus normas y sus operadores adjuntos.
+\end{ejercicio}
+\begin{proof}
+    Sean \( u \in L^p(\tilde{\Omega}) \) y \( v \in L^p(\Omega) \).
+
+    Primero, consideremos \( \rho \):
+    \[ \norm{\rho(u)}_{L^p(\Omega)}^p = \int_{\Omega} |u(t)|^p dt \le \int_{\tilde{\Omega}} |u(t)|^p dt = \norm{ u }_{L^p(\tilde{\Omega})}^p \]
+    Por lo tanto, tomando raíz \( p \)-ésima, \( \norm{\rho(u)}_{L^p(\Omega)} \le \norm{u}_{L^p(\tilde{\Omega})} \). Esto prueba que \( \rho \) es acotado y que \( \norm{\rho} \le 1 \). Si \( \mu(\Omega) > 0 \), podemos tomar una función \( u \neq 0 \) soportada enteramente en \( \Omega \), para la cual la desigualdad es una igualdad, concluyendo que \( \norm{\rho} = 1 \).
+
+    Ahora, consideremos \( e \):
+    \[ \norm{e(v)}_{L^p(\tilde{\Omega})}^p = \int_{\tilde{\Omega}} |e(v)(t)|^p dt = \int_{\Omega} |v(t)|^p dt = \norm{v}_{L^p(\Omega)}^p \]
+    Por lo tanto, \( e \) es una isometría (preserva la norma). Esto implica que es acotado y su norma es exactamente \( \norm{e} = 1 \).
+
+    Para calcular los operadores adjuntos, identificamos los espacios duales \( (L^p(\Omega))^* \cong L^q(\Omega) \) y \( (L^p(\tilde{\Omega}))^* \cong L^q(\tilde{\Omega}) \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \). La dualidad está dada por la integral del producto.
+
+    El operador adjunto de \( \rho \), digamos \( \rho^* : L^q(\Omega) \to L^q(\tilde{\Omega}) \), debe cumplir que para todo \( u \in L^p(\tilde{\Omega}) \) y \( g \in L^q(\Omega) \):
+    \[ \langle \rho^*(g), u \rangle = \langle g, \rho(u) \rangle = \int_{\Omega} g(t) \rho(u)(t) dt = \int_{\Omega} g(t) u(t) dt \]
+    Esta última integral sobre \( \Omega \) se puede reescribir como una integral sobre todo \( \tilde{\Omega} \) si extendemos \( g \) por cero fuera de \( \Omega \):
+    \[ \int_{\Omega} g(t) u(t) dt = \int_{\tilde{\Omega}} e(g)(t) u(t) dt = \langle e(g), u \rangle \]
+    De esto deducimos que \( \rho^*(g) = e(g) \). Es decir, \( \rho^* \) es el operador de extensión por cero \( e \), actuando ahora desde \( L^q(\Omega) \) hacia \( L^q(\tilde{\Omega}) \).
+
+    Análogamente, el adjunto de \( e \), \( e^* : L^q(\tilde{\Omega}) \to L^q(\Omega) \), debe cumplir para todo \( v \in L^p(\Omega) \) y \( h \in L^q(\tilde{\Omega}) \):
+    \[ \langle e^*(h), v \rangle = \langle h, e(v) \rangle = \int_{\tilde{\Omega}} h(t) e(v)(t) dt = \int_{\Omega} h(t) v(t) dt \]
+    Como en \( \Omega \) la función \( h \) coincide con su restricción \( \rho(h) \), tenemos:
+    \[ \int_{\Omega} h(t) v(t) dt = \int_{\Omega} \rho(h)(t) v(t) dt = \langle \rho(h), v \rangle \]
+    De esto se deduce que \( e^*(h) = \rho(h) \). Es decir, el operador adjunto de la extensión por cero es la restricción \( \rho \), operando en los espacios \( L^q \).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \( T:\ell^{1}\rightarrow c_{0} \) el operador lineal definido por
+    \[ T({\{x_{n}\}}_{n\ge 1}) = {\left \{ \sum_{k=1}^{\infty}x_{k}, \sum_{k=2}^{\infty}x_{k}, \sum_{k=3}^{\infty}x_{k}, \dots \right \}} \]
+    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{1}\rightarrow \ell^{\infty} \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Sea \( T:\ell^{1}\rightarrow \ell^{1} \) el operador lineal definido por
+    \[ T({\{x_{n}\}}_{n\ge 1}) = \left \{ \sum_{k=2}^{\infty}x_{k}, x_{1}, x_{2}, x_{3}, \dots \right \} \]
+    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{\infty}\rightarrow \ell^{\infty} \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Sea \( g\in L^{\infty}(\R) \) fijo. Definimos
+    \[ Tf(t) := g(t)f(t+1) \]
+    para \( f\in L^{1}(\R) \). Probar que \( T\in L(L^{1}(\R)) \) y hallar \( T^{*}:L^{\infty}(\R)\rightarrow L^{\infty}(\R) \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Sea \( T\in L(\ell^{2}(\R)) \) dado por
+    \[ T(x_{1},x_{2},x_{3},\dots) = \left( 0, \frac{x_{1}}{2}, \frac{x_{2}}{3}, \dots, \frac{x_{n-1}}{n}, \dots \right). \]
+    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{2}(\R)\rightarrow \ell^{2}(\R) \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Consideremos el operador \( T\in L(C[0,1]) \) dado por
+    \[ (Tf)(x) = f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt. \]
+    Calcular \( T^{*} \).
+\end{ejercicio}
+
+\end{document}
