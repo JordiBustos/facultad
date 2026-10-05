@@ -136,6 +136,26 @@
     \[ T({\{x_{n}\}}_{n\ge 1}) = {\left \{ \sum_{k=1}^{\infty}x_{k}, \sum_{k=2}^{\infty}x_{k}, \sum_{k=3}^{\infty}x_{k}, \dots \right \}} \]
     Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{1}\rightarrow \ell^{\infty} \).
 \end{ejercicio}
+\begin{proof}
+    Empecemos demostrando que \( T \) es acotado. \[
+        \norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{c_0} = \sup_{\norm{x}_{\ell^1} \le 1} \sup_{n \ge 1} \left| \sum_{k=n}^{\infty} x_k \right| \le \sup_{\norm{x}_{\ell^1} \le 1} \sum_{k=1}^{\infty} |x_k| \le 1
+    \]
+    Para hallar la norma basta con considerar la sucesión \( x = (1,0,0,\dots) \), que cumple \( \norm{x}_{\ell^1} = 1 \). En este caso,
+    \[ T(x) = (1,0,0,\dots) \]
+    y por lo tanto \( \norm{T(x)}_{c_0} = 1 \). Esto muestra que \( \norm{T} = 1 \).
+
+    Para el cálculo del operador adjunto \( T^* : {(c_0)}^* \to {(\ell^1)}^* \) recordemos que \({(c_0)}^* \cong \ell^1\) y \({(\ell^1)}^* \cong \ell^\infty \). Dado \( \varphi \in {(c_0)}^* \) existe una única sucesión \( {(y_n)}_{n \ge 1} \in \ell^1 \) tal que:\[
+        \varphi(x) = \sum_{n\ge1} x_n y_n \quad \forall x \in c_0.
+    \]
+    Entonces, para \( x \in \ell^1 \) tenemos
+    \[
+        (T^*\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} (Tx)_n y_n = \sum_{n\ge1} \left( \sum_{k=n}^{\infty} x_k \right) y_n = \sum_{k\ge1} x_k \left( \sum_{n=1}^{k} y_n \right),
+    \]
+    lo que nos da la fórmula explícita
+    \[
+        T^*(y_1, y_2, \dots) = \left( y_1, y_1+y_2, y_1+y_2+y_3, \dots \right) \in \ell^\infty.
+    \]
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -144,6 +164,37 @@
     \[ T({\{x_{n}\}}_{n\ge 1}) = \left \{ \sum_{k=2}^{\infty}x_{k}, x_{1}, x_{2}, x_{3}, \dots \right \} \]
     Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{\infty}\rightarrow \ell^{\infty} \).
 \end{ejercicio}
+\begin{proof}
+    Empecemos demostrando que \( T \) es acotado.\begin{align*}
+        \norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{\ell^1} & = \sup_{\norm{x}_{\ell^1} \le 1} \sum_{n=1}^{\infty} \left| {(T(x))}_n \right|                                                                                                                                                   \\
+                                                                       & = \sup_{\norm{x}_{\ell^1} \le 1} \left( \left| \sum_{k=2}^{\infty} x_k \right| + \sum_{n=1}^{\infty} |x_n| \right) \le \sup_{\norm{x}_{\ell^1} \le 1} \left( \sum_{k=2}^{\infty} |x_k| + \sum_{n=1}^{\infty} |x_n| \right) \le 2
+    \end{align*}
+
+    Para hallar la norma basta con considerar la sucesión \( x = (0, 1, 0, 0, \dots) \). En este caso,
+    \[
+        T(x) = \left( \sum_{k=2}^{\infty} x_k, x_1, x_2, x_3, \dots \right) = (1, 0, 1, 0, 0, \dots),
+    \]
+    y, por lo tanto,
+    \[
+        \norm{T(x)}_{\ell^1} = 1 + 0 + 1 + 0 + 0 + \cdots = 2.
+    \]
+    Como \(\norm{x}_{\ell^1} = 1\), se concluye que \(\norm{T} = 2\).
+
+    Hallemos ahora una fórmula explícita para \( T^* \). Sea \( \varphi \in {(\ell^1)}^* \) e \( y \in \ell^\infty \) la única sucesión tal que \( \varphi(x) = \sum_{n\ge1} x_n y_n \) para todo \( x \in \ell^1 \). Entonces,\[
+        T^*(\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} {(Tx)}_n y_n = \left( \sum_{k=2}^{\infty} x_k \right) y_1 + \sum_{n=1}^{\infty} x_n y_{n+1} = \sum_{n\ge1} x_n \tilde{y}_n,
+    \]
+    donde
+    \[
+        \tilde{y}_n = \begin{cases}
+            y_2           & \text{si } n = 1,   \\
+            y_{n+1} + y_1 & \text{si } n \ge 2.
+        \end{cases}
+    \]
+    Por lo tanto, la fórmula explícita para \( T^* \) es
+    \[
+        T^*(y_1, y_2, y_3, \dots) = (y_2, y_3 + y_1, y_4 + y_1, \dots) \in \ell^\infty.
+    \]
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -152,6 +203,38 @@
     \[ Tf(t) := g(t)f(t+1) \]
     para \( f\in L^{1}(\R) \). Probar que \( T\in L(L^{1}(\R)) \) y hallar \( T^{*}:L^{\infty}(\R)\rightarrow L^{\infty}(\R) \).
 \end{ejercicio}
+\begin{proof}
+    Empecemos probando que \(T\) es acotado y, en consecuencia, pertenece a \(L(L^1(\R))\). Para \(f \in L^1(\R)\) tenemos:
+    \[
+        \norm{Tf}_{L^1} = \int_{\R} |g(t) f(t+1)| \, dt \le \int_{\R} \norm{g}_{L^\infty} |f(t+1)| \, dt = \norm{g}_{L^\infty} \int_{\R} |f(t+1)| \, dt = \norm{g}_{L^\infty} \norm{f}_{L^1}.
+    \]
+    Luego, \(\norm{T}_{L(L^1(\R))} \le \norm{g}_{L^\infty}\).
+
+    Para calcular el operador adjunto \(T^*\), recordemos que el espacio dual de \(L^1(\R)\) se identifica con \(L^\infty(\R)\). Dado un funcional \(\varphi \in (L^1(\R))^*\), existe un único \(h \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\) se cumple:
+    \[
+        \varphi(f) = \int_{\R} f(t) h(t) \, dt.
+    \]
+    Por definición de operador adjunto, \(T^*\) debe satisfacer \((T^*\varphi)(f) = \varphi(Tf)\). Expresado en términos de integrales, buscamos la función \((T^*h) \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\):
+    \[
+        \int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} (Tf)(t) h(t) \, dt.
+    \]
+    Desarrollamos el lado derecho de la igualdad sustituyendo la definición de \(T\) y aplicando el cambio de variables \(u = t+1\) (de modo que \(t = u-1\) y \(dt = du\)):
+    \[
+        \int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} g(t) f(t+1) h(t) \, dt = \int_{\R} f(u) g(u-1) h(u-1) \, du.
+    \]
+    Cambiando nuevamente el nombre de la variable muda de integración \(u\) a \(t\), obtenemos:
+    \[
+        \int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
+    \]
+    Comparando ambas expresiones, concluimos que para toda \(f \in L^1(\R)\) debe cumplirse:
+    \[
+        \int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
+    \]
+    Como esta igualdad es válida para cualquier función \(f \in L^1(\R)\), las funciones que multiplican a \(f(t)\) en el integrando deben ser iguales en casi todo punto. Por lo tanto, el operador adjunto \(T^*: L^\infty(\R) \rightarrow L^\infty(\R)\) está dado por la fórmula explícita:
+    \[
+        (T^*h)(t) = g(t-1) h(t-1).
+    \]
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -160,6 +243,36 @@
     \[ T(x_{1},x_{2},x_{3},\dots) = \left( 0, \frac{x_{1}}{2}, \frac{x_{2}}{3}, \dots, \frac{x_{n-1}}{n}, \dots \right). \]
     Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{2}(\R)\rightarrow \ell^{2}(\R) \).
 \end{ejercicio}
+\begin{proof}
+    Empecemos demostrando que \(T\) es acotado. Para cualquier \(x \in \ell^2(\R)\), tenemos que \((Tx)_1 = 0\) y para \(n \ge 2\), \((Tx)_n = \frac{x_{n-1}}{n}\). Calculamos el cuadrado de la norma de \(Tx\):
+    \[
+        \norm{Tx}_{\ell^2}^2 = \sum_{n=2}^{\infty} \left| \frac{x_{n-1}}{n} \right|^2 = \sum_{k=1}^{\infty} \frac{|x_k|^2}{(k+1)^2}.
+    \]
+    Como \(k \ge 1\), se cumple que \((k+1) \ge 2\), por lo que \(\frac{1}{(k+1)^2} \le \frac{1}{4}\). Entonces:
+    \[
+        \norm{Tx}_{\ell^2}^2 \le \sum_{k=1}^{\infty} \frac{1}{4} |x_k|^2 = \frac{1}{4} \sum_{k=1}^{\infty} |x_k|^2 = \frac{1}{4} \norm{x}_{\ell^2}^2.
+    \]
+    Tomando raíz cuadrada, obtenemos \(\norm{Tx}_{\ell^2} \le \frac{1}{2} \norm{x}_{\ell^2}\), lo que demuestra que \(T\) es acotado y que \(\norm{T} \le \frac{1}{2}\).
+
+    Para ver que la norma es exactamente \(1/2\), basta tomar el vector \(x = e_1 = (1, 0, 0, \dots)\), para el cual \(\norm{x}_{\ell^2} = 1\). Aplicando el operador obtenemos \(Te_1 = \left( 0, \frac{1}{2}, 0, 0, \dots \right)\), cuya norma es \(\norm{Te_1}_{\ell^2} = \frac{1}{2}\). Por lo tanto,
+    \[
+        \norm{T} = \frac{1}{2}.
+    \]
+
+    Calculemos ahora el operador adjunto \(T^*\). Usando el producto interno de \(\ell^2(\R)\), para todo \(x, y \in \ell^2(\R)\) se debe cumplir que \( \langle Tx, y \rangle = \langle x, T^*y \rangle \). Desarrollamos el lado izquierdo:
+    \begin{align*}
+        \langle Tx, y \rangle & = \sum_{n=1}^{\infty} {(Tx)}_n y_n                         \\
+                              & = 0 \cdot y_1 + \sum_{n=2}^{\infty} \frac{x_{n-1}}{n} y_n.
+    \end{align*}
+    Haciendo el cambio de índice \(m = n - 1\) (por lo que \(n = m + 1\)), la suma queda:
+    \[
+        \langle Tx, y \rangle = \sum_{m=1}^{\infty} x_m \frac{y_{m+1}}{m+1} = \left\langle x, \left( \frac{y_2}{2}, \frac{y_3}{3}, \frac{y_4}{4}, \dots \right) \right\rangle.
+    \]
+    Por definición de adjunto, esto debe ser igual a \(\langle x, T^*y \rangle = \sum_{m=1}^{\infty} x_m {(T^*y)}_m\). Igualando término a término, concluimos que el operador adjunto \(T^*: \ell^2(\R) \rightarrow \ell^2(\R)\) está dado por:
+    \[
+        {(T^*y)}_m = \frac{y_{m+1}}{m+1} \quad \text{para todo } m \ge 1.
+    \]
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -168,5 +281,29 @@
     \[ (Tf)(x) = f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt. \]
     Calcular \( T^{*} \).
 \end{ejercicio}
+\begin{proof}
+    Sea \(\varphi \in {(C[0, 1])}^*\). Existe una única medida de Borel regular \( \mu \) tal que:
+    \[
+        \varphi(f) = \int_{[0, 1]} f \, d\mu \quad \forall f \in C[0, 1].
+    \]
+    Calculemos la acción del operador adjunto \(T^*\) sobre esta medida \( \mu \). Por definición, \((T^*\varphi)(f) = \varphi(Tf)\). Entonces:
+    \begin{align*}
+        (T^*\varphi)(f) & = \int_{[0, 1]} (Tf)(x) \, d\mu(x) = \int_{[0, 1]} \left( f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt \right) d\mu(x)                     \\
+                        & = f(0) \int_{[0, 1]} d\mu(x) + f(1) \int_{[0, 1]} x \, d\mu(x) + \left( \int_{0}^{1} f(t) dt \right) \int_{[0, 1]} x^{2} \, d\mu(x).
+    \end{align*}
+
+    Para expresar \( T^*\mu \) como una medida en \(\mathcal{M}[0,1]\), recordemos que la evaluación en un punto se representa mediante la medida Delta de Dirac. Es decir, \(f(0) = \int_{[0,1]} f \, d\delta_0\) y \(f(1) = \int_{[0,1]} f \, d\delta_1\). Además, la integral usual es la integral respecto a la medida de Lebesgue \(m\).
+
+    Reescribiendo la expresión anterior en términos de integrales de \(f\), obtenemos:
+    \[
+        (T^*\mu)(f) = \int_{[0,1]} f \, d\left( c_0 \delta_0 \right) + \int_{[0,1]} f \, d\left( c_1 \delta_1 \right) + \int_{[0,1]} f \, d\left( c_2 m \right),
+    \]
+    donde las constantes son \(c_0 = \int_{[0, 1]} d\mu(x)\), \(c_1 = \int_{[0, 1]} x \, d\mu(x)\) y \(c_2 = \int_{[0, 1]} x^{2} \, d\mu(x)\).
+
+    Por lo tanto, la forma explícita de la medida correspondiente al operador adjunto \(T^*: \mathcal{M}[0,1] \rightarrow \mathcal{M}[0,1]\) está dada por:
+    \[
+        T^*(\mu) = \left( \int_{[0, 1]} d\mu(x) \right) \delta_0 + \left( \int_{[0, 1]} x \, d\mu(x) \right) \delta_1 + \left( \int_{[0, 1]} x^{2} \, d\mu(x) \right) m.
+    \]
+\end{proof}
 
 \end{document}
