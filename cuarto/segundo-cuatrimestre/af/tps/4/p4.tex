@@ -40,12 +40,14 @@
 \begin{document}
 
 \title{Análisis Funcional: Trabajo Práctico N°4 - 2026}
-\author{El adjunto de un operador lineal sobre un espacio de Banach}
+\author{El adjunto de un operador lineal sobre un espacio de Banach y Proyectores}
 \date{}
 
 \maketitle
 
 \vspace{0.8cm}
+
+\section{El adjunto de un operador lineal sobre un espacio de Banach}
 
 \begin{ejercicio}{1}
     Fijado \( 1 \le p < \infty \) sean \( S \in L(\ell^p) \) y \( T \in L(\ell^p) \) los shifts a izquierda y derecha, respectivamente, y sea \( J: \ell^2 \to c_0 \) definido por \( J(x) = x \). Probar que \( J \in L(\ell^2, c_0) \) y calcular \( S^* \), \( T^* \) y \( J^* \).
@@ -305,5 +307,223 @@
         T^*(\mu) = \left( \int_{[0, 1]} d\mu(x) \right) \delta_0 + \left( \int_{[0, 1]} x \, d\mu(x) \right) \delta_1 + \left( \int_{[0, 1]} x^{2} \, d\mu(x) \right) m.
     \]
 \end{proof}
+
+\vspace{0.5cm}
+
+\section{Proyectores y subespacios complementados de un espacio de Banach}
+
+\begin{ejercicio}{1}
+    Sean \( X \) espacio de Banach y \( f \in X^* \) con \( f(e) = 1 \), \( e \in X \). Mostrá que \( Px = f(x) e \) es un proyector y que \( \norm{P} = \norm{f} \norm{e} \).
+\end{ejercicio}
+\begin{proof}
+    Primero, comprobamos que \( P \) es un operador lineal. Dados \( x, y \in X \) y un escalar \( \lambda \):
+    \[ P(x + \lambda y) = f(x + \lambda y)e = (f(x) + \lambda f(y))e = f(x)e + \lambda f(y)e = Px + \lambda Py. \]
+
+    Para probar que \( P \) es un proyector, debemos verificar que es idempotente, es decir, \( P^2 = P \). Evaluando \( P^2 \) en un \( x \in X \) arbitrario:
+    \[ P^2 x = P(Px) = P(f(x)e). \]
+    Como \( f(x) \) es un escalar y \( P \) es lineal:
+    \[ P(f(x)e) = f(x)P(e) = f(x)(f(e)e). \]
+    Por hipótesis, sabemos que \( f(e) = 1 \), por lo que:
+    \[ P^2 x = f(x)(1)e = f(x)e = Px. \]
+    Al cumplirse \( P^2 x = Px \) para todo \( x \in X \), concluimos que \( P^2 = P \) y, por ende, \( P \) es un proyector.
+
+    Para demostrar la igualdad de las normas, calculamos la norma del operador \( P \). Para cualquier \( x \in X \):
+    \[ \|Px\| = \|f(x)e\| = |f(x)| \|e\|. \]
+    Por definición de norma de un operador:
+    \[ \|P\| = \sup_{\|x\| \leq 1} \|Px\| = \sup_{\|x\| \leq 1} \big( |f(x)| \|e\| \big). \]
+    Como \( \|e\| \) es una constante independiente de \( x \), podemos extraerla del supremo:
+    \[ \|P\| = \|e\| \left( \sup_{\|x\| \leq 1} |f(x)| \right). \]
+    Por definición de la norma en el espacio dual \( X^* \), se tiene que \( \sup_{\|x\| \leq 1} |f(x)| = \|f\| \). Sustituyendo esto en la ecuación anterior, obtenemos finalmente:
+    \[ \|P\| = \|f\| \|e\|. \]
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Sea \( E \) un espacio de Banach. Probar que todo subespacio de dimensión finita es complementado. ¿Qué pasa si el subespacio cerrado tiene codimensión finita?
+\end{ejercicio}
+\begin{proof}
+    Sea \( M \) un subespacio de dimensión finita de \( E \). Elegimos una base \( \{ e_1, \ldots, e_n \} \) de \( M \) y sabemos que cualquier \( x \in M \) se puede expresar como combinación lineal de los \( e_i \):\[
+        x = \sum_{i=1}^{n} \alpha_i e_i, \quad \alpha_i \in \mathbb{K}.
+    \]
+    Definimos para cada \(j \in \{1, \dots, n\} \) el funcional lineal \(\varphi_j : M \to \mathbb{K}\) que nos da la \(j\)-ésima coordenada respecto a esta base, es decir, \(\varphi_j(x) = \alpha_j\). Al ser \(M\) un espacio de dimensión finita, todo funcional lineal definido sobre él es continuo, por lo que \(\varphi_j \in M^*\).
+
+    Por el Teorema de Hahn-Banach, podemos extender cada \(\varphi_j\) a un funcional lineal acotado en todo el espacio \(E\), que denotaremos \(f_j \in E^*\), tal que \(f_j(x) = \varphi_j(x)\) para todo \(x \in M\).
+
+    Ahora, definimos el operador \(P : E \to E\) como la suma de estos funcionales extendidos multiplicados por los vectores de la base:
+    \[Px = \sum_{j=1}^n f_j(x) e_j\]
+
+    Veamos que \(P\) es un proyector continuo. Primero, es claro que \(P\) es lineal y continuo, ya que es una combinación lineal finita de funcionales acotados. Para la idempotencia, notemos que si tomamos cualquier \(x \in E\), su imagen \(Px\) es una combinación lineal de los \(e_j\), luego \(Px \in M\).
+
+    Si aplicamos \(P\) nuevamente a \(Px\):
+    \[P^2x = P(Px) = \sum_{j=1}^n f_j(Px) e_j\]
+    Como \(Px \in M\), las extensiones coinciden con los funcionales originales, por lo tanto \(f_j(Px) = \varphi_j(Px)\). Por la definición de los \(\varphi_j\), sabemos que extraen las coordenadas de un vector en \(M\). Pero las coordenadas de \(Px = \sum_{i=1}^n f_i(x) e_i\) en la base \( \{e_1, \dots, e_n\} \) son exactamente los escalares \(f_j(x)\). En consecuencia, \(\varphi_j(Px) = f_j(x)\).
+
+    Sustituyendo esto, obtenemos:
+    \[P^2x = \sum_{j=1}^n f_j(x) e_j = Px\]
+
+    Concluimos que \(P^2 = P\), por lo que \(P\) es un proyector continuo cuya imagen es exactamente \(M\). Esto implica que \(E = M \oplus \ker(P)\), y como \(\ker(P)\) es cerrado (por ser la preimagen del conjunto cerrado \( \{0\} \) a través de un operador continuo), queda demostrado que \(M\) es complementado.
+
+    \textbf{¿Qué pasa si el subespacio cerrado tiene codimensión finita?}
+
+    También resulta complementado. Si \(M\) es un subespacio cerrado de codimensión finita \(n\), entonces el espacio cociente \(E/M\) tiene dimensión finita \(n\).
+
+    Sea \( \{[x_1], \dots, [x_n]\} \) una base de \(E/M\), donde cada \([x_j] = x_j + M\) para ciertos representantes \(x_1, \dots, x_n \in E\). Sea \(N = \text{span}\{x_1, \dots, x_n\} \). Al tener dimensión finita, \(N\) es cerrado.
+
+    Por un lado, para cualquier \(x \in E\), su clase de equivalencia \([x] \in E/M\) se puede escribir como \([x] = \sum_{j=1}^n c_j [x_j] = \left[ \sum_{j=1}^n c_j x_j \right]\) para ciertos escalares \(c_j\). Esto significa que \(x - \sum_{j=1}^n c_j x_j \in M\), por lo que existe \(m \in M\) tal que \(x = m + \sum_{j=1}^n c_j x_j\). Esto prueba que \(E = M + N\).
+
+    Por otro lado, si \(y \in M \cap N\), entonces \(y = \sum_{j=1}^n c_j x_j\) por estar en \(N\), y a su vez \([y] = [0]\) en el cociente por estar en \(M\). Luego, \(\sum_{j=1}^n c_j [x_j] = [0]\). Como las clases \([x_j]\) son linealmente independientes en \(E/M\), deducimos que \(c_j = 0\) para todo \(j\), y por tanto \(y = 0\).
+
+    Así, \( M \cap N = \{0\} \). Esto prueba que \(E = M \oplus N\), y como tanto \(M\) como \(N\) son subespacios cerrados, \(M\) es complementado.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Sean \( P, Q \) proyectores acotados con \( PQ = QP \).
+    \begin{enumerate}
+        \item \( PQ \) es un proyector con \( \operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q \).
+        \item \( P + Q - PQ \) es un proyector con rango \( \operatorname{ran} P + \operatorname{ran} Q \). Deducí que esa suma es cerrada.
+        \item Si además \( PQ = 0 \), entonces \( P + Q \) es un proyector sobre \( \operatorname{ran} P \oplus \operatorname{ran} Q \).
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    \begin{enumerate}
+        \item Veamos primero que \(PQ\) es un proyector. Como \(P\) y \(Q\) son lineales y acotados, su composición \(PQ\) también lo es. Para ver que es idempotente, calculamos \({(PQ)}^2\):
+              \[ {(PQ)}^2 = (PQ)(PQ) = P(QP)Q \]
+              Por hipótesis, \(P\) y \(Q\) conmutan (\(PQ = QP\)), así que podemos reescribir:
+              \[{(PQ)}^2 = P(PQ)Q = P^2 Q^2\]
+              Al ser \(P\) y \(Q\) proyectores, sabemos que \(P^2 = P\) y \(Q^2 = Q\). Por lo tanto:
+              \[{(PQ)}^2 = PQ\]
+              Esto demuestra que \(PQ\) es un proyector.
+              Ahora, probemos que \(\operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q\).\begin{itemize}
+                  \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran}(PQ)\). Entonces existe \(x \in X\) tal que \(y = PQx\). Como \(y = P(Qx)\), resulta inmediato que \(y \in \operatorname{ran} P\). Por otro lado, usando que conmutan, \(y = QPx = Q(Px)\), lo que implica que \(y \in \operatorname{ran} Q\). Así, \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\).
+                  \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\). Al ser \(P\) y \(Q\) proyectores, sus rangos son exactamente sus subespacios de puntos fijos. Es decir, \(Py = y\) y \(Qy = y\). Aplicando el operador \(PQ\) a \(y\), obtenemos:
+                        \[ PQy = P(Qy) = Py = y \]
+              \end{itemize}
+              Luego \(y \in \operatorname{ran}(PQ)\).
+
+        \item Sea \(R = P + Q - PQ\). Claramente es acotado por ser suma de operadores acotados. Veamos que es idempotente:
+              \[ R^2 = (P + Q - PQ)(P + Q - PQ) \]
+              Expandiendo por linealidad:
+              \[ R^2 = P^2 + PQ - P^2Q + QP + Q^2 - QPQ - PQP - PQQ + {(PQ)}^2 \]
+              Usando que \(P^2=P\), \(Q^2=Q\), \(PQ=QP\) y \({(PQ)}^2=PQ\) (probado en 1):
+              \[ R^2 = P + PQ - PQ + PQ + Q - PQ - PQ - PQ + PQ \]
+              Cancelando los términos \(PQ\) obtenemos:
+              \[ R^2 = P + Q - PQ = R \]
+              Luego \(R\) es un proyector. Veamos que \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\).
+              \begin{itemize}
+                  \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran} R\). Como \(R\) es proyector, se tiene que \(y = Ry\), de donde:
+                        \[ y = Py + Qy - PQy = P(y - Qy) + Qy \]
+                        Como \(P(y - Qy) \in \operatorname{ran} P\) y \(Qy \in \operatorname{ran} Q\), deducimos que \(y \in \operatorname{ran} P + \operatorname{ran} Q\).
+                  \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P + \operatorname{ran} Q\). Entonces \(y = u + v\) con \(u \in \operatorname{ran} P\) (luego \(Pu = u\)) y \(v \in \operatorname{ran} Q\) (luego \(Qv = v\)). Calculamos \(Ry\):
+                        \[ Ry = R(u+v) = Ru + Rv \]
+                        Analizamos cada término por separado:
+                        \[ Ru = (P + Q - PQ)u = Pu + Qu - Q(Pu) = u + Qu - Qu = u \]
+                        \[ Rv = (P + Q - PQ)v = Pv + Qv - P(Qv) = Pv + v - Pv = v \]
+                        Por lo tanto, \(Ry = u + v = y\), lo que prueba que \(y \in \operatorname{ran} R\).
+              \end{itemize}
+              Finalmente, para deducir que la suma es cerrada, basta observar que \(R\) es un operador lineal continuo. El rango de cualquier proyector continuo coincide con el núcleo del operador continuo \(I - R\). Como \(\ker(I-R) = {(I-R)}^{-1}({0})\), y \({0}\) es cerrado, su preimagen es cerrada. Por consiguiente, \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\) es un subespacio cerrado.
+
+        \item Si agregamos la hipótesis de que \(PQ = 0\), como conmutan, entonces también \(QP = 0\).
+              Sustituyendo esto en la expresión del proyector de la parte 2, nos queda \(R = P + Q - 0 = P + Q\). Sabemos por el inciso anterior que este operador es un proyector con rango \(\operatorname{ran} P + \operatorname{ran} Q\).
+              Para ver que esta suma es directa, debemos probar que \(\operatorname{ran} P \cap \operatorname{ran} Q = {0}\).
+              Usando el resultado del inciso 1, sabemos que \(\operatorname{ran} P \cap \operatorname{ran} Q = \operatorname{ran}(PQ)\).
+              Como el operador \(PQ = 0\) (es el operador nulo), su rango es trivial: \(\operatorname{ran}(PQ) = {0}\).
+              Por lo tanto, la suma de los subespacios es directa, concluyendo que \(P+Q\) es un proyector cuyo rango es \(\operatorname{ran} P \oplus \operatorname{ran} Q\).
+    \end{enumerate}
+\end{proof}
+
+\vspace{0.5cm}
+
+Recordemos el \textbf{Ejercicio 9} de la práctica de repaso de medida e integración:
+
+Sea \((X, \mathfrak{X}, \mu)\) un espacio de medida finita y supongamos que \(1 \le r < p \le \infty\). Entonces \(L_p \subseteq L_r\) y para toda \(f \in L_p\) se cumple que
+\[
+    \|f\|_r \le \|f\|_p {\mu(X)}^s, \quad \text{donde} \quad s := \frac{1}{r} - \frac{1}{p}.
+\]
+
+\begin{ejercicio}{4}
+    Sea \( \{A_1, \dots, A_n\} \) una partición medible de \( [0,1] \) con \( |A_i| > 0 \). Probar que
+    \[
+        Pf = \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i}
+    \]
+    es un proyector de norma \( 1 \) en \( L^p[0,1] \), para \( 1 \le p \le \infty \).
+\end{ejercicio}
+\begin{proof}
+    Veamos primero que \( P \) es un proyector (\(P^2 = P\)).
+
+    Dado que \( \{A_1, \dots, A_n\} \) es una partición de \([0,1]\), los conjuntos \(A_i\) son disjuntos dos a dos. Evaluemos \(P\) sobre \(Pf\):
+    \[
+        P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} Pf \right) \chi_{A_j}
+    \]
+    Calculamos la integral de \(Pf\) sobre un conjunto específico \(A_j\). Dado que \(A_i \cap A_j = \varnothing \) para \(i \neq j\), sobre el conjunto \(A_j\) la función \(Pf\) toma el valor constante \(c_j = \frac{1}{|A_j|} \int_{A_j} f\). Por lo tanto:
+    \[
+        \int_{A_j} Pf = \int_{A_j} \left( \frac{1}{|A_j|} \int_{A_j} f \right) dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) \int_{A_j} 1 dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) |A_j| = \int_{A_j} f
+    \]
+    Sustituyendo esto en la expresión de \(P(Pf)\), obtenemos:
+    \[
+        P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} f \right) \chi_{A_j} = Pf
+    \]
+    Como el operador es claramente lineal (hereda la linealidad de la integral y de las sumas finitas) y cumple \(P^2 = P\), queda demostrado que es un proyector.
+
+    \vspace{0.5cm}
+
+    Veamos ahora que \(\norm{P} = 1\).
+
+    Primero probaremos que \(\norm{Pf}_p \le \norm{f}_p\) (lo que acota la norma del operador por 1), y luego exhibiremos una función donde se alcance la igualdad.
+
+    \paragraph{Caso \(1 \le p < \infty \):}
+    Calculamos la norma \(p\) de \(Pf\):
+    \[
+        \|Pf\|_p^p = \int_0^1 |Pf|^p = \int_0^1 \left| \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i} \right|^p
+    \]
+    Al ser los \(A_i\) mutuamente disjuntos, las indicatrices no se superponen, lo que nos permite sacar la suma fuera de la integral:
+    \[
+        \|Pf\|_p^p = \sum_{i} \int_{A_i} \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p = \sum_{i} |A_i| \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p
+    \]
+    Para acotar el término del valor absoluto, consideramos el espacio de medida finita \((A_i, \mathcal{M}, m)\) donde la medida total es \(\mu(A_i) = |A_i|\). Usando el teorema referenciado con \(r=1\) y el mismo valor de \(p\), la desigualdad nos indica que \( \norm{f}_1 \le \|f\|_p {\mu(A_i)}^{1 - \frac{1}{p}}\). Aplicado a nuestro dominio \(A_i\), esto se traduce en:
+    \[
+        \int_{A_i} |f| \le {\left( \int_{A_i} |f|^p \right)}^{\frac{1}{p}} |A_i|^{1 - \frac{1}{p}}
+    \]
+    Elevando toda la expresión a la potencia \(p\):
+    \[
+        {\left( \int_{A_i} |f| \right)}^p \le \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1}
+    \]
+    Volviendo a la norma original, y aplicando la propiedad \(\left| \int_{A_i} f \right| \le \int_{A_i} |f|\), reemplazamos la cota obtenida:
+    \[
+        \|Pf\|_p^p \le \sum_{i} \frac{|A_i|}{|A_i|^p} {\left( \int_{A_i} |f| \right)}^p \le \sum_{i} \frac{1}{|A_i|^{p-1}} \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1} = \sum_{i} \int_{A_i} |f|^p
+    \]
+    Como la unión de los \(A_i\) es exactamente \([0,1]\), la suma de las integrales es la integral sobre todo el espacio:
+    \[
+        \|Pf\|_p^p \le \int_0^1 |f|^p = \|f\|_p^p
+    \]
+    Extrayendo la raíz \(p\)-ésima, obtenemos \(\norm{Pf}_p \le \norm{f}_p\), lo que implica que \(\norm{P} \le 1\).
+
+    \paragraph{Caso \( p = \infty \):}
+    De forma análoga, aplicando el teorema referenciado sobre el subespacio \(A_i\) con \(r=1\) y \( p=\infty \), la desigualdad toma la forma \( \norm{f}_1 \le \norm{f}_\infty {\mu(A_i)}^{1 - 0}\). Por lo tanto:
+    \[
+        \|Pf\|_\infty = \max_{i} \left| \frac{1}{|A_i|} \int_{A_i} f \right| \le \max_{i} \frac{1}{|A_i|} \int_{A_i} |f| \le \max_{i} \frac{1}{|A_i|} \left( \|f\|_{L^\infty(A_i)} |A_i| \right) \le \|f\|_\infty
+    \]
+    Lo cual vuelve a demostrar que \( \norm{P} \le 1\).
+
+    \paragraph{Igualdad:}
+    Para asegurar que la norma es exactamente 1 (y no estrictamente menor), tomamos la función indicatriz de cualquiera de los subconjuntos de la partición, por ejemplo \(f = \chi_{A_1}\). Aplicando el operador:
+    \[
+        Pf = \frac{1}{|A_1|} \left( \int_{A_1} \chi_{A_1} \right) \chi_{A_1} = \frac{|A_1|}{|A_1|} \chi_{A_1} = \chi_{A_1} = f
+    \]
+    Como \(Pf = f\) para un elemento no nulo, se tiene que \(\norm{Pf}_p = \norm{f}_p \therefore \norm{P} = 1\).
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Sean \( X \) un espacio de Banach, \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \). Probar lo siguiente:
+    \begin{enumerate}
+        \item \( P \) es acotado y \( \sup_n \norm{P_n} < \infty \).
+        \item \( P^2 = P \).
+        \item \( \ker P \supseteq \bigcap_n \ker P_n \). Dar un ejemplo donde la inclusión sea estricta.
+    \end{enumerate}
+\end{ejercicio}
 
 \end{document}
