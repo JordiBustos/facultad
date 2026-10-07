@@ -525,5 +525,51 @@ Sea \((X, \mathfrak{X}, \mu)\) un espacio de medida finita y supongamos que \(1 
         \item \( \ker P \supseteq \bigcap_n \ker P_n \). Dar un ejemplo donde la inclusión sea estricta.
     \end{enumerate}
 \end{ejercicio}
+\begin{proof}
+    Sea \( X \) un espacio de Banach y sean \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \).
+
+    Primero, demostraremos que \( P \) es acotado y que \( \sup_n \norm{P_n} < \infty \). Dado que para cada \( x \in X \) la sucesión \( {(P_n x)}_{n\in\N} \) es convergente, está puntualmente acotada. Como \( X \) es un espacio de Banach, por el Principio de Acotación Uniforme, la sucesión de operadores está uniformemente acotada, es decir, existe \( M > 0 \) tal que \( \sup_n \norm{P_n} = M < \infty \).
+    Entonces, para todo \( x \in X \):
+    \[
+        \norm{Px} = \norm{\lim_{n \to \infty} P_n x} = \lim_{n \to \infty} \norm{P_n x} \le \lim_{n \to \infty} M \norm{x} = M \norm{x}.
+    \]
+    Esto demuestra que \( P \) es acotado y que \( \norm{P} \le M \).
+
+    A continuación, demostraremos que \( P^2 = P \). Sea \( x \in X \), evaluamos la norma de la diferencia \( P^2 x - Px \):
+    \[
+        \norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + \norm{P_n(Px) - P_n(P_n x)} + \norm{P_n(P_n x) - Px}.
+    \]
+    Dado que \( P_n \) son proyectores, \( P_n(P_n x) = P_n^2 x = P_n x \). Sustituyendo esto en el tercer término y usando que \( \norm{P_n} \le M \) para acotar el segundo término, obtenemos:
+    \[
+        \norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + M \norm{Px - P_n x} + \norm{P_n x - Px}.
+    \]
+    Tomando el límite cuando \( n \to \infty \), los tres términos tienden a cero (el primer término por la convergencia puntual evaluada en \( y = Px \), y los otros dos evaluados en \( x \)). Por lo tanto, \( \norm{P^2 x - Px} = 0 \), lo que implica que \( P^2 x = Px \) para todo \( x \in X \), es decir, \( P^2 = P \).
+
+    Finalmente, veamos la inclusión de los núcleos. Si \( x \in \bigcap_n \ker P_n \), entonces \( P_n x = 0 \) para todo \( n \in \mathbb{N} \). Al tomar el límite:
+    \[
+        Px = \lim_{n \to \infty} P_n x = \lim_{n \to \infty} 0 = 0.
+    \]
+    Por lo tanto, \( x \in \ker P \), lo que demuestra que \( \ker P \supseteq \bigcap_n \ker P_n \).
+
+    Para ver que la inclusión puede ser estricta, consideremos el espacio de Banach \( X = \R^2 \) con la norma euclídea, y definamos la sucesión de operadores \( P_n : \R^2 \to \R^2 \) como:
+    \[
+        P_n(x,y) = \left( x + \frac{1}{n}y, 0 \right).
+    \]
+    Notemos que son proyectores, ya que:
+    \[
+        \ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
+    \]
+    La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
+    El núcleo de \( P_n \) está dado por:
+    \[
+        \ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
+    \]
+    La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
+    Sin embargo, el núcleo del operador límite \( P \) es:
+    \[
+        \ker P = \{ (x,y) \in \R^2 : x = 0 \} = \text{span}\{ (0,1) \}.
+    \]
+    Como \( \text{span}\{ (0,1) \} \) contiene infinitos vectores además del nulo, concluimos que \( \ker P \supsetneq \bigcap_n \ker P_n \).
+\end{proof}
 
 \end{document}
