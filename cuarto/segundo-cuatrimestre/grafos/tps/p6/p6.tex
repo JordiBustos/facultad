@@ -150,7 +150,7 @@
 		      Llamemos \( S = \sum_{i=1}^n d_i \). Como \( S \) es par, podemos escribir \( S = 2m \).
 		      Por hipótesis, \( d_1 \le \sum_{i=2}^n d_i \). Sumando \( d_1 \) a ambos lados obtenemos \( 2d_1 \le S = 2m \), lo que implica que \( d_1 \le m \).
 
-		      Vamos a construir un grafo \( G \) (multigrafo sin loops) usando un método de emparejamiento de semiaristas. Consideremos un conjunto de \( 2m \) puntos (o semiaristas), numerados del \( 1 \) al \( 2m \).
+		      Vamos a construir un grafo \( G \). Consideremos un conjunto de \( 2m \) puntos, numerados del \( 1 \) al \( 2m \).
 		      Asignamos estos puntos a los vértices de manera secuencial en bloques contiguos:
 		      \begin{itemize}
 			      \item Al vértice \( v_1 \) le asignamos los primeros \( d_1 \) puntos.
@@ -164,7 +164,7 @@
 
 		      Resta verificar que el grafo resultante no tiene loops. Un loop se formaría si conectamos el punto \( j \) con el punto \( j+m \) y ambos pertenecen al mismo vértice \( v_i \). Sin embargo, la cantidad de puntos asignados al vértice \( v_i \) es \( d_i \). Como la secuencia está ordenada de forma decreciente, el vértice con más puntos es \( v_1 \), el cual tiene \( d_1 \) puntos.
 		      Dado que \( d_1 \le m \), la distancia máxima entre los números de dos puntos que pertenecen al mismo vértice es estrictamente menor que \( m \).
-		      Por lo tanto, el punto \( j \) y el punto \( j+m \) nunca pueden pertenecer al mismo vértice. Esto garantiza que no se forman loops (aunque sí está permitido que se formen aristas múltiples), concluyendo la demostración.
+		      Por lo tanto, el punto \( j \) y el punto \( j+m \) nunca pueden pertenecer al mismo vértice. Esto garantiza que no se forman loops, concluyendo la demostración.
 	\end{itemize}
 \end{proof}
 
@@ -173,18 +173,90 @@
 \begin{ejercicio}{6}
 	Determinar si es verdadero o falso y justificar: todo digrafo simple (permitiendo loops) con \( n \) vértices (\( n > 1 \)) tiene dos vértices distintos con el mismo grado de salida o dos vértices distintos con el mismo grado de llegada ¿Cambia la respuesta si pensamos a los digrafos simples en el sentido más restrictivo de que los loops no están permitidos?
 \end{ejercicio}
+\begin{proof}
+	\emph{Claim}: La afirmación es \textbf{falsa} en ambos casos.
+
+	\begin{center}
+		\begin{tikzpicture}[
+				vertex/.style={circle, draw, minimum size=8mm, inner sep=0pt, font=\small}, ->, >=stealth, thick]
+
+			\node[vertex] (v1) at (0, 0) {$v_1$};
+			\node[vertex] (v2) at (4, 0) {$v_2$};
+			\node[vertex] (v3) at (2, 3) {$v_3$};
+
+			\draw (v3) -- (v2);
+			\draw (v3) -- (v1);
+			\draw (v2) -- (v1);
+
+			% Etiquetas de grados
+			\node[align=left, font=\footnotesize, right=0.3cm] at (v2) {$d^+(v_2)=1$\\$d^-(v_2)=1$};
+			\node[align=right, font=\footnotesize, left=0.3cm] at (v1) {$d^+(v_1)=0$\\$d^-(v_1)=2$};
+			\node[align=center, font=\footnotesize, above=0.3cm] at (v3) {$d^+(v_3)=2$\\$d^-(v_3)=0$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	Los grados de salida son \( d^+(v_1)=0 \), \( d^+(v_2)=1 \), \( d^+(v_3)=2 \) (todos distintos).
+	Los grados de llegada son \( d^-(v_1)=2 \), \( d^-(v_2)=1 \), \( d^-(v_3)=0 \) (todos distintos).
+
+	Como el grafo no utiliza loops, los grados de salida y llegada siguen siendo distintos para cada vértice. Por lo tanto, la afirmación es falsa en ambos casos.
+\end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{7}
+\begin{definition}
+	Un \textbf{camino dirigido} en un digrafo \( D \) es una secuencia de vértices \( v_1, v_2, \ldots, v_k \) tal que para cada \( i = 1, 2, \ldots, k-1 \), existe una arista dirigida de \( v_i \) a \( v_{i+1} \).
+\end{definition}
+
+\begin{definition}
+	Un digrafo se dice \textbf{fuertemente conexo} si para cada par de vértices \( u \) y \( v \), existe un camino dirigido de \( u \) a \( v \) y otro de \( v \) a \( u \).
+\end{definition}
+
+\begin{ejercicioEntregar}{7}
 	Dos vértices de un digrafo \( x \) e \( y \) se dicen conectados si existe un camino dirigido de \( x \) a \( y \) y otro de \( y \) a \( x \). Probar que la relación de conexión en un digrafo \( D \) es de equivalencia y que sus clases son las componentes fuertemente conexas de \( D \).
-\end{ejercicio}
+\end{ejercicioEntregar}
+\begin{proof}
+	Para ver que es una relación de equivalencia, debemos verificar que es reflexiva, simétrica y transitiva. Llamemos \( \sim \) a esta relación de conexión, es decir, \( x \sim y \) si y sólo si existe un camino dirigido de \( x \) a \( y \) y otro de \( y \) a \( x \).
+
+	\begin{itemize}
+		\item \textbf{Reflexiva (\( x \sim x \)):} Para cualquier vértice \( x \in V(D) \), la secuencia formada por el único vértice \( x \) constituye un camino dirigido de longitud 0 (camino trivial o vacío) de \( x \) a \( x \). Por lo tanto, \( x \sim x \).
+
+		\item \textbf{Simétrica (\( x \sim y \implies y \sim x \)):} Si \( x \sim y \), entonces por definición existe un camino dirigido de \( x \) a \( y \) y otro de \( y \) a \( x \). Esto es equivalente a decir que existe un camino de \( y \) a \( x \) y otro de \( x \) a \( y \), por lo que \( y \sim x \).
+
+		\item \textbf{Transitiva (\( x \sim y \) e \( y \sim z \implies x \sim z \)):} Si \( x \sim y \), existen caminos dirigidos \( P_{xy} \) (de \( x \) a \( y \)) y \( P_{yx} \) (de \( y \) a \( x \)). Como \( y \sim z \), existen caminos dirigidos \( P_{yz} \) y \( P_{zy} \). Concatenando \( P_{xy} \) con \( P_{yz} \) obtenemos un recorrido dirigido de \( x \) a \( z \), del cual siempre podemos extraer un camino dirigido de \( x \) a \( z \). Análogamente, concatenando \( P_{zy} \) con \( P_{yx} \) obtenemos un recorrido del cual extraemos un camino dirigido de \( z \) a \( x \). Por lo tanto, \( x \sim z \).
+	\end{itemize}
+
+	Luego, la relación de conexión \( \sim \) es de equivalencia.
+
+	Veamos ahora que las clases de equivalencia bajo esta relación son precisamente las componentes fuertemente conexas del digrafo \( D \).
+
+	Por un lado, la clase de equivalencia de un vértice \( x \), denotada \( [x] \), es el conjunto de todos los vértices \( y \) tales que \( x \sim y \). Por definición de \( \sim \), todos los vértices en \( [x] \) son mutuamente alcanzables, formando un conjunto fuertemente conexo.
+
+	Además, las clases de equivalencia son subconjuntos \textbf{maximales} respecto a esta propiedad: si existiera un vértice \( w \notin [x] \) que fuera mutuamente alcanzable con los vértices de \( [x] \), en particular tendríamos \( x \sim w \), lo que implicaría \( w \in [x] \), llegando a un absurdo.
+
+	Dado que una componente fuertemente conexa se define justamente como un subgrafo fuertemente conexo maximal, concluimos que las clases de equivalencia de \( \sim \) coinciden exactamente con las componentes fuertemente conexas de \( D \).
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
 	Probar que en todo digrafo existe una componente fuertemente conexa sin aristas que ingresen a ella y que existe una componente fuertemente conexa sin aristas que salgan de ella.
 \end{ejercicio}
+\begin{proof}
+	Sea \( D \) un digrafo (asumimos finito) y consideremos su grafo de componentes fuertemente conexas, \( D^* \). En \( D^* \), cada vértice representa una componente fuertemente conexa de \( D \), y hay una arista dirigida de la componente \( C_i \) a la componente \( C_j \) si existe al menos una arista en \( D \) desde algún vértice en \( C_i \) hacia algún vértice en \( C_j \).
+
+	Si el grafo \( D^* \) tuviera un ciclo dirigido, esto implicaría que todos los vértices de las componentes involucradas en el ciclo serían mutuamente alcanzables en \( D \). Pero entonces todas ellas formarían una única gran componente fuertemente conexa, lo que contradice la definición de las componentes originales. Por lo tanto, \( D^* \) es un digrafo acíclico.
+
+	Como \( D \) es finito, \( D^* \) también lo es. Veamos que en todo digrafo acíclico finito existe al menos un vértice sin aristas entrantes y al menos uno sin aristas salientes.
+
+	Consideremos un camino dirigido de longitud máxima en \( D^* \), digamos \( P = C_1, C_2, \ldots, C_k \).
+	\begin{itemize}
+		\item El vértice inicial \( C_1 \) no puede tener aristas que ingresen a él. Si recibiera una arista de algún \( C_i \) perteneciente a \( P \), se formaría un ciclo (absurdo). Si recibiera una arista de un vértice externo a \( P \), el camino podría extenderse hacia atrás, contradiciendo que \( P \) es de longitud máxima. Por lo tanto, \( C_1 \) es la componente buscada sin aristas entrantes.
+		\item Por un razonamiento análogo, el vértice final \( C_k \) no puede tener aristas que salgan de él (de lo contrario se formaría un ciclo o el camino se extendería hacia adelante). Luego, \( C_k \) es la componente buscada sin aristas salientes.
+	\end{itemize}
+
+	Esto demuestra la existencia de ambas componentes en el digrafo original \( D \).
+\end{proof}
 
 \vspace{0.5cm}
 
