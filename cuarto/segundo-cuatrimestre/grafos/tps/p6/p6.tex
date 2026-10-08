@@ -1,79 +1,215 @@
 \begin{ejercicio}{1}
-    Determinar si es verdadero o falso, y justificar: si \( u \) y \( v \) son los únicos vértices de grado impar en un grafo, entonces \( G \) contiene un \( uv \)-camino.
+	Determinar si es verdadero o falso, y justificar: si \( u \) y \( v \) son los únicos vértices de grado impar en un grafo, entonces \( G \) contiene un \( uv \)-camino.
 \end{ejercicio}
+\begin{proof}
+	Agregemos la arista \( uv \) al grafo \( G \) y llamemos \( G' \) al grafo resultante. En \( G' \), todos los vértices tienen grado par, por lo que \( G' \) tiene un circuito euleriano. Este circuito euleriano debe pasar por la arista \( uv \), pero podemos mirar la parte del circuito que va de \( u \) a \( v \) sin pasar por \( uv \) o, en el otro caso, el que va de \( v \) a \( u \) sin pasar por esa arista que nos da un \( uv \)-camino.
+\end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{2}
-    Probar si las siguientes son secuencias de grados de un grafo simple. En caso afirmativo, construir un grafo con esos grados. Si no, dar una prueba de imposibilidad.
-    \begin{itemize}
-        \item \( 5, 5, 4, 3, 2, 2, 2, 1 \)
-        \item \( 5, 5, 4, 4, 2, 2, 1, 1 \)
-        \item \( 5, 5, 5, 3, 2, 2, 1, 1 \)
-        \item \( 5, 5, 5, 4, 2, 1, 1, 1 \)
-    \end{itemize}
-\end{ejercicio}
+\begin{ejercicioEntregar}{2}
+	Probar si las siguientes son secuencias de grados de un grafo simple. En caso afirmativo, construir un grafo con esos grados. Si no, dar una prueba de imposibilidad.
+	\begin{itemize}
+		\item \( 5, 5, 4, 3, 2, 2, 2, 1 \)
+		\item \( 5, 5, 4, 4, 2, 2, 1, 1 \)
+		\item \( 5, 5, 5, 3, 2, 2, 1, 1 \)
+		\item \( 5, 5, 5, 4, 2, 1, 1, 1 \)
+	\end{itemize}
+\end{ejercicioEntregar}
+\begin{proof}
+	Recordemos el \textbf{algoritmo} visto en la teoría para determinar si una secuencia de enteros no negativos \( d_1, \ldots, d_n \) es la secuencia de grados de un grafo simple. Sea \( d_1 \geq d_2 \geq \cdots \geq d_n \). Si \( d_1 = 0 \), entonces todos los \( d_i = 0 \) y la secuencia es gráfica. Si \( d_1 > 0 \), eliminamos el primer elemento \( d_1 \) y le restamos 1 a los siguientes \( d_1 \) elementos. Luego reordenamos la secuencia resultante y repetimos el proceso hasta que lleguemos a una secuencia de ceros o a una secuencia que no sea válida (por ejemplo, si algún elemento se vuelve negativo).
+
+	Hagamos esto para cada una de las secuencias dadas:
+	\begin{itemize}
+		\item \textbf{Secuencia 1:} \( 5, 5, 4, 3, 2, 2, 2, 1 \)
+		      \[
+			      5, 5, 4, 3, 2, 2, 2, 1 \to 4, 3, 2, 1, 1, 2, 1 \to 4, 3, 2, 2, 1, 1, 1 \to 2, 1, 1, 0, 1, 1 \to 2, 1, 1, 1, 1, 0
+		      \]
+		      \[
+			      \to 0, 0, 1, 1, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+		      \]
+
+		\item \textbf{Secuencia 2:} \( 5, 5, 4, 4, 2, 2, 1, 1 \)
+		      \[
+			      5, 5, 4, 4, 2, 2, 1, 1 \to 4, 3, 3, 1, 1, 1, 1 \to 2, 2, 0, 0, 1, 1 \to 2, 2, 1, 1, 0, 0
+		      \]
+		      \[
+			      \to 1, 0, 1, 0, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+		      \]
+
+		\item \textbf{Secuencia 3:} \( 5, 5, 5, 3, 2, 2, 1, 1 \)
+		      \[
+			      5, 5, 5, 3, 2, 2, 1, 1 \to 4, 4, 2, 1, 1, 1, 1 \to 3, 1, 0, 0, 1, 1 \to 3, 1, 1, 1, 0, 0
+		      \]
+		      \[
+			      \to 0, 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+		      \]
+
+		\item \textbf{Secuencia 4:} \( 5, 5, 5, 4, 2, 1, 1, 1 \)
+		      \[
+			      5, 5, 5, 4, 2, 1, 1, 1 \to 4, 4, 3, 1, 0, 1, 1 \to 4, 4, 3, 1, 1, 1, 0 \to 3, 2, 0, 0, 1, 0
+		      \]
+		      \[
+			      \to 3, 2, 1, 0, 0, 0 \to 1, 0, -1, 0, 0 \implies \text{Secuencia \textbf{NO} válida, aparece un grado negativo}
+		      \]
+	\end{itemize}
+
+	\vspace{0.5cm}
+	A continuación, construimos los grafos simples correspondientes para las secuencias válidas. Nombramos los vértices \(v_1, \ldots, v_8\) donde el subíndice respeta el orden original de la secuencia de mayor a menor grado.
+
+	\begin{center}
+		\begin{tikzpicture}[
+				vertex/.style={circle, draw, minimum size=8mm, inner sep=0pt, font=\small},
+				thick]
+
+			\node at (0, 3) {\textbf{Grafo 1}};
+			% Grafo 1: 5, 5, 4, 3, 2, 2, 2, 1
+			\begin{scope}[shift={(0,0)}]
+				\foreach \i/\ang in {1/90, 2/45, 3/0, 4/-45, 5/-90, 6/-135, 7/-180, 8/135} {
+						\node[vertex] (g1v\i) at (\ang:2) {$v_{\i}$};
+					}
+				% Aristas Grafo 1
+				\draw (g1v1) -- (g1v2); \draw (g1v1) -- (g1v3); \draw (g1v1) -- (g1v4); \draw (g1v1) -- (g1v5); \draw (g1v1) -- (g1v6);
+				\draw (g1v2) -- (g1v3); \draw (g1v2) -- (g1v4); \draw (g1v2) -- (g1v5); \draw (g1v2) -- (g1v6);
+				\draw (g1v3) -- (g1v7); \draw (g1v3) -- (g1v8);
+				\draw (g1v4) -- (g1v7);
+			\end{scope}
+
+			\node at (6, 3) {\textbf{Grafo 2}};
+			% Grafo 2: 5, 5, 4, 4, 2, 2, 1, 1
+			\begin{scope}[shift={(6,0)}]
+				\foreach \i/\ang in {1/90, 2/45, 3/0, 4/-45, 5/-90, 6/-135, 7/-180, 8/135} {
+						\node[vertex] (g2v\i) at (\ang:2) {$v_{\i}$};
+					}
+				% Aristas Grafo 2
+				\draw (g2v1) -- (g2v2); \draw (g2v1) -- (g2v3); \draw (g2v1) -- (g2v4); \draw (g2v1) -- (g2v5); \draw (g2v1) -- (g2v6);
+				\draw (g2v2) -- (g2v3); \draw (g2v2) -- (g2v4); \draw (g2v2) -- (g2v5); \draw (g2v2) -- (g2v6);
+				\draw (g2v3) -- (g2v4); \draw (g2v3) -- (g2v7);
+				\draw (g2v4) -- (g2v8);
+			\end{scope}
+
+			\node at (12, 3) {\textbf{Grafo 3}};
+			% Grafo 3: 5, 5, 5, 3, 2, 2, 1, 1
+			\begin{scope}[shift={(12,0)}]
+				\foreach \i/\ang in {1/90, 2/45, 3/0, 4/-45, 5/-90, 6/-135, 7/-180, 8/135} {
+						\node[vertex] (g3v\i) at (\ang:2) {$v_{\i}$};
+					}
+				% Aristas Grafo 3
+				\draw (g3v1) -- (g3v2); \draw (g3v1) -- (g3v3); \draw (g3v1) -- (g3v4); \draw (g3v1) -- (g3v5); \draw (g3v1) -- (g3v6);
+				\draw (g3v2) -- (g3v3); \draw (g3v2) -- (g3v4); \draw (g3v2) -- (g3v5); \draw (g3v2) -- (g3v7);
+				\draw (g3v3) -- (g3v4); \draw (g3v3) -- (g3v6); \draw (g3v3) -- (g3v8);
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{3}
-    Se tiene una liga con dos divisiones de 13 equipos cada una. Determinar si es posible programar la temporada de manera que cada equipo juegue nueve partidos con equipos de su división y cuatro partidos con equipos de la otra división.
+	Se tiene una liga con dos divisiones de 13 equipos cada una. Determinar si es posible programar la temporada de manera que cada equipo juegue nueve partidos con equipos de su división y cuatro partidos con equipos de la otra división.
 \end{ejercicio}
+\begin{proof}
+	Si separamos cada división y vemos los partidos que se juegan dentro de cada división, tenemos que cada equipo juega 9 partidos con equipos de su división. Esto quiere decir que, si pensamos cada equipo como un vértice, tenemos que armar el grafo con la siguiente secuencia de números: \[
+		9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
+	\]
+	Cuya suma total es \( 9 \cdot 13 = 117 \), que es impar. Por lo tanto, no es posible que los equipos jueguen 9 partidos con equipos de su división y, por lo tanto, no es posible programar la temporada de la manera que se pide.
+\end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{4}
-    Probar que todo grafo simple con al menos dos vértices tiene dos vértices de igual grado ¿Vale lo mismo para grafos sin loops con aristas múltiples?
-\end{ejercicio}
+\begin{ejercicioEntregar}{4}
+	Probar que todo grafo simple con al menos dos vértices tiene dos vértices de igual grado ¿Vale lo mismo para grafos sin loops con aristas múltiples?
+\end{ejercicioEntregar}
+\begin{proof}
+	Sea \( G \) un grafo simple con \( n \geq 2 \) vértices. Los posibles grados de los vértices en un grafo simple con \( n \) vértices son \( 0, 1, 2, \ldots, n-1 \). Esto nos da \( n \) posibles grados. Supongamos que los \( n \) vértices tienen todos grados distintos. Si aplicamos el algoritmo, nos queda:\[
+		n-1, n-2, n-3, \ldots, 2, 1, 0 \to n-3, n-4, \ldots, 1, -1
+	\]
+	Luego, no es posible armar un grafo de estas características.
+
+	No vale lo mismo para grafos sin loops con aristas múltiples. Por ejemplo, el grafo de 3 vértices con una simple y una arista múltiple entre dos de ellos tiene grados \( 1, 2, 3 \) y no hay dos vértices con el mismo grado.
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-    Sean \( d_1, \ldots, d_n \) enteros tales que \( d_1 \geq \cdots \geq d_n \geq 0 \). Probar que existe un grafo sin loops (se permiten aristas múltiples) con secuencia de grados \( d_1, \ldots, d_n \) si y sólo si la suma de estos números es par y \( d_1 \leq d_2 + \cdots + d_n \).
+	Sean \( d_1, \ldots, d_n \) enteros tales que \( d_1 \geq \cdots \geq d_n \geq 0 \). Probar que existe un grafo sin loops (se permiten aristas múltiples) con secuencia de grados \( d_1, \ldots, d_n \) si y sólo si la suma de estos números es par y \( d_1 \leq d_2 + \cdots + d_n \).
 \end{ejercicio}
+\begin{proof}
+	Sean \( d_1, \ldots, d_n \) enteros tales que \( d_1 \geq \cdots \geq d_n \geq 0 \).
+	\begin{itemize}
+		\item[\(\Longrightarrow\))] Supongamos que existe un grafo \( G \) sin loops con secuencia de grados \( d_1, \ldots, d_n \). Por el Lema del Apretón de Manos, la suma de los grados siempre es par. Luego,
+		      \[
+			      \sum_{i=1}^n d_i = 2 |E(G)|
+		      \]
+		      Como no hay loops, el grado de cualquier vértice a lo sumo puede ser igual a la cantidad total de aristas en el grafo, por lo que \( d_1 \le |E(G)| \). Sustituyendo esto, tenemos:
+		      \[
+			      d_1 \le \sum_{i=1}^n \frac{d_i}{2} \implies 2d_1 \le \sum_{i=1}^n d_i \implies 2d_1 \le d_1 + \sum_{i=2}^n d_i \implies d_1 \le d_2 + \cdots + d_n
+		      \]
+
+		\item[\(\Longleftarrow\))] Sea \( d_1 \le d_2 + \cdots + d_n \) y supongamos que \( \sum_{i=1}^n d_i \) es par.
+		      Llamemos \( S = \sum_{i=1}^n d_i \). Como \( S \) es par, podemos escribir \( S = 2m \).
+		      Por hipótesis, \( d_1 \le \sum_{i=2}^n d_i \). Sumando \( d_1 \) a ambos lados obtenemos \( 2d_1 \le S = 2m \), lo que implica que \( d_1 \le m \).
+
+		      Vamos a construir un grafo \( G \) (multigrafo sin loops) usando un método de emparejamiento de semiaristas. Consideremos un conjunto de \( 2m \) puntos (o semiaristas), numerados del \( 1 \) al \( 2m \).
+		      Asignamos estos puntos a los vértices de manera secuencial en bloques contiguos:
+		      \begin{itemize}
+			      \item Al vértice \( v_1 \) le asignamos los primeros \( d_1 \) puntos.
+			      \item Al vértice \( v_2 \) le asignamos los siguientes \( d_2 \) puntos.
+			      \item Y así sucesivamente; en general, a cada vértice \( v_i \) le asignamos un bloque de \( d_i \) puntos.
+		      \end{itemize}
+
+		      Para formar las aristas de \( G \), unimos el punto \( j \) con el punto \( j+m \) para todo \( 1 \le j \le m \).
+
+		      Es evidente que cada vértice \( v_i \) tendrá grado exactamente \( d_i \), puesto que le asignamos \( d_i \) puntos y cada punto forma exactamente un extremo de una arista.
+
+		      Resta verificar que el grafo resultante no tiene loops. Un loop se formaría si conectamos el punto \( j \) con el punto \( j+m \) y ambos pertenecen al mismo vértice \( v_i \). Sin embargo, la cantidad de puntos asignados al vértice \( v_i \) es \( d_i \). Como la secuencia está ordenada de forma decreciente, el vértice con más puntos es \( v_1 \), el cual tiene \( d_1 \) puntos.
+		      Dado que \( d_1 \le m \), la distancia máxima entre los números de dos puntos que pertenecen al mismo vértice es estrictamente menor que \( m \).
+		      Por lo tanto, el punto \( j \) y el punto \( j+m \) nunca pueden pertenecer al mismo vértice. Esto garantiza que no se forman loops (aunque sí está permitido que se formen aristas múltiples), concluyendo la demostración.
+	\end{itemize}
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{6}
-    Determinar si es verdadero o falso y justificar: todo digrafo simple (permitiendo loops) con \( n \) vértices (\( n > 1 \)) tiene dos vértices distintos con el mismo grado de salida o dos vértices distintos con el mismo grado de llegada ¿Cambia la respuesta si pensamos a los digrafos simples en el sentido más restrictivo de que los loops no están permitidos?
+	Determinar si es verdadero o falso y justificar: todo digrafo simple (permitiendo loops) con \( n \) vértices (\( n > 1 \)) tiene dos vértices distintos con el mismo grado de salida o dos vértices distintos con el mismo grado de llegada ¿Cambia la respuesta si pensamos a los digrafos simples en el sentido más restrictivo de que los loops no están permitidos?
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
-    Dos vértices de un digrafo \( x \) e \( y \) se dicen conectados si existe un camino dirigido de \( x \) a \( y \) y otro de \( y \) a \( x \). Probar que la relación de conexión en un digrafo \( D \) es de equivalencia y que sus clases son las componentes fuertemente conexas de \( D \).
+	Dos vértices de un digrafo \( x \) e \( y \) se dicen conectados si existe un camino dirigido de \( x \) a \( y \) y otro de \( y \) a \( x \). Probar que la relación de conexión en un digrafo \( D \) es de equivalencia y que sus clases son las componentes fuertemente conexas de \( D \).
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
-    Probar que en todo digrafo existe una componente fuertemente conexa sin aristas que ingresen a ella y que existe una componente fuertemente conexa sin aristas que salgan de ella.
+	Probar que en todo digrafo existe una componente fuertemente conexa sin aristas que ingresen a ella y que existe una componente fuertemente conexa sin aristas que salgan de ella.
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{9}
-    Sea \( G \) un digrafo simple con \( n \) vértices y sin ciclos dirigidos. Probar que existe un orden \( v_1, \ldots, v_n \) de los vértices de \( G \) de modo que, para todo par de valores distintos \( i, j \) entre \( 1 \) y \( n \), si \( v_i v_j \in E(G) \) entonces \( i \leq j \).
+	Sea \( G \) un digrafo simple con \( n \) vértices y sin ciclos dirigidos. Probar que existe un orden \( v_1, \ldots, v_n \) de los vértices de \( G \) de modo que, para todo par de valores distintos \( i, j \) entre \( 1 \) y \( n \), si \( v_i v_j \in E(G) \) entonces \( i \leq j \).
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{definition}
-    Un \textbf{torneo} es un digrafo cuyo grafo subyacente es un grafo completo. En otras palabras, el digrafo obtenido de un grafo completo al darle orientación a sus aristas.
+	Un \textbf{torneo} es un digrafo cuyo grafo subyacente es un grafo completo. En otras palabras, el digrafo obtenido de un grafo completo al darle orientación a sus aristas.
 \end{definition}
 
 \begin{ejercicio}{10}
-    Probar que existe un torneo de \( n \) vértices con grado de salida igual al grado de llegada en cada vértice si y sólo si \( n \) es impar.
+	Probar que existe un torneo de \( n \) vértices con grado de salida igual al grado de llegada en cada vértice si y sólo si \( n \) es impar.
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{11}
-    Probar que todo torneo posee un camino dirigido hamiltoniano.
+	Probar que todo torneo posee un camino dirigido hamiltoniano.
 \end{ejercicio}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{12}
-    Probar que un torneo posee un ciclo hamiltoniano si y sólo si es fuertemente conexo.
+	Probar que un torneo posee un ciclo hamiltoniano si y sólo si es fuertemente conexo.
 \end{ejercicio}
