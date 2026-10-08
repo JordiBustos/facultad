@@ -50,262 +50,262 @@
 \section{El adjunto de un operador lineal sobre un espacio de Banach}
 
 \begin{ejercicio}{1}
-    Fijado \( 1 \le p < \infty \) sean \( S \in L(\ell^p) \) y \( T \in L(\ell^p) \) los shifts a izquierda y derecha, respectivamente, y sea \( J: \ell^2 \to c_0 \) definido por \( J(x) = x \). Probar que \( J \in L(\ell^2, c_0) \) y calcular \( S^* \), \( T^* \) y \( J^* \).
+	Fijado \( 1 \le p < \infty \) sean \( S \in L(\ell^p) \) y \( T \in L(\ell^p) \) los shifts a izquierda y derecha, respectivamente, y sea \( J: \ell^2 \to c_0 \) definido por \( J(x) = x \). Probar que \( J \in L(\ell^2, c_0) \) y calcular \( S^* \), \( T^* \) y \( J^* \).
 \end{ejercicio}
 \begin{proof}
-    Primero, veamos que \( J \in L(\ell^2, c_0) \). Sea \( x = {(x_n)}_{n \in \N} \in \ell^2 \). Como la serie converge, es decir \( \sum_{n=1}^{\infty} |x_n|^2 < \infty \), necesariamente el término general tiende a cero: \( \lim_{n \to \infty} x_n = 0 \). Por lo tanto, \( J(x) = x \in c_0 \), lo que muestra que el operador \( J \) está bien definido.
+	Primero, veamos que \( J \in L(\ell^2, c_0) \). Sea \( x = {(x_n)}_{n \in \N} \in \ell^2 \). Como la serie converge, es decir \( \sum_{n=1}^{\infty} |x_n|^2 < \infty \), necesariamente el término general tiende a cero: \( \lim_{n \to \infty} x_n = 0 \). Por lo tanto, \( J(x) = x \in c_0 \), lo que muestra que el operador \( J \) está bien definido.
 
-    Para ver que es acotado, notemos que:
-    \[ \norm{J(x)}_{\infty} = \sup_{n \ge 1} |x_n| \le {\left( \sum_{n=1}^{\infty} |x_n|^2 \right)}^{1/2} = \norm{x}_2 \]
-    Por lo tanto, \( J \) es un operador lineal acotado con \( \norm{J} \le 1 \).
+	Para ver que es acotado, notemos que:
+	\[ \norm{J(x)}_{\infty} = \sup_{n \ge 1} |x_n| \le {\left( \sum_{n=1}^{\infty} |x_n|^2 \right)}^{1/2} = \norm{x}_2 \]
+	Por lo tanto, \( J \) es un operador lineal acotado con \( \norm{J} \le 1 \).
 
-    Ahora, calculemos los operadores adjuntos. Recordemos que el espacio dual de \( \ell^p \) se identifica con \( \ell^q \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \).
+	Ahora, calculemos los operadores adjuntos. Recordemos que el espacio dual de \( \ell^p \) se identifica con \( \ell^q \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \).
 
-    Para el shift a izquierda \( S^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
-    \[ S^*(y)(x) = y(Sx) = \sum_{n=1}^{\infty} (Sx)_n y_n = \sum_{n=1}^{\infty} x_{n+1} y_n = \sum_{k=2}^{\infty} x_k y_{k-1} \]
-    Esto es equivalente a la acción funcional de aplicar un shift a derecha al vector \( y \). Así, \( S^* \) resulta ser el shift a derecha actuando en \( \ell^q \).
+	Para el shift a izquierda \( S^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
+	\[ S^*(y)(x) = y(Sx) = \sum_{n=1}^{\infty} (Sx)_n y_n = \sum_{n=1}^{\infty} x_{n+1} y_n = \sum_{k=2}^{\infty} x_k y_{k-1} \]
+	Esto es equivalente a la acción funcional de aplicar un shift a derecha al vector \( y \). Así, \( S^* \) resulta ser el shift a derecha actuando en \( \ell^q \).
 
-    Para el shift a derecha \( T^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
-    \[ T^*(y)(x) = y(Tx) = \sum_{n=1}^{\infty} {(Tx)}_n y_n = 0 \cdot y_1 + \sum_{n=2}^{\infty} x_{n-1} y_n = \sum_{k=1}^{\infty} x_k y_{k+1} \]
-    Esto es equivalente a la acción funcional de aplicar un shift a izquierda al vector \( y \). Por lo tanto, \( T^* \) resulta ser el shift a izquierda actuando en \( \ell^q \).
+	Para el shift a derecha \( T^*: \ell^q \to \ell^q \), dados \( x \in \ell^p \) e \( y \in \ell^q \):
+	\[ T^*(y)(x) = y(Tx) = \sum_{n=1}^{\infty} {(Tx)}_n y_n = 0 \cdot y_1 + \sum_{n=2}^{\infty} x_{n-1} y_n = \sum_{k=1}^{\infty} x_k y_{k+1} \]
+	Esto es equivalente a la acción funcional de aplicar un shift a izquierda al vector \( y \). Por lo tanto, \( T^* \) resulta ser el shift a izquierda actuando en \( \ell^q \).
 
-    Para \( J^* \), sabemos que el espacio dual de \( c_0 \) se identifica isométricamente con \( \ell^1 \), y el dual de \( \ell^2 \) es \( \ell^2 \). Entonces tenemos que \( J^*: \ell^1 \to \ell^2 \).
-    Dados \( y \in \ell^1 \) y \( x \in \ell^2 \):
-    \[ J^*(y)(x) = y(Jx) = \sum_{n=1}^{\infty} y_n {(Jx)}_n = \sum_{n=1}^{\infty} y_n x_n \]
-    Como funcional en \( (\ell^2)^* \cong \ell^2 \), esta expresión se identifica con el vector \( y \) mismo, ya que \( \ell^1 \subset \ell^2 \). Así, \( J^*(y) = y \), lo cual significa que \( J^* \) es simplemente el operador de inclusión canónica de \( \ell^1 \) en \( \ell^2 \).
+	Para \( J^* \), sabemos que el espacio dual de \( c_0 \) se identifica isométricamente con \( \ell^1 \), y el dual de \( \ell^2 \) es \( \ell^2 \). Entonces tenemos que \( J^*: \ell^1 \to \ell^2 \).
+	Dados \( y \in \ell^1 \) y \( x \in \ell^2 \):
+	\[ J^*(y)(x) = y(Jx) = \sum_{n=1}^{\infty} y_n {(Jx)}_n = \sum_{n=1}^{\infty} y_n x_n \]
+	Como funcional en \( (\ell^2)^* \cong \ell^2 \), esta expresión se identifica con el vector \( y \) mismo, ya que \( \ell^1 \subset \ell^2 \). Así, \( J^*(y) = y \), lo cual significa que \( J^* \) es simplemente el operador de inclusión canónica de \( \ell^1 \) en \( \ell^2 \).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{2}
-    Sea \( E = \ell^p(\N) \), con \( p \in (1, \infty) \) e identifiquemos \( E^* \) con \( \ell^q(\N) \) en la forma usual. Fijado un \( a \in \ell^{\infty}(\N) \) consideremos el operador multiplicación \( M_a \in L(E) \) producido por \( M_a x = {(a_n x_n)}_{n \in \N} \in \ell^p \) para cada \( x = {(x_n)}_{n \in \N} \in \ell^p \). Probar que su adjunto \( M_a^* \in L(E^*) = L(\ell^q(\N)) \) es el mismo \( M_a \) actuando ahora en \( \ell^q(\N) \).
+	Sea \( E = \ell^p(\N) \), con \( p \in (1, \infty) \) e identifiquemos \( E^* \) con \( \ell^q(\N) \) en la forma usual. Fijado un \( a \in \ell^{\infty}(\N) \) consideremos el operador multiplicación \( M_a \in L(E) \) producido por \( M_a x = {(a_n x_n)}_{n \in \N} \in \ell^p \) para cada \( x = {(x_n)}_{n \in \N} \in \ell^p \). Probar que su adjunto \( M_a^* \in L(E^*) = L(\ell^q(\N)) \) es el mismo \( M_a \) actuando ahora en \( \ell^q(\N) \).
 \end{ejercicio}
 \begin{proof}
-    Sean \( x = {(x_n)}_{n \in \N} \in \ell^p \) e \( y = {(y_n)}_{n \in \N} \in \ell^q \). Queremos encontrar la forma explícita del operador adjunto \( M_a^*: \ell^q \to \ell^q \), el cual está caracterizado por la siguiente relación de dualidad:
-    \[ M_a^*(y)(x) = y(M_a x) \]
-    Calculamos la acción del funcional \( y \) sobre el vector \( M_a x \):
-    \[ y(M_a x) = \sum_{n=1}^{\infty} {(M_a x)}_n y_n = \sum_{n=1}^{\infty} (a_n x_n) y_n \]
-    Dado que el producto de números reales (o complejos) es conmutativo y asociativo, podemos agrupar los términos y reescribir esta serie como:
-    \[ \sum_{n=1}^{\infty} x_n (a_n y_n) = \sum_{n=1}^{\infty} x_n {(M_a y)}_n \]
-    Esta última expresión es exactamente la definición de la acción del funcional generado por el vector \( M_a y \in \ell^q \) sobre el vector \( x \in \ell^p \). Por lo tanto, deducimos que:
-    \[ M_a^*(y) = M_a y = {(a_n y_n)}_{n \in \N} \]
-    Esto demuestra que el operador adjunto \( M_a^* \) coincide exactamente con el operador de multiplicación \( M_a \) generado por la sucesión \( a \), pero actuando en el espacio dual \( \ell^q(\N) \).
+	Sean \( x = {(x_n)}_{n \in \N} \in \ell^p \) e \( y = {(y_n)}_{n \in \N} \in \ell^q \). Queremos encontrar la forma explícita del operador adjunto \( M_a^*: \ell^q \to \ell^q \), el cual está caracterizado por la siguiente relación de dualidad:
+	\[ M_a^*(y)(x) = y(M_a x) \]
+	Calculamos la acción del funcional \( y \) sobre el vector \( M_a x \):
+	\[ y(M_a x) = \sum_{n=1}^{\infty} {(M_a x)}_n y_n = \sum_{n=1}^{\infty} (a_n x_n) y_n \]
+	Dado que el producto de números reales (o complejos) es conmutativo y asociativo, podemos agrupar los términos y reescribir esta serie como:
+	\[ \sum_{n=1}^{\infty} x_n (a_n y_n) = \sum_{n=1}^{\infty} x_n {(M_a y)}_n \]
+	Esta última expresión es exactamente la definición de la acción del funcional generado por el vector \( M_a y \in \ell^q \) sobre el vector \( x \in \ell^p \). Por lo tanto, deducimos que:
+	\[ M_a^*(y) = M_a y = {(a_n y_n)}_{n \in \N} \]
+	Esto demuestra que el operador adjunto \( M_a^* \) coincide exactamente con el operador de multiplicación \( M_a \) generado por la sucesión \( a \), pero actuando en el espacio dual \( \ell^q(\N) \).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{3}
-    Sean \( \Omega \subset \tilde{\Omega} \) dos conjuntos medibles de \( \R^{n} \). Se definen \( \rho:L^{p}(\tilde{\Omega})\rightarrow L^{p}(\Omega) \) como \( \rho(u)=u_{|\Omega} \) y \( e:L^{p}(\Omega)\rightarrow L^{p}(\tilde{\Omega}) \) dado por
-    \[
-        e(u)(t) =
-        \begin{cases}
-            u(t) & \text{si } t \in \Omega    \\
-            0    & \text{si } t \notin \Omega
-        \end{cases}
-    \]
-    Probar que \( \rho \) y \( e \) son acotados, calcular sus normas y sus operadores adjuntos.
+	Sean \( \Omega \subset \tilde{\Omega} \) dos conjuntos medibles de \( \R^{n} \). Se definen \( \rho:L^{p}(\tilde{\Omega})\rightarrow L^{p}(\Omega) \) como \( \rho(u)=u_{|\Omega} \) y \( e:L^{p}(\Omega)\rightarrow L^{p}(\tilde{\Omega}) \) dado por
+	\[
+		e(u)(t) =
+		\begin{cases}
+			u(t) & \text{si } t \in \Omega    \\
+			0    & \text{si } t \notin \Omega
+		\end{cases}
+	\]
+	Probar que \( \rho \) y \( e \) son acotados, calcular sus normas y sus operadores adjuntos.
 \end{ejercicio}
 \begin{proof}
-    Sean \( u \in L^p(\tilde{\Omega}) \) y \( v \in L^p(\Omega) \).
+	Sean \( u \in L^p(\tilde{\Omega}) \) y \( v \in L^p(\Omega) \).
 
-    Primero, consideremos \( \rho \):
-    \[ \norm{\rho(u)}_{L^p(\Omega)}^p = \int_{\Omega} |u(t)|^p dt \le \int_{\tilde{\Omega}} |u(t)|^p dt = \norm{ u }_{L^p(\tilde{\Omega})}^p \]
-    Por lo tanto, tomando raíz \( p \)-ésima, \( \norm{\rho(u)}_{L^p(\Omega)} \le \norm{u}_{L^p(\tilde{\Omega})} \). Esto prueba que \( \rho \) es acotado y que \( \norm{\rho} \le 1 \). Si \( \mu(\Omega) > 0 \), podemos tomar una función \( u \neq 0 \) soportada enteramente en \( \Omega \), para la cual la desigualdad es una igualdad, concluyendo que \( \norm{\rho} = 1 \).
+	Primero, consideremos \( \rho \):
+	\[ \norm{\rho(u)}_{L^p(\Omega)}^p = \int_{\Omega} |u(t)|^p dt \le \int_{\tilde{\Omega}} |u(t)|^p dt = \norm{ u }_{L^p(\tilde{\Omega})}^p \]
+	Por lo tanto, tomando raíz \( p \)-ésima, \( \norm{\rho(u)}_{L^p(\Omega)} \le \norm{u}_{L^p(\tilde{\Omega})} \). Esto prueba que \( \rho \) es acotado y que \( \norm{\rho} \le 1 \). Si \( \mu(\Omega) > 0 \), podemos tomar una función \( u \neq 0 \) soportada enteramente en \( \Omega \), para la cual la desigualdad es una igualdad, concluyendo que \( \norm{\rho} = 1 \).
 
-    Ahora, consideremos \( e \):
-    \[ \norm{e(v)}_{L^p(\tilde{\Omega})}^p = \int_{\tilde{\Omega}} |e(v)(t)|^p dt = \int_{\Omega} |v(t)|^p dt = \norm{v}_{L^p(\Omega)}^p \]
-    Por lo tanto, \( e \) es una isometría (preserva la norma). Esto implica que es acotado y su norma es exactamente \( \norm{e} = 1 \).
+	Ahora, consideremos \( e \):
+	\[ \norm{e(v)}_{L^p(\tilde{\Omega})}^p = \int_{\tilde{\Omega}} |e(v)(t)|^p dt = \int_{\Omega} |v(t)|^p dt = \norm{v}_{L^p(\Omega)}^p \]
+	Por lo tanto, \( e \) es una isometría (preserva la norma). Esto implica que es acotado y su norma es exactamente \( \norm{e} = 1 \).
 
-    Para calcular los operadores adjuntos, identificamos los espacios duales \( (L^p(\Omega))^* \cong L^q(\Omega) \) y \( (L^p(\tilde{\Omega}))^* \cong L^q(\tilde{\Omega}) \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \). La dualidad está dada por la integral del producto.
+	Para calcular los operadores adjuntos, identificamos los espacios duales \( (L^p(\Omega))^* \cong L^q(\Omega) \) y \( (L^p(\tilde{\Omega}))^* \cong L^q(\tilde{\Omega}) \), donde \( \frac{1}{p} + \frac{1}{q} = 1 \). La dualidad está dada por la integral del producto.
 
-    El operador adjunto de \( \rho \), digamos \( \rho^* : L^q(\Omega) \to L^q(\tilde{\Omega}) \), debe cumplir que para todo \( u \in L^p(\tilde{\Omega}) \) y \( g \in L^q(\Omega) \):
-    \[ \langle \rho^*(g), u \rangle = \langle g, \rho(u) \rangle = \int_{\Omega} g(t) \rho(u)(t) dt = \int_{\Omega} g(t) u(t) dt \]
-    Esta última integral sobre \( \Omega \) se puede reescribir como una integral sobre todo \( \tilde{\Omega} \) si extendemos \( g \) por cero fuera de \( \Omega \):
-    \[ \int_{\Omega} g(t) u(t) dt = \int_{\tilde{\Omega}} e(g)(t) u(t) dt = \langle e(g), u \rangle \]
-    De esto deducimos que \( \rho^*(g) = e(g) \). Es decir, \( \rho^* \) es el operador de extensión por cero \( e \), actuando ahora desde \( L^q(\Omega) \) hacia \( L^q(\tilde{\Omega}) \).
+	El operador adjunto de \( \rho \), digamos \( \rho^* : L^q(\Omega) \to L^q(\tilde{\Omega}) \), debe cumplir que para todo \( u \in L^p(\tilde{\Omega}) \) y \( g \in L^q(\Omega) \):
+	\[ \langle \rho^*(g), u \rangle = \langle g, \rho(u) \rangle = \int_{\Omega} g(t) \rho(u)(t) dt = \int_{\Omega} g(t) u(t) dt \]
+	Esta última integral sobre \( \Omega \) se puede reescribir como una integral sobre todo \( \tilde{\Omega} \) si extendemos \( g \) por cero fuera de \( \Omega \):
+	\[ \int_{\Omega} g(t) u(t) dt = \int_{\tilde{\Omega}} e(g)(t) u(t) dt = \langle e(g), u \rangle \]
+	De esto deducimos que \( \rho^*(g) = e(g) \). Es decir, \( \rho^* \) es el operador de extensión por cero \( e \), actuando ahora desde \( L^q(\Omega) \) hacia \( L^q(\tilde{\Omega}) \).
 
-    Análogamente, el adjunto de \( e \), \( e^* : L^q(\tilde{\Omega}) \to L^q(\Omega) \), debe cumplir para todo \( v \in L^p(\Omega) \) y \( h \in L^q(\tilde{\Omega}) \):
-    \[ \langle e^*(h), v \rangle = \langle h, e(v) \rangle = \int_{\tilde{\Omega}} h(t) e(v)(t) dt = \int_{\Omega} h(t) v(t) dt \]
-    Como en \( \Omega \) la función \( h \) coincide con su restricción \( \rho(h) \), tenemos:
-    \[ \int_{\Omega} h(t) v(t) dt = \int_{\Omega} \rho(h)(t) v(t) dt = \langle \rho(h), v \rangle \]
-    De esto se deduce que \( e^*(h) = \rho(h) \). Es decir, el operador adjunto de la extensión por cero es la restricción \( \rho \), operando en los espacios \( L^q \).
+	Análogamente, el adjunto de \( e \), \( e^* : L^q(\tilde{\Omega}) \to L^q(\Omega) \), debe cumplir para todo \( v \in L^p(\Omega) \) y \( h \in L^q(\tilde{\Omega}) \):
+	\[ \langle e^*(h), v \rangle = \langle h, e(v) \rangle = \int_{\tilde{\Omega}} h(t) e(v)(t) dt = \int_{\Omega} h(t) v(t) dt \]
+	Como en \( \Omega \) la función \( h \) coincide con su restricción \( \rho(h) \), tenemos:
+	\[ \int_{\Omega} h(t) v(t) dt = \int_{\Omega} \rho(h)(t) v(t) dt = \langle \rho(h), v \rangle \]
+	De esto se deduce que \( e^*(h) = \rho(h) \). Es decir, el operador adjunto de la extensión por cero es la restricción \( \rho \), operando en los espacios \( L^q \).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{4}
-    Sea \( T:\ell^{1}\rightarrow c_{0} \) el operador lineal definido por
-    \[ T({\{x_{n}\}}_{n\ge 1}) = {\left \{ \sum_{k=1}^{\infty}x_{k}, \sum_{k=2}^{\infty}x_{k}, \sum_{k=3}^{\infty}x_{k}, \dots \right \}} \]
-    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{1}\rightarrow \ell^{\infty} \).
+	Sea \( T:\ell^{1}\rightarrow c_{0} \) el operador lineal definido por
+	\[ T({\{x_{n}\}}_{n\ge 1}) = {\left \{ \sum_{k=1}^{\infty}x_{k}, \sum_{k=2}^{\infty}x_{k}, \sum_{k=3}^{\infty}x_{k}, \dots \right \}} \]
+	Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{1}\rightarrow \ell^{\infty} \).
 \end{ejercicio}
 \begin{proof}
-    Empecemos demostrando que \( T \) es acotado. \[
-        \norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{c_0} = \sup_{\norm{x}_{\ell^1} \le 1} \sup_{n \ge 1} \left| \sum_{k=n}^{\infty} x_k \right| \le \sup_{\norm{x}_{\ell^1} \le 1} \sum_{k=1}^{\infty} |x_k| \le 1
-    \]
-    Para hallar la norma basta con considerar la sucesión \( x = (1,0,0,\dots) \), que cumple \( \norm{x}_{\ell^1} = 1 \). En este caso,
-    \[ T(x) = (1,0,0,\dots) \]
-    y por lo tanto \( \norm{T(x)}_{c_0} = 1 \). Esto muestra que \( \norm{T} = 1 \).
+	Empecemos demostrando que \( T \) es acotado. \[
+		\norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{c_0} = \sup_{\norm{x}_{\ell^1} \le 1} \sup_{n \ge 1} \left| \sum_{k=n}^{\infty} x_k \right| \le \sup_{\norm{x}_{\ell^1} \le 1} \sum_{k=1}^{\infty} |x_k| \le 1
+	\]
+	Para hallar la norma basta con considerar la sucesión \( x = (1,0,0,\dots) \), que cumple \( \norm{x}_{\ell^1} = 1 \). En este caso,
+	\[ T(x) = (1,0,0,\dots) \]
+	y por lo tanto \( \norm{T(x)}_{c_0} = 1 \). Esto muestra que \( \norm{T} = 1 \).
 
-    Para el cálculo del operador adjunto \( T^* : {(c_0)}^* \to {(\ell^1)}^* \) recordemos que \({(c_0)}^* \cong \ell^1\) y \({(\ell^1)}^* \cong \ell^\infty \). Dado \( \varphi \in {(c_0)}^* \) existe una única sucesión \( {(y_n)}_{n \ge 1} \in \ell^1 \) tal que:\[
-        \varphi(x) = \sum_{n\ge1} x_n y_n \quad \forall x \in c_0.
-    \]
-    Entonces, para \( x \in \ell^1 \) tenemos
-    \[
-        (T^*\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} (Tx)_n y_n = \sum_{n\ge1} \left( \sum_{k=n}^{\infty} x_k \right) y_n = \sum_{k\ge1} x_k \left( \sum_{n=1}^{k} y_n \right),
-    \]
-    lo que nos da la fórmula explícita
-    \[
-        T^*(y_1, y_2, \dots) = \left( y_1, y_1+y_2, y_1+y_2+y_3, \dots \right) \in \ell^\infty.
-    \]
+	Para el cálculo del operador adjunto \( T^* : {(c_0)}^* \to {(\ell^1)}^* \) recordemos que \({(c_0)}^* \cong \ell^1\) y \({(\ell^1)}^* \cong \ell^\infty \). Dado \( \varphi \in {(c_0)}^* \) existe una única sucesión \( {(y_n)}_{n \ge 1} \in \ell^1 \) tal que:\[
+		\varphi(x) = \sum_{n\ge1} x_n y_n \quad \forall x \in c_0.
+	\]
+	Entonces, para \( x \in \ell^1 \) tenemos
+	\[
+		(T^*\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} (Tx)_n y_n = \sum_{n\ge1} \left( \sum_{k=n}^{\infty} x_k \right) y_n = \sum_{k\ge1} x_k \left( \sum_{n=1}^{k} y_n \right),
+	\]
+	lo que nos da la fórmula explícita
+	\[
+		T^*(y_1, y_2, \dots) = \left( y_1, y_1+y_2, y_1+y_2+y_3, \dots \right) \in \ell^\infty.
+	\]
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-    Sea \( T:\ell^{1}\rightarrow \ell^{1} \) el operador lineal definido por
-    \[ T({\{x_{n}\}}_{n\ge 1}) = \left \{ \sum_{k=2}^{\infty}x_{k}, x_{1}, x_{2}, x_{3}, \dots \right \} \]
-    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{\infty}\rightarrow \ell^{\infty} \).
+	Sea \( T:\ell^{1}\rightarrow \ell^{1} \) el operador lineal definido por
+	\[ T({\{x_{n}\}}_{n\ge 1}) = \left \{ \sum_{k=2}^{\infty}x_{k}, x_{1}, x_{2}, x_{3}, \dots \right \} \]
+	Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{\infty}\rightarrow \ell^{\infty} \).
 \end{ejercicio}
 \begin{proof}
-    Empecemos demostrando que \( T \) es acotado.\begin{align*}
-        \norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{\ell^1} & = \sup_{\norm{x}_{\ell^1} \le 1} \sum_{n=1}^{\infty} \left| {(T(x))}_n \right|                                                                                                                                                   \\
-                                                                       & = \sup_{\norm{x}_{\ell^1} \le 1} \left( \left| \sum_{k=2}^{\infty} x_k \right| + \sum_{n=1}^{\infty} |x_n| \right) \le \sup_{\norm{x}_{\ell^1} \le 1} \left( \sum_{k=2}^{\infty} |x_k| + \sum_{n=1}^{\infty} |x_n| \right) \le 2
-    \end{align*}
+	Empecemos demostrando que \( T \) es acotado.\begin{align*}
+		\norm{T} = \sup_{\norm{x}_{\ell^1} \le 1} \norm{T(x)}_{\ell^1} & = \sup_{\norm{x}_{\ell^1} \le 1} \sum_{n=1}^{\infty} \left| {(T(x))}_n \right|                                                                                                                                                   \\
+		                                                               & = \sup_{\norm{x}_{\ell^1} \le 1} \left( \left| \sum_{k=2}^{\infty} x_k \right| + \sum_{n=1}^{\infty} |x_n| \right) \le \sup_{\norm{x}_{\ell^1} \le 1} \left( \sum_{k=2}^{\infty} |x_k| + \sum_{n=1}^{\infty} |x_n| \right) \le 2
+	\end{align*}
 
-    Para hallar la norma basta con considerar la sucesión \( x = (0, 1, 0, 0, \dots) \). En este caso,
-    \[
-        T(x) = \left( \sum_{k=2}^{\infty} x_k, x_1, x_2, x_3, \dots \right) = (1, 0, 1, 0, 0, \dots),
-    \]
-    y, por lo tanto,
-    \[
-        \norm{T(x)}_{\ell^1} = 1 + 0 + 1 + 0 + 0 + \cdots = 2.
-    \]
-    Como \(\norm{x}_{\ell^1} = 1\), se concluye que \(\norm{T} = 2\).
+	Para hallar la norma basta con considerar la sucesión \( x = (0, 1, 0, 0, \dots) \). En este caso,
+	\[
+		T(x) = \left( \sum_{k=2}^{\infty} x_k, x_1, x_2, x_3, \dots \right) = (1, 0, 1, 0, 0, \dots),
+	\]
+	y, por lo tanto,
+	\[
+		\norm{T(x)}_{\ell^1} = 1 + 0 + 1 + 0 + 0 + \cdots = 2.
+	\]
+	Como \(\norm{x}_{\ell^1} = 1\), se concluye que \(\norm{T} = 2\).
 
-    Hallemos ahora una fórmula explícita para \( T^* \). Sea \( \varphi \in {(\ell^1)}^* \) e \( y \in \ell^\infty \) la única sucesión tal que \( \varphi(x) = \sum_{n\ge1} x_n y_n \) para todo \( x \in \ell^1 \). Entonces,\[
-        T^*(\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} {(Tx)}_n y_n = \left( \sum_{k=2}^{\infty} x_k \right) y_1 + \sum_{n=1}^{\infty} x_n y_{n+1} = \sum_{n\ge1} x_n \tilde{y}_n,
-    \]
-    donde
-    \[
-        \tilde{y}_n = \begin{cases}
-            y_2           & \text{si } n = 1,   \\
-            y_{n+1} + y_1 & \text{si } n \ge 2.
-        \end{cases}
-    \]
-    Por lo tanto, la fórmula explícita para \( T^* \) es
-    \[
-        T^*(y_1, y_2, y_3, \dots) = (y_2, y_3 + y_1, y_4 + y_1, \dots) \in \ell^\infty.
-    \]
+	Hallemos ahora una fórmula explícita para \( T^* \). Sea \( \varphi \in {(\ell^1)}^* \) e \( y \in \ell^\infty \) la única sucesión tal que \( \varphi(x) = \sum_{n\ge1} x_n y_n \) para todo \( x \in \ell^1 \). Entonces,\[
+		T^*(\varphi)(x) = \varphi(Tx) = \sum_{n\ge1} {(Tx)}_n y_n = \left( \sum_{k=2}^{\infty} x_k \right) y_1 + \sum_{n=1}^{\infty} x_n y_{n+1} = \sum_{n\ge1} x_n \tilde{y}_n,
+	\]
+	donde
+	\[
+		\tilde{y}_n = \begin{cases}
+			y_2           & \text{si } n = 1,   \\
+			y_{n+1} + y_1 & \text{si } n \ge 2.
+		\end{cases}
+	\]
+	Por lo tanto, la fórmula explícita para \( T^* \) es
+	\[
+		T^*(y_1, y_2, y_3, \dots) = (y_2, y_3 + y_1, y_4 + y_1, \dots) \in \ell^\infty.
+	\]
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{6}
-    Sea \( g\in L^{\infty}(\R) \) fijo. Definimos
-    \[ Tf(t) := g(t)f(t+1) \]
-    para \( f\in L^{1}(\R) \). Probar que \( T\in L(L^{1}(\R)) \) y hallar \( T^{*}:L^{\infty}(\R)\rightarrow L^{\infty}(\R) \).
+	Sea \( g\in L^{\infty}(\R) \) fijo. Definimos
+	\[ Tf(t) := g(t)f(t+1) \]
+	para \( f\in L^{1}(\R) \). Probar que \( T\in L(L^{1}(\R)) \) y hallar \( T^{*}:L^{\infty}(\R)\rightarrow L^{\infty}(\R) \).
 \end{ejercicio}
 \begin{proof}
-    Empecemos probando que \(T\) es acotado y, en consecuencia, pertenece a \(L(L^1(\R))\). Para \(f \in L^1(\R)\) tenemos:
-    \[
-        \norm{Tf}_{L^1} = \int_{\R} |g(t) f(t+1)| \, dt \le \int_{\R} \norm{g}_{L^\infty} |f(t+1)| \, dt = \norm{g}_{L^\infty} \int_{\R} |f(t+1)| \, dt = \norm{g}_{L^\infty} \norm{f}_{L^1}.
-    \]
-    Luego, \(\norm{T}_{L(L^1(\R))} \le \norm{g}_{L^\infty}\).
+	Empecemos probando que \(T\) es acotado y, en consecuencia, pertenece a \(L(L^1(\R))\). Para \(f \in L^1(\R)\) tenemos:
+	\[
+		\norm{Tf}_{L^1} = \int_{\R} |g(t) f(t+1)| \, dt \le \int_{\R} \norm{g}_{L^\infty} |f(t+1)| \, dt = \norm{g}_{L^\infty} \int_{\R} |f(t+1)| \, dt = \norm{g}_{L^\infty} \norm{f}_{L^1}.
+	\]
+	Luego, \(\norm{T}_{L(L^1(\R))} \le \norm{g}_{L^\infty}\).
 
-    Para calcular el operador adjunto \(T^*\), recordemos que el espacio dual de \(L^1(\R)\) se identifica con \(L^\infty(\R)\). Dado un funcional \(\varphi \in (L^1(\R))^*\), existe un único \(h \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\) se cumple:
-    \[
-        \varphi(f) = \int_{\R} f(t) h(t) \, dt.
-    \]
-    Por definición de operador adjunto, \(T^*\) debe satisfacer \((T^*\varphi)(f) = \varphi(Tf)\). Expresado en términos de integrales, buscamos la función \((T^*h) \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\):
-    \[
-        \int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} (Tf)(t) h(t) \, dt.
-    \]
-    Desarrollamos el lado derecho de la igualdad sustituyendo la definición de \(T\) y aplicando el cambio de variables \(u = t+1\) (de modo que \(t = u-1\) y \(dt = du\)):
-    \[
-        \int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} g(t) f(t+1) h(t) \, dt = \int_{\R} f(u) g(u-1) h(u-1) \, du.
-    \]
-    Cambiando nuevamente el nombre de la variable muda de integración \(u\) a \(t\), obtenemos:
-    \[
-        \int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
-    \]
-    Comparando ambas expresiones, concluimos que para toda \(f \in L^1(\R)\) debe cumplirse:
-    \[
-        \int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
-    \]
-    Como esta igualdad es válida para cualquier función \(f \in L^1(\R)\), las funciones que multiplican a \(f(t)\) en el integrando deben ser iguales en casi todo punto. Por lo tanto, el operador adjunto \(T^*: L^\infty(\R) \rightarrow L^\infty(\R)\) está dado por la fórmula explícita:
-    \[
-        (T^*h)(t) = g(t-1) h(t-1).
-    \]
+	Para calcular el operador adjunto \(T^*\), recordemos que el espacio dual de \(L^1(\R)\) se identifica con \(L^\infty(\R)\). Dado un funcional \(\varphi \in (L^1(\R))^*\), existe un único \(h \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\) se cumple:
+	\[
+		\varphi(f) = \int_{\R} f(t) h(t) \, dt.
+	\]
+	Por definición de operador adjunto, \(T^*\) debe satisfacer \((T^*\varphi)(f) = \varphi(Tf)\). Expresado en términos de integrales, buscamos la función \((T^*h) \in L^\infty(\R)\) tal que para toda \(f \in L^1(\R)\):
+	\[
+		\int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} (Tf)(t) h(t) \, dt.
+	\]
+	Desarrollamos el lado derecho de la igualdad sustituyendo la definición de \(T\) y aplicando el cambio de variables \(u = t+1\) (de modo que \(t = u-1\) y \(dt = du\)):
+	\[
+		\int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} g(t) f(t+1) h(t) \, dt = \int_{\R} f(u) g(u-1) h(u-1) \, du.
+	\]
+	Cambiando nuevamente el nombre de la variable muda de integración \(u\) a \(t\), obtenemos:
+	\[
+		\int_{\R} (Tf)(t) h(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
+	\]
+	Comparando ambas expresiones, concluimos que para toda \(f \in L^1(\R)\) debe cumplirse:
+	\[
+		\int_{\R} f(t) (T^*h)(t) \, dt = \int_{\R} f(t) \big[ g(t-1) h(t-1) \big] \, dt.
+	\]
+	Como esta igualdad es válida para cualquier función \(f \in L^1(\R)\), las funciones que multiplican a \(f(t)\) en el integrando deben ser iguales en casi todo punto. Por lo tanto, el operador adjunto \(T^*: L^\infty(\R) \rightarrow L^\infty(\R)\) está dado por la fórmula explícita:
+	\[
+		(T^*h)(t) = g(t-1) h(t-1).
+	\]
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
-    Sea \( T\in L(\ell^{2}(\R)) \) dado por
-    \[ T(x_{1},x_{2},x_{3},\dots) = \left( 0, \frac{x_{1}}{2}, \frac{x_{2}}{3}, \dots, \frac{x_{n-1}}{n}, \dots \right). \]
-    Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{2}(\R)\rightarrow \ell^{2}(\R) \).
+	Sea \( T\in L(\ell^{2}(\R)) \) dado por
+	\[ T(x_{1},x_{2},x_{3},\dots) = \left( 0, \frac{x_{1}}{2}, \frac{x_{2}}{3}, \dots, \frac{x_{n-1}}{n}, \dots \right). \]
+	Probar que \( T \) es acotado, calcular su norma y encontrar una fórmula explícita para \( T^{*}:\ell^{2}(\R)\rightarrow \ell^{2}(\R) \).
 \end{ejercicio}
 \begin{proof}
-    Empecemos demostrando que \(T\) es acotado. Para cualquier \(x \in \ell^2(\R)\), tenemos que \((Tx)_1 = 0\) y para \(n \ge 2\), \((Tx)_n = \frac{x_{n-1}}{n}\). Calculamos el cuadrado de la norma de \(Tx\):
-    \[
-        \norm{Tx}_{\ell^2}^2 = \sum_{n=2}^{\infty} \left| \frac{x_{n-1}}{n} \right|^2 = \sum_{k=1}^{\infty} \frac{|x_k|^2}{(k+1)^2}.
-    \]
-    Como \(k \ge 1\), se cumple que \((k+1) \ge 2\), por lo que \(\frac{1}{(k+1)^2} \le \frac{1}{4}\). Entonces:
-    \[
-        \norm{Tx}_{\ell^2}^2 \le \sum_{k=1}^{\infty} \frac{1}{4} |x_k|^2 = \frac{1}{4} \sum_{k=1}^{\infty} |x_k|^2 = \frac{1}{4} \norm{x}_{\ell^2}^2.
-    \]
-    Tomando raíz cuadrada, obtenemos \(\norm{Tx}_{\ell^2} \le \frac{1}{2} \norm{x}_{\ell^2}\), lo que demuestra que \(T\) es acotado y que \(\norm{T} \le \frac{1}{2}\).
+	Empecemos demostrando que \(T\) es acotado. Para cualquier \(x \in \ell^2(\R)\), tenemos que \((Tx)_1 = 0\) y para \(n \ge 2\), \((Tx)_n = \frac{x_{n-1}}{n}\). Calculamos el cuadrado de la norma de \(Tx\):
+	\[
+		\norm{Tx}_{\ell^2}^2 = \sum_{n=2}^{\infty} \left| \frac{x_{n-1}}{n} \right|^2 = \sum_{k=1}^{\infty} \frac{|x_k|^2}{(k+1)^2}.
+	\]
+	Como \(k \ge 1\), se cumple que \((k+1) \ge 2\), por lo que \(\frac{1}{(k+1)^2} \le \frac{1}{4}\). Entonces:
+	\[
+		\norm{Tx}_{\ell^2}^2 \le \sum_{k=1}^{\infty} \frac{1}{4} |x_k|^2 = \frac{1}{4} \sum_{k=1}^{\infty} |x_k|^2 = \frac{1}{4} \norm{x}_{\ell^2}^2.
+	\]
+	Tomando raíz cuadrada, obtenemos \(\norm{Tx}_{\ell^2} \le \frac{1}{2} \norm{x}_{\ell^2}\), lo que demuestra que \(T\) es acotado y que \(\norm{T} \le \frac{1}{2}\).
 
-    Para ver que la norma es exactamente \(1/2\), basta tomar el vector \(x = e_1 = (1, 0, 0, \dots)\), para el cual \(\norm{x}_{\ell^2} = 1\). Aplicando el operador obtenemos \(Te_1 = \left( 0, \frac{1}{2}, 0, 0, \dots \right)\), cuya norma es \(\norm{Te_1}_{\ell^2} = \frac{1}{2}\). Por lo tanto,
-    \[
-        \norm{T} = \frac{1}{2}.
-    \]
+	Para ver que la norma es exactamente \(1/2\), basta tomar el vector \(x = e_1 = (1, 0, 0, \dots)\), para el cual \(\norm{x}_{\ell^2} = 1\). Aplicando el operador obtenemos \(Te_1 = \left( 0, \frac{1}{2}, 0, 0, \dots \right)\), cuya norma es \(\norm{Te_1}_{\ell^2} = \frac{1}{2}\). Por lo tanto,
+	\[
+		\norm{T} = \frac{1}{2}.
+	\]
 
-    Calculemos ahora el operador adjunto \(T^*\). Usando el producto interno de \(\ell^2(\R)\), para todo \(x, y \in \ell^2(\R)\) se debe cumplir que \( \langle Tx, y \rangle = \langle x, T^*y \rangle \). Desarrollamos el lado izquierdo:
-    \begin{align*}
-        \langle Tx, y \rangle & = \sum_{n=1}^{\infty} {(Tx)}_n y_n                         \\
-                              & = 0 \cdot y_1 + \sum_{n=2}^{\infty} \frac{x_{n-1}}{n} y_n.
-    \end{align*}
-    Haciendo el cambio de índice \(m = n - 1\) (por lo que \(n = m + 1\)), la suma queda:
-    \[
-        \langle Tx, y \rangle = \sum_{m=1}^{\infty} x_m \frac{y_{m+1}}{m+1} = \left\langle x, \left( \frac{y_2}{2}, \frac{y_3}{3}, \frac{y_4}{4}, \dots \right) \right\rangle.
-    \]
-    Por definición de adjunto, esto debe ser igual a \(\langle x, T^*y \rangle = \sum_{m=1}^{\infty} x_m {(T^*y)}_m\). Igualando término a término, concluimos que el operador adjunto \(T^*: \ell^2(\R) \rightarrow \ell^2(\R)\) está dado por:
-    \[
-        {(T^*y)}_m = \frac{y_{m+1}}{m+1} \quad \text{para todo } m \ge 1.
-    \]
+	Calculemos ahora el operador adjunto \(T^*\). Usando el producto interno de \(\ell^2(\R)\), para todo \(x, y \in \ell^2(\R)\) se debe cumplir que \( \langle Tx, y \rangle = \langle x, T^*y \rangle \). Desarrollamos el lado izquierdo:
+	\begin{align*}
+		\langle Tx, y \rangle & = \sum_{n=1}^{\infty} {(Tx)}_n y_n                         \\
+		                      & = 0 \cdot y_1 + \sum_{n=2}^{\infty} \frac{x_{n-1}}{n} y_n.
+	\end{align*}
+	Haciendo el cambio de índice \(m = n - 1\) (por lo que \(n = m + 1\)), la suma queda:
+	\[
+		\langle Tx, y \rangle = \sum_{m=1}^{\infty} x_m \frac{y_{m+1}}{m+1} = \left\langle x, \left( \frac{y_2}{2}, \frac{y_3}{3}, \frac{y_4}{4}, \dots \right) \right\rangle.
+	\]
+	Por definición de adjunto, esto debe ser igual a \(\langle x, T^*y \rangle = \sum_{m=1}^{\infty} x_m {(T^*y)}_m\). Igualando término a término, concluimos que el operador adjunto \(T^*: \ell^2(\R) \rightarrow \ell^2(\R)\) está dado por:
+	\[
+		{(T^*y)}_m = \frac{y_{m+1}}{m+1} \quad \text{para todo } m \ge 1.
+	\]
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
-    Consideremos el operador \( T\in L(C[0,1]) \) dado por
-    \[ (Tf)(x) = f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt. \]
-    Calcular \( T^{*} \).
+	Consideremos el operador \( T\in L(C[0,1]) \) dado por
+	\[ (Tf)(x) = f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt. \]
+	Calcular \( T^{*} \).
 \end{ejercicio}
 \begin{proof}
-    Sea \(\varphi \in {(C[0, 1])}^*\). Existe una única medida de Borel regular \( \mu \) tal que:
-    \[
-        \varphi(f) = \int_{[0, 1]} f \, d\mu \quad \forall f \in C[0, 1].
-    \]
-    Calculemos la acción del operador adjunto \(T^*\) sobre esta medida \( \mu \). Por definición, \((T^*\varphi)(f) = \varphi(Tf)\). Entonces:
-    \begin{align*}
-        (T^*\varphi)(f) & = \int_{[0, 1]} (Tf)(x) \, d\mu(x) = \int_{[0, 1]} \left( f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt \right) d\mu(x)                     \\
-                        & = f(0) \int_{[0, 1]} d\mu(x) + f(1) \int_{[0, 1]} x \, d\mu(x) + \left( \int_{0}^{1} f(t) dt \right) \int_{[0, 1]} x^{2} \, d\mu(x).
-    \end{align*}
+	Sea \(\varphi \in {(C[0, 1])}^*\). Existe una única medida de Borel regular \( \mu \) tal que:
+	\[
+		\varphi(f) = \int_{[0, 1]} f \, d\mu \quad \forall f \in C[0, 1].
+	\]
+	Calculemos la acción del operador adjunto \(T^*\) sobre esta medida \( \mu \). Por definición, \((T^*\varphi)(f) = \varphi(Tf)\). Entonces:
+	\begin{align*}
+		(T^*\varphi)(f) & = \int_{[0, 1]} (Tf)(x) \, d\mu(x) = \int_{[0, 1]} \left( f(0) + xf(1) + x^{2}\int_{0}^{1}f(t)dt \right) d\mu(x)                     \\
+		                & = f(0) \int_{[0, 1]} d\mu(x) + f(1) \int_{[0, 1]} x \, d\mu(x) + \left( \int_{0}^{1} f(t) dt \right) \int_{[0, 1]} x^{2} \, d\mu(x).
+	\end{align*}
 
-    Para expresar \( T^*\mu \) como una medida en \(\mathcal{M}[0,1]\), recordemos que la evaluación en un punto se representa mediante la medida Delta de Dirac. Es decir, \(f(0) = \int_{[0,1]} f \, d\delta_0\) y \(f(1) = \int_{[0,1]} f \, d\delta_1\). Además, la integral usual es la integral respecto a la medida de Lebesgue \(m\).
+	Para expresar \( T^*\mu \) como una medida en \(\mathcal{M}[0,1]\), recordemos que la evaluación en un punto se representa mediante la medida Delta de Dirac. Es decir, \(f(0) = \int_{[0,1]} f \, d\delta_0\) y \(f(1) = \int_{[0,1]} f \, d\delta_1\). Además, la integral usual es la integral respecto a la medida de Lebesgue \(m\).
 
-    Reescribiendo la expresión anterior en términos de integrales de \(f\), obtenemos:
-    \[
-        (T^*\mu)(f) = \int_{[0,1]} f \, d\left( c_0 \delta_0 \right) + \int_{[0,1]} f \, d\left( c_1 \delta_1 \right) + \int_{[0,1]} f \, d\left( c_2 m \right),
-    \]
-    donde las constantes son \(c_0 = \int_{[0, 1]} d\mu(x)\), \(c_1 = \int_{[0, 1]} x \, d\mu(x)\) y \(c_2 = \int_{[0, 1]} x^{2} \, d\mu(x)\).
+	Reescribiendo la expresión anterior en términos de integrales de \(f\), obtenemos:
+	\[
+		(T^*\mu)(f) = \int_{[0,1]} f \, d\left( c_0 \delta_0 \right) + \int_{[0,1]} f \, d\left( c_1 \delta_1 \right) + \int_{[0,1]} f \, d\left( c_2 m \right),
+	\]
+	donde las constantes son \(c_0 = \int_{[0, 1]} d\mu(x)\), \(c_1 = \int_{[0, 1]} x \, d\mu(x)\) y \(c_2 = \int_{[0, 1]} x^{2} \, d\mu(x)\).
 
-    Por lo tanto, la forma explícita de la medida correspondiente al operador adjunto \(T^*: \mathcal{M}[0,1] \rightarrow \mathcal{M}[0,1]\) está dada por:
-    \[
-        T^*(\mu) = \left( \int_{[0, 1]} d\mu(x) \right) \delta_0 + \left( \int_{[0, 1]} x \, d\mu(x) \right) \delta_1 + \left( \int_{[0, 1]} x^{2} \, d\mu(x) \right) m.
-    \]
+	Por lo tanto, la forma explícita de la medida correspondiente al operador adjunto \(T^*: \mathcal{M}[0,1] \rightarrow \mathcal{M}[0,1]\) está dada por:
+	\[
+		T^*(\mu) = \left( \int_{[0, 1]} d\mu(x) \right) \delta_0 + \left( \int_{[0, 1]} x \, d\mu(x) \right) \delta_1 + \left( \int_{[0, 1]} x^{2} \, d\mu(x) \right) m.
+	\]
 \end{proof}
 
 \vspace{0.5cm}
@@ -313,125 +313,125 @@
 \section{Proyectores y subespacios complementados de un espacio de Banach}
 
 \begin{ejercicio}{1}
-    Sean \( X \) espacio de Banach y \( f \in X^* \) con \( f(e) = 1 \), \( e \in X \). Mostrá que \( Px = f(x) e \) es un proyector y que \( \norm{P} = \norm{f} \norm{e} \).
+	Sean \( X \) espacio de Banach y \( f \in X^* \) con \( f(e) = 1 \), \( e \in X \). Mostrá que \( Px = f(x) e \) es un proyector y que \( \norm{P} = \norm{f} \norm{e} \).
 \end{ejercicio}
 \begin{proof}
-    Primero, comprobamos que \( P \) es un operador lineal. Dados \( x, y \in X \) y un escalar \( \lambda \):
-    \[ P(x + \lambda y) = f(x + \lambda y)e = (f(x) + \lambda f(y))e = f(x)e + \lambda f(y)e = Px + \lambda Py. \]
+	Primero, comprobamos que \( P \) es un operador lineal. Dados \( x, y \in X \) y un escalar \( \lambda \):
+	\[ P(x + \lambda y) = f(x + \lambda y)e = (f(x) + \lambda f(y))e = f(x)e + \lambda f(y)e = Px + \lambda Py. \]
 
-    Para probar que \( P \) es un proyector, debemos verificar que es idempotente, es decir, \( P^2 = P \). Evaluando \( P^2 \) en un \( x \in X \) arbitrario:
-    \[ P^2 x = P(Px) = P(f(x)e). \]
-    Como \( f(x) \) es un escalar y \( P \) es lineal:
-    \[ P(f(x)e) = f(x)P(e) = f(x)(f(e)e). \]
-    Por hipótesis, sabemos que \( f(e) = 1 \), por lo que:
-    \[ P^2 x = f(x)(1)e = f(x)e = Px. \]
-    Al cumplirse \( P^2 x = Px \) para todo \( x \in X \), concluimos que \( P^2 = P \) y, por ende, \( P \) es un proyector.
+	Para probar que \( P \) es un proyector, debemos verificar que es idempotente, es decir, \( P^2 = P \). Evaluando \( P^2 \) en un \( x \in X \) arbitrario:
+	\[ P^2 x = P(Px) = P(f(x)e). \]
+	Como \( f(x) \) es un escalar y \( P \) es lineal:
+	\[ P(f(x)e) = f(x)P(e) = f(x)(f(e)e). \]
+	Por hipótesis, sabemos que \( f(e) = 1 \), por lo que:
+	\[ P^2 x = f(x)(1)e = f(x)e = Px. \]
+	Al cumplirse \( P^2 x = Px \) para todo \( x \in X \), concluimos que \( P^2 = P \) y, por ende, \( P \) es un proyector.
 
-    Para demostrar la igualdad de las normas, calculamos la norma del operador \( P \). Para cualquier \( x \in X \):
-    \[ \|Px\| = \|f(x)e\| = |f(x)| \|e\|. \]
-    Por definición de norma de un operador:
-    \[ \|P\| = \sup_{\|x\| \leq 1} \|Px\| = \sup_{\|x\| \leq 1} \big( |f(x)| \|e\| \big). \]
-    Como \( \|e\| \) es una constante independiente de \( x \), podemos extraerla del supremo:
-    \[ \|P\| = \|e\| \left( \sup_{\|x\| \leq 1} |f(x)| \right). \]
-    Por definición de la norma en el espacio dual \( X^* \), se tiene que \( \sup_{\|x\| \leq 1} |f(x)| = \|f\| \). Sustituyendo esto en la ecuación anterior, obtenemos finalmente:
-    \[ \|P\| = \|f\| \|e\|. \]
+	Para demostrar la igualdad de las normas, calculamos la norma del operador \( P \). Para cualquier \( x \in X \):
+	\[ \|Px\| = \|f(x)e\| = |f(x)| \|e\|. \]
+	Por definición de norma de un operador:
+	\[ \|P\| = \sup_{\|x\| \leq 1} \|Px\| = \sup_{\|x\| \leq 1} \big( |f(x)| \|e\| \big). \]
+	Como \( \|e\| \) es una constante independiente de \( x \), podemos extraerla del supremo:
+	\[ \|P\| = \|e\| \left( \sup_{\|x\| \leq 1} |f(x)| \right). \]
+	Por definición de la norma en el espacio dual \( X^* \), se tiene que \( \sup_{\|x\| \leq 1} |f(x)| = \|f\| \). Sustituyendo esto en la ecuación anterior, obtenemos finalmente:
+	\[ \|P\| = \|f\| \|e\|. \]
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{2}
-    Sea \( E \) un espacio de Banach. Probar que todo subespacio de dimensión finita es complementado. ¿Qué pasa si el subespacio cerrado tiene codimensión finita?
+	Sea \( E \) un espacio de Banach. Probar que todo subespacio de dimensión finita es complementado. ¿Qué pasa si el subespacio cerrado tiene codimensión finita?
 \end{ejercicio}
 \begin{proof}
-    Sea \( M \) un subespacio de dimensión finita de \( E \). Elegimos una base \( \{ e_1, \ldots, e_n \} \) de \( M \) y sabemos que cualquier \( x \in M \) se puede expresar como combinación lineal de los \( e_i \):\[
-        x = \sum_{i=1}^{n} \alpha_i e_i, \quad \alpha_i \in \mathbb{K}.
-    \]
-    Definimos para cada \(j \in \{1, \dots, n\} \) el funcional lineal \(\varphi_j : M \to \mathbb{K}\) que nos da la \(j\)-ésima coordenada respecto a esta base, es decir, \(\varphi_j(x) = \alpha_j\). Al ser \(M\) un espacio de dimensión finita, todo funcional lineal definido sobre él es continuo, por lo que \(\varphi_j \in M^*\).
+	Sea \( M \) un subespacio de dimensión finita de \( E \). Elegimos una base \( \{ e_1, \ldots, e_n \} \) de \( M \) y sabemos que cualquier \( x \in M \) se puede expresar como combinación lineal de los \( e_i \):\[
+		x = \sum_{i=1}^{n} \alpha_i e_i, \quad \alpha_i \in \mathbb{K}.
+	\]
+	Definimos para cada \(j \in \{1, \dots, n\} \) el funcional lineal \(\varphi_j : M \to \mathbb{K}\) que nos da la \(j\)-ésima coordenada respecto a esta base, es decir, \(\varphi_j(x) = \alpha_j\). Al ser \(M\) un espacio de dimensión finita, todo funcional lineal definido sobre él es continuo, por lo que \(\varphi_j \in M^*\).
 
-    Por el Teorema de Hahn-Banach, podemos extender cada \(\varphi_j\) a un funcional lineal acotado en todo el espacio \(E\), que denotaremos \(f_j \in E^*\), tal que \(f_j(x) = \varphi_j(x)\) para todo \(x \in M\).
+	Por el Teorema de Hahn-Banach, podemos extender cada \(\varphi_j\) a un funcional lineal acotado en todo el espacio \(E\), que denotaremos \(f_j \in E^*\), tal que \(f_j(x) = \varphi_j(x)\) para todo \(x \in M\).
 
-    Ahora, definimos el operador \(P : E \to E\) como la suma de estos funcionales extendidos multiplicados por los vectores de la base:
-    \[Px = \sum_{j=1}^n f_j(x) e_j\]
+	Ahora, definimos el operador \(P : E \to E\) como la suma de estos funcionales extendidos multiplicados por los vectores de la base:
+	\[Px = \sum_{j=1}^n f_j(x) e_j\]
 
-    Veamos que \(P\) es un proyector continuo. Primero, es claro que \(P\) es lineal y continuo, ya que es una combinación lineal finita de funcionales acotados. Para la idempotencia, notemos que si tomamos cualquier \(x \in E\), su imagen \(Px\) es una combinación lineal de los \(e_j\), luego \(Px \in M\).
+	Veamos que \(P\) es un proyector continuo. Primero, es claro que \(P\) es lineal y continuo, ya que es una combinación lineal finita de funcionales acotados. Para la idempotencia, notemos que si tomamos cualquier \(x \in E\), su imagen \(Px\) es una combinación lineal de los \(e_j\), luego \(Px \in M\).
 
-    Si aplicamos \(P\) nuevamente a \(Px\):
-    \[P^2x = P(Px) = \sum_{j=1}^n f_j(Px) e_j\]
-    Como \(Px \in M\), las extensiones coinciden con los funcionales originales, por lo tanto \(f_j(Px) = \varphi_j(Px)\). Por la definición de los \(\varphi_j\), sabemos que extraen las coordenadas de un vector en \(M\). Pero las coordenadas de \(Px = \sum_{i=1}^n f_i(x) e_i\) en la base \( \{e_1, \dots, e_n\} \) son exactamente los escalares \(f_j(x)\). En consecuencia, \(\varphi_j(Px) = f_j(x)\).
+	Si aplicamos \(P\) nuevamente a \(Px\):
+	\[P^2x = P(Px) = \sum_{j=1}^n f_j(Px) e_j\]
+	Como \(Px \in M\), las extensiones coinciden con los funcionales originales, por lo tanto \(f_j(Px) = \varphi_j(Px)\). Por la definición de los \(\varphi_j\), sabemos que extraen las coordenadas de un vector en \(M\). Pero las coordenadas de \(Px = \sum_{i=1}^n f_i(x) e_i\) en la base \( \{e_1, \dots, e_n\} \) son exactamente los escalares \(f_j(x)\). En consecuencia, \(\varphi_j(Px) = f_j(x)\).
 
-    Sustituyendo esto, obtenemos:
-    \[P^2x = \sum_{j=1}^n f_j(x) e_j = Px\]
+	Sustituyendo esto, obtenemos:
+	\[P^2x = \sum_{j=1}^n f_j(x) e_j = Px\]
 
-    Concluimos que \(P^2 = P\), por lo que \(P\) es un proyector continuo cuya imagen es exactamente \(M\). Esto implica que \(E = M \oplus \ker(P)\), y como \(\ker(P)\) es cerrado (por ser la preimagen del conjunto cerrado \( \{0\} \) a través de un operador continuo), queda demostrado que \(M\) es complementado.
+	Concluimos que \(P^2 = P\), por lo que \(P\) es un proyector continuo cuya imagen es exactamente \(M\). Esto implica que \(E = M \oplus \ker(P)\), y como \(\ker(P)\) es cerrado (por ser la preimagen del conjunto cerrado \( \{0\} \) a través de un operador continuo), queda demostrado que \(M\) es complementado.
 
-    \textbf{¿Qué pasa si el subespacio cerrado tiene codimensión finita?}
+	\textbf{¿Qué pasa si el subespacio cerrado tiene codimensión finita?}
 
-    También resulta complementado. Si \(M\) es un subespacio cerrado de codimensión finita \(n\), entonces el espacio cociente \(E/M\) tiene dimensión finita \(n\).
+	También resulta complementado. Si \(M\) es un subespacio cerrado de codimensión finita \(n\), entonces el espacio cociente \(E/M\) tiene dimensión finita \(n\).
 
-    Sea \( \{[x_1], \dots, [x_n]\} \) una base de \(E/M\), donde cada \([x_j] = x_j + M\) para ciertos representantes \(x_1, \dots, x_n \in E\). Sea \(N = \text{span}\{x_1, \dots, x_n\} \). Al tener dimensión finita, \(N\) es cerrado.
+	Sea \( \{[x_1], \dots, [x_n]\} \) una base de \(E/M\), donde cada \([x_j] = x_j + M\) para ciertos representantes \(x_1, \dots, x_n \in E\). Sea \(N = \text{span}\{x_1, \dots, x_n\} \). Al tener dimensión finita, \(N\) es cerrado.
 
-    Por un lado, para cualquier \(x \in E\), su clase de equivalencia \([x] \in E/M\) se puede escribir como \([x] = \sum_{j=1}^n c_j [x_j] = \left[ \sum_{j=1}^n c_j x_j \right]\) para ciertos escalares \(c_j\). Esto significa que \(x - \sum_{j=1}^n c_j x_j \in M\), por lo que existe \(m \in M\) tal que \(x = m + \sum_{j=1}^n c_j x_j\). Esto prueba que \(E = M + N\).
+	Por un lado, para cualquier \(x \in E\), su clase de equivalencia \([x] \in E/M\) se puede escribir como \([x] = \sum_{j=1}^n c_j [x_j] = \left[ \sum_{j=1}^n c_j x_j \right]\) para ciertos escalares \(c_j\). Esto significa que \(x - \sum_{j=1}^n c_j x_j \in M\), por lo que existe \(m \in M\) tal que \(x = m + \sum_{j=1}^n c_j x_j\). Esto prueba que \(E = M + N\).
 
-    Por otro lado, si \(y \in M \cap N\), entonces \(y = \sum_{j=1}^n c_j x_j\) por estar en \(N\), y a su vez \([y] = [0]\) en el cociente por estar en \(M\). Luego, \(\sum_{j=1}^n c_j [x_j] = [0]\). Como las clases \([x_j]\) son linealmente independientes en \(E/M\), deducimos que \(c_j = 0\) para todo \(j\), y por tanto \(y = 0\).
+	Por otro lado, si \(y \in M \cap N\), entonces \(y = \sum_{j=1}^n c_j x_j\) por estar en \(N\), y a su vez \([y] = [0]\) en el cociente por estar en \(M\). Luego, \(\sum_{j=1}^n c_j [x_j] = [0]\). Como las clases \([x_j]\) son linealmente independientes en \(E/M\), deducimos que \(c_j = 0\) para todo \(j\), y por tanto \(y = 0\).
 
-    Así, \( M \cap N = \{0\} \). Esto prueba que \(E = M \oplus N\), y como tanto \(M\) como \(N\) son subespacios cerrados, \(M\) es complementado.
+	Así, \( M \cap N = \{0\} \). Esto prueba que \(E = M \oplus N\), y como tanto \(M\) como \(N\) son subespacios cerrados, \(M\) es complementado.
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{3}
-    Sean \( P, Q \) proyectores acotados con \( PQ = QP \).
-    \begin{enumerate}
-        \item \( PQ \) es un proyector con \( \operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q \).
-        \item \( P + Q - PQ \) es un proyector con rango \( \operatorname{ran} P + \operatorname{ran} Q \). Deducí que esa suma es cerrada.
-        \item Si además \( PQ = 0 \), entonces \( P + Q \) es un proyector sobre \( \operatorname{ran} P \oplus \operatorname{ran} Q \).
-    \end{enumerate}
+	Sean \( P, Q \) proyectores acotados con \( PQ = QP \).
+	\begin{enumerate}
+		\item \( PQ \) es un proyector con \( \operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q \).
+		\item \( P + Q - PQ \) es un proyector con rango \( \operatorname{ran} P + \operatorname{ran} Q \). Deducí que esa suma es cerrada.
+		\item Si además \( PQ = 0 \), entonces \( P + Q \) es un proyector sobre \( \operatorname{ran} P \oplus \operatorname{ran} Q \).
+	\end{enumerate}
 \end{ejercicio}
 \begin{proof}
-    \begin{enumerate}
-        \item Veamos primero que \(PQ\) es un proyector. Como \(P\) y \(Q\) son lineales y acotados, su composición \(PQ\) también lo es. Para ver que es idempotente, calculamos \({(PQ)}^2\):
-              \[ {(PQ)}^2 = (PQ)(PQ) = P(QP)Q \]
-              Por hipótesis, \(P\) y \(Q\) conmutan (\(PQ = QP\)), así que podemos reescribir:
-              \[{(PQ)}^2 = P(PQ)Q = P^2 Q^2\]
-              Al ser \(P\) y \(Q\) proyectores, sabemos que \(P^2 = P\) y \(Q^2 = Q\). Por lo tanto:
-              \[{(PQ)}^2 = PQ\]
-              Esto demuestra que \(PQ\) es un proyector.
-              Ahora, probemos que \(\operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q\).\begin{itemize}
-                  \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran}(PQ)\). Entonces existe \(x \in X\) tal que \(y = PQx\). Como \(y = P(Qx)\), resulta inmediato que \(y \in \operatorname{ran} P\). Por otro lado, usando que conmutan, \(y = QPx = Q(Px)\), lo que implica que \(y \in \operatorname{ran} Q\). Así, \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\).
-                  \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\). Al ser \(P\) y \(Q\) proyectores, sus rangos son exactamente sus subespacios de puntos fijos. Es decir, \(Py = y\) y \(Qy = y\). Aplicando el operador \(PQ\) a \(y\), obtenemos:
-                        \[ PQy = P(Qy) = Py = y \]
-              \end{itemize}
-              Luego \(y \in \operatorname{ran}(PQ)\).
+	\begin{enumerate}
+		\item Veamos primero que \(PQ\) es un proyector. Como \(P\) y \(Q\) son lineales y acotados, su composición \(PQ\) también lo es. Para ver que es idempotente, calculamos \({(PQ)}^2\):
+		      \[ {(PQ)}^2 = (PQ)(PQ) = P(QP)Q \]
+		      Por hipótesis, \(P\) y \(Q\) conmutan (\(PQ = QP\)), así que podemos reescribir:
+		      \[{(PQ)}^2 = P(PQ)Q = P^2 Q^2\]
+		      Al ser \(P\) y \(Q\) proyectores, sabemos que \(P^2 = P\) y \(Q^2 = Q\). Por lo tanto:
+		      \[{(PQ)}^2 = PQ\]
+		      Esto demuestra que \(PQ\) es un proyector.
+		      Ahora, probemos que \(\operatorname{ran}(PQ) = \operatorname{ran} P \cap \operatorname{ran} Q\).\begin{itemize}
+			      \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran}(PQ)\). Entonces existe \(x \in X\) tal que \(y = PQx\). Como \(y = P(Qx)\), resulta inmediato que \(y \in \operatorname{ran} P\). Por otro lado, usando que conmutan, \(y = QPx = Q(Px)\), lo que implica que \(y \in \operatorname{ran} Q\). Así, \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\).
+			      \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P \cap \operatorname{ran} Q\). Al ser \(P\) y \(Q\) proyectores, sus rangos son exactamente sus subespacios de puntos fijos. Es decir, \(Py = y\) y \(Qy = y\). Aplicando el operador \(PQ\) a \(y\), obtenemos:
+			            \[ PQy = P(Qy) = Py = y \]
+		      \end{itemize}
+		      Luego \(y \in \operatorname{ran}(PQ)\).
 
-        \item Sea \(R = P + Q - PQ\). Claramente es acotado por ser suma de operadores acotados. Veamos que es idempotente:
-              \[ R^2 = (P + Q - PQ)(P + Q - PQ) \]
-              Expandiendo por linealidad:
-              \[ R^2 = P^2 + PQ - P^2Q + QP + Q^2 - QPQ - PQP - PQQ + {(PQ)}^2 \]
-              Usando que \(P^2=P\), \(Q^2=Q\), \(PQ=QP\) y \({(PQ)}^2=PQ\) (probado en 1):
-              \[ R^2 = P + PQ - PQ + PQ + Q - PQ - PQ - PQ + PQ \]
-              Cancelando los términos \(PQ\) obtenemos:
-              \[ R^2 = P + Q - PQ = R \]
-              Luego \(R\) es un proyector. Veamos que \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\).
-              \begin{itemize}
-                  \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran} R\). Como \(R\) es proyector, se tiene que \(y = Ry\), de donde:
-                        \[ y = Py + Qy - PQy = P(y - Qy) + Qy \]
-                        Como \(P(y - Qy) \in \operatorname{ran} P\) y \(Qy \in \operatorname{ran} Q\), deducimos que \(y \in \operatorname{ran} P + \operatorname{ran} Q\).
-                  \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P + \operatorname{ran} Q\). Entonces \(y = u + v\) con \(u \in \operatorname{ran} P\) (luego \(Pu = u\)) y \(v \in \operatorname{ran} Q\) (luego \(Qv = v\)). Calculamos \(Ry\):
-                        \[ Ry = R(u+v) = Ru + Rv \]
-                        Analizamos cada término por separado:
-                        \[ Ru = (P + Q - PQ)u = Pu + Qu - Q(Pu) = u + Qu - Qu = u \]
-                        \[ Rv = (P + Q - PQ)v = Pv + Qv - P(Qv) = Pv + v - Pv = v \]
-                        Por lo tanto, \(Ry = u + v = y\), lo que prueba que \(y \in \operatorname{ran} R\).
-              \end{itemize}
-              Finalmente, para deducir que la suma es cerrada, basta observar que \(R\) es un operador lineal continuo. El rango de cualquier proyector continuo coincide con el núcleo del operador continuo \(I - R\). Como \(\ker(I-R) = {(I-R)}^{-1}({0})\), y \({0}\) es cerrado, su preimagen es cerrada. Por consiguiente, \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\) es un subespacio cerrado.
+		\item Sea \(R = P + Q - PQ\). Claramente es acotado por ser suma de operadores acotados. Veamos que es idempotente:
+		      \[ R^2 = (P + Q - PQ)(P + Q - PQ) \]
+		      Expandiendo por linealidad:
+		      \[ R^2 = P^2 + PQ - P^2Q + QP + Q^2 - QPQ - PQP - PQQ + {(PQ)}^2 \]
+		      Usando que \(P^2=P\), \(Q^2=Q\), \(PQ=QP\) y \({(PQ)}^2=PQ\) (probado en 1):
+		      \[ R^2 = P + PQ - PQ + PQ + Q - PQ - PQ - PQ + PQ \]
+		      Cancelando los términos \(PQ\) obtenemos:
+		      \[ R^2 = P + Q - PQ = R \]
+		      Luego \(R\) es un proyector. Veamos que \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\).
+		      \begin{itemize}
+			      \item[(\(\subseteq \))] Sea \(y \in \operatorname{ran} R\). Como \(R\) es proyector, se tiene que \(y = Ry\), de donde:
+			            \[ y = Py + Qy - PQy = P(y - Qy) + Qy \]
+			            Como \(P(y - Qy) \in \operatorname{ran} P\) y \(Qy \in \operatorname{ran} Q\), deducimos que \(y \in \operatorname{ran} P + \operatorname{ran} Q\).
+			      \item[(\(\supseteq \))] Sea \(y \in \operatorname{ran} P + \operatorname{ran} Q\). Entonces \(y = u + v\) con \(u \in \operatorname{ran} P\) (luego \(Pu = u\)) y \(v \in \operatorname{ran} Q\) (luego \(Qv = v\)). Calculamos \(Ry\):
+			            \[ Ry = R(u+v) = Ru + Rv \]
+			            Analizamos cada término por separado:
+			            \[ Ru = (P + Q - PQ)u = Pu + Qu - Q(Pu) = u + Qu - Qu = u \]
+			            \[ Rv = (P + Q - PQ)v = Pv + Qv - P(Qv) = Pv + v - Pv = v \]
+			            Por lo tanto, \(Ry = u + v = y\), lo que prueba que \(y \in \operatorname{ran} R\).
+		      \end{itemize}
+		      Finalmente, para deducir que la suma es cerrada, basta observar que \(R\) es un operador lineal continuo. El rango de cualquier proyector continuo coincide con el núcleo del operador continuo \(I - R\). Como \(\ker(I-R) = {(I-R)}^{-1}({0})\), y \({0}\) es cerrado, su preimagen es cerrada. Por consiguiente, \(\operatorname{ran} R = \operatorname{ran} P + \operatorname{ran} Q\) es un subespacio cerrado.
 
-        \item Si agregamos la hipótesis de que \(PQ = 0\), como conmutan, entonces también \(QP = 0\).
-              Sustituyendo esto en la expresión del proyector de la parte 2, nos queda \(R = P + Q - 0 = P + Q\). Sabemos por el inciso anterior que este operador es un proyector con rango \(\operatorname{ran} P + \operatorname{ran} Q\).
-              Para ver que esta suma es directa, debemos probar que \(\operatorname{ran} P \cap \operatorname{ran} Q = {0}\).
-              Usando el resultado del inciso 1, sabemos que \(\operatorname{ran} P \cap \operatorname{ran} Q = \operatorname{ran}(PQ)\).
-              Como el operador \(PQ = 0\) (es el operador nulo), su rango es trivial: \(\operatorname{ran}(PQ) = {0}\).
-              Por lo tanto, la suma de los subespacios es directa, concluyendo que \(P+Q\) es un proyector cuyo rango es \(\operatorname{ran} P \oplus \operatorname{ran} Q\).
-    \end{enumerate}
+		\item Si agregamos la hipótesis de que \(PQ = 0\), como conmutan, entonces también \(QP = 0\).
+		      Sustituyendo esto en la expresión del proyector de la parte 2, nos queda \(R = P + Q - 0 = P + Q\). Sabemos por el inciso anterior que este operador es un proyector con rango \(\operatorname{ran} P + \operatorname{ran} Q\).
+		      Para ver que esta suma es directa, debemos probar que \(\operatorname{ran} P \cap \operatorname{ran} Q = {0}\).
+		      Usando el resultado del inciso 1, sabemos que \(\operatorname{ran} P \cap \operatorname{ran} Q = \operatorname{ran}(PQ)\).
+		      Como el operador \(PQ = 0\) (es el operador nulo), su rango es trivial: \(\operatorname{ran}(PQ) = {0}\).
+		      Por lo tanto, la suma de los subespacios es directa, concluyendo que \(P+Q\) es un proyector cuyo rango es \(\operatorname{ran} P \oplus \operatorname{ran} Q\).
+	\end{enumerate}
 \end{proof}
 
 \vspace{0.5cm}
@@ -440,136 +440,147 @@ Recordemos el \textbf{Ejercicio 9} de la práctica de repaso de medida e integra
 
 Sea \((X, \mathfrak{X}, \mu)\) un espacio de medida finita y supongamos que \(1 \le r < p \le \infty\). Entonces \(L_p \subseteq L_r\) y para toda \(f \in L_p\) se cumple que
 \[
-    \|f\|_r \le \|f\|_p {\mu(X)}^s, \quad \text{donde} \quad s := \frac{1}{r} - \frac{1}{p}.
+	\|f\|_r \le \|f\|_p {\mu(X)}^s, \quad \text{donde} \quad s := \frac{1}{r} - \frac{1}{p}.
 \]
 
 \begin{ejercicio}{4}
-    Sea \( \{A_1, \dots, A_n\} \) una partición medible de \( [0,1] \) con \( |A_i| > 0 \). Probar que
-    \[
-        Pf = \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i}
-    \]
-    es un proyector de norma \( 1 \) en \( L^p[0,1] \), para \( 1 \le p \le \infty \).
+	Sea \( \{A_1, \dots, A_n\} \) una partición medible de \( [0,1] \) con \( |A_i| > 0 \). Probar que
+	\[
+		Pf = \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i}
+	\]
+	es un proyector de norma \( 1 \) en \( L^p[0,1] \), para \( 1 \le p \le \infty \).
 \end{ejercicio}
 \begin{proof}
-    Veamos primero que \( P \) es un proyector (\(P^2 = P\)).
+	Veamos primero que \( P \) es un proyector (\(P^2 = P\)).
 
-    Dado que \( \{A_1, \dots, A_n\} \) es una partición de \([0,1]\), los conjuntos \(A_i\) son disjuntos dos a dos. Evaluemos \(P\) sobre \(Pf\):
-    \[
-        P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} Pf \right) \chi_{A_j}
-    \]
-    Calculamos la integral de \(Pf\) sobre un conjunto específico \(A_j\). Dado que \(A_i \cap A_j = \varnothing \) para \(i \neq j\), sobre el conjunto \(A_j\) la función \(Pf\) toma el valor constante \(c_j = \frac{1}{|A_j|} \int_{A_j} f\). Por lo tanto:
-    \[
-        \int_{A_j} Pf = \int_{A_j} \left( \frac{1}{|A_j|} \int_{A_j} f \right) dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) \int_{A_j} 1 dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) |A_j| = \int_{A_j} f
-    \]
-    Sustituyendo esto en la expresión de \(P(Pf)\), obtenemos:
-    \[
-        P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} f \right) \chi_{A_j} = Pf
-    \]
-    Como el operador es claramente lineal (hereda la linealidad de la integral y de las sumas finitas) y cumple \(P^2 = P\), queda demostrado que es un proyector.
+	Dado que \( \{A_1, \dots, A_n\} \) es una partición de \([0,1]\), los conjuntos \(A_i\) son disjuntos dos a dos. Evaluemos \(P\) sobre \(Pf\):
+	\[
+		P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} Pf \right) \chi_{A_j}
+	\]
+	Calculamos la integral de \(Pf\) sobre un conjunto específico \(A_j\). Dado que \(A_i \cap A_j = \varnothing \) para \(i \neq j\), sobre el conjunto \(A_j\) la función \(Pf\) toma el valor constante \(c_j = \frac{1}{|A_j|} \int_{A_j} f\). Por lo tanto:
+	\[
+		\int_{A_j} Pf = \int_{A_j} \left( \frac{1}{|A_j|} \int_{A_j} f \right) dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) \int_{A_j} 1 dx = \frac{1}{|A_j|} \left( \int_{A_j} f \right) |A_j| = \int_{A_j} f
+	\]
+	Sustituyendo esto en la expresión de \(P(Pf)\), obtenemos:
+	\[
+		P(Pf) = \sum_{j} \frac{1}{|A_j|} \left( \int_{A_j} f \right) \chi_{A_j} = Pf
+	\]
+	Como el operador es claramente lineal (hereda la linealidad de la integral y de las sumas finitas) y cumple \(P^2 = P\), queda demostrado que es un proyector.
 
-    \vspace{0.5cm}
+	\vspace{0.5cm}
 
-    Veamos ahora que \(\norm{P} = 1\).
+	Veamos ahora que \(\norm{P} = 1\).
 
-    Primero probaremos que \(\norm{Pf}_p \le \norm{f}_p\) (lo que acota la norma del operador por 1), y luego exhibiremos una función donde se alcance la igualdad.
+	Primero probaremos que \(\norm{Pf}_p \le \norm{f}_p\) (lo que acota la norma del operador por 1), y luego exhibiremos una función donde se alcance la igualdad.
 
-    \paragraph{Caso \(1 \le p < \infty \):}
-    Calculamos la norma \(p\) de \(Pf\):
-    \[
-        \|Pf\|_p^p = \int_0^1 |Pf|^p = \int_0^1 \left| \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i} \right|^p
-    \]
-    Al ser los \(A_i\) mutuamente disjuntos, las indicatrices no se superponen, lo que nos permite sacar la suma fuera de la integral:
-    \[
-        \|Pf\|_p^p = \sum_{i} \int_{A_i} \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p = \sum_{i} |A_i| \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p
-    \]
-    Para acotar el término del valor absoluto, consideramos el espacio de medida finita \((A_i, \mathcal{M}, m)\) donde la medida total es \(\mu(A_i) = |A_i|\). Usando el teorema referenciado con \(r=1\) y el mismo valor de \(p\), la desigualdad nos indica que \( \norm{f}_1 \le \|f\|_p {\mu(A_i)}^{1 - \frac{1}{p}}\). Aplicado a nuestro dominio \(A_i\), esto se traduce en:
-    \[
-        \int_{A_i} |f| \le {\left( \int_{A_i} |f|^p \right)}^{\frac{1}{p}} |A_i|^{1 - \frac{1}{p}}
-    \]
-    Elevando toda la expresión a la potencia \(p\):
-    \[
-        {\left( \int_{A_i} |f| \right)}^p \le \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1}
-    \]
-    Volviendo a la norma original, y aplicando la propiedad \(\left| \int_{A_i} f \right| \le \int_{A_i} |f|\), reemplazamos la cota obtenida:
-    \[
-        \|Pf\|_p^p \le \sum_{i} \frac{|A_i|}{|A_i|^p} {\left( \int_{A_i} |f| \right)}^p \le \sum_{i} \frac{1}{|A_i|^{p-1}} \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1} = \sum_{i} \int_{A_i} |f|^p
-    \]
-    Como la unión de los \(A_i\) es exactamente \([0,1]\), la suma de las integrales es la integral sobre todo el espacio:
-    \[
-        \|Pf\|_p^p \le \int_0^1 |f|^p = \|f\|_p^p
-    \]
-    Extrayendo la raíz \(p\)-ésima, obtenemos \(\norm{Pf}_p \le \norm{f}_p\), lo que implica que \(\norm{P} \le 1\).
+	\paragraph{Caso \(1 \le p < \infty \):}
+	Calculamos la norma \(p\) de \(Pf\):
+	\[
+		\|Pf\|_p^p = \int_0^1 |Pf|^p = \int_0^1 \left| \sum_{i} \frac{1}{|A_i|} \left( \int_{A_i} f \right) \chi_{A_i} \right|^p
+	\]
+	Al ser los \(A_i\) mutuamente disjuntos, las indicatrices no se superponen, lo que nos permite sacar la suma fuera de la integral:
+	\[
+		\|Pf\|_p^p = \sum_{i} \int_{A_i} \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p = \sum_{i} |A_i| \left| \frac{1}{|A_i|} \int_{A_i} f \right|^p
+	\]
+	Para acotar el término del valor absoluto, consideramos el espacio de medida finita \((A_i, \mathcal{M}, m)\) donde la medida total es \(\mu(A_i) = |A_i|\). Usando el teorema referenciado con \(r=1\) y el mismo valor de \(p\), la desigualdad nos indica que \( \norm{f}_1 \le \|f\|_p {\mu(A_i)}^{1 - \frac{1}{p}}\). Aplicado a nuestro dominio \(A_i\), esto se traduce en:
+	\[
+		\int_{A_i} |f| \le {\left( \int_{A_i} |f|^p \right)}^{\frac{1}{p}} |A_i|^{1 - \frac{1}{p}}
+	\]
+	Elevando toda la expresión a la potencia \(p\):
+	\[
+		{\left( \int_{A_i} |f| \right)}^p \le \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1}
+	\]
+	Volviendo a la norma original, y aplicando la propiedad \(\left| \int_{A_i} f \right| \le \int_{A_i} |f|\), reemplazamos la cota obtenida:
+	\[
+		\|Pf\|_p^p \le \sum_{i} \frac{|A_i|}{|A_i|^p} {\left( \int_{A_i} |f| \right)}^p \le \sum_{i} \frac{1}{|A_i|^{p-1}} \left( \int_{A_i} |f|^p \right) |A_i|^{p - 1} = \sum_{i} \int_{A_i} |f|^p
+	\]
+	Como la unión de los \(A_i\) es exactamente \([0,1]\), la suma de las integrales es la integral sobre todo el espacio:
+	\[
+		\|Pf\|_p^p \le \int_0^1 |f|^p = \|f\|_p^p
+	\]
+	Extrayendo la raíz \(p\)-ésima, obtenemos \(\norm{Pf}_p \le \norm{f}_p\), lo que implica que \(\norm{P} \le 1\).
 
-    \paragraph{Caso \( p = \infty \):}
-    De forma análoga, aplicando el teorema referenciado sobre el subespacio \(A_i\) con \(r=1\) y \( p=\infty \), la desigualdad toma la forma \( \norm{f}_1 \le \norm{f}_\infty {\mu(A_i)}^{1 - 0}\). Por lo tanto:
-    \[
-        \|Pf\|_\infty = \max_{i} \left| \frac{1}{|A_i|} \int_{A_i} f \right| \le \max_{i} \frac{1}{|A_i|} \int_{A_i} |f| \le \max_{i} \frac{1}{|A_i|} \left( \|f\|_{L^\infty(A_i)} |A_i| \right) \le \|f\|_\infty
-    \]
-    Lo cual vuelve a demostrar que \( \norm{P} \le 1\).
+	\paragraph{Caso \( p = \infty \):}
+	De forma análoga, aplicando el teorema referenciado sobre el subespacio \(A_i\) con \(r=1\) y \( p=\infty \), la desigualdad toma la forma \( \norm{f}_1 \le \norm{f}_\infty {\mu(A_i)}^{1 - 0}\). Por lo tanto:
+	\[
+		\|Pf\|_\infty = \max_{i} \left| \frac{1}{|A_i|} \int_{A_i} f \right| \le \max_{i} \frac{1}{|A_i|} \int_{A_i} |f| \le \max_{i} \frac{1}{|A_i|} \left( \|f\|_{L^\infty(A_i)} |A_i| \right) \le \|f\|_\infty
+	\]
+	Lo cual vuelve a demostrar que \( \norm{P} \le 1\).
 
-    \paragraph{Igualdad:}
-    Para asegurar que la norma es exactamente 1 (y no estrictamente menor), tomamos la función indicatriz de cualquiera de los subconjuntos de la partición, por ejemplo \(f = \chi_{A_1}\). Aplicando el operador:
-    \[
-        Pf = \frac{1}{|A_1|} \left( \int_{A_1} \chi_{A_1} \right) \chi_{A_1} = \frac{|A_1|}{|A_1|} \chi_{A_1} = \chi_{A_1} = f
-    \]
-    Como \(Pf = f\) para un elemento no nulo, se tiene que \(\norm{Pf}_p = \norm{f}_p \therefore \norm{P} = 1\).
+	\paragraph{Igualdad:}
+	Para asegurar que la norma es exactamente 1 (y no estrictamente menor), tomamos la función indicatriz de cualquiera de los subconjuntos de la partición, por ejemplo \(f = \chi_{A_1}\). Aplicando el operador:
+	\[
+		Pf = \frac{1}{|A_1|} \left( \int_{A_1} \chi_{A_1} \right) \chi_{A_1} = \frac{|A_1|}{|A_1|} \chi_{A_1} = \chi_{A_1} = f
+	\]
+	Como \(Pf = f\) para un elemento no nulo, se tiene que \(\norm{Pf}_p = \norm{f}_p \therefore \norm{P} = 1\).
 \end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-    Sean \( X \) un espacio de Banach, \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \). Probar lo siguiente:
-    \begin{enumerate}
-        \item \( P \) es acotado y \( \sup_n \norm{P_n} < \infty \).
-        \item \( P^2 = P \).
-        \item \( \ker P \supseteq \bigcap_n \ker P_n \). Dar un ejemplo donde la inclusión sea estricta.
-    \end{enumerate}
+	Sean \( X \) un espacio de Banach, \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \). Probar lo siguiente:
+	\begin{enumerate}
+		\item \( P \) es acotado y \( \sup_n \norm{P_n} < \infty \).
+		\item \( P^2 = P \).
+		\item \( \ker P \supseteq \bigcap_n \ker P_n \). Dar un ejemplo donde la inclusión sea estricta.
+	\end{enumerate}
 \end{ejercicio}
 \begin{proof}
-    Sea \( X \) un espacio de Banach y sean \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \).
+	Sea \( X \) un espacio de Banach y sean \( P_n \) proyectores acotados tales que \( P_n x \to Px \) para todo \( x \in X \).
 
-    Primero, demostraremos que \( P \) es acotado y que \( \sup_n \norm{P_n} < \infty \). Dado que para cada \( x \in X \) la sucesión \( {(P_n x)}_{n\in\N} \) es convergente, está puntualmente acotada. Como \( X \) es un espacio de Banach, por el Principio de Acotación Uniforme, la sucesión de operadores está uniformemente acotada, es decir, existe \( M > 0 \) tal que \( \sup_n \norm{P_n} = M < \infty \).
-    Entonces, para todo \( x \in X \):
-    \[
-        \norm{Px} = \norm{\lim_{n \to \infty} P_n x} = \lim_{n \to \infty} \norm{P_n x} \le \lim_{n \to \infty} M \norm{x} = M \norm{x}.
-    \]
-    Esto demuestra que \( P \) es acotado y que \( \norm{P} \le M \).
+	Primero, demostraremos que \( P \) es acotado y que \( \sup_n \norm{P_n} < \infty \). Dado que para cada \( x \in X \) la sucesión \( {(P_n x)}_{n\in\N} \) es convergente, está puntualmente acotada. Como \( X \) es un espacio de Banach, por el Principio de Acotación Uniforme, la sucesión de operadores está uniformemente acotada, es decir, existe \( M > 0 \) tal que \( \sup_n \norm{P_n} = M < \infty \).
+	Entonces, para todo \( x \in X \):
+	\[
+		\norm{Px} = \norm{\lim_{n \to \infty} P_n x} = \lim_{n \to \infty} \norm{P_n x} \le \lim_{n \to \infty} M \norm{x} = M \norm{x}.
+	\]
+	Esto demuestra que \( P \) es acotado y que \( \norm{P} \le M \).
 
-    A continuación, demostraremos que \( P^2 = P \). Sea \( x \in X \), evaluamos la norma de la diferencia \( P^2 x - Px \):
-    \[
-        \norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + \norm{P_n(Px) - P_n(P_n x)} + \norm{P_n(P_n x) - Px}.
-    \]
-    Dado que \( P_n \) son proyectores, \( P_n(P_n x) = P_n^2 x = P_n x \). Sustituyendo esto en el tercer término y usando que \( \norm{P_n} \le M \) para acotar el segundo término, obtenemos:
-    \[
-        \norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + M \norm{Px - P_n x} + \norm{P_n x - Px}.
-    \]
-    Tomando el límite cuando \( n \to \infty \), los tres términos tienden a cero (el primer término por la convergencia puntual evaluada en \( y = Px \), y los otros dos evaluados en \( x \)). Por lo tanto, \( \norm{P^2 x - Px} = 0 \), lo que implica que \( P^2 x = Px \) para todo \( x \in X \), es decir, \( P^2 = P \).
+	A continuación, demostraremos que \( P^2 = P \). Sea \( x \in X \), evaluamos la norma de la diferencia \( P^2 x - Px \):
+	\[
+		\norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + \norm{P_n(Px) - P_n(P_n x)} + \norm{P_n(P_n x) - Px}.
+	\]
+	Dado que \( P_n \) son proyectores, \( P_n(P_n x) = P_n^2 x = P_n x \). Sustituyendo esto en el tercer término y usando que \( \norm{P_n} \le M \) para acotar el segundo término, obtenemos:
+	\[
+		\norm{P^2 x - Px} \le \norm{P(Px) - P_n(Px)} + M \norm{Px - P_n x} + \norm{P_n x - Px}.
+	\]
+	Tomando el límite cuando \( n \to \infty \), los tres términos tienden a cero (el primer término por la convergencia puntual evaluada en \( y = Px \), y los otros dos evaluados en \( x \)). Por lo tanto, \( \norm{P^2 x - Px} = 0 \), lo que implica que \( P^2 x = Px \) para todo \( x \in X \), es decir, \( P^2 = P \).
 
-    Finalmente, veamos la inclusión de los núcleos. Si \( x \in \bigcap_n \ker P_n \), entonces \( P_n x = 0 \) para todo \( n \in \mathbb{N} \). Al tomar el límite:
-    \[
-        Px = \lim_{n \to \infty} P_n x = \lim_{n \to \infty} 0 = 0.
-    \]
-    Por lo tanto, \( x \in \ker P \), lo que demuestra que \( \ker P \supseteq \bigcap_n \ker P_n \).
+	Finalmente, veamos la inclusión de los núcleos. Si \( x \in \bigcap_n \ker P_n \), entonces \( P_n x = 0 \) para todo \( n \in \mathbb{N} \). Al tomar el límite:
+	\[
+		Px = \lim_{n \to \infty} P_n x = \lim_{n \to \infty} 0 = 0.
+	\]
+	Por lo tanto, \( x \in \ker P \), lo que demuestra que \( \ker P \supseteq \bigcap_n \ker P_n \).
 
-    Para ver que la inclusión puede ser estricta, consideremos el espacio de Banach \( X = \R^2 \) con la norma euclídea, y definamos la sucesión de operadores \( P_n : \R^2 \to \R^2 \) como:
-    \[
-        P_n(x,y) = \left( x + \frac{1}{n}y, 0 \right).
-    \]
-    Notemos que son proyectores, ya que:
-    \[
-        \ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
-    \]
-    La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
-    El núcleo de \( P_n \) está dado por:
-    \[
-        \ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
-    \]
-    La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
-    Sin embargo, el núcleo del operador límite \( P \) es:
-    \[
-        \ker P = \{ (x,y) \in \R^2 : x = 0 \} = \text{span}\{ (0,1) \}.
-    \]
-    Como \( \text{span}\{ (0,1) \} \) contiene infinitos vectores además del nulo, concluimos que \( \ker P \supsetneq \bigcap_n \ker P_n \).
+	Para ver que la inclusión puede ser estricta, consideremos el espacio de Banach \( X = \R^2 \) con la norma euclídea, y definamos la sucesión de operadores \( P_n : \R^2 \to \R^2 \) como:
+	\[
+		P_n(x,y) = \left( x + \frac{1}{n}y, 0 \right).
+	\]
+	Notemos que son proyectores, ya que:
+	\[
+		\ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
+	\]
+	La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
+	El núcleo de \( P_n \) está dado por:
+	\[
+		\ker P_n = \left \{ (x,y) \in \R^2 : x + \frac{1}{n}y = 0 \right \} = \text{span} \left \{ \left( -\frac{1}{n}, 1 \right) \right \}.
+	\]
+	La intersección de todos estos núcleos es únicamente el vector nulo, es decir, \( \bigcap_n \ker P_n = \{ (0,0) \} \).
+	Sin embargo, el núcleo del operador límite \( P \) es:
+	\[
+		\ker P = \{ (x,y) \in \R^2 : x = 0 \} = \text{span}\{ (0,1) \}.
+	\]
+	Como \( \text{span}\{ (0,1) \} \) contiene infinitos vectores además del nulo, concluimos que \( \ker P \supsetneq \bigcap_n \ker P_n \).
+\end{proof}
+
+\begin{ejercicio}{6}
+	Sea \( P(f)(t) = \frac{1}{2} (f(t) + f(-t)) \) para \( f \in L_p(\R) \) probar que:\begin{enumerate}
+		\item \( P \) es un proyector de norma \( 1 \) y \( \norm{I - P} = 1 \).
+		\item \( L_p(\R) = \{ f \in L_p(\R) : f \text{ es par} \} \oplus \{ f \in L_p(\R) : f \text{ es impar} \} \).
+	\end{enumerate}
+\end{ejercicio}
+\begin{proof}
+	Notar que \( P = \frac{I+Q}{2} \) donde \( Q(f)(t) = f(-t) \). Como \( Q \) es un operador lineal acotado con \( \norm{Q} = 1 \), se tiene que \( P \) es de norma \( 1 \). Es fácil ver que \( P^2 = P \). Además, \( I - P = \frac{I - Q}{2} \) también es un proyector de norma \( 1 \).
+	Luego, es claro que la imagen de \( P \) es el subespacio de funciones pares y la imagen de \( I - P \) es el subespacio de funciones impares. Por lo tanto, \( L_p(\R) = \operatorname{ran}(P) \oplus \operatorname{ran}(I - P) \).
 \end{proof}
 
 \end{document}
