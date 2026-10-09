@@ -1,0 +1,316 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+
+% --- Configuración de Página ---
+\geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.4em minus 0.2em}
+
+% --- Configuración de Hipervínculos ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    citecolor=darkblue,
+    bookmarksnumbered=true
+}
+
+% --- Colores Profesionales ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+
+% --- Encabezados y Pies de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkblue}{\textbf{Temas de Análisis Real}}}
+\fancyhead[R]{\textcolor{mediumgray}{Entrega ejercicios}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{darkblue}\hrule width\headwidth height\headrulewidth \kern-\headrulewidth}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Definición de Entornos Matemáticos con Estilo ---
+\newtheoremstyle{profesional}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{darkblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+
+\theoremstyle{plain}
+\newtheorem{ej}{Ejercicio}[section]
+
+\theoremstyle{profesional}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposicion}{Proposición}[section]
+\newtheorem{corolario}{Corolario}[section]
+
+% --- Estilo para definiciones (verde) ---
+\newtheoremstyle{definicion-style}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{definicion-style}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
+
+% --- Estilo para observaciones (púrpura) ---
+\newtheoremstyle{observacion-style}%
+    {0.5em}%
+    {0.5em}%
+    {\color{mediumgray}\itshape}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {:}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+\newtheorem{observacion}{Observación}[section]
+
+% --- Macros útiles ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\M}{\X}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\ocint}[1]{\left( #1 \right]}
+
+\newcommand{\X}{\mathfrak{X}}
+
+\newcommand{\coint}[1]{\left[ #1 \right)}
+
+% --- Configuración de tcolorbox para teoremas ---
+\tcbset{
+    colback=white,
+    colframe=darkblue,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=3pt,
+    right=3pt,
+    top=3pt,
+    bottom=3pt
+}
+
+% --- Formato de títulos de secciones ---
+\titleformat{\section}
+    {\Large\bfseries\color{darkblue}}
+    {\thesection.}
+    {0.5em}
+    {}
+    [\vspace{0.3em}\noindent\textcolor{darkblue}{\rule{\textwidth}{1.5pt}}]
+
+\titleformat{\subsection}
+    {\large\bfseries\color{accentblue}}
+    {\thesubsection.}
+    {0.5em}
+    {}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{accentblue}}
+    {\thesubsubsection.}
+    {0.5em}
+    {}
+
+\begin{document}
+
+% --- PORTADA PROFESIONAL ---
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[width=4cm]{logo_unlp.png}
+
+	\textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+	\vspace{0.5cm}
+	{\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+	{\normalsize Facultad de Ciencias Exactas}\\
+	{\normalsize Departamento de Matemática}\\
+
+	\vspace{0.5cm}
+	\textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+	\vspace{2.5cm}
+
+	{\Huge \textbf{\textcolor{darkblue}{Diferenciación de medidas}}}\\
+
+	\vspace{3cm}
+
+	{\large \textbf{Entrega ejercicios - Examen Final}}\\
+	{\normalsize Temas de Análisis Real}
+
+	\vspace{2.5cm}
+
+	{\normalsize
+		\renewcommand{\arraystretch}{1.3} % Da un poco más de aire a las filas
+		\begin{tabular}{>{\bfseries\color{darkblue}}l l}
+			Autor:   & Jordi Bustos               \\
+			Fecha:   & \today                     \\
+			Carrera: & Licenciatura en Matemática
+		\end{tabular}
+	}
+
+	\vfill
+
+	{\footnotesize \textcolor{mediumgray}{%
+			Este documento presenta la resolución de los ejercicios seleccionados de la materia Temas de Análisis Real. \\
+		}}
+
+	\vspace{1cm}
+\end{center}
+
+\newpage
+
+% --- ÍNDICE ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+\section{Medida de Hausdorff}
+
+\begin{definicion}[Diámetro de un conjunto]
+	Dado un conjunto \( E \subseteq \mathbb{R}^n \), el diámetro de \( E \) se define como:\[
+		\text{diam}(E) = \sup\{ |x - y| : x, y \in E \}
+	\]
+\end{definicion}
+
+\begin{definicion}[Medida de Hausdorff]
+	Dado \( \delta > 0 \) y \( s \geq 0 \), la medida de Hausdorff \( H^s_\delta(E) \) de un conjunto \( E \subseteq \R^n \) se define como:\[
+		H_\delta^s(E) := \inf \left\{ \sum_{i} (\text{diam}(U_i))^s : E \subseteq \bigcup_{i} U_i, \text{ diam}(U_i) < \delta \right\}
+	\]
+
+	Definimos la medida de Hausdorff \( H^s(E) \) como el límite cuando \( \delta \to 0^+ \):
+	\[
+		H^s(E) := \lim_{\delta \to 0^+} H_\delta^s(E)
+	\]
+\end{definicion}
+
+\begin{definicion}[Dimensión de Hausdorff]
+	La dimensión de Hausdorff \( \dim_H(E) \) de un conjunto \( E \subseteq \R^n \) se define como:\[
+		\dim_H(E) = \inf \{ s \geq 0 : H^s(E) = 0 \}
+	\]
+\end{definicion}
+
+\begin{teorema}[Propiedades de la medida de Hausdorff]
+	Sea \( E \subseteq \R^n \) y \( s \geq 0 \). Entonces:
+	\begin{itemize}
+		\item \( H^s(E) \) es una medida exterior y Borel regular.
+		\item Si \( \delta_1 < \delta_2 \), entonces \( H^s_{\delta_2}(E) \geq H^s_{\delta_1}(E) \).
+		\item Si \( E \subseteq F \), entonces \( H^s(E) \leq H^s(F) \).
+		\item Si \( s > n \implies H^s(E) = 0 \) para cualquier \( E \subseteq \R^n \).
+	\end{itemize}
+\end{teorema}
+
+\vspace{0.5cm}
+
+\begin{lemma}\label{lemma:hausdorff-dimension}
+	Si \( E \subseteq \R^n \) y \( 0 \leq s < t < \infty \) entonces si \( H^s(E) < \infty \implies H^t(E) = 0 \) y si \( H^t(E) > 0 \implies H^s(E) = \infty \).
+\end{lemma}
+
+\vspace{0.5cm}
+
+\begin{definicion}[Número de Lebesgue]
+	Sea \( {\{E_j\}}_{j \ge 1} \) un cubrimiento abierto de un conjunto compacto \( K \subseteq \R^n \). Un número \( \lambda > 0 \) se llama número de Lebesgue para este cubrimiento si para cualquier subconjunto \( A \subseteq K \) con \( \text{diam}(A) < \lambda \), existe algún \( j \) tal que \( A \subseteq E_j \).
+\end{definicion}
+
+\begin{lemma}[Cubrimientos abiertos para la medida de Hausdorff]\label{lemma:cubrimientos-abiertos}
+	Para todo \( E \subseteq \R^n \), \( s \geq 0 \) y \( \delta > 0 \), el ínfimo que define a \( H^s_\delta(E) \) puede calcularse considerando únicamente cubrimientos por conjuntos \emph{abiertos} \( U_i \) con \( \text{diam}(U_i) < \delta \).
+\end{lemma}
+\begin{proof}
+	Dado un cubrimiento arbitrario \( \{U_i\} \) de \( E \) con \( \text{diam}(U_i) < \delta \) y \( \varepsilon > 0 \), para cada \( i \) existe un abierto \( V_i \supseteq U_i \) con \( \text{diam}(V_i) < \text{diam}(U_i) + \varepsilon 2^{-i} \). Entonces \( \{V_i\} \) es un cubrimiento abierto de \( E \) con \( \sum_i {\text{diam}(V_i)}^s \le \sum_i {\text{diam}(U_i)}^s + \varepsilon' \), donde \( \varepsilon' \to 0 \) cuando \( \varepsilon \to 0 \). Como \( \varepsilon > 0 \) es arbitrario, el ínfimo sobre cubrimientos abiertos coincide con el ínfimo sobre cubrimientos arbitrarios.
+\end{proof}
+
+\begin{lemma}[Separación de los intervalos de \( C_m \)]\label{lemma:separacion}
+	Para cada \( m \in \N \), los \( 2^m \) intervalos cerrados y disjuntos que componen \( C_m \) están separados dos a dos por una distancia de al menos \( 3^{-m} \); es decir, si \( I, I' \) son dos intervalos distintos de \( C_m \), entonces \( \text{dist}(I, I') \geq 3^{-m} \).
+\end{lemma}
+\begin{proof}
+	Inducción en \( m \). Para \( m = 0 \), \( C_0 = [0,1] \) es un único intervalo y no hay nada que probar.
+
+	Supongamos la afirmación válida para \( m \). Cada intervalo \( I \) de \( C_m \) tiene longitud \( 3^{-m} \) y, al pasar a \( C_{m+1} \), se le remueve su tercio medio (de longitud \( 3^{-(m+1)} \)), quedando partido en dos intervalos "hijos" de longitud \( 3^{-(m+1)} \) separados exactamente por esa distancia. Si \( I', J' \) son dos intervalos de \( C_{m+1} \) hijos de un mismo padre, entonces \( \text{dist}(I', J') = 3^{-(m+1)} \). Si en cambio son hijos de padres distintos \( I \neq J \), como \( I' \subseteq I \) y \( J' \subseteq J \), la hipótesis inductiva da:
+	\[
+		\text{dist}(I', J') \geq \text{dist}(I, J) \geq 3^{-m} > 3^{-(m+1)}.
+	\]
+	En ambos casos \( \text{dist}(I', J') \geq 3^{-(m+1)} \), completando la inducción.
+\end{proof}
+
+\begin{ej}
+	Sea \( C \) el conjunto de Cantor. Entonces \( \dim_H( C ) = \frac{\log(2)}{\log(3)} \).
+\end{ej}
+\begin{proof}
+	Sea \( C \) el conjunto de Cantor. Recordemos que \( C \) se construye eliminando el tercio medio de cada intervalo en cada paso. En el primer paso, eliminamos el intervalo \( (1/3, 2/3) \), dejando los intervalos \( [0, 1/3] \) y \( [2/3, 1] \). En el segundo paso, eliminamos los tercios medios de estos dos intervalos, y así sucesivamente.
+
+	Sea \( \alpha = \frac{\log(2)}{\log(3)} \). Queremos calcular la medida de Hausdorff \( H^s( C ) \) para todo \( s > 0 \) para determinar la dimensión de Hausdorff de \( C \). Definimos \( C_k \) como el conjunto de Cantor después de \( k \) pasos. Cada \( C_k \) consiste en \( 2^k \) intervalos de longitud \( 3^{-k} \). La demostración consiste en dos partes: primero, mostraremos que \( H^\alpha( C ) < \infty \), y luego mostraremos que \( H^\alpha( C ) > 0 \).
+
+	Veamos en primer lugar que \( H^\alpha( C ) < \infty \). Fijemos \( \delta > 0 \). El conjunto \( C_k \) contiene a \( C \), para algún \( k \in \N \) suficientemente grande cada intervalo de \( C_k \) tiene longitud \( 3^{-k} < \delta \), y hay \( 2^k \) de ellos. Por lo tanto, podemos cubrir \( C \) con estos \( 2^k \) intervalos, cada uno de longitud \( 3^{-k} \). Así, tenemos:
+	\[
+		H^\alpha_\delta( C ) \leq \sum_{j=1}^{2^k} {(3^{-k})}^\alpha = 2^k {(3^{-k})}^\alpha = 2^k 3^{-k\alpha} = {(2 \cdot 3^{-\alpha})}^k.
+	\]
+	Luego, como \( \alpha = \frac{\log(2)}{\log(3)} \), tenemos \( 3^\alpha = 2 \implies 3^{-\alpha} = 2^{-1} \). Por lo tanto:
+	\[
+		H^\alpha_\delta( C ) \leq {(2 \cdot 2^{-1})}^k = 1.
+	\]
+	Como esto vale para todo \( \delta > 0 \), tomando el límite cuando \( \delta \to 0 \) obtenemos \( H^\alpha( C ) \leq 1 < \infty \).
+
+	Por el Lemma~\ref{lemma:hausdorff-dimension} para demostrar que la dimensión es efectivamente igual a \( \alpha \), basta con mostrar que \( H^\alpha( C ) > 0 \).
+
+
+	Por el Lema~\ref{lemma:cubrimientos-abiertos}, basta considerar cubrimientos por conjuntos abiertos. Sea entonces \( {\{E_j\}}_{j=1}^\infty \) cualquier cubrimiento de \( C \) por conjuntos abiertos tales que \( \text{diam}(E_j) \le \delta \) para todo \( j \). Al ser \( C \) un conjunto compacto y \( \{E_j\} \) un cubrimiento abierto, existe un número de Lebesgue \( \lambda > 0 \) para este cubrimiento.
+
+	Elijamos un entero \( k \) suficientemente grande tal que la longitud de los intervalos en \( C_k \), que es \( 3^{-k} \), sea estrictamente menor a \( \lambda \). Por la definición del número de Lebesgue, cualquier intervalo de \( C_k \) estará completamente contenido en \( E_j \) para algún \( j \).
+
+	Ahora acotaremos la suma \( \sum_j {\text{diam}(E_j)}^\alpha \) por debajo. Dado un conjunto \( E_j \) del cubrimiento, sea \( m_j \) el entero tal que:
+	\[
+		3^{-(m_j+1)} \le \text{diam}(E_j) < 3^{-m_j}
+	\]
+	Por el Lema~\ref{lemma:separacion}, dos intervalos distintos de \( C_{m_j} \) distan entre sí al menos \( 3^{-m_j} \), que es estrictamente mayor que \( \text{diam}(E_j) \). Por lo tanto \( E_j \) no puede contener puntos de dos intervalos distintos de \( C_{m_j} \) a la vez, es decir, interseca a lo sumo a uno de ellos. Para \( k > m_j \), cada intervalo de \( C_{m_j} \) contiene exactamente \( 2^{k-m_j} \) intervalos de \( C_k \), de modo que el número \( N_j \) de intervalos de \( C_k \) contenidos en \( E_j \) satisface:
+	\[
+		N_j \le 2^{k-m_j}
+	\]
+	Sabiendo que \( 3^\alpha = 2 \), podemos relacionar esto con el diámetro de \( E_j \):
+	\[
+		2^{-m_j} = {(3^{-m_j})}^\alpha \le {(3 \cdot {\text{diam}(E_j)})}^\alpha = 3^\alpha \cdot {\text{diam}(E_j)}^\alpha = 2 \cdot {\text{diam}(E_j)}^\alpha
+	\]
+	Reemplazando esta cota en la desigualdad de \( N_j \):
+	\[
+		N_j \le 2^{k} \cdot 2^{-m_j} \le 2^{k} \cdot 2 \cdot {\text{diam}(E_j)}^\alpha = 2^{k+1} \cdot {\text{diam}(E_j)}^\alpha
+	\]
+	Como garantizamos que todos los \( 2^k \) intervalos de \( C_k \) están contenidos en algún \( E_j \), la suma de los \( N_j \) sobre todo el cubrimiento debe ser al menos \( 2^k \). Entonces:
+	\[
+		2^k \le \sum_{j=1}^\infty N_j \le \sum_{j=1}^\infty 2^{k+1} {\text{diam}(E_j)}^\alpha = 2^{k+1} \sum_{j=1}^\infty {\text{diam}(E_j)}^\alpha
+	\]
+	Dividiendo ambos lados por \( 2^{k+1} \):
+	\[
+		\frac{1}{2} \le \sum_{j=1}^\infty {\text{diam}(E_j)}^\alpha
+	\]
+	Tomando el ínfimo sobre todos los posibles \( \delta \)-cubrimientos, obtenemos que \( H_\delta^\alpha( C ) \ge \frac{1}{2} \). Finalmente, tomando el límite cuando \( \delta \to 0 \), concluimos que \( H^\alpha( C ) \ge \frac{1}{2} > 0 \).
+
+	Como hemos demostrado que \( 0 < H^\alpha( C ) < \infty \), se concluye que la dimensión de Hausdorff de \( C \) es exactamente \( \alpha = \frac{\log(2)}{\log(3)} \).
+\end{proof}
+
+\end{document}
