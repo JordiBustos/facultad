@@ -21,6 +21,9 @@
 % --- Cajas y Colores ---
 \usepackage[dvipsnames]{xcolor}
 \usepackage[many]{tcolorbox}
+\usepackage{array}
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
 \usepackage{enumitem}
 \usepackage{graphicx}
 
@@ -133,21 +136,51 @@
 
 \begin{document}
 
-% --- Portada Personalizada ---
-\begin{titlepage}
-	\centering
-	\vspace*{4cm}
-	{\Huge\bfseries Teoría de Grafos\par}
-	\vspace{1.5cm}
-	{\Large Resolución de Prácticas I -- VI\par}
-	\vspace{1.5cm}
-	{\large \textbf{Autor:}\\ Bustos Jordi\par}
-	\vfill
-	{\large Universidad Nacional de La Plata\par}
-	{\large \today\par}
-\end{titlepage}
+% --- PORTADA PROFESIONAL ---
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[width=4cm]{logo_unlp.png}
 
-\clearpage
+	\textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+	\vspace{0.5cm}
+	{\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+	{\normalsize Facultad de Ciencias Exactas}\\
+	{\normalsize Departamento de Matemática}\\
+
+	\vspace{0.5cm}
+	\textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+	\vspace{2.5cm}
+
+	{\Huge \textbf{\textcolor{darkblue}{Teoría de Grafos}}}\\
+
+	\vspace{3cm}
+
+	{\large \textbf{Resolución de Prácticas I -- VI}}\\
+	{\normalsize Teoría de Grafos}
+
+	\vspace{2.5cm}
+
+	{\normalsize
+		\renewcommand{\arraystretch}{1.3} % Da un poco más de aire a las filas
+		\begin{tabular}{>{\bfseries\color{darkblue}}l l}
+			Autor:   & Jordi Bustos               \\
+			Fecha:   & \today                     \\
+			Carrera: & Licenciatura en Matemática
+		\end{tabular}
+	}
+
+	\vfill
+
+	{\footnotesize \textcolor{mediumgray}{%
+			Este documento presenta la resolución de las prácticas de la materia Teoría de Grafos. \\
+		}}
+
+	\vspace{1cm}
+\end{center}
+
+\newpage
 \tableofcontents
 \clearpage
 

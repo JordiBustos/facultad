@@ -2,7 +2,9 @@
 	Determinar si es verdadero o falso, y justificar: si \( u \) y \( v \) son los únicos vértices de grado impar en un grafo, entonces \( G \) contiene un \( uv \)-camino.
 \end{ejercicio}
 \begin{proof}
-	Agregemos la arista \( uv \) al grafo \( G \) y llamemos \( G' \) al grafo resultante. En \( G' \), todos los vértices tienen grado par, por lo que \( G' \) tiene un circuito euleriano. Este circuito euleriano debe pasar por la arista \( uv \), pero podemos mirar la parte del circuito que va de \( u \) a \( v \) sin pasar por \( uv \) o, en el otro caso, el que va de \( v \) a \( u \) sin pasar por esa arista que nos da un \( uv \)-camino.
+	Notemos primero que \( u \) y \( v \) deben pertenecer a la misma componente conexa de \( G \): en cualquier componente conexa, la suma de los grados de sus vértices es par, por lo que la cantidad de vértices de grado impar dentro de ella también es par. Como \( u \) y \( v \) son los \emph{únicos} vértices de grado impar de \( G \), una componente que contenga a uno de ellos no puede tener una cantidad impar de vértices de grado impar quedando el otro afuera; luego ambos están en la misma componente \( H \) (las demás componentes, si las hay, tienen todos sus vértices de grado par).
+
+	Trabajemos entonces dentro de \( H \). Agreguemos la arista \( uv \) a \( H \) y llamemos \( H' \) al grafo resultante. En \( H' \), todos los vértices tienen grado par y \( H' \) sigue siendo conexo, por lo que \( H' \) tiene un circuito euleriano. Este circuito euleriano debe pasar por la arista \( uv \), pero podemos mirar la parte del circuito que va de \( u \) a \( v \) sin pasar por \( uv \) o, en el otro caso, el que va de \( v \) a \( u \) sin pasar por esa arista, obteniendo así un \( uv \)-camino (que también es un \( uv \)-camino en \( G \), ya que \( H \) es subgrafo de \( G \)).
 \end{proof}
 
 \vspace{0.5cm}
@@ -26,7 +28,7 @@
 			      5, 5, 4, 3, 2, 2, 2, 1 \to 4, 3, 2, 1, 1, 2, 1 \to 4, 3, 2, 2, 1, 1, 1 \to 2, 1, 1, 0, 1, 1 \to 2, 1, 1, 1, 1, 0
 		      \]
 		      \[
-			      \to 0, 0, 1, 1, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+			      \to 0, 0, 1, 1, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0 \implies \text{Secuencia válida.}
 		      \]
 
 		\item \textbf{Secuencia 2:} \( 5, 5, 4, 4, 2, 2, 1, 1 \)
@@ -34,7 +36,7 @@
 			      5, 5, 4, 4, 2, 2, 1, 1 \to 4, 3, 3, 1, 1, 1, 1 \to 2, 2, 0, 0, 1, 1 \to 2, 2, 1, 1, 0, 0
 		      \]
 		      \[
-			      \to 1, 0, 1, 0, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+			      \to 1, 0, 1, 0, 0 \to 1, 1, 0, 0, 0 \to 0, 0, 0, 0 \implies \text{Secuencia válida.}
 		      \]
 
 		\item \textbf{Secuencia 3:} \( 5, 5, 5, 3, 2, 2, 1, 1 \)
@@ -42,7 +44,7 @@
 			      5, 5, 5, 3, 2, 2, 1, 1 \to 4, 4, 2, 1, 1, 1, 1 \to 3, 1, 0, 0, 1, 1 \to 3, 1, 1, 1, 0, 0
 		      \]
 		      \[
-			      \to 0, 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
+			      \to 0, 0, 0, 0, 0 \implies \text{Secuencia válida.}
 		      \]
 
 		\item \textbf{Secuencia 4:} \( 5, 5, 5, 4, 2, 1, 1, 1 \)
@@ -137,7 +139,7 @@
 \begin{proof}
 	Sean \( d_1, \ldots, d_n \) enteros tales que \( d_1 \geq \cdots \geq d_n \geq 0 \).
 	\begin{itemize}
-		\item[\(\Longrightarrow\))] Supongamos que existe un grafo \( G \) sin loops con secuencia de grados \( d_1, \ldots, d_n \). Por el Lema del Apretón de Manos, la suma de los grados siempre es par. Luego,
+		\item[\(\Longrightarrow\))] Supongamos que existe un grafo \( G \) sin loops con secuencia de grados \( d_1, \ldots, d_n \). La suma de los grados siempre es par. Luego,
 		      \[
 			      \sum_{i=1}^n d_i = 2 |E(G)|
 		      \]
@@ -239,9 +241,9 @@
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{8}
+\begin{ejercicioEntregar}{8}
 	Probar que en todo digrafo existe una componente fuertemente conexa sin aristas que ingresen a ella y que existe una componente fuertemente conexa sin aristas que salgan de ella.
-\end{ejercicio}
+\end{ejercicioEntregar}
 \begin{proof}
 	Sea \( D \) un digrafo (asumimos finito) y consideremos su grafo de componentes fuertemente conexas, \( D^* \). En \( D^* \), cada vértice representa una componente fuertemente conexa de \( D \), y hay una arista dirigida de la componente \( C_i \) a la componente \( C_j \) si existe al menos una arista en \( D \) desde algún vértice en \( C_i \) hacia algún vértice en \( C_j \).
 
@@ -263,6 +265,31 @@
 \begin{ejercicio}{9}
 	Sea \( G \) un digrafo simple con \( n \) vértices y sin ciclos dirigidos. Probar que existe un orden \( v_1, \ldots, v_n \) de los vértices de \( G \) de modo que, para todo par de valores distintos \( i, j \) entre \( 1 \) y \( n \), si \( v_i v_j \in E(G) \) entonces \( i \leq j \).
 \end{ejercicio}
+\begin{proof}
+	Procedemos por inducción sobre \( n \), la cantidad de vértices de \( G \).
+
+	\paragraph{Caso base:} Si \( n = 1 \), \( G \) tiene un único vértice \( v_1 \) y ninguna arista. El orden \( v_1 \) satisface la condición trivialmente.
+
+	\paragraph{Paso inductivo:} Supongamos que la afirmación es cierta para todo digrafo simple sin ciclos dirigidos de \( n-1 \) vértices (\( n \ge 2 \)).
+
+	Sea \( G \) un digrafo simple sin ciclos dirigidos de \( n \) vértices. Sea \( S \) el conjunto de los vértices de \( G \) con grado de entrada igual a cero.
+
+	Primero, demostremos que \( S \neq \varnothing \). Supongamos por el absurdo que \( S = \varnothing \implies \) todo vértice de \( G \) tiene al menos una arista entrante. Si partimos de un vértice cualquiera y retrocedemos por las aristas entrantes, podemos construir un camino infinito. Dado que \( G \) tiene una cantidad finita de vértices, en algún momento deberemos visitar un vértice por segunda vez. Esto forma un ciclo dirigido, pero \( G \) es acíclico \( \implies S \neq \varnothing \).
+
+	Tomemos \( v \in S \) y lo fijamos como el primer elemento de la secuencia, \( v_1 = v \). Consideremos el subgrafo inducido \( G' = G - \{v_1\} \). Es claro que \( G' \) es un digrafo simple sin ciclos dirigidos y tiene \( n-1 \) vértices.
+
+	Por \textbf{H.I}, existe un orden \( v_2, \ldots, v_n \) de los vértices de \( G' \) tal que para todo par de índices \( i, j \in \{2, \ldots, n\} \), si \( v_i v_j \in E(G') \), entonces \( i \le j \).
+
+	Para finalizar, comprobemos que el orden \( v_1, v_2, \ldots, v_n \) es válido para la totalidad de \( G \). Tomemos una arista cualquiera \( v_i v_j \in E(G) \) y evaluemos los casos posibles:
+
+	\begin{itemize}
+		\item \textbf{Si \( i, j \ge 2 \):} estamos en la \textbf{H.I} y vale.
+		\item \textbf{Si \( i = 1 \):} La arista es de la forma \( v_1 v_j \). Como \( j \in \{2, \ldots, n\} \implies 1 < j \implies i \le j \).
+		\item \textbf{Si \( j = 1 \):} No existen aristas de la forma \( v_i v_1 \) pues \( v_1 \in S \).
+	\end{itemize}
+
+	En todos los casos posibles, \( v_i v_j \in E(G) \implies i \le j \). Esto completa la demostración.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -273,15 +300,83 @@
 \begin{ejercicio}{10}
 	Probar que existe un torneo de \( n \) vértices con grado de salida igual al grado de llegada en cada vértice si y sólo si \( n \) es impar.
 \end{ejercicio}
+\begin{proof}
+	\(\Longrightarrow\)) Sea \( G \) un torneo de \( n \) vértices tal que en cada vértice el grado de salida es igual al grado de llegada. En cualquier torneo, \(\forall v \in V(G) \) vale que \( d^+(v) + d^-(v) = n-1 \). Como por hipótesis \( d^+(v) = d^-(v) \), obtenemos \( 2d^+(v) = n-1 \implies n \) es impar.
+
+	\(\Longleftarrow)\) Supongamos que \( n \) es impar. Queremos construir un torneo de \( n \) vértices tal que \( d^+(v) = d^-(v) \quad \forall v \in V(G) \). Sea \( k = \frac{n-1}{2} \in \N \).
+
+	Sea el conjunto de vértices \( V = \{0, 1, \ldots, n-1\} \). Trazamos una arista dirigida de \( i \) a \( j \iff (j - i) \pmod n \in \{1, 2, \ldots, k\} \).
+
+	Veamos que esto define un torneo. Dados dos vértices distintos \( i, j \in V \), como \( i \not\equiv j \pmod n \), ambos restos \( (j-i) \bmod n \) y \( (i-j) \bmod n \) son no nulos y pertenecen a \( \{1, \ldots, n-1\} \); además, al ser uno el opuesto del otro módulo \( n \), su suma es exactamente \( n \). Si ambos fueran \( \le k \), la suma sería a lo sumo \( 2k < n \); si ambos fueran \( \ge k+1 \), la suma sería al menos \( 2k+2 > n \). Luego, exactamente uno de los dos restos es \( \le k \), es decir, se traza exactamente una arista dirigida entre cada par de vértices, cumpliendo la definición de torneo.
+
+	Finalmente, por construcción, para cada vértice \( i \) hay exactamente \( k \) valores distintos de \( j \) hacia los que apunta. Por lo tanto, el grado de salida de todo vértice es \( k = \frac{n-1}{2} \). Como cada vértice está conectado a \( n-1 \) vértices en total, su grado de entrada también es \( n - 1 - k = k \), cumpliéndose así lo requerido.
+\end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{11}
+\begin{definition}
+	Un \textbf{camino dirigido hamiltoniano} en un digrafo \( D \) es un camino dirigido que visita cada vértice de \( D \) exactamente una vez.
+\end{definition}
+
+\begin{ejercicioEntregar}{11}
 	Probar que todo torneo posee un camino dirigido hamiltoniano.
-\end{ejercicio}
+\end{ejercicioEntregar}
+\begin{proof}
+	Sea \( G \) un torneo con \( n \) vértices. Procedemos por inducción sobre \( n \).
+
+	\paragraph{Caso base:} Si \( n = 1 \), el único vértice forma un camino hamiltoniano trivial.
+
+	\paragraph{Paso inductivo:} Supongamos que vale para todo torneo con \( n-1 \) vértices. Sea \( G \) un torneo con \( n \) vértices. Tomemos un vértice \( v \in V(G) \) y consideremos el subgrafo inducido \( G' = G - \{v\} \), que es un torneo de \( n-1 \) vértices. Por \textbf{H.I}, existe un camino dirigido hamiltoniano en \( G' \), digamos \( P = v_1, v_2, \ldots, v_{n-1} \).
+
+	Para extender este camino a todo \( G \), debemos insertar el vértice \( v \). Como \( G \) es un torneo, entre \( v \) y cualquier \( v_k \) existe exactamente una arista dirigida. Analizamos tres casos posibles para la inserción:
+
+	\begin{itemize}
+		\item Si \( v v_1 \in E(G) \), entonces el camino \( v, v_1, v_2, \ldots, v_{n-1} \) es un camino dirigido hamiltoniano en \( G \).
+
+		\item Si \( v_{n-1} v \in E(G) \), entonces el camino \( v_1, v_2, \ldots, v_{n-1}, v \) es un camino dirigido hamiltoniano en \( G \).
+
+		\item Veamos qué ocurre si \( v v_1 \notin E(G) \) y \( v_{n-1} v \notin E(G) \). Sea \( i \) el \textit{máximo} índice en el conjunto \( \{1, \ldots, n-1\} \) tal que \( v_i v \in E(G) \).
+		      Sabemos que \( i \) existe y es al menos \( 1 \) (pues \( v_1 v \in E(G) \)), y sabemos que \( i < n-1 \) (pues \( v_{n-1} v \notin E(G) \)).
+
+		      Consideremos el vértice siguiente en el camino, \( v_{i+1} \). Como \( i \) es el máximo índice que apunta a \( v \), la arista entre \( v_{i+1} \) y \( v \) no puede estar dirigida hacia \( v \). Por ser \( G \) un torneo, necesariamente sale de \( v \), es decir, \( v v_{i+1} \in E(G) \).
+
+		      De esta manera podemos insertar \( v \) justo entre ellos, formando el camino dirigido hamiltoniano \( v_1, \ldots, v_i, v, v_{i+1}, \ldots, v_{n-1} \).
+	\end{itemize}
+
+	En todos los casos es posible construir el camino hamiltoniano, lo que completa la demostración.
+\end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}
+	Un \textbf{ciclo dirigido hamiltoniano} en un digrafo \( D \) es un ciclo dirigido que visita cada vértice de \( D \) exactamente una vez.
+\end{definition}
 
 \begin{ejercicio}{12}
 	Probar que un torneo posee un ciclo hamiltoniano si y sólo si es fuertemente conexo.
 \end{ejercicio}
+\begin{proof}
+	(\(\Longrightarrow\)) Sea \( G \) un torneo con un ciclo hamiltoniano. Sea \( C = v_1, v_2, \ldots, v_n, v_1 \) dicho ciclo. Para cualquier par de vértices \( v_i, v_j \), podemos ir de \( v_i \) a \( v_j \) siguiendo el ciclo en la dirección adecuada. Por lo tanto, existe un camino dirigido de \( v_i \) a \( v_j \) y otro de \( v_j \) a \( v_i \), lo que implica que \( G \) es fuertemente conexo.
+
+	(\(\Longleftarrow\)) Sea \( G \) un torneo fuertemente conexo. Demostraremos que contiene un ciclo hamiltoniano tomando un ciclo de longitud máxima y probando por el absurdo que debe incluir a todos los vértices.
+
+	Como \( G \) es fuertemente conexo (y \( n \ge 3 \), ya que para \( n=1 \) es trivial y \( n=2 \) no puede ser fuertemente conexo), cada vértice tiene grado de entrada y salida mayor a cero, lo que garantiza la existencia de al menos un ciclo.
+	Sea \( C = v_1, v_2, \ldots, v_k, v_1 \) un ciclo dirigido de longitud máxima \( k \). Supongamos por el absurdo que \( k < n \).
+
+	Sea \( W = V(G) \setminus V( C ) \) el conjunto de vértices que no están en el ciclo. Evaluamos las conexiones entre \( W \) y \( C \). Existen dos posibilidades para un vértice \( u \in W \):
+
+	\paragraph{Caso 1:} \( u \) tiene al menos una arista hacia \( C \) y al menos una arista recibida desde \( C \).
+	Por un razonamiento anáogo al ejercicio anterior, al recorrer los vértices de \( C \) en orden, la dirección de las aristas entre \( C \) y \( u \) debe cambiar en algún momento de salir de \( C \) a entrar a \( C \). Es decir, existe un índice \( i \) tal que \( v_i u \in E(G) \) y \( u v_{i+1} \in E(G) \).
+	Si insertamos \( u \), formamos el ciclo \( v_1, \ldots, v_i, u, v_{i+1}, \ldots, v_k, v_1 \) de longitud \( k+1 \), lo que contradice que \( C \) era de longitud máxima.
+
+	\paragraph{Caso 2:} Ningún vértice de \( W \) cumple el Caso 1.
+	Entonces, \( W \) se divide estrictamente en dos subconjuntos: \( W_{in} \), formado por los vértices que \textit{sólo} reciben aristas desde \( C \) (y por lo tanto no envían ninguna arista hacia \( C \)); y \( W_{out} \), formado por los vértices que \textit{sólo} envían aristas hacia \( C \) (y por lo tanto no reciben ninguna arista desde \( C \)).
+
+	Veamos primero que ambos subconjuntos son no vacíos. Si \( W_{out} = \varnothing \), entonces todo vértice de \( W \) pertenece a \( W_{in} \), y por definición ninguno de ellos envía una arista hacia \( C \); como tampoco hay otra forma de salir de \( W \) (las únicas aristas entre \( C \) y \( W \) son las que van de \( C \) a \( W_{in} \)), ningún vértice de \( W \) podría alcanzar jamás a un vértice de \( C \), contradiciendo que \( G \) es fuertemente conexo (recordar que \( W \neq \varnothing \) pues \( k < n \)). Por lo tanto \( W_{out} \neq \varnothing \). Simétricamente, si \( W_{in} = \varnothing \), entonces todo vértice de \( W \) pertenece a \( W_{out} \) y ninguno recibe una arista desde \( C \), por lo que ningún vértice de \( C \) podría alcanzar a un vértice de \( W \), contradiciendo nuevamente que \( G \) es fuertemente conexo. Luego \( W_{in} \neq \varnothing \).
+
+	Afirmamos ahora que existe al menos un par \( y \in W_{in} \), \( x \in W_{out} \) con \( yx \in E(G) \). En efecto, supongamos por el absurdo que para todo \( y \in W_{in} \) y todo \( x \in W_{out} \) la arista va en el sentido \( xy \) (esto cubre todos los casos, pues \( G \) es un torneo y entre \( y \) y \( x \) hay exactamente una arista dirigida). Entonces ningún vértice de \( W_{in} \) tiene aristas salientes hacia \( C \) (por definición de \( W_{in} \)) ni hacia \( W_{out} \) (por la suposición), de modo que sus únicas aristas salientes posibles quedan dentro del propio \( W_{in} \). Esto implica que ningún vértice de \( W_{in} \) puede alcanzar jamás a un vértice de \( C \), contradiciendo que \( G \) es fuertemente conexo. Luego existen \( y \in W_{in} \) y \( x \in W_{out} \) con \( yx \in E(G) \).
+
+	Pero en este escenario, sabiendo que \( v_1 \) apunta a \( y \) (pues \( y \in W_{in} \)) y que \( x \) apunta a \( v_2 \) (pues \( x \in W_{out} \)), podemos formar el ciclo \( v_1, y, x, v_2, v_3, \ldots, v_k, v_1 \). Este nuevo ciclo tiene longitud \( k+2 \), lo que vuelve a contradecir la maximidad de \( C \).
+
+	En ambos casos llegamos a un absurdo producto de suponer que \( k < n \). Por lo tanto, \( k = n \) y el ciclo máximo \( C \) es un ciclo hamiltoniano.
+\end{proof}
