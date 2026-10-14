@@ -1,0 +1,199 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\cl}[1]{\overline{#1}}                       % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                         % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                          % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
+\newcommand{\ran}{\operatorname{ran}}
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                                  % Si y sólo si
+\newcommand{\imp}{\implies}                              % Implies
+\newcommand{\setdiff}{\smallsetminus}                    % Set difference
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Repaso para el Primer Parcial}
+\author{Bustos Jordi}
+\date{}
+
+\maketitle
+
+\vspace{0.3cm}
+\noindent
+Esta guía contiene ejercicios \emph{nuevos} generados por \textbf{Claude Sonnet 5}.
+
+\vspace{0.5cm}
+
+\section{Hahn Banach y funcionales}
+
+\begin{ejercicio}{1}
+    Sea \( G = \{ {(x_n)}_{n \ge 1} \in \ell^1 : 2x_1 - x_3 = 0 \} \) y sea \( f : G \to \R \) el funcional definido por \( f(x_1, x_2, \dots) = x_1 \).
+    \begin{enumerate}
+        \item Probar que \( f \) es lineal y acotado en \( (G, \norm{\cdot}_1) \), y que \( \norm{f} = \dfrac{1}{3} \).
+        \item Probar que \( f \) tiene una \emph{única} extensión de Hahn Banach \( h : \ell^1 \to \R \), y que está dada por
+              \[
+                  h(x_1, x_2, x_3, \dots) = \frac{1}{3} x_1 + \frac{1}{3} x_3 \quad \text{para todo } (x_1,x_2,\dots) \in \ell^1.
+              \]
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{2}
+    Sea \( G = \{ {(x_n)}_{n \ge 1} \in \ell^1 : x_1 + x_2 = 0,\ x_3 = 0 \} \) y sea \( f : G \to \R \) dado por \( f(x_1, x_2, \dots) = x_1 \).
+    \begin{enumerate}
+        \item Probar que \( \norm{f} = \dfrac{1}{2} \).
+        \item Probar que el funcional \( f \) admite más de una extensión de Hahn Banach.
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{3}
+    Sea \( (X, \norm{\cdot}) \) un espacio normado y sea \( x_0 \in X \), \( x_0 \neq 0 \). Usando el Teorema de Hahn--Banach, probar que existe \( f \in X^* \) tal que
+    \[
+        \norm{f} = 1 \qquad \text{y} \qquad f(x_0) = \norm{x_0}.
+    \]
+    Deducir que para todo \( x \in X \) vale \( \norm{x} = \max_{f \in X^*,\, \norm{f} \le 1} |f(x)| \), y que dicho máximo se alcanza (a diferencia de la definición de \( \norm{f} \) como supremo sobre la bola de \(X\), que en general no se alcanza).
+\end{ejercicio}
+
+\vspace{0.6cm}
+\section{Operadores lineales acotados, potencias y adjuntos}
+
+\begin{ejercicio}{4}
+    Sea \( T : \ell^1 \to \ell^1 \) el operador lineal definido por
+    \[
+        T(x_1, x_2, x_3, \dots) = \left( x_2,\ \frac{x_3}{2},\ \frac{x_4}{3}, \dots, \frac{x_{n+1}}{n}, \dots \right).
+    \]
+    \begin{enumerate}
+        \item Probar que \( T \) es acotado y que \( \norm{T} = 1 \).
+        \item Probar que, para cada \( k \ge 1 \) y cada \( n \ge 1 \),
+              \[
+                  {(T^k x)}_n = \frac{x_{n+k}}{n(n+1)\cdots(n+k-1)},
+              \]
+              y deducir que \( \norm{T^k} = \dfrac{1}{k!} \).
+        \item Encontrar una fórmula explícita para \( T^* : \ell^\infty \to \ell^\infty \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{5}
+    Fijado \( 1 \le p < \infty \), sea \( S \in L(\ell^p) \) el shift a izquierda, \( S(x_1,x_2,x_3,\dots) = (x_2,x_3,x_4,\dots) \), y sea \( T = I - S \), es decir
+    \[
+        T(x_1,x_2,x_3,\dots) = (x_1 - x_2,\ x_2 - x_3,\ x_3-x_4,\dots).
+    \]
+    \begin{enumerate}
+        \item Probar que \( T \in L(\ell^p) \) y que \( \norm{T} \le 2 \).
+        \item Probar que, de hecho, \( \norm{T} = 2 \), exhibiendo una sucesión de vectores unitarios \( x^{(N)} \) tales que \( \norm{T x^{(N)}}_p \to 2 \).
+        \item Usando que \( S^* \) es el shift a derecha \( R \) en \( \ell^q \) (\( \frac1p+\frac1q=1 \)), encontrar una fórmula explícita para \( T^* : \ell^q \to \ell^q \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.6cm}
+\section{Teorema de la Aplicación Abierta, Inversa Acotada y Gráfico Cerrado}
+
+\begin{ejercicio}{6}
+    Sea \( X \) un espacio de Banach y \( T \in L(X) \) tal que \( \norm{T} < 1 \). Probar que \( I - T \) es invertible, con inverso acotado dado por la serie de Neumann
+    \[
+        {(I-T)}^{-1} = \sum_{n=0}^{\infty} T^n,
+    \]
+    y que \( \norm{{(I-T)}^{-1}} \le \dfrac{1}{1 - \norm{T}} \). Deducir que el conjunto de los operadores invertibles es abierto en \( L(X) \).
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{7}
+    Sean \( X, Y \) espacios de Banach y \( T : X \to Y \) un operador lineal acotado e inyectivo. Probar que son equivalentes:
+    \begin{enumerate}
+        \item \( \ran(T) \) es cerrado en \( Y \).
+        \item Existe \( C > 0 \) tal que \( \norm{Tx} \ge C \norm{x} \) para todo \( x \in X \).
+    \end{enumerate}
+    \emph{Sugerencia}: Para \((i) \Rightarrow (ii)\), considerar \( T \) como una biyección continua de \( X \) en \( (\ran(T), \norm{\cdot}_Y) \), que es un espacio de Banach por ser cerrado en \(Y\), y aplicar el Teorema de la Aplicación Abierta (o de la Inversa Acotada) a \(T^{-1}\).
+\end{ejercicio}
+
+\vspace{0.6cm}
+\section{Principio de Acotación Uniforme}
+
+\begin{ejercicio}{8}
+    Fijado \( 1 < p < \infty \), sea \( a = (a_n)_{n \in \N} \) una sucesión de escalares tal que \( (a_n x_n)_{n \in \N} \in \ell^1 \) para toda \( x = (x_n)_{n \in \N} \in \ell^p \). Probar, usando el Principio de Acotación Uniforme, que \( a \in \ell^q \), donde \( \frac1p + \frac1q = 1 \).
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{9}
+    Sea \( X \) un espacio de Banach y sea \( (T_n)_{n \in \N} \subset L(X) \) tal que, para cada \( x \in X \), la sucesión \( (T_n x)_{n \in \N} \) converge (a un límite que en principio depende de \(x\), que llamamos \( Tx \)). Probar que:
+    \begin{enumerate}
+        \item \( \sup_n \norm{T_n} < \infty \).
+        \item \( T \in L(X) \), es decir, \( T \) es lineal y acotado.
+        \item \( \norm{T} \le \liminf_{n \to \infty} \norm{T_n} \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.6cm}
+\section{Proyectores y subespacios complementados}
+
+\begin{ejercicio}{10}
+    Sea \( X \) un espacio de Banach y sea \( P \in L(X) \) un proyector, i.e. \( P^2 = P \), con \( P \neq 0, I \). Probar que:
+    \begin{enumerate}
+        \item \( \ran(P) \) y \( \ker(P) \) son subespacios cerrados de \( X \), y \( X = \ran(P) \oplus \ker(P) \).
+        \item \( I - P \) es también un proyector, con \( \ran(I-P) = \ker(P) \) y \( \ker(I-P) = \ran(P) \).
+        \item \( \norm{P} \ge 1 \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{11}
+    Sean \( X \) un espacio de Banach y \( M, N \subseteq X \) subespacios \emph{cerrados} tales que \( X = M \oplus N \) algebraicamente (es decir, \( M \cap N = \{0\} \) y \( M + N = X \)). Sea \( P : X \to X \) la proyección asociada a esta descomposición (\( P(m+n) = m \) para \( m \in M, n \in N \)).
+
+    Probar, usando el Teorema del Gráfico Cerrado, que \( P \in L(X) \). Concluir que \( M \) y \( N \) son complementados en \( X \).
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{12}
+    Sea \( X = \ell^1 \) y consideremos
+    \[
+        M = \{ x = (x_n)_{n \ge 1} \in \ell^1 : x_{2n-1} = 0 \ \text{ para todo } n \in \N \}, \qquad
+        N = \{ x = (x_n)_{n \ge 1} \in \ell^1 : x_{2n} = 0 \ \text{ para todo } n \in \N \},
+    \]
+    es decir, \( M \) es el subespacio de las sucesiones con coordenadas impares nulas y \( N \) el de las sucesiones con coordenadas pares nulas.
+    \begin{enumerate}
+        \item Probar que \( M \) y \( N \) son subespacios cerrados de \( \ell^1 \) y que \( \ell^1 = M \oplus N \).
+        \item Exhibir explícitamente el proyector acotado \( P \in L(\ell^1) \) con \( \ran(P) = M \) y \( \ker(P) = N \), y calcular \( \norm{P} \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\noindent
+\textbf{Observación.} A diferencia de lo que ocurre en un espacio de Hilbert (donde \emph{todo} subespacio cerrado es complementado, vía el complemento ortogonal), en un espacio de Banach general esto es falso: existen subespacios cerrados que no son complementados (por ejemplo, \( c_0 \) no es complementado en \( \ell^\infty \), teorema de Phillips). Los Ejercicios 10 a 12 ilustran, sin embargo, dos situaciones generales en las que sí se puede garantizar o construir explícitamente un complemento: cuando la proyección candidata ya se sabe acotada (Ejercicio 10), cuando se puede invocar el Teorema del Gráfico Cerrado (Ejercicio 11), o cuando se dispone de una descomposición explícita en coordenadas (Ejercicio 12).
+
+\end{document}
