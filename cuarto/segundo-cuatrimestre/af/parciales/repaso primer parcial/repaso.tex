@@ -196,4 +196,81 @@ Esta guía contiene ejercicios \emph{nuevos} generados por \textbf{Claude Sonnet
 \noindent
 \textbf{Observación.} A diferencia de lo que ocurre en un espacio de Hilbert (donde \emph{todo} subespacio cerrado es complementado, vía el complemento ortogonal), en un espacio de Banach general esto es falso: existen subespacios cerrados que no son complementados (por ejemplo, \( c_0 \) no es complementado en \( \ell^\infty \), teorema de Phillips). Los Ejercicios 10 a 12 ilustran, sin embargo, dos situaciones generales en las que sí se puede garantizar o construir explícitamente un complemento: cuando la proyección candidata ya se sabe acotada (Ejercicio 10), cuando se puede invocar el Teorema del Gráfico Cerrado (Ejercicio 11), o cuando se dispone de una descomposición explícita en coordenadas (Ejercicio 12).
 
+\clearpage
+
+\section{Simulacro de Parcial}
+
+\begin{ejercicio}{1}
+    Determine y justifique si cada una de las siguientes afirmaciones es verdadera o falsa.
+    \begin{enumerate}
+        \item Sean \( E, F \) espacios de Banach y \( T \in L(E,F) \) inyectivo. Entonces \( \ran(T) \) es cerrado en \( F \).
+        \item Sea \( X \) Banach y \( {(T_n)}_{n\in\N} \subset L(X) \) tal que \( T_n x \to Tx \) para todo \( x \in X \). Entonces \( \norm{T_n - T} \to 0 \).
+        \item Sean \( E, F \) espacios de Banach y \( T \in L(E,F) \) un isomorfismo isométrico (i.e. \( T \) es biyectivo y \( \norm{Tx} = \norm{x} \) para todo \( x \in E \)). Entonces \( T^{-1} \in L(F,E) \) y \( \norm{T^{-1}} = 1 \).
+        \item Sea \( E = C[0,1] \) con la norma uniforme y sea \( T : E \to E \) definido por
+              \[
+                  (Tf)(t) = \int_0^t f(s)\, ds.
+              \]
+              Entonces \( T \in L(E) \) y \( \norm{T} = 1 \).
+        \item Para el operador \( T \) del inciso anterior, existe \( T^{-1} : \ran(T) \to E \) y es acotado.
+        \item Si \( X \) es un espacio de Banach y \( M \subseteq X \) es un subespacio de dimensión finita, entonces \( M \) es cerrado y complementado en \( X \).
+
+        \item Sea \( X \) un espacio de Banach y \( M \subseteq X \) un subespacio cerrado de codimensión finita. Entonces \( M \) es complementado en \( X \).
+        \item Sea \( D : (C^1[0,1], \norm{\cdot}_\infty) \to (C[0,1], \norm{\cdot}_\infty) \), \( Df = f' \). Como \( D \) tiene gráfico cerrado y no es acotado, contradice el Teorema del Gráfico Cerrado.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+    Vale la pena ver los contraejemplos del primer y segundo inciso. Para el primero, consideremos: \[
+        T: \ell^2 \to \ell^2, \quad x \mapsto {\left \{\frac{x_n}{n} \right \}}_{n\in\N}.
+    \]
+    Es fácil ver que es lineal, continuo e inyectivo, pero si su rango fuese cerrado, entonces \( R(T) \) sería un espacio de Banach y podríamos aplicar el corolario de TIA a \( T: \ell^2 \to R(T) \), obteniendo así que la inversa de \( T \) es acotada, pero esto es un absurdo pues, \( T^{-1}(x) = \{ n x_n \} \) que no es acotado. Por lo tanto, \( \ran(T) \) no es cerrado en \( \ell^2 \).
+
+    Para el segundo inciso consideremos \( \varphi_n(x) = x_n \) para \( x \in c_0 \), es claro que como cada \( \varphi \) está definida en \( c_0 \), puntualmente la sucesión tiende a cero, sin embargo \( \varphi_n(e_n) = 1 \quad \forall n \ge 1 \implies \norm{\varphi_n} = 1 \) que no tiende a cero. Esto muestra que la convergencia puntual no implica convergencia en norma.
+\end{proof}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{2}
+    Sea \( (X,\norm{\cdot}) \) un espacio normado, \( M \subseteq X \) un subespacio cerrado y \( x_0 \in X \setdiff M \). Sea \( d = \inf_{m \in M} \norm{x_0 - m} > 0 \).
+    \begin{enumerate}
+        \item Probar que existe \( f \in X^* \) con \( \norm{f} = 1 \), \( f|_M = 0 \) y \( f(x_0) = d \).
+        \item Deducir que \( M \) es denso en \( X \) si y sólo si el único \( f \in X^* \) con \( f|_M = 0 \) es \( f = 0 \).
+        \item Aplicar lo anterior para probar que \( c_{00} \) (sucesiones finitas) es denso en \( \ell^1 \) pero no es denso en \( \ell^\infty \).
+    \end{enumerate}
+    \emph{Sugerencia}: Para (a), definir \( g \) en \( M \oplus \R x_0 \) por \( g(m + \lambda x_0) = \lambda d \), y calcular su norma.
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{3}
+    Sea \( C^1[0,1] \) el espacio de funciones \( f : [0,1] \to \R \) continuamente diferenciables, con la norma
+    \[
+        \norm{f}_{C^1} = \norm{f}_\infty + \norm{f'}_\infty.
+    \]
+    \begin{enumerate}
+        \item Probar que \( (C^1[0,1], \norm{\cdot}_{C^1}) \) es un espacio de Banach.
+        \item Probar que \( (C^1[0,1], \norm{\cdot}_\infty) \) \emph{no} es de Banach.
+        \item Probar que no existe \( K > 0 \) tal que \( \norm{f}_{C^1} \le K \norm{f}_\infty \) para toda \( f \in C^1[0,1] \), y explicar por qué esto no contradice el Teorema de la Aplicación Abierta.
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{4}
+    \begin{enumerate}
+        \item Sea \( a = {(a_n)}_{n\in\N} \) una sucesión de escalares tal que la serie \( \sum_{n=1}^\infty a_n x_n \) converge para toda \( x = {(x_n)}_{n\in\N} \in c_0 \). Usando el Principio de Acotación Uniforme, probar que \( a \in \ell^1 \).
+        \item Sea \( E \subseteq C[0,1] \) un subespacio \emph{cerrado} (con la norma uniforme) tal que \( E \subseteq C^1[0,1] \). Usando el Teorema del Gráfico Cerrado, probar que existe \( C > 0 \) tal que \( \norm{f'}_\infty \le C \norm{f}_\infty \) para toda \( f \in E \).
+    \end{enumerate}
+\end{ejercicio}
+
+\vspace{0.3cm}
+
+\begin{ejercicio}{5}
+    Sea \( X \) un espacio de Banach.
+    \begin{enumerate}
+        \item Sea \( x_0 \in X \), \( x_0 \neq 0 \). Usando Hahn--Banach, construir un proyector \( P \in L(X) \) con \( \ran(P) = \R x_0 \) y \( \norm{P} = 1 \).
+        \item Sea \( P \in L(X) \) un proyector y \( T \in L(X) \). Probar que \( TP = PT \) si y sólo si \( \ran(P) \) y \( \ker(P) \) son invariantes por \( T \).
+        \item Sea \( P \in L(X) \) un proyector, \( P \neq 0, I \), y \( \lambda \in \R \). Probar que \( I - \lambda P \) es invertible si y sólo si \( \lambda \neq 1 \), y calcular explícitamente \( {(I - \lambda P)}^{-1} \).
+    \end{enumerate}
+\end{ejercicio}
+
 \end{document}
