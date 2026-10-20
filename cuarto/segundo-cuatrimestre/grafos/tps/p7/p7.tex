@@ -1,0 +1,151 @@
+\begin{ejercicio}{1}
+    Hallar la cantidad total de árboles no isomorfos entre sí con 5 vértices. ¿Cuántos hay de 6 vértices?
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Probar que un grafo conexo \( G \) es un árbol si y sólo si toda arista de \( G \) es de corte.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+    Probar que todo árbol con grado máximo \( a > 1 \) tiene al menos \( a \) hojas.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+    Sea \( T \) un árbol tal que todo vértice adyacente a una hoja tiene grado al menos \( 3 \). Probar que \( T \) tiene un par de hojas con vecino común.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+    Dado un vértice \( v \) de un grafo \( G \), la excentricidad de \( v \) está definida por \( \operatorname{ecc}(v) = \max\{d(v, w) : w \in V(G)\} \). El centro de \( G \) es el subgrafo inducido por los vértices de mínima excentricidad en \( G \). Demostrar que, para todo árbol, el centro consiste de un único vértice o de dos vértices adyacentes.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+    Elegir un árbol de \( 8 \) vértices, numerar sus vértices y hallar su código de Prüfer. Luego, invertir dicho código y hallar el árbol que posee tal código (mostrar el procedimiento en ambas partes. Si el código resultante es capicúa, cambiar alguno de los números del código para resolver la segunda parte).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+    Determinar cuáles árboles tienen códigos de Prüfer que
+    \begin{enumerate}
+        \item contienen sólo un valor (los caracteres del código son todos iguales).
+        \item contienen exactamente \( 2 \) valores distintos.
+        \item tienen distintos valores en todas las posiciones.
+    \end{enumerate}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+    Sea \( G \) un grafo simple con cinco vértices, tales que cuatro de ellos inducen \( C_4 \) y el vértice restante es adyacente a todos los demás. Hallar la cantidad total de árboles generadores de este grafo.
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+    Determinar si es verdadero o falso: si \( T \) es un árbol generador de peso mínimo de un grafo \( G \) y \( u, v \in V(G) \), entonces el \( uv \)-camino en \( T \) es un \( uv \)-camino mínimo en \( G \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+    Sea \( G \) un grafo tal que sus aristas tienen peso y sea \( C \) un ciclo de \( G \). Probar que, si \( e \) es una arista de \( C \) que tiene un peso mayor que cualquier otra del ciclo, entonces no existe un árbol generador de \( G \) de peso mínimo que tenga a la arista \( e \).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+    Dado un grafo conexo \( G \), sea \( H \) el grafo cuyos vértices son todos los árboles generadores de \( G \), siendo dos árboles generadores distintos \( T \) y \( T' \) adyacentes si y sólo si existen aristas \( e \) y \( e' \) tales que \( T' = T - e + e' \).
+    \begin{itemize}
+        \item Probar que \( H \) es conexo.
+        \item Supongamos ahora que las aristas de \( G \) tienen pesos no negativos. Sea \( H' \) el subgrafo de \( H \) inducido por los árboles generadores de peso mínimo. Probar que \( H' \) es conexo también. (Sugerencia: considerar los argumentos de la demostración del algoritmo de Kruskal y/o el ejercicio anterior. Alternativamente, dados dos árboles generadores de peso mínimo, considerar, entre las aristas que están en un árbol pero no en el otro, una de peso máximo.)
+        \item Demostrar que, si \( G \) posee dos árboles generadores de peso mínimo distintos, entonces los pesos de sus aristas y las multiplicidades de dichos pesos coinciden.
+    \end{itemize}
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{12}
+    Determinar el menor costo de construcción de una red de carreteras entre \( 5 \) ciudades de manera que, partiendo desde cualquier ciudad, se pueda llegar a toda otra ciudad, sabiendo que el costo de construcción de una ruta entre cada par de ciudades está dado por la matriz
+    \[
+        A = \begin{pmatrix}
+            0  & 3 & 5      & 11     & 9  \\
+            3  & 0 & 3      & 9      & 8  \\
+            5  & 3 & 0      & \infty & 10 \\
+            11 & 9 & \infty & 0      & 7  \\
+            9  & 8 & 10     & 7      & 0
+        \end{pmatrix}
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{13}
+    Hallar caminos de peso mínimo desde el vértice \( 1 \) a todos los demás. Considerar el grafo cuyos pesos están dados por la matriz
+    \[
+        A = \begin{pmatrix}
+            0  & 3 & 5      & 11     & 9  \\
+            3  & 0 & 3      & 9      & 8  \\
+            5  & 3 & 0      & \infty & 10 \\
+            11 & 9 & \infty & 0      & 7  \\
+            9  & 8 & 10     & 7      & 0
+        \end{pmatrix}
+    \]
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{14}
+    Cuatro personas deben cruzar un cañón de noche a través de un puente frágil. Para cruzar, es esencial hacerlo con una linterna. El grupo dispone de una linterna solamente y la única forma de cruzar al otro lado es que sea portada por alguien que esté cruzando. A lo sumo dos personas pueden estar en el puente juntas a la vez. Las cuatro personas requieren de \( 10 \), \( 5 \), \( 2 \) y \( 1 \) minutos respectivamente si cruzan solas. Cuando dos personas cruzan juntas, se mueven a la velocidad de la persona más lenta. En \( 18 \) minutos, una inundación repentina inundará el sector llevándose el puente. ¿Tienen tiempo las cuatro personas para cruzar y salvar sus vidas? Dar una respuesta sin usar teoría de grafos, y luego describir cómo se podría hallar la respuesta usando teoría de grafos (Sugerencia: relacionar con el problema de hallar caminos mínimos).
+\end{ejercicio}
+\begin{proof}
+
+\end{proof}
