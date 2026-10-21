@@ -1,48 +1,83 @@
-
+% !TeX root = ../main.tex
+% ----------------------------------------------------------------------
+% Entornos: definiciones, teoremas, ejemplos, observaciones y demostraciones
+% ----------------------------------------------------------------------
 \usepackage{thmtools}
-\usepackage[framemethod=TikZ]{mdframed}
-\mdfsetup{skipabove=1em,skipbelow=1em}
+\usepackage[framemethod=default]{mdframed}
 
-\theoremstyle{definition}
+\mdfsetup{skipabove=0.9em, skipbelow=0.6em}
+
+% Caja con barra lateral de color
+\mdfdefinestyle{barra}{
+  topline=false, rightline=false, bottomline=false,
+  linewidth=2.5pt,
+  innerleftmargin=10pt, innerrightmargin=8pt,
+  innertopmargin=10pt, innerbottommargin=10pt,
+  leftmargin=0pt, rightmargin=0pt,
+  splittopskip=0.5em, splitbottomskip=0.5em
+}
+
+% Teoremas, proposiciones, lemas y corolarios
 \declaretheoremstyle[
-    headfont=\bfseries\sffamily\color{magenta!80!black}, bodyfont=\normalfont,
-    mdframed={
-            linecolor=white!60,
-            innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=12pt, innerleftmargin=12pt,
-        }
-]{thmbox}
+  headfont=\bfseries\color{darkblue},
+  notefont=\bfseries\color{accentblue},
+  notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.},
+  postheadspace=0.5em,
+  mdframed={style=barra, linecolor=darkblue, backgroundcolor=darkblue!5}
+]{caja-teorema}
 
+% Definiciones
 \declaretheoremstyle[
-    headfont=\bfseries\sffamily\color{black}, bodyfont=\normalfont,
-    mdframed={
-            linecolor=white!60,
-            innertopmargin=0pt, innerbottommargin=0pt, innerrightmargin=12pt, innerleftmargin=12pt,
-            align=center,
-        }
-]{thmtikz}
+  headfont=\bfseries\color{accentblue},
+  notefont=\bfseries\color{accentblue},
+  notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.},
+  postheadspace=0.5em,
+  mdframed={style=barra, linecolor=accentblue, backgroundcolor=accentblue!5}
+]{caja-definicion}
 
+% Ejemplos
 \declaretheoremstyle[
-    headfont=\bfseries\sffamily\color{magenta!80!black}, bodyfont=\normalfont,
-    numbered=no,
-    mdframed={
-            linecolor=white!40,
-            innertopmargin=10pt, innerbottommargin=0pt, innerrightmargin=12pt, innerleftmargin=12pt,
-        },
-    qed=\qedsymbol
-]{thmproofbox}
+  headfont=\bfseries\color{mediumgray},
+  notefont=\bfseries\color{mediumgray},
+  notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.},
+  postheadspace=0.5em,
+  mdframed={style=barra, linecolor=mediumgray!60, backgroundcolor=white}
+]{caja-ejemplo}
 
-\declaretheorem[numberwithin=chapter,style=thmbox, name=Definición]{definition}
-\declaretheorem[sibling=definition,style=thmbox, numbered=no, name=Ejemplo]{eg}
-\declaretheorem[sibling=definition,style=thmbox, name=Proposición]{prop}
-\declaretheorem[sibling=definition,style=thmbox, name=Teorema, numbered=yes]{theorem}
-\declaretheorem[sibling=definition,style=thmbox, name=Lema]{lemma}
-\declaretheorem[sibling=definition,style=thmbox, name=Corolario]{corollary}
+% Observaciones
+\declaretheoremstyle[
+  headfont=\bfseries\color{mediumgray},
+  notefont=\bfseries\color{mediumgray},
+  notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.},
+  postheadspace=0.5em,
+  mdframed={style=barra, linecolor=mediumgray!60, backgroundcolor=lightgray}
+]{caja-observacion}
 
-\declaretheorem[style=thmproofbox, name=Demostración]{replacementproof}
-\renewenvironment{proof}[1][\proofname]{\vspace{-10pt}\begin{replacementproof}}{\end{replacementproof}}
+\declaretheorem[numberwithin=chapter, style=caja-definicion, name=Definición]{definition}
+\declaretheorem[sibling=definition, style=caja-teorema, name=Proposición]{prop}
+\declaretheorem[sibling=definition, style=caja-teorema, name=Teorema]{theorem}
+\declaretheorem[sibling=definition, style=caja-teorema, name=Lema]{lemma}
+\declaretheorem[sibling=definition, style=caja-teorema, name=Corolario]{corollary}
+\declaretheorem[sibling=definition, style=caja-ejemplo, numbered=no, name=Ejemplo]{eg}
+\declaretheorem[style=caja-observacion, numbered=no, name=Observación]{note}
+\declaretheorem[style=caja-observacion, numbered=no, name=Ejercicio]{ejercicio}
 
-\declaretheorem[style=thmbox, numbered=no, name=Observación]{note}
-\declaretheorem[style=thmbox, numbered=no, ]{temp}
-\declaretheorem[style=thmtikz, numbered=no, name=.]{tikznt}
-
-\newcommand{\bb}[1]{\mathbb{#1}}
+% Demostraciones (fuera de las cajas)
+\renewcommand{\proofname}{Demostración}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+  \par\pushQED{\qed}\normalfont\topsep=0.3em\relax
+  \trivlist\item[\hskip\labelsep\itshape\textcolor{darkblue}{#1}\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother

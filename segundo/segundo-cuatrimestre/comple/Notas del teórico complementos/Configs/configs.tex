@@ -1,52 +1,82 @@
-%!TEX root = main.tex
-\usepackage[T1]{fontenc}
-\usepackage[spanish]{babel}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{booktabs}
-\usepackage{enumitem}
-\usepackage{subcaption}
-\usepackage{multicol}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+% !TeX root = ../main.tex
+% ----------------------------------------------------------------------
+% Paquetes, colores, geometría y macros matemáticas
+% ----------------------------------------------------------------------
+
+% --- Fuentes y codificación (válido para XeLaTeX, LuaLaTeX y pdfLaTeX) ---
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec}
+\fi
+\usepackage[spanish,es-nodecimaldot]{babel}
+\spanishdeactivate{<>}
+\AtBeginDocument{\shorthandoff{<>}}
+\usepackage{microtype}
+
+% --- Matemática ---
+\usepackage{amsmath, amssymb, amsthm, mathtools}
 \usepackage{mathrsfs}
-\usepackage{euler}
 \usepackage{cancel}
-\usepackage{enumitem}
-\usepackage[breaklinks = true]{hyperref}
-\usepackage{lipsum}
 \usepackage{interval}
 
-
-\newcommand\N{\ensuremath{\mathbb{N}}}
-\newcommand\R{\ensuremath{\mathbb{R}}}
-\newcommand\Z{\ensuremath{\mathbb{Z}}}
-\renewcommand\O{\ensuremath{\emptyset}}
-\newcommand\Q{\ensuremath{\mathbb{Q}}}
-\newcommand\C{\ensuremath{\mathbb{C}}}
-\newcommand\e{\ensuremath{\varepsilon}}
-
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-
-\def\upint{\mathchoice%
-	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
-	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-	\int}
-\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
-
+% --- Utilidades ---
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
+% --- Colores (los mismos que en la portada del final de Temas) ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+
+% --- Geometría y párrafos ---
 \usepackage{geometry}
 \geometry{
-	a4paper,
-	total={170mm,245mm},
-	left=20mm,
-	top=20mm,
+  a4paper,
+  left=2.8cm, right=2.8cm,
+  top=3.2cm, bottom=3.2cm,
+  headheight=15pt
 }
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em plus 0.3em minus 0.2em}
+\setlist{itemsep=0.2em, topsep=0.3em, parsep=0pt}
 
-\input{Configs/Boxes}
-\input{Configs/Formats}
+% --- Conjuntos numéricos y atajos ---
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\e}{\varepsilon}
+\renewcommand{\O}{\varnothing}
+
+% --- Operadores ---
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\interior}{int}
+\newcommand{\cl}[1]{\overline{#1}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% --- Integrales superior e inferior ---
+\def\upint{\mathchoice%
+  {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}

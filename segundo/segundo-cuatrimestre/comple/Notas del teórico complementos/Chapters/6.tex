@@ -1,198 +1,211 @@
 \section{Sucesiones}
 
-Una sucesión de números reales es una función \(x: \N \to \R \).
-Notamos \(x(n) = x_n\) y lo llamamos el n-ésimo término de la sucesión.
-Indicamos la sucesión como \({(x_n)}_{n \in \N} \) o \((x_1, x_2, \ldots)\).
+Una \emph{sucesión} de números reales es una función $x\colon \N \to \R$. Se escribe $x(n) = x_n$ y se lo llama el $n$-ésimo término de la sucesión. La sucesión se indica ${(x_n)}_{n \in \N}$ o $(x_1, x_2, \dots)$.
 
-Una subsucesión de \(x\) es la restricción de \(x\) a un subconjunto infinito \(A = \{ n_1 < n_2 < \cdots \} \subset \N \).
-Escribimos \({(x_n)}_{n \in A} \) para indicar la subsucesión.
+Una \emph{subsucesión} de $x$ es la restricción de $x$ a un subconjunto infinito $A = \{ n_1 < n_2 < \cdots \} \subset \N$. Se escribe ${(x_n)}_{n \in A}$ o ${(x_{n_i})}_{i \in \N}$.
 
 \begin{note}
-  Estrictamente la subsucesión no tiene dominio \(\N \), pero es trivial considerarla como una función definida en \(\N \) componiendo con \(1 \mapsto x_1, 2 \mapsto x_2, \cdots \) \\
-  Por esto se usa la notación \({(x_{n_i})}_{i \in \N} \).
+  Estrictamente, la subsucesión no está definida en $\N$, pero se la puede considerar como una función definida en $\N$ componiendo con la biyección $i \mapsto n_i$. Por eso se usa la notación ${(x_{n_i})}_{i \in \N}$.
 \end{note}
 
-\begin{definition}
-  Decimos que \(a = \lim_{n \to \infty} x_n \iff (\forall \e > 0)(\exists n_0 \in \N) : |x_n - a| < \e, \forall n > n_0\). \\
-  Equivalentemente, si \(\forall \e > 0\) el intervalo \((a-\e, a+\e)\) contiene a todos los términos de la sucesión salvo quizás un número finitos.
+\begin{definition}[Límite]
+  Decimos que $a = \lim_{n \to \infty} x_n$ si
+  \[
+    (\forall \e > 0)(\exists n_0 \in \N) \colon |x_n - a| < \e \quad \forall n > n_0.
+  \]
+  Equivalentemente, si para todo $\e > 0$ el intervalo $(a - \e, a + \e)$ contiene a todos los términos de la sucesión salvo, quizás, una cantidad finita.
 \end{definition}
 
 \begin{theorem}[Unicidad del límite]
-  Si \(\lim_{n \to \infty} x_n = a\) y \(\lim_{n \to \infty} x_n = b \Rightarrow a=b\)
-  \begin{proof}
-    Sea \(\e > 0\), \(\exists n_0\), \(n_1 \in \N \) tales que \(|x_n - a| < \e \) y \(|x_n - b| < \e \), \(\forall n > \max(n_0\text{, } n_1)\). Luego, \begin{align*}
-      |a - b| & \leq |a - x_n| + |x_n - b|                                        \\
-              & < \e + \e = 2\e\text{, } \forall n > \max(n_0\text{, } n_1)       \\
-              & \Rightarrow |a - b| < 2\e \quad \forall \e > 0 \Rightarrow a = b.
-    \end{align*}
-  \end{proof}
+  Si $\lim_{n \to \infty} x_n = a$ y $\lim_{n \to \infty} x_n = b$, entonces $a = b$.
 \end{theorem}
 
+\begin{proof}
+  Sea $\e > 0$. Existen $n_0, n_1 \in \N$ tales que $|x_n - a| < \e$ para $n > n_0$ y $|x_n - b| < \e$ para $n > n_1$. Luego, para $n > \max\{n_0, n_1\}$,
+  \[
+    |a - b| \leq |a - x_n| + |x_n - b| < 2\e.
+  \]
+  Como $\e > 0$ es arbitrario, $|a - b| = 0$, es decir, $a = b$.
+\end{proof}
+
 \begin{theorem}
-  Si \(\lim_{n \to \infty} x_n = a \Rightarrow \) toda subsucesión de \({(x_n)}_{n \in \N} \) converge a \(a\).
-  \begin{proof}
-    Dado \((x_{n_1}, x_{n_2}, \cdots)\) una subsucesión de \({(x_n)}_{n \in \N} \). Por hipotesis dado \(\e > 0, \exists n_0 \in \N : |x_n - a| < \e, \forall n > n_0\). Como los índices de la subsucesión son infinitos, \(\exists n_{i_0} > n_0 \Rightarrow \) si \(n_i > n_{i_0} \Rightarrow |x_{n_i} - a| < \e, (n_i > n_{i_0} > n_0) \Rightarrow \lim_{n \to \infty} x_{n_i} = a\).
-  \end{proof}
+  Si $\lim_{n \to \infty} x_n = a$, toda subsucesión de ${(x_n)}_{n \in \N}$ converge a $a$.
 \end{theorem}
+
+\begin{proof}
+  Sea ${(x_{n_i})}_{i \in \N}$ una subsucesión. Dado $\e > 0$, existe $n_0$ tal que $|x_n - a| < \e$ para $n > n_0$. Como $n_1 < n_2 < \cdots$ es estrictamente creciente, existe $i_0$ con $n_{i_0} > n_0$, y entonces para $i > i_0$ se tiene $n_i > n_0$ y por lo tanto $|x_{n_i} - a| < \e$.
+\end{proof}
 
 \begin{theorem}
   Toda sucesión convergente es acotada.
-  \begin{proof}
-    Sea \(a = \lim_{n \to \infty} x_n\). Tomando \(\e = 1, \exists n_{\e} : x_n \in (a - 1, a+1), \forall n > n_{\e} \). \\
-    \(A = \{ x_1, x_2, \ldots, x_{n_{\e}}, a-1, a+1 \} \), \(c = \min(A)\), \(d = \max(A) \Rightarrow x_n \in [c, d], \forall n \in \N \therefore \) la sucesión es acotada.
-  \end{proof}
 \end{theorem}
+
+\begin{proof}
+  Sea $a = \lim_{n \to \infty} x_n$. Tomando $\e = 1$, existe $n_1$ tal que $x_n \in (a - 1, a + 1)$ para todo $n > n_1$. Sean $A = \{ x_1, \dots, x_{n_1}, a - 1, a + 1 \}$, $c = \min A$ y $d = \max A$. Entonces $x_n \in [c, d]$ para todo $n \in \N$.
+\end{proof}
 
 \begin{theorem}
   Toda sucesión monótona y acotada es convergente.
-  \begin{proof}
-    Supongamos que \( {(x_n)}_{n \in \N} \) es creciente y acotada y quiero ver que \( \lim_{n \to \infty} x_n = a = \sup \{ x_n \}_{n \in \N} \). \\
-    Dado \(\e > 0\), como \(a-\e < a, a-\e \) no puede ser cota superior de \( \{x_n\} \Rightarrow \exists n_0 : x_{n_0} > a - \e \).
-    Como \(( x_n)_{n \in \N} \) es monótona, si \(n > n_0 \Rightarrow x_n > x_{n_0} > a - \e \Rightarrow \) \\
-    \(a-\e < x_n \leq a < a+\e, \forall n > n_0 \therefore x_n \to a\). \\
-    Análogamente para \( ( x_n )_{n \in \N} \) es decreciente y acotada.
-  \end{proof}
 \end{theorem}
+
+\begin{proof}
+  Supongamos que ${(x_n)}$ es creciente y acotada, y sea $a = \sup \{ x_n : n \in \N \}$. Dado $\e > 0$, $a - \e$ no es cota superior de $\{ x_n \}$, luego existe $n_0$ con $x_{n_0} > a - \e$. Como la sucesión es creciente, para $n > n_0$ vale
+  \[
+    a - \e < x_{n_0} \leq x_n \leq a < a + \e,
+  \]
+  es decir, $x_n \to a$. El caso decreciente es análogo, con el ínfimo.
+\end{proof}
 
 \begin{corollary}
-  Si una sucesión monótona tiene una subsucesión convergente \(\Rightarrow \) es convergente.
-  \begin{proof}
-    \({(x_n)}_{n \in \N} \) es acotada porque tiene una subsucesión acotada.
-  \end{proof}
+  Si una sucesión monótona tiene una subsucesión convergente, entonces es convergente.
 \end{corollary}
 
+\begin{proof}
+  La subsucesión es acotada, y como la sucesión es monótona, está acotada por los mismos valores (el conjunto de sus términos está entre $x_1$ y una cota de la subsucesión). Por el teorema anterior, es convergente.
+\end{proof}
+
 \begin{eg}
-  \(x_n = a^n, a \in \R \). Si \(a=0\) o \(a = 1\) la sucesión es constante. \\
-  Si \(a = -1\), la sucesión diverge porque \(x_{2n} \to 1\) y \(x_{2n+1} \to -1\). \\
-  Si \(a > 1\), la sucesión es creciente y no acotada \(\Rightarrow \) diverge. \\
-  Si \(a < -1\), la sucesión es decreciente y no acotada \(\Rightarrow \) diverge. \\
-  Si \(0 < a < 1\), la sucesión es convergente por ser subsucesión de \(\dfrac{1}{n} \) y más aún \(a^n \to 0\). \\
-  Si \(-1 < a < 0\), la sucesión converge pues \(|a^n| = |a|^n = a^n \to 0\).
+  Sea $x_n = a^n$ con $a \in \R$.
+  \begin{itemize}
+    \item Si $a = 0$ o $a = 1$, la sucesión es constante, luego convergente.
+    \item Si $a = -1$, la sucesión diverge, pues $x_{2n} = 1 \to 1$ y $x_{2n+1} = -1 \to -1$ son subsucesiones con límites distintos.
+    \item Si $|a| > 1$, escribimos $|a| = 1 + h$ con $h > 0$; por la desigualdad de Bernoulli, $|a|^n \geq 1 + nh$, y la sucesión no es acotada, luego diverge.
+    \item Si $0 < a < 1$, la sucesión es decreciente y acotada inferiormente por $0$, luego converge a algún $l$. Como $x_{n+1} = a \, x_n$, pasando al límite $l = a l$, de donde $l = 0$.
+    \item Si $-1 < a < 0$, se tiene $|a^n - 0| = |a|^n \to 0$ por el caso anterior, de modo que $a^n \to 0$.
+  \end{itemize}
 \end{eg}
 
-\clearpage
-
-\section{Propiedades de límites}
+\section{Propiedades de los límites}
 
 \begin{theorem}
-  Si \(\lim_{n \to \infty} x_n = 0\) e \((y_n)_{n \in \N} \) una sucesión acotada \(\Rightarrow \lim_{n \to \infty} x_n \cdot y_n = 0\).
-  \begin{proof}
-    \(\exists c : |y_n| < c, \forall n \in \N \), pues \(y_n\) es acotado. \\
-    Dado \(\e > 0\), como \(x_n \to 0, \exists n_0 : |x_n| < \e/c, \forall n > n_0 \Rightarrow \) \\
-    \(|x_n y_n| < c (\e/c) = \e, \forall n > n_0 \therefore x_n \cdot y_n \to 0\).
-  \end{proof}
+  Si $\lim_{n \to \infty} x_n = 0$ e ${(y_n)}_{n \in \N}$ es una sucesión acotada, entonces $\lim_{n \to \infty} x_n y_n = 0$.
 \end{theorem}
 
-Sea \(\lim_{n \to \infty} x_n = a\) y \(\lim_{n \to \infty} y_n = b\).
+\begin{proof}
+  Sea $c > 0$ con $|y_n| < c$ para todo $n$. Dado $\e > 0$, existe $n_0$ tal que $|x_n| < \frac{\e}{c}$ para $n > n_0$. Entonces $|x_n y_n| < c \cdot \frac{\e}{c} = \e$ para todo $n > n_0$.
+\end{proof}
+
+Sean $\lim_{n \to \infty} x_n = a$ y $\lim_{n \to \infty} y_n = b$.
 
 \begin{prop}
-  \(x_n + y_n \to a+b\).
-  \begin{proof}
-    Dado \(\e > 0, \exists n_0 \in \N : |x_n - a| < \dfrac{\e}{2}, \forall n > n_0\) y \\ \(\exists n_1 \in \N : |y_n - b| < \dfrac{\e}{2}, \forall n > n_1\).
-    Sea \(n_2 = \max(n_0, n_1)\) \\
-    Si \(n > n_2, |(x_n + y_n)-(a + b)| \leq |x_n - a| + |y_n - b| \leq \dfrac{\e}{2} + \dfrac{\e}{2} = \e \).
-  \end{proof}
+  $x_n + y_n \to a + b$.
 \end{prop}
+
+\begin{proof}
+  Dado $\e > 0$, existen $n_0$ y $n_1$ tales que $|x_n - a| < \frac{\e}{2}$ para $n > n_0$ y $|y_n - b| < \frac{\e}{2}$ para $n > n_1$. Para $n > \max\{n_0, n_1\}$,
+  \[
+    |(x_n + y_n) - (a + b)| \leq |x_n - a| + |y_n - b| < \e. \qedhere
+  \]
+\end{proof}
 
 \begin{prop}
-  \(x_n - y_n \to a-b\).
-  \begin{proof}
-    Análogo.
-  \end{proof}
+  $x_n - y_n \to a - b$.
 \end{prop}
+
+\begin{proof}
+  Análoga a la anterior.
+\end{proof}
 
 \begin{prop}
-  \(x_n \cdot y_n \to a \cdot b\).
-  \begin{proof}
-    \(x_n \cdot y_n - ab = x_n \cdot y_n - x_n \cdot b + x_n \cdot b - a \cdot b = x_n \cdot (y_n - b) + b \cdot (x_n - a)\). \\
-    Como \(y_n - b \to 0\) y \(x_n\) es acotada, pues es convergente \(\Rightarrow x_n \cdot (y_n-b) \to 0\).
-    Además \(x_n - a \to 0 \Rightarrow b(x_n - a) \to 0 \Rightarrow x_n \cdot y_n = a \cdot b\).
-  \end{proof}
+  $x_n y_n \to a b$.
 \end{prop}
+
+\begin{proof}
+  Se tiene
+  \[
+    x_n y_n - a b = x_n (y_n - b) + b (x_n - a).
+  \]
+  Como $y_n - b \to 0$ y $(x_n)$ es acotada por ser convergente, $x_n (y_n - b) \to 0$. Además $b (x_n - a) \to 0$. Luego $x_n y_n - ab \to 0$.
+\end{proof}
 
 \begin{prop}
-  \(\dfrac{x_n}{y_n} \to \dfrac{a}{b} \).
-  \begin{proof}
-    Si \(y_n \not \to 0 \Rightarrow y_n \neq 0\) salvo quizá finitos términos. En efecto, como \(b \neq 0\), si \(\e = |b|\) resulta que \(0 \notin (b - \e, b + \e) \Rightarrow \)
-    \begin{align*}
-      \exists n_{\e} : y_n \in (b-\e, b+\e) \quad \forall n > n_{\e}
-    \end{align*} Luego \(y_n \neq 0, \forall n > n_{\e} \). Ahora escribo \begin{align*}
-      \dfrac{x_n}{y_n} - \dfrac{a}{b} = \dfrac{x_n \cdot b - a \cdot y_n}{y_n \cdot b}
-    \end{align*} Quiero ver que \(\dfrac{1}{y_n \cdot b} \) es acotada. Como
-    \begin{align*}
-       & y_n \cdot b \to b² \text{ si } \e = \dfrac{b²}{2} \, \exists n_0 : y_n \cdot b > \dfrac{b²}{2}, \forall n > n_0 \Rightarrow                     \\
-       & 0 < \dfrac{1}{y_n \cdot b} < \dfrac{2}{b²} \quad \forall n > n_0 \Rightarrow \left(\dfrac{1}{y_n \cdot b}\right)_{n \in \N} \text{ es acotada}.
-    \end{align*}
-  \end{proof}
+  Si $b \neq 0$, entonces $y_n \neq 0$ salvo finitos términos y $\dfrac{x_n}{y_n} \to \dfrac{a}{b}$.
 \end{prop}
 
-\section{Ejemplo subsucesiones}
+\begin{proof}
+  Tomando $\e = \frac{|b|}{2}$, existe $n_0$ tal que $|y_n - b| < \frac{|b|}{2}$ para $n > n_0$, de modo que $|y_n| > \frac{|b|}{2} > 0$ para $n > n_0$; en particular $y_n \neq 0$. Para $n > n_0$,
+  \[
+    \frac{x_n}{y_n} - \frac{a}{b} = \frac{b x_n - a y_n}{b\, y_n} = \frac{1}{b\, y_n} \bigl( b (x_n - a) - a (y_n - b) \bigr).
+  \]
+  La sucesión $\bigl( \frac{1}{b y_n} \bigr)_{n > n_0}$ es acotada, pues $\left| \frac{1}{b y_n} \right| < \frac{2}{b^2}$, y el factor entre paréntesis tiende a $0$. Por el teorema anterior, $\frac{x_n}{y_n} - \frac{a}{b} \to 0$.
+\end{proof}
+
+\section{Ejemplos con subsucesiones}
 
 \begin{eg}
-  \(x_n = \sqrt[n]{a}, \ a > 0\). \\
-  \({(x_n)}_{n \in \N} \) es monótona (decreciente si \(a > 1\), creciente si \(0 < a < 1\)) y acotada \(0 < l = \lim_{n \to \infty} \sqrt[n]{a} \). \\
-  Para ver que \(l = 1\), considero la subsucesión \((a^{\frac{1}{n(n+1)}})_{n \in \N} \) convergente a \(l\). \\
-  \(l = \lim_{n \to \infty} a^{\frac{1}{n(n+1)}} = \lim_{n \to \infty} a^{\frac{1}{n} - \frac{1}{n+1}} =
-  \frac{\lim_{n \to \infty} a^{\frac{1}{n}}}{\lim_{n \to \infty} a^{\frac{1}{n+1}}} = \frac{l}{l} = 1.\) \\
-  \(\therefore l = 1\).
+  Si $a > 0$, entonces $\sqrt[n]{a} \to 1$.
 \end{eg}
 
+\begin{proof}
+  Si $a = 1$ es trivial. Si $a > 1$, la sucesión $x_n = a^{1/n}$ es decreciente: $a^{1/n} > a^{1/(n+1)} \iff a^{n+1} > a^n$, lo cual es cierto pues $a > 1$ (se elevó a la $n(n+1)$). Además $x_n > 1$, de modo que converge a un límite $l \geq 1$. Si $0 < a < 1$, la sucesión es creciente y acotada por $1$, y converge a un $l \geq a > 0$.
+
+  En ambos casos $l > 0$. La subsucesión $y_n = a^{\frac{1}{n(n+1)}}$ (índices $n(n+1)$) converge también a $l$, y
+  \[
+    y_n = a^{\frac{1}{n} - \frac{1}{n+1}} = \frac{a^{1/n}}{a^{1/(n+1)}} \longrightarrow \frac{l}{l} = 1,
+  \]
+  usando que $l \neq 0$. Por unicidad del límite, $l = 1$.
+\end{proof}
+
 \begin{eg}
-  \(x_n = \sqrt[n]{n} \). \\
-  Veamos si es monótona. \(\sqrt[n]{n} > \sqrt[n+1]{n+1} \iff n^{n+1} > (n+1)^{n+1} \iff n > (\dfrac{n+1}{n})^{n+1} \). \\
-  Esto pasa para \(\forall n \geq 3\) porque \((1+\frac{1}{n})^n < 3, \forall n \in \N \). Se puede demostrar por inducción. \\
-  Luego, es decreciente a partir del tercer término. \\
-  Además está acotada inferiormente por \(0, (\sqrt[n]{n} > 0) \therefore \exists \lim_{n \to \infty} \sqrt[n]{n} = l = \inf {\{ \sqrt[n]{n} \}}_{n \in \N} \). \\
-  Como \(\sqrt[n]{n} > 1 \Rightarrow l \geq 1\) y \(l \neq 0\). \\
-  Considero la subsucesión \((2n)^{\frac{1}{2n}} \Rightarrow l^2 = (\lim_{n \to \infty} {(2n)}^{\frac{1}{2n}})^2 = \lim_{n \to \infty} 2^{\frac{1}{n}} \cdot \lim_{n \to \infty} n^{\frac{1}{n}} = 1 \cdot l\). \\
-  Luego \(l^2 = l\) y \(l \neq 0 \therefore l = 1\).
+  $\sqrt[n]{n} \to 1$.
 \end{eg}
+
+\begin{proof}
+  Veamos que la sucesión es decreciente a partir del tercer término. Elevando a la $n(n+1)$,
+  \[
+    \sqrt[n]{n} > \sqrt[n+1]{n+1} \iff n^{n+1} > {(n+1)}^n \iff n > {\left( \frac{n+1}{n} \right)}^n = {\left( 1 + \frac{1}{n} \right)}^n.
+  \]
+  Esto vale para todo $n \geq 3$ porque ${(1 + \frac{1}{n})}^n < 3$ para todo $n$. En efecto, por el binomio de Newton,
+  \[
+    {\left( 1 + \frac{1}{n} \right)}^n = \sum_{k=0}^{n} \binom{n}{k} \frac{1}{n^k} \leq \sum_{k=0}^{n} \frac{1}{k!} \leq 1 + \sum_{k=1}^{n} \frac{1}{2^{k-1}} < 1 + 2 = 3,
+  \]
+  pues $\binom{n}{k} \frac{1}{n^k} = \frac{n (n-1) \cdots (n-k+1)}{n^k} \cdot \frac{1}{k!} \leq \frac{1}{k!}$ y $k! \geq 2^{k-1}$.
+
+  Además $\sqrt[n]{n} \geq 1$ para todo $n$, de modo que la sucesión converge a un $l \geq 1$; en particular $l \neq 0$. Considerando la subsucesión ${(2n)}^{\frac{1}{2n}}$,
+  \[
+    l^2 = {\left( \lim_{n \to \infty} {(2n)}^{\frac{1}{2n}} \right)}^2 = \lim_{n \to \infty} {(2n)}^{\frac{1}{n}} = \lim_{n \to \infty} 2^{\frac{1}{n}} \cdot \lim_{n \to \infty} n^{\frac{1}{n}} = 1 \cdot l,
+  \]
+  donde usamos el ejemplo anterior. Luego $l^2 = l$ y como $l \neq 0$, $l = 1$.
+\end{proof}
 
 \begin{note}
-  La definición de límite puede ser reformulada de la siguiente forma: \\
-  Dado \(a \in \R \) es el límite de \({(x_n)}_{n \in \N} \iff \forall \e > 0\) el conjunto \( \{ n \in \N : x_n \in (a - \e, a + \e) \} \) tiene complemento finito (o vacío) en \(\N \).
+  La definición de límite puede reformularse así: $a$ es el límite de ${(x_n)}_{n \in \N}$ si y sólo si para todo $\e > 0$ el conjunto $\{ n \in \N : x_n \in (a - \e, a + \e) \}$ tiene complemento finito en $\N$.
 \end{note}
 
 \begin{theorem}
-  \(a \in \R \) es el límite de alguna subsucesión de \({(x_n)}_{n \in \N} \iff \forall \e > 0, \exists \) infinitos índices \(n : x_n \in (a-\e, a+\e)\).
-  \begin{proof}
-    Para la ida tenemos que \(a = \lim_{n \in A} x_n\), con \(A = \{ n_1 < n_2 < \cdots \} \). \\
-    \(\forall \e > 0, \exists i_0 : x_{n_i} \in (a - \e, a + \e), \forall i > i_0\). \\
-    Como existen infinitos \(i > i_0 : n_i \in A \Rightarrow \exists \) infinitos \(n_i \in \N \) tales que \(x_{n_i} \in (a - \e, a + \e)\). \\
-    Recíprocamente si tomamos sucesivamente \(\e = 1, 1/2, 1/3, \ldots \). Puedo obtener \(A = \{ n_1, n_2, \ldots \} : \lim_{n \in A} x_n = a\) pues: \\
-    Sea \(n_1 \in \N : x_{n_1} \in (a-1, a+1)\). Supongamos por inducción que \(n_1 < n_2 < \cdots < n_i\) fueron definidos tales que \(x_{n_2} \in (a - 1/2, a + 1/2), \ldots, x_{n_i} \in (a - 1/i, a + 1/i)\). \\
-    Como el conjunto \( \{ n \in \N : x_n \in (a - \frac{1}{1+i}, a + \frac{1}{1+i}) \} \) es infinito, contiene algún \(x_n\) con \(n > n_i\) y lo tomo como \(x_{n_i + 1} \). \\
-    Como \(| x_{n_i} - a | < \frac{1}{i}, \forall i \in \N \Rightarrow \lim_{i \to \infty} x_{n_i} = a\).
-  \end{proof}
+  Un número $a \in \R$ es el límite de alguna subsucesión de ${(x_n)}_{n \in \N}$ si y sólo si para todo $\e > 0$ existen infinitos índices $n$ tales que $x_n \in (a - \e, a + \e)$.
 \end{theorem}
+
+\begin{proof}
+  ($\Rightarrow$) Sea $a = \lim_{i \to \infty} x_{n_i}$. Dado $\e > 0$, existe $i_0$ tal que $x_{n_i} \in (a - \e, a + \e)$ para todo $i > i_0$. Como los $n_i$ son todos distintos, hay infinitos índices $n$ con $x_n \in (a - \e, a + \e)$.
+
+  ($\Leftarrow$) Construimos recursivamente índices $n_1 < n_2 < \cdots$ con $|x_{n_i} - a| < \frac{1}{i}$. Como $\{ n : x_n \in (a - 1, a + 1) \}$ es infinito, existe $n_1$ en él. Dados $n_1 < \cdots < n_i$, como $\{ n : x_n \in (a - \frac{1}{i+1}, a + \frac{1}{i+1}) \}$ es infinito, contiene algún $n_{i+1} > n_i$. Entonces $|x_{n_i} - a| < \frac{1}{i}$ para todo $i$, y por lo tanto $x_{n_i} \to a$.
+\end{proof}
 
 \section{Punto de acumulación}
 
-\begin{definition}
-  \(a \in \R \) se llama punto de acumulación de \({(x_n)}_{n \in \N} \) si es límite de alguna subsucesión de \({(x_n)}_{n \in \N} \).
+\begin{definition}[Punto de acumulación de una sucesión]
+  Un número $a \in \R$ es un \emph{punto de acumulación} de ${(x_n)}_{n \in \N}$ si es el límite de alguna subsucesión de ${(x_n)}_{n \in \N}$.
 \end{definition}
 
-\begin{definition}
-  Sea \({(x_n)}_{n \in \N} \) una sucesión acotada, digamos\begin{align*}
-    \alpha \leq x_n \leq \beta \quad \forall n \in \N
+\begin{definition}[Límite inferior y superior]
+  Sea ${(x_n)}_{n \in \N}$ una sucesión acotada, digamos $\alpha \leq x_n \leq \beta$ para todo $n \in \N$. Sea $X_n = \{ x_n, x_{n+1}, \dots \}$, de modo que $[\alpha, \beta] \supset X_1 \supset X_2 \supset \cdots$. Llamando $a_n = \inf X_n$ y $b_n = \sup X_n$, se tiene
+  \[
+    \alpha \leq a_1 \leq a_2 \leq \cdots \leq a_n \leq b_n \leq \cdots \leq b_2 \leq b_1 \leq \beta.
+  \]
+  Por lo tanto existen
+  \begin{align*}
+    a & = \lim_{n \to \infty} a_n = \sup_{n} \, \inf_{k \geq n} x_k, \\
+    b & = \lim_{n \to \infty} b_n = \inf_{n} \, \sup_{k \geq n} x_k.
   \end{align*}
-  Si llamamos \(X_n = \{ x_n, x_{n+1}, \ldots \} \) tenemos que \([\alpha, \beta] \supset X_1 \supset X_2 \supset \cdots \). \\
-  Así que llamando \(a_n = \inf(X_n)\), \(b_n = \sup(X_n)\) tenemos que \begin{align*}
-     & \alpha \leq a_1 \leq a_2 \leq \cdots \leq a_n \leq \cdots \leq b_n \leq \cdots \leq \cdots \leq b_2 \leq b_1 \leq \beta \Rightarrow \\
-     & \exists a = \lim_{n \to \infty} a_n = \sup{(a_n)}_{n \in \N} = \sup(\inf{(x_n)}_{n \in \N})                                         \\
-     & b = \lim_{n \to \infty} b_n = \inf{(b_n)}_{n \in \N} = \inf(\sup{(x_n)}_{n \in \N})
-  \end{align*}
-  \begin{itemize}
-    \item \( a \) se llama el límite inferior de la sucesión \({(x_n)}_{n \in \N} \) y \(a = \liminf_{n \to \infty} x_n\).
-    \item  \(b\) se llama el límite superior de la sucesión \({(x_n)}_{n \in \N} \) y \(b = \limsup_{n \to \infty} x_n\).
-  \end{itemize}
+  Se llama \emph{límite inferior} de ${(x_n)}$ a $a = \liminf_{n \to \infty} x_n$ y \emph{límite superior} a $b = \limsup_{n \to \infty} x_n$.
 \end{definition}
 
 \begin{eg}
+  Sea ${(x_n)} = (-1, 2, -\frac{1}{2}, \frac{3}{2}, -\frac{1}{3}, \frac{4}{3}, \dots)$, es decir, $x_{2n-1} = -\frac{1}{n}$ y $x_{2n} = 1 + \frac{1}{n}$. Entonces
   \begin{align*}
-     & {(x_n)}_{n \in \N} = (-1, 2, -1/2, 3/2, -1/3, 4/3, \cdots),                                                                             \\
-     & {(x_{2n+1})}_{n \in \N} = -\frac{1}{n}, \, {(x_{2n})}_{n \in \N} = 1 + \frac{1}{n},                                                     \\
-     & \text{Luego, } \inf(X_{2n-2}) = \inf(X_{2n-1}) = -\frac{1}{n},                                                                          \\
-     & \sup(X_{2n-2}) = \sup(X_{2n-1}) = 1 + \frac{1}{n} \Rightarrow \liminf_{n \to \infty} x_n = 0 \text{ y } \limsup_{n \to \infty} x_n = 1.
+    \inf X_{2n-2} = \inf X_{2n-1} & = -\frac{1}{n},    \\
+    \sup X_{2n-1} = \sup X_{2n}   & = 1 + \frac{1}{n},
   \end{align*}
+  de donde $\liminf_{n \to \infty} x_n = 0$ y $\limsup_{n \to \infty} x_n = 1$.
 \end{eg}

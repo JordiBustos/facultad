@@ -1,114 +1,136 @@
+% !TeX program = xelatex
 % !TeX root = main.tex
-\documentclass[12pt,a4paper]{book} 
-\input{Configs/Configs}
+\documentclass[12pt,a4paper,oneside,openany]{book}
+
+\input{Configs/configs}
+\input{Configs/boxes}
+\input{Configs/formats}
+
 \begin{document}
-\renewcommand{\contentsname}{\vspace{0cm} Contenido \vspace{-2cm}}
 
+% ----------------------------------------------------------------------
+% Portada (mismo diseño que la del final de Temas)
+% ----------------------------------------------------------------------
 \begin{titlepage}
-	\vspace*{2cm}
+  \thispagestyle{empty}
+  \begin{center}
+    \includegraphics[width=4cm]{img/logo_unlp.png}
 
-	\noindent
-	\vspace*{0.5cm}
-	\titlefont{Notas del teórico}
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
 
-	\vspace{1.5cm}
-	\epigraph{Complementos de análisis matemático - Irene Drelichman 2024}%
-	{\textsc{Bustos Jordi}}
-	\null\vfill
-	\vspace*{1cm}
-	\noindent
-	\hfill
-	\begin{minipage}{0.7\linewidth}
-		\begin{flushright}
-			\printauthor
-		\end{flushright}
-	\end{minipage}
-	%
-	\begin{minipage}{0.02\linewidth}
-		\rule{1pt}{70pt}
-	\end{minipage}
-	\titlepagedecoration
+    \vspace{0.5cm}
+    {\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+    {\normalsize Facultad de Ciencias Exactas}\\
+    {\normalsize Departamento de Matemática}
+
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{2.5cm}
+    {\Huge \textbf{\textcolor{darkblue}{NOTAS DEL TEÓRICO}}}
+
+    \vspace{3cm}
+    {\large \textbf{Complementos de Análisis Matemático}}\\
+    {\normalsize Profesora: Irene Drelichman}
+
+    \vspace{2.5cm}
+    {\normalsize
+      \renewcommand{\arraystretch}{1.3}
+      \begin{tabular}{>{\bfseries\color{darkblue}}l l}
+        Autor:   & Jordi Bustos                  \\
+        Fecha:   & \today                        \\
+        Carrera: & Licenciatura en Matemática    \\
+      \end{tabular}}
+
+    \vfill
+    {\footnotesize \textcolor{mediumgray}{%
+        Notas del curso dictado en el segundo cuatrimestre de 2024.}}
+
+    \vspace{1cm}
+  \end{center}
 \end{titlepage}
 
-\let\cleardoublepage=\clearpage
+\frontmatter
 \tableofcontents
-\blankpage
 
-\chapter*{Prefacio}
+\capitulosinnumero{Prefacio}
 \input{Chapters/preface}
 
-\chapter{Clase I - 23/08 }
+\mainmatter
+\clase{23/08/2024}{Funciones, naturales y cuerpos}
 \input{Chapters/1}
 
-\chapter{Clase II - 27/08}
+\clase{27/08/2024}{Cuerpos completos y cardinalidad}
 \input{Chapters/2}
 
-\chapter{Clase III - 30/08}
+\clase{30/08/2024}{Conjuntos numerables}
 \input{Chapters/3}
 
-\chapter{Clase IV - 03/09}
+\clase{03/09/2024}{Cardinales y números reales}
 \input{Chapters/4}
 
-\chapter{Clase V - 06/09}
+\clase{06/09/2024}{Los números reales}
 \input{Chapters/5}
 
-\chapter{Clase VI - 10/09}
+\clase{10/09/2024}{Sucesiones}
 \input{Chapters/6}
 
-\chapter{Clase VII - 13/09}
+\clase{13/09/2024}{Límites y series}
 \input{Chapters/7}
 
-\chapter{Clase VIII - 24/09}
+\clase{24/09/2024}{Convergencia de series}
 \input{Chapters/8}
 
-\chapter{Clase IX - 27/09}
+\clase{27/09/2024}{Topología euclídea}
 \input{Chapters/9}
 
-\chapter{Clase X - 01/10}
+\clase{01/10/2024}{Compacidad}
 \input{Chapters/10}
 
-\chapter{Clase XI - 04/10}
+\clase{04/10/2024}{Límite de una función}
 \input{Chapters/11}
 
-\chapter{Clase XII - 08/10}
+\clase{08/10/2024}{Continuidad}
 \input{Chapters/12}
 
 % TODO: revisar clase 13
-\chapter{Clase XIII - 15/10}
+\clase{15/10/2024}{Gráficas continuas y convexidad}
 \input{Chapters/13}
 
-\chapter{Clase XIV - 18/10}
+\clase{18/10/2024}{Conexión y continuidad uniforme}
 \input{Chapters/14}
 
-\chapter{Clase XV - 25/09}
+\clase{25/10/2024}{Teorema de la función inversa}
 \input{Chapters/15}
 
-\chapter{Clase XVI - 29/09}
+\clase{29/10/2024}{Teorema de la función implícita}
 \input{Chapters/16}
 
-\chapter{Clase XVII - 01/10}
+\clase{01/11/2024}{Integral de Riemann}
 \input{Chapters/17}
 
-\chapter{Clase XVIII - 05/10}
+\clase{05/11/2024}{Teorema fundamental del cálculo e integración múltiple}
 \input{Chapters/18}
 
-\chapter{Clase XIX - 08/10}
+\clase{08/11/2024}{Contenido y medida de Jordan}
 \input{Chapters/19}
 
-\chapter{Clase XX - 12/11}
+\clase{12/11/2024}{Sucesiones de funciones}
 \input{Chapters/20}
 
-\chapter{Clase XXI - 15/11}
+\clase{15/11/2024}{Series de potencias y equicontinuidad}
 \input{Chapters/21}
 
-\chapter{Clase XXII - 22/11}
+\clase{22/11/2024}{Teorema de Arzelà--Ascoli}
 \input{Chapters/22}
 
-\chapter{Parciales}
+\capitulosinnumero{Parciales}
 \input{Chapters/parciales}
 
-\blankpage
-
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
 \bibliographystyle{unsrt}
 \bibliography{references}
 \nocite{*}

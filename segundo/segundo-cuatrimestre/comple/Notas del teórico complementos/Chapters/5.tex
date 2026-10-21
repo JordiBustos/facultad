@@ -1,214 +1,180 @@
-\section{Construcción de los Reales}
+\section{Operaciones en los reales}
 
 \begin{note}
-	Dado \(q \in \Q \) definimos \(\tilde{q} \) como la clase de equivalencia de la sucesión constante como \((q, q, q, \cdots) \Rightarrow \Q \subset \R \).
+  A cada $q \in \Q$ se le asocia la clase $\tilde{q}$ de la sucesión constante $(q, q, q, \dots)$. La función $q \mapsto \tilde{q}$ es inyectiva, y de esta manera consideramos $\Q \subset \R$.
 \end{note}
 
 \begin{definition}
-	\(\tilde{s}, \tilde{t} \in \R \), \(s = [(a_n)], t = [(b_n)]\) definimos:
-	\begin{itemize}
-		\item \(s+t = [(a_n + b_n)]\) la clase de equivalencia de \((a_n + b_n)_{n \in \N} \).
-		\item \(s \cdot t = [(a_n b_n)]\) la clase de equivalencia de \((a_n b_n)_{n \in \N} \).
-	\end{itemize}
-	Veamos que están bien definidas, si: \begin{align*}
-		[(a_n)] = [(c_n)] \text{ y } [(b_n)] = [(d_n)] \Rightarrow a_n - c_n \to 0 \text{ y } b_n - d_n \to 0.
-	\end{align*}
-	En efecto,
-	\begin{align*}
-		([a_n] + [(b_n)]) - ([c_n] +[d_n]) & = ([a_n] - [(c_n)]) + ([b_n] - [(d_n)])        \\
-		                                   & = 0                                            \\
-		                                   & \Rightarrow \text{la suma está bien definida.}
-	\end{align*}
-	\begin{align*}
-		a_n b_n - c_n d_n & = a_n b_n - c_n b_n + c_n b_n - c_n d_n                                                 \\
-		                  & = b_n (a_n - c_n) + c_n (b_n - d_n)                                                     \\
-		                  & \Rightarrow |a_n \cdot b_n - c_n \cdot b_n| \leq |b_n| |a_n - c_n| + |c_n| |b_n - d_n|. \\
-	\end{align*}
-	Como \({(b_n)}_{n \in \N} \) y \({(c_n)}_{n \in \N} \) están acotadas \(\exists M : |b_n| < M\), \(|c_n| < M, \forall n \in \N \). \\
-	\(|a_n b_n - c_n b_n| \leq M (|a_n - c_n| + |b_n - d_n|) < \e, \forall n > n_0\). \\
-	Porque \(a_n - c_n \to 0\), \(b_n - d_n \to 0\).
+  Sean $s = [(a_n)]$ y $t = [(b_n)]$ en $\R$. Definimos
+  \begin{itemize}
+    \item $s + t = [(a_n + b_n)]$,
+    \item $s \cdot t = [(a_n b_n)]$.
+  \end{itemize}
 \end{definition}
 
+Hay que verificar que las definiciones son correctas.
+
+\begin{itemize}
+  \item \emph{Las sucesiones $(a_n + b_n)$ y $(a_n b_n)$ son de Cauchy.} Para la suma es inmediato. Para el producto, si $|a_n|, |b_n| \leq M$ para todo $n$ (las sucesiones de Cauchy son acotadas), entonces
+        \[
+          a_n b_n - a_m b_m = a_n (b_n - b_m) + b_m (a_n - a_m)
+        \]
+        y por lo tanto $|a_n b_n - a_m b_m| \leq M \bigl( |b_n - b_m| + |a_n - a_m| \bigr)$, que es menor que $\e$ para $n, m$ grandes.
+  \item \emph{No dependen de los representantes.} Sean $[(a_n)] = [(c_n)]$ y $[(b_n)] = [(d_n)]$, es decir, $a_n - c_n \to 0$ y $b_n - d_n \to 0$. Para la suma,
+        \[
+          (a_n + b_n) - (c_n + d_n) = (a_n - c_n) + (b_n - d_n) \to 0.
+        \]
+        Para el producto,
+        \[
+          a_n b_n - c_n d_n = b_n (a_n - c_n) + c_n (b_n - d_n).
+        \]
+        Como $(b_n)$ y $(c_n)$ son acotadas, existe $M$ con $|b_n|, |c_n| \leq M$ para todo $n$, de donde $|a_n b_n - c_n d_n| \leq M \bigl( |a_n - c_n| + |b_n - d_n| \bigr) \to 0$.
+\end{itemize}
+
 \begin{prop}
-	\(\R \) es un cuerpo con esta definición.
-	\begin{proof}
-		Ejercicio.
-	\end{proof}
+  $\R$ con estas operaciones es un cuerpo.
 \end{prop}
 
-\clearpage
+\begin{proof}
+  Los axiomas de cuerpo (asociatividad, conmutatividad, distributividad, neutros $\tilde{0}$ y $\tilde{1}$, opuesto $-[(a_n)] = [(-a_n)]$) se heredan de $\Q$ operando término a término. Queda como ejercicio. La existencia del inverso multiplicativo se prueba en el siguiente teorema.
+\end{proof}
+
+\begin{lemma}
+  Sea $(a_n)$ una sucesión de Cauchy con $a_n \not\to 0$. Entonces existen $\delta \in \Q$, $\delta > 0$, y $n_0 \in \N$ tales que $|a_n| > \delta$ para todo $n > n_0$. Además, o bien $a_n > \delta$ para todo $n > n_0$, o bien $a_n < -\delta$ para todo $n > n_0$.
+\end{lemma}
+
+\begin{proof}
+  Como $a_n \not\to 0$, existe $\e_1 > 0$ tal que $|a_n| \geq \e_1$ para infinitos valores de $n$. Como $(a_n)$ es de Cauchy, existe $n_0$ tal que $|a_n - a_m| < \frac{\e_1}{2}$ para todos $n, m > n_0$. Elegimos $M > n_0$ con $|a_M| \geq \e_1$. Entonces, para $n > n_0$,
+  \[
+    |a_n| \geq |a_M| - |a_n - a_M| > \e_1 - \frac{\e_1}{2} = \frac{\e_1}{2}.
+  \]
+  Sea $\delta = \frac{\e_1}{2}$. Si $a_M > 0$, entonces $a_n > a_M - \frac{\e_1}{2} \geq \delta$ para $n > n_0$; si $a_M < 0$, análogamente $a_n < a_M + \frac{\e_1}{2} \leq -\delta$.
+\end{proof}
 
 \begin{theorem}
-	Dado \(s \in \R \setminus \{0\}, \exists t \in \R : s \cdot t = 1\).
-	\begin{proof}
-		\(s = [(a_n)]\) sabemos que \(s \notin \tilde{0} \), o sea \(a_n \not \to 0\).
-		Podría pasar que algunos de los terminos de \({(a_n)}_{n \in \N} \) si sean \(0 \), lo que pasa es que \(a_n \neq 0\) para \(n\) lo suficiente grande.
-		Como:
-		\begin{align*}
-			 & a_n \not \to 0 \Rightarrow \exists \e_1 > 0, \exists \text{ infinitos valores de } M: |a_M - 0| > \e_1                                                       \\
-			 & \text{Si } \e = \dfrac{\e_1}{2}\text{, como } {(a_n)}_{n \in \N} \text{ es de cauchy, } \exists n_0 : |a_n - a_m| < \dfrac{\e_1}{2} \quad \forall n, m > n_0 \\
-			 & \text{Si } M > n_0 \text{ (puedo porque son infinitos) } : |a_M| > \e_1 \Rightarrow |a_m - a_M| < \dfrac{\e_1}{2} \quad \forall m > n_0                      \\
-			 & \dfrac{-\e_1}{2} < a_n - a_m < \dfrac{\e_1}{2} \text{ o } -\dfrac{\e_1}{2} < a_m - a_n < \dfrac{\e_1}{2}
-		\end{align*}\begin{itemize}
-			\item Si \(a_M > 0 \Rightarrow \dfrac{\e_1}{2} < a_M - \dfrac{\e_1}{2} < a_n < a_M + \dfrac{\e_1}{2}, \forall n > n_0\).
-			\item Si \(a_M < 0\), \(\dfrac{\e_1}{2} < -a_M - \dfrac{\e_1}{2} < -a_n<-a_m+ \dfrac{\e_1}{2} \Rightarrow a_n < -\dfrac{\e_1}{2}, \forall n > n_0\).
-		\end{itemize}
-		O sea que: \(\forall n > n_0, a_n\) tiene el mismo signo que \(a_M\) en particular \(a_n \neq 0, \forall n > n_0\). Sabiendo esto veamos que \(\exists \) el inverso: \begin{align*}
-			S = [(a_n)] \neq 0 \Rightarrow \exists n_0 : a_n \neq 0 \quad \forall n > n_0
-		\end{align*}
-		Sea \({(b_n)}_{n \in \N} \subset \Q \) definida por:
-		\[
-			b_n =
-			\begin{cases}
-				0              & \text{si } n < n_0,    \\
-				\dfrac{1}{a_n} & \text{si } n \geq n_0,
-			\end{cases}
-			\quad \Rightarrow \quad
-			a_n b_n =
-			\begin{cases}
-				0 & \text{si } n < n_0,    \\
-				1 & \text{si } n \geq n_0.
-			\end{cases}
-		\]
-		\( \Rightarrow (1, 1, \ldots) - {(a_n \cdot b_n)}_{n \in \N} \to 0 \therefore [(a_n b_n)] = [(1, 1, \cdots)]\), es decir \(t = [(b_n)]\) cumple que \(t \cdot s = 1\).
-	\end{proof}
+  Si $s \in \R$, $s \neq 0$, entonces existe $t \in \R$ tal que $s \cdot t = 1$.
 \end{theorem}
+
+\begin{proof}
+  Sea $s = [(a_n)]$. Como $s \neq \tilde{0}$, se tiene $a_n \not\to 0$. Por el lema, existen $\delta > 0$ y $n_0$ tales que $|a_n| > \delta$ para $n > n_0$; en particular $a_n \neq 0$ para $n > n_0$, aunque puede haber finitos términos nulos al principio. Definimos
+  \[
+    b_n =
+    \begin{cases}
+      0              & \text{si } n \leq n_0, \\
+      \dfrac{1}{a_n} & \text{si } n > n_0.
+    \end{cases}
+  \]
+  La sucesión $(b_n)$ es de Cauchy: para $n, m > n_0$,
+  \[
+    |b_n - b_m| = \frac{|a_m - a_n|}{|a_n| |a_m|} < \frac{|a_n - a_m|}{\delta^2},
+  \]
+  que es arbitrariamente pequeño para $n, m$ grandes. Además $a_n b_n = 1$ para $n > n_0$, de modo que $(1, 1, \dots) - (a_n b_n) \to 0$ y $[(a_n b_n)] = \tilde{1}$. Es decir, $t = [(b_n)]$ cumple $s \cdot t = 1$.
+\end{proof}
 
 \section{Cuerpo ordenado}
 
-Para probar que \(\R \) es un cuerpo ordenado bajo esta definición hay que definir qué es ser positivo. \\
-Sea \(s \in \R \) decimos que \(s\) es positivo si \(s \neq 0\) y \(s = [(a_n)]\) tal que \(a_n > 0 \quad \forall n > n_0\). O sea, todos los terminos son positivos a partir de un punto.
+Para ver que $\R$ es un cuerpo ordenado hay que decir quiénes son los positivos.
 
 \begin{definition}
-	Decimos que \(s > t\) si \(s-t > 0\).
-	Ejercicio probar que está bien definido.
+  Un real $s \in \R$ es \emph{positivo} si $s \neq 0$ y $s = [(a_n)]$ con $a_n > 0$ para todo $n$ mayor que cierto $n_0$; es decir, si todos los términos son positivos a partir de cierto punto. Escribimos $s > t$ si $s - t$ es positivo.
 \end{definition}
 
-Veamos un ejemplo de como se prueban los axiomas de orden.
+\begin{ejercicio}
+  Probar que la definición no depende del representante elegido, que la suma y el producto de positivos son positivos, y que para todo $s \in \R$ vale exactamente una de las opciones $s > 0$, $s = 0$, $-s > 0$. (Sugerencia: usar el lema anterior.)
+\end{ejercicio}
 
-\clearpage
-
-\begin{theorem}
-	Sean \(s, t \in \R : s > t, r \in \R \Rightarrow s+r > t+r\).
-	\begin{proof}
-		\(s = [(a_n)], t = [(b_n)], r = [(c_n)]\). \\
-		Como \(s > t, \exists n_0 : a_n - b_n > 0, \forall n > n_0, a_n - b_n \not \to 0 \Rightarrow (a_n + c_n) - (b_n + c_n) = a_n + b_n > 0\) y \((a_n + c_n) - (b_n + c_n) \not \to 0 \Rightarrow \) \\
-		\(s + r - (t + r) > 0 \Rightarrow s+r > t+r\).
-	\end{proof}
-\end{theorem}
+Veamos, a modo de ejemplo, cómo se prueban las propiedades de orden.
 
 \begin{theorem}
-	\(\R \) con esta construcción es Arquimediano.
-	\begin{proof}
-		Sean \(s, t > 0, s, t \in \R \) quiero ver que \(\exists m \in \N : m \cdot s > t \).
-		Es decir si \(s = [(a_n)]\), \(t = [(b_n)]\) quiero ver que \([(m \cdot a_n)] > [(b_n)]\). O sea que \(m \cdot a_n - b_n \not \to 0\) y que \(\exists n_0 : m \cdot a_n - b_n > 0, \forall n> n_0\). \\
-		Supongamos que \(\forall m, n_0, \exists n>n_0 : m \cdot a_n \leq b_n\).
-		Como \({(b_n)}_{n \in \N} \) es de Cauchy\begin{align*}
-			 & \exists M \in \Q : b_n < M \quad \forall n \in \N                                                          \\
-			 & \Rightarrow a_n \leq \dfrac{b_n}{m} \leq \dfrac{M}{m}\text{, para algún } n > n_0 \quad \forall n_0 \in \N
-		\end{align*}
-		Como \(\Q \) es arquimediano, dado \(\e > 0, \exists m : \dfrac{M}{m} < \dfrac{\e}{2} \), elijo \(m\) así y tengo que \(a_n \leq \dfrac{b_n}{m} < \dfrac{M}{m} < \dfrac{\e}{2}, n > n_0, \forall n_0\). \\
-		Como \({(a_n)}_{n \in \N} \) es de Cauchy \(\exists n_0 : \forall n,k > n_0, |a_n - a_k| < \e/2\). Para este \(n_0, \exists \) algún \(n > n_0\) tal que \(a_n < \e / 2 \Rightarrow \) \\
-		\(\forall k > n_0, a_k - a_n < \e / 2 \Rightarrow a_k < a_n + \e / 2 < \e / 2 + \e / 2 < \e \Rightarrow a_n \to 0\). Absurdo, pues dijimos que \(([a_n]) = s > 0\). \\
-		Luego \(\exists m \in \N : m \cdot a_n - b_n > 0, \forall n > n_0\). Queda ver que \(m \cdot a_n - b_n \cancel{\to} 0\), si \(m \cdot a_n - b_n \cancel{\to} 0\) nada que probar. Caso contrario tomamos \(m+1\) en vez de \(m\). \\
-		\((m+1) \cdot a_n - b_n = m \cdot a_n + a_n - b_n > a_n > 0, \forall n > n_0 \Rightarrow m \cdot a_n - b_n \to 0\) y \(a_n \cancel{\to} 0 \therefore \) \\
-		\(\R \) es arquimediano.
-	\end{proof}
+  Si $s, t, r \in \R$ y $s > t$, entonces $s + r > t + r$.
 \end{theorem}
+
+\begin{proof}
+  Sean $s = [(a_n)]$, $t = [(b_n)]$ y $r = [(c_n)]$. Como $(a_n + c_n) - (b_n + c_n) = a_n - b_n$ para todo $n$,
+  \[
+    (s + r) - (t + r) = [(a_n - b_n)] = s - t > 0. \qedhere
+  \]
+\end{proof}
 
 \begin{theorem}
-	\(\Q \) es denso en \(\R \). Es decir dado \(r \in \R \) y \(\e > 0, \exists q \in \Q : |r-q| < \e \).\( \, r = [(a_n)]\), con \({(a_n)}_{n \in \N} \subset \Q \) es de Cauchy.
-
-	\begin{proof}
-		Dado \( \e > 0 \)\begin{align*}
-			\exists n_0 : |a_n - a_m| < \e \quad \forall n, m > n_0
-		\end{align*}
-		Elijo algún \( l > n_0 \) y defino \begin{align*}
-			 & q = [(a_l, a_l, \cdots)]                                       \\
-			 & \Rightarrow r-q = [(a_n - a_l)] \text{ y } q-r = [(a_l - a_n)]
-		\end{align*}
-		Como \( l > n_0 \Rightarrow (\forall n > n_0)(a_n-a_l < \e) \) y \( (a_l - a_n < \e) \Rightarrow |r-q| < \e \).
-	\end{proof}
+  $\R$ es arquimediano: si $s, t > 0$, existe $m \in \N$ tal que $m \cdot s > t$.
 \end{theorem}
 
-\section{R tiene la propiedad del supremo}
+\begin{proof}
+  Sean $s = [(a_n)]$ y $t = [(b_n)]$. Como $s > 0$, por el lema existen $\delta \in \Q$, $\delta > 0$, y $n_0$ tales que $a_n > \delta$ para $n > n_0$. Como $(b_n)$ es de Cauchy, es acotada: existe $B \in \Q$ con $b_n \leq B$ para todo $n$. Como $\Q$ es arquimediano, existe $m \in \N$ con $m \delta > B + 1$. Entonces, para $n > n_0$,
+  \[
+    m a_n - b_n > m \delta - B > 1.
+  \]
+  Luego $m a_n - b_n \not\to 0$ y es positivo a partir de $n_0$, es decir, $m s - t > 0$.
+\end{proof}
 
-Sea \(S \subset \R, S \neq \varnothing, M\) cota superior de \(S\). Vamos a construir dos sucesiones \({(u_n)}_{n \in \N}, {(l_n)}_{n \in \N} \). \\
-Como \(S \neq \varnothing, \exists s_0 \in S\). Defino \(u_0 = M, l_0 = s_0\). \\
-Si ya están definidos \(u_m, l_m\), llamo \(m_n = \dfrac{l_n+u_n}{2} \) al punto medio.\begin{enumerate}
-	\item[(i)] Si \(m_n\) es cota superior de \(S\) definimos \(u_{m+1} = m_n, l_{n+1} = l_n\).
-	\item[(ii)] Si \(m_n\) no es cota superior de S definimos \(u_{n+1} = u_n\) y \(l_{n+1} = m_n\).
+\begin{theorem}
+  $\Q$ es denso en $\R$: dados $r \in \R$ y $\e \in \Q$, $\e > 0$, existe $q \in \Q$ tal que $|r - q| < \e$.
+\end{theorem}
+
+\begin{proof}
+  Sea $r = [(a_n)]$ con $(a_n) \subset \Q$ de Cauchy. Existe $n_0$ tal que $|a_n - a_m| < \frac{\e}{2}$ para todos $n, m > n_0$. Fijamos $l > n_0$ y sea $q = \tilde{a_l} = [(a_l, a_l, \dots)]$. Entonces
+  \[
+    r - q = [(a_n - a_l)_n], \qquad \e - (r - q) = [(\e - (a_n - a_l))_n],
+  \]
+  y para $n > n_0$ se cumple $|a_n - a_l| < \frac{\e}{2}$, de modo que $\e - (a_n - a_l) > \frac{\e}{2} > 0$ y $\e + (a_n - a_l) > \frac{\e}{2}$ (estas sucesiones no tienden a $0$). Luego $r - q < \e$ y $q - r < \e$, es decir, $|r - q| < \e$.
+\end{proof}
+
+\section{Propiedad del supremo}
+
+Sea $S \subset \R$ un conjunto no vacío y acotado superiormente por $M \in \R$. Fijamos $s_0 \in S$ y construimos recursivamente dos sucesiones $(u_n)_{n \geq 0}$ y $(l_n)_{n \geq 0}$ con $u_0 = M$ y $l_0 = s_0$. Dados $u_n$ y $l_n$, sea $m_n = \frac{l_n + u_n}{2}$ el punto medio.
+\begin{enumerate}[label=(\roman*)]
+  \item Si $m_n$ es cota superior de $S$, definimos $u_{n+1} = m_n$ y $l_{n+1} = l_n$.
+  \item Si $m_n$ no es cota superior de $S$, definimos $u_{n+1} = u_n$ y $l_{n+1} = m_n$.
 \end{enumerate}
 
-Como \(s_0 < M\) es fácil ver que \({(u_n)}_{n \in \N} \) es decreciente y que \({(l_n)}_{n \in \N} \) es creciente. Queda como ejercicio demostrarlo.
-\begin{lemma}
-	\({(u_n)}_{n \in \N} \) y \({(l_n)}_{n \in \N} \) son sucesiones de Cauchy de números reales.
-	\begin{proof}
-		Por construcción se tiene que \(l_n \leq M, \forall n \in \N \Rightarrow \) \\
-		\({(l_n)}_{n \in \N} \) es creciente y acotada *\(\Rightarrow \) Es de cauchy. \\
-
-		Como \(u_n > s_0, \forall n \in \N \Rightarrow -u_n \leq s_0, (-u_n)_{n \in \N} \) es creciente \(\Rightarrow \) Es de cauchy. \\
-
-		* \begin{proof}
-			Supongamos que \({(l_n)}_{n \in \N} \) no es de Cauchy. Entonces existe \(\e > 0 : \forall n_0, \exists n, m \geq n_0 : l_n - l_m \geq \e \). \\
-			Como \({(l_n)}_{n \in \N} \) es creciente, \(l_n - l_{n_0} \geq \e \), inductivamente consigo: \\
-			\(n_1 > n_0 : l_{n_1} - l_{n_0} \geq \e \) \\
-			\(n_2 > n_1 : l_{n_2} - l_{n_1} \geq \e \) \\
-			\vdots \\
-
-			Por otro lado por la arquimedianidad \(\exists k \in \N : k \cdot \e > M - l_{n_0} \Rightarrow \) \\
-			\(l_{n_k} - l_{n_0} = (l_{n_k} - l_{n_{k-1}}) + (l_{n_{k-1}} - l_{n_{k-2}}) + \cdots + (l_{n_1} - l_{n_0}) > k \cdot \e > M - l_{n_0} \Rightarrow \) \\
-			\(l_{n_k} > M\). Absurdo!
-		\end{proof}
-	\end{proof}
-\end{lemma}
-
-\clearpage
+Por inducción se verifica que para todo $n$:
+\begin{enumerate}[label=(\alph*)]
+  \item $u_n$ es cota superior de $S$;
+  \item existe $s_n \in S$ con $l_n \leq s_n$ (en el caso (ii), $m_n$ no es cota superior, y existe $s \in S$ con $s > m_n$);
+  \item $l_n \leq s_n \leq u_n$, y además $l_n \leq l_{n+1} \leq u_{n+1} \leq u_n$;
+  \item $u_n - l_n = \dfrac{M - s_0}{2^n}$, pues en ambos casos $u_{n+1} - l_{n+1} = \frac{u_n - l_n}{2}$.
+\end{enumerate}
 
 \begin{lemma}
-	\(\exists u \in \R : u_n \to u\).
-	\begin{proof}
-		Sea \(u_n\) un termino de \({(u_n)}_{n \in \N} \) entonces,\begin{align*}
-			\exists q_n \in \Q : |u_n - q_n| < \dfrac{1}{n}
-		\end{align*}
-		Consideremos \((q_1, q_2, \ldots) \subset \Q \). Afirmo que \({(q_n)}_{n \in \N} \) es de Cauchy. Dado \(\e > 0\), como \({(u_n)}_{n \in \N} \) es de Cauchy \(\Rightarrow \)\begin{align*}
-			\exists n_0 : \forall n, m > n_0 \quad |u_n - u_m| < \dfrac{\e}{3}
-		\end{align*}
-		Por arquimedianidad\begin{align*}
-			 & \exists n_1 : \dfrac{1}{n} < \dfrac{\e}{3} \quad \forall n > n_1                                              \\
-			 & \Rightarrow \text{Si } n > \max(n_0, n_1) \quad |q_n - q_m| \leq |q_n - u_n| + |u_n - u_m| + |u_m - q_m| < \e \\
-			 & \Rightarrow u = [(q_n)] \in \R
-		\end{align*}
-		Veamos que \(u_n \to u\). \\
-		Si \(\tilde{q}_n = [(q_n, q_n, \ldots)] \in \R \Rightarrow \tilde{q}_n - u \to 0\) pues \(q_n\) es de Cauchy y por construcción \(u_n - q_n < \dfrac{1}{n} \Rightarrow u_n - \tilde{q}_n \to 0\) y como \(\tilde{q}_n - u \to 0 \Rightarrow u_n \to u\).
-	\end{proof}
+  Las sucesiones $(u_n)$ y $(l_n)$ son de Cauchy en $\R$.
 \end{lemma}
 
+\begin{proof}
+  Sea $\e > 0$. Como $\R$ es arquimediano y $2^n \geq n$, existe $n_0$ tal que $\frac{M - s_0}{2^n} < \e$ para todo $n > n_0$. Si $m \geq n > n_0$, por (c) se tiene $l_n \leq l_m \leq u_m \leq u_n$, de donde
+  \[
+    0 \leq l_m - l_n \leq u_n - l_n < \e, \qquad 0 \leq u_n - u_m \leq u_n - l_n < \e. \qedhere
+  \]
+\end{proof}
+
 \begin{lemma}
-	\(l_n \to u\)
-	\begin{proof}
-		Según las posibles definiciones de \(l_n\) tenemos que: \begin{align*}
-			 & u_{n+1} - l_{n+1} = m_n - l_n = \dfrac{u_n+l_n}{2} - l_n = \dfrac{u_n-l_n}{2} \text{ o bien }     \\
-			 & u_{n+1} - l_{n+1} = u_{n+1} - m_n = u_n - \dfrac{u_n - l_n}{2} = \dfrac{u_n - l_n}{2} \Rightarrow \\
-			 & u_1 - l_1 = \dfrac{1}{2} (M-s)                                                                    \\
-			 & u_2 - l_2 = \dfrac{1}{2} (u_1 - l_1) = {\left(\dfrac{1}{2}\right)}^2 (M - s)                        \\
-			 & \vdots                                                                                            \\
-			 & u_n - l_n = {\left(\dfrac{1}{2}\right)}^n (M - s)
-		\end{align*}
-		Por arquimedianidad de \(\R \) \begin{align*}
-			\forall \e > 0\text{, } \dfrac{1}{2^n} (M - s) < \e \quad \forall n > n_0 \Rightarrow
-		\end{align*}
-		\(u_n - l_n \to 0 \therefore \) \(l_n \to u\), pues \(u_n \to u\).
-	\end{proof}
+  Toda sucesión de Cauchy $(u_n)$ en $\R$ converge a algún $u \in \R$.
 \end{lemma}
+
+\begin{proof}
+  Como $\Q$ es denso en $\R$, para cada $n$ existe $q_n \in \Q$ con $|u_n - q_n| < \frac{1}{n}$. Veamos que $(q_n)$ es de Cauchy en $\Q$. Dado $\e > 0$ racional, existe $n_0$ tal que $|u_n - u_m| < \frac{\e}{3}$ para $n, m > n_0$, y por la arquimedianidad existe $n_1$ con $\frac{1}{n} < \frac{\e}{3}$ para $n > n_1$. Si $n, m > \max\{n_0, n_1\}$,
+  \[
+    |q_n - q_m| \leq |q_n - u_n| + |u_n - u_m| + |u_m - q_m| < \e.
+  \]
+  Sea $u = [(q_n)] \in \R$. Para cada $n$, $|u_n - u| \leq |u_n - \tilde{q_n}| + |\tilde{q_n} - u|$. El primer término es menor que $\frac{1}{n}$. Para el segundo, $\tilde{q_n} - u = [(q_n - q_k)_k]$ y, dado $\e > 0$, existe $n_2$ tal que $|q_n - q_k| < \e$ para $n, k > n_2$, de modo que $|\tilde{q_n} - u| \leq \e$ para $n > n_2$. Por lo tanto $u_n \to u$.
+\end{proof}
+
+\begin{lemma}
+  Existe $u \in \R$ tal que $u_n \to u$ y $l_n \to u$.
+\end{lemma}
+
+\begin{proof}
+  Por los lemas anteriores existe $u$ con $u_n \to u$. Como $u_n - l_n = \frac{M - s_0}{2^n} \to 0$, también $l_n \to u$.
+\end{proof}
 
 \begin{theorem}
-	\(\R \) tiene la propiedad del supremo.
-	\begin{proof}
-
-		(1) Veamos que \(u\) es cota superior, si no \(u < s, s \in S \Rightarrow \e = s - u > 0\), como \(u_n \to u\) y es decreciente \(\exists n : u_n - u < \e \Rightarrow u_n < u + \e = u + s - u = s\) Absurdo, por construcción \(u_n\) era cota superior de \(S \), \( \forall n\). \\
-		(2) Veamos que es la menor de las cotas superiores. Sabemos que \(l_n\) no es cota superior de \(S\), así que \((\forall n \in \N)(\exists s_n \in S) : l_n \leq s_n\). Como \(l_n \to u\) y \(l_n\) es creciente \(\Rightarrow \) \\
-		\(\forall \e > 0, \exists n_0 : l_n > u - \e, \forall n>n_0 \Rightarrow s_n \geq l_n > u - \e, \forall n > n_0\). Es decir que para todo \(\e > 0\) tengo un \(s_n\) más grande en \(S \therefore u\) es la menor de las cotas superiores.
-	\end{proof}
+  $\R$ tiene la propiedad del supremo: todo subconjunto no vacío y acotado superiormente tiene supremo.
 \end{theorem}
 
+\begin{proof}
+  Probamos que el $u$ del lema anterior es $\sup S$.
+
+  \emph{$u$ es cota superior.} Si existiera $s \in S$ con $u < s$, sea $\e = s - u > 0$. Como $u_n \to u$, existe $n$ con $u_n - u < \e$, es decir, $u_n < u + \e = s$, en contradicción con que $u_n$ es cota superior de $S$.
+
+  \emph{$u$ es la menor cota superior.} Sea $c < u$. Como $l_n \to u$, existe $n$ con $l_n > c$. Por (b), $s_n \geq l_n > c$ con $s_n \in S$, de modo que $c$ no es cota superior de $S$.
+\end{proof}

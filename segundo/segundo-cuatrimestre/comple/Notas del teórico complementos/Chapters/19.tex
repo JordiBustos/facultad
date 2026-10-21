@@ -1,57 +1,80 @@
-\section{Ejemplo de medida de Jordan}
+\section{Ejemplos de contenido de Jordan}
 
 \begin{eg}
-  \(X = \Q \cap [a, b]\) con \(a < b\) no tiene contenido nulo.
-  \begin{proof}
-    Si fuese \(c(X) = 0\), Dado \(0 < \e < b-a\) \(\exists \) partición \(P\) de \([a, b]\) tal que la suma de las longitudes de los intervalos de \(P\) que contienen puntos de \(X\) sería \(< \e \).
-    Como la suma de todas las longitudes de todos los intervalos de \(P\) tiene que ser \(b-a\) alguno tendría puntos racionales, absurdo!
-  \end{proof}
+  El conjunto $X = \Q \cap [a, b]$, con $a < b$, no tiene contenido nulo.
 \end{eg}
+
+\begin{proof}
+  Como $\cl{X} = [a, b]$, para toda partición $P$ de un intervalo $I \supseteq [a, b]$ los subintervalos de $P$ que intersecan a $\cl{X}$ cubren $[a, b]$, y sus medidas suman al menos $b - a$. Luego $\overline{c}(X) \geq b - a > 0$.
+\end{proof}
 
 \begin{lemma}
-  \(X \subset [a, b]\) Si \(\forall \e > 0\) \(\exists \) abiertos \(I_1\), \(\cdots \), \(I_k\) y un subconjunto finito \(F \subset X : X - F = I_1 \cup \cdots \cup I_k\) y \(|I_1| + \cdots + |I_k| \mapsto \e \).
-  \begin{proof}
-    Dado \(\e > 0\) \(\exists F \subset X\) finito en intervalos abiertos \(I_1\), \(\cdots \), \(I_k\) tales que \(\sum_{i = 1}^k |I_i| < \frac{\e}{2} \) y \(X - F \subset I_1 \cup \cdots \cup I_k\). Por otro lado,
-    podemos encontrar intervalos abiertos \(I_{k+1} \), \(\cdots \), \(I_n : F \subset I_{k+1} \cup \cdots \cup I_n\) y \(\sum_{j = k+1}^n |I_j| < \frac{\e}{2} \Rightarrow X \subset I_1 \cup \cdots \cup I_n\) y \(\sum_{i = 1}^n |I_i| < \e \therefore c(X) = 0\).
-  \end{proof}
+  Sea $X \subseteq \R$ acotado. Si para todo $\e > 0$ existen un conjunto finito $F \subseteq X$ e intervalos abiertos $I_1, \dots, I_k$ tales que $X \setminus F \subseteq I_1 \cup \cdots \cup I_k$ y $|I_1| + \cdots + |I_k| < \e$, entonces $c(X) = 0$.
 \end{lemma}
 
+\begin{proof}
+  Dado $\e > 0$, tomamos $F, I_1, \dots, I_k$ como en el enunciado con $\sum_{i=1}^k |I_i| < \frac{\e}{2}$. Si $F = \{x_1, \dots, x_q\}$, podemos cubrir $F$ con intervalos abiertos $I_{k+1}, \dots, I_n$ de longitud menor que $\frac{\e}{2q}$ cada uno. Entonces $X \subseteq I_1 \cup \cdots \cup I_n$ y $\sum_{i=1}^n |I_i| < \e$.
+
+  Sean $\bar{I}_i = [\alpha_i, \beta_i]$ y $[a, b]$ un intervalo que contiene a $X$ y a todos los $\bar{I}_i$. Para $\eta > 0$, sea $P$ la partición de $[a, b]$ cuyos puntos son $a$, $b$ y todos los $\alpha_i$, $\beta_i$, $\alpha_i - \eta$, $\beta_i + \eta$ que están en $[a, b]$. Un subintervalo $R$ de $P$ que interseca a $\cl{X} \subseteq \bigcup_i \bar{I}_i$ interseca algún $\bar{I}_i$. Como $\alpha_i$ y $\beta_i$ son puntos de $P$, o bien $R \subseteq \bar{I}_i$, o bien $R$ comparte con $\bar{I}_i$ un único extremo, y en ese caso $R = [\beta_i, \beta_i']$ o $R = [\alpha_i', \alpha_i]$ con longitud a lo sumo $\eta$. Hay a lo sumo $2n$ subintervalos del segundo tipo, y los del primer tipo suman a lo sumo $\sum_i |I_i|$, pues sus interiores son disjuntos. Luego
+  \[
+    \overline{c}(X) \leq \overline{J}(X, P) \leq \sum_{i=1}^n |I_i| + 2n\eta < \e + 2n\eta.
+  \]
+  Como $\eta$ es arbitrario, $\overline{c}(X) \leq \e$, y como $\e$ es arbitrario, $\overline{c}(X) = 0$. Entonces $c(X) = 0$.
+\end{proof}
+
 \begin{eg}
-  El conjunto de Cantor tiene contenido nulo.
-  \begin{proof}
-    Por el lema anterior vale que \(C \subset F_n\) \(\forall n \in \N \) y la suma de las longitudes de los intervalos de \(F_n\) es \(1 - \frac{1}{3} \sum_{i = 0}^n {\left(\frac{2}{3}\right)}^i = {\left(\frac{2}{3}\right)}^{n+1} < \e \) \(\forall n > n_0 \Rightarrow c(C) = 0\).
-  \end{proof}
+  El conjunto de Cantor $C$ tiene contenido nulo.
 \end{eg}
 
-\clearpage
+\begin{proof}
+  Sea $F_n$ el conjunto obtenido en el paso $n$ de la construcción de $C$, unión de $2^n$ intervalos cerrados disjuntos de longitud $3^{-n}$. Entonces $C \subseteq F_n$ y la suma de las longitudes de los intervalos de $F_n$ es $1 - \frac{1}{3} \sum_{i=0}^{n-1} {\left( \frac{2}{3} \right)}^i = {\left( \frac{2}{3} \right)}^n$. Cada intervalo cerrado de $F_n$ está contenido en un intervalo abierto de longitud $2 \cdot 3^{-n}$, y la suma de las longitudes de éstos es $2 {\left( \frac{2}{3} \right)}^n$, que es menor que $\e$ para $n$ suficientemente grande. Por el lema (con $F = \varnothing$), $c(C) = 0$.
+\end{proof}
 
 \begin{theorem}
-  \(S \subset \R^n \Rightarrow \overline{c}(\partial S) = \overline{c}(S) - \underline{c}(S)\). En particular \(S\) es medible Jordan \(\iff \partial S\) tiene contenido de Jordan nulo.
-  \begin{proof}
-    Sea \(I \subset \R^n\) un intervalo compacto que contiene a \(\overline{S} \Rightarrow \) Para toda partición \(P\) de \(I\), \(J(\partial S, P) = \overline{J}(S, P) - \underline{J}(S, P) \Rightarrow \overline{J}(\partial S, P) \geq \overline{c}(S) - \underline{c}(S) \Rightarrow \overline{c}(\partial S) \geq \overline{c}(S) - \underline{c}(S)\). Para la desigualdad opuesta, dado \(\e > 0\) sea \(P_1\) tal que \(\overline{J}(S, P_1) < \overline{c}(S) + \frac{\e}{2} \) y sea \(P_2\) tal que \(\underline{J}(S, P_2) > \underline{c}(S) - \frac{\e}{2} \). Si \(P = P_1 \cup P_2\), como refinar aumenta las sumas interiores y achica las exteriores \begin{align*}
-      \overline{c}(\partial S) \leq \overline{J}(\partial S, P) = \overline{J}(S, P) - \underline{J}(S, P) \leq \overline{J}(S, P_1) - \underline{J}(S, P_2) \leq \overline{c}(S) - \underline(c)(S) + \e
-    \end{align*}
-    Como vale \(\forall \e > 0 \Rightarrow \overline{c}(\partial S) \leq \overline{c}(S) - \underline{c}(S)\).
-  \end{proof} y juntando las dos desigualdades se tiene que \(\overline{\partial S} = \overline{c}(S) - \underline{c}(S)\).
+  Sea $S \subset \R^n$ acotado. Entonces $\overline{c}(\partial S) = \overline{c}(S) - \underline{c}(S)$. En particular, $S$ es medible Jordan si y sólo si $\partial S$ tiene contenido de Jordan nulo.
 \end{theorem}
 
-\begin{definition}[Medida de Lebesgue]
-  Un conjunto \(S \subset \R^n\) tiene medida de Lebesgue \(0\) si \(\forall \e > 0\) \(S\) se puede cubrir por a lo sumo numerables intervalos cuyas medidas suman menos que \(\e \). Notamos \(|S| = 0\).
+\begin{proof}
+  Sea $I \subset \R^n$ un intervalo compacto que contiene a $\cl{S}$. Veamos primero que para toda partición $P$ de $I$,
+  \[
+    \overline{J}(\partial S, P) = \overline{J}(S, P) - \underline{J}(S, P).
+  \]
+  Un subintervalo $R$ de $P$ está contenido en $\interior S$ si y sólo si interseca a $\cl{S}$ y no interseca a $\partial S$. En efecto, si $R \subseteq \interior S$ entonces $R \cap \partial S = \varnothing$ y $R \cap \cl{S} \neq \varnothing$. Recíprocamente, si $R \cap \partial S = \varnothing$, entonces $R \subseteq \interior S \cup (\R^n \setminus \cl{S})$, unión de dos abiertos disjuntos; por ser $R$ conexo está contenido en uno de ellos, y si interseca a $\cl{S}$, está contenido en $\interior S$. Luego los subintervalos que intersecan a $\partial S = \cl{\partial S}$ son exactamente los que intersecan a $\cl{S}$ y no están contenidos en $\interior S$, lo que da la igualdad.
+
+  Como $\overline{J}(S, P) \geq \overline{c}(S)$ y $\underline{J}(S, P) \leq \underline{c}(S)$, resulta $\overline{J}(\partial S, P) \geq \overline{c}(S) - \underline{c}(S)$ para toda $P$, y entonces $\overline{c}(\partial S) \geq \overline{c}(S) - \underline{c}(S)$.
+
+  Para la desigualdad opuesta, dado $\e > 0$ sea $P_1$ tal que $\overline{J}(S, P_1) < \overline{c}(S) + \frac{\e}{2}$ y $P_2$ tal que $\underline{J}(S, P_2) > \underline{c}(S) - \frac{\e}{2}$. Sea $P = P_1 \cup P_2$ (refinamiento común). Como refinar achica las sumas exteriores y agranda las interiores,
+  \begin{align*}
+    \overline{c}(\partial S) \leq \overline{J}(\partial S, P) & = \overline{J}(S, P) - \underline{J}(S, P) \leq \overline{J}(S, P_1) - \underline{J}(S, P_2) \\
+                                                              & < \overline{c}(S) - \underline{c}(S) + \e.
+  \end{align*}
+  Como $\e > 0$ es arbitrario, $\overline{c}(\partial S) \leq \overline{c}(S) - \underline{c}(S)$.
+
+  Finalmente, $S$ es medible Jordan si y sólo si $\overline{c}(S) = \underline{c}(S)$, es decir, si y sólo si $\overline{c}(\partial S) = 0$, que equivale a $c(\partial S) = 0$ pues $0 \leq \underline{c}(\partial S) \leq \overline{c}(\partial S)$.
+\end{proof}
+
+\section{Medida de Lebesgue nula}
+
+\begin{definition}[Medida de Lebesgue nula]
+  Un conjunto $S \subseteq \R^n$ tiene \emph{medida de Lebesgue nula} si para todo $\e > 0$ puede cubrirse con una cantidad numerable de intervalos cuyas medidas suman menos que $\e$. Notamos $|S| = 0$.
 \end{definition}
 
 \begin{eg}
-  Si \(c(X) = 0 \Rightarrow |X| = 0\), por ejemplo el conjunto de Cantor.
+  Si $c(X) = 0$, entonces $|X| = 0$, pues existe una partición $P$ tal que los subintervalos que intersecan a $\cl{X}$ cubren a $X$ y suman menos que $\e$. Por ejemplo, el conjunto de Cantor tiene medida nula.
 \end{eg}
 
-\begin{eg}
-  \(|\Q| = 0\), más aún, toda unión numerable de conjuntos de medida nula, tiene medida nula.
-  \begin{proof}
-    Numero a los racionales, digamos \(\Q = \{r_1, r_2, \ldots \} \) y dado \(\e > 0\) tomo para uno el intervalo \(I_k = (r_k - \frac{\e}{2^{k+1}}, r_k + \frac{\e}{2^{k+1}}) \Rightarrow \Q \subset \bigcup_{k + 1}^{+\infty} I_k\) y \(\sum_{k = 1}^{+\infty} |I_k| = \sum_{k = 1}^{+\infty} \frac{\e}{2^k} = \e \).
-    Si ahora \(F = \{F_1, F_2, \ldots \} \) son conjuntos de medida nula, dado \(\e > 0\) \(\forall k \in \N \) puedo elegir un cubrimiento por a lo sumo numerables intervalos abiertos tales que la suma de sus medidas sea menor que \(\frac{\e}{2^k} \Rightarrow \) la unión de todos los intervalos es numerable y la suma de todas las medidas es menor que \(\e \).
-  \end{proof}
-\end{eg}
+\begin{prop}
+  Toda unión numerable de conjuntos de medida nula tiene medida nula. En particular, todo conjunto numerable tiene medida nula; por ejemplo, $|\Q| = 0$.
+\end{prop}
 
-TODO:\@ Terminar esta clase
+\begin{proof}
+  Sean $F_1, F_2, \dots$ conjuntos de medida nula y $\e > 0$. Para cada $k \in \N$ cubrimos $F_k$ con una cantidad numerable de intervalos cuyas medidas suman menos que $\frac{\e}{2^k}$. La unión de todos estos intervalos es una familia numerable que cubre $\bigcup_k F_k$, y la suma de sus medidas es menor que $\sum_k \frac{\e}{2^k} = \e$.
+
+  Todo conjunto con un único punto tiene medida nula (se cubre con un intervalo de medida menor que $\e$), de modo que todo conjunto numerable, por ejemplo $\Q = \{r_1, r_2, \dots\}$, tiene medida nula. Explícitamente, cubriendo a $r_k$ con el intervalo $\left( r_k - \frac{\e}{2^{k+2}}, r_k + \frac{\e}{2^{k+2}} \right)$ se obtiene una suma total $\sum_k \frac{\e}{2^{k+1}} = \frac{\e}{2} < \e$.
+\end{proof}
+
+TODO: terminar esta clase.
+
 \section{Integrabilidad y medida de Jordan}
 
 \section{Integración en conjuntos}

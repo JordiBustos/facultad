@@ -1,294 +1,262 @@
 \section{Sucesiones de funciones}
 
 \begin{definition}[Convergencia puntual]
-  \(X \subseteq \R \) y sean \(f_n: X \to \R \quad (\forall n \in \N)\). La sucesión \({(f_n)}_{n \in \N} \) converge puntualmente a \(f: X \to \R \) si \((\forall x \in X)\):
-  \begin{align*}
-    \lim_{n \to +\infty} f_n(x) = f(x)
-  \end{align*}
+  Sean $X \subset \R$ y $f_n\colon X \to \R$ para cada $n \in \N$. La sucesión ${(f_n)}_{n \in \N}$ \emph{converge puntualmente} a $f\colon X \to \R$ si para todo $x \in X$,
+  \[
+    \lim_{n \to +\infty} f_n(x) = f(x).
+  \]
 \end{definition}
 
 \begin{eg}
-  \(f_n: [0, 1] \to \R \) dada por \(f_n(x) = x^n\) converge puntualmente a \(f: [0, 1] \to \R \) tal que \begin{align*} f(x) = \begin{cases}
+  Las funciones $f_n\colon [0, 1] \to \R$, $f_n(x) = x^n$, convergen puntualmente a la función $f\colon [0, 1] \to \R$ dada por
+  \[
+    f(x) = \begin{cases}
       0 & \text{si } 0 \leq x < 1, \\
       1 & \text{si } x = 1.
-    \end{cases}\end{align*}
-  En efecto, si \(x \in \interval[open right]{0}{1} \), \(\lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} x^n = 0\). Por otro lado si \(x = 1\), \(\lim_{n \to \infty} 1^n = 1\). \\
-  \begin{tikzpicture}
-    \begin{axis}[
-        width=10cm, height=7cm,
-        xlabel={\(x\)},
-        ylabel={\(f_n(x)\)},
-        xmin=0, xmax=1,
-        ymin=0, ymax=1,
-        legend pos=north west,
-        grid=major,
-        title={Funciones \(f_n(x) = x^n\) en \([0, 1]\)}
-      ]
-      \addplot[domain=0:1, samples=100, thick, blue] {x^1};
-      \addlegendentry{\(f_1(x) = x^1\)}
+    \end{cases}
+  \]
+  En efecto, si $x \in [0, 1)$, $\lim_{n \to \infty} x^n = 0$, y si $x = 1$, $\lim_{n \to \infty} 1^n = 1$.
 
-      \addplot[domain=0:1, samples=100, thick, red] {x^2};
-      \addlegendentry{\(f_2(x) = x^2\)}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=10cm, height=7cm,
+          xlabel={$x$},
+          ylabel={$f_n(x)$},
+          xmin=0, xmax=1,
+          ymin=0, ymax=1,
+          legend pos=north west,
+          grid=major,
+          title={Funciones $f_n(x) = x^n$ en $[0, 1]$}
+        ]
+        \addplot[domain=0:1, samples=100, thick, blue] {x^1};
+        \addlegendentry{$f_1$}
 
-      \addplot[domain=0:1, samples=100, thick, green] {x^3};
-      \addlegendentry{\(f_3(x) = x^3\)}
+        \addplot[domain=0:1, samples=100, thick, red] {x^2};
+        \addlegendentry{$f_2$}
 
-      \addplot[domain=0:1, samples=100, thick, orange] {x^5};
-      \addlegendentry{\(f_5(x) = x^5\)}
+        \addplot[domain=0:1, samples=100, thick, green!60!black] {x^3};
+        \addlegendentry{$f_3$}
 
-      \addplot[domain=0:1, samples=100, thick, purple] {x^10};
-      \addlegendentry{\(f_{10}(x) = x^{10} \)}
+        \addplot[domain=0:1, samples=100, thick, orange] {x^5};
+        \addlegendentry{$f_5$}
 
-      \addplot[domain=0:1, samples=100, thick, purple] {x^50};
-      \addlegendentry{\(f_{50}(x) = x^{50} \)}
-    \end{axis}
-  \end{tikzpicture}
+        \addplot[domain=0:1, samples=100, thick, purple] {x^10};
+        \addlegendentry{$f_{10}$}
+
+        \addplot[domain=0:1, samples=100, thick, brown] {x^50};
+        \addlegendentry{$f_{50}$}
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
 \end{eg}
 
 \begin{eg}
-  \(f_n: [0, 2 \cdot \pi] \to \R \), \(f_n(x) = \cos(nx)\) no converge puntualmente pues si \(x = \pi \), \(f_n(\pi) = {(-1)}^n\) y \(\nexists \lim_{n \to +\infty} f_n(\pi)\).
+  Las funciones $f_n\colon [0, 2\pi] \to \R$, $f_n(x) = \cos(nx)$, no convergen puntualmente: para $x = \pi$, $f_n(\pi) = {(-1)}^n$, que no tiene límite.
 \end{eg}
 
-Notemos que si \(f_n: X \subset \R \to \R \) converge puntualmente a \(f: X \to \R \Rightarrow (\forall \e > 0)(\exists n_0 \in \N) : |f_n(x) - f(x)| < \e \) \((\forall n > n_0)\), pero \(n_0\) depende de \(\e \) y de \(x\). Si \(\e \) está fijo puede ser que ningún \(n_0 \in \N \) sirva \(\forall x \in X\).
+Si $f_n\colon X \to \R$ converge puntualmente a $f$, para cada $\e > 0$ y cada $x \in X$ existe $n_0$ tal que $|f_n(x) - f(x)| < \e$ para todo $n > n_0$, pero $n_0$ depende de $\e$ y de $x$. Para $\e$ fijo puede ocurrir que ningún $n_0$ sirva para todo $x \in X$ a la vez.
 
 \begin{eg}
-  Tomemos \(f_n: [0, 1] \to \R \) dada por \(f_n(x) = x^n\). Si: \begin{align*}
-    \e = \frac{1}{2} & \Rightarrow (\forall n \in \N) \, \exists x \in \interval[open right]{0}{1} : |f_n(x) - f(x)| \geq \e = \frac{1}{2} \\
-                     & \iff |x^n - 0| \geq \frac{1}{2}
-  \end{align*}
-  En efecto pues dado \(n \in \N \), \(\lim_{x \to 1} x^n = 1\).
+  Sea $f_n(x) = x^n$ en $[0, 1]$, que converge puntualmente a la $f$ del ejemplo anterior. Para $\e = \frac{1}{2}$ y cada $n \in \N$, el punto $x = 2^{-1/n} \in [0, 1)$ cumple $|f_n(x) - f(x)| = x^n = \frac{1}{2} \geq \e$. Luego ningún $n_0$ sirve para todos los $x \in [0, 1)$ simultáneamente.
 \end{eg}
 
 \begin{definition}[Convergencia uniforme]
-  \({(f_n)}_{n \in \N} \) converge uniformemente a \(f: X \to \R \) si \((\forall \e > 0)(\forall x \in X)(\exists n_0 \in \N) : (\forall n > n_0)\) \(|f_n(x) - f(x)| < \e \). Notamos \(f_n \rightrightarrows f\).
+  La sucesión ${(f_n)}_{n \in \N}$ \emph{converge uniformemente} a $f\colon X \to \R$ si
+  \[
+    (\forall \e > 0)(\exists n_0 \in \N) \colon (\forall n > n_0)(\forall x \in X) \quad |f_n(x) - f(x)| < \e.
+  \]
+  Notamos $f_n \rightrightarrows f$.
 \end{definition}
 
-De la definición se desprende que \({(f_n)}_{n \in \N} \) converge uniformemente a \(f\) si y solo si \begin{align*}
-  \lim_{n \to +\infty} \sup_{x \in X} |f_n(x) - f(x)| = 0
-\end{align*}
+De la definición se deduce que $f_n \rightrightarrows f$ si y sólo si
+\[
+  \lim_{n \to +\infty} \sup_{x \in X} |f_n(x) - f(x)| = 0.
+\]
 
 \begin{eg}
-  Por el ejemplo anterior \(f_n: [0, 1] \to \R \) dada por \(f_n(x) = x^n\) no converge uniformemente.
-  Consideremos \(f_n: [0, 1 - \delta]\) con \(\delta \in (0, 1) \Rightarrow \) la convergencia a \(f(x) = 0\) es uniforme.
-  En efecto, dado \(\e > 0\) quiero ver que
-  \begin{align*}
-    \exists n_0 \in \N : |x^n - 0| = x^n < \e \quad \forall n > n_0 \, \forall x \in [0, 1 - \delta].
-  \end{align*}
-  Como \(x^n\) es creciente entonces
-  \begin{align*}
-     & 0 \leq x^n \leq {(1 - \delta)}^n                                                                                      \\
-     & \text{Como } \lim_{n \to +\infty} {(1 - \delta)}^n = 0                                                                \\
-     & \Rightarrow \text{Dado } \e > 0 \quad \exists n_0 \in \N \, : \, |{(1 - \delta)}^n - 0 | < \e \quad \forall n > n_0   \\
-     & \Rightarrow |x^n - 0| \leq |{(1 - \delta)}^n - 0| < \e \quad \forall n > n_0 \quad \forall x \in [0\text{, }1-\delta]
-  \end{align*}
-  \(\therefore \) la convergencia es uniforme.
+  Por el ejemplo anterior, $f_n(x) = x^n$ no converge uniformemente en $[0, 1]$. Sea ahora $\delta \in (0, 1)$ y consideremos $f_n\colon [0, 1 - \delta] \to \R$; veamos que la convergencia a $f \equiv 0$ es uniforme. Para $x \in [0, 1 - \delta]$, $0 \leq x^n \leq {(1 - \delta)}^n$. Como $\lim_{n \to \infty} {(1 - \delta)}^n = 0$, dado $\e > 0$ existe $n_0$ con ${(1 - \delta)}^n < \e$ para $n > n_0$, y entonces $|x^n - 0| < \e$ para todo $n > n_0$ y todo $x \in [0, 1 - \delta]$.
 \end{eg}
 
-\begin{definition}[Sucesión de Cauchy]
-  \({(f_n)}_{n \in \N} \), \(f_n: X \to \R \) es de Cauchy si \( \forall \e > 0 \), \(\exists n_0 \in N : \forall n\),\(m > n_0\),\(\forall x \in X\), \(|f_n(x) - f_m(x)| < \e \).
+\begin{definition}[Sucesión de Cauchy de funciones]
+  La sucesión ${(f_n)}_{n \in \N}$, con $f_n\colon X \to \R$, es \emph{de Cauchy} (uniformemente) si
+  \[
+    (\forall \e > 0)(\exists n_0 \in \N) \colon (\forall n, m > n_0)(\forall x \in X) \quad |f_n(x) - f_m(x)| < \e.
+  \]
 \end{definition}
 
 \begin{theorem}
-  Una sucesión de funciones \(f_n : X \to \R \) es uniformemente convergente \(\iff \) es de Cauchy.
-  \begin{proof}
-    Para la ida tomemos \(\e > 0\), luego \(\exists n_0 \in \N : |f_n(x) - f(x)| < \frac{\e}{2} \) \((\forall n > n_0)(\forall x \in X)\) por hipótesis. Luego si \(n, m > n_0 \Rightarrow |f_n(x) - f_m(x)| < |f_n(x) - f(x)| + |f_m(x) - f(x)| < \e \) \((\forall x \in X)\). \\
-    Para la vuelta tenemos que \(\forall x \in X\) \({(f_n(x))}_{n \in \N} \) es una sucesión de Cauchy que converge a un límite que llamo \(f(x)\). Dado \(\e > 0\), \(\exists n_0 \in \N : |f_n(x) - f_m(x)| < \e \) \((\forall n, m > n_0)\).\(\forall x \in X\) fijado el \(x\) y el \(n\) tomamos \(m \to +\infty \therefore |f_n(x) - f(x)| < \e \) \((\forall x \in X)(\forall n > n_0) \therefore \) la convergencia es uniforme.
-  \end{proof}
+  Una sucesión de funciones $f_n\colon X \to \R$ converge uniformemente si y sólo si es de Cauchy.
 \end{theorem}
 
-\(f = \sum f_n\) es un caso particular del límite.
-\(f : X \to \R \), \(f_n: X \to \R \).\(f = \lim_{n \to +\infty} S_n\), \(S_n\) la suma parcial, luego
-\begin{align*}
-  \sum f_n \rightrightarrows f \iff (\forall \e > 0) \, (\exists n_0 \in \N) \, : \, |S_{n+1}(x) - S_n(x)| < \e \quad (\forall n > n_0) \, (\forall x \in X)
-\end{align*}
+\begin{proof}
+  ($\Rightarrow$) Sea $f_n \rightrightarrows f$ y $\e > 0$. Existe $n_0$ tal que $|f_n(x) - f(x)| < \frac{\e}{2}$ para $n > n_0$ y todo $x \in X$. Si $n, m > n_0$,
+  \[
+    |f_n(x) - f_m(x)| \leq |f_n(x) - f(x)| + |f(x) - f_m(x)| < \e \qquad (\forall x \in X).
+  \]
+
+  ($\Leftarrow$) Para cada $x \in X$, ${(f_n(x))}_{n \in \N}$ es de Cauchy en $\R$, y por lo tanto converge; llamamos $f(x)$ a su límite. Dado $\e > 0$, existe $n_0$ tal que $|f_n(x) - f_m(x)| < \e$ para $n, m > n_0$ y todo $x \in X$. Fijando $x$ y $n > n_0$ y haciendo $m \to +\infty$ se obtiene $|f_n(x) - f(x)| \leq \e$ para todo $n > n_0$ y todo $x \in X$. Luego $f_n \rightrightarrows f$.
+\end{proof}
+
+Una serie de funciones $\sum f_n$ es un caso particular: sea $S_n = f_1 + \cdots + f_n$ la suma parcial. Decimos que $\sum f_n$ converge puntual o uniformemente a $f$ si $S_n$ lo hace, y en ese caso escribimos $\sum f_n \rightrightarrows f$. Por el teorema anterior, $\sum f_n$ converge uniformemente si y sólo si
+\[
+  (\forall \e > 0)(\exists n_0 \in \N) \colon (\forall n > n_0)(\forall p \in \N)(\forall x \in X) \quad |S_{n+p}(x) - S_n(x)| < \e.
+\]
 
 \begin{definition}[Convergencia normal]
-  Decimos que \(\sum f_n: X \to \R \) converge normalmente si
-  \begin{align*}
-     & \exists {(a_n)}_{n \in \N} \subset \R : \sum a_n < +\infty \text{ y } \\
-     & |f_n(x)| < a_n \quad (\forall n \in \N)(\forall x \in X).
-  \end{align*}
+  Decimos que una serie $\sum f_n$, con $f_n\colon X \to \R$, \emph{converge normalmente} si existe una sucesión ${(a_n)}_{n \in \N} \subset [0, +\infty)$ con $\sum a_n < +\infty$ y $|f_n(x)| \leq a_n$ para todo $n \in \N$ y todo $x \in X$.
 \end{definition}
 
 \begin{eg}
-  \(\sum_{n \geq 1} \frac{sen(nx)}{n^2} \) es normalmente convergente pues \(|\frac{sen(nx)}{n^2}| \leq \frac{1}{n²} \) \((\forall n \in N)\) y \(\sum \frac{1}{n²} \) converge.
+  La serie $\sum_{n \geq 1} \frac{\sin(nx)}{n^2}$ converge normalmente en $\R$, pues $\left| \frac{\sin(nx)}{n^2} \right| \leq \frac{1}{n^2}$ para todo $n$ y $\sum \frac{1}{n^2}$ converge.
 \end{eg}
 
-\begin{theorem}[Test de Weierstrass]
-  Si \(\sum f_n\) es normalmente convergente \(\Rightarrow \sum |f_n|\) y \(\sum f_n\) son uniformemente convergentes.
-  \begin{proof}
-    \(X\) el dominio de todas las \(f_i \Rightarrow (\forall n \in \N)(\forall p \in \N)(\forall x \in X) \Rightarrow \) \begin{align*}
-      |S_{n + p}(x) - S_n(x)| & = |f_{n+1}(x) + \cdots + f_{n + p}(x)| \\
-      & \leq |f_{n+1}(x)| + \cdots + |f_{n+p}(x)| \\
-      & \leq a_{n+1} + \cdots + a_{n+p} < \e
-    \end{align*}
-    Por la hipótesis de la convergencia normal \(\therefore \sum f_n\) y \(\sum |f_n|\) convergen uniformemente.
-  \end{proof}
+\begin{theorem}[Criterio de Weierstrass]
+  Si $\sum f_n$ converge normalmente, entonces $\sum f_n$ y $\sum |f_n|$ convergen uniformemente.
 \end{theorem}
 
-Notemos que la convergencia normal implica la convergencia uniforme que a su vez implica la convergencia puntual, pero el camino inverso no vale.
+\begin{proof}
+  Sea $\e > 0$. Como $\sum a_n$ converge, por el criterio de Cauchy existe $n_0$ tal que $a_{n+1} + \cdots + a_{n+p} < \e$ para todo $n > n_0$ y todo $p \in \N$. Entonces, para todo $x \in X$,
+  \begin{multline*}
+    |S_{n+p}(x) - S_n(x)| = |f_{n+1}(x) + \cdots + f_{n+p}(x)| \\
+    \leq |f_{n+1}(x)| + \cdots + |f_{n+p}(x)| \leq a_{n+1} + \cdots + a_{n+p} < \e.
+  \end{multline*}
+  Luego $\sum f_n$ converge uniformemente; el argumento para $\sum |f_n|$ es el mismo.
+\end{proof}
+
+La convergencia normal implica la convergencia uniforme, que a su vez implica la convergencia puntual, pero las recíprocas no valen.
 
 \begin{eg}
-  Sea \(f_n : \interval[open right]{1}{+\infty} \) dada por \begin{align*}
+  Sea $f_n\colon [1, +\infty) \to \R$ dada por
+  \[
     f_n(x) = \begin{cases}
-               \frac{1}{x} & \text{si } x \in [n, n+1], \\
-               0           & \text{caso contrario.}
-             \end{cases}
-  \end{align*}
-  Si llamamos \(f: \interval[open right]{1}{+\infty} \to \R \) a \(f(x) = \frac{1}{x} \).
-  Afirmo que \(\sum_{n \geq 1} f_n \rightrightarrows f\). En efecto, pues
-  \begin{align*}
-     & 0 \leq f(x) - S_n < \frac{1}{n} \quad (\forall x \in \interval[open right]{1}{+\infty}) \text{ pues si }                                                                  \\
-     & x \leq n+1 \Rightarrow f(x) = \frac{1}{x} \text{ y } S_n = \frac{1}{x} \text{ i.e } x \in \interval[open right]{1}{n+1} \Rightarrow \text{ la suma parcial no se anula, } \\
-     & x > n+1 \Rightarrow f(x) = \frac{1}{x} \text{ y } S_n = 0 \text{ i.e no aparece en la suma.}
-  \end{align*}
-  Pero no converge normalmente en \(\interval[open right]{1}{+\infty}\), pues si fuese \(f(x) \leq a_n\) \((\forall x \in \interval[open right]{1}{+\infty})\) tomando \(x = n \Rightarrow \frac{1}{n} \leq a_n \Rightarrow \sum a_n = + \infty \) y no puede ser normal la serie.
+      \dfrac{1}{x} & \text{si } x \in [n, n + 1), \\[1ex]
+      0            & \text{en caso contrario,}
+    \end{cases}
+  \]
+  y sea $f(x) = \frac{1}{x}$. Afirmamos que $\sum_{n \geq 1} f_n \rightrightarrows f$. En efecto, $S_n(x) = \frac{1}{x}$ si $x \in [1, n + 1)$ y $S_n(x) = 0$ si $x \geq n + 1$. Luego $f(x) - S_n(x) = 0$ si $x < n + 1$, y $f(x) - S_n(x) = \frac{1}{x} \leq \frac{1}{n + 1} < \frac{1}{n}$ si $x \geq n + 1$; así, $0 \leq f - S_n < \frac{1}{n}$ en $[1, +\infty)$.
+
+  Pero la serie no converge normalmente: si $|f_n(x)| \leq a_n$ para todo $x$, tomando $x = n$ resulta $a_n \geq \frac{1}{n}$, y $\sum a_n = +\infty$.
 \end{eg}
 
 \begin{note}
-  Sea \({(f_n)}_{n \in \N} \) nos preguntamos si el límite en \(x\) y en \(n\) son intercambiables. La respuesta en general es no.
+  Dada una sucesión ${(f_n)}_{n \in \N}$, nos preguntamos si los límites en $x$ y en $n$ pueden intercambiarse. En general, la respuesta es negativa.
 \end{note}
 
 \begin{eg}
-  \(f_n(x) = x^n\), \(f(x) = \begin{cases}
-      1 & \text{si } x = 1,        \\
-      0 & \text{si } 0 \leq x < 1.
-    \end{cases} \) \begin{align*}
-    & \lim_{x \to 1} \left(\lim_{n \to \infty} f_n(x)\right) = \lim_{x \to 1} f(x) = 0 \\
-    & \lim_{n \to \infty} \left(\lim_{x \to 1} f_n(x)\right) = \lim_{n \to \infty} \left(\lim_{x \to 1} x^n\right) = \lim_{n \to \infty} 1 = 1
+  Sean $f_n(x) = x^n$ en $[0, 1]$ y $f$ su límite puntual. Entonces
+  \begin{align*}
+    \lim_{x \to 1} \left( \lim_{n \to \infty} f_n(x) \right) & = \lim_{x \to 1} f(x) = 0, \\
+    \lim_{n \to \infty} \left( \lim_{x \to 1} f_n(x) \right) & = \lim_{n \to \infty} 1 = 1.
   \end{align*}
 \end{eg}
 
 \begin{theorem}
-  Sea \(a\) un punto de acumulación de \(X\). Si la sucesión \(f_n: X \to \R \) converge uniformemente a \(f: X \to \R \) y \((\forall n \in \N)(\exists \lim_{x \to a} f_n(x) = L_n) \Rightarrow \)
-  \begin{enumerate}
-    \item \(\exists \lim_{n \to \infty} L_n\).
-    \item \(L = \lim_{x \to a} f(x)\).
-  \end{enumerate}
-  Es decir que \begin{align*}
-    \lim_{n \to \infty}\left(\lim_{x \to a} f_n(x)\right) = \lim_{x \to a}\left(\lim_{n \to \infty} f_n(x)\right)
-  \end{align*}
-  Siempre que los límites de adentro existan y el de la sucesión de funciones sea uniforme.
-
-  \begin{proof}
-    Para ver que \(\exists \lim_{n \to \infty} L_n = L\). Probemos que \(L_n\) es de Cauchy.
-    \begin{enumerate}
-      \item Dado \(\e > 0\), como \(f_n \rightrightarrows f\), entonces
-            \begin{align*}
-               & \exists n_0 \in \N : |f_n(x) - f_m(x)| < \frac{\e}{3}  \quad (\forall n > n_0)(\forall x \in X)                 \\
-               & \text{Si } m, n > n_0, \exists x \in X : |L_m - f_m(x)| < \frac{\e}{3} \text{ y } |L_n - f_n(x)| < \frac{\e}{3} \\
-               & \Rightarrow
-              \begin{aligned}[t]
-                |L_n - L_m| & \leq |L_n - f_n(x)| + |f_n(x) - f_m(x)| + |f_m(x) - L_m| \\
-                            & < \frac{\e}{3} + \frac{\e}{3} + \frac{\e}{3} = \e
-              \end{aligned}
-            \end{align*}
-      \item Veamos que si \(f(x) = \lim_{n \to \infty} f_n\) verifica \(\lim_{x \to a} f(x) = L\). Dado \(\e > 0\),
-            \begin{align*}
-               & \exists n_0 \in \N : |L_n - L| < \frac{\e}{3} \quad \forall n > n_0 \quad \forall x \in X                                                                       \\
-               & \text{Si } n > n_0 \Rightarrow \exists \delta > 0 \, : \, 0 < |x-a| < \delta \Rightarrow |f_n(x) - L_n| < \frac{\e}{3} \text{ pues }\lim_{x \to a} f_n(x) = L_n \\
-               & \Rightarrow \text{ Si } |x-a| < \delta \Rightarrow |f(x) - L| < \e
-            \end{align*}
-    \end{enumerate}
-  \end{proof}
+  Sea $a$ un punto de acumulación de $X \subset \R$ (o $a = \pm\infty$). Si $f_n \rightrightarrows f$ en $X$ y para cada $n \in \N$ existe $L_n = \lim_{x \to a} f_n(x)$, entonces existe $L = \lim_{n \to \infty} L_n$ y $\lim_{x \to a} f(x) = L$. Es decir,
+  \[
+    \lim_{n \to \infty} \left( \lim_{x \to a} f_n(x) \right) = \lim_{x \to a} \left( \lim_{n \to \infty} f_n(x) \right).
+  \]
 \end{theorem}
+
+\begin{proof}
+  Veamos primero que ${(L_n)}$ es de Cauchy. Dado $\e > 0$, existe $n_0$ tal que $|f_n(x) - f_m(x)| < \frac{\e}{3}$ para $n, m > n_0$ y todo $x \in X$. Fijemos $n, m > n_0$. Como $f_n(x) \to L_n$ y $f_m(x) \to L_m$ cuando $x \to a$, y $a$ es de acumulación, existe $x \in X$ tal que $|f_n(x) - L_n| < \frac{\e}{3}$ y $|f_m(x) - L_m| < \frac{\e}{3}$. Entonces
+  \[
+    |L_n - L_m| \leq |L_n - f_n(x)| + |f_n(x) - f_m(x)| + |f_m(x) - L_m| < \e.
+  \]
+  Luego ${(L_n)}$ converge a un $L \in \R$.
+
+  Veamos ahora que $\lim_{x \to a} f(x) = L$. Dado $\e > 0$, existen $n_1$ con $|f_n(x) - f(x)| < \frac{\e}{3}$ para $n > n_1$ y todo $x \in X$, y $n_2$ con $|L_n - L| < \frac{\e}{3}$ para $n > n_2$. Sea $n > \max\{n_1, n_2\}$. Como $f_n(x) \to L_n$ cuando $x \to a$, existe $\delta > 0$ tal que $0 < |x - a| < \delta$ implica $|f_n(x) - L_n| < \frac{\e}{3}$. Para tales $x$,
+  \[
+    |f(x) - L| \leq |f(x) - f_n(x)| + |f_n(x) - L_n| + |L_n - L| < \e.
+  \]
+  Si $a = \pm\infty$, la demostración es la misma reemplazando la condición $0 < |x - a| < \delta$ por $x > R$ (o $x < -R$).
+\end{proof}
 
 \begin{corollary}
-  Sea \(a \in X\) punto de acumulación. Si \begin{enumerate}
-    \item \(\sum f_n \rightrightarrows f\) en \(X\)
-    \item \(\forall n \in \N \), \(\exists \lim_{x \to a} f_n(x) = L_n\)
-  \end{enumerate} \(\Rightarrow \sum L_n < +\infty \) y \(\sum L_n = \lim_{x \to a} f(x)\).
-  Es decir que \begin{align*}
-    \lim_{x \to a}\left(\sum f_n(x)\right) = \sum\left(\lim_{x \to a} f_n(x)\right)
-  \end{align*} Siempre que \(\sum f_n\) sea uniformemente convergente.
+  Sea $a$ un punto de acumulación de $X$. Si $\sum f_n \rightrightarrows f$ en $X$ y para cada $n$ existe $L_n = \lim_{x \to a} f_n(x)$, entonces $\sum L_n$ converge y $\sum L_n = \lim_{x \to a} f(x)$. Es decir,
+  \[
+    \lim_{x \to a} \left( \sum f_n(x) \right) = \sum \left( \lim_{x \to a} f_n(x) \right).
+  \]
 \end{corollary}
 
-Notemos que el teorema también vale si \(a = +\infty \)
-\begin{align*}
-  \lim_{n \to +\infty} \left(\lim_{x \to +\infty} f_n(x)\right) = \lim_{x \to +\infty}\left(\lim_{n \to +\infty} f_n(x)\right)
-\end{align*}
-Siempre que los límites de adentro existan y la convergencia de la sucesión de funciones sea uniforme. La demostración queda como ejercicio.
+\begin{proof}
+  Se aplica el teorema a las sumas parciales $S_n$, que convergen uniformemente a $f$ y tienen $\lim_{x \to a} S_n(x) = L_1 + \cdots + L_n$.
+\end{proof}
 
 \begin{theorem}
-  Si \(f_n \rightrightarrows f\) y todas las \(f_n\) son continuas en \(a \in X \Rightarrow f\) es continua en \(a\).
-  \begin{proof}
-    Si \(a\) es punto aislado es inmediato. Si \(a \in X^{\prime} \Rightarrow \) \begin{align*}
-      \lim_{x \to a} f(x) & = \lim_{x \to a}\left(\lim_{n \to \infty} f_n(x)\right)                                     \\
-                          & = \lim_{n \to \infty}\left(\lim_{x \to a} f_n(x)\right) = \lim_{n \to \infty} f_n(a) = f(a)
-    \end{align*}
-  \end{proof}
+  Sean $f_n\colon X \to \R$ funciones continuas en $a \in X$ tales que $f_n \rightrightarrows f$. Entonces $f$ es continua en $a$.
 \end{theorem}
 
-Si el límite de \({(f_n)}_{n \in \N} \) no es continuo y las funciones de la sucesión sí, el límite no puede ser uniforme. Por otro lado que el límite sea continuo tampoco alcanza para que la convergencia sea uniforme.
+\begin{proof}
+  Si $a$ es aislado en $X$, $f$ es continua en $a$ trivialmente. Si $a \in X'$, por continuidad $\lim_{x \to a} f_n(x) = f_n(a)$ para cada $n$, y por el teorema anterior,
+  \[
+    \lim_{x \to a} f(x) = \lim_{n \to \infty} f_n(a) = f(a). \qedhere
+  \]
+\end{proof}
+
+En particular, si las $f_n$ son continuas pero el límite puntual no lo es, la convergencia no es uniforme. Por otro lado, que el límite sea continuo no alcanza para que la convergencia sea uniforme: $f_n(x) = x^n$ converge puntualmente a $0$ en $[0, 1)$, pero no uniformemente.
 
 \begin{definition}[Convergencia monótona]
-  Decimos que \({(f_n)}_{n \in \N} \) converge monótonamente a \(f\), si \((\forall x \in X)\) la sucesión \({(f_n)}_{n \in \N} \) es monótona y \(f_n(x) \to f(x)\).
+  Decimos que ${(f_n)}_{n \in \N}$ \emph{converge monótonamente} a $f$ si para todo $x \in X$ la sucesión ${(f_n(x))}_{n \in \N}$ es monótona y $f_n(x) \to f(x)$.
 \end{definition}
 
-\begin{theorem}
-  Sea \(X \subset \R \) compacto. Si una sucesión de funciones continuas \(f_n: X \to \R \) converge monótonamente a una función continua \(f: X \to \R \Rightarrow \) la convergencia es uniforme.
-  \begin{proof}
-    Dado \(\e > 0\), definamos
-    \begin{align*}
-      K_n & = \{ x \in X : |f_n(x) - f(x)| \geq \e \} \quad (\forall n \in \N) \\
-          & = |f_n(x) - f(x)|^{-1}(\interval[open right]{\e}{+\infty})
-    \end{align*}
-    Como \(f_n\), \(f\) son continuas, \(K_n\) es cerrado de \(X \Rightarrow K_n\) es compacto \((\forall n \in \N)\). Afirmo que como \((f_n)\) es monótona,
-    \(K_1 \supset K_2 \supset K_3 \supset \cdots \).
-    En efecto, si \begin{enumerate}
-      \item \(f_1 < f_2 < \cdots < f_n < \cdots < f \Rightarrow -f_1 > -f_2 \Rightarrow f - f_1 > |f - f_2| \Rightarrow K_1 \supset K_2 \cdots \).
-      \item \(f_1 > f_2 > \cdots > f_n > \cdots < f \Rightarrow f_1 - f > |f - f_2| \Rightarrow K_1 \supset K_2 \cdots \).
-    \end{enumerate}
-    Pero además debe ser \(\bigcap_{n \in \N} K_n = \varnothing \) porque si no \(|f(x) - f_n(x)| \geq \e \) \((\forall n \in \N)\) absurdo
-    \(\Rightarrow \exists n_0 \in \N : K_{n_0} = \varnothing \Rightarrow K_n = \varnothing \) \((\forall n > n_0) \Rightarrow |f(x) - f_n(x)| < \e \) \((\forall n > n_0)(\forall x \in X)\).
-  \end{proof}
+\begin{theorem}[Dini]
+  Sea $X \subset \R$ compacto. Si una sucesión de funciones continuas $f_n\colon X \to \R$ converge monótonamente a una función continua $f\colon X \to \R$, entonces la convergencia es uniforme.
 \end{theorem}
 
+\begin{proof}
+  Dado $\e > 0$ definimos $K_n = \{ x \in X : |f_n(x) - f(x)| \geq \e \}$. Como $|f_n - f|$ es continua, $K_n$ es cerrado relativo a $X$, y por lo tanto compacto. Para cada $x$, como ${(f_n(x))}$ es monótona y converge a $f(x)$, la sucesión ${\bigl( |f_n(x) - f(x)| \bigr)}_n$ es decreciente, de modo que $K_1 \supset K_2 \supset K_3 \supset \cdots$. Además $\bigcap_{n} K_n = \varnothing$, pues si $x$ pertenece a todos los $K_n$, entonces $|f_n(x) - f(x)| \geq \e$ para todo $n$, lo que contradice $f_n(x) \to f(x)$.
+
+  Supongamos que $K_n \neq \varnothing$ para todo $n$. Elegimos $x_n \in K_n$. Como $X$ es compacto, existe una subsucesión $x_{h(k)} \to x \in X$. Para cada $m$ fijo, $x_{h(k)} \in K_{h(k)} \subset K_m$ para $k$ grande, y como $K_m$ es cerrado relativo a $X$, $x \in K_m$. Entonces $x \in \bigcap_m K_m = \varnothing$, absurdo.
+
+  Luego existe $n_0$ con $K_{n_0} = \varnothing$, y entonces $K_n = \varnothing$ para $n \geq n_0$, es decir, $|f_n(x) - f(x)| < \e$ para $n \geq n_0$ y todo $x \in X$.
+\end{proof}
+
 \begin{corollary}
-  Una serie convergente de funciones no negativas, continuas, definidas en un compacto es uniformemente convergente \(\iff \sum f_n(x)\) es continua en un compacto.
-  \begin{proof}
-    \(S_n = f_1 + \cdots + f_n\) es una sucesión monótona pues son no negativas.
-  \end{proof}
+  Sea $X \subset \R$ compacto y $f_n\colon X \to \R$ funciones continuas no negativas tales que $\sum f_n(x)$ converge para todo $x \in X$. Entonces $\sum f_n$ converge uniformemente si y sólo si su suma es continua.
 \end{corollary}
+
+\begin{proof}
+  ($\Rightarrow$) Es el teorema de continuidad del límite uniforme. ($\Leftarrow$) Las sumas parciales $S_n = f_1 + \cdots + f_n$ son continuas y forman una sucesión creciente, pues las $f_n$ son no negativas, que converge puntualmente a una función continua. Por el teorema de Dini, la convergencia es uniforme.
+\end{proof}
 
 \section{Integración de sucesiones de funciones}
 
 \begin{theorem}
-  Si \(f_n: [a, b] \to \R \) son funciones integrables que convergen uniformemente a \(f: [a, b] \to \R \Rightarrow \) es integrable y vale que \(\int_a^b f(x) dx = \lim_{n \to +\infty} \int_a^b f_n(x) dx\).
-  \begin{proof}
-    Sean \(D_n\) y \(D\) los conjuntos de discontinuidad de \(f_n\) y \(f\). Si \(x \notin D_n\) \((\forall n \in \N) \Rightarrow x \notin D\),
-    pues el límite uniforme es continuo en los puntos de discontinuidad.
-    Luego \(D \subseteq \bigcup_{n \in \N} D_n\) Como \(|D_n| = 0\) \((\forall n \in \N)\), pues son integrables,
-    tenemos que \(|D| = 0 \Rightarrow f\) es integrable. Ahora, dado \(\e > 0\),
-    \(\exists n_0 \in \N : |f_n(x) - f(x)| < \frac{\e}{b-a} \) \((\forall x \in [a, b])(\forall n > n_0)\). Luego \((\forall n > n_0)\)
-    \begin{align*}
-      \left|\int_a^b f(x) dx - \int_a^b f_n(x) dx\right| \leq \int_a^b |f(x) - f_n(x)|dx < \frac{\e}{b-a} \cdot (b-a) = \e
-    \end{align*}
-    Es decir que \(\int_a^b \lim_{n \to +\infty} f_n(x) dx = \lim_{n \to +\infty} \int_a^b f_n(x) dx\).
-  \end{proof}
+  Si $f_n\colon [a, b] \to \R$ son integrables y $f_n \rightrightarrows f$, entonces $f$ es integrable y
+  \[
+    \int_a^b f(x) \,\dd x = \lim_{n \to +\infty} \int_a^b f_n(x) \,\dd x.
+  \]
 \end{theorem}
 
+\begin{proof}
+  Como las $f_n$ son acotadas y $f_n \rightrightarrows f$, $f$ es acotada. Sea $\e > 0$ y sea $\eta = \frac{\e}{4(b - a)}$. Existe $n$ con $|f_n(x) - f(x)| < \eta$ para todo $x \in [a, b]$. En cada subintervalo $[t_{i-1}, t_i]$ de una partición $P$ se tiene entonces $\omega_i(f) \leq \omega_i(f_n) + 2\eta$, de modo que
+  \[
+    S(f, P) - s(f, P) \leq S(f_n, P) - s(f_n, P) + 2\eta (b - a).
+  \]
+  Como $f_n$ es integrable, existe $P$ con $S(f_n, P) - s(f_n, P) < \frac{\e}{2}$, y entonces $S(f, P) - s(f, P) < \frac{\e}{2} + \frac{\e}{2} = \e$. Luego $f$ es integrable.
+
+  Ahora, dado $\e > 0$ existe $n_0$ tal que $|f_n(x) - f(x)| < \frac{\e}{b - a}$ para $n > n_0$ y todo $x \in [a, b]$. Para esos $n$,
+  \[
+    \left| \int_a^b f \,\dd x - \int_a^b f_n \,\dd x \right| \leq \int_a^b |f - f_n| \,\dd x \leq \frac{\e}{b - a} (b - a) = \e. \qedhere
+  \]
+\end{proof}
+
 \begin{corollary}
-  Si \(\sum f_n \rightrightarrows f\) y las \(f_n\) son integrables \(\Rightarrow \) la suma es integrable y \(\int_a^b \sum f_n = \sum \int_a^b f_n\) en otras palabras, la serie se puede integrar término a término.
+  Si $\sum f_n \rightrightarrows f$ en $[a, b]$ y las $f_n$ son integrables, entonces $f$ es integrable y $\int_a^b \sum f_n = \sum \int_a^b f_n$. Es decir, la serie puede integrarse término a término.
 \end{corollary}
 
 \begin{note}
-  Si \(f_n: [a, b] \to \R \) son integrables y convergen puntualmente a \(f\) en \([a, b]\) puede pasar que \(f\) no sea integrable por ejemplo si \(\Q \cap [a, b] = \{r_1, \cdots \} \) y
-  \begin{align*}
+  Si $f_n\colon [a, b] \to \R$ son integrables y convergen puntualmente a $f$, puede ocurrir que $f$ no sea integrable. Por ejemplo, si $\Q \cap [a, b] = \{ r_1, r_2, \dots \}$ y
+  \[
     f_n(x) = \begin{cases}
-               1 & \text{si } x \in \{r_1, \ldots, r_n\}, \\
-               0 & \text{caso contrario}.
-             \end{cases}
-  \end{align*}
-  Luego \(f(x) = \begin{cases}
-      1 & \text{si } x \in \Q \cap [a, b], \\
-      0 & \text{caso contrario}.
-    \end{cases} \Rightarrow f_n \to f \text{ en } [a, b]\), cada \(f_n\) es integrable, pero \(f\) no lo es.
+      1 & \text{si } x \in \{ r_1, \dots, r_n \}, \\
+      0 & \text{en caso contrario,}
+    \end{cases}
+  \]
+  entonces $f_n \to f$ puntualmente, con $f(x) = 1$ si $x \in \Q \cap [a, b]$ y $f(x) = 0$ en caso contrario. Cada $f_n$ es integrable (tiene finitas discontinuidades), pero $f$ no lo es.
 \end{note}
 
 \begin{note}
-  \(f_n \to f\) en \([a, b]\), \(f_n\) y \(f\) son integrables, pero \(\lim_{n \to \infty} \int_a^b f_n \neq \int_a^b f\). Por ejemplo si \(f_n: [0, 1] \to \R \), \(f_n(x) = \begin{cases}
-      (n+1) x^{n+1} & \text{si } x \in \interval[open right]{0}{1}, \\
-      0             & \text{si } x = 1.
-    \end{cases} \) Luego si \(f: [0, 1] \to \{0\} \), \(f(x) = 0 \Rightarrow f_n \to f\), pero \(\int_0^1 f_n(x) dx = 1 \neq 0 = \int_0^1 f(x) dx\).
+  Aun cuando $f_n$ y $f$ sean integrables y $f_n \to f$ puntualmente, puede ser $\lim_{n \to \infty} \int_a^b f_n \neq \int_a^b f$. Por ejemplo, sea $f_n\colon [0, 1] \to \R$ dada por $f_n(x) = (n + 1) x^n$ si $x \in [0, 1)$ y $f_n(1) = 0$. Entonces $f_n \to 0$ puntualmente y $\int_0^1 f_n(x) \,\dd x = 1$ para todo $n$, pero $\int_0^1 0 \,\dd x = 0$.
 \end{note}

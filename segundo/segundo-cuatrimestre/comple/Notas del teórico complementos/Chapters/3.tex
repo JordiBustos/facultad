@@ -1,191 +1,192 @@
 \section{Conjuntos numerables}
 
 \begin{definition}[Conjunto numerable]
-	Un conjunto \(X\) es numerable si \(X \sim \N \). Cada biyección se llama una enumeración de los elementos de \(X\).
-\end{definition}
-
-\begin{definition}[Conjunto a lo sumo numerable]
-	Decimos que un conjunto es a lo sumo numerable (contable) si es finito numerable.
+  Un conjunto $X$ es \emph{numerable} si $X \sim \N$. Cada biyección $\N \to X$ se llama una \emph{enumeración} de $X$. Un conjunto es \emph{a lo sumo numerable} si es finito o numerable.
 \end{definition}
 
 \begin{eg}
-	Los números pares, \(P = \{ 2n:n \in \N \} \).
-	\begin{proof}
-		\(f(n) = 2n\), \(f: \N \to P\) es biyectiva \(\therefore \) es numerable.
-	\end{proof}
+  El conjunto de los números pares $P = \{ 2n : n \in \N \}$ es numerable, pues $f\colon \N \to P$, $f(n) = 2n$, es biyectiva.
 \end{eg}
 
 \begin{eg}
-	\(\Z \) es numerable.
-	\begin{proof}
-		Definimos \(f: \Z \to \N \) como \(f(n) = \begin{cases}
-			2n    & \text{si } n >0,     \\
-			-2n+1 & \text{si } n \leq 0.
-		\end{cases} \) y \(f^{-1} \) es una enumeración.
-	\end{proof}
+  $\Z$ es numerable. La función $f\colon \Z \to \N$ dada por
+  \[
+    f(n) =
+    \begin{cases}
+      2n      & \text{si } n > 0,    \\
+      -2n + 1 & \text{si } n \leq 0,
+    \end{cases}
+  \]
+  es biyectiva (los positivos van a los pares y los no positivos a los impares), y su inversa es una enumeración de $\Z$.
 \end{eg}
 
-\begin{theorem}
-	Sea \(X\) un conjunto y \(P(X) = \{ A : A \subset X \} \Rightarrow card(X) \neq card(P(X))\)
-	\begin{proof}
-		Supongamos que \(\exists f:X \to P(X)\) biyectiva, en particular, \(f\) es suryectiva y dado \(x \in X \) puede ocurrir que \(x \in f(x)\) o \(x \notin f(x)\). Definimos \(B = \{ x \in X: x \notin f(x) \} \subset X\). Como \(f\) es suryectiva se tiene que \(\exists y \in P(X): f(y) = B\).\begin{itemize}
-			\item Si \(y \notin B=f(y) \Rightarrow y \notin f(y) \Rightarrow y \in B\).
-			\item Si \(y \in B = f(y) \Rightarrow y \in f(y) \Rightarrow y \notin B\).
-		\end{itemize}
-		Absurdo en ambos casos, luego \(\Rightarrow \nexists f\) biyectiva \(\therefore \) \(card(X) \neq card(P)\).
-	\end{proof}
+\begin{theorem}[Cantor]
+  Sea $X$ un conjunto y $\mathcal{P}(X) = \{ A : A \subset X \}$. Entonces $\card(X) \neq \card(\mathcal{P}(X))$.
 \end{theorem}
 
-\begin{definition}
-	Decimos que \(card(X) \leq card(Y)\) si \(\exists f: X \to Y\) inyectiva. \\
-	\(card(X) < card(Y)\) si \(card(X) < card(Y)\), pero \(\neg(X\sim Y)\).
+\begin{proof}
+  Supongamos que existe $f\colon X \to \mathcal{P}(X)$ biyectiva. Para cada $x \in X$ puede ocurrir $x \in f(x)$ o $x \notin f(x)$. Sea
+  \[
+    B = \{ x \in X : x \notin f(x) \} \subset X.
+  \]
+  Como $f$ es suryectiva, existe $y \in X$ tal que $f(y) = B$.
+  \begin{itemize}
+    \item Si $y \in B = f(y)$, entonces $y \in f(y)$, lo que contradice la definición de $B$.
+    \item Si $y \notin B = f(y)$, entonces $y \notin f(y)$, y por definición $y \in B$.
+  \end{itemize}
+  En ambos casos llegamos a un absurdo, de modo que no existe tal $f$.
+\end{proof}
+
+\begin{definition}[Orden entre cardinales]
+  Se escribe $\card(X) \leq \card(Y)$ si existe una función inyectiva $X \to Y$. Se escribe $\card(X) < \card(Y)$ si $\card(X) \leq \card(Y)$ pero $X \not\sim Y$.
 \end{definition}
+
+\begin{theorem}[Cantor--Schröder--Bernstein]
+  Si existen funciones inyectivas $f\colon X \to Y$ y $g\colon Y \to X$, entonces existe una función biyectiva $h\colon X \to Y$.
+\end{theorem}
+
+\begin{proof}
+  Basta encontrar particiones $X = X_1 \cup X_2$ e $Y = Y_1 \cup Y_2$ tales que $f\colon X_1 \to Y_1$ y $g\colon Y_2 \to X_2$ sean biyectivas: entonces
+  \[
+    h(x) =
+    \begin{cases}
+      f(x)      & \text{si } x \in X_1, \\
+      g^{-1}(x) & \text{si } x \in X_2,
+    \end{cases}
+  \]
+  es biyectiva.
+
+  Definimos $\phi\colon \mathcal{P}(X) \to \mathcal{P}(X)$ por $\phi(A) = X \setminus g\bigl(Y \setminus f(A)\bigr)$.
+
+  \emph{$\phi$ es creciente}, es decir, $A \subset B \Rightarrow \phi(A) \subset \phi(B)$. En efecto,
+  \begin{multline*}
+    A \subset B \Rightarrow f(A) \subset f(B) \Rightarrow Y \setminus f(B) \subset Y \setminus f(A) \\
+    \Rightarrow g\bigl(Y \setminus f(B)\bigr) \subset g\bigl(Y \setminus f(A)\bigr) \Rightarrow \phi(A) \subset \phi(B).
+  \end{multline*}
+
+  Sea $\mathscr{C} = \{ C \subset X : \phi(C) \subset C \}$. Es no vacío pues $X \in \mathscr{C}$. Sea $A = \bigcap_{C \in \mathscr{C}} C$. Para cada $C \in \mathscr{C}$ se tiene $A \subset C$, luego $\phi(A) \subset \phi(C) \subset C$; por lo tanto $\phi(A) \subset A$. Aplicando $\phi$ nuevamente, $\phi(\phi(A)) \subset \phi(A)$, es decir, $\phi(A) \in \mathscr{C}$ y entonces $A \subset \phi(A)$. Concluimos que $A = \phi(A)$.
+
+  Sean $X_1 = A$, $X_2 = X \setminus A$, $Y_1 = f(A)$ e $Y_2 = Y \setminus f(A)$. De $A = \phi(A)$ se obtiene $X \setminus A = g\bigl(Y \setminus f(A)\bigr)$, es decir, $X_2 = g(Y_2)$. Como $f$ y $g$ son inyectivas, $f\colon X_1 \to Y_1$ y $g\colon Y_2 \to X_2$ son biyectivas.
+\end{proof}
 
 \begin{prop}
-	Es una relación de orden
-	\begin{proof}
-		\begin{itemize}
-			\item \(card(X) \leq card(X)\) porque la identidad es inyectiva.
-			\item \(card(X) \leq card(Y)\), \(card(Y) \leq card(Z) \Rightarrow card(X) \leq card(Z)\) pues la composición de funciones es inyectiva.
-			\item \(card(X) = card(Y) \Rightarrow X \sim Y\).
-		\end{itemize}
-	\end{proof}
+  La relación $\leq$ entre cardinales es reflexiva, transitiva y antisimétrica.
 \end{prop}
 
-\begin{theorem}[Cantor, Schröder, Bernstein]
-	Si \(\exists f: X \to Y\) y \(g: Y \to X\) inyectivas \(\Rightarrow \exists h:X \to Y\) biyectiva.
-
-	\begin{proof}
-		Vamos a probar que existen dos particiones distintas de \(X\) e \(Y\). Sea \(X = X_1 \cup X_2\) y \(Y = Y_1 \cup Y_2 : f: X_1 \to Y_1\) y \(g: X_2 \to Y_2\) son biyectivas. Podemos definir a \(h: X \to Y\) como \begin{align*} h(x) = \begin{cases}
-				       f(x)      & \text{si } x \in X_1, \\
-				       g^{-1}(x) & \text{si } x \in X_2.
-			       \end{cases}
-		\end{align*}
-		Que es biyectiva. Definimos \(\phi(x):P(X) \to P(X)\), \(\phi(A) = X-g(Y-f(A))\). Veamos primero que \(\phi \) es creciente i.e \(A \subseteq B \Rightarrow \phi(A) \subseteq \phi(B)\).
-		\begin{proof}
-			\(A \subseteq B \iff f(A) \subseteq f(B) \iff y - f(B) \subseteq y - f(A) \iff g(y-f(B)) \subseteq g(y-f(A)) \iff X - \phi(A) \subseteq X - \phi(B)\)
-		\end{proof}
-
-		Sea \(\mathscr{C} = \{ C \subset X: \phi(C) \subset C \} \neq \varnothing \) pues \(X \in \mathscr{C} \) y \(A = \bigcap_{C \in \mathscr{C}} C \neq\varnothing \), \(A \subset C, \forall C \in \mathscr{C} \) y \(\phi \) es creciente y tenemos que \(\phi(C) \subset C \Rightarrow \phi(A) \subset \phi(C) \subset C \Rightarrow \phi(C) \in A\). Además, usando otra vez que \(\phi \) es creciente, \(\phi(\phi(A)) \subset \phi(A) \Rightarrow \phi(A) \in \mathscr{C} \Rightarrow A \subset \phi(A) \Rightarrow A = \phi(A) \).
-		Sean \(X_1 = A\), \(X-X_1=X_2=g_2(Y_2)\) \\
-		\(Y_1 = f(A)\), \(Y_2 = Y - f(A) \Rightarrow \) \\
-		\(A = \phi(A) = X-g(Y-f(A)) \iff X-A = g(Y-f(A)) \iff X-X_1=g(Y_2) = X_2 \therefore f:X_1 \to Y_1\) y \(g: X_2 \to Y_2\) son biyectivas.
-	\end{proof}
-\end{theorem}
+\begin{proof}
+  Reflexiva: la identidad es inyectiva. Transitiva: la composición de funciones inyectivas es inyectiva. Antisimétrica: si $\card(X) \leq \card(Y)$ y $\card(Y) \leq \card(X)$, por el teorema de Cantor--Schröder--Bernstein $X \sim Y$.
+\end{proof}
 
 \begin{eg}
-	\(\N \sim \Z \sim \Q \).
-	\begin{proof}
-		\(f:\Z \to \Q, f(x) = x\) es inyectiva. \\
-		Sea \(a \in \Z, b \in \N \), \(f: \Q \to \Z, f\left(\dfrac{a}{b}\right)=sign(a) \cdot 2^a \cdot 3^b\) es inyectiva por Teorema Fundamental de la Aritmética. Luego por el teorema anterior \(\Z \sim \Q \).
-	\end{proof}
+  $\N \sim \Z \sim \Q$.
 \end{eg}
+
+\begin{proof}
+  Ya vimos que $\N \sim \Z$. La inclusión $\Z \to \Q$ es inyectiva. Recíprocamente, todo $q \in \Q$ se escribe de manera única como $q = a/b$ con $a \in \Z$, $b \in \N$ coprimos. Definimos $F\colon \Q \to \Z$ por $F(q) = \operatorname{sgn}(a) \cdot 2^{|a|} \cdot 3^{b}$. Por el teorema fundamental de la aritmética, $F$ es inyectiva. Por el teorema de Cantor--Schröder--Bernstein, $\Z \sim \Q$.
+\end{proof}
 
 \begin{eg}
-	\((\N \times \N)\) es numerable.
-	\begin{proof}
-		\(f: \N \to \N\times \N, f(n)=(1, n)\) es inyectiva.
-		\(f: \N\times \N \to \N , f((n, m))= 2^n \cdot 3^m\) es inyectiva por Teorema Fundamental de la Aritmética \(\therefore \) es numerable.
-	\end{proof}
+  $\N \times \N$ es numerable.
 \end{eg}
 
-\begin{theorem}
-	\(\R \)  no es numerable.
-	\begin{proof}
-		Supongamos que es numerable \(\Rightarrow \)
-		\(\exists f: \N \to \R \) biyectiva. A cada número real \(x_n\) le asignamos un intervalo centrado en ese punto de longitud \(2^{-n} \). La unión de todos esos intervalos tiene longitud menor o igual a la suma de las longitudes (se pueden superponer).
-		\begin{align*}
-			\left|\bigcup_{n \in \N} I_{x_n}\right| \leq \sum_{n \geq 1} |I_{x_n}| = \sum_{n \in \N}\dfrac{1}{2^n} = 1
-		\end{align*}
-		Se cubrió un intervalo de longitud \(1\) de toda la recta real, por lo tanto quedan reales afuera y eso es un absurdo \(\therefore \R \) no es numerable.
-	\end{proof}
-\end{theorem}
+\begin{proof}
+  La función $n \mapsto (1, n)$ es inyectiva de $\N$ en $\N \times \N$, y la función $(n, m) \mapsto 2^n 3^m$ es inyectiva de $\N \times \N$ en $\N$ por el teorema fundamental de la aritmética. Por el teorema de Cantor--Schröder--Bernstein, $\N \times \N \sim \N$.
+\end{proof}
 
 \begin{eg}
-	\(A = \{ {(a_n)}_{n \geq 1} : a_n \in \{0, 1\} \} = {\{0, 1\}}^{\N} \). Es decir las sucesiones de ceros y unos no es un conjunto numerable.
-	\begin{proof}
-		Supongamos que si es numerable \(\Rightarrow \) podemos escribir \\ \(A = \{ {(a_n^1)}_{n\geq1}, \ldots, {(a_n^j)}_{n\geq1}, \cdots \} \), todas las sucesiones de ceros y unos están contenidas en \(A\). La sucesión donde \(a_i=1-a_n^n\) (en el i-ésimo lugar tiene lo contrario de lo que la n-ésima sucesión tiene en el lugar n) debería ser una de ellas, pero eso es absurdo \(\therefore \) es no numerable.
-	\end{proof}
+  El conjunto de sucesiones de ceros y unos, $A = {\{0, 1\}}^{\N} = \{ {(a_n)}_{n \geq 1} : a_n \in \{0, 1\} \}$, no es numerable.
 \end{eg}
 
-La idea del último ejemplo (argumento diagonal), se puede adaptar para probar que \( \interval[open left]{0}{1} \) es no numerable.
+\begin{proof}
+  Supongamos que es numerable y escribamos $A = \{ a^1, a^2, \dots, a^j, \dots \}$ con $a^j = {(a^j_n)}_{n \geq 1}$. Consideremos la sucesión $b = {(b_n)}_{n \geq 1}$ dada por $b_n = 1 - a^n_n$, que en el lugar $n$ tiene lo contrario de lo que tiene la $n$-ésima sucesión de la lista. Entonces $b \in A$ pero $b \neq a^n$ para todo $n$ (difieren en el lugar $n$), lo que es absurdo.
+\end{proof}
+
+Este argumento (\emph{diagonal de Cantor}) puede adaptarse para probar que el intervalo $(0, 1)$ no es numerable. A continuación damos otra demostración, basada en el siguiente teorema.
 
 \begin{theorem}[Principio de encaje de intervalos]
-	Sea \(I_1 \supset I_2 \supset I_3 \supset \cdots \) una sucesión de intervalos cerrados y acotados \(I_n = [a_n, b_n] \Rightarrow \)
-	La intersección de todos es no vacía y \(\bigcap_{n=1}^{\infty} I_n = [a,b]\) con \(a = \sup(a_n), b=\inf(b_n)\).
-	\begin{proof}
-		Sea \(n \in \N \), tenemos que \(I_{n+1} \subseteq I_n\) con \(I_n = [a_n\text{, } b_n] \, \forall n \in \N \). Entonces, \begin{align*}
-			a_n \leq a_{n+1} \leq b_{n+1} \leq b_n
-		\end{align*}
-		Sea \(A = \{ a_n : n \in \N \} \) y \(B = \{ b_n : n \in \N \} \). Claramente \begin{align*}
-			a_1 \leq a_n \leq b_n \leq b_1 \, \forall n \in \N
-		\end{align*}
-		Luego \(A\) y \(B\) están acotados y podemos llamar \(\alpha = \sup(A)\), \(\beta = \inf(B)\) con \(\alpha \leq \beta \). Luego, \begin{align*}
-			 & a_1 \leq \cdots \leq a_n \leq \alpha \leq \beta \leq b_n \leq \cdots \leq b_1 \quad \forall n \in \N \\
-			 & \Rightarrow [\alpha\text{, }\beta] \subseteq I_n \quad \forall n \in \N                              \\
-			 & \Rightarrow [\alpha\text{, }\beta] \subseteq \bigcap_{n \geq 1} I_n                                  \\
-			 & \Rightarrow \bigcap_{n \geq 1} I_n \neq \varnothing
-		\end{align*}
-		Notemos que si \(x < \alpha \) entonces \(\exists a_i \in A\) tal que \(x < a_i \Rightarrow x \notin I_i \Rightarrow x \notin \bigcap_{n \geq 1} I_n\).
-		Análogamente si \(x > \beta \therefore \bigcap_{n \geq 1} I_n = [\alpha\text{, }\beta]\).
-	\end{proof}
+  Sea $I_1 \supset I_2 \supset I_3 \supset \cdots$ una sucesión decreciente de intervalos cerrados y acotados, $I_n = [a_n, b_n]$. Entonces
+  \[
+    \bigcap_{n=1}^{\infty} I_n = [\alpha, \beta], \qquad \alpha = \sup_n a_n, \quad \beta = \inf_n b_n,
+  \]
+  y en particular la intersección es no vacía.
 \end{theorem}
+
+\begin{proof}
+  Como $I_{n+1} \subset I_n$, se tiene $a_n \leq a_{n+1} \leq b_{n+1} \leq b_n$. Luego, para todos $m, k \in \N$, tomando $j = \max\{m, k\}$ resulta $a_m \leq a_j \leq b_j \leq b_k$. Entonces el conjunto $A = \{ a_n : n \in \N \}$ está acotado superiormente por cada $b_k$, y $B = \{ b_n : n \in \N \}$ está acotado inferiormente por cada $a_m$. Así existen $\alpha = \sup A$ y $\beta = \inf B$, y $\alpha \leq b_k$ para todo $k$, de donde $\alpha \leq \beta$. Se cumple
+  \[
+    a_n \leq \alpha \leq \beta \leq b_n \quad \text{para todo } n \in \N,
+  \]
+  y por lo tanto $[\alpha, \beta] \subset I_n$ para todo $n$, es decir, $[\alpha, \beta] \subset \bigcap_n I_n$.
+
+  Recíprocamente, si $x < \alpha$, existe $a_i$ con $x < a_i$, de modo que $x \notin I_i$. Análogamente, si $x > \beta$ existe $b_i < x$ y $x \notin I_i$. Luego $\bigcap_n I_n \subset [\alpha, \beta]$.
+\end{proof}
 
 \begin{theorem}
-	\(\R \)  no es numerable.
-	\begin{proof}
-		Supongamos que \(\exists f:\N \to \R : f(n) = x_n\). \\
-		Definimos la sucesión de \(\mathbb{I}_n\) de la siguiente forma: \\
-		Tomamos \([0, 1]\) y divido en \(3\) cerrados iguales, luego, al menos uno no contiene a \(x_1\), lo elijo como \(\mathbb{I}_1\) (si  hay dos que no lo contienen elijo alguno). Inductivamente lo divido en \(3\) intervalos iguales y al menos \(1\) de ellos no contiene a \(x_{n+1} \) y lo elijo como \(\mathbb{I}_{n+1} \). Por el principio anterior la \(\mathbb{I} = \bigcap_{n=1}^\infty \mathbb{I}_n \neq \varnothing \) (tiene un único elemento y la longitud de los intervalos tiende a cero). \\
-		Si \(x \in \mathbb{I} \) no puede ser igual o mayor que \(x_1\) (por construcción se los excluye en algún paso) \(\Rightarrow \R \) es no numerable, pues ese \(x\) queda afuera.
-	\end{proof}
+  $\R$ no es numerable.
 \end{theorem}
 
-\section{Propiedades}
+\begin{proof}
+  Supongamos que existe una enumeración $\N \to \R$, $n \mapsto x_n$. Construimos recursivamente intervalos cerrados $[0, 1] = I_0 \supset I_1 \supset I_2 \supset \cdots$ tales que $I_n$ tiene longitud $3^{-n}$ y $x_n \notin I_n$. Dado $I_{n-1}$, lo dividimos en tres intervalos cerrados de igual longitud; como $x_n$ pertenece a lo sumo a dos de ellos, alguno no lo contiene, y lo llamamos $I_n$.
+
+  Por el principio de encaje, existe $x \in \bigcap_{n \geq 1} I_n \subset [0, 1]$. Pero $x \neq x_n$ para todo $n$ (pues $x \in I_n$ y $x_n \notin I_n$), en contradicción con que la enumeración recorre todo $\R$.
+\end{proof}
+
+\begin{note}
+  Otra idea para ver que $\R$ no es numerable es la siguiente. Si $\R = \{x_n : n \in \N\}$, fijado $0 < \e < 1$ se asigna a cada $x_n$ un intervalo abierto $I_n$ centrado en $x_n$ de longitud $\e\, 2^{-n}$. Estos intervalos cubrirían $[0, 1]$ con longitud total $\sum_n \e\, 2^{-n} = \e < 1$, lo cual es imposible, pues un intervalo cerrado no puede cubrirse con intervalos abiertos de longitud total menor que la suya. Este hecho se probará más adelante.
+\end{note}
+
+\section{Propiedades de los conjuntos numerables}
 
 \begin{theorem}
-	Sea \(X\) numerable, \(Y \subset X \Rightarrow \) \(Y\) es a lo sumo numerable.
-	\begin{proof}
-		Supongamos que \(Y\) no es finito. Como \(X \sim Y\) puedo pensar \(X = {(x_n)}_{n\geq1} \) y defino
-		\begin{align*}
-			n_1= \min \{ n \in \N: x_n \in Y \}
-		\end{align*}
-		E inductivamente elegimos \(n_1, n_2, \ldots , n_k, \ldots \). Definimos \(n_k = \min \{ n \in \N : n > n_k, x_n \in Y \} \Rightarrow \) Tenemos la sucesión estrictamente creciente de naturales y podemos definir \(g: \N \to Y, g(K) = x_{n_k} \text{. } g\) es inyectiva si \(K\neq Y, n_k \neq n_j\) por ser estrictamente creciente y es suryectiva, si \(y \in Y \Rightarrow y = x_j\). Para ningún \(j \Rightarrow \exists k :n_k\leq j \leq n_k+1\). Como \(j \leq n_{k+1}=\{ n>n_k:x_n \in Y \} \) debe ser \(j = n_k\).
-	\end{proof}
+  Si $X$ es numerable e $Y \subset X$, entonces $Y$ es a lo sumo numerable.
 \end{theorem}
+
+\begin{proof}
+  Supongamos que $Y$ es infinito y escribamos $X = \{ x_n : n \in \N \}$ (enumeración). Definimos recursivamente
+  \[
+    n_1 = \min\{ n \in \N : x_n \in Y \}, \qquad n_{k+1} = \min\{ n > n_k : x_n \in Y \},
+  \]
+  que están bien definidos porque $Y$ es infinito. La sucesión $(n_k)$ es estrictamente creciente. Sea $g\colon \N \to Y$ dada por $g(k) = x_{n_k}$.
+
+  $g$ es inyectiva pues $k \neq l \Rightarrow n_k \neq n_l$. Veamos que es suryectiva: sea $y = x_j \in Y$. Como $(n_k)$ es estrictamente creciente, existe un menor $k$ con $n_k \geq j$. Si $k = 1$, entonces $n_1 \geq j$ y, como $x_j \in Y$, $n_1 \leq j$; luego $n_1 = j$. Si $k > 1$, entonces $n_{k-1} < j \leq n_k$ y como $x_j \in Y$, la definición de $n_k$ como mínimo da $n_k \leq j$; luego $n_k = j$. En ambos casos $y = g(k)$.
+\end{proof}
 
 \begin{corollary}
-	\(f: X \to Y\) inyectiva e \(Y\) numerable \(\Rightarrow \) \(X\) es a lo sumo numerable.
-	\begin{proof}
-		\(f\) es inyectiva \(\Rightarrow X \sim f(X)\) y como \(f(X) \subset Y \Rightarrow \) es a lo sumo numerable por el teorema anterior.
-	\end{proof}
+  Si $f\colon X \to Y$ es inyectiva e $Y$ es a lo sumo numerable, entonces $X$ es a lo sumo numerable.
 \end{corollary}
 
-\begin{theorem}
-	\(f: X \to Y\) suryectiva, \(X\) a lo sumo numerable \(\Rightarrow Y\) es a lo sumo numerable.
-	\begin{proof}
-		\(f: X \to Y\) es suryectiva \(\exists g: Y \to X\) inversa a derecha tal que \(f \circ g = id_Y \Rightarrow f\) es inversa a izquierda de \(g \Rightarrow g\) es inyectiva \(\therefore \) por el corolario anterior \(Y\) es a lo sumo numerable.
-	\end{proof}
-\end{theorem}
+\begin{proof}
+  Como $f$ es inyectiva, $X \sim f(X)$, y $f(X) \subset Y$ es a lo sumo numerable por el teorema anterior.
+\end{proof}
 
 \begin{theorem}
-	Para cada \(m \in \N \). Sea \(x_n\) un conjunto numerable \(\Rightarrow \bigcup_{n \in \N}x_n = X\) es numerable.
-	\begin{proof}
-		\(x_n\) es numerable \(\Rightarrow \exists f:\N \to x_n\) biyectiva. Sea \(f:\N \times \N \to \bigcup_{n \in \N} x_n\) definida como \(f(n, n) = f_n(n)\). Veamos que es suryectiva, dado \(x \in X\), \(\exists n \in \N:x \in x_n \Rightarrow \exists m:x=f_n(m)\) luego \(X=f_n(m) = f(n, m)\). Como \(\N \times \N \) es numerable y \(f: \N \times \N \to \bigcup_{n \geq 1}{x_n} \) es suryectiva \(\Rightarrow \bigcup_{n \geq 1}x_n\) es a lo sumo numerable \(\therefore \) como es infinito, es numerable.
-	\end{proof}
+  Si $f\colon X \to Y$ es suryectiva y $X$ es a lo sumo numerable, entonces $Y$ es a lo sumo numerable.
 \end{theorem}
+
+\begin{proof}
+  Como $f$ es suryectiva, existe $g\colon Y \to X$ con $f \circ g = \id_Y$ (inversa a derecha). Entonces $g$ es inyectiva y, por el corolario, $Y$ es a lo sumo numerable.
+\end{proof}
+
+\begin{theorem}
+  Si $(X_n)_{n \in \N}$ es una familia de conjuntos numerables, entonces $X = \bigcup_{n \in \N} X_n$ es numerable.
+\end{theorem}
+
+\begin{proof}
+  Para cada $n$ elegimos una biyección $f_n\colon \N \to X_n$. Definimos $F\colon \N \times \N \to X$ por $F(n, m) = f_n(m)$. $F$ es suryectiva: si $x \in X$, existe $n$ con $x \in X_n$ y existe $m$ con $x = f_n(m) = F(n, m)$. Como $\N \times \N$ es numerable, $X$ es a lo sumo numerable por el teorema anterior; y como contiene al conjunto infinito $X_1$, es numerable.
+\end{proof}
 
 \begin{eg}
-	\(\Q(x) \sim \N \).
-	\begin{proof}
-		\(\Q_k[x] = \{ p \in \Q(x) : gr(p) \leq k \} \) tenemos \(f_n : \Q^{n+1} \to \Q_n[x]\), \(f(a_0, \ldots, a_{n+1}) = a_0 + \cdots + a_n \cdot x^n\), cada \(f_n\) es biyectiva \(\Rightarrow \Q^{n+1} \) es numerable y como la unión numerable de conjuntos numerables es numerable \(\therefore \Q(x)\) es numerable.
-	\end{proof}
+  El conjunto $\Q[x]$ de polinomios con coeficientes racionales es numerable.
 \end{eg}
 
-\begin{definition}
-	Un número se dice algebraico si es raíz de algún polinomio con coeficientes enteros, por ejemplo \(\sqrt{2} \) es raíz de \(x² = 2\).
+\begin{proof}
+  Para cada $n$, sea $\Q_n[x] = \{ p \in \Q[x] : \operatorname{gr}(p) \leq n \}$. La función $\Q^{n+1} \to \Q_n[x]$, $(a_0, \dots, a_n) \mapsto a_0 + a_1 x + \cdots + a_n x^n$, es biyectiva. Como $\Q^{n+1}$ es numerable (producto finito de numerables) y $\Q[x] = \bigcup_{n \geq 0} \Q_n[x]$ es unión numerable de conjuntos numerables, $\Q[x]$ es numerable.
+\end{proof}
+
+\begin{definition}[Números algebraicos y trascendentes]
+  Un número real es \emph{algebraico} si es raíz de algún polinomio no nulo con coeficientes enteros; por ejemplo, $\sqrt{2}$ es raíz de $x^2 - 2$. Un número real que no es algebraico se llama \emph{trascendente}.
 \end{definition}
 
-\begin{definition}
-	Si un número real no es algebraico se lo llama trascendente. Queda como ejercicio demostrar que el conjunto de números algebraicos es numerable.
-\end{definition}
+\begin{ejercicio}
+  Probar que el conjunto de números algebraicos es numerable. Concluir que existen números trascendentes (de hecho, el conjunto de números trascendentes no es numerable).
+\end{ejercicio}
