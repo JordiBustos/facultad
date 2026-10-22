@@ -1,58 +1,58 @@
 \section{Límite superior e inferior}
 
 \begin{theorem}
-  Sea ${(x_n)}_{n \in \N}$ una sucesión acotada. Entonces $\liminf x_n$ es el menor punto de acumulación de la sucesión y $\limsup x_n$ es el mayor.
+  Sea \({(x_n)}_{n \in \N}\) una sucesión acotada. Entonces \(\liminf x_n\) es el menor punto de acumulación de la sucesión y \(\limsup x_n\) es el mayor.
 \end{theorem}
 
 \begin{proof}
-  Sea $a = \liminf_{n \to \infty} x_n = \lim_{n \to \infty} a_n$, con $a_n = \inf X_n$.
+  Sea \(a = \liminf_{n \to \infty} x_n = \lim_{n \to \infty} a_n\), con \(a_n = \inf X_n\).
 
-  \emph{$a$ es punto de acumulación.} Sean $\e > 0$ y $n_0 \in \N$. Como $a_n \to a$, existe $n_1 > n_0$ con $a - \e < a_{n_1} \leq a$. Como $a_{n_1} = \inf X_{n_1}$, el número $a + \e > a_{n_1}$ no es cota inferior de $X_{n_1}$, luego existe $n \geq n_1$ con $x_n < a + \e$; además $x_n \geq a_{n_1} > a - \e$. Entonces $x_n \in (a - \e, a + \e)$ con $n > n_0$. Como $n_0$ es arbitrario, hay infinitos índices con $x_n \in (a - \e, a + \e)$, y por el teorema de la sección anterior, $a$ es punto de acumulación.
+  \emph{\(a\) es punto de acumulación.} Sean \(\e > 0\) y \(n_0 \in \N\). Como \(a_n \to a\), existe \(n_1 > n_0\) con \(a - \e < a_{n_1} \leq a\). Como \(a_{n_1} = \inf X_{n_1}\), el número \(a + \e > a_{n_1}\) no es cota inferior de \(X_{n_1}\), luego existe \(n \geq n_1\) con \(x_n < a + \e\); además \(x_n \geq a_{n_1} > a - \e\). Entonces \(x_n \in (a - \e, a + \e)\) con \(n > n_0\). Como \(n_0\) es arbitrario, hay infinitos índices con \(x_n \in (a - \e, a + \e)\), y por el teorema de la sección anterior, \(a\) es punto de acumulación.
 
-  \emph{Ningún $c < a$ es punto de acumulación.} Como $a_n \to a$ y $c < a$, existe $n_0$ con $c < a_{n_0} \leq a$. Sea $\e = a_{n_0} - c > 0$. Para $n \geq n_0$ se cumple $x_n \geq a_{n_0} = c + \e$, de modo que $x_n \notin (c - \e, c + \e)$ salvo quizás para $n < n_0$ (finitos índices). Luego $c$ no es punto de acumulación.
+  \emph{Ningún \(c < a\) es punto de acumulación.} Como \(a_n \to a\) y \(c < a\), existe \(n_0\) con \(c < a_{n_0} \leq a\). Sea \(\e = a_{n_0} - c > 0\). Para \(n \geq n_0\) se cumple \(x_n \geq a_{n_0} = c + \e\), de modo que \(x_n \notin (c - \e, c + \e)\) salvo quizás para \(n < n_0\) (finitos índices). Luego \(c\) no es punto de acumulación.
 
-  La afirmación sobre $\limsup$ se prueba de manera análoga.
+  La afirmación sobre \(\limsup\) se prueba de manera análoga.
 \end{proof}
 
 \begin{theorem}[Bolzano--Weierstrass]
-  Toda sucesión acotada de $\R$ tiene una subsucesión convergente.
+  Toda sucesión acotada de \(\R\) tiene una subsucesión convergente.
 \end{theorem}
 
 \begin{proof}
-  $\limsup x_n$ es punto de acumulación de ${(x_n)}$, es decir, el límite de alguna subsucesión.
+  \(\limsup x_n\) es punto de acumulación de \({(x_n)}\), es decir, el límite de alguna subsucesión.
 \end{proof}
 
 \begin{corollary}
-  Una sucesión acotada de $\R$ es convergente si y sólo si $\limsup x_n = \liminf x_n$, es decir, si posee un único punto de acumulación.
+  Una sucesión acotada de \(\R\) es convergente si y sólo si \(\limsup x_n = \liminf x_n\), es decir, si posee un único punto de acumulación.
 \end{corollary}
 
 \begin{proof}
-  ($\Rightarrow$) Si ${(x_n)}$ converge a $L$, toda subsucesión converge a $L$. Como $\liminf x_n$ y $\limsup x_n$ son límites de subsucesiones, ambos son iguales a $L$.
+  (\(\Rightarrow\)) Si \({(x_n)}\) converge a \(L\), toda subsucesión converge a \(L\). Como \(\liminf x_n\) y \(\limsup x_n\) son límites de subsucesiones, ambos son iguales a \(L\).
 
-  ($\Leftarrow$) Sea $a = \liminf x_n = \limsup x_n = \lim a_n = \lim b_n$. Dado $\e > 0$, existe $n_0$ tal que $a - \e < a_n$ y $b_n < a + \e$ para $n \geq n_0$. Como $x_n \in X_n$, se tiene $a_n \leq x_n \leq b_n$, y entonces $a - \e < x_n < a + \e$ para todo $n \geq n_0$. Es decir, $x_n \to a$.
+  (\(\Leftarrow\)) Sea \(a = \liminf x_n = \limsup x_n = \lim a_n = \lim b_n\). Dado \(\e > 0\), existe \(n_0\) tal que \(a - \e < a_n\) y \(b_n < a + \e\) para \(n \geq n_0\). Como \(x_n \in X_n\), se tiene \(a_n \leq x_n \leq b_n\), y entonces \(a - \e < x_n < a + \e\) para todo \(n \geq n_0\). Es decir, \(x_n \to a\).
 \end{proof}
 
 \section{Sucesiones de Cauchy}
 
-Una sucesión ${(x_n)}_{n \in \N} \subset \R$ es \emph{de Cauchy} si para todo $\e > 0$ existe $n_0 \in \N$ tal que $|x_n - x_m| < \e$ para todos $n, m > n_0$, tal como se hizo en $\Q$. Valen, con las mismas demostraciones que en $\Q$:
+Una sucesión \({(x_n)}_{n \in \N} \subset \R\) es \emph{de Cauchy} si para todo \(\e > 0\) existe \(n_0 \in \N\) tal que \(|x_n - x_m| < \e\) para todos \(n, m > n_0\), tal como se hizo en \(\Q\). Valen, con las mismas demostraciones que en \(\Q\):
 \begin{enumerate}[label=(\arabic*)]
   \item Toda sucesión convergente es de Cauchy.
   \item Toda sucesión de Cauchy es acotada.
 \end{enumerate}
 
 \begin{lemma}
-  Si una sucesión de Cauchy tiene una subsucesión que converge a $a \in \R$, entonces $\lim_{n \to \infty} x_n = a$.
+  Si una sucesión de Cauchy tiene una subsucesión que converge a \(a \in \R\), entonces \(\lim_{n \to \infty} x_n = a\).
 \end{lemma}
 
 \begin{proof}
-  Dado $\e > 0$, existe $n_0$ tal que $|x_n - x_m| < \frac{\e}{2}$ para $n, m > n_0$. Como $a$ es el límite de una subsucesión, existe un índice $n_1 > n_0$ de la subsucesión con $|x_{n_1} - a| < \frac{\e}{2}$. Entonces, para $n > n_0$,
+  Dado \(\e > 0\), existe \(n_0\) tal que \(|x_n - x_m| < \frac{\e}{2}\) para \(n, m > n_0\). Como \(a\) es el límite de una subsucesión, existe un índice \(n_1 > n_0\) de la subsucesión con \(|x_{n_1} - a| < \frac{\e}{2}\). Entonces, para \(n > n_0\),
   \[
     |x_n - a| \leq |x_n - x_{n_1}| + |x_{n_1} - a| < \frac{\e}{2} + \frac{\e}{2} = \e. \qedhere
   \]
 \end{proof}
 
 \begin{theorem}
-  Toda sucesión de Cauchy en $\R$ es convergente.
+  Toda sucesión de Cauchy en \(\R\) es convergente.
 \end{theorem}
 
 \begin{proof}
@@ -62,118 +62,118 @@ Una sucesión ${(x_n)}_{n \in \N} \subset \R$ es \emph{de Cauchy} si para todo $
 \section{Límites infinitos}
 
 \begin{definition}
-  Decimos que $\lim_{n \to \infty} x_n = +\infty$ si para todo $A > 0$ existe $n_0 \in \N$ tal que $x_n > A$ para todo $n > n_0$. Decimos que $\lim_{n \to \infty} x_n = -\infty$ si para todo $A > 0$ existe $n_0 \in \N$ tal que $x_n < -A$ para todo $n > n_0$.
+  Decimos que \(\lim_{n \to \infty} x_n = +\infty\) si para todo \(A > 0\) existe \(n_0 \in \N\) tal que \(x_n > A\) para todo \(n > n_0\). Decimos que \(\lim_{n \to \infty} x_n = -\infty\) si para todo \(A > 0\) existe \(n_0 \in \N\) tal que \(x_n < -A\) para todo \(n > n_0\).
 \end{definition}
 
 \begin{prop}
-  Si $\lim_{n \to \infty} x_n = +\infty$ e ${(y_n)}$ es acotada inferiormente, entonces $\lim_{n \to \infty} (x_n + y_n) = +\infty$.
+  Si \(\lim_{n \to \infty} x_n = +\infty\) e \({(y_n)}\) es acotada inferiormente, entonces \(\lim_{n \to \infty} (x_n + y_n) = +\infty\).
 \end{prop}
 
 \begin{proof}
-  Sea $c \in \R$ con $c < y_n$ para todo $n$. Dado $A > 0$, existe $n_0$ tal que $x_n > A - c$ para $n > n_0$. Entonces $x_n + y_n > (A - c) + c = A$ para $n > n_0$.
+  Sea \(c \in \R\) con \(c < y_n\) para todo \(n\). Dado \(A > 0\), existe \(n_0\) tal que \(x_n > A - c\) para \(n > n_0\). Entonces \(x_n + y_n > (A - c) + c = A\) para \(n > n_0\).
 \end{proof}
 
 \begin{prop}
-  Si $\lim_{n \to \infty} x_n = +\infty$ y existe $c > 0$ tal que $y_n > c$ para todo $n$, entonces $\lim_{n \to \infty} x_n y_n = +\infty$.
+  Si \(\lim_{n \to \infty} x_n = +\infty\) y existe \(c > 0\) tal que \(y_n > c\) para todo \(n\), entonces \(\lim_{n \to \infty} x_n y_n = +\infty\).
 \end{prop}
 
 \begin{proof}
-  Dado $A > 0$, existe $n_0$ tal que $x_n > \frac{A}{c}$ para $n > n_0$. Entonces $x_n y_n > \frac{A}{c} \cdot c = A$ para $n > n_0$.
+  Dado \(A > 0\), existe \(n_0\) tal que \(x_n > \frac{A}{c}\) para \(n > n_0\). Entonces \(x_n y_n > \frac{A}{c} \cdot c = A\) para \(n > n_0\).
 \end{proof}
 
 \begin{prop}
-  Si $x_n > 0$ para todo $n$, entonces $\lim_{n \to \infty} x_n = 0$ si y sólo si $\lim_{n \to \infty} \frac{1}{x_n} = +\infty$.
+  Si \(x_n > 0\) para todo \(n\), entonces \(\lim_{n \to \infty} x_n = 0\) si y sólo si \(\lim_{n \to \infty} \frac{1}{x_n} = +\infty\).
 \end{prop}
 
 \begin{proof}
-  ($\Rightarrow$) Dado $A > 0$, existe $n_0$ tal que $0 < x_n < \frac{1}{A}$ para $n > n_0$, es decir, $\frac{1}{x_n} > A$.
+  (\(\Rightarrow\)) Dado \(A > 0\), existe \(n_0\) tal que \(0 < x_n < \frac{1}{A}\) para \(n > n_0\), es decir, \(\frac{1}{x_n} > A\).
 
-  ($\Leftarrow$) Dado $\e > 0$, existe $n_0$ tal que $\frac{1}{x_n} > \frac{1}{\e}$ para $n > n_0$, es decir, $0 < x_n < \e$.
+  (\(\Leftarrow\)) Dado \(\e > 0\), existe \(n_0\) tal que \(\frac{1}{x_n} > \frac{1}{\e}\) para \(n > n_0\), es decir, \(0 < x_n < \e\).
 \end{proof}
 
 \begin{prop}
-  Sean ${(x_n)}$ e ${(y_n)}$ sucesiones de términos positivos.
+  Sean \({(x_n)}\) e \({(y_n)}\) sucesiones de términos positivos.
   \begin{enumerate}[label=(\arabic*)]
-    \item Si existe $c > 0$ con $x_n > c$ para todo $n$ y $\lim_{n \to \infty} y_n = 0$, entonces $\lim_{n \to \infty} \frac{x_n}{y_n} = +\infty$.
-    \item Si ${(x_n)}$ es acotada y $\lim_{n \to \infty} y_n = +\infty$, entonces $\lim_{n \to \infty} \frac{x_n}{y_n} = 0$.
+    \item Si existe \(c > 0\) con \(x_n > c\) para todo \(n\) y \(\lim_{n \to \infty} y_n = 0\), entonces \(\lim_{n \to \infty} \frac{x_n}{y_n} = +\infty\).
+    \item Si \({(x_n)}\) es acotada y \(\lim_{n \to \infty} y_n = +\infty\), entonces \(\lim_{n \to \infty} \frac{x_n}{y_n} = 0\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) Dado $A > 0$, existe $n_0$ tal que $0 < y_n < \frac{c}{A}$ para $n > n_0$, de modo que $\frac{x_n}{y_n} > c \cdot \frac{A}{c} = A$.
+  (1) Dado \(A > 0\), existe \(n_0\) tal que \(0 < y_n < \frac{c}{A}\) para \(n > n_0\), de modo que \(\frac{x_n}{y_n} > c \cdot \frac{A}{c} = A\).
 
-  (2) Sea $k > 0$ una cota superior de ${(x_n)}$. Dado $\e > 0$, existe $n_0$ tal que $y_n > \frac{k}{\e}$ para $n > n_0$, de modo que $0 < \frac{x_n}{y_n} < k \cdot \frac{\e}{k} = \e$.
+  (2) Sea \(k > 0\) una cota superior de \({(x_n)}\). Dado \(\e > 0\), existe \(n_0\) tal que \(y_n > \frac{k}{\e}\) para \(n > n_0\), de modo que \(0 < \frac{x_n}{y_n} < k \cdot \frac{\e}{k} = \e\).
 \end{proof}
 
 \section{Series numéricas}
 
-Dada una sucesión ${(a_n)}_{n \in \N} \subset \R$ formamos la sucesión ${(S_n)}_{n \in \N}$ de \emph{sumas parciales} dada por $S_n = a_1 + \cdots + a_n$. La \emph{serie} $\sum_{n \geq 1} a_n$ \emph{converge} si ${(S_n)}$ converge, y su suma es $\lim_{n \to \infty} S_n$.
+Dada una sucesión \({(a_n)}_{n \in \N} \subset \R\) formamos la sucesión \({(S_n)}_{n \in \N}\) de \emph{sumas parciales} dada por \(S_n = a_1 + \cdots + a_n\). La \emph{serie} \(\sum_{n \geq 1} a_n\) \emph{converge} si \({(S_n)}\) converge, y su suma es \(\lim_{n \to \infty} S_n\).
 
 \begin{theorem}
-  Si $\sum_{n \geq 1} a_n$ converge, entonces $\lim_{n \to \infty} a_n = 0$.
+  Si \(\sum_{n \geq 1} a_n\) converge, entonces \(\lim_{n \to \infty} a_n = 0\).
 \end{theorem}
 
 \begin{proof}
-  Sea $s = \lim_{n \to \infty} S_n$. Como $S_{n-1} \to s$ también,
+  Sea \(s = \lim_{n \to \infty} S_n\). Como \(S_{n-1} \to s\) también,
   \[
     a_n = S_n - S_{n-1} \longrightarrow s - s = 0. \qedhere
   \]
 \end{proof}
 
 \begin{eg}
-  El recíproco del teorema anterior es falso: $\sum_{n \geq 1} \frac{1}{n}$ diverge.
+  El recíproco del teorema anterior es falso: \(\sum_{n \geq 1} \frac{1}{n}\) diverge.
 \end{eg}
 
 \begin{proof}
-  Agrupando los términos en bloques de $2^{k-1}$ sumandos, cada uno de los cuales es al menos $2^{k-1} \cdot \frac{1}{2^k} = \frac{1}{2}$,
+  Agrupando los términos en bloques de \(2^{k-1}\) sumandos, cada uno de los cuales es al menos \(2^{k-1} \cdot \frac{1}{2^k} = \frac{1}{2}\),
   \begin{align*}
     S_{2^n} & = 1 + \frac{1}{2} + \left( \frac{1}{3} + \frac{1}{4} \right) + \cdots + \left( \frac{1}{2^{n-1} + 1} + \cdots + \frac{1}{2^n} \right) \\
             & \geq 1 + \frac{1}{2} + \frac{2}{4} + \cdots + \frac{2^{n-1}}{2^n} = 1 + \frac{n}{2}.
   \end{align*}
-  Luego $S_{2^n} \to +\infty$ y la serie diverge.
+  Luego \(S_{2^n} \to +\infty\) y la serie diverge.
 \end{proof}
 
 \begin{theorem}
-  Si $a_n \geq 0$ para todo $n$, entonces $\sum_{n \geq 1} a_n$ converge si y sólo si la sucesión ${(S_n)}$ es acotada.
+  Si \(a_n \geq 0\) para todo \(n\), entonces \(\sum_{n \geq 1} a_n\) converge si y sólo si la sucesión \({(S_n)}\) es acotada.
 \end{theorem}
 
 \begin{proof}
-  Por ser $a_n \geq 0$, ${(S_n)}$ es creciente, y por lo tanto converge si y sólo si es acotada.
+  Por ser \(a_n \geq 0\), \({(S_n)}\) es creciente, y por lo tanto converge si y sólo si es acotada.
 \end{proof}
 
 \begin{theorem}[Criterio de Cauchy]
-  $\sum a_n$ converge si y sólo si para todo $\e > 0$ existe $n_0 \in \N$ tal que
+  \(\sum a_n\) converge si y sólo si para todo \(\e > 0\) existe \(n_0 \in \N\) tal que
   \[
     |a_{n+1} + \cdots + a_{n+p}| < \e \quad \text{para todo } n > n_0 \text{ y todo } p \in \N.
   \]
 \end{theorem}
 
 \begin{proof}
-  Como $|S_{n+p} - S_n| = |a_{n+1} + \cdots + a_{n+p}|$, la condición dice exactamente que ${(S_n)}$ es de Cauchy, lo cual equivale a que sea convergente.
+  Como \(|S_{n+p} - S_n| = |a_{n+1} + \cdots + a_{n+p}|\), la condición dice exactamente que \({(S_n)}\) es de Cauchy, lo cual equivale a que sea convergente.
 \end{proof}
 
 \begin{theorem}[Criterio de comparación]
-  Sean $a_n, b_n \geq 0$ para todo $n$ y supongamos que existen $c > 0$ y $n_0 \in \N$ con $a_n \leq c\, b_n$ para todo $n > n_0$.
+  Sean \(a_n, b_n \geq 0\) para todo \(n\) y supongamos que existen \(c > 0\) y \(n_0 \in \N\) con \(a_n \leq c\, b_n\) para todo \(n > n_0\).
   \begin{enumerate}[label=(\alph*)]
-    \item Si $\sum b_n$ converge, entonces $\sum a_n$ converge.
-    \item Si $\sum a_n$ diverge, entonces $\sum b_n$ diverge.
+    \item Si \(\sum b_n\) converge, entonces \(\sum a_n\) converge.
+    \item Si \(\sum a_n\) diverge, entonces \(\sum b_n\) diverge.
   \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-  Notemos que la convergencia de una serie sólo depende de su cola: $\sum a_n$ converge si y sólo si $\sum_{n > n_1} a_n$ converge para algún (todo) $n_1$.
+  Notemos que la convergencia de una serie sólo depende de su cola: \(\sum a_n\) converge si y sólo si \(\sum_{n > n_1} a_n\) converge para algún (todo) \(n_1\).
 
-  (a) Si $\sum b_n$ converge, sus sumas parciales $T_n$ están acotadas, digamos por $K$. Para $n > n_0$ las sumas parciales de $\sum a_n$ cumplen
+  (a) Si \(\sum b_n\) converge, sus sumas parciales \(T_n\) están acotadas, digamos por \(K\). Para \(n > n_0\) las sumas parciales de \(\sum a_n\) cumplen
   \[
     S_n = S_{n_0} + \sum_{m = n_0 + 1}^{n} a_m \leq S_{n_0} + c \sum_{m = n_0 + 1}^{n} b_m \leq S_{n_0} + c K.
   \]
-  Luego ${(S_n)}$ es acotada y $\sum a_n$ converge.
+  Luego \({(S_n)}\) es acotada y \(\sum a_n\) converge.
 
   (b) Es la contrarrecíproca de (a).
 \end{proof}
 
 \begin{definition}
-  La serie $\sum a_n$ es \emph{absolutamente convergente} si $\sum |a_n|$ converge. Si $\sum a_n$ converge pero $\sum |a_n|$ diverge, se dice que es \emph{condicionalmente convergente}.
+  La serie \(\sum a_n\) es \emph{absolutamente convergente} si \(\sum |a_n|\) converge. Si \(\sum a_n\) converge pero \(\sum |a_n|\) diverge, se dice que es \emph{condicionalmente convergente}.
 \end{definition}
 
 \begin{theorem}
@@ -181,29 +181,29 @@ Dada una sucesión ${(a_n)}_{n \in \N} \subset \R$ formamos la sucesión ${(S_n)
 \end{theorem}
 
 \begin{proof}
-  Dado $\e > 0$, como $\sum |a_n|$ converge, por el criterio de Cauchy existe $n_0$ tal que $|a_{n+1}| + \cdots + |a_{n+p}| < \e$ para $n > n_0$ y $p \in \N$. Entonces
+  Dado \(\e > 0\), como \(\sum |a_n|\) converge, por el criterio de Cauchy existe \(n_0\) tal que \(|a_{n+1}| + \cdots + |a_{n+p}| < \e\) para \(n > n_0\) y \(p \in \N\). Entonces
   \[
     |a_{n+1} + \cdots + a_{n+p}| \leq |a_{n+1}| + \cdots + |a_{n+p}| < \e
   \]
-  para $n > n_0$ y $p \in \N$, y por el criterio de Cauchy, $\sum a_n$ converge.
+  para \(n > n_0\) y \(p \in \N\), y por el criterio de Cauchy, \(\sum a_n\) converge.
 \end{proof}
 
 \begin{theorem}[Criterio de condensación de Cauchy]
-  Sea ${(a_n)}$ una sucesión con $a_1 \geq a_2 \geq \cdots \geq 0$. Entonces $\sum_{n \geq 1} a_n$ converge si y sólo si $\sum_{k \geq 0} 2^k a_{2^k}$ converge.
+  Sea \({(a_n)}\) una sucesión con \(a_1 \geq a_2 \geq \cdots \geq 0\). Entonces \(\sum_{n \geq 1} a_n\) converge si y sólo si \(\sum_{k \geq 0} 2^k a_{2^k}\) converge.
 \end{theorem}
 
 \begin{proof}
-  Sean $s_n = a_1 + \cdots + a_n$ y $t_k = a_1 + 2 a_2 + \cdots + 2^k a_{2^k}$.
+  Sean \(s_n = a_1 + \cdots + a_n\) y \(t_k = a_1 + 2 a_2 + \cdots + 2^k a_{2^k}\).
 
-  Si $n < 2^k$, agrupando en bloques y usando que la sucesión es decreciente,
+  Si \(n < 2^k\), agrupando en bloques y usando que la sucesión es decreciente,
   \begin{align*}
     s_n & \leq a_1 + (a_2 + a_3) + \cdots + (a_{2^{k-1}} + \cdots + a_{2^k - 1}) \\
         & \leq a_1 + 2 a_2 + \cdots + 2^{k-1} a_{2^{k-1}} \leq t_k.
   \end{align*}
-  Por otro lado, si $n \geq 2^k$,
+  Por otro lado, si \(n \geq 2^k\),
   \begin{align*}
     s_n & \geq a_1 + a_2 + (a_3 + a_4) + \cdots + (a_{2^{k-1} + 1} + \cdots + a_{2^k}) \\
         & \geq a_1 + a_2 + 2 a_4 + \cdots + 2^{k-1} a_{2^k} \geq \frac{1}{2} t_k.
   \end{align*}
-  Luego las sucesiones ${(s_n)}$ y ${(t_k)}$ (crecientes) son ambas acotadas o ambas no acotadas, y el resultado se sigue del teorema sobre series de términos no negativos.
+  Luego las sucesiones \({(s_n)}\) y \({(t_k)}\) (crecientes) son ambas acotadas o ambas no acotadas, y el resultado se sigue del teorema sobre series de términos no negativos.
 \end{proof}

@@ -1,22 +1,22 @@
 \section{Integral de Riemann}
 
-Sea $f\colon [a, b] \to \R$ una función acotada, con $a < b$, y sean $m = \inf f([a, b])$ y $M = \sup f([a, b])$. Una \emph{partición} de $[a, b]$ es un subconjunto finito $P \subset [a, b]$ con $a, b \in P$. Escribimos $P = \{ t_0, \dots, t_n \}$ con $a = t_0 < t_1 < \cdots < t_n = b$. Para $i \in \{1, \dots, n\}$ sean $m_i$ y $M_i$ el ínfimo y el supremo de $f$ en $[t_{i-1}, t_i]$. Las \emph{sumas inferior y superior} de $f$ respecto de $P$ son
+Sea \(f\colon [a, b] \to \R\) una función acotada, con \(a < b\), y sean \(m = \inf f([a, b])\) y \(M = \sup f([a, b])\). Una \emph{partición} de \([a, b]\) es un subconjunto finito \(P \subset [a, b]\) con \(a, b \in P\). Escribimos \(P = \{ t_0, \dots, t_n \}\) con \(a = t_0 < t_1 < \cdots < t_n = b\). Para \(i \in \{1, \dots, n\}\) sean \(m_i\) y \(M_i\) el ínfimo y el supremo de \(f\) en \([t_{i-1}, t_i]\). Las \emph{sumas inferior y superior} de \(f\) respecto de \(P\) son
 \begin{align*}
   s(f, P) & = \sum_{i=1}^{n} m_i (t_i - t_{i-1}), \\
   S(f, P) & = \sum_{i=1}^{n} M_i (t_i - t_{i-1}).
 \end{align*}
-Vale que $m(b - a) \leq s(f, P) \leq S(f, P) \leq M(b - a)$.
+Vale que \(m(b - a) \leq s(f, P) \leq S(f, P) \leq M(b - a)\).
 
 \begin{definition}[Refinamiento]
-  Si $P$ y $G$ son particiones de un mismo intervalo y $P \subset G$, decimos que $G$ es \emph{más fina} que $P$ (o que refina a $P$).
+  Si \(P\) y \(G\) son particiones de un mismo intervalo y \(P \subset G\), decimos que \(G\) es \emph{más fina} que \(P\) (o que refina a \(P\)).
 \end{definition}
 
 \begin{lemma}
-  Sea $f\colon [a, b] \to \R$ acotada y sean $P \subset G$ particiones de $[a, b]$. Entonces $s(f, P) \leq s(f, G)$ y $S(f, G) \leq S(f, P)$.
+  Sea \(f\colon [a, b] \to \R\) acotada y sean \(P \subset G\) particiones de \([a, b]\). Entonces \(s(f, P) \leq s(f, G)\) y \(S(f, G) \leq S(f, P)\).
 \end{lemma}
 
 \begin{proof}
-  Alcanza con probarlo cuando $G$ tiene un único punto más que $P$, pues el caso general se obtiene agregando los puntos de a uno. Sea $P = \{ t_0, \dots, t_n \}$ y $G = P \cup \{ r \}$ con $t_{i-1} < r < t_i$. Sean $m_i = \inf_{[t_{i-1}, t_i]} f$, $m' = \inf_{[t_{i-1}, r]} f$ y $m'' = \inf_{[r, t_i]} f$. Como $[t_{i-1}, r]$ y $[r, t_i]$ están contenidos en $[t_{i-1}, t_i]$, se tiene $m_i \leq m'$ y $m_i \leq m''$. Entonces
+  Alcanza con probarlo cuando \(G\) tiene un único punto más que \(P\), pues el caso general se obtiene agregando los puntos de a uno. Sea \(P = \{ t_0, \dots, t_n \}\) y \(G = P \cup \{ r \}\) con \(t_{i-1} < r < t_i\). Sean \(m_i = \inf_{[t_{i-1}, t_i]} f\), \(m' = \inf_{[t_{i-1}, r]} f\) y \(m'' = \inf_{[r, t_i]} f\). Como \([t_{i-1}, r]\) y \([r, t_i]\) están contenidos en \([t_{i-1}, t_i]\), se tiene \(m_i \leq m'\) y \(m_i \leq m''\). Entonces
   \begin{align*}
     s(f, G) - s(f, P) & = m'(r - t_{i-1}) + m''(t_i - r) - m_i (t_i - t_{i-1})       \\
                       & = (m' - m_i)(r - t_{i-1}) + (m'' - m_i)(t_i - r) \geq 0.
@@ -25,43 +25,43 @@ Vale que $m(b - a) \leq s(f, P) \leq S(f, P) \leq M(b - a)$.
 \end{proof}
 
 \begin{corollary}
-  Sea $f\colon [a, b] \to \R$ acotada. Si $P$ y $G$ son particiones de $[a, b]$, entonces $s(f, P) \leq S(f, G)$.
+  Sea \(f\colon [a, b] \to \R\) acotada. Si \(P\) y \(G\) son particiones de \([a, b]\), entonces \(s(f, P) \leq S(f, G)\).
 \end{corollary}
 
 \begin{proof}
-  Como $P \cup G$ refina a $P$ y a $G$,
+  Como \(P \cup G\) refina a \(P\) y a \(G\),
   \[
     s(f, P) \leq s(f, P \cup G) \leq S(f, P \cup G) \leq S(f, G). \qedhere
   \]
 \end{proof}
 
 \begin{definition}[Integral inferior]
-  Si $f\colon [a, b] \to \R$ es acotada, su \emph{integral inferior} es
+  Si \(f\colon [a, b] \to \R\) es acotada, su \emph{integral inferior} es
   \[
     \lowint_a^b f(x) \,\dd x = \sup_P s(f, P),
   \]
-  donde el supremo se toma sobre todas las particiones $P$ de $[a, b]$. Es decir, $s(f, P) \leq \lowint_a^b f(x) \,\dd x$ para toda partición $P$, y dado $\e > 0$ existe $P$ con $\lowint_a^b f(x) \,\dd x \leq s(f, P) + \e$.
+  donde el supremo se toma sobre todas las particiones \(P\) de \([a, b]\). Es decir, \(s(f, P) \leq \lowint_a^b f(x) \,\dd x\) para toda partición \(P\), y dado \(\e > 0\) existe \(P\) con \(\lowint_a^b f(x) \,\dd x \leq s(f, P) + \e\).
 \end{definition}
 
 \begin{definition}[Integral superior]
-  Análogamente, la \emph{integral superior} de $f$ es
+  Análogamente, la \emph{integral superior} de \(f\) es
   \[
     \upint_a^b f(x) \,\dd x = \inf_P S(f, P).
   \]
 \end{definition}
 
-Por el corolario anterior, $\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd x$.
+Por el corolario anterior, \(\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd x\).
 
 \begin{lemma}
-  Sea $a < c < b$. Si consideramos sólo las particiones de $[a, b]$ que contienen a $c$, los valores de las integrales superior e inferior no cambian.
+  Sea \(a < c < b\). Si consideramos sólo las particiones de \([a, b]\) que contienen a \(c\), los valores de las integrales superior e inferior no cambian.
 \end{lemma}
 
 \begin{proof}
-  El supremo sobre todas las particiones es mayor o igual que el supremo sobre las que contienen a $c$. Recíprocamente, dada una partición $P$ cualquiera, $P' = P \cup \{c\}$ la refina y contiene a $c$, y $s(f, P) \leq s(f, P')$. Luego el supremo sobre las particiones que contienen a $c$ es mayor o igual que $s(f, P)$ para toda $P$, y entonces ambos supremos coinciden. Para la integral superior se razona igual con ínfimos.
+  El supremo sobre todas las particiones es mayor o igual que el supremo sobre las que contienen a \(c\). Recíprocamente, dada una partición \(P\) cualquiera, \(P' = P \cup \{c\}\) la refina y contiene a \(c\), y \(s(f, P) \leq s(f, P')\). Luego el supremo sobre las particiones que contienen a \(c\) es mayor o igual que \(s(f, P)\) para toda \(P\), y entonces ambos supremos coinciden. Para la integral superior se razona igual con ínfimos.
 \end{proof}
 
 \begin{theorem}
-  Sean $a < c < b$ y $f\colon [a, b] \to \R$ acotada. Entonces
+  Sean \(a < c < b\) y \(f\colon [a, b] \to \R\) acotada. Entonces
   \begin{align*}
     \lowint_a^b f(x) \,\dd x & = \lowint_a^c f(x) \,\dd x + \lowint_c^b f(x) \,\dd x, \\
     \upint_a^b f(x) \,\dd x  & = \upint_a^c f(x) \,\dd x + \upint_c^b f(x) \,\dd x.
@@ -69,7 +69,7 @@ Por el corolario anterior, $\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd 
 \end{theorem}
 
 \begin{proof}
-  Sean $A$ y $B$ los conjuntos de sumas inferiores de $f|_{[a, c]}$ y $f|_{[c, b]}$, respectivamente. Las particiones de $[a, b]$ que contienen a $c$ son exactamente las uniones $P_1 \cup P_2$ de una partición $P_1$ de $[a, c]$ y una partición $P_2$ de $[c, b]$, y $s(f, P_1 \cup P_2) = s(f|_{[a, c]}, P_1) + s(f|_{[c, b]}, P_2)$. Por lo tanto $A + B = \{ x + y : x \in A, \ y \in B \}$ es el conjunto de las sumas inferiores de $f$ respecto de particiones de $[a, b]$ que contienen a $c$. Por el lema anterior,
+  Sean \(A\) y \(B\) los conjuntos de sumas inferiores de \(f|_{[a, c]}\) y \(f|_{[c, b]}\), respectivamente. Las particiones de \([a, b]\) que contienen a \(c\) son exactamente las uniones \(P_1 \cup P_2\) de una partición \(P_1\) de \([a, c]\) y una partición \(P_2\) de \([c, b]\), y \(s(f, P_1 \cup P_2) = s(f|_{[a, c]}, P_1) + s(f|_{[c, b]}, P_2)\). Por lo tanto \(A + B = \{ x + y : x \in A, \ y \in B \}\) es el conjunto de las sumas inferiores de \(f\) respecto de particiones de \([a, b]\) que contienen a \(c\). Por el lema anterior,
   \[
     \lowint_a^b f(x) \,\dd x = \sup(A + B) = \sup A + \sup B = \lowint_a^c f(x) \,\dd x + \lowint_c^b f(x) \,\dd x.
   \]
@@ -77,107 +77,107 @@ Por el corolario anterior, $\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd 
 \end{proof}
 
 \begin{prop}
-  Sean $f, g\colon [a, b] \to \R$ acotadas. Entonces
+  Sean \(f, g\colon [a, b] \to \R\) acotadas. Entonces
   \[
     \lowint_a^b f \,\dd x + \lowint_a^b g \,\dd x \leq \lowint_a^b (f + g) \,\dd x \leq \upint_a^b (f + g) \,\dd x \leq \upint_a^b f \,\dd x + \upint_a^b g \,\dd x.
   \]
 \end{prop}
 
 \begin{proof}
-  Sea $P$ una partición. En cada $[t_{i-1}, t_i]$ valen $m_i(f + g) \geq m_i(f) + m_i(g)$ y $M_i(f + g) \leq M_i(f) + M_i(g)$, de donde
+  Sea \(P\) una partición. En cada \([t_{i-1}, t_i]\) valen \(m_i(f + g) \geq m_i(f) + m_i(g)\) y \(M_i(f + g) \leq M_i(f) + M_i(g)\), de donde
   \[
     s(f, P) + s(g, P) \leq s(f + g, P), \qquad S(f + g, P) \leq S(f, P) + S(g, P).
   \]
-  Dadas dos particiones $P$ y $G$, usando el refinamiento $P \cup G$,
+  Dadas dos particiones \(P\) y \(G\), usando el refinamiento \(P \cup G\),
   \[
     s(f, P) + s(g, G) \leq s(f, P \cup G) + s(g, P \cup G) \leq s(f + g, P \cup G) \leq \lowint_a^b (f + g) \,\dd x.
   \]
-  Tomando supremo sobre $P$ y sobre $G$ se obtiene la primera desigualdad. La tercera se prueba de la misma forma con sumas superiores e ínfimos, y la del medio ya fue observada.
+  Tomando supremo sobre \(P\) y sobre \(G\) se obtiene la primera desigualdad. La tercera se prueba de la misma forma con sumas superiores e ínfimos, y la del medio ya fue observada.
 \end{proof}
 
 \begin{prop}
-  Sea $f\colon [a, b] \to \R$ acotada y $c \in \R$.
+  Sea \(f\colon [a, b] \to \R\) acotada y \(c \in \R\).
   \begin{itemize}
-    \item Si $c \geq 0$, $\lowint_a^b c f \,\dd x = c \lowint_a^b f \,\dd x$ y $\upint_a^b c f \,\dd x = c \upint_a^b f \,\dd x$.
-    \item Si $c < 0$, $\lowint_a^b c f \,\dd x = c \upint_a^b f \,\dd x$ y $\upint_a^b c f \,\dd x = c \lowint_a^b f \,\dd x$.
+    \item Si \(c \geq 0\), \(\lowint_a^b c f \,\dd x = c \lowint_a^b f \,\dd x\) y \(\upint_a^b c f \,\dd x = c \upint_a^b f \,\dd x\).
+    \item Si \(c < 0\), \(\lowint_a^b c f \,\dd x = c \upint_a^b f \,\dd x\) y \(\upint_a^b c f \,\dd x = c \lowint_a^b f \,\dd x\).
   \end{itemize}
 \end{prop}
 
 \begin{proof}
-  Si $c \geq 0$, $m_i(cf) = c\, m_i(f)$ y $M_i(cf) = c\, M_i(f)$, y si $c < 0$, $m_i(cf) = c\, M_i(f)$ y $M_i(cf) = c\, m_i(f)$, por las propiedades del supremo y del ínfimo. Luego $s(cf, P) = c\, s(f, P)$ y $S(cf, P) = c\, S(f, P)$ si $c \geq 0$, y $s(cf, P) = c\, S(f, P)$ y $S(cf, P) = c\, s(f, P)$ si $c < 0$. Tomando supremo e ínfimo sobre las particiones (que invierte el orden cuando $c < 0$) se obtiene el resultado.
+  Si \(c \geq 0\), \(m_i(cf) = c\, m_i(f)\) y \(M_i(cf) = c\, M_i(f)\), y si \(c < 0\), \(m_i(cf) = c\, M_i(f)\) y \(M_i(cf) = c\, m_i(f)\), por las propiedades del supremo y del ínfimo. Luego \(s(cf, P) = c\, s(f, P)\) y \(S(cf, P) = c\, S(f, P)\) si \(c \geq 0\), y \(s(cf, P) = c\, S(f, P)\) y \(S(cf, P) = c\, s(f, P)\) si \(c < 0\). Tomando supremo e ínfimo sobre las particiones (que invierte el orden cuando \(c < 0\)) se obtiene el resultado.
 \end{proof}
 
 \begin{prop}
-  Sean $f, g\colon [a, b] \to \R$ acotadas con $f(x) \leq g(x)$ para todo $x \in [a, b]$. Entonces
+  Sean \(f, g\colon [a, b] \to \R\) acotadas con \(f(x) \leq g(x)\) para todo \(x \in [a, b]\). Entonces
   \[
     \lowint_a^b f \,\dd x \leq \lowint_a^b g \,\dd x \qquad \text{y} \qquad \upint_a^b f \,\dd x \leq \upint_a^b g \,\dd x.
   \]
 \end{prop}
 
 \begin{proof}
-  Si $f \leq g$, entonces $m_i(f) \leq m_i(g)$ y $M_i(f) \leq M_i(g)$ para toda partición, y por lo tanto $s(f, P) \leq s(g, P)$ y $S(f, P) \leq S(g, P)$. Tomando supremo e ínfimo se obtienen las desigualdades para las integrales.
+  Si \(f \leq g\), entonces \(m_i(f) \leq m_i(g)\) y \(M_i(f) \leq M_i(g)\) para toda partición, y por lo tanto \(s(f, P) \leq s(g, P)\) y \(S(f, P) \leq S(g, P)\). Tomando supremo e ínfimo se obtienen las desigualdades para las integrales.
 \end{proof}
 
 \begin{definition}[Función integrable]
-  Una función acotada $f\colon [a, b] \to \R$ es \emph{integrable} si $\lowint_a^b f(x) \,\dd x = \upint_a^b f(x) \,\dd x$. En ese caso, el valor común se denota $\int_a^b f(x) \,\dd x$.
+  Una función acotada \(f\colon [a, b] \to \R\) es \emph{integrable} si \(\lowint_a^b f(x) \,\dd x = \upint_a^b f(x) \,\dd x\). En ese caso, el valor común se denota \(\int_a^b f(x) \,\dd x\).
 \end{definition}
 
 \begin{eg}
-  La función $f\colon [a, b] \to \R$ dada por $f(x) = 1$ si $x \in \Q$ y $f(x) = 0$ si $x \notin \Q$ no es integrable.
+  La función \(f\colon [a, b] \to \R\) dada por \(f(x) = 1\) si \(x \in \Q\) y \(f(x) = 0\) si \(x \notin \Q\) no es integrable.
 
-  En efecto, como cada intervalo $[t_{i-1}, t_i]$ contiene racionales e irracionales, $m_i = 0$ y $M_i = 1$. Luego $s(f, P) = 0$ y $S(f, P) = b - a$ para toda partición $P$, y entonces $\lowint_a^b f \,\dd x = 0 \neq b - a = \upint_a^b f \,\dd x$.
+  En efecto, como cada intervalo \([t_{i-1}, t_i]\) contiene racionales e irracionales, \(m_i = 0\) y \(M_i = 1\). Luego \(s(f, P) = 0\) y \(S(f, P) = b - a\) para toda partición \(P\), y entonces \(\lowint_a^b f \,\dd x = 0 \neq b - a = \upint_a^b f \,\dd x\).
 \end{eg}
 
 \begin{note}
-  Sea $f\colon [a, b] \to \R$ acotada, y sean $\Sigma_{-}$ y $\Sigma_{+}$ los conjuntos de sumas inferiores y superiores de $f$. Que $f$ sea integrable significa que $\sup \Sigma_{-} = \inf \Sigma_{+}$. Esto ocurre si y sólo si para todo $\e > 0$ existen $s \in \Sigma_{-}$ y $S \in \Sigma_{+}$ con $S - s < \e$.
+  Sea \(f\colon [a, b] \to \R\) acotada, y sean \(\Sigma_{-}\) y \(\Sigma_{+}\) los conjuntos de sumas inferiores y superiores de \(f\). Que \(f\) sea integrable significa que \(\sup \Sigma_{-} = \inf \Sigma_{+}\). Esto ocurre si y sólo si para todo \(\e > 0\) existen \(s \in \Sigma_{-}\) y \(S \in \Sigma_{+}\) con \(S - s < \e\).
 \end{note}
 
 \begin{proof}
-  ($\Rightarrow$) Si $I$ es el valor común, existen $s \in \Sigma_{-}$ y $S \in \Sigma_{+}$ con $s > I - \frac{\e}{2}$ y $S < I + \frac{\e}{2}$, de modo que $S - s < \e$.
+  (\(\Rightarrow\)) Si \(I\) es el valor común, existen \(s \in \Sigma_{-}\) y \(S \in \Sigma_{+}\) con \(s > I - \frac{\e}{2}\) y \(S < I + \frac{\e}{2}\), de modo que \(S - s < \e\).
 
-  ($\Leftarrow$) Siempre $s \leq \sup \Sigma_{-} \leq \inf \Sigma_{+} \leq S$, de modo que $0 \leq \inf \Sigma_{+} - \sup \Sigma_{-} \leq S - s < \e$ para todo $\e > 0$, y entonces $\sup \Sigma_{-} = \inf \Sigma_{+}$.
+  (\(\Leftarrow\)) Siempre \(s \leq \sup \Sigma_{-} \leq \inf \Sigma_{+} \leq S\), de modo que \(0 \leq \inf \Sigma_{+} - \sup \Sigma_{-} \leq S - s < \e\) para todo \(\e > 0\), y entonces \(\sup \Sigma_{-} = \inf \Sigma_{+}\).
 \end{proof}
 
 \begin{definition}[Oscilación]
-  Dada una función acotada $f\colon [a, b] \to \R$ y un conjunto no vacío $X \subset [a, b]$, la \emph{oscilación} de $f$ en $X$ es $\omega(f, X) = \sup f(X) - \inf f(X)$.
+  Dada una función acotada \(f\colon [a, b] \to \R\) y un conjunto no vacío \(X \subset [a, b]\), la \emph{oscilación} de \(f\) en \(X\) es \(\omega(f, X) = \sup f(X) - \inf f(X)\).
 \end{definition}
 
 \begin{note}
-  $\omega(f, X) = \sup \{ |f(x) - f(y)| : x, y \in X \}$.
+  \(\omega(f, X) = \sup \{ |f(x) - f(y)| : x, y \in X \}\).
 \end{note}
 
 \begin{proof}
-  Para $x, y \in X$ vale $f(x) - f(y) \leq \sup f(X) - \inf f(X)$, y lo mismo intercambiando $x$ e $y$; luego $|f(x) - f(y)| \leq \omega(f, X)$. Recíprocamente, dado $\e > 0$ existen $x, y \in X$ con $f(x) > \sup f(X) - \frac{\e}{2}$ y $f(y) < \inf f(X) + \frac{\e}{2}$, y entonces $|f(x) - f(y)| > \omega(f, X) - \e$.
+  Para \(x, y \in X\) vale \(f(x) - f(y) \leq \sup f(X) - \inf f(X)\), y lo mismo intercambiando \(x\) e \(y\); luego \(|f(x) - f(y)| \leq \omega(f, X)\). Recíprocamente, dado \(\e > 0\) existen \(x, y \in X\) con \(f(x) > \sup f(X) - \frac{\e}{2}\) y \(f(y) < \inf f(X) + \frac{\e}{2}\), y entonces \(|f(x) - f(y)| > \omega(f, X) - \e\).
 \end{proof}
 
 \begin{theorem}
-  Sea $f\colon [a, b] \to \R$ acotada. Son equivalentes:
+  Sea \(f\colon [a, b] \to \R\) acotada. Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f$ es integrable.
-    \item Para todo $\e > 0$ existen particiones $P$ y $G$ de $[a, b]$ tales que $S(f, G) - s(f, P) < \e$.
-    \item Para todo $\e > 0$ existe una partición $P$ de $[a, b]$ tal que $S(f, P) - s(f, P) < \e$.
-    \item Para todo $\e > 0$ existe una partición $P = \{ t_0, \dots, t_n \}$ de $[a, b]$ tal que $\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) < \e$, donde $\omega_i = \omega(f, [t_{i-1}, t_i])$.
+    \item \(f\) es integrable.
+    \item Para todo \(\e > 0\) existen particiones \(P\) y \(G\) de \([a, b]\) tales que \(S(f, G) - s(f, P) < \e\).
+    \item Para todo \(\e > 0\) existe una partición \(P\) de \([a, b]\) tal que \(S(f, P) - s(f, P) < \e\).
+    \item Para todo \(\e > 0\) existe una partición \(P = \{ t_0, \dots, t_n \}\) de \([a, b]\) tal que \(\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) < \e\), donde \(\omega_i = \omega(f, [t_{i-1}, t_i])\).
   \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-  (1) $\Leftrightarrow$ (2) Es la nota anterior, pues $s(f, P)$ recorre las sumas inferiores y $S(f, G)$ las superiores.
+  (1) \(\Leftrightarrow\) (2) Es la nota anterior, pues \(s(f, P)\) recorre las sumas inferiores y \(S(f, G)\) las superiores.
 
-  (3) $\Leftrightarrow$ (4) Vale porque $\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) = S(f, P) - s(f, P)$.
+  (3) \(\Leftrightarrow\) (4) Vale porque \(\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) = S(f, P) - s(f, P)\).
 
-  (3) $\Rightarrow$ (2) Es trivial, tomando $G = P$.
+  (3) \(\Rightarrow\) (2) Es trivial, tomando \(G = P\).
 
-  (2) $\Rightarrow$ (3) Sean $P$ y $G$ con $S(f, G) - s(f, P) < \e$ y sea $P_0 = P \cup G$. Entonces
+  (2) \(\Rightarrow\) (3) Sean \(P\) y \(G\) con \(S(f, G) - s(f, P) < \e\) y sea \(P_0 = P \cup G\). Entonces
   \[
     s(f, P) \leq s(f, P_0) \leq S(f, P_0) \leq S(f, G),
   \]
-  de donde $S(f, P_0) - s(f, P_0) \leq S(f, G) - s(f, P) < \e$.
+  de donde \(S(f, P_0) - s(f, P_0) \leq S(f, G) - s(f, P) < \e\).
 \end{proof}
 
 \section{Continuidad e integración}
 
 \begin{theorem}
-  Sea $f\colon [a, b] \to \R$ acotada y $a < c < b$. Entonces $f$ es integrable en $[a, b]$ si y sólo si $f|_{[a, c]}$ y $f|_{[c, b]}$ son integrables, y en ese caso
+  Sea \(f\colon [a, b] \to \R\) acotada y \(a < c < b\). Entonces \(f\) es integrable en \([a, b]\) si y sólo si \(f|_{[a, c]}\) y \(f|_{[c, b]}\) son integrables, y en ese caso
   \[
     \int_a^b f(x) \,\dd x = \int_a^c f(x) \,\dd x + \int_c^b f(x) \,\dd x.
   \]
@@ -192,13 +192,13 @@ Por el corolario anterior, $\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd 
 \end{proof}
 
 \begin{theorem}
-  Sean $f, g\colon [a, b] \to \R$ integrables y $c \in \R$.
+  Sean \(f, g\colon [a, b] \to \R\) integrables y \(c \in \R\).
   \begin{enumerate}[label=(\arabic*)]
-    \item $c f$ es integrable y $\int_a^b c f(x) \,\dd x = c \int_a^b f(x) \,\dd x$.
-    \item $f + g$ es integrable y $\int_a^b \bigl( f(x) + g(x) \bigr) \dd x = \int_a^b f(x) \,\dd x + \int_a^b g(x) \,\dd x$.
-    \item Si $f(x) \leq g(x)$ para todo $x \in [a, b]$, entonces $\int_a^b f(x) \,\dd x \leq \int_a^b g(x) \,\dd x$.
-    \item $|f|$ es integrable y $\left| \int_a^b f(x) \,\dd x \right| \leq \int_a^b |f(x)| \,\dd x$.
-    \item $f g$ es integrable.
+    \item \(c f\) es integrable y \(\int_a^b c f(x) \,\dd x = c \int_a^b f(x) \,\dd x\).
+    \item \(f + g\) es integrable y \(\int_a^b \bigl( f(x) + g(x) \bigr) \dd x = \int_a^b f(x) \,\dd x + \int_a^b g(x) \,\dd x\).
+    \item Si \(f(x) \leq g(x)\) para todo \(x \in [a, b]\), entonces \(\int_a^b f(x) \,\dd x \leq \int_a^b g(x) \,\dd x\).
+    \item \(|f|\) es integrable y \(\left| \int_a^b f(x) \,\dd x \right| \leq \int_a^b |f(x)| \,\dd x\).
+    \item \(f g\) es integrable.
   \end{enumerate}
 \end{theorem}
 
@@ -209,65 +209,65 @@ Por el corolario anterior, $\lowint_a^b f(x) \,\dd x \leq \upint_a^b f(x) \,\dd 
   \]
   de modo que todas las desigualdades son igualdades. Para (1) se usa la proposición del producto por una constante, y para (3) la monotonía.
 
-  (4) Para cualesquiera $x, y$ se tiene $\bigl| |f(x)| - |f(y)| \bigr| \leq |f(x) - f(y)|$. Por la nota sobre oscilaciones, $\omega(|f|, X) \leq \omega(f, X)$ para todo $X \subset [a, b]$ no vacío. En particular, para toda partición $P$, $S(|f|, P) - s(|f|, P) \leq S(f, P) - s(f, P)$, y por el teorema de caracterización $|f|$ es integrable. Como $-|f| \leq f \leq |f|$, por (1) y (3),
+  (4) Para cualesquiera \(x, y\) se tiene \(\bigl| |f(x)| - |f(y)| \bigr| \leq |f(x) - f(y)|\). Por la nota sobre oscilaciones, \(\omega(|f|, X) \leq \omega(f, X)\) para todo \(X \subset [a, b]\) no vacío. En particular, para toda partición \(P\), \(S(|f|, P) - s(|f|, P) \leq S(f, P) - s(f, P)\), y por el teorema de caracterización \(|f|\) es integrable. Como \(-|f| \leq f \leq |f|\), por (1) y (3),
   \[
     -\int_a^b |f(x)| \,\dd x \leq \int_a^b f(x) \,\dd x \leq \int_a^b |f(x)| \,\dd x,
   \]
-  es decir, $\left| \int_a^b f \,\dd x \right| \leq \int_a^b |f| \,\dd x$.
+  es decir, \(\left| \int_a^b f \,\dd x \right| \leq \int_a^b |f| \,\dd x\).
 
-  (5) Sea $k > 0$ con $|f(x)| \leq k$ y $|g(x)| \leq k$ para todo $x \in [a, b]$. Si $x, y \in [t_{i-1}, t_i]$,
+  (5) Sea \(k > 0\) con \(|f(x)| \leq k\) y \(|g(x)| \leq k\) para todo \(x \in [a, b]\). Si \(x, y \in [t_{i-1}, t_i]\),
   \begin{align*}
     |f(x) g(x) - f(y) g(y)| & = |f(x) \bigl( g(x) - g(y) \bigr) + g(y) \bigl( f(x) - f(y) \bigr)|          \\
                             & \leq k\, \omega_i(g) + k\, \omega_i(f).
   \end{align*}
-  Luego $\omega_i(fg) \leq k \bigl( \omega_i(f) + \omega_i(g) \bigr)$. Dado $\e > 0$, existen particiones $P_1$ y $P_2$ con $S(f, P_1) - s(f, P_1) < \frac{\e}{2k}$ y $S(g, P_2) - s(g, P_2) < \frac{\e}{2k}$. Para $P = P_1 \cup P_2$, que refina a ambas, las mismas desigualdades valen, y entonces
+  Luego \(\omega_i(fg) \leq k \bigl( \omega_i(f) + \omega_i(g) \bigr)\). Dado \(\e > 0\), existen particiones \(P_1\) y \(P_2\) con \(S(f, P_1) - s(f, P_1) < \frac{\e}{2k}\) y \(S(g, P_2) - s(g, P_2) < \frac{\e}{2k}\). Para \(P = P_1 \cup P_2\), que refina a ambas, las mismas desigualdades valen, y entonces
   \[
     S(fg, P) - s(fg, P) \leq k \bigl( S(f, P) - s(f, P) \bigr) + k \bigl( S(g, P) - s(g, P) \bigr) < \e. \qedhere
   \]
 \end{proof}
 
 \begin{theorem}
-  Toda función continua $f\colon [a, b] \to \R$ es integrable.
+  Toda función continua \(f\colon [a, b] \to \R\) es integrable.
 \end{theorem}
 
 \begin{proof}
-  Como $[a, b]$ es compacto, $f$ es acotada y uniformemente continua. Dado $\e > 0$ existe $\delta > 0$ tal que $|x - y| < \delta \Rightarrow |f(x) - f(y)| < \frac{\e}{2(b - a)}$. Sea $n \in \N$ con $\frac{b - a}{n} < \delta$ y sea $P$ la partición $t_i = a + i \frac{b - a}{n}$, con $i \in \{0, \dots, n\}$. Si $x, y \in [t_{i-1}, t_i]$, entonces $|x - y| < \delta$ y $|f(x) - f(y)| < \frac{\e}{2(b - a)}$, de donde $\omega_i \leq \frac{\e}{2(b - a)}$. Luego
+  Como \([a, b]\) es compacto, \(f\) es acotada y uniformemente continua. Dado \(\e > 0\) existe \(\delta > 0\) tal que \(|x - y| < \delta \Rightarrow |f(x) - f(y)| < \frac{\e}{2(b - a)}\). Sea \(n \in \N\) con \(\frac{b - a}{n} < \delta\) y sea \(P\) la partición \(t_i = a + i \frac{b - a}{n}\), con \(i \in \{0, \dots, n\}\). Si \(x, y \in [t_{i-1}, t_i]\), entonces \(|x - y| < \delta\) y \(|f(x) - f(y)| < \frac{\e}{2(b - a)}\), de donde \(\omega_i \leq \frac{\e}{2(b - a)}\). Luego
   \[
     \sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) \leq \frac{\e}{2(b - a)} \sum_{i=1}^{n} (t_i - t_{i-1}) = \frac{\e}{2} < \e,
   \]
-  y $f$ es integrable.
+  y \(f\) es integrable.
 \end{proof}
 
 \begin{theorem}
-  Sea $f\colon [a, b] \to \R$ acotada. Si $f|_{[a, c]}$ es integrable para todo $c \in (a, b)$, entonces $f$ es integrable. Análogamente, si $f|_{[c, b]}$ es integrable para todo $c \in (a, b)$, entonces $f$ es integrable.
+  Sea \(f\colon [a, b] \to \R\) acotada. Si \(f|_{[a, c]}\) es integrable para todo \(c \in (a, b)\), entonces \(f\) es integrable. Análogamente, si \(f|_{[c, b]}\) es integrable para todo \(c \in (a, b)\), entonces \(f\) es integrable.
 \end{theorem}
 
 \begin{proof}
-  Probamos la primera afirmación; la segunda es simétrica. Sea $k > 0$ con $|f(x)| \leq k$ para todo $x \in [a, b]$, y sea $\e > 0$. Elegimos $c \in (a, b)$ con $k (b - c) < \frac{\e}{4}$. Como $f|_{[a, c]}$ es integrable, existe una partición $\{ t_0, \dots, t_n \}$ de $[a, c]$ tal que $\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) < \frac{\e}{2}$. Agregando $t_{n+1} = b$ se obtiene una partición de $[a, b]$ y $\omega_{n+1} \leq 2k$, de modo que $\omega_{n+1} (t_{n+1} - t_n) \leq 2k (b - c) < \frac{\e}{2}$. Luego $\sum_{i=1}^{n+1} \omega_i (t_i - t_{i-1}) < \e$.
+  Probamos la primera afirmación; la segunda es simétrica. Sea \(k > 0\) con \(|f(x)| \leq k\) para todo \(x \in [a, b]\), y sea \(\e > 0\). Elegimos \(c \in (a, b)\) con \(k (b - c) < \frac{\e}{4}\). Como \(f|_{[a, c]}\) es integrable, existe una partición \(\{ t_0, \dots, t_n \}\) de \([a, c]\) tal que \(\sum_{i=1}^{n} \omega_i (t_i - t_{i-1}) < \frac{\e}{2}\). Agregando \(t_{n+1} = b\) se obtiene una partición de \([a, b]\) y \(\omega_{n+1} \leq 2k\), de modo que \(\omega_{n+1} (t_{n+1} - t_n) \leq 2k (b - c) < \frac{\e}{2}\). Luego \(\sum_{i=1}^{n+1} \omega_i (t_i - t_{i-1}) < \e\).
 \end{proof}
 
 \begin{corollary}
-  Sea $f\colon [a, b] \to \R$ acotada. Si $f|_{[c, d]}$ es integrable para todos $c, d$ con $a < c < d < b$, entonces $f$ es integrable.
+  Sea \(f\colon [a, b] \to \R\) acotada. Si \(f|_{[c, d]}\) es integrable para todos \(c, d\) con \(a < c < d < b\), entonces \(f\) es integrable.
 \end{corollary}
 
 \begin{proof}
-  Sea $m \in (a, b)$. Para cada $c \in (a, m)$, $f|_{[c, m]}$ es integrable, de modo que $f|_{[a, m]}$ es integrable por la segunda parte del teorema anterior. Análogamente, $f|_{[m, d]}$ es integrable para todo $d \in (m, b)$, y por la primera parte $f|_{[m, b]}$ es integrable. Por aditividad, $f$ es integrable en $[a, b]$.
+  Sea \(m \in (a, b)\). Para cada \(c \in (a, m)\), \(f|_{[c, m]}\) es integrable, de modo que \(f|_{[a, m]}\) es integrable por la segunda parte del teorema anterior. Análogamente, \(f|_{[m, d]}\) es integrable para todo \(d \in (m, b)\), y por la primera parte \(f|_{[m, b]}\) es integrable. Por aditividad, \(f\) es integrable en \([a, b]\).
 \end{proof}
 
 \begin{corollary}
-  Toda función acotada $f\colon [a, b] \to \R$ con finitas discontinuidades es integrable.
+  Toda función acotada \(f\colon [a, b] \to \R\) con finitas discontinuidades es integrable.
 \end{corollary}
 
 \begin{proof}
-  Sean $a = s_0 < s_1 < \cdots < s_r = b$ tales que todos los puntos de discontinuidad de $f$ pertenecen a $\{ s_0, \dots, s_r \}$. En cada $[s_{j-1}, s_j]$, la restricción $f|_{[c, d]}$ es continua, y por lo tanto integrable, para $s_{j-1} < c < d < s_j$. Por el corolario anterior $f|_{[s_{j-1}, s_j]}$ es integrable, y aplicando $r - 1$ veces la aditividad, $f$ es integrable en $[a, b]$.
+  Sean \(a = s_0 < s_1 < \cdots < s_r = b\) tales que todos los puntos de discontinuidad de \(f\) pertenecen a \(\{ s_0, \dots, s_r \}\). En cada \([s_{j-1}, s_j]\), la restricción \(f|_{[c, d]}\) es continua, y por lo tanto integrable, para \(s_{j-1} < c < d < s_j\). Por el corolario anterior \(f|_{[s_{j-1}, s_j]}\) es integrable, y aplicando \(r - 1\) veces la aditividad, \(f\) es integrable en \([a, b]\).
 \end{proof}
 
 \begin{eg}
-  Sea $f\colon [a, b] \to \R$ dada por $f(x) = 0$ si $x$ es irracional o $x = 0$, y $f(x) = \frac{1}{q}$ si $x = \frac{p}{q}$ con $p \in \Z$, $q \in \N$ y $\mathrm{mcd}(p, q) = 1$. Entonces $f$ es discontinua en todos los racionales no nulos de $[a, b]$ (un conjunto infinito), pero es integrable y $\int_a^b f(x) \,\dd x = 0$.
+  Sea \(f\colon [a, b] \to \R\) dada por \(f(x) = 0\) si \(x\) es irracional o \(x = 0\), y \(f(x) = \frac{1}{q}\) si \(x = \frac{p}{q}\) con \(p \in \Z\), \(q \in \N\) y \(\mathrm{mcd}(p, q) = 1\). Entonces \(f\) es discontinua en todos los racionales no nulos de \([a, b]\) (un conjunto infinito), pero es integrable y \(\int_a^b f(x) \,\dd x = 0\).
 
-  Dado $\e > 0$, sea $\eta = \frac{\e}{b - a}$ y $F = \{ x \in [a, b] : f(x) \geq \eta \}$. El conjunto $F$ es finito: si $x = \frac{p}{q} \in F$ entonces $q \leq \frac{1}{\eta}$, y para cada $q$ hay finitos $p$ con $\frac{p}{q} \in [a, b]$. Sea $N = |F|$ y tomemos la partición uniforme de $[a, b]$ en $n$ intervalos con $\frac{2N (b - a)}{n} < \e$. Cada punto de $F$ pertenece a lo sumo a dos intervalos, de modo que los intervalos que intersecan a $F$ tienen longitud total menor que $\e$, y en ellos $M_i \leq 1$. En los demás intervalos todos los valores de $f$ son menores que $\eta$, luego $M_i \leq \eta$. Entonces
+  Dado \(\e > 0\), sea \(\eta = \frac{\e}{b - a}\) y \(F = \{ x \in [a, b] : f(x) \geq \eta \}\). El conjunto \(F\) es finito: si \(x = \frac{p}{q} \in F\) entonces \(q \leq \frac{1}{\eta}\), y para cada \(q\) hay finitos \(p\) con \(\frac{p}{q} \in [a, b]\). Sea \(N = |F|\) y tomemos la partición uniforme de \([a, b]\) en \(n\) intervalos con \(\frac{2N (b - a)}{n} < \e\). Cada punto de \(F\) pertenece a lo sumo a dos intervalos, de modo que los intervalos que intersecan a \(F\) tienen longitud total menor que \(\e\), y en ellos \(M_i \leq 1\). En los demás intervalos todos los valores de \(f\) son menores que \(\eta\), luego \(M_i \leq \eta\). Entonces
   \[
     S(f, P) = \sum M_i (t_i - t_{i-1}) < \e + \eta (b - a) = 2\e.
   \]
-  Por lo tanto $\upint_a^b f \,\dd x = 0$. Como $f \geq 0$, $0 \leq \lowint_a^b f \,\dd x \leq \upint_a^b f \,\dd x = 0$, y entonces $f$ es integrable con integral $0$.
+  Por lo tanto \(\upint_a^b f \,\dd x = 0\). Como \(f \geq 0\), \(0 \leq \lowint_a^b f \,\dd x \leq \upint_a^b f \,\dd x = 0\), y entonces \(f\) es integrable con integral \(0\).
 \end{eg}

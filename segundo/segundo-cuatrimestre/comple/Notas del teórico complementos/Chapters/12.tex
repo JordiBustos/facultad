@@ -1,151 +1,151 @@
 \section{Límites en varias dimensiones}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A'$, $f\colon A \to \R^k$, $f = (f_1, \dots, f_k)$ e $y = (y_1, \dots, y_k) \in \R^k$. Son equivalentes:
+  Sean \(A \subset \R^n\), \(x_0 \in A'\), \(f\colon A \to \R^k\), \(f = (f_1, \dots, f_k)\) e \(y = (y_1, \dots, y_k) \in \R^k\). Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $\lim_{x \to x_0} f(x) = y$.
-    \item Para todo $i \in \{1, \dots, k\}$, $\lim_{x \to x_0} f_i(x) = y_i$.
+    \item \(\lim_{x \to x_0} f(x) = y\).
+    \item Para todo \(i \in \{1, \dots, k\}\), \(\lim_{x \to x_0} f_i(x) = y_i\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) $\Rightarrow$ (2) Dado $\e > 0$ existe $\delta > 0$ tal que, si $x \in A$ y $0 < \norm{x - x_0} < \delta$, entonces $\norm{f(x) - y} < \e$. Para cada $i$, para esos mismos $x$,
+  (1) \(\Rightarrow\) (2) Dado \(\e > 0\) existe \(\delta > 0\) tal que, si \(x \in A\) y \(0 < \norm{x - x_0} < \delta\), entonces \(\norm{f(x) - y} < \e\). Para cada \(i\), para esos mismos \(x\),
   \[
     |f_i(x) - y_i| \leq \sqrt{\sum_{j=1}^{k} {\bigl( f_j(x) - y_j \bigr)}^2} = \norm{f(x) - y} < \e,
   \]
-  luego $\lim_{x \to x_0} f_i(x) = y_i$.
+  luego \(\lim_{x \to x_0} f_i(x) = y_i\).
 
-  (2) $\Rightarrow$ (1) Dado $\e > 0$, para cada $i$ existe $\delta_i > 0$ tal que $0 < \norm{x - x_0} < \delta_i$ implica $|f_i(x) - y_i| < \frac{\e}{\sqrt{k}}$. Sea $\delta = \min\{\delta_1, \dots, \delta_k\}$. Si $x \in A$ cumple $0 < \norm{x - x_0} < \delta$, entonces
+  (2) \(\Rightarrow\) (1) Dado \(\e > 0\), para cada \(i\) existe \(\delta_i > 0\) tal que \(0 < \norm{x - x_0} < \delta_i\) implica \(|f_i(x) - y_i| < \frac{\e}{\sqrt{k}}\). Sea \(\delta = \min\{\delta_1, \dots, \delta_k\}\). Si \(x \in A\) cumple \(0 < \norm{x - x_0} < \delta\), entonces
   \[
     \norm{f(x) - y} = \sqrt{\sum_{i=1}^{k} {\bigl( f_i(x) - y_i \bigr)}^2} < \sqrt{\sum_{i=1}^{k} \frac{\e^2}{k}} = \e. \qedhere
   \]
 \end{proof}
 
 \begin{definition}[Límites laterales]
-  Sean $A \subset \R$, $f\colon A \to \R^k$ y $x_0 \in \R$.
+  Sean \(A \subset \R\), \(f\colon A \to \R^k\) y \(x_0 \in \R\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Sea $A_{x_0}^{+} = A \cap (x_0, +\infty)$. Si $x_0 \in {(A_{x_0}^{+})}'$ y la restricción $f|_{A_{x_0}^{+}}$ tiene límite $y$ en $x_0$, decimos que $y$ es el \emph{límite por derecha} de $f$ en $x_0$ y escribimos $\lim_{x \to x_0^{+}} f(x) = y$.
-    \item Sea $A_{x_0}^{-} = A \cap (-\infty, x_0)$. Si $x_0 \in {(A_{x_0}^{-})}'$ y la restricción $f|_{A_{x_0}^{-}}$ tiene límite $y$ en $x_0$, decimos que $y$ es el \emph{límite por izquierda} de $f$ en $x_0$ y escribimos $\lim_{x \to x_0^{-}} f(x) = y$.
+    \item Sea \(A_{x_0}^{+} = A \cap (x_0, +\infty)\). Si \(x_0 \in {(A_{x_0}^{+})}'\) y la restricción \(f|_{A_{x_0}^{+}}\) tiene límite \(y\) en \(x_0\), decimos que \(y\) es el \emph{límite por derecha} de \(f\) en \(x_0\) y escribimos \(\lim_{x \to x_0^{+}} f(x) = y\).
+    \item Sea \(A_{x_0}^{-} = A \cap (-\infty, x_0)\). Si \(x_0 \in {(A_{x_0}^{-})}'\) y la restricción \(f|_{A_{x_0}^{-}}\) tiene límite \(y\) en \(x_0\), decimos que \(y\) es el \emph{límite por izquierda} de \(f\) en \(x_0\) y escribimos \(\lim_{x \to x_0^{-}} f(x) = y\).
   \end{enumerate}
 \end{definition}
 
 \section{Continuidad en un punto}
 
 \begin{definition}[Continuidad en un punto]
-  Sean $A \subset \R^n$ y $x_0 \in A$. Una función $f\colon A \to \R^k$ es \emph{continua en $x_0$} si
+  Sean \(A \subset \R^n\) y \(x_0 \in A\). Una función \(f\colon A \to \R^k\) es \emph{continua en \(x_0\)} si
   \[
     (\forall \e > 0)(\exists \delta > 0) \colon (\forall x \in A) \quad \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e.
   \]
 \end{definition}
 
 \begin{lemma}
-  Sean $A \subset \R^n$ y $x_0 \in A$. Una función $f\colon A \to \R^k$ es continua en $x_0$ si y sólo si $x_0$ es un punto aislado de $A$ o bien $\lim_{x \to x_0} f(x) = f(x_0)$.
+  Sean \(A \subset \R^n\) y \(x_0 \in A\). Una función \(f\colon A \to \R^k\) es continua en \(x_0\) si y sólo si \(x_0\) es un punto aislado de \(A\) o bien \(\lim_{x \to x_0} f(x) = f(x_0)\).
 \end{lemma}
 
 \begin{proof}
-  ($\Rightarrow$) Sea $f$ continua en $x_0$ y supongamos que $x_0$ no es aislado en $A$. Entonces toda bola centrada en $x_0$ contiene puntos de $A$ distintos de $x_0$, es decir, $x_0 \in A'$. Dado $\e > 0$, existe $\delta > 0$ tal que $\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e$; en particular vale para $0 < \norm{x - x_0} < \delta$, y entonces $\lim_{x \to x_0} f(x) = f(x_0)$.
+  (\(\Rightarrow\)) Sea \(f\) continua en \(x_0\) y supongamos que \(x_0\) no es aislado en \(A\). Entonces toda bola centrada en \(x_0\) contiene puntos de \(A\) distintos de \(x_0\), es decir, \(x_0 \in A'\). Dado \(\e > 0\), existe \(\delta > 0\) tal que \(\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e\); en particular vale para \(0 < \norm{x - x_0} < \delta\), y entonces \(\lim_{x \to x_0} f(x) = f(x_0)\).
 
-  ($\Leftarrow$) Sea $\e > 0$. Si $x_0$ es aislado en $A$, existe $\delta > 0$ con $B_{\delta}(x_0) \cap A = \{x_0\}$, y para $x \in A$ con $\norm{x - x_0} < \delta$ se tiene $x = x_0$ y $\norm{f(x) - f(x_0)} = 0 < \e$. Si $\lim_{x \to x_0} f(x) = f(x_0)$, existe $\delta > 0$ tal que $0 < \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e$; para $x = x_0$ la desigualdad vale trivialmente, de modo que vale para todo $x \in A$ con $\norm{x - x_0} < \delta$.
+  (\(\Leftarrow\)) Sea \(\e > 0\). Si \(x_0\) es aislado en \(A\), existe \(\delta > 0\) con \(B_{\delta}(x_0) \cap A = \{x_0\}\), y para \(x \in A\) con \(\norm{x - x_0} < \delta\) se tiene \(x = x_0\) y \(\norm{f(x) - f(x_0)} = 0 < \e\). Si \(\lim_{x \to x_0} f(x) = f(x_0)\), existe \(\delta > 0\) tal que \(0 < \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e\); para \(x = x_0\) la desigualdad vale trivialmente, de modo que vale para todo \(x \in A\) con \(\norm{x - x_0} < \delta\).
 \end{proof}
 
 \begin{definition}[Entorno relativo]
-  Dado $A \subset \R^n$, un conjunto $V$ es un \emph{entorno de $x$ relativo a $A$} si existe un entorno $N \subset \R^n$ de $x$ tal que $V = A \cap N$.
+  Dado \(A \subset \R^n\), un conjunto \(V\) es un \emph{entorno de \(x\) relativo a \(A\)} si existe un entorno \(N \subset \R^n\) de \(x\) tal que \(V = A \cap N\).
 \end{definition}
 
 \begin{definition}[Abierto relativo]
-  Dado $A \subset \R^n$, un conjunto $U$ es \emph{abierto relativo a $A$} si existe un abierto $\tilde{U} \subset \R^n$ tal que $U = \tilde{U} \cap A$.
+  Dado \(A \subset \R^n\), un conjunto \(U\) es \emph{abierto relativo a \(A\)} si existe un abierto \(\tilde{U} \subset \R^n\) tal que \(U = \tilde{U} \cap A\).
 \end{definition}
 
 \begin{definition}[Cerrado relativo]
-  Dado $A \subset \R^n$, un conjunto $F$ es \emph{cerrado relativo a $A$} si existe un cerrado $\tilde{F} \subset \R^n$ tal que $F = \tilde{F} \cap A$.
+  Dado \(A \subset \R^n\), un conjunto \(F\) es \emph{cerrado relativo a \(A\)} si existe un cerrado \(\tilde{F} \subset \R^n\) tal que \(F = \tilde{F} \cap A\).
 \end{definition}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A$ y $f\colon A \to \R^k$. Son equivalentes:
+  Sean \(A \subset \R^n\), \(x_0 \in A\) y \(f\colon A \to \R^k\). Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f$ es continua en $x_0$.
-    \item Para todo entorno $V$ de $f(x_0)$ existe un entorno $U$ de $x_0$ relativo a $A$ tal que $f(U) \subset V$.
-    \item Para todo entorno $V$ de $f(x_0)$, el conjunto $f^{-1}(V)$ es un entorno de $x_0$ relativo a $A$.
+    \item \(f\) es continua en \(x_0\).
+    \item Para todo entorno \(V\) de \(f(x_0)\) existe un entorno \(U\) de \(x_0\) relativo a \(A\) tal que \(f(U) \subset V\).
+    \item Para todo entorno \(V\) de \(f(x_0)\), el conjunto \(f^{-1}(V)\) es un entorno de \(x_0\) relativo a \(A\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) $\Rightarrow$ (2) Sea $V$ un entorno de $f(x_0)$; existe $\e > 0$ con $B_{\e}(f(x_0)) \subset V$. Por continuidad existe $\delta > 0$ tal que, para $x \in A$, $\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e$. El conjunto $U = A \cap B_{\delta}(x_0)$ es un entorno de $x_0$ relativo a $A$, y si $x \in U$ entonces $f(x) \in B_{\e}(f(x_0)) \subset V$. Luego $f(U) \subset V$.
+  (1) \(\Rightarrow\) (2) Sea \(V\) un entorno de \(f(x_0)\); existe \(\e > 0\) con \(B_{\e}(f(x_0)) \subset V\). Por continuidad existe \(\delta > 0\) tal que, para \(x \in A\), \(\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e\). El conjunto \(U = A \cap B_{\delta}(x_0)\) es un entorno de \(x_0\) relativo a \(A\), y si \(x \in U\) entonces \(f(x) \in B_{\e}(f(x_0)) \subset V\). Luego \(f(U) \subset V\).
 
-  (2) $\Rightarrow$ (3) Sea $V$ un entorno de $f(x_0)$. Por hipótesis existe un entorno $U$ de $x_0$ relativo a $A$ con $f(U) \subset V$, es decir, $U \subset f^{-1}(V)$. Existe un entorno $N$ de $x_0$ con $U = A \cap N$. Como $U \subset f^{-1}(V) \subset A$, resulta $f^{-1}(V) = A \cap \bigl( N \cup f^{-1}(V) \bigr)$, y $N \cup f^{-1}(V)$ es un entorno de $x_0$ en $\R^n$. Luego $f^{-1}(V)$ es un entorno de $x_0$ relativo a $A$.
+  (2) \(\Rightarrow\) (3) Sea \(V\) un entorno de \(f(x_0)\). Por hipótesis existe un entorno \(U\) de \(x_0\) relativo a \(A\) con \(f(U) \subset V\), es decir, \(U \subset f^{-1}(V)\). Existe un entorno \(N\) de \(x_0\) con \(U = A \cap N\). Como \(U \subset f^{-1}(V) \subset A\), resulta \(f^{-1}(V) = A \cap \bigl( N \cup f^{-1}(V) \bigr)\), y \(N \cup f^{-1}(V)\) es un entorno de \(x_0\) en \(\R^n\). Luego \(f^{-1}(V)\) es un entorno de \(x_0\) relativo a \(A\).
 
-  (3) $\Rightarrow$ (1) Sea $\e > 0$. Como $B_{\e}(f(x_0))$ es un entorno de $f(x_0)$, el conjunto $f^{-1}\bigl( B_{\e}(f(x_0)) \bigr)$ es un entorno de $x_0$ relativo a $A$: existe un entorno $N$ de $x_0$ en $\R^n$ con $f^{-1}\bigl( B_{\e}(f(x_0)) \bigr) = A \cap N$. Sea $\delta > 0$ con $B_{\delta}(x_0) \subset N$. Si $x \in A$ y $\norm{x - x_0} < \delta$, entonces $x \in A \cap N = f^{-1}\bigl( B_{\e}(f(x_0)) \bigr)$, es decir, $\norm{f(x) - f(x_0)} < \e$.
+  (3) \(\Rightarrow\) (1) Sea \(\e > 0\). Como \(B_{\e}(f(x_0))\) es un entorno de \(f(x_0)\), el conjunto \(f^{-1}\bigl( B_{\e}(f(x_0)) \bigr)\) es un entorno de \(x_0\) relativo a \(A\): existe un entorno \(N\) de \(x_0\) en \(\R^n\) con \(f^{-1}\bigl( B_{\e}(f(x_0)) \bigr) = A \cap N\). Sea \(\delta > 0\) con \(B_{\delta}(x_0) \subset N\). Si \(x \in A\) y \(\norm{x - x_0} < \delta\), entonces \(x \in A \cap N = f^{-1}\bigl( B_{\e}(f(x_0)) \bigr)\), es decir, \(\norm{f(x) - f(x_0)} < \e\).
 \end{proof}
 
 \begin{prop}[Caracterización por sucesiones]
-  Sean $A \subset \R^n$, $x_0 \in A$ y $f\colon A \to \R^k$. Entonces $f$ es continua en $x_0$ si y sólo si para toda sucesión ${(x_m)}_{m \in \N} \subset A$ con $x_m \to x_0$ se cumple $f(x_m) \to f(x_0)$.
+  Sean \(A \subset \R^n\), \(x_0 \in A\) y \(f\colon A \to \R^k\). Entonces \(f\) es continua en \(x_0\) si y sólo si para toda sucesión \({(x_m)}_{m \in \N} \subset A\) con \(x_m \to x_0\) se cumple \(f(x_m) \to f(x_0)\).
 \end{prop}
 
 \begin{proof}
-  ($\Rightarrow$) Sea $f$ continua en $x_0$, ${(x_m)} \subset A$ con $x_m \to x_0$ y $\e > 0$. Existe $\delta > 0$ tal que $\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e$ para $x \in A$. Como $x_m \to x_0$, existe $m_0$ con $\norm{x_m - x_0} < \delta$ para $m > m_0$, y entonces $\norm{f(x_m) - f(x_0)} < \e$ para $m > m_0$.
+  (\(\Rightarrow\)) Sea \(f\) continua en \(x_0\), \({(x_m)} \subset A\) con \(x_m \to x_0\) y \(\e > 0\). Existe \(\delta > 0\) tal que \(\norm{x - x_0} < \delta \Rightarrow \norm{f(x) - f(x_0)} < \e\) para \(x \in A\). Como \(x_m \to x_0\), existe \(m_0\) con \(\norm{x_m - x_0} < \delta\) para \(m > m_0\), y entonces \(\norm{f(x_m) - f(x_0)} < \e\) para \(m > m_0\).
 
-  ($\Leftarrow$) Por contrarrecíproco, supongamos que $f$ no es continua en $x_0$. Existe $\e > 0$ tal que para todo $\delta > 0$ hay un $x \in A$ con $\norm{x - x_0} < \delta$ y $\norm{f(x) - f(x_0)} \geq \e$. Tomando $\delta = \frac{1}{m}$ obtenemos ${(x_m)} \subset A$ con $x_m \to x_0$ pero $\norm{f(x_m) - f(x_0)} \geq \e$ para todo $m$, es decir, $f(x_m) \not\to f(x_0)$.
+  (\(\Leftarrow\)) Por contrarrecíproco, supongamos que \(f\) no es continua en \(x_0\). Existe \(\e > 0\) tal que para todo \(\delta > 0\) hay un \(x \in A\) con \(\norm{x - x_0} < \delta\) y \(\norm{f(x) - f(x_0)} \geq \e\). Tomando \(\delta = \frac{1}{m}\) obtenemos \({(x_m)} \subset A\) con \(x_m \to x_0\) pero \(\norm{f(x_m) - f(x_0)} \geq \e\) para todo \(m\), es decir, \(f(x_m) \not\to f(x_0)\).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A$ y $f\colon A \to \R^k$ continua en $x_0$. Si $B \subset A$ y $x_0 \in B$, entonces $f|_B\colon B \to \R^k$ es continua en $x_0$.
+  Sean \(A \subset \R^n\), \(x_0 \in A\) y \(f\colon A \to \R^k\) continua en \(x_0\). Si \(B \subset A\) y \(x_0 \in B\), entonces \(f|_B\colon B \to \R^k\) es continua en \(x_0\).
 \end{prop}
 
 \begin{proof}
-  Dado $\e > 0$, existe $\delta > 0$ tal que para todo $x \in A$ con $\norm{x - x_0} < \delta$ vale $\norm{f(x) - f(x_0)} < \e$. En particular vale para todo $x \in B \subset A$.
+  Dado \(\e > 0\), existe \(\delta > 0\) tal que para todo \(x \in A\) con \(\norm{x - x_0} < \delta\) vale \(\norm{f(x) - f(x_0)} < \e\). En particular vale para todo \(x \in B \subset A\).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$ y $x_0 \in A$.
+  Sean \(A \subset \R^n\) y \(x_0 \in A\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Si $f, g\colon A \to \R^k$ y $h\colon A \to \R$ son continuas en $x_0$, entonces $f + g\colon A \to \R^k$ y $h \cdot f\colon A \to \R^k$ son continuas en $x_0$.
-    \item Si $h\colon A \to \R$ es continua en $x_0$ y $h(x) \neq 0$ para todo $x \in A$, entonces $\frac{1}{h}\colon A \to \R$ es continua en $x_0$.
+    \item Si \(f, g\colon A \to \R^k\) y \(h\colon A \to \R\) son continuas en \(x_0\), entonces \(f + g\colon A \to \R^k\) y \(h \cdot f\colon A \to \R^k\) son continuas en \(x_0\).
+    \item Si \(h\colon A \to \R\) es continua en \(x_0\) y \(h(x) \neq 0\) para todo \(x \in A\), entonces \(\frac{1}{h}\colon A \to \R\) es continua en \(x_0\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  Sea ${(x_m)} \subset A$ con $x_m \to x_0$. Por la caracterización por sucesiones, $f(x_m) \to f(x_0)$, $g(x_m) \to g(x_0)$ y $h(x_m) \to h(x_0)$. Por las propiedades de límites de sucesiones, $f(x_m) + g(x_m) \to f(x_0) + g(x_0)$, $h(x_m) f(x_m) \to h(x_0) f(x_0)$ y, como $h(x_m) \neq 0$ y $h(x_0) \neq 0$, $\frac{1}{h(x_m)} \to \frac{1}{h(x_0)}$. Aplicando nuevamente la caracterización por sucesiones se obtienen (1) y (2).
+  Sea \({(x_m)} \subset A\) con \(x_m \to x_0\). Por la caracterización por sucesiones, \(f(x_m) \to f(x_0)\), \(g(x_m) \to g(x_0)\) y \(h(x_m) \to h(x_0)\). Por las propiedades de límites de sucesiones, \(f(x_m) + g(x_m) \to f(x_0) + g(x_0)\), \(h(x_m) f(x_m) \to h(x_0) f(x_0)\) y, como \(h(x_m) \neq 0\) y \(h(x_0) \neq 0\), \(\frac{1}{h(x_m)} \to \frac{1}{h(x_0)}\). Aplicando nuevamente la caracterización por sucesiones se obtienen (1) y (2).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A$ y $f\colon A \to \R^k$ continua en $x_0$.
+  Sean \(A \subset \R^n\), \(x_0 \in A\) y \(f\colon A \to \R^k\) continua en \(x_0\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Si $y_0 \neq f(x_0)$, existe un entorno $U$ de $x_0$ relativo a $A$ tal que $y_0 \notin f(U)$.
-    \item Si $k = 1$ y $c \in \R$ cumple $f(x_0) < c$, existe un entorno $U$ de $x_0$ relativo a $A$ tal que $f(x) < c$ para todo $x \in U$.
-    \item Existe un entorno $U$ de $x_0$ relativo a $A$ tal que $f$ es acotada en $U$, es decir, $f(U)$ es un conjunto acotado.
+    \item Si \(y_0 \neq f(x_0)\), existe un entorno \(U\) de \(x_0\) relativo a \(A\) tal que \(y_0 \notin f(U)\).
+    \item Si \(k = 1\) y \(c \in \R\) cumple \(f(x_0) < c\), existe un entorno \(U\) de \(x_0\) relativo a \(A\) tal que \(f(x) < c\) para todo \(x \in U\).
+    \item Existe un entorno \(U\) de \(x_0\) relativo a \(A\) tal que \(f\) es acotada en \(U\), es decir, \(f(U)\) es un conjunto acotado.
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) Sea $r = \norm{f(x_0) - y_0} > 0$. Como $B_r(f(x_0))$ es un entorno de $f(x_0)$, por la continuidad existe un entorno $U$ de $x_0$ relativo a $A$ con $f(U) \subset B_r(f(x_0))$. Como $y_0 \notin B_r(f(x_0))$, resulta $y_0 \notin f(U)$.
+  (1) Sea \(r = \norm{f(x_0) - y_0} > 0\). Como \(B_r(f(x_0))\) es un entorno de \(f(x_0)\), por la continuidad existe un entorno \(U\) de \(x_0\) relativo a \(A\) con \(f(U) \subset B_r(f(x_0))\). Como \(y_0 \notin B_r(f(x_0))\), resulta \(y_0 \notin f(U)\).
 
-  (2) El intervalo $(-\infty, c)$ es un entorno de $f(x_0)$, luego existe un entorno $U$ de $x_0$ relativo a $A$ con $f(U) \subset (-\infty, c)$, es decir, $f(x) < c$ para todo $x \in U$.
+  (2) El intervalo \((-\infty, c)\) es un entorno de \(f(x_0)\), luego existe un entorno \(U\) de \(x_0\) relativo a \(A\) con \(f(U) \subset (-\infty, c)\), es decir, \(f(x) < c\) para todo \(x \in U\).
 
-  (3) La bola $B_1(f(x_0))$ es un entorno de $f(x_0)$ y existe un entorno $U$ de $x_0$ relativo a $A$ con $f(U) \subset B_1(f(x_0))$, que es un conjunto acotado.
+  (3) La bola \(B_1(f(x_0))\) es un entorno de \(f(x_0)\) y existe un entorno \(U\) de \(x_0\) relativo a \(A\) con \(f(U) \subset B_1(f(x_0))\), que es un conjunto acotado.
 \end{proof}
 
 \section{Composición de funciones}
 
 \begin{theorem}
-  Sean $A \subset \R^n$, $B \subset \R^k$, $f\colon A \to \R^k$ y $g\colon B \to \R^p$ con $f(A) \subset B$. Si $f$ es continua en $x_0 \in A$ y $g$ es continua en $f(x_0)$, entonces $g \circ f\colon A \to \R^p$ es continua en $x_0$.
+  Sean \(A \subset \R^n\), \(B \subset \R^k\), \(f\colon A \to \R^k\) y \(g\colon B \to \R^p\) con \(f(A) \subset B\). Si \(f\) es continua en \(x_0 \in A\) y \(g\) es continua en \(f(x_0)\), entonces \(g \circ f\colon A \to \R^p\) es continua en \(x_0\).
 \end{theorem}
 
 \begin{proof}
-  Sea $W$ un entorno de $g(f(x_0))$. Como $g$ es continua en $f(x_0)$, existe un entorno $V$ de $f(x_0)$ relativo a $B$ con $g(V) \subset W$. Existe un entorno $V_0$ de $f(x_0)$ en $\R^k$ con $V = V_0 \cap B$. Como $f$ es continua en $x_0$, existe un entorno $U$ de $x_0$ relativo a $A$ con $f(U) \subset V_0$. Como además $f(A) \subset B$, se tiene $f(U) \subset V_0 \cap B = V$, y entonces $(g \circ f)(U) \subset g(V) \subset W$. Luego $g \circ f$ es continua en $x_0$.
+  Sea \(W\) un entorno de \(g(f(x_0))\). Como \(g\) es continua en \(f(x_0)\), existe un entorno \(V\) de \(f(x_0)\) relativo a \(B\) con \(g(V) \subset W\). Existe un entorno \(V_0\) de \(f(x_0)\) en \(\R^k\) con \(V = V_0 \cap B\). Como \(f\) es continua en \(x_0\), existe un entorno \(U\) de \(x_0\) relativo a \(A\) con \(f(U) \subset V_0\). Como además \(f(A) \subset B\), se tiene \(f(U) \subset V_0 \cap B = V\), y entonces \((g \circ f)(U) \subset g(V) \subset W\). Luego \(g \circ f\) es continua en \(x_0\).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A$ y $f\colon A \to \R^k$, $f = (f_1, \dots, f_k)$. Entonces $f$ es continua en $x_0$ si y sólo si cada componente $f_1, \dots, f_k\colon A \to \R$ es continua en $x_0$.
+  Sean \(A \subset \R^n\), \(x_0 \in A\) y \(f\colon A \to \R^k\), \(f = (f_1, \dots, f_k)\). Entonces \(f\) es continua en \(x_0\) si y sólo si cada componente \(f_1, \dots, f_k\colon A \to \R\) es continua en \(x_0\).
 \end{prop}
 
 \begin{proof}
-  ($\Rightarrow$) Para todo $x \in A$ y todo $i$,
+  (\(\Rightarrow\)) Para todo \(x \in A\) y todo \(i\),
   \[
     |f_i(x) - f_i(x_0)| \leq \sqrt{\sum_{j=1}^{k} {\bigl( f_j(x) - f_j(x_0) \bigr)}^2} = \norm{f(x) - f(x_0)}.
   \]
-  Dado $\e > 0$, el $\delta$ de la continuidad de $f$ sirve para cada $f_i$.
+  Dado \(\e > 0\), el \(\delta\) de la continuidad de \(f\) sirve para cada \(f_i\).
 
-  ($\Leftarrow$) Dado $\e > 0$, para cada $i$ existe $\delta_i > 0$ tal que $\norm{x - x_0} < \delta_i \Rightarrow |f_i(x) - f_i(x_0)| < \frac{\e}{\sqrt{k}}$. Con $\delta = \min\{\delta_1, \dots, \delta_k\}$ y $\norm{x - x_0} < \delta$,
+  (\(\Leftarrow\)) Dado \(\e > 0\), para cada \(i\) existe \(\delta_i > 0\) tal que \(\norm{x - x_0} < \delta_i \Rightarrow |f_i(x) - f_i(x_0)| < \frac{\e}{\sqrt{k}}\). Con \(\delta = \min\{\delta_1, \dots, \delta_k\}\) y \(\norm{x - x_0} < \delta\),
   \[
     \norm{f(x) - f(x_0)} = \sqrt{\sum_{i=1}^{k} {\bigl( f_i(x) - f_i(x_0) \bigr)}^2} < \sqrt{k \cdot \frac{\e^2}{k}} = \e. \qedhere
   \]
@@ -154,52 +154,52 @@
 \section{Continuidad global}
 
 \begin{definition}[Continuidad global]
-  Sea $A \subset \R^n$. Una función $f\colon A \to \R^k$ es \emph{continua} si es continua en todo punto de $A$.
+  Sea \(A \subset \R^n\). Una función \(f\colon A \to \R^k\) es \emph{continua} si es continua en todo punto de \(A\).
 \end{definition}
 
 \begin{prop}
-  Sean $A \subset \R^n$ y $f\colon A \to \R^k$. Entonces $f$ es continua si y sólo si para toda sucesión ${(x_m)}_{m \in \N} \subset A$ con $x_m \to x \in A$ se tiene $\lim_{m \to \infty} f(x_m) = f(x)$.
+  Sean \(A \subset \R^n\) y \(f\colon A \to \R^k\). Entonces \(f\) es continua si y sólo si para toda sucesión \({(x_m)}_{m \in \N} \subset A\) con \(x_m \to x \in A\) se tiene \(\lim_{m \to \infty} f(x_m) = f(x)\).
 \end{prop}
 
 \begin{proof}
-  Es la caracterización por sucesiones de la continuidad en un punto, aplicada en cada $x \in A$.
+  Es la caracterización por sucesiones de la continuidad en un punto, aplicada en cada \(x \in A\).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$ y $f\colon A \to \R^k$. Son equivalentes:
+  Sean \(A \subset \R^n\) y \(f\colon A \to \R^k\). Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f$ es continua.
-    \item Para todo abierto $V \subset \R^k$, $f^{-1}(V)$ es abierto relativo a $A$.
-    \item Para todo cerrado $F \subset \R^k$, $f^{-1}(F)$ es cerrado relativo a $A$.
+    \item \(f\) es continua.
+    \item Para todo abierto \(V \subset \R^k\), \(f^{-1}(V)\) es abierto relativo a \(A\).
+    \item Para todo cerrado \(F \subset \R^k\), \(f^{-1}(F)\) es cerrado relativo a \(A\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) $\Rightarrow$ (2) Sea $V \subset \R^k$ abierto y $p \in f^{-1}(V)$. Existe $\e > 0$ con $B_{\e}(f(p)) \subset V$, y por la continuidad de $f$ en $p$ existe $\delta_p > 0$ tal que $x \in A$, $\norm{x - p} < \delta_p$ implica $f(x) \in B_{\e}(f(p)) \subset V$, es decir, $A \cap B_{\delta_p}(p) \subset f^{-1}(V)$. Entonces
+  (1) \(\Rightarrow\) (2) Sea \(V \subset \R^k\) abierto y \(p \in f^{-1}(V)\). Existe \(\e > 0\) con \(B_{\e}(f(p)) \subset V\), y por la continuidad de \(f\) en \(p\) existe \(\delta_p > 0\) tal que \(x \in A\), \(\norm{x - p} < \delta_p\) implica \(f(x) \in B_{\e}(f(p)) \subset V\), es decir, \(A \cap B_{\delta_p}(p) \subset f^{-1}(V)\). Entonces
   \[
     f^{-1}(V) = A \cap \bigcup_{p \in f^{-1}(V)} B_{\delta_p}(p),
   \]
-  pues $\supset$ vale por lo anterior y $\subset$ porque $p \in B_{\delta_p}(p)$. La unión es un abierto de $\R^n$, de modo que $f^{-1}(V)$ es abierto relativo a $A$.
+  pues \(\supset\) vale por lo anterior y \(\subset\) porque \(p \in B_{\delta_p}(p)\). La unión es un abierto de \(\R^n\), de modo que \(f^{-1}(V)\) es abierto relativo a \(A\).
 
-  (2) $\Rightarrow$ (3) Sea $F \subset \R^k$ cerrado. Entonces $\R^k \setminus F$ es abierto y $f^{-1}(\R^k \setminus F) = A \cap \tilde{U}$ para algún abierto $\tilde{U} \subset \R^n$. Como $f^{-1}(F) = A \setminus f^{-1}(\R^k \setminus F)$, resulta $f^{-1}(F) = A \cap (\R^n \setminus \tilde{U})$, que es cerrado relativo a $A$.
+  (2) \(\Rightarrow\) (3) Sea \(F \subset \R^k\) cerrado. Entonces \(\R^k \setminus F\) es abierto y \(f^{-1}(\R^k \setminus F) = A \cap \tilde{U}\) para algún abierto \(\tilde{U} \subset \R^n\). Como \(f^{-1}(F) = A \setminus f^{-1}(\R^k \setminus F)\), resulta \(f^{-1}(F) = A \cap (\R^n \setminus \tilde{U})\), que es cerrado relativo a \(A\).
 
-  (3) $\Rightarrow$ (1) Sea $x \in A$ y $V$ un entorno de $f(x)$; entonces $f(x) \in V^{\circ}$. Como $\R^k \setminus V^{\circ}$ es cerrado, $f^{-1}(\R^k \setminus V^{\circ}) = A \cap \tilde{F}$ con $\tilde{F}$ cerrado en $\R^n$. Luego $f^{-1}(V^{\circ}) = A \setminus f^{-1}(\R^k \setminus V^{\circ}) = A \cap (\R^n \setminus \tilde{F})$, donde $\R^n \setminus \tilde{F}$ es abierto y contiene a $x$. Entonces $U = A \cap (\R^n \setminus \tilde{F})$ es un entorno de $x$ relativo a $A$ con $f(U) \subset V^{\circ} \subset V$. Por la caracterización de la continuidad en un punto, $f$ es continua en $x$.
+  (3) \(\Rightarrow\) (1) Sea \(x \in A\) y \(V\) un entorno de \(f(x)\); entonces \(f(x) \in V^{\circ}\). Como \(\R^k \setminus V^{\circ}\) es cerrado, \(f^{-1}(\R^k \setminus V^{\circ}) = A \cap \tilde{F}\) con \(\tilde{F}\) cerrado en \(\R^n\). Luego \(f^{-1}(V^{\circ}) = A \setminus f^{-1}(\R^k \setminus V^{\circ}) = A \cap (\R^n \setminus \tilde{F})\), donde \(\R^n \setminus \tilde{F}\) es abierto y contiene a \(x\). Entonces \(U = A \cap (\R^n \setminus \tilde{F})\) es un entorno de \(x\) relativo a \(A\) con \(f(U) \subset V^{\circ} \subset V\). Por la caracterización de la continuidad en un punto, \(f\) es continua en \(x\).
 \end{proof}
 
 \begin{corollary}
-  Sean $f, g\colon A \to \R^k$ continuas.
+  Sean \(f, g\colon A \to \R^k\) continuas.
   \begin{enumerate}[label=(\arabic*)]
-    \item El conjunto $\{ x \in A : f(x) \neq g(x) \}$ es abierto relativo a $A$ y $\{ x \in A : f(x) = g(x) \}$ es cerrado relativo a $A$.
-    \item Si $k = 1$, $\{ x \in A : f(x) > 0 \}$ es abierto relativo a $A$.
+    \item El conjunto \(\{ x \in A : f(x) \neq g(x) \}\) es abierto relativo a \(A\) y \(\{ x \in A : f(x) = g(x) \}\) es cerrado relativo a \(A\).
+    \item Si \(k = 1\), \(\{ x \in A : f(x) > 0 \}\) es abierto relativo a \(A\).
   \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-  (1) La función $h = f - g\colon A \to \R^k$ es continua, $\R^k \setminus \{0\}$ es abierto y $\{0\}$ es cerrado. Luego $h^{-1}(\R^k \setminus \{0\}) = \{ x \in A : f(x) \neq g(x) \}$ es abierto relativo a $A$ y $h^{-1}(\{0\}) = \{ x \in A : f(x) = g(x) \}$ es cerrado relativo a $A$.
+  (1) La función \(h = f - g\colon A \to \R^k\) es continua, \(\R^k \setminus \{0\}\) es abierto y \(\{0\}\) es cerrado. Luego \(h^{-1}(\R^k \setminus \{0\}) = \{ x \in A : f(x) \neq g(x) \}\) es abierto relativo a \(A\) y \(h^{-1}(\{0\}) = \{ x \in A : f(x) = g(x) \}\) es cerrado relativo a \(A\).
 
-  (2) Como $f$ es continua y $(0, +\infty)$ es abierto, $f^{-1}\bigl( (0, +\infty) \bigr) = \{ x \in A : f(x) > 0 \}$ es abierto relativo a $A$.
+  (2) Como \(f\) es continua y \((0, +\infty)\) es abierto, \(f^{-1}\bigl( (0, +\infty) \bigr) = \{ x \in A : f(x) > 0 \}\) es abierto relativo a \(A\).
 \end{proof}
 
 \begin{note}
-  La imagen de un conjunto abierto (o cerrado) por una función continua puede no ser abierta ni cerrada. Por ejemplo, $f(x) = \frac{1}{1 + x^2}$ es continua, $\R$ es abierto y cerrado, y $f(\R) = (0, 1]$, que no es abierto ni cerrado.
+  La imagen de un conjunto abierto (o cerrado) por una función continua puede no ser abierta ni cerrada. Por ejemplo, \(f(x) = \frac{1}{1 + x^2}\) es continua, \(\R\) es abierto y cerrado, y \(f(\R) = (0, 1]\), que no es abierto ni cerrado.
 \end{note}

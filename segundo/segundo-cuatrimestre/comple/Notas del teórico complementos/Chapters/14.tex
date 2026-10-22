@@ -1,50 +1,50 @@
 \section{Conjuntos conexos y arco-conexos}
 
 \begin{theorem}
-  Todo subconjunto no vacío y arco-conexo de $\R^n$ es conexo.
+  Todo subconjunto no vacío y arco-conexo de \(\R^n\) es conexo.
 \end{theorem}
 
 \begin{proof}
-  Sea $A \subset \R^n$ arco-conexo y no vacío, y sea $a_0 \in A$. Para cada $a \in A$ existe una función continua $\sigma_a\colon [0, 1] \to \R^n$ con valores en $A$ tal que $\sigma_a(0) = a_0$ y $\sigma_a(1) = a$. Como $[0, 1]$ es conexo y $\sigma_a$ es continua, $\sigma_a([0, 1])$ es conexo; además contiene a $a_0$ y a $a$ y está contenido en $A$. Luego $A = \bigcup_{a \in A} \sigma_a([0, 1])$ es unión de conexos que contienen todos a $a_0$, en particular son no disjuntos de a pares, y por lo tanto $A$ es conexo.
+  Sea \(A \subset \R^n\) arco-conexo y no vacío, y sea \(a_0 \in A\). Para cada \(a \in A\) existe una función continua \(\sigma_a\colon [0, 1] \to \R^n\) con valores en \(A\) tal que \(\sigma_a(0) = a_0\) y \(\sigma_a(1) = a\). Como \([0, 1]\) es conexo y \(\sigma_a\) es continua, \(\sigma_a([0, 1])\) es conexo; además contiene a \(a_0\) y a \(a\) y está contenido en \(A\). Luego \(A = \bigcup_{a \in A} \sigma_a([0, 1])\) es unión de conexos que contienen todos a \(a_0\), en particular son no disjuntos de a pares, y por lo tanto \(A\) es conexo.
 \end{proof}
 
 \begin{corollary}
-  $\R^n$ es conexo. En particular, los únicos subconjuntos de $\R^n$ que son abiertos y cerrados a la vez son $\varnothing$ y $\R^n$.
+  \(\R^n\) es conexo. En particular, los únicos subconjuntos de \(\R^n\) que son abiertos y cerrados a la vez son \(\varnothing\) y \(\R^n\).
 \end{corollary}
 
 \begin{proof}
-  $\R^n$ es convexo, luego arco-conexo, luego conexo. La segunda afirmación es la caracterización de los conexos por subconjuntos abiertos y cerrados.
+  \(\R^n\) es convexo, luego arco-conexo, luego conexo. La segunda afirmación es la caracterización de los conexos por subconjuntos abiertos y cerrados.
 \end{proof}
 
 \begin{theorem}
-  Un subconjunto abierto y no vacío de $\R^n$ es arco-conexo si y sólo si es conexo.
+  Un subconjunto abierto y no vacío de \(\R^n\) es arco-conexo si y sólo si es conexo.
 \end{theorem}
 
 \begin{proof}
-  ($\Rightarrow$) Es el teorema anterior.
+  (\(\Rightarrow\)) Es el teorema anterior.
 
-  ($\Leftarrow$) Sea $A \subset \R^n$ abierto, no vacío y conexo, y sea $x_0 \in A$. Sea $U$ el conjunto de los $x \in A$ para los que existe una función continua $\sigma\colon [0, 1] \to \R^n$ con valores en $A$, $\sigma(0) = x_0$ y $\sigma(1) = x$. Veamos que $U = A$.
+  (\(\Leftarrow\)) Sea \(A \subset \R^n\) abierto, no vacío y conexo, y sea \(x_0 \in A\). Sea \(U\) el conjunto de los \(x \in A\) para los que existe una función continua \(\sigma\colon [0, 1] \to \R^n\) con valores en \(A\), \(\sigma(0) = x_0\) y \(\sigma(1) = x\). Veamos que \(U = A\).
 
-  Primero observamos que, si $p \in U$, $q \in A$ y el segmento $\{ (1-s)p + sq : s \in [0, 1] \}$ está contenido en $A$, entonces $q \in U$. En efecto, si $\sigma$ es una curva en $A$ de $x_0$ a $p$, la función
+  Primero observamos que, si \(p \in U\), \(q \in A\) y el segmento \(\{ (1-s)p + sq : s \in [0, 1] \}\) está contenido en \(A\), entonces \(q \in U\). En efecto, si \(\sigma\) es una curva en \(A\) de \(x_0\) a \(p\), la función
   \[
     \tau(\alpha) = \begin{cases}
       \sigma(2\alpha)                       & \text{si } \alpha \in \left[ 0, \tfrac{1}{2} \right], \\
       (2 - 2\alpha)\, p + (2\alpha - 1)\, q & \text{si } \alpha \in \left[ \tfrac{1}{2}, 1 \right]
     \end{cases}
   \]
-  está bien definida, pues ambas expresiones valen $p$ en $\alpha = \frac{1}{2}$, es continua, tiene valores en $A$ y cumple $\tau(0) = x_0$ y $\tau(1) = q$.
+  está bien definida, pues ambas expresiones valen \(p\) en \(\alpha = \frac{1}{2}\), es continua, tiene valores en \(A\) y cumple \(\tau(0) = x_0\) y \(\tau(1) = q\).
 
-  $U$ es abierto: sea $x \in U$. Como $A$ es abierto, existe $r > 0$ con $B_r(x) \subset A$. Si $y \in B_r(x)$, el segmento de $x$ a $y$ está contenido en la bola $B_r(x)$, que es convexa, y por lo tanto en $A$. Luego $y \in U$ y $B_r(x) \subset U$.
+  \(U\) es abierto: sea \(x \in U\). Como \(A\) es abierto, existe \(r > 0\) con \(B_r(x) \subset A\). Si \(y \in B_r(x)\), el segmento de \(x\) a \(y\) está contenido en la bola \(B_r(x)\), que es convexa, y por lo tanto en \(A\). Luego \(y \in U\) y \(B_r(x) \subset U\).
 
-  $A \setminus U$ es abierto: sea $u \in A \setminus U$ y $s > 0$ con $B_s(u) \subset A$. Si existiera $y \in B_s(u) \cap U$, el segmento de $y$ a $u$ estaría en $B_s(u) \subset A$ y entonces $u \in U$, absurdo. Luego $B_s(u) \subset A \setminus U$.
+  \(A \setminus U\) es abierto: sea \(u \in A \setminus U\) y \(s > 0\) con \(B_s(u) \subset A\). Si existiera \(y \in B_s(u) \cap U\), el segmento de \(y\) a \(u\) estaría en \(B_s(u) \subset A\) y entonces \(u \in U\), absurdo. Luego \(B_s(u) \subset A \setminus U\).
 
-  Entonces $A = U \cup (A \setminus U)$ con $U$ y $A \setminus U$ abiertos y disjuntos. Como $A$ es conexo y $x_0 \in U$, debe ser $A \setminus U = \varnothing$, es decir, $U = A$. Esto prueba que $A$ es arco-conexo, pues dados $x, y \in A$ se unen mediante una curva de $x_0$ a $x$ y otra de $x_0$ a $y$; recorriendo la primera al revés y luego la segunda se obtiene una curva de $x$ a $y$ en $A$.
+  Entonces \(A = U \cup (A \setminus U)\) con \(U\) y \(A \setminus U\) abiertos y disjuntos. Como \(A\) es conexo y \(x_0 \in U\), debe ser \(A \setminus U = \varnothing\), es decir, \(U = A\). Esto prueba que \(A\) es arco-conexo, pues dados \(x, y \in A\) se unen mediante una curva de \(x_0\) a \(x\) y otra de \(x_0\) a \(y\); recorriendo la primera al revés y luego la segunda se obtiene una curva de \(x\) a \(y\) en \(A\).
 \end{proof}
 
 \section{Continuidad uniforme}
 
 \begin{definition}[Continuidad uniforme]
-  Una función $f\colon A \to \R^k$, con $A \subset \R^n$, es \emph{uniformemente continua} si
+  Una función \(f\colon A \to \R^k\), con \(A \subset \R^n\), es \emph{uniformemente continua} si
   \[
     (\forall \e > 0)(\exists \delta > 0) \colon (\forall x, y \in A) \quad \norm{x - y} < \delta \Rightarrow \norm{f(x) - f(y)} < \e.
   \]
@@ -52,45 +52,45 @@
 
 \begin{eg}
   \begin{enumerate}[label=(\arabic*)]
-    \item $f(x) = x$ es uniformemente continua: dado $\e > 0$ basta tomar $\delta = \e$.
-    \item $f\colon \R \to \R$, $f(x) = \sin x$ es uniformemente continua. Como $f$ es continua en $0$, dado $\e > 0$ existe $\delta' > 0$ tal que $|z| < \delta' \Rightarrow |\sin z| < \frac{\e}{2}$. Sea $\delta = 2\delta'$. Si $|x - y| < \delta$, entonces
+    \item \(f(x) = x\) es uniformemente continua: dado \(\e > 0\) basta tomar \(\delta = \e\).
+    \item \(f\colon \R \to \R\), \(f(x) = \sin x\) es uniformemente continua. Como \(f\) es continua en \(0\), dado \(\e > 0\) existe \(\delta' > 0\) tal que \(|z| < \delta' \Rightarrow |\sin z| < \frac{\e}{2}\). Sea \(\delta = 2\delta'\). Si \(|x - y| < \delta\), entonces
           \[
             |\sin x - \sin y| = \left| 2 \sin \frac{x - y}{2} \cos \frac{x + y}{2} \right| \leq 2 \left| \sin \frac{x - y}{2} \right| < 2 \cdot \frac{\e}{2} = \e.
           \]
-    \item $f\colon (0, +\infty) \to \R$, $f(x) = \cos \frac{\pi}{x}$ no es uniformemente continua. Sean $x_m = \frac{1}{m}$ e $y_m = \frac{1}{m + 1}$. Entonces $|x_m - y_m| = \frac{1}{m(m+1)} \to 0$, pero $|f(x_m) - f(y_m)| = \bigl| \cos(m\pi) - \cos((m+1)\pi) \bigr| = 2$ para todo $m$. Para $\e = 1$, ningún $\delta > 0$ sirve: existe $m$ con $\frac{1}{m(m+1)} < \delta$ y para ese $m$ se tiene $|x_m - y_m| < \delta$ pero $|f(x_m) - f(y_m)| = 2 \geq \e$.
+    \item \(f\colon (0, +\infty) \to \R\), \(f(x) = \cos \frac{\pi}{x}\) no es uniformemente continua. Sean \(x_m = \frac{1}{m}\) e \(y_m = \frac{1}{m + 1}\). Entonces \(|x_m - y_m| = \frac{1}{m(m+1)} \to 0\), pero \(|f(x_m) - f(y_m)| = \bigl| \cos(m\pi) - \cos((m+1)\pi) \bigr| = 2\) para todo \(m\). Para \(\e = 1\), ningún \(\delta > 0\) sirve: existe \(m\) con \(\frac{1}{m(m+1)} < \delta\) y para ese \(m\) se tiene \(|x_m - y_m| < \delta\) pero \(|f(x_m) - f(y_m)| = 2 \geq \e\).
   \end{enumerate}
 \end{eg}
 
 \begin{theorem}
-  Si $K \subset \R^n$ es compacto y $f\colon K \to \R^k$ es continua, entonces $f$ es uniformemente continua.
+  Si \(K \subset \R^n\) es compacto y \(f\colon K \to \R^k\) es continua, entonces \(f\) es uniformemente continua.
 \end{theorem}
 
 \begin{proof}
-  Sea $\e > 0$. Como $f$ es continua, para cada $x \in K$ existe $\delta_x > 0$ tal que
+  Sea \(\e > 0\). Como \(f\) es continua, para cada \(x \in K\) existe \(\delta_x > 0\) tal que
   \[
     (\forall z \in K) \quad \norm{z - x} < \delta_x \Rightarrow \norm{f(z) - f(x)} < \frac{\e}{2}.
   \]
-  La familia $\mathscr{U} = \{ B_{\delta_x}(x) : x \in K \}$ es un cubrimiento abierto de $K$. Como $K$ es compacto, existe un número de Lebesgue $\delta > 0$ para $\mathscr{U}$: si $x, y \in K$ y $\norm{x - y} < \delta$, existe $z \in K$ con $x, y \in B_{\delta_z}(z)$. Entonces $\norm{f(x) - f(z)} < \frac{\e}{2}$ y $\norm{f(y) - f(z)} < \frac{\e}{2}$, y
+  La familia \(\mathscr{U} = \{ B_{\delta_x}(x) : x \in K \}\) es un cubrimiento abierto de \(K\). Como \(K\) es compacto, existe un número de Lebesgue \(\delta > 0\) para \(\mathscr{U}\): si \(x, y \in K\) y \(\norm{x - y} < \delta\), existe \(z \in K\) con \(x, y \in B_{\delta_z}(z)\). Entonces \(\norm{f(x) - f(z)} < \frac{\e}{2}\) y \(\norm{f(y) - f(z)} < \frac{\e}{2}\), y
   \[
     \norm{f(x) - f(y)} \leq \norm{f(x) - f(z)} + \norm{f(z) - f(y)} < \e.
   \]
-  Luego $f$ es uniformemente continua.
+  Luego \(f\) es uniformemente continua.
 \end{proof}
 
 \begin{theorem}[Extensión de funciones uniformemente continuas]
-  Sea $A \subset \R^n$ y $f\colon A \to \R^k$ uniformemente continua. Entonces existe una única función continua $\bar{f}\colon \cl{A} \to \R^k$ tal que $\bar{f}(x) = f(x)$ para todo $x \in A$, y además $\bar{f}$ es uniformemente continua.
+  Sea \(A \subset \R^n\) y \(f\colon A \to \R^k\) uniformemente continua. Entonces existe una única función continua \(\bar{f}\colon \cl{A} \to \R^k\) tal que \(\bar{f}(x) = f(x)\) para todo \(x \in A\), y además \(\bar{f}\) es uniformemente continua.
 \end{theorem}
 
 \begin{proof}
-  \emph{Paso 1.} Si ${(x_m)} \subset A$ es convergente, entonces ${(f(x_m))}$ es convergente. En efecto, ${(x_m)}$ es de Cauchy. Dado $\e > 0$, sea $\delta > 0$ tal que $\norm{x - y} < \delta \Rightarrow \norm{f(x) - f(y)} < \e$. Existe $m_0$ tal que $\norm{x_m - x_l} < \delta$ para $m, l > m_0$, y entonces $\norm{f(x_m) - f(x_l)} < \e$. Luego ${(f(x_m))}$ es de Cauchy en $\R^k$ y converge.
+  \emph{Paso 1.} Si \({(x_m)} \subset A\) es convergente, entonces \({(f(x_m))}\) es convergente. En efecto, \({(x_m)}\) es de Cauchy. Dado \(\e > 0\), sea \(\delta > 0\) tal que \(\norm{x - y} < \delta \Rightarrow \norm{f(x) - f(y)} < \e\). Existe \(m_0\) tal que \(\norm{x_m - x_l} < \delta\) para \(m, l > m_0\), y entonces \(\norm{f(x_m) - f(x_l)} < \e\). Luego \({(f(x_m))}\) es de Cauchy en \(\R^k\) y converge.
 
-  \emph{Paso 2.} Si ${(x_m)}, {(y_m)} \subset A$ convergen al mismo punto $x_0$, entonces $\lim f(x_m) = \lim f(y_m)$. En efecto, $\norm{x_m - y_m} \to 0$. Dado $\e > 0$, sea $\delta$ como en la continuidad uniforme; para $m$ grande $\norm{x_m - y_m} < \delta$ y entonces $\norm{f(x_m) - f(y_m)} < \e$. Luego $\norm{f(x_m) - f(y_m)} \to 0$, y los límites, que existen por el paso 1, coinciden.
+  \emph{Paso 2.} Si \({(x_m)}, {(y_m)} \subset A\) convergen al mismo punto \(x_0\), entonces \(\lim f(x_m) = \lim f(y_m)\). En efecto, \(\norm{x_m - y_m} \to 0\). Dado \(\e > 0\), sea \(\delta\) como en la continuidad uniforme; para \(m\) grande \(\norm{x_m - y_m} < \delta\) y entonces \(\norm{f(x_m) - f(y_m)} < \e\). Luego \(\norm{f(x_m) - f(y_m)} \to 0\), y los límites, que existen por el paso 1, coinciden.
 
-  \emph{Paso 3: definición de $\bar{f}$.} Dado $x_0 \in \cl{A}$ existe una sucesión ${(x_m)} \subset A$ con $x_m \to x_0$. Definimos $\bar{f}(x_0) = \lim_{m \to \infty} f(x_m)$. Por los pasos 1 y 2, este límite existe y no depende de la sucesión elegida. Si $x \in A$, la sucesión constante $x_m = x$ converge a $x$, de modo que $\bar{f}(x) = f(x)$.
+  \emph{Paso 3: definición de \(\bar{f}\).} Dado \(x_0 \in \cl{A}\) existe una sucesión \({(x_m)} \subset A\) con \(x_m \to x_0\). Definimos \(\bar{f}(x_0) = \lim_{m \to \infty} f(x_m)\). Por los pasos 1 y 2, este límite existe y no depende de la sucesión elegida. Si \(x \in A\), la sucesión constante \(x_m = x\) converge a \(x\), de modo que \(\bar{f}(x) = f(x)\).
 
-  \emph{Paso 4: $\bar{f}$ es uniformemente continua.} Sea $\e > 0$ y $\delta > 0$ tal que $x, y \in A$, $\norm{x - y} < \delta \Rightarrow \norm{f(x) - f(y)} < \frac{\e}{2}$. Sean $u, v \in \cl{A}$ con $\norm{u - v} < \delta$, y sean ${(u_m)}, {(v_m)} \subset A$ con $u_m \to u$, $v_m \to v$. Entonces $\norm{u_m - v_m} \to \norm{u - v} < \delta$, de modo que $\norm{u_m - v_m} < \delta$ para $m$ grande, y entonces $\norm{f(u_m) - f(v_m)} < \frac{\e}{2}$. Tomando límite cuando $m \to \infty$ se obtiene $\norm{\bar{f}(u) - \bar{f}(v)} \leq \frac{\e}{2} < \e$. En particular, $\bar{f}$ es continua.
+  \emph{Paso 4: \(\bar{f}\) es uniformemente continua.} Sea \(\e > 0\) y \(\delta > 0\) tal que \(x, y \in A\), \(\norm{x - y} < \delta \Rightarrow \norm{f(x) - f(y)} < \frac{\e}{2}\). Sean \(u, v \in \cl{A}\) con \(\norm{u - v} < \delta\), y sean \({(u_m)}, {(v_m)} \subset A\) con \(u_m \to u\), \(v_m \to v\). Entonces \(\norm{u_m - v_m} \to \norm{u - v} < \delta\), de modo que \(\norm{u_m - v_m} < \delta\) para \(m\) grande, y entonces \(\norm{f(u_m) - f(v_m)} < \frac{\e}{2}\). Tomando límite cuando \(m \to \infty\) se obtiene \(\norm{\bar{f}(u) - \bar{f}(v)} \leq \frac{\e}{2} < \e\). En particular, \(\bar{f}\) es continua.
 
-  \emph{Paso 5: unicidad.} Sea $g\colon \cl{A} \to \R^k$ continua con $g|_A = f$. Dado $x \in \cl{A}$, sea ${(x_m)} \subset A$ con $x_m \to x$. Por la continuidad de $g$, $g(x_m) \to g(x)$, y por la continuidad de $\bar{f}$, $\bar{f}(x_m) \to \bar{f}(x)$. Como $g(x_m) = f(x_m) = \bar{f}(x_m)$ para todo $m$, por la unicidad del límite $g(x) = \bar{f}(x)$.
+  \emph{Paso 5: unicidad.} Sea \(g\colon \cl{A} \to \R^k\) continua con \(g|_A = f\). Dado \(x \in \cl{A}\), sea \({(x_m)} \subset A\) con \(x_m \to x\). Por la continuidad de \(g\), \(g(x_m) \to g(x)\), y por la continuidad de \(\bar{f}\), \(\bar{f}(x_m) \to \bar{f}(x)\). Como \(g(x_m) = f(x_m) = \bar{f}(x_m)\) para todo \(m\), por la unicidad del límite \(g(x) = \bar{f}(x)\).
 \end{proof}
 
 % TODO: Revisar esta sección

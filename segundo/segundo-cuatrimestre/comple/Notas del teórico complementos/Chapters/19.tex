@@ -1,160 +1,160 @@
 \section{Ejemplos de contenido de Jordan}
 
 \begin{eg}
-  El conjunto $X = \Q \cap [a, b]$, con $a < b$, no tiene contenido nulo.
+  El conjunto \(X = \Q \cap [a, b]\), con \(a < b\), no tiene contenido nulo.
 \end{eg}
 
 \begin{proof}
-  Como $\cl{X} = [a, b]$, para toda partición $P$ de un intervalo $I \supseteq [a, b]$ los subintervalos de $P$ que intersecan a $\cl{X}$ cubren $[a, b]$, y sus medidas suman al menos $b - a$. Luego $\overline{c}(X) \geq b - a > 0$.
+  Como \(\cl{X} = [a, b]\), para toda partición \(P\) de un intervalo \(I \supseteq [a, b]\) los subintervalos de \(P\) que intersecan a \(\cl{X}\) cubren \([a, b]\), y sus medidas suman al menos \(b - a\). Luego \(\overline{c}(X) \geq b - a > 0\).
 \end{proof}
 
 \begin{lemma}
-  Sea $X \subseteq \R$ acotado. Si para todo $\e > 0$ existen un conjunto finito $F \subseteq X$ e intervalos abiertos $I_1, \dots, I_k$ tales que $X \setminus F \subseteq I_1 \cup \cdots \cup I_k$ y $|I_1| + \cdots + |I_k| < \e$, entonces $c(X) = 0$.
+  Sea \(X \subseteq \R\) acotado. Si para todo \(\e > 0\) existen un conjunto finito \(F \subseteq X\) e intervalos abiertos \(I_1, \dots, I_k\) tales que \(X \setminus F \subseteq I_1 \cup \cdots \cup I_k\) y \(|I_1| + \cdots + |I_k| < \e\), entonces \(c(X) = 0\).
 \end{lemma}
 
 \begin{proof}
-  Dado $\e > 0$, tomamos $F, I_1, \dots, I_k$ como en el enunciado con $\sum_{i=1}^k |I_i| < \frac{\e}{2}$. Si $F = \{x_1, \dots, x_q\}$, podemos cubrir $F$ con intervalos abiertos $I_{k+1}, \dots, I_n$ de longitud menor que $\frac{\e}{2q}$ cada uno. Entonces $X \subseteq I_1 \cup \cdots \cup I_n$ y $\sum_{i=1}^n |I_i| < \e$.
+  Dado \(\e > 0\), tomamos \(F, I_1, \dots, I_k\) como en el enunciado con \(\sum_{i=1}^k |I_i| < \frac{\e}{2}\). Si \(F = \{x_1, \dots, x_q\}\), podemos cubrir \(F\) con intervalos abiertos \(I_{k+1}, \dots, I_n\) de longitud menor que \(\frac{\e}{2q}\) cada uno. Entonces \(X \subseteq I_1 \cup \cdots \cup I_n\) y \(\sum_{i=1}^n |I_i| < \e\).
 
-  Sean $\bar{I}_i = [\alpha_i, \beta_i]$ y $[a, b]$ un intervalo que contiene a $X$ y a todos los $\bar{I}_i$. Para $\eta > 0$, sea $P$ la partición de $[a, b]$ cuyos puntos son $a$, $b$ y todos los $\alpha_i$, $\beta_i$, $\alpha_i - \eta$, $\beta_i + \eta$ que están en $[a, b]$. Un subintervalo $R$ de $P$ que interseca a $\cl{X} \subseteq \bigcup_i \bar{I}_i$ interseca algún $\bar{I}_i$. Como $\alpha_i$ y $\beta_i$ son puntos de $P$, o bien $R \subseteq \bar{I}_i$, o bien $R$ comparte con $\bar{I}_i$ un único extremo, y en ese caso $R = [\beta_i, \beta_i']$ o $R = [\alpha_i', \alpha_i]$ con longitud a lo sumo $\eta$. Hay a lo sumo $2n$ subintervalos del segundo tipo, y los del primer tipo suman a lo sumo $\sum_i |I_i|$, pues sus interiores son disjuntos. Luego
+  Sean \(\bar{I}_i = [\alpha_i, \beta_i]\) y \([a, b]\) un intervalo que contiene a \(X\) y a todos los \(\bar{I}_i\). Para \(\eta > 0\), sea \(P\) la partición de \([a, b]\) cuyos puntos son \(a\), \(b\) y todos los \(\alpha_i\), \(\beta_i\), \(\alpha_i - \eta\), \(\beta_i + \eta\) que están en \([a, b]\). Un subintervalo \(R\) de \(P\) que interseca a \(\cl{X} \subseteq \bigcup_i \bar{I}_i\) interseca algún \(\bar{I}_i\). Como \(\alpha_i\) y \(\beta_i\) son puntos de \(P\), o bien \(R \subseteq \bar{I}_i\), o bien \(R\) comparte con \(\bar{I}_i\) un único extremo, y en ese caso \(R = [\beta_i, \beta_i']\) o \(R = [\alpha_i', \alpha_i]\) con longitud a lo sumo \(\eta\). Hay a lo sumo \(2n\) subintervalos del segundo tipo, y los del primer tipo suman a lo sumo \(\sum_i |I_i|\), pues sus interiores son disjuntos. Luego
   \[
     \overline{c}(X) \leq \overline{J}(X, P) \leq \sum_{i=1}^n |I_i| + 2n\eta < \e + 2n\eta.
   \]
-  Como $\eta$ es arbitrario, $\overline{c}(X) \leq \e$, y como $\e$ es arbitrario, $\overline{c}(X) = 0$. Entonces $c(X) = 0$.
+  Como \(\eta\) es arbitrario, \(\overline{c}(X) \leq \e\), y como \(\e\) es arbitrario, \(\overline{c}(X) = 0\). Entonces \(c(X) = 0\).
 \end{proof}
 
 \begin{eg}
-  El conjunto de Cantor $C$ tiene contenido nulo.
+  El conjunto de Cantor \(C\) tiene contenido nulo.
 \end{eg}
 
 \begin{proof}
-  Sea $F_n$ el conjunto obtenido en el paso $n$ de la construcción de $C$, unión de $2^n$ intervalos cerrados disjuntos de longitud $3^{-n}$. Entonces $C \subseteq F_n$ y la suma de las longitudes de los intervalos de $F_n$ es $1 - \frac{1}{3} \sum_{i=0}^{n-1} {\left( \frac{2}{3} \right)}^i = {\left( \frac{2}{3} \right)}^n$. Cada intervalo cerrado de $F_n$ está contenido en un intervalo abierto de longitud $2 \cdot 3^{-n}$, y la suma de las longitudes de éstos es $2 {\left( \frac{2}{3} \right)}^n$, que es menor que $\e$ para $n$ suficientemente grande. Por el lema (con $F = \varnothing$), $c(C) = 0$.
+  Sea \(F_n\) el conjunto obtenido en el paso \(n\) de la construcción de \(C\), unión de \(2^n\) intervalos cerrados disjuntos de longitud \(3^{-n}\). Entonces \(C \subseteq F_n\) y la suma de las longitudes de los intervalos de \(F_n\) es \(1 - \frac{1}{3} \sum_{i=0}^{n-1} {\left( \frac{2}{3} \right)}^i = {\left( \frac{2}{3} \right)}^n\). Cada intervalo cerrado de \(F_n\) está contenido en un intervalo abierto de longitud \(2 \cdot 3^{-n}\), y la suma de las longitudes de éstos es \(2 {\left( \frac{2}{3} \right)}^n\), que es menor que \(\e\) para \(n\) suficientemente grande. Por el lema (con \(F = \varnothing\)), \(c(C) = 0\).
 \end{proof}
 
 \begin{theorem}
-  Sea $S \subset \R^n$ acotado. Entonces $\overline{c}(\partial S) = \overline{c}(S) - \underline{c}(S)$. En particular, $S$ es medible Jordan si y sólo si $\partial S$ tiene contenido de Jordan nulo.
+  Sea \(S \subset \R^n\) acotado. Entonces \(\overline{c}(\partial S) = \overline{c}(S) - \underline{c}(S)\). En particular, \(S\) es medible Jordan si y sólo si \(\partial S\) tiene contenido de Jordan nulo.
 \end{theorem}
 
 \begin{proof}
-  Sea $I \subset \R^n$ un intervalo compacto que contiene a $\cl{S}$. Veamos primero que para toda partición $P$ de $I$,
+  Sea \(I \subset \R^n\) un intervalo compacto que contiene a \(\cl{S}\). Veamos primero que para toda partición \(P\) de \(I\),
   \[
     \overline{J}(\partial S, P) = \overline{J}(S, P) - \underline{J}(S, P).
   \]
-  Un subintervalo $R$ de $P$ está contenido en $\interior S$ si y sólo si interseca a $\cl{S}$ y no interseca a $\partial S$. En efecto, si $R \subseteq \interior S$ entonces $R \cap \partial S = \varnothing$ y $R \cap \cl{S} \neq \varnothing$. Recíprocamente, si $R \cap \partial S = \varnothing$, entonces $R \subseteq \interior S \cup (\R^n \setminus \cl{S})$, unión de dos abiertos disjuntos; por ser $R$ conexo está contenido en uno de ellos, y si interseca a $\cl{S}$, está contenido en $\interior S$. Luego los subintervalos que intersecan a $\partial S = \cl{\partial S}$ son exactamente los que intersecan a $\cl{S}$ y no están contenidos en $\interior S$, lo que da la igualdad.
+  Un subintervalo \(R\) de \(P\) está contenido en \(\interior S\) si y sólo si interseca a \(\cl{S}\) y no interseca a \(\partial S\). En efecto, si \(R \subseteq \interior S\) entonces \(R \cap \partial S = \varnothing\) y \(R \cap \cl{S} \neq \varnothing\). Recíprocamente, si \(R \cap \partial S = \varnothing\), entonces \(R \subseteq \interior S \cup (\R^n \setminus \cl{S})\), unión de dos abiertos disjuntos; por ser \(R\) conexo está contenido en uno de ellos, y si interseca a \(\cl{S}\), está contenido en \(\interior S\). Luego los subintervalos que intersecan a \(\partial S = \cl{\partial S}\) son exactamente los que intersecan a \(\cl{S}\) y no están contenidos en \(\interior S\), lo que da la igualdad.
 
-  Como $\overline{J}(S, P) \geq \overline{c}(S)$ y $\underline{J}(S, P) \leq \underline{c}(S)$, resulta $\overline{J}(\partial S, P) \geq \overline{c}(S) - \underline{c}(S)$ para toda $P$, y entonces $\overline{c}(\partial S) \geq \overline{c}(S) - \underline{c}(S)$.
+  Como \(\overline{J}(S, P) \geq \overline{c}(S)\) y \(\underline{J}(S, P) \leq \underline{c}(S)\), resulta \(\overline{J}(\partial S, P) \geq \overline{c}(S) - \underline{c}(S)\) para toda \(P\), y entonces \(\overline{c}(\partial S) \geq \overline{c}(S) - \underline{c}(S)\).
 
-  Para la desigualdad opuesta, dado $\e > 0$ sea $P_1$ tal que $\overline{J}(S, P_1) < \overline{c}(S) + \frac{\e}{2}$ y $P_2$ tal que $\underline{J}(S, P_2) > \underline{c}(S) - \frac{\e}{2}$. Sea $P = P_1 \cup P_2$ (refinamiento común). Como refinar achica las sumas exteriores y agranda las interiores,
+  Para la desigualdad opuesta, dado \(\e > 0\) sea \(P_1\) tal que \(\overline{J}(S, P_1) < \overline{c}(S) + \frac{\e}{2}\) y \(P_2\) tal que \(\underline{J}(S, P_2) > \underline{c}(S) - \frac{\e}{2}\). Sea \(P = P_1 \cup P_2\) (refinamiento común). Como refinar achica las sumas exteriores y agranda las interiores,
   \begin{align*}
     \overline{c}(\partial S) \leq \overline{J}(\partial S, P) & = \overline{J}(S, P) - \underline{J}(S, P) \leq \overline{J}(S, P_1) - \underline{J}(S, P_2) \\
                                                               & < \overline{c}(S) - \underline{c}(S) + \e.
   \end{align*}
-  Como $\e > 0$ es arbitrario, $\overline{c}(\partial S) \leq \overline{c}(S) - \underline{c}(S)$.
+  Como \(\e > 0\) es arbitrario, \(\overline{c}(\partial S) \leq \overline{c}(S) - \underline{c}(S)\).
 
-  Finalmente, $S$ es medible Jordan si y sólo si $\overline{c}(S) = \underline{c}(S)$, es decir, si y sólo si $\overline{c}(\partial S) = 0$, que equivale a $c(\partial S) = 0$ pues $0 \leq \underline{c}(\partial S) \leq \overline{c}(\partial S)$.
+  Finalmente, \(S\) es medible Jordan si y sólo si \(\overline{c}(S) = \underline{c}(S)\), es decir, si y sólo si \(\overline{c}(\partial S) = 0\), que equivale a \(c(\partial S) = 0\) pues \(0 \leq \underline{c}(\partial S) \leq \overline{c}(\partial S)\).
 \end{proof}
 
 \section{Medida de Lebesgue nula}
 
 \begin{definition}[Medida de Lebesgue nula]
-  Un conjunto $S \subseteq \R^n$ tiene \emph{medida de Lebesgue nula} si para todo $\e > 0$ puede cubrirse con una cantidad numerable de intervalos cuyas medidas suman menos que $\e$. Notamos $|S| = 0$.
+  Un conjunto \(S \subseteq \R^n\) tiene \emph{medida de Lebesgue nula} si para todo \(\e > 0\) puede cubrirse con una cantidad numerable de intervalos cuyas medidas suman menos que \(\e\). Notamos \(|S| = 0\).
 \end{definition}
 
 \begin{eg}
-  Si $c(X) = 0$, entonces $|X| = 0$, pues existe una partición $P$ tal que los subintervalos que intersecan a $\cl{X}$ cubren a $X$ y suman menos que $\e$. Por ejemplo, el conjunto de Cantor tiene medida nula.
+  Si \(c(X) = 0\), entonces \(|X| = 0\), pues existe una partición \(P\) tal que los subintervalos que intersecan a \(\cl{X}\) cubren a \(X\) y suman menos que \(\e\). Por ejemplo, el conjunto de Cantor tiene medida nula.
 \end{eg}
 
 \begin{prop}
-  Toda unión numerable de conjuntos de medida nula tiene medida nula. En particular, todo conjunto numerable tiene medida nula; por ejemplo, $|\Q| = 0$.
+  Toda unión numerable de conjuntos de medida nula tiene medida nula. En particular, todo conjunto numerable tiene medida nula; por ejemplo, \(|\Q| = 0\).
 \end{prop}
 
 \begin{proof}
-  Sean $F_1, F_2, \dots$ conjuntos de medida nula y $\e > 0$. Para cada $k \in \N$ cubrimos $F_k$ con una cantidad numerable de intervalos cuyas medidas suman menos que $\frac{\e}{2^k}$. La unión de todos estos intervalos es una familia numerable que cubre $\bigcup_k F_k$, y la suma de sus medidas es menor que $\sum_k \frac{\e}{2^k} = \e$.
+  Sean \(F_1, F_2, \dots\) conjuntos de medida nula y \(\e > 0\). Para cada \(k \in \N\) cubrimos \(F_k\) con una cantidad numerable de intervalos cuyas medidas suman menos que \(\frac{\e}{2^k}\). La unión de todos estos intervalos es una familia numerable que cubre \(\bigcup_k F_k\), y la suma de sus medidas es menor que \(\sum_k \frac{\e}{2^k} = \e\).
 
-  Todo conjunto con un único punto tiene medida nula (se cubre con un intervalo de medida menor que $\e$), de modo que todo conjunto numerable, por ejemplo $\Q = \{r_1, r_2, \dots\}$, tiene medida nula. Explícitamente, cubriendo a $r_k$ con el intervalo $\left( r_k - \frac{\e}{2^{k+2}}, r_k + \frac{\e}{2^{k+2}} \right)$ se obtiene una suma total $\sum_k \frac{\e}{2^{k+1}} = \frac{\e}{2} < \e$.
+  Todo conjunto con un único punto tiene medida nula (se cubre con un intervalo de medida menor que \(\e\)), de modo que todo conjunto numerable, por ejemplo \(\Q = \{r_1, r_2, \dots\}\), tiene medida nula. Explícitamente, cubriendo a \(r_k\) con el intervalo \(\left( r_k - \frac{\e}{2^{k+2}}, r_k + \frac{\e}{2^{k+2}} \right)\) se obtiene una suma total \(\sum_k \frac{\e}{2^{k+1}} = \frac{\e}{2} < \e\).
 \end{proof}
 
 \section{Integrabilidad y medida de Jordan}
 
-Vamos a ver que $f: I \subset \R^n \to \R$ es integrable Riemann si y solo si su conjunto de puntos de discontinuidad tiene medida de Lebesgue nula.
+Vamos a ver que \(f: I \subset \R^n \to \R\) es integrable Riemann si y solo si su conjunto de puntos de discontinuidad tiene medida de Lebesgue nula.
 
 \begin{definition}[Oscilación]
-  Sea $f: I \subset \R^n \to \R$ acotada, $I$ intervalo compacto. Se define la oscilación de $f$ en un punto $x_0 \in I$ como:
+  Sea \(f: I \subset \R^n \to \R\) acotada, \(I\) intervalo compacto. Se define la oscilación de \(f\) en un punto \(x_0 \in I\) como:
   \[ \omega(f, x_0) = \lim_{\delta \to 0} \omega(f, B_\delta(x_0) \cap I) \]
-  donde $\omega(f, A) = \sup_A f - \inf_A f$. Notar que el límite existe porque $\omega(f, B_\delta(x_0) \cap I)$ es acotada por ser $f$ acotada y es una función decreciente de $\delta$.
+  donde \(\omega(f, A) = \sup_A f - \inf_A f\). Notar que el límite existe porque \(\omega(f, B_\delta(x_0) \cap I)\) es acotada por ser \(f\) acotada y es una función decreciente de \(\delta\).
 \end{definition}
 
 \begin{theorem}
-  Sea $f: I \subset \R^n \to \R$ acotada, $I$ intervalo compacto. $f$ es continua en $x_0 \in I$ si y solo si $\omega(f, x_0) = 0$.
+  Sea \(f: I \subset \R^n \to \R\) acotada, \(I\) intervalo compacto. \(f\) es continua en \(x_0 \in I\) si y solo si \(\omega(f, x_0) = 0\).
 \end{theorem}
 \begin{proof}
-  Sea $f$ continua en $x_0$. Dado $\e > 0$, $\exists \delta > 0$ tal que si $x \in B_\delta(x_0) \cap I \implies f(x) \in B_{\e/2}(f(x_0))$. Esto implica que $\omega(f, B_\delta(x_0) \cap I) < \e$, y por tanto $\omega(f, x_0) = 0$.
+  Sea \(f\) continua en \(x_0\). Dado \(\e > 0\), \(\exists \delta > 0\) tal que si \(x \in B_\delta(x_0) \cap I \implies f(x) \in B_{\e/2}(f(x_0))\). Esto implica que \(\omega(f, B_\delta(x_0) \cap I) < \e\), y por tanto \(\omega(f, x_0) = 0\).
 
-  Recíprocamente, si $\omega(f, x_0) = 0 \implies \forall \e > 0, \exists \delta > 0 : \omega(f, B_\delta(x_0) \cap I) < \e$.
-  Para todo $x, y \in B_\delta(x_0) \cap I \implies |f(x) - f(y)| < \e$. En particular, tomando $y = x_0$, tenemos $|f(x) - f(x_0)| < \e$, así que $f$ es continua en $x_0$.
+  Recíprocamente, si \(\omega(f, x_0) = 0 \implies \forall \e > 0, \exists \delta > 0 : \omega(f, B_\delta(x_0) \cap I) < \e\).
+  Para todo \(x, y \in B_\delta(x_0) \cap I \implies |f(x) - f(y)| < \e\). En particular, tomando \(y = x_0\), tenemos \(|f(x) - f(x_0)| < \e\), así que \(f\) es continua en \(x_0\).
 \end{proof}
 
 \begin{theorem}
-  Sea $f: I \subset \R^n \to \R$ acotada, $I \subset \R^n$ intervalo compacto. Si $\omega(f, x) < \e$ para todo $x \in I \implies \exists \delta > 0$ tal que para todo subintervalo cerrado $J \subset I$, si la longitud del mayor lado de $J$ es $< \delta$, entonces $\omega(f, J) < \e$.
+  Sea \(f: I \subset \R^n \to \R\) acotada, \(I \subset \R^n\) intervalo compacto. Si \(\omega(f, x) < \e\) para todo \(x \in I \implies \exists \delta > 0\) tal que para todo subintervalo cerrado \(J \subset I\), si la longitud del mayor lado de \(J\) es \(< \delta\), entonces \(\omega(f, J) < \e\).
 \end{theorem}
 \begin{proof}
-  Para cada $x \in I$, existe $\delta_x > 0$ tal que en $B_x = B_{\delta_x}(x)$, se tiene $\omega(f, B_x \cap I) < \e$.
-  El conjunto de bolas $\{B_{\delta_x/2}(x) : x \in I\}$ es un cubrimiento abierto de $I$. Como $I$ es compacto, nos podemos quedar con finitos, digamos $M$.
-  Sea $\delta = \min \left\{ \frac{\delta_{x_1}}{2\sqrt{n}}, \dots, \frac{\delta_{x_M}}{2\sqrt{n}} \right\}$.
-  Si la longitud del mayor lado de $J$ es menor que $\delta$, entonces $J$ está parcialmente cubierto por una bola de estas que contiene a su centro, digamos $B_{\delta_p/2}(x_p)$.
-  Entonces la bola $B_{\delta_p}(x_p)$ cubre a $J$ porque $\delta_p \geq 2\sqrt{n}\delta$ y el mayor lado de $J$ tiene longitud $\leq \delta$. Además, en $B_{\delta_p}(x_p) \cap I$ la oscilación de $f$ es menor que $\e$, por lo que $\omega(f, J) < \e$.
+  Para cada \(x \in I\), existe \(\delta_x > 0\) tal que en \(B_x = B_{\delta_x}(x)\), se tiene \(\omega(f, B_x \cap I) < \e\).
+  El conjunto de bolas \(\{B_{\delta_x/2}(x) : x \in I\}\) es un cubrimiento abierto de \(I\). Como \(I\) es compacto, nos podemos quedar con finitos, digamos \(M\).
+  Sea \(\delta = \min \left\{ \frac{\delta_{x_1}}{2\sqrt{n}}, \dots, \frac{\delta_{x_M}}{2\sqrt{n}} \right\}\).
+  Si la longitud del mayor lado de \(J\) es menor que \(\delta\), entonces \(J\) está parcialmente cubierto por una bola de estas que contiene a su centro, digamos \(B_{\delta_p/2}(x_p)\).
+  Entonces la bola \(B_{\delta_p}(x_p)\) cubre a \(J\) porque \(\delta_p \geq 2\sqrt{n}\delta\) y el mayor lado de \(J\) tiene longitud \(\leq \delta\). Además, en \(B_{\delta_p}(x_p) \cap I\) la oscilación de \(f\) es menor que \(\e\), por lo que \(\omega(f, J) < \e\).
 \end{proof}
 
 \begin{theorem}
-  Sea $f: I \subset \R^n \to \R$ acotada, $I$ compacto. Para cada $\e > 0$, definimos $T_\e = \{x \in I : \omega(f, x) \geq \e\}$. Entonces $T_\e$ es cerrado.
+  Sea \(f: I \subset \R^n \to \R\) acotada, \(I\) compacto. Para cada \(\e > 0\), definimos \(T_\e = \{x \in I : \omega(f, x) \geq \e\}\). Entonces \(T_\e\) es cerrado.
 \end{theorem}
 \begin{proof}
-  Sea $x_0 \notin T_\e \implies \omega(f, x_0) < \e \implies \exists B_\delta(x_0)$ tal que $\omega(f, B_\delta(x_0) \cap I) < \e$.
-  Pero entonces ningún punto de $B_\delta(x_0)$ puede estar en $T_\e$, absurdo si $x_0 \in \cl{T_\e}$. Luego el complemento de $T_\e$ es abierto, y $T_\e$ es cerrado.
+  Sea \(x_0 \notin T_\e \implies \omega(f, x_0) < \e \implies \exists B_\delta(x_0)\) tal que \(\omega(f, B_\delta(x_0) \cap I) < \e\).
+  Pero entonces ningún punto de \(B_\delta(x_0)\) puede estar en \(T_\e\), absurdo si \(x_0 \in \cl{T_\e}\). Luego el complemento de \(T_\e\) es abierto, y \(T_\e\) es cerrado.
 \end{proof}
 
 \begin{theorem}[Criterio de Lebesgue]
-  Sea $f: I \subset \R^n \to \R$ acotada, $I$ compacto y sea $D$ el conjunto de puntos de discontinuidad de $f$. $f$ es integrable Riemann en $I$ si y solo si $|D| = 0$.
+  Sea \(f: I \subset \R^n \to \R\) acotada, \(I\) compacto y sea \(D\) el conjunto de puntos de discontinuidad de \(f\). \(f\) es integrable Riemann en \(I\) si y solo si \(|D| = 0\).
 \end{theorem}
 \begin{proof}
-  Supongamos que $f$ es integrable Riemann y $|D| \neq 0$. Como $D = \{x \in I : \omega(f, x) > 0\}$, entonces $D = \bigcup_{r=1}^\infty D_r$ con $D_r = \{x \in I : \omega(f, x) \geq 1/r\}$.
-  Si $|D| \neq 0$, entonces $|D_r| \neq 0$ para algún $r$, es decir, existe $\e > 0$ tal que todo cubrimiento numerable de $D_r$ por intervalos abiertos tiene suma de medidas mayor a $\e$.
+  Supongamos que \(f\) es integrable Riemann y \(|D| \neq 0\). Como \(D = \{x \in I : \omega(f, x) > 0\}\), entonces \(D = \bigcup_{r=1}^\infty D_r\) con \(D_r = \{x \in I : \omega(f, x) \geq 1/r\}\).
+  Si \(|D| \neq 0\), entonces \(|D_r| \neq 0\) para algún \(r\), es decir, existe \(\e > 0\) tal que todo cubrimiento numerable de \(D_r\) por intervalos abiertos tiene suma de medidas mayor a \(\e\).
 
-  Si $P$ es una partición de $I$ que define subintervalos $I_1, \dots, I_n$, separamos la suma:
+  Si \(P\) es una partición de \(I\) que define subintervalos \(I_1, \dots, I_n\), separamos la suma:
   \[ S(f, P) - s(f, P) = \sum_{m=1}^n (M_m - m_m)|I_m| = S_1 + S_2 \]
-  donde $S_1$ son los términos con intervalos que tienen puntos de $D_r$ en el interior.
-  Los intervalos abiertos de $S_1$ cubren a $D_r$, salvo quizás por un subconjunto de medida nula (las fronteras). Así que la suma de las medidas de los intervalos de $S_1$ es por lo menos $\e$.
-  Además, en estos intervalos $M_m - m_m \geq 1/r \implies S_1 \geq \e/r$.
-  Luego $S(f, P) - s(f, P) \geq \e/r > 0$ para toda partición $P$, lo cual contradice que $f$ sea integrable.
+  donde \(S_1\) son los términos con intervalos que tienen puntos de \(D_r\) en el interior.
+  Los intervalos abiertos de \(S_1\) cubren a \(D_r\), salvo quizás por un subconjunto de medida nula (las fronteras). Así que la suma de las medidas de los intervalos de \(S_1\) es por lo menos \(\e\).
+  Además, en estos intervalos \(M_m - m_m \geq 1/r \implies S_1 \geq \e/r\).
+  Luego \(S(f, P) - s(f, P) \geq \e/r > 0\) para toda partición \(P\), lo cual contradice que \(f\) sea integrable.
 
-  Supongamos ahora que $|D| = 0$. Vuelvo a escribir $D = \bigcup_{r=1}^\infty D_r$.
-  Como $|D| = 0 \implies |D_r| = 0$. Es decir que $D_r$ se puede cubrir por numerables intervalos abiertos cuyas medidas suman menos que $\e$.
-  Como $D_r$ es compacto (es un subconjunto cerrado del compacto $I$), me puedo quedar con finitos intervalos abiertos que cubren a $D_r$. La unión es abierta, la llamo $A_r$.
-  $B_r = I \setminus A_r$ es una unión de finitos subintervalos cerrados de $I$.
-  Para todo $x \in B_r$, $x \notin D_r$, por lo que $\omega(f, x) < 1/r$.
-  Existe $\delta > 0$ tal que $J \subset B_r$ con lados de longitud $< \delta$ cumple $\omega(f, J) < 1/r$.
-  Subdividimos $I$ en finitos subintervalos con una partición $P$ de norma menor a $\delta$.
+  Supongamos ahora que \(|D| = 0\). Vuelvo a escribir \(D = \bigcup_{r=1}^\infty D_r\).
+  Como \(|D| = 0 \implies |D_r| = 0\). Es decir que \(D_r\) se puede cubrir por numerables intervalos abiertos cuyas medidas suman menos que \(\e\).
+  Como \(D_r\) es compacto (es un subconjunto cerrado del compacto \(I\)), me puedo quedar con finitos intervalos abiertos que cubren a \(D_r\). La unión es abierta, la llamo \(A_r\).
+  \(B_r = I \setminus A_r\) es una unión de finitos subintervalos cerrados de \(I\).
+  Para todo \(x \in B_r\), \(x \notin D_r\), por lo que \(\omega(f, x) < 1/r\).
+  Existe \(\delta > 0\) tal que \(J \subset B_r\) con lados de longitud \(< \delta\) cumple \(\omega(f, J) < 1/r\).
+  Subdividimos \(I\) en finitos subintervalos con una partición \(P\) de norma menor a \(\delta\).
   Separamos la suma:
   \[ S(f, P) - s(f, P) = \sum_{m=1}^n (M_m - m_m)|I_m| = S_1 + S_2 \]
-  En $S_2$ (intervalos en $B_r$), tenemos $M_m - m_m < 1/r \implies S_2 < |I|/r$.
-  En $S_1$ (intervalos que intersecan $A_r$), acotamos $M_m - m_m \leq M - m$. Como la suma de las medidas de estos intervalos es menor a $\e$, $S_1 \leq (M - m)\e$.
-  Como $\e$ y $r$ son arbitrarios, podemos hacer la suma tan pequeña como queramos, por lo tanto $f$ es integrable Riemann.
+  En \(S_2\) (intervalos en \(B_r\)), tenemos \(M_m - m_m < 1/r \implies S_2 < |I|/r\).
+  En \(S_1\) (intervalos que intersecan \(A_r\)), acotamos \(M_m - m_m \leq M - m\). Como la suma de las medidas de estos intervalos es menor a \(\e\), \(S_1 \leq (M - m)\e\).
+  Como \(\e\) y \(r\) son arbitrarios, podemos hacer la suma tan pequeña como queramos, por lo tanto \(f\) es integrable Riemann.
 \end{proof}
 
 \section{Integración en conjuntos}
 
 \begin{definition}
-  Sea $f$ acotada y definida en un conjunto $S \subset \R^n$. Sea $I \subset \R^n$ un intervalo compacto que contiene a $S$. Definimos:
+  Sea \(f\) acotada y definida en un conjunto \(S \subset \R^n\). Sea \(I \subset \R^n\) un intervalo compacto que contiene a \(S\). Definimos:
   \[ \tilde{f}(x) = \begin{cases} f(x) & \text{si } x \in S \\ 0 & \text{si } x \in I \setminus S \end{cases} \]
-  Definimos $\int_S f = \int_I \tilde{f}$ si $\tilde{f}$ es integrable Riemann. Análogamente se definen la integral superior e inferior.
+  Definimos \(\int_S f = \int_I \tilde{f}\) si \(\tilde{f}\) es integrable Riemann. Análogamente se definen la integral superior e inferior.
 \end{definition}
 
 \begin{theorem}
-  Sea $S \subset \R^n$ medible Jordan y sea $f: S \to \R$ acotada. $f$ es integrable en $S$ si y solo si las discontinuidades de $f$ en $S$ son un conjunto de medida nula.
+  Sea \(S \subset \R^n\) medible Jordan y sea \(f: S \to \R\) acotada. \(f\) es integrable en \(S\) si y solo si las discontinuidades de \(f\) en \(S\) son un conjunto de medida nula.
 \end{theorem}
 \begin{proof}
-  Sea $I$ compacto con $S \subset I$. Si $x \notin \cl{S} \cup \partial S$, entonces $x \in I \setminus \cl{S}$, que es abierto, y en un entorno de $x$, $\tilde{f} = 0$, por lo que $\tilde{f}$ es continua ahí.
-  Las discontinuidades de $\tilde{f}$ pueden ocurrir en las discontinuidades de $f$ en el interior de $S$, o en los puntos de la frontera $\partial S$.
-  Como $S$ es medible Jordan, $c(\partial S) = 0 \implies |\partial S| = 0$.
-  Por el criterio de Lebesgue, $\tilde{f}$ es integrable Riemann en $I$ si y solo si el conjunto de sus discontinuidades tiene medida nula.
-  Como $|\partial S| = 0$, el conjunto total de discontinuidades tiene medida nula si y solo si el conjunto de discontinuidades de $f$ en el interior de $S$ tiene medida nula.
+  Sea \(I\) compacto con \(S \subset I\). Si \(x \notin \cl{S} \cup \partial S\), entonces \(x \in I \setminus \cl{S}\), que es abierto, y en un entorno de \(x\), \(\tilde{f} = 0\), por lo que \(\tilde{f}\) es continua ahí.
+  Las discontinuidades de \(\tilde{f}\) pueden ocurrir en las discontinuidades de \(f\) en el interior de \(S\), o en los puntos de la frontera \(\partial S\).
+  Como \(S\) es medible Jordan, \(c(\partial S) = 0 \implies |\partial S| = 0\).
+  Por el criterio de Lebesgue, \(\tilde{f}\) es integrable Riemann en \(I\) si y solo si el conjunto de sus discontinuidades tiene medida nula.
+  Como \(|\partial S| = 0\), el conjunto total de discontinuidades tiene medida nula si y solo si el conjunto de discontinuidades de \(f\) en el interior de \(S\) tiene medida nula.
 \end{proof}

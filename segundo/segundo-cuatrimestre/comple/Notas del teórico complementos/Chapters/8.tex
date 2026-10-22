@@ -1,120 +1,120 @@
 \section{Un ejemplo de convergencia condicional}
 
 \begin{eg}
-  La serie $\sum_{n \geq 1} \dfrac{(-1)^{n+1}}{n}$ converge, pero no lo hace absolutamente.
+  La serie \(\sum_{n \geq 1} \dfrac{(-1)^{n+1}}{n}\) converge, pero no lo hace absolutamente.
 \end{eg}
 
 \begin{proof}
-  No converge absolutamente porque $\sum \frac{1}{n}$ diverge. Veamos que converge.
+  No converge absolutamente porque \(\sum \frac{1}{n}\) diverge. Veamos que converge.
 
   \emph{(i) Sumas parciales pares.} Se tiene
   \[
     S_{2n} = \left( 1 - \frac{1}{2} \right) + \left( \frac{1}{3} - \frac{1}{4} \right) + \cdots + \left( \frac{1}{2n-1} - \frac{1}{2n} \right),
   \]
-  de modo que $S_2 < S_4 < \cdots < S_{2n} < \cdots$ es creciente. Además,
+  de modo que \(S_2 < S_4 < \cdots < S_{2n} < \cdots\) es creciente. Además,
   \[
     S_{2n} = 1 - \left( \frac{1}{2} - \frac{1}{3} \right) - \cdots - \left( \frac{1}{2n-2} - \frac{1}{2n-1} \right) - \frac{1}{2n} < 1,
   \]
-  luego ${(S_{2n})}$ es creciente y acotada, y por lo tanto converge a algún $\tilde{s}$.
+  luego \({(S_{2n})}\) es creciente y acotada, y por lo tanto converge a algún \(\tilde{s}\).
 
-  \emph{(ii) Sumas parciales impares.} Como $S_{2n+1} = S_{2n} + \frac{1}{2n+1}$ y
+  \emph{(ii) Sumas parciales impares.} Como \(S_{2n+1} = S_{2n} + \frac{1}{2n+1}\) y
   \[
     S_{2n+1} = 1 - \left( \frac{1}{2} - \frac{1}{3} \right) - \cdots - \left( \frac{1}{2n} - \frac{1}{2n+1} \right),
   \]
-  se tiene $S_1 > S_3 > \cdots > S_{2n+1} > \cdots > 0$, es decir, ${(S_{2n+1})}$ es decreciente y acotada, y converge a algún $s'$.
+  se tiene \(S_1 > S_3 > \cdots > S_{2n+1} > \cdots > 0\), es decir, \({(S_{2n+1})}\) es decreciente y acotada, y converge a algún \(s'\).
 
-  Como $S_{2n+1} - S_{2n} = \frac{1}{2n+1} \to 0$, resulta $\tilde{s} = s'$. Entonces ${(S_n)}$ converge, pues sus subsucesiones de índices pares e impares convergen al mismo límite.
+  Como \(S_{2n+1} - S_{2n} = \frac{1}{2n+1} \to 0\), resulta \(\tilde{s} = s'\). Entonces \({(S_n)}\) converge, pues sus subsucesiones de índices pares e impares convergen al mismo límite.
 \end{proof}
 
 \section{Corolarios del criterio de comparación}
 
 \begin{corollary}
-  Sea $\sum b_n$ una serie convergente de términos positivos. Si existen $k > 0$ y $n_0 \in \N$ tales que $|a_n| \leq k\, b_n$ para todo $n > n_0$, entonces $\sum a_n$ converge absolutamente.
+  Sea \(\sum b_n\) una serie convergente de términos positivos. Si existen \(k > 0\) y \(n_0 \in \N\) tales que \(|a_n| \leq k\, b_n\) para todo \(n > n_0\), entonces \(\sum a_n\) converge absolutamente.
 \end{corollary}
 
 \begin{proof}
-  Es una aplicación directa del criterio de comparación a $|a_n|$ y $b_n$.
+  Es una aplicación directa del criterio de comparación a \(|a_n|\) y \(b_n\).
 \end{proof}
 
 \begin{corollary}
-  Si existen $k > 0$, $0 < c < 1$ y $n_0 \in \N$ tales que $|a_n| \leq k\, c^n$ para todo $n > n_0$, entonces $\sum a_n$ converge absolutamente.
+  Si existen \(k > 0\), \(0 < c < 1\) y \(n_0 \in \N\) tales que \(|a_n| \leq k\, c^n\) para todo \(n > n_0\), entonces \(\sum a_n\) converge absolutamente.
 \end{corollary}
 
 \begin{proof}
-  Como $0 < c < 1$, la serie geométrica $\sum c^n$ converge, y se aplica el corolario anterior.
+  Como \(0 < c < 1\), la serie geométrica \(\sum c^n\) converge, y se aplica el corolario anterior.
 \end{proof}
 
 \begin{note}
-  Tomando $k = 1$, la condición $|a_n| \leq c^n$ equivale a $\sqrt[n]{|a_n|} \leq c < 1$. Si esto vale para todo $n > n_0$, entonces $\limsup_{n \to \infty} \sqrt[n]{|a_n|} \leq c < 1$. Recíprocamente, si $\limsup_{n \to \infty} \sqrt[n]{|a_n|} < 1$, existen $c < 1$ y $n_0$ con $\sqrt[n]{|a_n|} < c$ para $n > n_0$.
+  Tomando \(k = 1\), la condición \(|a_n| \leq c^n\) equivale a \(\sqrt[n]{|a_n|} \leq c < 1\). Si esto vale para todo \(n > n_0\), entonces \(\limsup_{n \to \infty} \sqrt[n]{|a_n|} \leq c < 1\). Recíprocamente, si \(\limsup_{n \to \infty} \sqrt[n]{|a_n|} < 1\), existen \(c < 1\) y \(n_0\) con \(\sqrt[n]{|a_n|} < c\) para \(n > n_0\).
 \end{note}
 
 \section{Criterios de convergencia}
 
 \begin{theorem}[Criterio de la raíz]
-  Sea $\sum a_n$ una serie y $\alpha = \limsup_{n \to \infty} \sqrt[n]{|a_n|}$.
+  Sea \(\sum a_n\) una serie y \(\alpha = \limsup_{n \to \infty} \sqrt[n]{|a_n|}\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Si $\alpha < 1$, entonces $\sum a_n$ converge absolutamente.
-    \item Si $\alpha > 1$, entonces $\sum a_n$ diverge.
-    \item Si $\alpha = 1$, el criterio no decide: tanto $\sum \frac{1}{n}$ (que diverge) como $\sum \frac{1}{n^2}$ (que converge) cumplen $\sqrt[n]{|a_n|} \to 1$.
+    \item Si \(\alpha < 1\), entonces \(\sum a_n\) converge absolutamente.
+    \item Si \(\alpha > 1\), entonces \(\sum a_n\) diverge.
+    \item Si \(\alpha = 1\), el criterio no decide: tanto \(\sum \frac{1}{n}\) (que diverge) como \(\sum \frac{1}{n^2}\) (que converge) cumplen \(\sqrt[n]{|a_n|} \to 1\).
   \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-  (1) Sea $\beta \in (\alpha, 1)$. Como $\alpha = \inf_n \sup_{k \geq n} \sqrt[k]{|a_k|}$, existe $N$ tal que $\sqrt[n]{|a_n|} < \beta$ para todo $n > N$, es decir, $|a_n| < \beta^n$. Como $0 < \beta < 1$, la serie $\sum \beta^n$ converge y, por el criterio de comparación, $\sum a_n$ converge absolutamente.
+  (1) Sea \(\beta \in (\alpha, 1)\). Como \(\alpha = \inf_n \sup_{k \geq n} \sqrt[k]{|a_k|}\), existe \(N\) tal que \(\sqrt[n]{|a_n|} < \beta\) para todo \(n > N\), es decir, \(|a_n| < \beta^n\). Como \(0 < \beta < 1\), la serie \(\sum \beta^n\) converge y, por el criterio de comparación, \(\sum a_n\) converge absolutamente.
 
-  (2) Si $\alpha > 1$, existen infinitos índices con $\sqrt[n]{|a_n|} > 1$ (si la sucesión de raíces no es acotada, también los hay), y entonces $|a_n| > 1$ para infinitos $n$. Luego $a_n \not\to 0$ y la serie diverge.
+  (2) Si \(\alpha > 1\), existen infinitos índices con \(\sqrt[n]{|a_n|} > 1\) (si la sucesión de raíces no es acotada, también los hay), y entonces \(|a_n| > 1\) para infinitos \(n\). Luego \(a_n \not\to 0\) y la serie diverge.
 
-  (3) Se tiene $\sqrt[n]{1/n} \to 1$ por un ejemplo anterior y, por la misma razón, $\sqrt[n]{1/n^2} = {(\sqrt[n]{1/n})}^2 \to 1$. La serie $\sum \frac{1}{n}$ diverge, mientras que $\sum \frac{1}{n^2}$ converge (por ejemplo, por el criterio de condensación, pues $\sum 2^k \frac{1}{4^k} = \sum \frac{1}{2^k}$ converge).
+  (3) Se tiene \(\sqrt[n]{1/n} \to 1\) por un ejemplo anterior y, por la misma razón, \(\sqrt[n]{1/n^2} = {(\sqrt[n]{1/n})}^2 \to 1\). La serie \(\sum \frac{1}{n}\) diverge, mientras que \(\sum \frac{1}{n^2}\) converge (por ejemplo, por el criterio de condensación, pues \(\sum 2^k \frac{1}{4^k} = \sum \frac{1}{2^k}\) converge).
 \end{proof}
 
 \begin{theorem}[Criterio de comparación de cocientes]
-  Sea $\sum a_n$ una serie con $a_n \neq 0$ para todo $n$, y sea $\sum b_n$ una serie convergente de términos positivos. Si existe $n_0 \in \N$ tal que
+  Sea \(\sum a_n\) una serie con \(a_n \neq 0\) para todo \(n\), y sea \(\sum b_n\) una serie convergente de términos positivos. Si existe \(n_0 \in \N\) tal que
   \[
     \frac{|a_{n+1}|}{|a_n|} \leq \frac{b_{n+1}}{b_n} \quad \text{para todo } n > n_0,
   \]
-  entonces $\sum a_n$ converge absolutamente.
+  entonces \(\sum a_n\) converge absolutamente.
 \end{theorem}
 
 \begin{proof}
-  Multiplicando las desigualdades correspondientes a $n_0 + 1, n_0 + 2, \dots, n - 1$ se obtiene, para $n > n_0 + 1$,
+  Multiplicando las desigualdades correspondientes a \(n_0 + 1, n_0 + 2, \dots, n - 1\) se obtiene, para \(n > n_0 + 1\),
   \[
     \frac{|a_n|}{|a_{n_0 + 1}|} \leq \frac{b_n}{b_{n_0 + 1}}, \qquad \text{es decir,} \qquad |a_n| \leq \frac{|a_{n_0 + 1}|}{b_{n_0 + 1}} \, b_n.
   \]
-  Por el criterio de comparación, $\sum |a_n|$ converge.
+  Por el criterio de comparación, \(\sum |a_n|\) converge.
 \end{proof}
 
 \begin{corollary}[Criterio de D'Alembert]
-  Si existe $c \in (0, 1)$ tal que $\dfrac{|a_{n+1}|}{|a_n|} \leq c$ para todo $n > n_0$, entonces $\sum a_n$ converge absolutamente. En particular, esto ocurre si $\limsup \dfrac{|a_{n+1}|}{|a_n|} < 1$. Si el cociente vale $1$ el criterio no decide, y si $\dfrac{|a_{n+1}|}{|a_n|} \geq 1$ para todo $n > n_0$ la serie diverge (pues $a_n \not\to 0$).
+  Si existe \(c \in (0, 1)\) tal que \(\dfrac{|a_{n+1}|}{|a_n|} \leq c\) para todo \(n > n_0\), entonces \(\sum a_n\) converge absolutamente. En particular, esto ocurre si \(\limsup \dfrac{|a_{n+1}|}{|a_n|} < 1\). Si el cociente vale \(1\) el criterio no decide, y si \(\dfrac{|a_{n+1}|}{|a_n|} \geq 1\) para todo \(n > n_0\) la serie diverge (pues \(a_n \not\to 0\)).
 \end{corollary}
 
 \begin{proof}
-  Se toma $b_n = c^n$ en el teorema anterior, pues $\sum c^n$ converge si $c \in (0, 1)$. Si $\limsup \frac{|a_{n+1}|}{|a_n|} < 1$, se elige $c$ entre ese valor y $1$ como en el criterio de la raíz.
+  Se toma \(b_n = c^n\) en el teorema anterior, pues \(\sum c^n\) converge si \(c \in (0, 1)\). Si \(\limsup \frac{|a_{n+1}|}{|a_n|} < 1\), se elige \(c\) entre ese valor y \(1\) como en el criterio de la raíz.
 \end{proof}
 
 \begin{theorem}
-  Sea ${(a_n)}$ una sucesión de términos positivos tal que ${\left( \frac{a_{n+1}}{a_n} \right)}$ es acotada. Entonces
+  Sea \({(a_n)}\) una sucesión de términos positivos tal que \({\left( \frac{a_{n+1}}{a_n} \right)}\) es acotada. Entonces
   \[
     \liminf_{n \to \infty} \frac{a_{n+1}}{a_n} \leq \liminf_{n \to \infty} \sqrt[n]{a_n} \leq \limsup_{n \to \infty} \sqrt[n]{a_n} \leq \limsup_{n \to \infty} \frac{a_{n+1}}{a_n}.
   \]
-  En particular, si existe $\lim_{n \to \infty} \frac{a_{n+1}}{a_n}$, entonces existe $\lim_{n \to \infty} \sqrt[n]{a_n}$ y ambos son iguales.
+  En particular, si existe \(\lim_{n \to \infty} \frac{a_{n+1}}{a_n}\), entonces existe \(\lim_{n \to \infty} \sqrt[n]{a_n}\) y ambos son iguales.
 \end{theorem}
 
 \begin{proof}
-  La desigualdad del medio es evidente. Veamos que $\limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n}$. Supongamos que no es así; entonces existe $c$ con
+  La desigualdad del medio es evidente. Veamos que \(\limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n}\). Supongamos que no es así; entonces existe \(c\) con
   \[
     \limsup_{n \to \infty} \frac{a_{n+1}}{a_n} < c < \limsup_{n \to \infty} \sqrt[n]{a_n}.
   \]
-  Por la definición de $\limsup$, existe $n_0$ tal que $\frac{a_{n+1}}{a_n} < c$ para todo $n \geq n_0$. Multiplicando estas desigualdades para $n_0, \dots, n - 1$,
+  Por la definición de \(\limsup\), existe \(n_0\) tal que \(\frac{a_{n+1}}{a_n} < c\) para todo \(n \geq n_0\). Multiplicando estas desigualdades para \(n_0, \dots, n - 1\),
   \[
     \frac{a_n}{a_{n_0}} < c^{n - n_0} \quad \Longrightarrow \quad a_n < k\, c^n, \qquad k = \frac{a_{n_0}}{c^{n_0}}.
   \]
-  Como $\sqrt[n]{k} \to 1$, resulta
+  Como \(\sqrt[n]{k} \to 1\), resulta
   \[
     \limsup_{n \to \infty} \sqrt[n]{a_n} \leq \limsup_{n \to \infty} \sqrt[n]{k\, c^n} = c \cdot \lim_{n \to \infty} \sqrt[n]{k} = c,
   \]
   lo cual es absurdo. La primera desigualdad se prueba de manera análoga, invirtiendo las desigualdades.
 
-  Si el límite del cociente existe, $\liminf$ y $\limsup$ del cociente coinciden, y entonces los de la raíz también coinciden con él, de modo que la sucesión de raíces converge a ese valor.
+  Si el límite del cociente existe, \(\liminf\) y \(\limsup\) del cociente coinciden, y entonces los de la raíz también coinciden con él, de modo que la sucesión de raíces converge a ese valor.
 \end{proof}
 
 \begin{eg}
@@ -122,7 +122,7 @@
 \end{eg}
 
 \begin{proof}
-  Sean $0 < a < b$ y sea ${(x_n)}$ la sucesión que se obtiene multiplicando alternadamente por $a$ y por $b$:
+  Sean \(0 < a < b\) y sea \({(x_n)}\) la sucesión que se obtiene multiplicando alternadamente por \(a\) y por \(b\):
   \[
     x_1 = a, \quad x_2 = a b, \quad x_3 = a^2 b, \quad x_4 = a^2 b^2, \quad \dots
   \]
@@ -134,32 +134,32 @@
       a & \text{si } n \text{ es par},
     \end{cases}
   \]
-  de modo que no existe $\lim_{n \to \infty} \frac{x_{n+1}}{x_n}$ (su $\limsup$ es $b$ y su $\liminf$ es $a$). Por otro lado, $x_{2k} = a^k b^k$ y $x_{2k-1} = a^k b^{k-1}$, de modo que
+  de modo que no existe \(\lim_{n \to \infty} \frac{x_{n+1}}{x_n}\) (su \(\limsup\) es \(b\) y su \(\liminf\) es \(a\)). Por otro lado, \(x_{2k} = a^k b^k\) y \(x_{2k-1} = a^k b^{k-1}\), de modo que
   \[
     \sqrt[2k]{x_{2k}} = \sqrt{ab}, \qquad \sqrt[2k-1]{x_{2k-1}} = a^{\frac{k}{2k-1}} b^{\frac{k-1}{2k-1}} = \sqrt{ab} \cdot a^{\frac{1}{2(2k-1)}} b^{-\frac{1}{2(2k-1)}} \longrightarrow \sqrt{ab}.
   \]
-  Como ambas subsucesiones convergen a $\sqrt{ab}$, se tiene $\lim_{n \to \infty} \sqrt[n]{x_n} = \sqrt{ab}$.
+  Como ambas subsucesiones convergen a \(\sqrt{ab}\), se tiene \(\lim_{n \to \infty} \sqrt[n]{x_n} = \sqrt{ab}\).
 \end{proof}
 
 \begin{theorem}[Criterio de Dirichlet]
-  Sea $\sum a_n$ una serie (no necesariamente convergente) cuyas sumas parciales $S_n$ forman una sucesión acotada, y sea ${(b_n)}$ una sucesión decreciente de números positivos con $\lim_{n \to \infty} b_n = 0$. Entonces $\sum a_n b_n$ converge.
+  Sea \(\sum a_n\) una serie (no necesariamente convergente) cuyas sumas parciales \(S_n\) forman una sucesión acotada, y sea \({(b_n)}\) una sucesión decreciente de números positivos con \(\lim_{n \to \infty} b_n = 0\). Entonces \(\sum a_n b_n\) converge.
 \end{theorem}
 
 \begin{proof}
-  Por sumación por partes, con $S_0 = 0$,
+  Por sumación por partes, con \(S_0 = 0\),
   \begin{align*}
     a_1 b_1 + \cdots + a_n b_n & = S_1 (b_1 - b_2) + S_2 (b_2 - b_3) + \cdots + S_{n-1} (b_{n-1} - b_n) + S_n b_n \\
                                & = \sum_{i=1}^{n-1} S_i (b_i - b_{i+1}) + S_n b_n.
   \end{align*}
-  Por hipótesis existe $k > 0$ con $|S_n| \leq k$ para todo $n$. Como $b_i - b_{i+1} \geq 0$, y la serie telescópica $\sum_{i \geq 1} (b_i - b_{i+1})$ converge (a $b_1$), la serie $\sum S_i (b_i - b_{i+1})$ converge absolutamente por comparación, y en particular converge. Además $S_n b_n \to 0$, por ser $(S_n)$ acotada y $b_n \to 0$. Luego la sucesión de sumas parciales de $\sum a_n b_n$ converge.
+  Por hipótesis existe \(k > 0\) con \(|S_n| \leq k\) para todo \(n\). Como \(b_i - b_{i+1} \geq 0\), y la serie telescópica \(\sum_{i \geq 1} (b_i - b_{i+1})\) converge (a \(b_1\)), la serie \(\sum S_i (b_i - b_{i+1})\) converge absolutamente por comparación, y en particular converge. Además \(S_n b_n \to 0\), por ser \((S_n)\) acotada y \(b_n \to 0\). Luego la sucesión de sumas parciales de \(\sum a_n b_n\) converge.
 \end{proof}
 
 \begin{corollary}[Criterio de Abel]
-  Si $\sum a_n$ converge y ${(b_n)}$ es una sucesión decreciente de términos positivos, entonces $\sum a_n b_n$ converge.
+  Si \(\sum a_n\) converge y \({(b_n)}\) es una sucesión decreciente de términos positivos, entonces \(\sum a_n b_n\) converge.
 \end{corollary}
 
 \begin{proof}
-  Como ${(b_n)}$ es decreciente y acotada inferiormente por $0$, converge a algún $c \geq 0$. La sucesión ${(b_n - c)}$ es decreciente, de términos no negativos, y tiende a $0$. Como $\sum a_n$ converge, sus sumas parciales son acotadas, y por el criterio de Dirichlet $\sum a_n (b_n - c)$ converge. Entonces
+  Como \({(b_n)}\) es decreciente y acotada inferiormente por \(0\), converge a algún \(c \geq 0\). La sucesión \({(b_n - c)}\) es decreciente, de términos no negativos, y tiende a \(0\). Como \(\sum a_n\) converge, sus sumas parciales son acotadas, y por el criterio de Dirichlet \(\sum a_n (b_n - c)\) converge. Entonces
   \[
     \sum a_n b_n = \sum a_n (b_n - c) + c \sum a_n
   \]
@@ -167,17 +167,17 @@
 \end{proof}
 
 \begin{corollary}[Criterio de Leibniz]
-  Si ${(b_n)}$ es decreciente y $b_n \to 0$, entonces $\sum (-1)^n b_n$ converge.
+  Si \({(b_n)}\) es decreciente y \(b_n \to 0\), entonces \(\sum (-1)^n b_n\) converge.
 \end{corollary}
 
 \begin{proof}
-  La serie $\sum (-1)^n$ no converge, pero sus sumas parciales toman los valores $-1$ y $0$, y son acotadas. Se aplica el criterio de Dirichlet.
+  La serie \(\sum (-1)^n\) no converge, pero sus sumas parciales toman los valores \(-1\) y \(0\), y son acotadas. Se aplica el criterio de Dirichlet.
 \end{proof}
 
 \section{Parte positiva y parte negativa}
 
 \begin{definition}
-  Dada una serie $\sum a_n$, para cada $n \in \N$ definimos
+  Dada una serie \(\sum a_n\), para cada \(n \in \N\) definimos
   \[
     p_n =
     \begin{cases}
@@ -191,33 +191,33 @@
       0    & \text{en otro caso}.
     \end{cases}
   \]
-  Entonces $p_n, q_n \geq 0$, $a_n = p_n - q_n$ y $|a_n| = p_n + q_n = a_n + 2 q_n = 2 p_n - a_n$.
+  Entonces \(p_n, q_n \geq 0\), \(a_n = p_n - q_n\) y \(|a_n| = p_n + q_n = a_n + 2 q_n = 2 p_n - a_n\).
 \end{definition}
 
 \begin{note}
-  Si $\sum a_n$ converge absolutamente, para todo $k$ se tiene
+  Si \(\sum a_n\) converge absolutamente, para todo \(k\) se tiene
   \[
     \sum_{n \geq 1} |a_n| \geq \sum_{n=1}^{k} |a_n| = \sum_{n=1}^{k} p_n + \sum_{n=1}^{k} q_n,
   \]
-  de modo que las sumas parciales de $\sum p_n$ y $\sum q_n$ son crecientes y acotadas por $\sum |a_n|$, y ambas series convergen. Recíprocamente, si $\sum p_n$ y $\sum q_n$ convergen, entonces $\sum |a_n| = \sum (p_n + q_n)$ converge, y $\sum a_n$ converge absolutamente.
+  de modo que las sumas parciales de \(\sum p_n\) y \(\sum q_n\) son crecientes y acotadas por \(\sum |a_n|\), y ambas series convergen. Recíprocamente, si \(\sum p_n\) y \(\sum q_n\) convergen, entonces \(\sum |a_n| = \sum (p_n + q_n)\) converge, y \(\sum a_n\) converge absolutamente.
 \end{note}
 
 \begin{theorem}
-  Si $\sum a_n$ converge condicionalmente, entonces $\sum p_n$ y $\sum q_n$ divergen.
+  Si \(\sum a_n\) converge condicionalmente, entonces \(\sum p_n\) y \(\sum q_n\) divergen.
 \end{theorem}
 
 \begin{proof}
-  Supongamos que $\sum q_n$ converge, con suma $c$. Como $|a_n| = a_n + 2 q_n$,
+  Supongamos que \(\sum q_n\) converge, con suma \(c\). Como \(|a_n| = a_n + 2 q_n\),
   \[
     \sum_{n=1}^{k} |a_n| = \sum_{n=1}^{k} a_n + 2 \sum_{n=1}^{k} q_n \longrightarrow \sum_{n \geq 1} a_n + 2c \quad (k \to \infty),
   \]
-  de modo que $\sum |a_n|$ converge, lo cual es absurdo pues $\sum a_n$ no converge absolutamente. Luego $\sum q_n$ diverge. Análogamente, usando $|a_n| = 2 p_n - a_n$, se prueba que $\sum p_n$ diverge.
+  de modo que \(\sum |a_n|\) converge, lo cual es absurdo pues \(\sum a_n\) no converge absolutamente. Luego \(\sum q_n\) diverge. Análogamente, usando \(|a_n| = 2 p_n - a_n\), se prueba que \(\sum p_n\) diverge.
 \end{proof}
 
 \section{Reordenamientos}
 
 \begin{definition}
-  Reordenar una serie $\sum a_n$ significa tomar una biyección $\varphi\colon \N \to \N$ y considerar la serie $\sum b_n$ con $b_n = a_{\varphi(n)}$.
+  Reordenar una serie \(\sum a_n\) significa tomar una biyección \(\varphi\colon \N \to \N\) y considerar la serie \(\sum b_n\) con \(b_n = a_{\varphi(n)}\).
 \end{definition}
 
 \begin{theorem}
@@ -225,32 +225,32 @@
 \end{theorem}
 
 \begin{proof}
-  \emph{Caso $a_n \geq 0$.} Sea $\varphi\colon \N \to \N$ una biyección y $b_n = a_{\varphi(n)}$. Sean $S_n$ y $T_n$ las sumas parciales de $\sum a_n$ y $\sum b_n$. Para cada $n$, sea $m = \max\{\varphi(1), \dots, \varphi(n)\}$, de modo que $\{\varphi(1), \dots, \varphi(n)\} \subset \{1, \dots, m\}$. Como $a_j \geq 0$,
+  \emph{Caso \(a_n \geq 0\).} Sea \(\varphi\colon \N \to \N\) una biyección y \(b_n = a_{\varphi(n)}\). Sean \(S_n\) y \(T_n\) las sumas parciales de \(\sum a_n\) y \(\sum b_n\). Para cada \(n\), sea \(m = \max\{\varphi(1), \dots, \varphi(n)\}\), de modo que \(\{\varphi(1), \dots, \varphi(n)\} \subset \{1, \dots, m\}\). Como \(a_j \geq 0\),
   \[
     T_n = \sum_{i=1}^{n} a_{\varphi(i)} \leq \sum_{j=1}^{m} a_j = S_m \leq \sum_{j \geq 1} a_j.
   \]
-  Entonces $\sum b_n$ converge y $\sum b_n \leq \sum a_n$. Como $a_n = b_{\varphi^{-1}(n)}$ es un reordenamiento de $\sum b_n$, el mismo argumento da $\sum a_n \leq \sum b_n$. Luego son iguales.
+  Entonces \(\sum b_n\) converge y \(\sum b_n \leq \sum a_n\). Como \(a_n = b_{\varphi^{-1}(n)}\) es un reordenamiento de \(\sum b_n\), el mismo argumento da \(\sum a_n \leq \sum b_n\). Luego son iguales.
 
-  \emph{Caso general.} Como $\sum a_n$ converge absolutamente, $\sum a_n = \sum p_n - \sum q_n$ con $\sum p_n$ y $\sum q_n$ convergentes y de términos no negativos. Las partes positiva y negativa de $b_n = a_{\varphi(n)}$ son $p_{\varphi(n)}$ y $q_{\varphi(n)}$, que son reordenamientos de $\sum p_n$ y $\sum q_n$. Por el caso anterior,
+  \emph{Caso general.} Como \(\sum a_n\) converge absolutamente, \(\sum a_n = \sum p_n - \sum q_n\) con \(\sum p_n\) y \(\sum q_n\) convergentes y de términos no negativos. Las partes positiva y negativa de \(b_n = a_{\varphi(n)}\) son \(p_{\varphi(n)}\) y \(q_{\varphi(n)}\), que son reordenamientos de \(\sum p_n\) y \(\sum q_n\). Por el caso anterior,
   \[
     \sum b_n = \sum p_{\varphi(n)} - \sum q_{\varphi(n)} = \sum p_n - \sum q_n = \sum a_n. \qedhere
   \]
 \end{proof}
 
 \begin{theorem}[Riemann]
-  Sea $\sum a_n$ una serie condicionalmente convergente y sea $c \in \R$. Entonces existe un reordenamiento $\sum b_n$ de $\sum a_n$ tal que $\sum b_n = c$.
+  Sea \(\sum a_n\) una serie condicionalmente convergente y sea \(c \in \R\). Entonces existe un reordenamiento \(\sum b_n\) de \(\sum a_n\) tal que \(\sum b_n = c\).
 \end{theorem}
 
 \begin{proof}
-  Como $\sum a_n$ converge, $a_n \to 0$. Sean $P_1, P_2, \dots$ los términos positivos de la serie y $-Q_1, -Q_2, \dots$ los negativos, cada uno en su orden original. Entonces $P_k \to 0$ y $Q_k \to 0$, y por el teorema anterior $\sum P_k = \sum Q_k = +\infty$. (Los términos nulos, si los hay, pueden intercalarse en cualquier lugar sin alterar el argumento.)
+  Como \(\sum a_n\) converge, \(a_n \to 0\). Sean \(P_1, P_2, \dots\) los términos positivos de la serie y \(-Q_1, -Q_2, \dots\) los negativos, cada uno en su orden original. Entonces \(P_k \to 0\) y \(Q_k \to 0\), y por el teorema anterior \(\sum P_k = \sum Q_k = +\infty\). (Los términos nulos, si los hay, pueden intercalarse en cualquier lugar sin alterar el argumento.)
 
   Construimos el reordenamiento por etapas:
   \begin{enumerate}[label=(\arabic*)]
-    \item Se toman $P_1, P_2, \dots$ hasta que la suma parcial supere por primera vez a $c$.
-    \item Se agregan $-Q_1, -Q_2, \dots$ hasta que la suma parcial sea por primera vez menor que $c$.
-    \item Se agregan los siguientes $P_k$ hasta superar nuevamente a $c$, luego los siguientes $-Q_k$ hasta quedar por debajo de $c$, y así sucesivamente.
+    \item Se toman \(P_1, P_2, \dots\) hasta que la suma parcial supere por primera vez a \(c\).
+    \item Se agregan \(-Q_1, -Q_2, \dots\) hasta que la suma parcial sea por primera vez menor que \(c\).
+    \item Se agregan los siguientes \(P_k\) hasta superar nuevamente a \(c\), luego los siguientes \(-Q_k\) hasta quedar por debajo de \(c\), y así sucesivamente.
   \end{enumerate}
-  El proceso nunca se detiene, pues $\sum P_k$ y $\sum Q_k$ divergen, y usa todos los términos de la serie original, ya que en cada etapa se consumen términos nuevos de cada tipo.
+  El proceso nunca se detiene, pues \(\sum P_k\) y \(\sum Q_k\) divergen, y usa todos los términos de la serie original, ya que en cada etapa se consumen términos nuevos de cada tipo.
 
-  Veamos que las sumas parciales $T_N$ convergen a $c$. Al terminar una etapa de suma de positivos, con último término $P_j$, la suma parcial supera a $c$ pero antes de sumar $P_j$ no lo hacía, de modo que $0 < T - c \leq P_j$. Análogamente, al terminar una etapa de negativos con último término $-Q_j$, $0 < c - T \leq Q_j$. Dentro de cada etapa, las sumas parciales varían monótonamente entre dos de estos valores, de modo que están entre ambos. Entonces, para $N$ en una etapa avanzada, $|T_N - c| \leq \max\{P_j, Q_{j'}\}$, donde $P_j$ y $Q_{j'}$ son los últimos términos usados en los extremos de dicha etapa. Como $P_j \to 0$ y $Q_{j'} \to 0$ cuando el número de etapas tiende a infinito, resulta $T_N \to c$.
+  Veamos que las sumas parciales \(T_N\) convergen a \(c\). Al terminar una etapa de suma de positivos, con último término \(P_j\), la suma parcial supera a \(c\) pero antes de sumar \(P_j\) no lo hacía, de modo que \(0 < T - c \leq P_j\). Análogamente, al terminar una etapa de negativos con último término \(-Q_j\), \(0 < c - T \leq Q_j\). Dentro de cada etapa, las sumas parciales varían monótonamente entre dos de estos valores, de modo que están entre ambos. Entonces, para \(N\) en una etapa avanzada, \(|T_N - c| \leq \max\{P_j, Q_{j'}\}\), donde \(P_j\) y \(Q_{j'}\) son los últimos términos usados en los extremos de dicha etapa. Como \(P_j \to 0\) y \(Q_{j'} \to 0\) cuando el número de etapas tiende a infinito, resulta \(T_N \to c\).
 \end{proof}

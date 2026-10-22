@@ -1,103 +1,103 @@
 \section{Preliminares}
 
-Podíamos definir $\| T(x) \| \le \| T \|_{\infty} \cdot \| x \| \quad \forall x \in \mathbb{R}^n$.
+Podíamos definir \(\| T(x) \| \le \| T \|_{\infty} \cdot \| x \| \quad \forall x \in \mathbb{R}^n\).
 
 \begin{theorem}[Regla de la Cadena]
-    Sea $A \subset \mathbb{R}^n$ abierto, $F: A \subset \mathbb{R}^n \to \mathbb{R}^m$, y $G: B \subset \mathbb{R}^m \to \mathbb{R}^k$ con $F(A) \subset B$. Si $F$ es diferenciable en $p \in A$ y $G$ es diferenciable en $F(p) \in B$, entonces $G \circ F$ es diferenciable en $p$ y además:
+    Sea \(A \subset \mathbb{R}^n\) abierto, \(F: A \subset \mathbb{R}^n \to \mathbb{R}^m\), y \(G: B \subset \mathbb{R}^m \to \mathbb{R}^k\) con \(F(A) \subset B\). Si \(F\) es diferenciable en \(p \in A\) y \(G\) es diferenciable en \(F(p) \in B\), entonces \(G \circ F\) es diferenciable en \(p\) y además:
     \[ D(G \circ F)_p = DG_{F(p)} \cdot DF_p \]
 \end{theorem}
 
 \subsection{Teoremas de Análisis I}
 
 \begin{theorem}[Teorema de Fermat]
-    Sea $f: [a,b] \to \mathbb{R}$. Supongamos que $c \in (a,b)$ es extremo local de $f$. Si $f$ es derivable en $c$, entonces $f'(c) = 0$.
+    Sea \(f: [a,b] \to \mathbb{R}\). Supongamos que \(c \in (a,b)\) es extremo local de \(f\). Si \(f\) es derivable en \(c\), entonces \(f'(c) = 0\).
 \end{theorem}
 
 \begin{theorem}[Teorema de Rolle]
-    Si $f$ es continua en $[a,b]$, derivable en $(a,b)$ y $f(a) = f(b)$, entonces $\exists c \in (a,b)$ tal que $f'(c) = 0$.
+    Si \(f\) es continua en \([a,b]\), derivable en \((a,b)\) y \(f(a) = f(b)\), entonces \(\exists c \in (a,b)\) tal que \(f'(c) = 0\).
 \end{theorem}
 
 \begin{theorem}[Teorema de Lagrange]
-    Sea $f$ continua en $[a,b]$ y derivable en $(a,b)$. Entonces $\exists c \in (a,b)$ tal que:
+    Sea \(f\) continua en \([a,b]\) y derivable en \((a,b)\). Entonces \(\exists c \in (a,b)\) tal que:
     \[ f'(c) = \frac{f(b) - f(a)}{b - a} \]
 \end{theorem}
 
-\subsection{Extensión a $\mathbb{R}^n$}
+\subsection{Extensión a \(\mathbb{R}^n\)}
 
-\begin{theorem}[Lagrange en $\mathbb{R}^n$]
-    Sea $f: B_r(p) \subset \mathbb{R}^n \to \mathbb{R}$ diferenciable. Para todo $a, b \in B_r(p)$, en el segmento que une $a$ con $b$, existe $c$ tal que:
+\begin{theorem}[Lagrange en \(\mathbb{R}^n\)]
+    Sea \(f: B_r(p) \subset \mathbb{R}^n \to \mathbb{R}\) diferenciable. Para todo \(a, b \in B_r(p)\), en el segmento que une \(a\) con \(b\), existe \(c\) tal que:
     \[ f(b) - f(a) = \nabla f(c) \cdot (b - a) \]
 \end{theorem}
 
-\begin{theorem}[Teorema de Fermat en $\mathbb{R}^n$]
-    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ con $A$ abierto. Si $p \in A$ es extremo local de $f$, entonces $\nabla f(p) = 0$.
+\begin{theorem}[Teorema de Fermat en \(\mathbb{R}^n\)]
+    Sea \(f: A \subset \mathbb{R}^n \to \mathbb{R}\) con \(A\) abierto. Si \(p \in A\) es extremo local de \(f\), entonces \(\nabla f(p) = 0\).
 \end{theorem}
 
 \subsection{Propiedades de Transformaciones Lineales}
 \begin{enumerate}
-    \item Toda transformación lineal $T$ es diferenciable y $DT_p = T$ para todo $p \in \mathbb{R}^n$.
-    \item Si $T: \mathbb{R}^m \to \mathbb{R}^k$ es lineal y $F \in C^1$, entonces $T \circ F$ es diferenciable y $D(T \circ F)_p = T \cdot DF_p$.
-    \item $T$ es inyectiva si y solo si $N(T) = \{0\}$.
-    \item Si $T: \mathbb{R}^n \to \mathbb{R}^n$, se tiene que $T$ es inversible si y solo si es inyectiva (por teorema de la dimensión).
+    \item Toda transformación lineal \(T\) es diferenciable y \(DT_p = T\) para todo \(p \in \mathbb{R}^n\).
+    \item Si \(T: \mathbb{R}^m \to \mathbb{R}^k\) es lineal y \(F \in C^1\), entonces \(T \circ F\) es diferenciable y \(D(T \circ F)_p = T \cdot DF_p\).
+    \item \(T\) es inyectiva si y solo si \(N(T) = \{0\}\).
+    \item Si \(T: \mathbb{R}^n \to \mathbb{R}^n\), se tiene que \(T\) es inversible si y solo si es inyectiva (por teorema de la dimensión).
 \end{enumerate}
 
 \begin{lemma}
-    Sea $G: A \subset \mathbb{R}^n \to \mathbb{R}^m$ abierto. Si $G$ es $C^1$ en $A$, dados $p, q \in A$, vale que:
+    Sea \(G: A \subset \mathbb{R}^n \to \mathbb{R}^m\) abierto. Si \(G\) es \(C^1\) en \(A\), dados \(p, q \in A\), vale que:
     \[ \| DG_p - DG_q \|_{\infty} \le n \max_{i,j} \left| \frac{\partial g_i}{\partial x_j}(p) - \frac{\partial g_i}{\partial x_j}(q) \right| \]
 \end{lemma}
 
 \begin{lemma}
-    Sea $G: B_r(p) \subset \mathbb{R}^n \to \mathbb{R}^m$ diferenciable y supongamos que $\| DG_x \|_{\infty} \le M$ para todo $x \in B_r(p)$. Entonces:
+    Sea \(G: B_r(p) \subset \mathbb{R}^n \to \mathbb{R}^m\) diferenciable y supongamos que \(\| DG_x \|_{\infty} \le M\) para todo \(x \in B_r(p)\). Entonces:
     \[ \| G(x) - G(y) \| \le M \| x - y \| \quad \forall x,y \in B_r(p) \]
 \end{lemma}
 
 \section{Teorema de la Función Inversa}
 
 \begin{theorem}[Teorema de la Función Inversa]
-    Sea $F: A \subset \mathbb{R}^n \to \mathbb{R}^n$ con $A$ abierto. Si $F$ es $C^1$ en $A$ y $DF_p: \mathbb{R}^n \to \mathbb{R}^n$ es una transformación lineal inversible para un $p \in A$, entonces:
+    Sea \(F: A \subset \mathbb{R}^n \to \mathbb{R}^n\) con \(A\) abierto. Si \(F\) es \(C^1\) en \(A\) y \(DF_p: \mathbb{R}^n \to \mathbb{R}^n\) es una transformación lineal inversible para un \(p \in A\), entonces:
     \begin{enumerate}
-        \item $\exists r > 0$ tal que $F: B_r(p) \to F(B_r(p))$ es biyectiva y la función inversa es continua en su dominio.
-        \item Existen abiertos $U \subset B_r(p)$ y $W \subset F(B_r(p))$ tales que $F^{-1}: W \to U$ es diferenciable.
-        \item La diferencial de la función inversa es $D(F^{-1})_{F(q)} = (DF_q)^{-1}$.
-        \item Si además $F \in C^k(U)$, entonces $F^{-1} \in C^k(W)$.
+        \item \(\exists r > 0\) tal que \(F: B_r(p) \to F(B_r(p))\) es biyectiva y la función inversa es continua en su dominio.
+        \item Existen abiertos \(U \subset B_r(p)\) y \(W \subset F(B_r(p))\) tales que \(F^{-1}: W \to U\) es diferenciable.
+        \item La diferencial de la función inversa es \(D(F^{-1})_{F(q)} = (DF_q)^{-1}\).
+        \item Si además \(F \in C^k(U)\), entonces \(F^{-1} \in C^k(W)\).
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    1) Supongamos primero que $DF_p = I$. Usando la continuidad de la diferencial, existe $r_0 > 0$ tal que $B_{r_0}(p) \subset A$. Tomamos $r < r_0$ tal que $\|DG_x - DF_p\|_\infty \le \frac{1}{2}$ para $\|x-p\| < r$.
-    Definimos $G(x) = F(x) - x$, entonces $DG_x = DF_x - I$, y $\|DG_x\|_\infty \le \frac{1}{2}$. Por el lema anterior, $\|G(x) - G(y)\| \le \frac{1}{2}\|x-y\|$.
-    Desarrollando $\|x - y\|$ tenemos:
+    1) Supongamos primero que \(DF_p = I\). Usando la continuidad de la diferencial, existe \(r_0 > 0\) tal que \(B_{r_0}(p) \subset A\). Tomamos \(r < r_0\) tal que \(\|DG_x - DF_p\|_\infty \le \frac{1}{2}\) para \(\|x-p\| < r\).
+    Definimos \(G(x) = F(x) - x\), entonces \(DG_x = DF_x - I\), y \(\|DG_x\|_\infty \le \frac{1}{2}\). Por el lema anterior, \(\|G(x) - G(y)\| \le \frac{1}{2}\|x-y\|\).
+    Desarrollando \(\|x - y\|\) tenemos:
     \[ \|x - y\| = \|x - y - (F(x) - F(y)) + (F(x) - F(y))\| \le \|G(x) - G(y)\| + \|F(x) - F(y)\| \]
-    Sustituyendo la cota de $G$:
+    Sustituyendo la cota de \(G\):
     \[ \|x - y\| \le \frac{1}{2}\|x-y\| + \|F(x) - F(y)\| \implies \frac{1}{2}\|x-y\| \le \|F(x) - F(y)\| \]
-    Esto prueba que si $x \neq y$, $F(x) \neq F(y)$, por ende $F$ es inyectiva en $B_r(p)$ y su inversa es continua (es bi-lipschitz).
+    Esto prueba que si \(x \neq y\), \(F(x) \neq F(y)\), por ende \(F\) es inyectiva en \(B_r(p)\) y su inversa es continua (es bi-lipschitz).
 
-    2) Demostremos que cubre un abierto. Sea $S_r(p) = \{x \in \mathbb{R}^n : \|x-p\| = r\} \subset A$. $S_r(p)$ es compacto. Para un $y$ en $W = B_{d/2}(F(p))$ (donde $d$ es la distancia de $F(p)$ a $F(S_r(p))$), consideramos $h(x) = \|y - F(x)\|^2$.
-    Al ser continua en el compacto $\overline{B_r}(p)$, alcanza su mínimo en un punto $p_y$. Evaluando en los bordes se verifica que $p_y$ debe estar en el interior $B_r(p)$. Al ser mínimo local diferenciable, evaluando en cualquier dirección $v$:
+    2) Demostremos que cubre un abierto. Sea \(S_r(p) = \{x \in \mathbb{R}^n : \|x-p\| = r\} \subset A\). \(S_r(p)\) es compacto. Para un \(y\) en \(W = B_{d/2}(F(p))\) (donde \(d\) es la distancia de \(F(p)\) a \(F(S_r(p))\)), consideramos \(h(x) = \|y - F(x)\|^2\).
+    Al ser continua en el compacto \(\overline{B_r}(p)\), alcanza su mínimo en un punto \(p_y\). Evaluando en los bordes se verifica que \(p_y\) debe estar en el interior \(B_r(p)\). Al ser mínimo local diferenciable, evaluando en cualquier dirección \(v\):
     \[ \langle v, DF_{p_y}^t (y - F(p_y)) \rangle = 0 \]
-    Como el operador diferencial es inversible por estar en la bola, $DF_{p_y}^t$ también lo es, deduciéndose que $y - F(p_y) = 0 \implies F(p_y) = y$.
+    Como el operador diferencial es inversible por estar en la bola, \(DF_{p_y}^t\) también lo es, deduciéndose que \(y - F(p_y) = 0 \implies F(p_y) = y\).
 
-    3) La diferenciabilidad se deduce mediante una manipulación del límite $z \to F(q)$ apoyándonos en que $F$ es diferenciable y que su inversa local acaba de ser probada como continua.
+    3) La diferenciabilidad se deduce mediante una manipulación del límite \(z \to F(q)\) apoyándonos en que \(F\) es diferenciable y que su inversa local acaba de ser probada como continua.
 
-    Finalmente, si $DF_p \neq I$, tomamos $\tilde{F} = (DF_p)^{-1} \circ F$ que verifica $D\tilde{F}_p = I$ y hereda las propiedades demostradas, extendiendo el resultado al caso general.
+    Finalmente, si \(DF_p \neq I\), tomamos \(\tilde{F} = (DF_p)^{-1} \circ F\) que verifica \(D\tilde{F}_p = I\) y hereda las propiedades demostradas, extendiendo el resultado al caso general.
 \end{proof}
 
 \begin{lemma}
-    Sean $A, B: \mathbb{R}^n \to \mathbb{R}^n$ transformaciones lineales.
+    Sean \(A, B: \mathbb{R}^n \to \mathbb{R}^n\) transformaciones lineales.
     \begin{enumerate}
-        \item Si $A$ es inversible y $\| B - A \|_{\infty} < \frac{1}{\| A^{-1} \|_{\infty}}$, entonces $B$ es inversible.
-        \item El conjunto de operadores lineales inversibles en $\mathbb{R}^n$ es abierto, y la función $A \mapsto A^{-1}$ es continua.
+        \item Si \(A\) es inversible y \(\| B - A \|_{\infty} < \frac{1}{\| A^{-1} \|_{\infty}}\), entonces \(B\) es inversible.
+        \item El conjunto de operadores lineales inversibles en \(\mathbb{R}^n\) es abierto, y la función \(A \mapsto A^{-1}\) es continua.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    1) Llamemos $\frac{1}{\alpha} = \|A^{-1}\|_\infty$ y $\beta = \|B-A\|_\infty < \alpha$. Sea $x \in \mathbb{R}^n$.
-    Por un lado, $\|x\| = \|A^{-1}Ax\| \le \frac{1}{\alpha}\|Ax\| \implies \alpha\|x\| \le \|Ax\|$.
-    Además, $\|Ax\| = \|(A-B+B)x\| \le \|(A-B)x\| + \|Bx\| \le \beta\|x\| + \|Bx\|$.
+    1) Llamemos \(\frac{1}{\alpha} = \|A^{-1}\|_\infty\) y \(\beta = \|B-A\|_\infty < \alpha\). Sea \(x \in \mathbb{R}^n\).
+    Por un lado, \(\|x\| = \|A^{-1}Ax\| \le \frac{1}{\alpha}\|Ax\| \implies \alpha\|x\| \le \|Ax\|\).
+    Además, \(\|Ax\| = \|(A-B+B)x\| \le \|(A-B)x\| + \|Bx\| \le \beta\|x\| + \|Bx\|\).
     Uniendo ambas desigualdades:
     \[ \alpha\|x\| \le \beta\|x\| + \|Bx\| \implies (\alpha-\beta)\|x\| \le \|Bx\| \]
-    Como $\beta < \alpha$, tenemos $\alpha - \beta > 0$. Si $x \neq 0$, la desigualdad implica $\|Bx\| > 0 \implies Bx \neq 0$. Por lo tanto, $N(B) = \{0\}$, lo que significa que $B$ es inyectiva. En dimensión finita, esto equivale a ser inversible.
+    Como \(\beta < \alpha\), tenemos \(\alpha - \beta > 0\). Si \(x \neq 0\), la desigualdad implica \(\|Bx\| > 0 \implies Bx \neq 0\). Por lo tanto, \(N(B) = \{0\}\), lo que significa que \(B\) es inyectiva. En dimensión finita, esto equivale a ser inversible.
 
-    2) Tomando $x = B^{-1}y$ en la desigualdad anterior obtenemos $(\alpha - \beta)\|B^{-1}y\| \le \|y\|$, lo que nos da que $\|B^{-1}\|_\infty \le \frac{1}{\alpha-\beta}$. Para ver la continuidad, usamos la identidad $B^{-1} - A^{-1} = B^{-1}(A-B)A^{-1}$.
+    2) Tomando \(x = B^{-1}y\) en la desigualdad anterior obtenemos \((\alpha - \beta)\|B^{-1}y\| \le \|y\|\), lo que nos da que \(\|B^{-1}\|_\infty \le \frac{1}{\alpha-\beta}\). Para ver la continuidad, usamos la identidad \(B^{-1} - A^{-1} = B^{-1}(A-B)A^{-1}\).
     Tomando normas:
     \[ \|B^{-1} - A^{-1}\|_\infty \le \|B^{-1}\|_\infty \|A-B\|_\infty \|A^{-1}\|_\infty \]
-    Esto tiende a 0 a medida que $B \to A$, probando que la aplicación toma la inversa de manera continua.
+    Esto tiende a 0 a medida que \(B \to A\), probando que la aplicación toma la inversa de manera continua.
 \end{proof}

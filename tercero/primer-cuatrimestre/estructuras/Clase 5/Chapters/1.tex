@@ -1,91 +1,91 @@
 \section{Módulos}
 \subsection{Módulos y morfismos}
 
-Sea $R$ un anillo un $R$-módulo a izquierda consiste de un grupo abeliano $M$ junto
-con una operación $\cdot : R \times M \to M$, $(r, m) \mapsto r \cdot m : \quad \forall m$, $n \in M$
-y $\forall r$, $s \in R$ se satisfacen las siguientes propiedades:
+Sea \(R\) un anillo un \(R\)-módulo a izquierda consiste de un grupo abeliano \(M\) junto
+con una operación \(\cdot : R \times M \to M\), \((r, m) \mapsto r \cdot m : \quad \forall m\), \(n \in M\)
+y \(\forall r\), \(s \in R\) se satisfacen las siguientes propiedades:
 \begin{enumerate}
-    \item $1_R \cdot m = m$.
-    \item $(rs) \cdot m = r \cdot ( s \cdot m)$.
-    \item $(r + s) \cdot m = r \cdot m + s \cdot m$.
-    \item $r \cdot (m + n) = r \cdot m + r \cdot n$.
+    \item \(1_R \cdot m = m\).
+    \item \((rs) \cdot m = r \cdot ( s \cdot m)\).
+    \item \((r + s) \cdot m = r \cdot m + s \cdot m\).
+    \item \(r \cdot (m + n) = r \cdot m + r \cdot n\).
 \end{enumerate}
 
 \begin{note}
-    Dado un $R$-módulo a izquierda $M$ tenemos: \begin{enumerate}
-        \item $0_R \cdot m = 0_M \quad \forall m \in M$.
-        \item $(-r) \cdot m = - (r \cdot m) \quad \forall m \in M$.
-        \item $End_{\Z}(M) = \{ f : M \to M : f \text{ es morfismo de grupos} \}$ es un anillo con las operaciones $(f+g)(m) = f(m) + g(m)$ y $(f \cdot g)(m) = f(g(m))$. El neutro para la suma es la función nula y para $\cdot$ es la identidad.
+    Dado un \(R\)-módulo a izquierda \(M\) tenemos: \begin{enumerate}
+        \item \(0_R \cdot m = 0_M \quad \forall m \in M\).
+        \item \((-r) \cdot m = - (r \cdot m) \quad \forall m \in M\).
+        \item \(End_{\Z}(M) = \{ f : M \to M : f \text{ es morfismo de grupos} \}\) es un anillo con las operaciones \((f+g)(m) = f(m) + g(m)\) y \((f \cdot g)(m) = f(g(m))\). El neutro para la suma es la función nula y para \(\cdot\) es la identidad.
     \end{enumerate}
 \end{note}
 
-La operación $\cdot : R \times M \to M$ induce un morfismo de anillos $\rho : R \to End_{\Z}(M)$, $\rho(r)(m) = r \cdot m$.
-Recíprocamente, dados un anillo $R$ y un grupo abeliano $M$, un morfismo de anillos $\rho : R \to End_{\Z}$ determina una estructura de $R$-módulo (a izquierda) en $M$, pues
-$r \cdot m = \rho(r)(m) \quad \forall r \in R$, $m \in M$. Queda como ejercicio verificar que las propiedades de un $R$-módulo a izquierda se cumplen.
+La operación \(\cdot : R \times M \to M\) induce un morfismo de anillos \(\rho : R \to End_{\Z}(M)\), \(\rho(r)(m) = r \cdot m\).
+Recíprocamente, dados un anillo \(R\) y un grupo abeliano \(M\), un morfismo de anillos \(\rho : R \to End_{\Z}\) determina una estructura de \(R\)-módulo (a izquierda) en \(M\), pues
+\(r \cdot m = \rho(r)(m) \quad \forall r \in R\), \(m \in M\). Queda como ejercicio verificar que las propiedades de un \(R\)-módulo a izquierda se cumplen.
 
-Luego dado un anillo $R$ y un grupo abeliano $M$, dar una estructura de $R$-módulo a izquierda en $M$ es equivalente a dar un morfismo de anillos $\rho : R \to End_{\Z}(M)$.
+Luego dado un anillo \(R\) y un grupo abeliano \(M\), dar una estructura de \(R\)-módulo a izquierda en \(M\) es equivalente a dar un morfismo de anillos \(\rho : R \to End_{\Z}(M)\).
 
 \begin{definition}[Anulador]
-    El anulador de un $R$-módulo $M$ es el ideal $Ann_R(M) = ker(\rho) \triangleleft R$.
+    El anulador de un \(R\)-módulo \(M\) es el ideal \(Ann_R(M) = ker(\rho) \triangleleft R\).
 
-    $Ann_R(M) = \{ r \in R : r \cdot m = 0_M \quad \forall m \in M \}$.
+    \(Ann_R(M) = \{ r \in R : r \cdot m = 0_M \quad \forall m \in M \}\).
 
-    Decimos que $M$ es fiel si $Ann_R(M) = \{0_R\}$ i.e $\rho$ es monomorfismo.
+    Decimos que \(M\) es fiel si \(Ann_R(M) = \{0_R\}\) i.e \(\rho\) es monomorfismo.
 \end{definition}
 
 \begin{definition}[Submódulo]
-    Un submódulo de $R$-módulo $M$ es un subgrupo $N \subseteq M : R \cdot N \subseteq N$.
+    Un submódulo de \(R\)-módulo \(M\) es un subgrupo \(N \subseteq M : R \cdot N \subseteq N\).
 \end{definition}
 
-\begin{definition}[$R$-módulo a derecha]
-    Un $R$-módulo a derecha es un grupo abeliano $M$ junto con una operación $\cdot : M \times R \to M$, $(m$, $r) \mapsto m \cdot r$ que verifica: \begin{enumerate}
-        \item $m \cdot 1_R = m$.
-        \item $m \cdot (rs) = (m \cdot r) \cdot s$.
-        \item $m \cdot (r + s) = m \cdot r + m \cdot s$.
-        \item $(m + n) \cdot r = m \cdot r + n \cdot r$.
+\begin{definition}[\(R\)-módulo a derecha]
+    Un \(R\)-módulo a derecha es un grupo abeliano \(M\) junto con una operación \(\cdot : M \times R \to M\), \((m\), \(r) \mapsto m \cdot r\) que verifica: \begin{enumerate}
+        \item \(m \cdot 1_R = m\).
+        \item \(m \cdot (rs) = (m \cdot r) \cdot s\).
+        \item \(m \cdot (r + s) = m \cdot r + m \cdot s\).
+        \item \((m + n) \cdot r = m \cdot r + n \cdot r\).
     \end{enumerate}
-    $\forall m$, $n \in M$ y $\forall r$, $s \in R$
+    \(\forall m\), \(n \in M\) y \(\forall r\), \(s \in R\)
 \end{definition}
 
-Notemos que esto es equivalente a que $M$ tenga una estructura de $R^{op}$-módulo a izquierda:
+Notemos que esto es equivalente a que \(M\) tenga una estructura de \(R^{op}\)-módulo a izquierda:
 
-$\tilde{\cdot} \, : R^{op} \times M \to M$, $(r$, $m) \mapsto m \, \tilde{\cdot} \, r$.
+\(\tilde{\cdot} \, : R^{op} \times M \to M\), \((r\), \(m) \mapsto m \, \tilde{\cdot} \, r\).
 \begin{enumerate}
-    \item $1_R \, \tilde{\cdot} \, m = m$.
-    \item $(rs) \, \tilde{\cdot} \, m = sr \, \tilde{\cdot} \, m = (m \cdot s) \cdot r = r \, \tilde{\cdot} \, (m \cdot s) = r \, \tilde{\cdot} \, (s \, \tilde{\cdot} \, m)$.
-    \item $(r + s) \, \tilde{\cdot} \, m = m \cdot (r + s) = m \cdot r + m \cdot s = r \, \tilde{\cdot} \, m + s \, \tilde{\cdot} \, m$.
-    \item $ r \, \tilde{\cdot} \, (m + n) = (m + n) \cdot r = m \cdot r + n \cdot r = r \, \tilde{\cdot} \, m + r \, \tilde{\cdot} \, n$.
+    \item \(1_R \, \tilde{\cdot} \, m = m\).
+    \item \((rs) \, \tilde{\cdot} \, m = sr \, \tilde{\cdot} \, m = (m \cdot s) \cdot r = r \, \tilde{\cdot} \, (m \cdot s) = r \, \tilde{\cdot} \, (s \, \tilde{\cdot} \, m)\).
+    \item \((r + s) \, \tilde{\cdot} \, m = m \cdot (r + s) = m \cdot r + m \cdot s = r \, \tilde{\cdot} \, m + s \, \tilde{\cdot} \, m\).
+    \item \( r \, \tilde{\cdot} \, (m + n) = (m + n) \cdot r = m \cdot r + n \cdot r = r \, \tilde{\cdot} \, m + r \, \tilde{\cdot} \, n\).
 \end{enumerate}
 
-Recíprocamente, si $M$ es un $R^{op}$-módulo a izquierda $\cdot : R^{op} \times M \to M$, define $* : M \times R \to M$ por $m * r := r \cdot m$. Verificar que cumple las propiedades de $R$ módulo a derecha.
+Recíprocamente, si \(M\) es un \(R^{op}\)-módulo a izquierda \(\cdot : R^{op} \times M \to M\), define \(* : M \times R \to M\) por \(m * r := r \cdot m\). Verificar que cumple las propiedades de \(R\) módulo a derecha.
 
 \begin{definition}
-    Sean $R$ un anillo, $M$ y $N$ dos $R$-submódulos y $f : M \to N$ una función. Decimos que $f$ es un morfismo de $R$-módulos si $f$ es morfismo de grupos (morfismo $R$-lineal) y $f(r \cdot m) = r \cdot f(m) \quad \forall r \in R \quad \forall m \in M$.
+    Sean \(R\) un anillo, \(M\) y \(N\) dos \(R\)-submódulos y \(f : M \to N\) una función. Decimos que \(f\) es un morfismo de \(R\)-módulos si \(f\) es morfismo de grupos (morfismo \(R\)-lineal) y \(f(r \cdot m) = r \cdot f(m) \quad \forall r \in R \quad \forall m \in M\).
 \end{definition}
 
 Notaremos \begin{enumerate}
-    \item $hom_R(M$, $N) = \{ f : M \to N : f \text{ es morfismo} \}$. Es grupo abeliano con la suma puntual.
-    \item $End_R(M) = hom_R(M$, $M)$.
-    \item $Aut_R(M) = \{ f \in End_R(M) : f \text{ es biyectivo} \}$.
+    \item \(hom_R(M\), \(N) = \{ f : M \to N : f \text{ es morfismo} \}\). Es grupo abeliano con la suma puntual.
+    \item \(End_R(M) = hom_R(M\), \(M)\).
+    \item \(Aut_R(M) = \{ f \in End_R(M) : f \text{ es biyectivo} \}\).
 \end{enumerate}
 
 \begin{note}
-    Si $P$ es otro $R$-módulo, la composición de una aplicación $\circ : hom_R(P$, $N) \times hom_R(M$, $P) \to hom_R(M$, $N)$. Es decir, la composición de morfismos $R$-lineales es un morfismo $R$-lineal.
-    Además, la aplicación $\circ$ es bilineal, es decir, $\forall f$, $g \in hom_R(M$, $N)$ y $\forall h$, $k \in hom_R(P$, $M)$ se cumple que:
+    Si \(P\) es otro \(R\)-módulo, la composición de una aplicación \(\circ : hom_R(P\), \(N) \times hom_R(M\), \(P) \to hom_R(M\), \(N)\). Es decir, la composición de morfismos \(R\)-lineales es un morfismo \(R\)-lineal.
+    Además, la aplicación \(\circ\) es bilineal, es decir, \(\forall f\), \(g \in hom_R(M\), \(N)\) y \(\forall h\), \(k \in hom_R(P\), \(M)\) se cumple que:
     \begin{align*}
         (f + g) \circ h & = f \circ h + g \circ h \\
         f \circ (h + k) & = f \circ h + f \circ k \\
     \end{align*}
 \end{note}
 
-En particular, el grupo $End_R(N)$ junto con la composición es un anillo y $hom_R(M$, $N)$ es un $End_R(N)$-módulo a izquierda y un $End_R(M)$-módulo a derecha.
-$f \in hom_R(M$, $N)$, $g \in End_R(N)$, $h \in End_R(M)$ entonces $g \circ f = g \cdot f$, $f \circ h = f \cdot h$.
+En particular, el grupo \(End_R(N)\) junto con la composición es un anillo y \(hom_R(M\), \(N)\) es un \(End_R(N)\)-módulo a izquierda y un \(End_R(M)\)-módulo a derecha.
+\(f \in hom_R(M\), \(N)\), \(g \in End_R(N)\), \(h \in End_R(M)\) entonces \(g \circ f = g \cdot f\), \(f \circ h = f \cdot h\).
 
-Si $a \in Z(R)$, la aplicación $L_a : N \to N$ dada por $L_a(n) = a \cdot n$ es $R$-lineal y $L: Z(R) \to End_R(N)$ es morfismo de anillos.
+Si \(a \in Z(R)\), la aplicación \(L_a : N \to N\) dada por \(L_a(n) = a \cdot n\) es \(R\)-lineal y \(L: Z(R) \to End_R(N)\) es morfismo de anillos.
 
-Esto nos permite darle a $hom_R(M$, $N)$ una estructura de $Z(R)$-módulo.
+Esto nos permite darle a \(hom_R(M\), \(N)\) una estructura de \(Z(R)\)-módulo.
 
 \begin{definition}
-    Sea $M$ un grupo abeliano y $R$, $S$ anillos. Decimos que $M$ es un $(R$, $S)$-bimódulo si es un $R$-módulo a izquierda y un $S$-módulo a derecha y las estructuras son compatibles.
-    Es decir, $\forall r \in R \, \forall s \in S \, \forall m \in M$, $(r \cdot m) \cdot s = r \cdot (m \cdot s)$.
+    Sea \(M\) un grupo abeliano y \(R\), \(S\) anillos. Decimos que \(M\) es un \((R\), \(S)\)-bimódulo si es un \(R\)-módulo a izquierda y un \(S\)-módulo a derecha y las estructuras son compatibles.
+    Es decir, \(\forall r \in R \, \forall s \in S \, \forall m \in M\), \((r \cdot m) \cdot s = r \cdot (m \cdot s)\).
 \end{definition}

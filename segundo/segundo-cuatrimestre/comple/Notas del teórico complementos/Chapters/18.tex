@@ -1,98 +1,98 @@
 \section{Teorema fundamental del cálculo}
 
-Para $f$ integrable en $[a, b]$ y $c, d \in [a, b]$ con $c > d$ convenimos $\int_c^d f(x) \,\dd x = -\int_d^c f(x) \,\dd x$, y $\int_c^c f(x) \,\dd x = 0$. Con esta convención vale $\int_a^b f = \int_a^c f + \int_c^b f$ para $a, b, c$ cualesquiera en el dominio.
+Para \(f\) integrable en \([a, b]\) y \(c, d \in [a, b]\) con \(c > d\) convenimos \(\int_c^d f(x) \,\dd x = -\int_d^c f(x) \,\dd x\), y \(\int_c^c f(x) \,\dd x = 0\). Con esta convención vale \(\int_a^b f = \int_a^c f + \int_c^b f\) para \(a, b, c\) cualesquiera en el dominio.
 
 \begin{theorem}[Teorema fundamental del cálculo]
-  Sea $f\colon [a, b] \to \R$ integrable. Si $f$ es continua en $c \in [a, b]$, entonces $F\colon [a, b] \to \R$, $F(x) = \int_a^x f(t) \,\dd t$, es derivable en $c$ (con derivadas laterales en los extremos) y $F'(c) = f(c)$.
+  Sea \(f\colon [a, b] \to \R\) integrable. Si \(f\) es continua en \(c \in [a, b]\), entonces \(F\colon [a, b] \to \R\), \(F(x) = \int_a^x f(t) \,\dd t\), es derivable en \(c\) (con derivadas laterales en los extremos) y \(F'(c) = f(c)\).
 \end{theorem}
 
 \begin{proof}
-  Sea $\e > 0$. Como $f$ es continua en $c$, existe $\delta > 0$ tal que $t \in [a, b]$ y $|t - c| < \delta$ implican $|f(t) - f(c)| < \e$. Sea $h \neq 0$ con $|h| < \delta$ y $c + h \in [a, b]$. Como $F(c + h) - F(c) = \int_c^{c+h} f(t) \,\dd t$ y $\int_c^{c+h} f(c) \,\dd t = h f(c)$,
+  Sea \(\e > 0\). Como \(f\) es continua en \(c\), existe \(\delta > 0\) tal que \(t \in [a, b]\) y \(|t - c| < \delta\) implican \(|f(t) - f(c)| < \e\). Sea \(h \neq 0\) con \(|h| < \delta\) y \(c + h \in [a, b]\). Como \(F(c + h) - F(c) = \int_c^{c+h} f(t) \,\dd t\) y \(\int_c^{c+h} f(c) \,\dd t = h f(c)\),
   \[
     \left| \frac{F(c + h) - F(c)}{h} - f(c) \right| = \frac{1}{|h|} \left| \int_c^{c+h} \bigl( f(t) - f(c) \bigr) \dd t \right| \leq \frac{1}{|h|} \cdot \e |h| = \e.
   \]
-  Luego $\lim_{h \to 0} \frac{F(c + h) - F(c)}{h} = f(c)$.
+  Luego \(\lim_{h \to 0} \frac{F(c + h) - F(c)}{h} = f(c)\).
 \end{proof}
 
 \begin{corollary}[Regla de Barrow]
-  Sea $f\colon [a, b] \to \R$ integrable y sea $F\colon [a, b] \to \R$ derivable con $F' = f$. Entonces $\int_a^b f(x) \,\dd x = F(b) - F(a)$.
+  Sea \(f\colon [a, b] \to \R\) integrable y sea \(F\colon [a, b] \to \R\) derivable con \(F' = f\). Entonces \(\int_a^b f(x) \,\dd x = F(b) - F(a)\).
 \end{corollary}
 
 \begin{proof}
-  Sea $P = \{ t_0, \dots, t_n \}$ una partición de $[a, b]$. Por el teorema del valor medio, para cada $i$ existe $\alpha_i \in (t_{i-1}, t_i)$ con $F(t_i) - F(t_{i-1}) = f(\alpha_i)(t_i - t_{i-1})$. Entonces
+  Sea \(P = \{ t_0, \dots, t_n \}\) una partición de \([a, b]\). Por el teorema del valor medio, para cada \(i\) existe \(\alpha_i \in (t_{i-1}, t_i)\) con \(F(t_i) - F(t_{i-1}) = f(\alpha_i)(t_i - t_{i-1})\). Entonces
   \[
     F(b) - F(a) = \sum_{i=1}^{n} \bigl( F(t_i) - F(t_{i-1}) \bigr) = \sum_{i=1}^{n} f(\alpha_i)(t_i - t_{i-1}).
   \]
-  Como $m_i \leq f(\alpha_i) \leq M_i$, resulta $s(f, P) \leq F(b) - F(a) \leq S(f, P)$ para toda partición $P$. Luego $\lowint_a^b f \,\dd x \leq F(b) - F(a) \leq \upint_a^b f \,\dd x$, y como $f$ es integrable, $F(b) - F(a) = \int_a^b f(x) \,\dd x$.
+  Como \(m_i \leq f(\alpha_i) \leq M_i\), resulta \(s(f, P) \leq F(b) - F(a) \leq S(f, P)\) para toda partición \(P\). Luego \(\lowint_a^b f \,\dd x \leq F(b) - F(a) \leq \upint_a^b f \,\dd x\), y como \(f\) es integrable, \(F(b) - F(a) = \int_a^b f(x) \,\dd x\).
 \end{proof}
 
 \begin{definition}[Norma de una partición]
-  Sea $P = \{ t_0, \dots, t_n \}$ una partición de $[a, b]$. La \emph{norma} de $P$ es $\norm{P} = \max_{1 \leq i \leq n} (t_i - t_{i-1})$.
+  Sea \(P = \{ t_0, \dots, t_n \}\) una partición de \([a, b]\). La \emph{norma} de \(P\) es \(\norm{P} = \max_{1 \leq i \leq n} (t_i - t_{i-1})\).
 \end{definition}
 
 \begin{theorem}
-  Sea $f\colon [a, b] \to \R$ acotada. Para todo $\e > 0$ existe $\delta > 0$ tal que si $\norm{P} < \delta$, entonces $S(f, P) < \upint_a^b f(x) \,\dd x + \e$.
+  Sea \(f\colon [a, b] \to \R\) acotada. Para todo \(\e > 0\) existe \(\delta > 0\) tal que si \(\norm{P} < \delta\), entonces \(S(f, P) < \upint_a^b f(x) \,\dd x + \e\).
 \end{theorem}
 
 \begin{proof}
-  Supongamos primero $f \geq 0$. Sea $M = \sup f$. Dado $\e > 0$ existe una partición $P_0 = \{ t_0, \dots, t_n \}$ con $S(f, P_0) < \upint_a^b f \,\dd x + \frac{\e}{2}$. Sea $\delta = \frac{\e}{2n (M + 1)}$ y sea $P$ una partición con $\norm{P} < \delta$.
+  Supongamos primero \(f \geq 0\). Sea \(M = \sup f\). Dado \(\e > 0\) existe una partición \(P_0 = \{ t_0, \dots, t_n \}\) con \(S(f, P_0) < \upint_a^b f \,\dd x + \frac{\e}{2}\). Sea \(\delta = \frac{\e}{2n (M + 1)}\) y sea \(P\) una partición con \(\norm{P} < \delta\).
 
-  Dividimos los intervalos de $P$ en dos tipos: los contenidos en algún $[t_{i-1}, t_i]$ y los restantes. Cada intervalo del segundo tipo contiene algún $t_i$ en su interior, así que hay a lo sumo $n$ de ellos, y cada uno tiene longitud menor que $\delta$ y $M_k \leq M$. Para cada $i$, los intervalos del primer tipo contenidos en $[t_{i-1}, t_i]$ tienen supremo $\leq M_i$ y longitudes que suman a lo sumo $t_i - t_{i-1}$, de modo que su aporte a $S(f, P)$ es a lo sumo $M_i (t_i - t_{i-1})$ (pues $M_i \geq 0$). Entonces
+  Dividimos los intervalos de \(P\) en dos tipos: los contenidos en algún \([t_{i-1}, t_i]\) y los restantes. Cada intervalo del segundo tipo contiene algún \(t_i\) en su interior, así que hay a lo sumo \(n\) de ellos, y cada uno tiene longitud menor que \(\delta\) y \(M_k \leq M\). Para cada \(i\), los intervalos del primer tipo contenidos en \([t_{i-1}, t_i]\) tienen supremo \(\leq M_i\) y longitudes que suman a lo sumo \(t_i - t_{i-1}\), de modo que su aporte a \(S(f, P)\) es a lo sumo \(M_i (t_i - t_{i-1})\) (pues \(M_i \geq 0\)). Entonces
   \[
     S(f, P) \leq \sum_{i=1}^{n} M_i (t_i - t_{i-1}) + n M \delta < S(f, P_0) + \frac{\e}{2} < \upint_a^b f \,\dd x + \e.
   \]
 
-  Para $f$ acotada cualquiera, existe $c \in \R$ con $g = f + c \geq 0$. Como $S(g, P) = S(f, P) + c(b - a)$ para toda partición y $\upint_a^b g \,\dd x = \upint_a^b f \,\dd x + c(b - a)$, el resultado para $g$ implica el de $f$.
+  Para \(f\) acotada cualquiera, existe \(c \in \R\) con \(g = f + c \geq 0\). Como \(S(g, P) = S(f, P) + c(b - a)\) para toda partición y \(\upint_a^b g \,\dd x = \upint_a^b f \,\dd x + c(b - a)\), el resultado para \(g\) implica el de \(f\).
 \end{proof}
 
 \begin{corollary}
-  Si $f\colon [a, b] \to \R$ es acotada, entonces
+  Si \(f\colon [a, b] \to \R\) es acotada, entonces
   \[
     \lim_{\norm{P} \to 0} S(f, P) = \upint_a^b f(x) \,\dd x, \qquad \lim_{\norm{P} \to 0} s(f, P) = \lowint_a^b f(x) \,\dd x.
   \]
-  En particular, si $f$ es integrable, $\int_a^b f(x) \,\dd x = \lim_{\norm{P} \to 0} S(f, P) = \lim_{\norm{P} \to 0} s(f, P)$.
+  En particular, si \(f\) es integrable, \(\int_a^b f(x) \,\dd x = \lim_{\norm{P} \to 0} S(f, P) = \lim_{\norm{P} \to 0} s(f, P)\).
 \end{corollary}
 
 \begin{proof}
-  La primera igualdad es el teorema anterior, junto con $S(f, P) \geq \upint_a^b f \,\dd x$ para toda $P$. Para la segunda, $s(f, P) = -S(-f, P)$ y $\lowint_a^b f \,\dd x = -\upint_a^b (-f) \,\dd x$.
+  La primera igualdad es el teorema anterior, junto con \(S(f, P) \geq \upint_a^b f \,\dd x\) para toda \(P\). Para la segunda, \(s(f, P) = -S(-f, P)\) y \(\lowint_a^b f \,\dd x = -\upint_a^b (-f) \,\dd x\).
 \end{proof}
 
 \begin{definition}[Partición punteada]
-  Una \emph{partición punteada} $P^{*}$ de $[a, b]$ es una partición $P = \{ t_0, \dots, t_n \}$ junto con una elección de puntos $\alpha_i \in [t_{i-1}, t_i]$ para $i \in \{1, \dots, n\}$. Su norma es $\norm{P^{*}} = \norm{P}$.
+  Una \emph{partición punteada} \(P^{*}\) de \([a, b]\) es una partición \(P = \{ t_0, \dots, t_n \}\) junto con una elección de puntos \(\alpha_i \in [t_{i-1}, t_i]\) para \(i \in \{1, \dots, n\}\). Su norma es \(\norm{P^{*}} = \norm{P}\).
 \end{definition}
 
 \begin{definition}[Suma de Riemann]
-  Si $f\colon [a, b] \to \R$ es acotada y $P^{*}$ es una partición punteada, la \emph{suma de Riemann} de $f$ asociada a $P^{*}$ es
+  Si \(f\colon [a, b] \to \R\) es acotada y \(P^{*}\) es una partición punteada, la \emph{suma de Riemann} de \(f\) asociada a \(P^{*}\) es
   \[
     R(f, P^{*}) = \sum_{i=1}^{n} f(\alpha_i)(t_i - t_{i-1}).
   \]
-  Decimos que $I = \lim_{\norm{P} \to 0} R(f, P^{*})$ si para todo $\e > 0$ existe $\delta > 0$ tal que $|R(f, P^{*}) - I| < \e$ para toda partición punteada $P^{*}$ con $\norm{P^{*}} < \delta$.
+  Decimos que \(I = \lim_{\norm{P} \to 0} R(f, P^{*})\) si para todo \(\e > 0\) existe \(\delta > 0\) tal que \(|R(f, P^{*}) - I| < \e\) para toda partición punteada \(P^{*}\) con \(\norm{P^{*}} < \delta\).
 \end{definition}
 
 \begin{theorem}
-  Sea $f\colon [a, b] \to \R$ acotada. Existe $I = \lim_{\norm{P} \to 0} R(f, P^{*})$ si y sólo si $f$ es integrable, y en ese caso $I = \int_a^b f(x) \,\dd x$.
+  Sea \(f\colon [a, b] \to \R\) acotada. Existe \(I = \lim_{\norm{P} \to 0} R(f, P^{*})\) si y sólo si \(f\) es integrable, y en ese caso \(I = \int_a^b f(x) \,\dd x\).
 \end{theorem}
 
 \begin{proof}
-  ($\Leftarrow$) Si $f$ es integrable, por el corolario anterior $\lim_{\norm{P} \to 0} s(f, P) = \lim_{\norm{P} \to 0} S(f, P) = \int_a^b f \,\dd x$. Como $s(f, P) \leq R(f, P^{*}) \leq S(f, P)$ para toda partición punteada, $\lim_{\norm{P} \to 0} R(f, P^{*}) = \int_a^b f \,\dd x$.
+  (\(\Leftarrow\)) Si \(f\) es integrable, por el corolario anterior \(\lim_{\norm{P} \to 0} s(f, P) = \lim_{\norm{P} \to 0} S(f, P) = \int_a^b f \,\dd x\). Como \(s(f, P) \leq R(f, P^{*}) \leq S(f, P)\) para toda partición punteada, \(\lim_{\norm{P} \to 0} R(f, P^{*}) = \int_a^b f \,\dd x\).
 
-  ($\Rightarrow$) Supongamos que el límite $I$ existe y sea $\e > 0$. Existe $\delta > 0$ tal que $|R(f, P^{*}) - I| < \frac{\e}{4}$ para toda partición punteada con $\norm{P^{*}} < \delta$. Fijemos una partición $P = \{ t_0, \dots, t_n \}$ con $\norm{P} < \delta$. Elegimos $\alpha_i \in [t_{i-1}, t_i]$ con $f(\alpha_i) < m_i + \frac{\e}{4n(t_i - t_{i-1})}$; entonces
+  (\(\Rightarrow\)) Supongamos que el límite \(I\) existe y sea \(\e > 0\). Existe \(\delta > 0\) tal que \(|R(f, P^{*}) - I| < \frac{\e}{4}\) para toda partición punteada con \(\norm{P^{*}} < \delta\). Fijemos una partición \(P = \{ t_0, \dots, t_n \}\) con \(\norm{P} < \delta\). Elegimos \(\alpha_i \in [t_{i-1}, t_i]\) con \(f(\alpha_i) < m_i + \frac{\e}{4n(t_i - t_{i-1})}\); entonces
   \[
     R(f, P^{*}) < \sum_{i=1}^{n} m_i (t_i - t_{i-1}) + \frac{\e}{4} = s(f, P) + \frac{\e}{4}.
   \]
-  Análogamente, eligiendo otros puntos $\tilde{\alpha}_i$ con $f(\tilde{\alpha}_i) > M_i - \frac{\e}{4n(t_i - t_{i-1})}$, obtenemos una partición punteada $\tilde{P}^{*}$ con $R(f, \tilde{P}^{*}) > S(f, P) - \frac{\e}{4}$. Luego
+  Análogamente, eligiendo otros puntos \(\tilde{\alpha}_i\) con \(f(\tilde{\alpha}_i) > M_i - \frac{\e}{4n(t_i - t_{i-1})}\), obtenemos una partición punteada \(\tilde{P}^{*}\) con \(R(f, \tilde{P}^{*}) > S(f, P) - \frac{\e}{4}\). Luego
   \[
     I - \frac{\e}{2} < R(f, P^{*}) - \frac{\e}{4} < s(f, P) \leq S(f, P) < R(f, \tilde{P}^{*}) + \frac{\e}{4} < I + \frac{\e}{2},
   \]
-  de donde $S(f, P) - s(f, P) < \e$. Por el teorema de caracterización, $f$ es integrable. Además $s(f, P) \leq \int_a^b f \,\dd x \leq S(f, P)$ y $I$ pertenece al mismo intervalo $[s(f, P), S(f, P)]$, de longitud menor que $\e$. Como $\e$ es arbitrario, $I = \int_a^b f(x) \,\dd x$.
+  de donde \(S(f, P) - s(f, P) < \e\). Por el teorema de caracterización, \(f\) es integrable. Además \(s(f, P) \leq \int_a^b f \,\dd x \leq S(f, P)\) y \(I\) pertenece al mismo intervalo \([s(f, P), S(f, P)]\), de longitud menor que \(\e\). Como \(\e\) es arbitrario, \(I = \int_a^b f(x) \,\dd x\).
 \end{proof}
 
 \begin{eg}
-  Sea $f\colon [1, 2] \to \R$, $f(x) = \frac{1}{x}$. Por la regla de Barrow, $\int_1^2 \frac{1}{x} \,\dd x = \ln 2 - \ln 1 = \ln 2$. Para cada $n \in \N$ sea $P_n$ la partición $t_i = \frac{n + i}{n}$, con $i \in \{0, \dots, n\}$, y elijamos $\alpha_i = t_i$ en cada $[t_{i-1}, t_i]$. Entonces $t_i - t_{i-1} = \frac{1}{n}$, $f(\alpha_i) = \frac{n}{n + i}$ y
+  Sea \(f\colon [1, 2] \to \R\), \(f(x) = \frac{1}{x}\). Por la regla de Barrow, \(\int_1^2 \frac{1}{x} \,\dd x = \ln 2 - \ln 1 = \ln 2\). Para cada \(n \in \N\) sea \(P_n\) la partición \(t_i = \frac{n + i}{n}\), con \(i \in \{0, \dots, n\}\), y elijamos \(\alpha_i = t_i\) en cada \([t_{i-1}, t_i]\). Entonces \(t_i - t_{i-1} = \frac{1}{n}\), \(f(\alpha_i) = \frac{n}{n + i}\) y
   \[
     R(f, P_n^{*}) = \sum_{i=1}^{n} \frac{n}{n + i} \cdot \frac{1}{n} = \sum_{i=1}^{n} \frac{1}{n + i}.
   \]
-  Como $\norm{P_n} = \frac{1}{n} \to 0$ y $f$ es integrable,
+  Como \(\norm{P_n} = \frac{1}{n} \to 0\) y \(f\) es integrable,
   \[
     \lim_{n \to \infty} \left( \frac{1}{n + 1} + \cdots + \frac{1}{2n} \right) = \ln 2.
   \]
@@ -100,31 +100,31 @@ Para $f$ integrable en $[a, b]$ y $c, d \in [a, b]$ con $c > d$ convenimos $\int
 
 \section{Integral de Riemann en varias dimensiones}
 
-Un \emph{intervalo $n$-dimensional} es un conjunto $I = I_1 \times \cdots \times I_n \subset \R^n$, donde $I_1, \dots, I_n$ son intervalos de $\R$. Se admite el caso degenerado en que algunos $I_k$ se reducen a un punto. Si todos los $I_k$ son abiertos (respectivamente cerrados, acotados), entonces $I$ es abierto (respectivamente cerrado, acotado) en $\R^n$. Notamos $|I| = |I_1| \cdots |I_n|$, donde $|I_k|$ es la longitud de $I_k$.
+Un \emph{intervalo \(n\)-dimensional} es un conjunto \(I = I_1 \times \cdots \times I_n \subset \R^n\), donde \(I_1, \dots, I_n\) son intervalos de \(\R\). Se admite el caso degenerado en que algunos \(I_k\) se reducen a un punto. Si todos los \(I_k\) son abiertos (respectivamente cerrados, acotados), entonces \(I\) es abierto (respectivamente cerrado, acotado) en \(\R^n\). Notamos \(|I| = |I_1| \cdots |I_n|\), donde \(|I_k|\) es la longitud de \(I_k\).
 
-Sea $I = [a_1, b_1] \times \cdots \times [a_n, b_n]$ un intervalo compacto. Si $P_k$ es una partición de $[a_k, b_k]$ para cada $k$, entonces $P = P_1 \times \cdots \times P_n$ es una \emph{partición} de $I$, que determina subintervalos compactos $Q_1, \dots, Q_N$ (los productos de subintervalos de las $P_k$), cuyos interiores son disjuntos dos a dos y cuya unión es $I$. Decimos que una partición $P' = P'_1 \times \cdots \times P'_n$ es \emph{más fina} que $P$ si $P_k \subset P'_k$ para todo $k$.
+Sea \(I = [a_1, b_1] \times \cdots \times [a_n, b_n]\) un intervalo compacto. Si \(P_k\) es una partición de \([a_k, b_k]\) para cada \(k\), entonces \(P = P_1 \times \cdots \times P_n\) es una \emph{partición} de \(I\), que determina subintervalos compactos \(Q_1, \dots, Q_N\) (los productos de subintervalos de las \(P_k\)), cuyos interiores son disjuntos dos a dos y cuya unión es \(I\). Decimos que una partición \(P' = P'_1 \times \cdots \times P'_n\) es \emph{más fina} que \(P\) si \(P_k \subset P'_k\) para todo \(k\).
 
 \begin{definition}[Suma de Riemann e integrabilidad]
-  Sea $f\colon I \to \R$ acotada, $P$ una partición de $I$ con subintervalos $Q_1, \dots, Q_N$ y $\alpha_j \in Q_j$ para cada $j$. La \emph{suma de Riemann} asociada es $R(f, P^{*}) = \sum_{j=1}^{N} f(\alpha_j) |Q_j|$. Decimos que $f$ es \emph{integrable Riemann} en $I$ si existe $A \in \R$ tal que para todo $\e > 0$ existe una partición $P_{\e}$ de $I$ con $|R(f, P^{*}) - A| < \e$ para toda partición $P$ más fina que $P_{\e}$ y toda elección de puntos $\alpha_j \in Q_j$. En ese caso escribimos
+  Sea \(f\colon I \to \R\) acotada, \(P\) una partición de \(I\) con subintervalos \(Q_1, \dots, Q_N\) y \(\alpha_j \in Q_j\) para cada \(j\). La \emph{suma de Riemann} asociada es \(R(f, P^{*}) = \sum_{j=1}^{N} f(\alpha_j) |Q_j|\). Decimos que \(f\) es \emph{integrable Riemann} en \(I\) si existe \(A \in \R\) tal que para todo \(\e > 0\) existe una partición \(P_{\e}\) de \(I\) con \(|R(f, P^{*}) - A| < \e\) para toda partición \(P\) más fina que \(P_{\e}\) y toda elección de puntos \(\alpha_j \in Q_j\). En ese caso escribimos
   \[
     A = \int_I f(x) \,\dd x = \int \cdots \int_I f(x_1, \dots, x_n) \,\dd x_1 \cdots \dd x_n.
   \]
 \end{definition}
 
 \begin{definition}[Sumas e integrales de Darboux]
-  Sea $I \subset \R^n$ un intervalo compacto, $f\colon I \to \R$ acotada y $P$ una partición de $I$ con subintervalos $Q_1, \dots, Q_N$. Sean $m_j = \inf f(Q_j)$ y $M_j = \sup f(Q_j)$. Las sumas inferior y superior son $s(f, P) = \sum_{j=1}^{N} m_j |Q_j|$ y $S(f, P) = \sum_{j=1}^{N} M_j |Q_j|$, y las integrales inferior y superior son
+  Sea \(I \subset \R^n\) un intervalo compacto, \(f\colon I \to \R\) acotada y \(P\) una partición de \(I\) con subintervalos \(Q_1, \dots, Q_N\). Sean \(m_j = \inf f(Q_j)\) y \(M_j = \sup f(Q_j)\). Las sumas inferior y superior son \(s(f, P) = \sum_{j=1}^{N} m_j |Q_j|\) y \(S(f, P) = \sum_{j=1}^{N} M_j |Q_j|\), y las integrales inferior y superior son
   \[
     \lowint_I f(x) \,\dd x = \sup_P s(f, P), \qquad \upint_I f(x) \,\dd x = \inf_P S(f, P).
   \]
-  Estas cantidades mantienen las propiedades vistas en $\R$.
+  Estas cantidades mantienen las propiedades vistas en \(\R\).
 \end{definition}
 
 \begin{theorem}
-  Sea $I \subset \R^n$ un intervalo compacto y $f\colon I \to \R$ acotada. Son equivalentes:
+  Sea \(I \subset \R^n\) un intervalo compacto y \(f\colon I \to \R\) acotada. Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f$ es integrable en $I$.
-    \item Para todo $\e > 0$ existe una partición $P_{\e}$ de $I$ tal que $S(f, P) - s(f, P) < \e$ para toda $P$ más fina que $P_{\e}$.
-    \item $\lowint_I f(x) \,\dd x = \upint_I f(x) \,\dd x$.
+    \item \(f\) es integrable en \(I\).
+    \item Para todo \(\e > 0\) existe una partición \(P_{\e}\) de \(I\) tal que \(S(f, P) - s(f, P) < \e\) para toda \(P\) más fina que \(P_{\e}\).
+    \item \(\lowint_I f(x) \,\dd x = \upint_I f(x) \,\dd x\).
   \end{enumerate}
 \end{theorem}
 
@@ -133,84 +133,84 @@ Sea $I = [a_1, b_1] \times \cdots \times [a_n, b_n]$ un intervalo compacto. Si $
 \end{proof}
 
 \begin{prop}
-  Si $I \subset \R^n$ es un intervalo compacto y $f\colon I \to \R$ es continua, entonces $f$ es integrable en $I$.
+  Si \(I \subset \R^n\) es un intervalo compacto y \(f\colon I \to \R\) es continua, entonces \(f\) es integrable en \(I\).
 \end{prop}
 
 \begin{proof}
-  Podemos suponer $|I| > 0$. Como $I$ es compacto, $f$ es acotada y uniformemente continua. Dado $\e > 0$ existe $\delta > 0$ tal que $\norm{x - y} < \delta$ implica $|f(x) - f(y)| < \frac{\e}{2|I|}$. Sea $P$ una partición cuyos subintervalos tienen diámetro menor que $\delta$ (basta subdividir cada lado en partes pequeñas). Entonces $M_j - m_j \leq \frac{\e}{2|I|}$ para todo $j$ y
+  Podemos suponer \(|I| > 0\). Como \(I\) es compacto, \(f\) es acotada y uniformemente continua. Dado \(\e > 0\) existe \(\delta > 0\) tal que \(\norm{x - y} < \delta\) implica \(|f(x) - f(y)| < \frac{\e}{2|I|}\). Sea \(P\) una partición cuyos subintervalos tienen diámetro menor que \(\delta\) (basta subdividir cada lado en partes pequeñas). Entonces \(M_j - m_j \leq \frac{\e}{2|I|}\) para todo \(j\) y
   \[
     S(f, P) - s(f, P) = \sum_{j} (M_j - m_j) |Q_j| \leq \frac{\e}{2|I|} \sum_j |Q_j| = \frac{\e}{2} < \e.
   \]
-  Como $s(f, P) \leq \lowint_I f \leq \upint_I f \leq S(f, P)$, resulta $0 \leq \upint_I f - \lowint_I f < \e$ para todo $\e > 0$, es decir, $f$ es integrable.
+  Como \(s(f, P) \leq \lowint_I f \leq \upint_I f \leq S(f, P)\), resulta \(0 \leq \upint_I f - \lowint_I f < \e\) para todo \(\e > 0\), es decir, \(f\) es integrable.
 \end{proof}
 
 \begin{theorem}
-  Sea $Q = [a, b] \times [c, d] \subset \R^2$ y $f\colon Q \to \R$ acotada. Entonces
+  Sea \(Q = [a, b] \times [c, d] \subset \R^2\) y \(f\colon Q \to \R\) acotada. Entonces
   \[
     \lowint_Q f \leq \lowint_a^b \left( \upint_c^d f(x, y) \,\dd y \right) \dd x \leq \upint_a^b \left( \upint_c^d f(x, y) \,\dd y \right) \dd x \leq \upint_Q f.
   \]
 \end{theorem}
 
 \begin{proof}
-  Sea $F(x) = \upint_c^d f(x, y) \,\dd y$ para $x \in [a, b]$, que está acotada por $M(d - c)$ si $|f| \leq M$. Sean $P_1 = \{ x_0, \dots, x_p \}$ y $P_2 = \{ y_0, \dots, y_q \}$ particiones de $[a, b]$ y $[c, d]$, y $P = P_1 \times P_2$, con subrectángulos $Q_{ij} = [x_{i-1}, x_i] \times [y_{j-1}, y_j]$. Sean $m_{ij} = \inf f(Q_{ij})$ y $M_{ij} = \sup f(Q_{ij})$.
+  Sea \(F(x) = \upint_c^d f(x, y) \,\dd y\) para \(x \in [a, b]\), que está acotada por \(M(d - c)\) si \(|f| \leq M\). Sean \(P_1 = \{ x_0, \dots, x_p \}\) y \(P_2 = \{ y_0, \dots, y_q \}\) particiones de \([a, b]\) y \([c, d]\), y \(P = P_1 \times P_2\), con subrectángulos \(Q_{ij} = [x_{i-1}, x_i] \times [y_{j-1}, y_j]\). Sean \(m_{ij} = \inf f(Q_{ij})\) y \(M_{ij} = \sup f(Q_{ij})\).
 
-  Por la aditividad de la integral superior, $F(x) = \sum_{j=1}^{q} \upint_{y_{j-1}}^{y_j} f(x, y) \,\dd y$. Si $x \in [x_{i-1}, x_i]$, entonces $m_{ij} \leq f(x, y) \leq M_{ij}$ para $y \in [y_{j-1}, y_j]$, y por lo tanto
+  Por la aditividad de la integral superior, \(F(x) = \sum_{j=1}^{q} \upint_{y_{j-1}}^{y_j} f(x, y) \,\dd y\). Si \(x \in [x_{i-1}, x_i]\), entonces \(m_{ij} \leq f(x, y) \leq M_{ij}\) para \(y \in [y_{j-1}, y_j]\), y por lo tanto
   \[
     \sum_{j=1}^{q} m_{ij} (y_j - y_{j-1}) \leq F(x) \leq \sum_{j=1}^{q} M_{ij} (y_j - y_{j-1}).
   \]
-  Tomando ínfimo y supremo de $F$ en $[x_{i-1}, x_i]$ y multiplicando por $x_i - x_{i-1}$, y sumando en $i$, obtenemos
+  Tomando ínfimo y supremo de \(F\) en \([x_{i-1}, x_i]\) y multiplicando por \(x_i - x_{i-1}\), y sumando en \(i\), obtenemos
   \[
     s(f, P) \leq s(F, P_1) \qquad \text{y} \qquad S(F, P_1) \leq S(f, P).
   \]
-  Entonces $s(f, P) \leq s(F, P_1) \leq \lowint_a^b F \,\dd x \leq \upint_a^b F \,\dd x \leq S(F, P_1) \leq S(f, P)$. Como esto vale para toda partición $P = P_1 \times P_2$ de $Q$, tomando supremo sobre $P$ en el miembro izquierdo e ínfimo en el derecho se obtiene el resultado.
+  Entonces \(s(f, P) \leq s(F, P_1) \leq \lowint_a^b F \,\dd x \leq \upint_a^b F \,\dd x \leq S(F, P_1) \leq S(f, P)\). Como esto vale para toda partición \(P = P_1 \times P_2\) de \(Q\), tomando supremo sobre \(P\) en el miembro izquierdo e ínfimo en el derecho se obtiene el resultado.
 \end{proof}
 
 \begin{note}
   Con la misma demostración se obtiene lo siguiente.
   \begin{enumerate}[label=(\arabic*)]
-    \item Vale el teorema reemplazando $\upint_c^d$ por $\lowint_c^d$:
+    \item Vale el teorema reemplazando \(\upint_c^d\) por \(\lowint_c^d\):
           \[
             \lowint_Q f \leq \lowint_a^b \bigl( \lowint_c^d f \,\dd y \bigr) \dd x \leq \upint_a^b \bigl( \lowint_c^d f \,\dd y \bigr) \dd x \leq \upint_Q f.
           \]
-    \item Vale intercambiando los papeles de $x$ e $y$:
+    \item Vale intercambiando los papeles de \(x\) e \(y\):
           \[
             \lowint_Q f \leq \lowint_c^d \bigl( \upint_a^b f \,\dd x \bigr) \dd y \leq \upint_c^d \bigl( \upint_a^b f \,\dd x \bigr) \dd y \leq \upint_Q f,
           \]
-          y también con $\lowint_a^b$ en el interior.
-    \item Si $f$ es integrable en $Q$, los extremos de todas estas cadenas de desigualdades coinciden con $\iint_Q f$, y por lo tanto todas las integrales iteradas (con cualquier combinación de integrales inferiores o superiores) son iguales a $\iint_Q f$.
+          y también con \(\lowint_a^b\) en el interior.
+    \item Si \(f\) es integrable en \(Q\), los extremos de todas estas cadenas de desigualdades coinciden con \(\iint_Q f\), y por lo tanto todas las integrales iteradas (con cualquier combinación de integrales inferiores o superiores) son iguales a \(\iint_Q f\).
   \end{enumerate}
 \end{note}
 
 \section{Teorema de Fubini}
 
 \begin{corollary}[Teorema de Fubini]
-  Si $f\colon Q \to \R$ es continua en $Q = [a, b] \times [c, d]$, entonces
+  Si \(f\colon Q \to \R\) es continua en \(Q = [a, b] \times [c, d]\), entonces
   \[
     \iint_Q f = \int_a^b \left( \int_c^d f(x, y) \,\dd y \right) \dd x = \int_c^d \left( \int_a^b f(x, y) \,\dd x \right) \dd y.
   \]
 \end{corollary}
 
 \begin{proof}
-  Por la proposición anterior $f$ es integrable en $Q$. Para cada $x$, la función $y \mapsto f(x, y)$ es continua, y por lo tanto integrable, de modo que $\upint_c^d f(x, y) \,\dd y = \int_c^d f(x, y) \,\dd y$. Por la nota anterior (3), $\lowint_a^b F \,\dd x = \upint_a^b F \,\dd x = \iint_Q f$, donde $F(x) = \int_c^d f(x, y) \,\dd y$. Es decir, $F$ es integrable y $\iint_Q f = \int_a^b F(x) \,\dd x$. La otra igualdad se prueba intercambiando los papeles de $x$ e $y$.
+  Por la proposición anterior \(f\) es integrable en \(Q\). Para cada \(x\), la función \(y \mapsto f(x, y)\) es continua, y por lo tanto integrable, de modo que \(\upint_c^d f(x, y) \,\dd y = \int_c^d f(x, y) \,\dd y\). Por la nota anterior (3), \(\lowint_a^b F \,\dd x = \upint_a^b F \,\dd x = \iint_Q f\), donde \(F(x) = \int_c^d f(x, y) \,\dd y\). Es decir, \(F\) es integrable y \(\iint_Q f = \int_a^b F(x) \,\dd x\). La otra igualdad se prueba intercambiando los papeles de \(x\) e \(y\).
 \end{proof}
 
 \section{Contenido de Jordan}
 
 \begin{definition}[Contenidos interior y exterior]
-  Sea $S$ un subconjunto de un intervalo compacto $I \subset \R^n$. Para cada partición $P$ de $I$ sea $\underline{J}(S, P)$ la suma de las medidas de los subintervalos de $P$ contenidos en el interior de $S$, y $\overline{J}(S, P)$ la suma de las medidas de los subintervalos de $P$ que intersecan a $\cl{S}$. El \emph{contenido interior} y el \emph{contenido exterior} de $S$ son
+  Sea \(S\) un subconjunto de un intervalo compacto \(I \subset \R^n\). Para cada partición \(P\) de \(I\) sea \(\underline{J}(S, P)\) la suma de las medidas de los subintervalos de \(P\) contenidos en el interior de \(S\), y \(\overline{J}(S, P)\) la suma de las medidas de los subintervalos de \(P\) que intersecan a \(\cl{S}\). El \emph{contenido interior} y el \emph{contenido exterior} de \(S\) son
   \[
     \underline{c}(S) = \sup_P \underline{J}(S, P), \qquad \overline{c}(S) = \inf_P \overline{J}(S, P).
   \]
 \end{definition}
 
 \begin{definition}[Contenido de Jordan]
-  Si $\underline{c}(S) = \overline{c}(S)$, este valor común se denota $c(S)$ y se llama \emph{contenido de Jordan} de $S$. En ese caso decimos que $S$ es \emph{medible Jordan}.
+  Si \(\underline{c}(S) = \overline{c}(S)\), este valor común se denota \(c(S)\) y se llama \emph{contenido de Jordan} de \(S\). En ese caso decimos que \(S\) es \emph{medible Jordan}.
 \end{definition}
 
 \begin{note}
   \begin{enumerate}[label=(\arabic*)]
-    \item Se puede ver que $\underline{c}(S)$ y $\overline{c}(S)$ dependen únicamente de $S$ y no del intervalo $I$ elegido.
-    \item $0 \leq \underline{c}(S) \leq \overline{c}(S)$.
-    \item Si $c(S) = 0$, entonces $\overline{c}(S) = 0$ y, por definición de ínfimo, para todo $\e > 0$ el conjunto $S$ puede cubrirse con finitos intervalos cuyas medidas suman menos que $\e$.
+    \item Se puede ver que \(\underline{c}(S)\) y \(\overline{c}(S)\) dependen únicamente de \(S\) y no del intervalo \(I\) elegido.
+    \item \(0 \leq \underline{c}(S) \leq \overline{c}(S)\).
+    \item Si \(c(S) = 0\), entonces \(\overline{c}(S) = 0\) y, por definición de ínfimo, para todo \(\e > 0\) el conjunto \(S\) puede cubrirse con finitos intervalos cuyas medidas suman menos que \(\e\).
   \end{enumerate}
 \end{note}

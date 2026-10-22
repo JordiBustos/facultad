@@ -1,40 +1,40 @@
 \section{Equicontinuidad uniforme}
 
 \begin{theorem}
-  Sea $E$ una familia de funciones derivables en un intervalo $I$. Si existe $c > 0$ tal que $|f'(x)| \leq c$ para toda $f \in E$ y todo $x \in I$, entonces $E$ es equicontinua en $I$.
+  Sea \(E\) una familia de funciones derivables en un intervalo \(I\). Si existe \(c > 0\) tal que \(|f'(x)| \leq c\) para toda \(f \in E\) y todo \(x \in I\), entonces \(E\) es equicontinua en \(I\).
 \end{theorem}
 
 \begin{proof}
-  Sean $x_0 \in I$, $\e > 0$ y $\delta = \frac{\e}{c}$. Si $x \in I$ y $|x - x_0| < \delta$, por el teorema del valor medio, para toda $f \in E$,
+  Sean \(x_0 \in I\), \(\e > 0\) y \(\delta = \frac{\e}{c}\). Si \(x \in I\) y \(|x - x_0| < \delta\), por el teorema del valor medio, para toda \(f \in E\),
   \[
     |f(x) - f(x_0)| \leq c \, |x - x_0| < c \cdot \frac{\e}{c} = \e. \qedhere
   \]
 \end{proof}
 
 \begin{note}
-  Con el mismo argumento, si para todo $x \in I$ existen $c_x > 0$ y un intervalo $I_x \subseteq I$ que contiene a $x$ en su interior relativo a $I$, tales que $|f'(y)| \leq c_x$ para toda $f \in E$ y todo $y \in I_x$, entonces $E$ es equicontinua en $I$. Basta tomar $\delta = \min\{ \frac{\e}{c_x}, \eta \}$, con $\eta > 0$ tal que $I \cap (x - \eta, x + \eta) \subseteq I_x$.
+  Con el mismo argumento, si para todo \(x \in I\) existen \(c_x > 0\) y un intervalo \(I_x \subseteq I\) que contiene a \(x\) en su interior relativo a \(I\), tales que \(|f'(y)| \leq c_x\) para toda \(f \in E\) y todo \(y \in I_x\), entonces \(E\) es equicontinua en \(I\). Basta tomar \(\delta = \min\{ \frac{\e}{c_x}, \eta \}\), con \(\eta > 0\) tal que \(I \cap (x - \eta, x + \eta) \subseteq I_x\).
 \end{note}
 
 \begin{definition}[Equicontinuidad uniforme]
-  Una familia $E$ de funciones $f\colon X \to \R$ se dice \emph{uniformemente equicontinua} si para todo $\e > 0$ existe $\delta > 0$ tal que, si $x, y \in X$ y $|x - y| < \delta$, entonces $|f(x) - f(y)| < \e$ para toda $f \in E$.
+  Una familia \(E\) de funciones \(f\colon X \to \R\) se dice \emph{uniformemente equicontinua} si para todo \(\e > 0\) existe \(\delta > 0\) tal que, si \(x, y \in X\) y \(|x - y| < \delta\), entonces \(|f(x) - f(y)| < \e\) para toda \(f \in E\).
 \end{definition}
 
 \begin{eg}
-  Si $E$ es una familia de funciones derivables en un intervalo $I$ con $|f'(x)| \leq c$ para toda $f \in E$ y todo $x \in I$, entonces $E$ es uniformemente equicontinua: el mismo argumento con $\delta = \frac{\e}{c}$ vale para todo par $x, y \in I$.
+  Si \(E\) es una familia de funciones derivables en un intervalo \(I\) con \(|f'(x)| \leq c\) para toda \(f \in E\) y todo \(x \in I\), entonces \(E\) es uniformemente equicontinua: el mismo argumento con \(\delta = \frac{\e}{c}\) vale para todo par \(x, y \in I\).
 \end{eg}
 
 \begin{eg}
-  Una familia formada por una única función continua que no es uniformemente continua, por ejemplo $f(x) = x^2$ en $\R$, es equicontinua pero no uniformemente equicontinua.
+  Una familia formada por una única función continua que no es uniformemente continua, por ejemplo \(f(x) = x^2\) en \(\R\), es equicontinua pero no uniformemente equicontinua.
 \end{eg}
 
 \begin{theorem}
-  Sea $K \subset \R$ compacto. Toda familia equicontinua de funciones $f\colon K \to \R$ es uniformemente equicontinua.
+  Sea \(K \subset \R\) compacto. Toda familia equicontinua de funciones \(f\colon K \to \R\) es uniformemente equicontinua.
 \end{theorem}
 
 \begin{proof}
-  Supongamos que una familia equicontinua $E$ no es uniformemente equicontinua. Entonces existe $\e > 0$ tal que para todo $n \in \N$ hay $x_n, y_n \in K$ y $f_n \in E$ con $|x_n - y_n| < \frac{1}{n}$ y $|f_n(x_n) - f_n(y_n)| \geq \e$.
+  Supongamos que una familia equicontinua \(E\) no es uniformemente equicontinua. Entonces existe \(\e > 0\) tal que para todo \(n \in \N\) hay \(x_n, y_n \in K\) y \(f_n \in E\) con \(|x_n - y_n| < \frac{1}{n}\) y \(|f_n(x_n) - f_n(y_n)| \geq \e\).
 
-  Como $K$ es compacto, pasando a una subsucesión podemos suponer que $x_n \to x \in K$, y como $|y_n - x_n| < \frac{1}{n}$, también $y_n \to x$. Por la equicontinuidad de $E$ en $x$ existe $\delta > 0$ tal que $z \in K$ y $|z - x| < \delta$ implican $|f(z) - f(x)| < \frac{\e}{2}$ para toda $f \in E$. Para $n$ suficientemente grande, $|x_n - x| < \delta$ y $|y_n - x| < \delta$, de modo que
+  Como \(K\) es compacto, pasando a una subsucesión podemos suponer que \(x_n \to x \in K\), y como \(|y_n - x_n| < \frac{1}{n}\), también \(y_n \to x\). Por la equicontinuidad de \(E\) en \(x\) existe \(\delta > 0\) tal que \(z \in K\) y \(|z - x| < \delta\) implican \(|f(z) - f(x)| < \frac{\e}{2}\) para toda \(f \in E\). Para \(n\) suficientemente grande, \(|x_n - x| < \delta\) y \(|y_n - x| < \delta\), de modo que
   \[
     |f_n(x_n) - f_n(y_n)| \leq |f_n(x_n) - f_n(x)| + |f_n(x) - f_n(y_n)| < \e,
   \]
@@ -42,45 +42,45 @@
 \end{proof}
 
 \begin{theorem}
-  Sea ${(f_n)}$ una sucesión equicontinua de funciones $f_n\colon X \to \R$, con $X \subseteq \R$. Si ${(f_n)}$ converge puntualmente en un subconjunto denso $D \subseteq X$, entonces converge uniformemente sobre todo compacto $K \subseteq X$.
+  Sea \({(f_n)}\) una sucesión equicontinua de funciones \(f_n\colon X \to \R\), con \(X \subseteq \R\). Si \({(f_n)}\) converge puntualmente en un subconjunto denso \(D \subseteq X\), entonces converge uniformemente sobre todo compacto \(K \subseteq X\).
 \end{theorem}
 
 \begin{proof}
-  Sean $K \subseteq X$ compacto y $\e > 0$. Veamos que existe $n_0$ tal que $|f_m(x) - f_n(x)| < \e$ para todo $m, n > n_0$ y todo $x \in K$.
+  Sean \(K \subseteq X\) compacto y \(\e > 0\). Veamos que existe \(n_0\) tal que \(|f_m(x) - f_n(x)| < \e\) para todo \(m, n > n_0\) y todo \(x \in K\).
 
-  Para cada $y \in K$, por la equicontinuidad en $y$ existe un intervalo abierto $I_y$ centrado en $y$ tal que $|f_n(z) - f_n(y)| < \frac{\e}{6}$ para todo $z \in X \cap I_y$ y todo $n \in \N$; luego $|f_n(x) - f_n(z)| < \frac{\e}{3}$ para todo $x, z \in X \cap I_y$ y todo $n$. Como $K$ es compacto, del cubrimiento $K \subseteq \bigcup_{y \in K} I_y$ se puede extraer un subcubrimiento finito $K \subseteq I_1 \cup \cdots \cup I_p$, donde cada $I_i = I_{y_i}$ con $y_i \in K \subseteq X$.
+  Para cada \(y \in K\), por la equicontinuidad en \(y\) existe un intervalo abierto \(I_y\) centrado en \(y\) tal que \(|f_n(z) - f_n(y)| < \frac{\e}{6}\) para todo \(z \in X \cap I_y\) y todo \(n \in \N\); luego \(|f_n(x) - f_n(z)| < \frac{\e}{3}\) para todo \(x, z \in X \cap I_y\) y todo \(n\). Como \(K\) es compacto, del cubrimiento \(K \subseteq \bigcup_{y \in K} I_y\) se puede extraer un subcubrimiento finito \(K \subseteq I_1 \cup \cdots \cup I_p\), donde cada \(I_i = I_{y_i}\) con \(y_i \in K \subseteq X\).
 
-  Como $D$ es denso en $X$ y $y_i \in X \cap I_i$, que es abierto relativo a $X$, podemos elegir $d_i \in D \cap I_i$ para cada $i$. Como $f_n(d_i)$ converge, existe $n_i$ tal que $|f_m(d_i) - f_n(d_i)| < \frac{\e}{3}$ para todo $m, n > n_i$. Sea $n_0 = \max\{n_1, \dots, n_p\}$.
+  Como \(D\) es denso en \(X\) y \(y_i \in X \cap I_i\), que es abierto relativo a \(X\), podemos elegir \(d_i \in D \cap I_i\) para cada \(i\). Como \(f_n(d_i)\) converge, existe \(n_i\) tal que \(|f_m(d_i) - f_n(d_i)| < \frac{\e}{3}\) para todo \(m, n > n_i\). Sea \(n_0 = \max\{n_1, \dots, n_p\}\).
 
-  Si $m, n > n_0$ y $x \in K$, existe $i$ con $x \in I_i$, y entonces
+  Si \(m, n > n_0\) y \(x \in K\), existe \(i\) con \(x \in I_i\), y entonces
   \[
     |f_m(x) - f_n(x)| \leq |f_m(x) - f_m(d_i)| + |f_m(d_i) - f_n(d_i)| + |f_n(d_i) - f_n(x)| < \e.
   \]
-  Luego ${(f_n)}$ es uniformemente de Cauchy en $K$ y, por lo tanto, converge uniformemente en $K$.
+  Luego \({(f_n)}\) es uniformemente de Cauchy en \(K\) y, por lo tanto, converge uniformemente en \(K\).
 \end{proof}
 
 \begin{definition}[Acotación puntual y uniforme]
-  Una familia $E$ de funciones $f\colon X \to \R$ se dice \emph{puntualmente acotada} si para todo $x \in X$ existe $c_x > 0$ tal que $|f(x)| \leq c_x$ para toda $f \in E$. Se dice \emph{uniformemente acotada} si existe $c > 0$ tal que $|f(x)| \leq c$ para toda $f \in E$ y todo $x \in X$.
+  Una familia \(E\) de funciones \(f\colon X \to \R\) se dice \emph{puntualmente acotada} si para todo \(x \in X\) existe \(c_x > 0\) tal que \(|f(x)| \leq c_x\) para toda \(f \in E\). Se dice \emph{uniformemente acotada} si existe \(c > 0\) tal que \(|f(x)| \leq c\) para toda \(f \in E\) y todo \(x \in X\).
 \end{definition}
 
 \begin{theorem}[Cantor, Tijonov]
-  Sea $X \subseteq \R$ numerable. Toda sucesión puntualmente acotada de funciones $f_n\colon X \to \R$ posee una subsucesión puntualmente convergente.
+  Sea \(X \subseteq \R\) numerable. Toda sucesión puntualmente acotada de funciones \(f_n\colon X \to \R\) posee una subsucesión puntualmente convergente.
 \end{theorem}
 
 \begin{proof}
-  Si $X$ es finito el resultado se sigue de que toda sucesión acotada en $\R$ tiene una subsucesión convergente, aplicada sucesivamente a cada punto. Sea $X = \{x_1, x_2, \dots\}$ infinito. Como ${(f_n(x_1))}_{n \in \N}$ es acotada, tiene una subsucesión convergente: existe $\N_1 \subseteq \N$ infinito tal que existe $a_1 = \lim_{n \in \N_1} f_n(x_1)$. Como ${(f_n(x_2))}_{n \in \N_1}$ es acotada, existe $\N_2 \subseteq \N_1$ infinito tal que existe $a_2 = \lim_{n \in \N_2} f_n(x_2)$. Siguiendo así, para cada $i \in \N$ obtenemos $\N_1 \supseteq \N_2 \supseteq \cdots \supseteq \N_i \supseteq \cdots$, infinitos, con $\lim_{n \in \N_i} f_n(x_i) = a_i$.
+  Si \(X\) es finito el resultado se sigue de que toda sucesión acotada en \(\R\) tiene una subsucesión convergente, aplicada sucesivamente a cada punto. Sea \(X = \{x_1, x_2, \dots\}\) infinito. Como \({(f_n(x_1))}_{n \in \N}\) es acotada, tiene una subsucesión convergente: existe \(\N_1 \subseteq \N\) infinito tal que existe \(a_1 = \lim_{n \in \N_1} f_n(x_1)\). Como \({(f_n(x_2))}_{n \in \N_1}\) es acotada, existe \(\N_2 \subseteq \N_1\) infinito tal que existe \(a_2 = \lim_{n \in \N_2} f_n(x_2)\). Siguiendo así, para cada \(i \in \N\) obtenemos \(\N_1 \supseteq \N_2 \supseteq \cdots \supseteq \N_i \supseteq \cdots\), infinitos, con \(\lim_{n \in \N_i} f_n(x_i) = a_i\).
 
-  Definimos $\N^* \subseteq \N$ tomando como $i$-ésimo elemento de $\N^*$ al $i$-ésimo elemento de $\N_i$ (en orden creciente). Como $\N_{i+1} \subseteq \N_i$, el $(i+1)$-ésimo elemento de $\N_{i+1}$ es mayor o igual que el $(i+1)$-ésimo de $\N_i$, que es mayor que el $i$-ésimo de $\N_i$; luego $\N^*$ es infinito y estrictamente creciente. Para cada $i$, a partir del $i$-ésimo elemento, ${(f_n(x_i))}_{n \in \N^*}$ es una subsucesión de ${(f_n(x_i))}_{n \in \N_i}$, que converge. Por lo tanto ${(f_n)}_{n \in \N^*}$ converge en todo $x_i \in X$.
+  Definimos \(\N^* \subseteq \N\) tomando como \(i\)-ésimo elemento de \(\N^*\) al \(i\)-ésimo elemento de \(\N_i\) (en orden creciente). Como \(\N_{i+1} \subseteq \N_i\), el \((i+1)\)-ésimo elemento de \(\N_{i+1}\) es mayor o igual que el \((i+1)\)-ésimo de \(\N_i\), que es mayor que el \(i\)-ésimo de \(\N_i\); luego \(\N^*\) es infinito y estrictamente creciente. Para cada \(i\), a partir del \(i\)-ésimo elemento, \({(f_n(x_i))}_{n \in \N^*}\) es una subsucesión de \({(f_n(x_i))}_{n \in \N_i}\), que converge. Por lo tanto \({(f_n)}_{n \in \N^*}\) converge en todo \(x_i \in X\).
 \end{proof}
 
 \begin{theorem}[Arzelà, Ascoli]
-  Sea $K \subset \R$ compacto. Toda sucesión equicontinua y puntualmente acotada de funciones $f_n\colon K \to \R$ posee una subsucesión uniformemente convergente.
+  Sea \(K \subset \R\) compacto. Toda sucesión equicontinua y puntualmente acotada de funciones \(f_n\colon K \to \R\) posee una subsucesión uniformemente convergente.
 \end{theorem}
 
 \begin{proof}
-  Veamos primero que $K$ tiene un subconjunto numerable y denso $X$. Para cada $m \in \N$, los intervalos abiertos de radio $\frac{1}{m}$ centrados en puntos de $K$ cubren $K$; por compacidad bastan finitos, con centros en un conjunto finito $X_m \subseteq K$. Entonces $X = \bigcup_m X_m$ es numerable y todo punto de $K$ está a distancia menor que $\frac{1}{m}$ de $X_m$ para cada $m$, así que $X$ es denso en $K$.
+  Veamos primero que \(K\) tiene un subconjunto numerable y denso \(X\). Para cada \(m \in \N\), los intervalos abiertos de radio \(\frac{1}{m}\) centrados en puntos de \(K\) cubren \(K\); por compacidad bastan finitos, con centros en un conjunto finito \(X_m \subseteq K\). Entonces \(X = \bigcup_m X_m\) es numerable y todo punto de \(K\) está a distancia menor que \(\frac{1}{m}\) de \(X_m\) para cada \(m\), así que \(X\) es denso en \(K\).
 
-  Por el teorema de Cantor--Tijonov, como $X$ es numerable y ${(f_n)}$ es puntualmente acotada, existe una subsucesión ${(f_{n_k})}_{k \in \N}$ que converge puntualmente en $X$. Esta subsucesión sigue siendo equicontinua, y converge puntualmente en el subconjunto denso $X \subseteq K$. Por el teorema anterior, converge uniformemente sobre el compacto $K$.
+  Por el teorema de Cantor--Tijonov, como \(X\) es numerable y \({(f_n)}\) es puntualmente acotada, existe una subsucesión \({(f_{n_k})}_{k \in \N}\) que converge puntualmente en \(X\). Esta subsucesión sigue siendo equicontinua, y converge puntualmente en el subconjunto denso \(X \subseteq K\). Por el teorema anterior, converge uniformemente sobre el compacto \(K\).
 \end{proof}
 
 \section{Ecuaciones diferenciales}

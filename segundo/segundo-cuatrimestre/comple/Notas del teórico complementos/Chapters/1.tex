@@ -1,68 +1,68 @@
 \section{Repaso de funciones}
 
-Una función $f\colon A \to B$ consta de tres partes: un conjunto $A$ (dominio), un conjunto $B$ (codominio) y una regla que asocia a cada elemento $x \in A$ un único elemento $f(x) \in B$.
+Una función \(f\colon A \to B\) consta de tres partes: un conjunto \(A\) (dominio), un conjunto \(B\) (codominio) y una regla que asocia a cada elemento \(x \in A\) un único elemento \(f(x) \in B\).
 
-El \emph{gráfico} de $f$ es el subconjunto de $A \times B$ dado por
+El \emph{gráfico} de \(f\) es el subconjunto de \(A \times B\) dado por
 \[
   G(f) = \{ (x, y) \in A \times B : y = f(x) \}.
 \]
 
 \begin{definition}[Inyectividad]
-  $f\colon A \to B$ es \emph{inyectiva} si para todo $x, y \in A$ vale $f(x) = f(y) \Rightarrow x = y$.
+  \(f\colon A \to B\) es \emph{inyectiva} si para todo \(x, y \in A\) vale \(f(x) = f(y) \Rightarrow x = y\).
 \end{definition}
 
 \begin{definition}[Suryectividad]
-  $f\colon A \to B$ es \emph{suryectiva} si para todo $y \in B$ existe $x \in A$ tal que $f(x) = y$.
+  \(f\colon A \to B\) es \emph{suryectiva} si para todo \(y \in B\) existe \(x \in A\) tal que \(f(x) = y\).
 \end{definition}
 
 \begin{definition}[Biyectividad]
-  $f\colon A \to B$ es \emph{biyectiva} si es inyectiva y suryectiva.
+  \(f\colon A \to B\) es \emph{biyectiva} si es inyectiva y suryectiva.
 \end{definition}
 
 \begin{definition}[Imagen]
-  Dados $f\colon A \to B$ y $X \subset A$, la \emph{imagen} de $X$ por $f$ es $f(X) = \{ f(x) : x \in X \}$.
+  Dados \(f\colon A \to B\) y \(X \subset A\), la \emph{imagen} de \(X\) por \(f\) es \(f(X) = \{ f(x) : x \in X \}\).
 \end{definition}
 
 \subsection{Propiedades de la imagen}
 
 \begin{prop}
-  Sean $X, Y \subset A$. Entonces:
+  Sean \(X, Y \subset A\). Entonces:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f(X \cup Y) = f(X) \cup f(Y)$.
-    \item $X \subset Y \Rightarrow f(X) \subset f(Y)$.
-    \item $f(\varnothing) = \varnothing$.
+    \item \(f(X \cup Y) = f(X) \cup f(Y)\).
+    \item \(X \subset Y \Rightarrow f(X) \subset f(Y)\).
+    \item \(f(\varnothing) = \varnothing\).
   \end{enumerate}
 \end{prop}
 
 \begin{prop}
-  Si $X, Y \subset A$, entonces $f(X \cap Y) \subset f(X) \cap f(Y)$. La igualdad vale para todo par $X, Y$ si y solo si $f$ es inyectiva.
+  Si \(X, Y \subset A\), entonces \(f(X \cap Y) \subset f(X) \cap f(Y)\). La igualdad vale para todo par \(X, Y\) si y solo si \(f\) es inyectiva.
 \end{prop}
 
 \begin{proof}
-  Si $b \in f(X \cap Y)$, existe $x \in X \cap Y$ con $f(x) = b$. Como $x \in X$ e $x \in Y$, resulta $b \in f(X) \cap f(Y)$.
+  Si \(b \in f(X \cap Y)\), existe \(x \in X \cap Y\) con \(f(x) = b\). Como \(x \in X\) e \(x \in Y\), resulta \(b \in f(X) \cap f(Y)\).
 
-  Si $f$ es inyectiva y $b \in f(X) \cap f(Y)$, existen $a \in X$ y $a' \in Y$ con $f(a) = f(a') = b$. Por inyectividad $a = a'$, luego $a \in X \cap Y$ y $b \in f(X \cap Y)$.
+  Si \(f\) es inyectiva y \(b \in f(X) \cap f(Y)\), existen \(a \in X\) y \(a' \in Y\) con \(f(a) = f(a') = b\). Por inyectividad \(a = a'\), luego \(a \in X \cap Y\) y \(b \in f(X \cap Y)\).
 
-  Si $f$ no es inyectiva, existen $x \neq y$ con $f(x) = f(y)$. Tomando $X = \{x\}$ e $Y = \{y\}$ se tiene $X \cap Y = \varnothing$, de modo que $f(X \cap Y) = \varnothing$, pero $f(X) \cap f(Y) = \{f(x)\} \neq \varnothing$.
+  Si \(f\) no es inyectiva, existen \(x \neq y\) con \(f(x) = f(y)\). Tomando \(X = \{x\}\) e \(Y = \{y\}\) se tiene \(X \cap Y = \varnothing\), de modo que \(f(X \cap Y) = \varnothing\), pero \(f(X) \cap f(Y) = \{f(x)\} \neq \varnothing\).
 \end{proof}
 
 \subsection{Preimagen}
 
 \begin{definition}[Preimagen]
-  Dados $f\colon A \to B$ e $Y \subset B$, la \emph{preimagen} de $Y$ por $f$ es
+  Dados \(f\colon A \to B\) e \(Y \subset B\), la \emph{preimagen} de \(Y\) por \(f\) es
   \[
     f^{-1}(Y) = \{ x \in A : f(x) \in Y \}.
   \]
 \end{definition}
 
 \begin{prop}
-  Sean $X, Y \subset B$. Entonces:
+  Sean \(X, Y \subset B\). Entonces:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f^{-1}(X \cup Y) = f^{-1}(X) \cup f^{-1}(Y)$.
-    \item $f^{-1}(X \cap Y) = f^{-1}(X) \cap f^{-1}(Y)$.
-    \item $f^{-1}(Y^c) = {\bigl(f^{-1}(Y)\bigr)}^c$.
-    \item $X \subset Y \Rightarrow f^{-1}(X) \subset f^{-1}(Y)$.
-    \item $f^{-1}(B) = A$ y $f^{-1}(\varnothing) = \varnothing$.
+    \item \(f^{-1}(X \cup Y) = f^{-1}(X) \cup f^{-1}(Y)\).
+    \item \(f^{-1}(X \cap Y) = f^{-1}(X) \cap f^{-1}(Y)\).
+    \item \(f^{-1}(Y^c) = {\bigl(f^{-1}(Y)\bigr)}^c\).
+    \item \(X \subset Y \Rightarrow f^{-1}(X) \subset f^{-1}(Y)\).
+    \item \(f^{-1}(B) = A\) y \(f^{-1}(\varnothing) = \varnothing\).
   \end{enumerate}
 \end{prop}
 
@@ -75,53 +75,53 @@ El \emph{gráfico} de $f$ es el subconjunto de $A \times B$ dado por
 
 \subsection{Composición e inversas}
 
-Sean $f\colon A \to B$ y $g\colon B \to C$. La \emph{composición} $g \circ f\colon A \to C$ se define como $(g \circ f)(x) = g(f(x))$ para todo $x \in A$. Basta con que $f(A)$ esté contenido en el dominio de $g$.
+Sean \(f\colon A \to B\) y \(g\colon B \to C\). La \emph{composición} \(g \circ f\colon A \to C\) se define como \((g \circ f)(x) = g(f(x))\) para todo \(x \in A\). Basta con que \(f(A)\) esté contenido en el dominio de \(g\).
 
 \begin{prop}
-  La composición de funciones inyectivas es inyectiva y la composición de funciones suryectivas es suryectiva. Además, ${(g \circ f)}^{-1}(Z) = f^{-1}\bigl(g^{-1}(Z)\bigr)$ para todo $Z \subset C$.
+  La composición de funciones inyectivas es inyectiva y la composición de funciones suryectivas es suryectiva. Además, \({(g \circ f)}^{-1}(Z) = f^{-1}\bigl(g^{-1}(Z)\bigr)\) para todo \(Z \subset C\).
 \end{prop}
 
 \begin{definition}[Restricción]
-  La \emph{restricción} de $f\colon A \to B$ a un subconjunto $X \subset A$ es la función $f|_X\colon X \to B$ dada por $f|_X(x) = f(x)$.
+  La \emph{restricción} de \(f\colon A \to B\) a un subconjunto \(X \subset A\) es la función \(f|_X\colon X \to B\) dada por \(f|_X(x) = f(x)\).
 \end{definition}
 
 \begin{definition}[Inversas laterales]
-  Sea $f\colon A \to B$. Una función $g\colon B \to A$ es:
+  Sea \(f\colon A \to B\). Una función \(g\colon B \to A\) es:
   \begin{itemize}
-    \item una \emph{inversa a izquierda} de $f$ si $g \circ f = \id_A$;
-    \item una \emph{inversa a derecha} de $f$ si $f \circ g = \id_B$;
-    \item una \emph{inversa} de $f$ si es inversa a izquierda y a derecha.
+    \item una \emph{inversa a izquierda} de \(f\) si \(g \circ f = \id_A\);
+    \item una \emph{inversa a derecha} de \(f\) si \(f \circ g = \id_B\);
+    \item una \emph{inversa} de \(f\) si es inversa a izquierda y a derecha.
   \end{itemize}
 \end{definition}
 
 \begin{prop}
-  Sea $f\colon A \to B$ con $A \neq \varnothing$. Entonces:
+  Sea \(f\colon A \to B\) con \(A \neq \varnothing\). Entonces:
   \begin{enumerate}[label=(\arabic*)]
-    \item $f$ tiene inversa a izquierda si y solo si $f$ es inyectiva;
-    \item $f$ tiene inversa a derecha si y solo si $f$ es suryectiva (esta implicación usa el axioma de elección);
-    \item $f$ es biyectiva si y solo si tiene una inversa, que en tal caso es única.
+    \item \(f\) tiene inversa a izquierda si y solo si \(f\) es inyectiva;
+    \item \(f\) tiene inversa a derecha si y solo si \(f\) es suryectiva (esta implicación usa el axioma de elección);
+    \item \(f\) es biyectiva si y solo si tiene una inversa, que en tal caso es única.
   \end{enumerate}
 \end{prop}
 
 \subsection{Familias}
 
-Sea $L$ un conjunto de \emph{índices}, cuyos elementos se representan genéricamente con $\lambda$. Dado un conjunto $X$, una \emph{familia} de elementos de $X$ con índices en $L$ es una función $x\colon L \to X$. El valor de $x$ en $\lambda \in L$ se nota $x_\lambda$ y la familia, ${(x_\lambda)}_{\lambda \in L}$.
+Sea \(L\) un conjunto de \emph{índices}, cuyos elementos se representan genéricamente con \(\lambda\). Dado un conjunto \(X\), una \emph{familia} de elementos de \(X\) con índices en \(L\) es una función \(x\colon L \to X\). El valor de \(x\) en \(\lambda \in L\) se nota \(x_\lambda\) y la familia, \({(x_\lambda)}_{\lambda \in L}\).
 
 \begin{eg}
-  Si $L = \{1, 2\}$, una familia $x\colon \{1, 2\} \to X$ se representa por los valores $x_1$ y $x_2$, es decir, se identifica con un par ordenado $(x_1, x_2)$ de elementos de $X$.
+  Si \(L = \{1, 2\}\), una familia \(x\colon \{1, 2\} \to X\) se representa por los valores \(x_1\) y \(x_2\), es decir, se identifica con un par ordenado \((x_1, x_2)\) de elementos de \(X\).
 \end{eg}
 
-Una familia indexada por $\N$ se llama \emph{sucesión}: ${(x_n)}_{n \in \N}$ es una función $x\colon \N \to X$ con $x_n = x(n)$.
+Una familia indexada por \(\N\) se llama \emph{sucesión}: \({(x_n)}_{n \in \N}\) es una función \(x\colon \N \to X\) con \(x_n = x(n)\).
 
-Las propiedades anteriores se extienden a familias arbitrarias de conjuntos; por ejemplo, $f\bigl(\bigcup_\lambda X_\lambda\bigr) = \bigcup_\lambda f(X_\lambda)$ y $f^{-1}\bigl(\bigcap_\lambda Y_\lambda\bigr) = \bigcap_\lambda f^{-1}(Y_\lambda)$.
+Las propiedades anteriores se extienden a familias arbitrarias de conjuntos; por ejemplo, \(f\bigl(\bigcup_\lambda X_\lambda\bigr) = \bigcup_\lambda f(X_\lambda)\) y \(f^{-1}\bigl(\bigcap_\lambda Y_\lambda\bigr) = \bigcap_\lambda f^{-1}(Y_\lambda)\).
 
 \section{Números naturales}
 
-Partimos de un conjunto $\N$ y una función $S\colon \N \to \N$ (el \emph{sucesor}) que cumple los \emph{axiomas de Peano}:
+Partimos de un conjunto \(\N\) y una función \(S\colon \N \to \N\) (el \emph{sucesor}) que cumple los \emph{axiomas de Peano}:
 \begin{enumerate}[label=(\arabic*)]
-  \item $S$ es inyectiva.
-  \item $\N \setminus S(\N)$ tiene un único elemento, que llamamos $1$.
-  \item (\emph{Principio de inducción}) Si $X \subset \N$ cumple $1 \in X$ y $S(m) \in X$ para todo $m \in X$, entonces $X = \N$.
+  \item \(S\) es inyectiva.
+  \item \(\N \setminus S(\N)\) tiene un único elemento, que llamamos \(1\).
+  \item (\emph{Principio de inducción}) Si \(X \subset \N\) cumple \(1 \in X\) y \(S(m) \in X\) para todo \(m \in X\), entonces \(X = \N\).
 \end{enumerate}
 
 El principio de inducción permite definir operaciones recursivamente. La \emph{suma} se define por
@@ -130,117 +130,117 @@ El principio de inducción permite definir operaciones recursivamente. La \emph{
 \]
 
 \begin{prop}[Asociatividad]
-  Para todos $m, n, p \in \N$, $m + (n + p) = (m + n) + p$.
+  Para todos \(m, n, p \in \N\), \(m + (n + p) = (m + n) + p\).
 \end{prop}
 
 \begin{proof}
-  Sea $X = \{ p \in \N : m + (n + p) = (m + n) + p \text{ para todos } m, n \in \N \}$.
+  Sea \(X = \{ p \in \N : m + (n + p) = (m + n) + p \text{ para todos } m, n \in \N \}\).
 
-  Para $p = 1$: $m + (n + 1) = m + S(n) = S(m + n) = (m + n) + 1$, así que $1 \in X$.
+  Para \(p = 1\): \(m + (n + 1) = m + S(n) = S(m + n) = (m + n) + 1\), así que \(1 \in X\).
 
-  Si $p \in X$, entonces
+  Si \(p \in X\), entonces
   \[
     m + (n + S(p)) = m + S(n + p) = S\bigl(m + (n + p)\bigr) = S\bigl((m + n) + p\bigr) = (m + n) + S(p),
   \]
-  de modo que $S(p) \in X$. Por inducción, $X = \N$.
+  de modo que \(S(p) \in X\). Por inducción, \(X = \N\).
 \end{proof}
 
 \begin{prop}
-  La suma es conmutativa: $m + n = n + m$. Además vale la ley de cancelación: $m + n = m + p \Rightarrow n = p$.
+  La suma es conmutativa: \(m + n = n + m\). Además vale la ley de cancelación: \(m + n = m + p \Rightarrow n = p\).
 \end{prop}
 
 \begin{prop}[Tricotomía]
-  Dados $m, n \in \N$, se cumple exactamente una de las siguientes condiciones:
+  Dados \(m, n \in \N\), se cumple exactamente una de las siguientes condiciones:
   \[
     m = n, \qquad \exists\, p \in \N \colon m = n + p, \qquad \exists\, p \in \N \colon n = m + p.
   \]
-  Se escribe $n < m$ en el segundo caso y $m < n$ en el tercero.
+  Se escribe \(n < m\) en el segundo caso y \(m < n\) en el tercero.
 \end{prop}
 
 \begin{definition}[Producto]
-  La \emph{multiplicación} se define recursivamente por $m \cdot 1 = m$ y $m \cdot S(n) = m \cdot n + m$. Es asociativa, conmutativa, distributiva respecto de la suma, cumple la ley de cancelación y es compatible con el orden.
+  La \emph{multiplicación} se define recursivamente por \(m \cdot 1 = m\) y \(m \cdot S(n) = m \cdot n + m\). Es asociativa, conmutativa, distributiva respecto de la suma, cumple la ley de cancelación y es compatible con el orden.
 \end{definition}
 
 \begin{theorem}[Principio de buena ordenación]
-  Todo subconjunto no vacío $A \subset \N$ tiene un elemento mínimo.
+  Todo subconjunto no vacío \(A \subset \N\) tiene un elemento mínimo.
 \end{theorem}
 
 \begin{proof}
-  Para cada $m \in \N$ sea $I_m = \{ p \in \N : p \leq m \}$ y sea
+  Para cada \(m \in \N\) sea \(I_m = \{ p \in \N : p \leq m \}\) y sea
   \[
     X = \{ m \in \N : I_m \subset \N \setminus A \}.
   \]
-  Si $1 \in A$, entonces $1$ es el mínimo de $A$. Supongamos $1 \notin A$; entonces $1 \in X$. Además $X \neq \N$, porque si fuera $X = \N$ tendríamos $m \in I_m \subset \N \setminus A$ para todo $m$, es decir $A = \varnothing$.
+  Si \(1 \in A\), entonces \(1\) es el mínimo de \(A\). Supongamos \(1 \notin A\); entonces \(1 \in X\). Además \(X \neq \N\), porque si fuera \(X = \N\) tendríamos \(m \in I_m \subset \N \setminus A\) para todo \(m\), es decir \(A = \varnothing\).
 
-  Por el principio de inducción, existe $m \in X$ tal que $m + 1 \notin X$. Entonces todos los elementos menores o iguales que $m$ están en $\N \setminus A$, pero $I_{m+1} \not\subset \N \setminus A$, de donde $m + 1 \in A$. Luego $m + 1$ es el mínimo de $A$.
+  Por el principio de inducción, existe \(m \in X\) tal que \(m + 1 \notin X\). Entonces todos los elementos menores o iguales que \(m\) están en \(\N \setminus A\), pero \(I_{m+1} \not\subset \N \setminus A\), de donde \(m + 1 \in A\). Luego \(m + 1\) es el mínimo de \(A\).
 \end{proof}
 
 \section{Cuerpos}
 
-Un \emph{cuerpo} es un conjunto $\K$ dotado de dos operaciones, suma y producto, que cumplen los siguientes axiomas para todos $x, y, z \in \K$.
+Un \emph{cuerpo} es un conjunto \(\K\) dotado de dos operaciones, suma y producto, que cumplen los siguientes axiomas para todos \(x, y, z \in \K\).
 
 \subsection{Axiomas de la suma}
 
 \begin{enumerate}[label=(S\arabic*)]
-  \item Asociatividad: $(x + y) + z = x + (y + z)$.
-  \item Conmutatividad: $x + y = y + x$.
-  \item Neutro: existe $0 \in \K$ tal que $x + 0 = x$.
-  \item Opuesto: existe $-x \in \K$ tal que $x + (-x) = 0$.
+  \item Asociatividad: \((x + y) + z = x + (y + z)\).
+  \item Conmutatividad: \(x + y = y + x\).
+  \item Neutro: existe \(0 \in \K\) tal que \(x + 0 = x\).
+  \item Opuesto: existe \(-x \in \K\) tal que \(x + (-x) = 0\).
 \end{enumerate}
 
 \subsection{Axiomas del producto}
 
 \begin{enumerate}[label=(P\arabic*)]
-  \item Asociatividad: $(xy)z = x(yz)$.
-  \item Conmutatividad: $xy = yx$.
-  \item Neutro: existe $1 \in \K$, $1 \neq 0$, tal que $x \cdot 1 = x$.
-  \item Inverso: si $x \neq 0$, existe $x^{-1} \in \K$ tal que $x \cdot x^{-1} = 1$.
+  \item Asociatividad: \((xy)z = x(yz)\).
+  \item Conmutatividad: \(xy = yx\).
+  \item Neutro: existe \(1 \in \K\), \(1 \neq 0\), tal que \(x \cdot 1 = x\).
+  \item Inverso: si \(x \neq 0\), existe \(x^{-1} \in \K\) tal que \(x \cdot x^{-1} = 1\).
 \end{enumerate}
 
-Además se pide la \emph{distributividad}: $x(y + z) = xy + xz$.
+Además se pide la \emph{distributividad}: \(x(y + z) = xy + xz\).
 
 \begin{eg}
-  $\Q$, $\R$, $\C$ y $\Z_2 = \Z/2\Z$ son cuerpos.
+  \(\Q\), \(\R\), \(\C\) y \(\Z_2 = \Z/2\Z\) son cuerpos.
 \end{eg}
 
 \subsection{Cuerpos ordenados}
 
-Un \emph{cuerpo ordenado} es un cuerpo $\K$ con un subconjunto $P \subset \K$, llamado conjunto de elementos \emph{positivos}, tal que:
+Un \emph{cuerpo ordenado} es un cuerpo \(\K\) con un subconjunto \(P \subset \K\), llamado conjunto de elementos \emph{positivos}, tal que:
 \begin{enumerate}[label=(O\arabic*)]
-  \item si $x, y \in P$, entonces $x + y \in P$ y $xy \in P$;
-  \item para todo $x \in \K$ se cumple exactamente una de las siguientes: $x \in P$, $-x \in P$ o $x = 0$.
+  \item si \(x, y \in P\), entonces \(x + y \in P\) y \(xy \in P\);
+  \item para todo \(x \in \K\) se cumple exactamente una de las siguientes: \(x \in P\), \(-x \in P\) o \(x = 0\).
 \end{enumerate}
 
 \begin{eg}
-  $\Q$ con $P = \{ p/q : p, q \in \N \}$ es un cuerpo ordenado. En cambio, $\Z_2$ no admite un orden: si $1 \in P$, entonces $1 + 1 = 0 \in P$, lo que contradice (O2).
+  \(\Q\) con \(P = \{ p/q : p, q \in \N \}\) es un cuerpo ordenado. En cambio, \(\Z_2\) no admite un orden: si \(1 \in P\), entonces \(1 + 1 = 0 \in P\), lo que contradice (O2).
 \end{eg}
 
 \begin{prop}
-  En un cuerpo ordenado, si $a \neq 0$ entonces $a^2 \in P$.
+  En un cuerpo ordenado, si \(a \neq 0\) entonces \(a^2 \in P\).
 \end{prop}
 
 \begin{proof}
-  Si $a \in P$, entonces $a^2 = a \cdot a \in P$ por (O1). Si $a \notin P$, por (O2) es $-a \in P$ y entonces $a^2 = (-a)(-a) \in P$.
+  Si \(a \in P\), entonces \(a^2 = a \cdot a \in P\) por (O1). Si \(a \notin P\), por (O2) es \(-a \in P\) y entonces \(a^2 = (-a)(-a) \in P\).
 \end{proof}
 
-En un cuerpo ordenado se define $x < y$ cuando $y - x \in P$. Esta relación cumple:
+En un cuerpo ordenado se define \(x < y\) cuando \(y - x \in P\). Esta relación cumple:
 
 \begin{prop}
-  Sean $x, y, z \in \K$. Entonces:
+  Sean \(x, y, z \in \K\). Entonces:
   \begin{enumerate}[label=(\arabic*)]
-    \item (Transitividad) $x < y$ e $y < z$ implican $x < z$.
-    \item (Tricotomía) vale exactamente una de las relaciones $x = y$, $x < y$, $y < x$.
-    \item (Monotonía de la suma) $x < y \Rightarrow x + z < y + z$.
-    \item (Monotonía del producto) $x < y$ y $0 < z \Rightarrow xz < yz$.
+    \item (Transitividad) \(x < y\) e \(y < z\) implican \(x < z\).
+    \item (Tricotomía) vale exactamente una de las relaciones \(x = y\), \(x < y\), \(y < x\).
+    \item (Monotonía de la suma) \(x < y \Rightarrow x + z < y + z\).
+    \item (Monotonía del producto) \(x < y\) y \(0 < z \Rightarrow xz < yz\).
   \end{enumerate}
 \end{prop}
 
-Se escribe $x \leq y$ si $x < y$ o $x = y$, es decir, si $y - x \in P \cup \{0\}$. Con esta relación se cumplen todas las propiedades anteriores y además la antisimetría: $x \leq y$ e $y \leq x$ implican $x = y$.
+Se escribe \(x \leq y\) si \(x < y\) o \(x = y\), es decir, si \(y - x \in P \cup \{0\}\). Con esta relación se cumplen todas las propiedades anteriores y además la antisimetría: \(x \leq y\) e \(y \leq x\) implican \(x = y\).
 
-También se tiene la noción de intervalo. Dados $a, b \in \K$ se definen
+También se tiene la noción de intervalo. Dados \(a, b \in \K\) se definen
 \[
   [a, b] = \{ x \in \K : a \leq x \leq b \}, \quad (a, b) = \{ x \in \K : a < x < b \},
 \]
-y análogamente $[a, b)$, $(a, b]$, $[a, +\infty)$, $(a, +\infty)$, $(-\infty, b]$ y $(-\infty, b)$. Notar que $[a, a] = \{a\}$.
+y análogamente \([a, b)\), \((a, b]\), \([a, +\infty)\), \((a, +\infty)\), \((-\infty, b]\) y \((-\infty, b)\). Notar que \([a, a] = \{a\}\).
 
-Un subconjunto $X \subset \K$ es \emph{acotado superiormente} si existe $b \in \K$ tal que $x \leq b$ para todo $x \in X$ (se dice que $b$ es una \emph{cota superior}). Análogamente se define \emph{acotado inferiormente} y \emph{cota inferior}. Un conjunto es \emph{acotado} si lo es superior e inferiormente.
+Un subconjunto \(X \subset \K\) es \emph{acotado superiormente} si existe \(b \in \K\) tal que \(x \leq b\) para todo \(x \in X\) (se dice que \(b\) es una \emph{cota superior}). Análogamente se define \emph{acotado inferiormente} y \emph{cota inferior}. Un conjunto es \emph{acotado} si lo es superior e inferiormente.

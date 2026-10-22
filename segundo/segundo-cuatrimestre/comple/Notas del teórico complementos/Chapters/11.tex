@@ -1,97 +1,97 @@
 \section{Límite de una función}
 
 \begin{definition}[Límite]
-  Sean $A \subset \R^n$, $x_0 \in A'$ (punto de acumulación de $A$) y $f\colon A \to \R^k$ una función. Decimos que $y \in \R^k$ es el \emph{límite} de $f$ en $x_0$, y escribimos $\lim_{x \to x_0} f(x) = y$, si
+  Sean \(A \subset \R^n\), \(x_0 \in A'\) (punto de acumulación de \(A\)) y \(f\colon A \to \R^k\) una función. Decimos que \(y \in \R^k\) es el \emph{límite} de \(f\) en \(x_0\), y escribimos \(\lim_{x \to x_0} f(x) = y\), si
   \[
     (\forall \e > 0)(\exists \delta > 0) \colon (\forall x \in A) \quad 0 < \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - y} < \e.
   \]
 \end{definition}
 
 \begin{lemma}
-  Si $A \subset \R^n$ y $x_0 \in A'$, una función $f\colon A \to \R^k$ tiene a lo sumo un límite en $x_0$.
+  Si \(A \subset \R^n\) y \(x_0 \in A'\), una función \(f\colon A \to \R^k\) tiene a lo sumo un límite en \(x_0\).
 \end{lemma}
 
 \begin{proof}
-  Sean $y, y' \in \R^k$ límites de $f$ en $x_0$ y supongamos $y \neq y'$. Sea $\e = \frac{1}{2} \norm{y - y'} > 0$. Existen $\delta_1, \delta_2 > 0$ tales que
+  Sean \(y, y' \in \R^k\) límites de \(f\) en \(x_0\) y supongamos \(y \neq y'\). Sea \(\e = \frac{1}{2} \norm{y - y'} > 0\). Existen \(\delta_1, \delta_2 > 0\) tales que
   \[
     0 < \norm{x - x_0} < \delta_1 \Rightarrow \norm{f(x) - y} < \e, \qquad 0 < \norm{x - x_0} < \delta_2 \Rightarrow \norm{f(x) - y'} < \e.
   \]
-  Sea $\delta = \min\{\delta_1, \delta_2\}$. Como $x_0 \in A'$, existe $x \in A$ con $0 < \norm{x - x_0} < \delta$, y para ese $x$,
+  Sea \(\delta = \min\{\delta_1, \delta_2\}\). Como \(x_0 \in A'\), existe \(x \in A\) con \(0 < \norm{x - x_0} < \delta\), y para ese \(x\),
   \[
     \norm{y - y'} \leq \norm{y - f(x)} + \norm{f(x) - y'} < 2\e = \norm{y - y'},
   \]
-  lo cual es absurdo. Luego $y = y'$.
+  lo cual es absurdo. Luego \(y = y'\).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A'$, $f\colon A \to \R^k$ e $y \in \R^k$. Son equivalentes:
+  Sean \(A \subset \R^n\), \(x_0 \in A'\), \(f\colon A \to \R^k\) e \(y \in \R^k\). Son equivalentes:
   \begin{enumerate}[label=(\arabic*)]
-    \item $\lim_{x \to x_0} f(x) = y$.
-    \item Para todo $\e > 0$ existe $\delta > 0$ tal que $f\bigl( B_{\delta}(x_0) \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y)$.
-    \item Para todo entorno $V$ de $y$ existe un entorno $U$ de $x_0$ tal que $f\bigl( U \cap (A \setminus \{x_0\}) \bigr) \subset V$.
+    \item \(\lim_{x \to x_0} f(x) = y\).
+    \item Para todo \(\e > 0\) existe \(\delta > 0\) tal que \(f\bigl( B_{\delta}(x_0) \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y)\).
+    \item Para todo entorno \(V\) de \(y\) existe un entorno \(U\) de \(x_0\) tal que \(f\bigl( U \cap (A \setminus \{x_0\}) \bigr) \subset V\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) $\Rightarrow$ (2) Dado $\e > 0$, sea $\delta > 0$ como en la definición. Si $x \in B_{\delta}(x_0) \cap (A \setminus \{x_0\})$, entonces $0 < \norm{x - x_0} < \delta$, luego $\norm{f(x) - y} < \e$, es decir, $f(x) \in B_{\e}(y)$.
+  (1) \(\Rightarrow\) (2) Dado \(\e > 0\), sea \(\delta > 0\) como en la definición. Si \(x \in B_{\delta}(x_0) \cap (A \setminus \{x_0\})\), entonces \(0 < \norm{x - x_0} < \delta\), luego \(\norm{f(x) - y} < \e\), es decir, \(f(x) \in B_{\e}(y)\).
 
-  (2) $\Rightarrow$ (3) Sea $V$ un entorno de $y$. Existe $\e > 0$ con $B_{\e}(y) \subset V$. Por (2) existe $\delta > 0$ con $f\bigl( B_{\delta}(x_0) \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y) \subset V$. Basta tomar $U = B_{\delta}(x_0)$, que es un entorno de $x_0$.
+  (2) \(\Rightarrow\) (3) Sea \(V\) un entorno de \(y\). Existe \(\e > 0\) con \(B_{\e}(y) \subset V\). Por (2) existe \(\delta > 0\) con \(f\bigl( B_{\delta}(x_0) \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y) \subset V\). Basta tomar \(U = B_{\delta}(x_0)\), que es un entorno de \(x_0\).
 
-  (3) $\Rightarrow$ (1) Sea $\e > 0$. Como $B_{\e}(y)$ es un entorno de $y$, existe un entorno $U$ de $x_0$ con $f\bigl( U \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y)$. Como $U$ es entorno de $x_0$, existe $\delta > 0$ con $B_{\delta}(x_0) \subset U$. Si $x \in A$ cumple $0 < \norm{x - x_0} < \delta$, entonces $x \in U \cap (A \setminus \{x_0\})$, luego $f(x) \in B_{\e}(y)$, es decir, $\norm{f(x) - y} < \e$.
+  (3) \(\Rightarrow\) (1) Sea \(\e > 0\). Como \(B_{\e}(y)\) es un entorno de \(y\), existe un entorno \(U\) de \(x_0\) con \(f\bigl( U \cap (A \setminus \{x_0\}) \bigr) \subset B_{\e}(y)\). Como \(U\) es entorno de \(x_0\), existe \(\delta > 0\) con \(B_{\delta}(x_0) \subset U\). Si \(x \in A\) cumple \(0 < \norm{x - x_0} < \delta\), entonces \(x \in U \cap (A \setminus \{x_0\})\), luego \(f(x) \in B_{\e}(y)\), es decir, \(\norm{f(x) - y} < \e\).
 \end{proof}
 
 \begin{prop}[Caracterización por sucesiones]
-  Sean $A \subset \R^n$, $x_0 \in A'$, $f\colon A \to \R^k$ e $y \in \R^k$. Entonces $\lim_{x \to x_0} f(x) = y$ si y sólo si para toda sucesión ${(x_m)}_{m \in \N} \subset A \setminus \{x_0\}$ con $x_m \to x_0$ se cumple $f(x_m) \to y$.
+  Sean \(A \subset \R^n\), \(x_0 \in A'\), \(f\colon A \to \R^k\) e \(y \in \R^k\). Entonces \(\lim_{x \to x_0} f(x) = y\) si y sólo si para toda sucesión \({(x_m)}_{m \in \N} \subset A \setminus \{x_0\}\) con \(x_m \to x_0\) se cumple \(f(x_m) \to y\).
 \end{prop}
 
 \begin{proof}
-  ($\Rightarrow$) Sea ${(x_m)} \subset A \setminus \{x_0\}$ con $x_m \to x_0$ y sea $\e > 0$. Existe $\delta > 0$ tal que $0 < \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - y} < \e$. Como $x_m \to x_0$, existe $m_0$ con $\norm{x_m - x_0} < \delta$ para $m > m_0$, y como $x_m \neq x_0$, resulta $\norm{f(x_m) - y} < \e$ para $m > m_0$.
+  (\(\Rightarrow\)) Sea \({(x_m)} \subset A \setminus \{x_0\}\) con \(x_m \to x_0\) y sea \(\e > 0\). Existe \(\delta > 0\) tal que \(0 < \norm{x - x_0} < \delta \Rightarrow \norm{f(x) - y} < \e\). Como \(x_m \to x_0\), existe \(m_0\) con \(\norm{x_m - x_0} < \delta\) para \(m > m_0\), y como \(x_m \neq x_0\), resulta \(\norm{f(x_m) - y} < \e\) para \(m > m_0\).
 
-  ($\Leftarrow$) Por contrarrecíproco, supongamos que $\lim_{x \to x_0} f(x) \neq y$. Entonces existe $\e > 0$ tal que para todo $\delta > 0$ hay un $x \in A$ con $0 < \norm{x - x_0} < \delta$ y $\norm{f(x) - y} \geq \e$. Tomando $\delta = \frac{1}{m}$ obtenemos $x_m \in A \setminus \{x_0\}$ con $\norm{x_m - x_0} < \frac{1}{m}$, de modo que $x_m \to x_0$, pero $\norm{f(x_m) - y} \geq \e$ para todo $m$, es decir, $f(x_m) \not\to y$.
+  (\(\Leftarrow\)) Por contrarrecíproco, supongamos que \(\lim_{x \to x_0} f(x) \neq y\). Entonces existe \(\e > 0\) tal que para todo \(\delta > 0\) hay un \(x \in A\) con \(0 < \norm{x - x_0} < \delta\) y \(\norm{f(x) - y} \geq \e\). Tomando \(\delta = \frac{1}{m}\) obtenemos \(x_m \in A \setminus \{x_0\}\) con \(\norm{x_m - x_0} < \frac{1}{m}\), de modo que \(x_m \to x_0\), pero \(\norm{f(x_m) - y} \geq \e\) para todo \(m\), es decir, \(f(x_m) \not\to y\).
 \end{proof}
 
 \begin{prop}[Álgebra de límites]
-  Sean $A \subset \R^n$, $x_0 \in A'$, $f, g\colon A \to \R^k$ y $h\colon A \to \R$.
+  Sean \(A \subset \R^n\), \(x_0 \in A'\), \(f, g\colon A \to \R^k\) y \(h\colon A \to \R\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Si $\lim_{x \to x_0} f(x) = y$ y $\lim_{x \to x_0} g(x) = z$, entonces $\lim_{x \to x_0} \bigl( f(x) + g(x) \bigr) = y + z$.
-    \item Si $\lim_{x \to x_0} h(x) = r$ y $\lim_{x \to x_0} f(x) = y$, entonces $\lim_{x \to x_0} h(x) f(x) = r y$.
-    \item Si $\lim_{x \to x_0} h(x) = r \neq 0$ y $h(x) \neq 0$ para todo $x \in A$, entonces $\lim_{x \to x_0} \dfrac{1}{h(x)} = \dfrac{1}{r}$.
+    \item Si \(\lim_{x \to x_0} f(x) = y\) y \(\lim_{x \to x_0} g(x) = z\), entonces \(\lim_{x \to x_0} \bigl( f(x) + g(x) \bigr) = y + z\).
+    \item Si \(\lim_{x \to x_0} h(x) = r\) y \(\lim_{x \to x_0} f(x) = y\), entonces \(\lim_{x \to x_0} h(x) f(x) = r y\).
+    \item Si \(\lim_{x \to x_0} h(x) = r \neq 0\) y \(h(x) \neq 0\) para todo \(x \in A\), entonces \(\lim_{x \to x_0} \dfrac{1}{h(x)} = \dfrac{1}{r}\).
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  Sea ${(x_m)} \subset A \setminus \{x_0\}$ con $x_m \to x_0$. Por la caracterización por sucesiones, $f(x_m) \to y$, $g(x_m) \to z$ y $h(x_m) \to r$. Por las propiedades de límites de sucesiones, $f(x_m) + g(x_m) \to y + z$, $h(x_m) f(x_m) \to r y$ y $\frac{1}{h(x_m)} \to \frac{1}{r}$. Como esto vale para toda tal sucesión, se obtienen (1), (2) y (3).
+  Sea \({(x_m)} \subset A \setminus \{x_0\}\) con \(x_m \to x_0\). Por la caracterización por sucesiones, \(f(x_m) \to y\), \(g(x_m) \to z\) y \(h(x_m) \to r\). Por las propiedades de límites de sucesiones, \(f(x_m) + g(x_m) \to y + z\), \(h(x_m) f(x_m) \to r y\) y \(\frac{1}{h(x_m)} \to \frac{1}{r}\). Como esto vale para toda tal sucesión, se obtienen (1), (2) y (3).
 \end{proof}
 
 \begin{prop}
-  Sean $A \subset \R^n$, $x_0 \in A'$, $f\colon A \to \R^k$ y $\lim_{x \to x_0} f(x) = y$.
+  Sean \(A \subset \R^n\), \(x_0 \in A'\), \(f\colon A \to \R^k\) y \(\lim_{x \to x_0} f(x) = y\).
   \begin{enumerate}[label=(\arabic*)]
-    \item Si $z \neq y$, existe $r > 0$ tal que $z \notin f\bigl( B_r(x_0) \cap (A \setminus \{x_0\}) \bigr)$.
-    \item Si $k = 1$ e $y > 0$, existe $r > 0$ tal que $f(x) > 0$ para todo $x \in B_r(x_0) \cap (A \setminus \{x_0\})$.
-    \item Existe $r > 0$ tal que $f$ es acotada en $B_r(x_0) \cap A$, es decir, el conjunto $\{ \norm{f(x)} : x \in B_r(x_0) \cap A \}$ está acotado superiormente.
+    \item Si \(z \neq y\), existe \(r > 0\) tal que \(z \notin f\bigl( B_r(x_0) \cap (A \setminus \{x_0\}) \bigr)\).
+    \item Si \(k = 1\) e \(y > 0\), existe \(r > 0\) tal que \(f(x) > 0\) para todo \(x \in B_r(x_0) \cap (A \setminus \{x_0\})\).
+    \item Existe \(r > 0\) tal que \(f\) es acotada en \(B_r(x_0) \cap A\), es decir, el conjunto \(\{ \norm{f(x)} : x \in B_r(x_0) \cap A \}\) está acotado superiormente.
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
-  (1) Como $\norm{y - z} > 0$, tomando $\e = \norm{y - z}$ existe $r > 0$ tal que $0 < \norm{x - x_0} < r \Rightarrow \norm{f(x) - y} < \norm{y - z}$. En particular $f(x) \neq z$ para tales $x$.
+  (1) Como \(\norm{y - z} > 0\), tomando \(\e = \norm{y - z}\) existe \(r > 0\) tal que \(0 < \norm{x - x_0} < r \Rightarrow \norm{f(x) - y} < \norm{y - z}\). En particular \(f(x) \neq z\) para tales \(x\).
 
-  (2) Tomando $\e = y > 0$, existe $r > 0$ con $|f(x) - y| < y$, es decir, $f(x) > 0$, para todo $x \in A$ con $0 < \norm{x - x_0} < r$.
+  (2) Tomando \(\e = y > 0\), existe \(r > 0\) con \(|f(x) - y| < y\), es decir, \(f(x) > 0\), para todo \(x \in A\) con \(0 < \norm{x - x_0} < r\).
 
-  (3) Tomando $\e = 1$, existe $r > 0$ tal que para $x \in A$ con $0 < \norm{x - x_0} < r$ se tiene $\norm{f(x)} \leq \norm{f(x) - y} + \norm{y} < 1 + \norm{y}$. Si $x_0 \notin A$, entonces $1 + \norm{y}$ es cota de $\norm{f(x)}$ en $B_r(x_0) \cap A$. Si $x_0 \in A$, el punto $x_0$ no está contemplado por la definición de límite, y una cota es $\max\{ 1 + \norm{y}, \norm{f(x_0)} \}$.
+  (3) Tomando \(\e = 1\), existe \(r > 0\) tal que para \(x \in A\) con \(0 < \norm{x - x_0} < r\) se tiene \(\norm{f(x)} \leq \norm{f(x) - y} + \norm{y} < 1 + \norm{y}\). Si \(x_0 \notin A\), entonces \(1 + \norm{y}\) es cota de \(\norm{f(x)}\) en \(B_r(x_0) \cap A\). Si \(x_0 \in A\), el punto \(x_0\) no está contemplado por la definición de límite, y una cota es \(\max\{ 1 + \norm{y}, \norm{f(x_0)} \}\).
 \end{proof}
 
 \begin{theorem}[Teorema del sándwich]
-  Sean $A \subset \R^n$, $x_0 \in A'$ y $f, g, h\colon A \to \R$ tales que $f(x) \leq g(x) \leq h(x)$ para todo $x \in A$. Si $\lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = y$, entonces $\lim_{x \to x_0} g(x) = y$.
+  Sean \(A \subset \R^n\), \(x_0 \in A'\) y \(f, g, h\colon A \to \R\) tales que \(f(x) \leq g(x) \leq h(x)\) para todo \(x \in A\). Si \(\lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = y\), entonces \(\lim_{x \to x_0} g(x) = y\).
 \end{theorem}
 
 \begin{proof}
-  Dado $\e > 0$, existen $\delta_1, \delta_2 > 0$ tales que
+  Dado \(\e > 0\), existen \(\delta_1, \delta_2 > 0\) tales que
   \[
     0 < \norm{x - x_0} < \delta_1 \Rightarrow |f(x) - y| < \e, \qquad 0 < \norm{x - x_0} < \delta_2 \Rightarrow |h(x) - y| < \e.
   \]
-  Sea $\delta = \min\{\delta_1, \delta_2\}$. Si $x \in A$ cumple $0 < \norm{x - x_0} < \delta$, entonces
+  Sea \(\delta = \min\{\delta_1, \delta_2\}\). Si \(x \in A\) cumple \(0 < \norm{x - x_0} < \delta\), entonces
   \[
     y - \e < f(x) \leq g(x) \leq h(x) < y + \e,
   \]
-  es decir, $|g(x) - y| < \e$. Luego $\lim_{x \to x_0} g(x) = y$.
+  es decir, \(|g(x) - y| < \e\). Luego \(\lim_{x \to x_0} g(x) = y\).
 \end{proof}
