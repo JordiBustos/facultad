@@ -1,2 +1,57 @@
-TODO
-\section{Teorema de la función implícita}
+\begin{theorem}[Teorema de la Función Implícita]
+    Sea $S \subset \mathbb{R}^n \times \mathbb{R}^m$ abierto y $f: S \to \mathbb{R}^m$ de clase $C^1$.
+    Sea $(a,b) \in S$ (con $a \in \mathbb{R}^n, b \in \mathbb{R}^m$) tal que $f(a,b) = 0$ y la matriz
+    \[ M = \begin{pmatrix}
+            \frac{\partial f_1}{\partial x_{n+1}}(a,b) & \dots  & \frac{\partial f_1}{\partial x_{n+m}}(a,b) \\
+            \vdots                                     & \ddots & \vdots                                     \\
+            \frac{\partial f_m}{\partial x_{n+1}}(a,b) & \dots  & \frac{\partial f_m}{\partial x_{n+m}}(a,b)
+        \end{pmatrix} \]
+    es inversible.
+
+    Entonces, existen $A \subset \mathbb{R}^n$ y $B \subset \mathbb{R}^m$ abiertos tales que $A \times B \subset S$, $a \in A$, $b \in B$, y existe una única función $g: A \to B$ de clase $C^1$ tal que $g(a) = b$ y
+    \[ f(x,g(x)) = 0 \quad \forall x \in A \]
+\end{theorem}
+
+\noindent\textbf{Observación:} La hipótesis se puede cambiar por pedir que $Df(a,b)$ sea sobreyectiva, ya que esto obliga a que la matriz tenga $m$ columnas linealmente independientes. Se puede suponer que son las últimas $m$, si no se hace un cambio de variables.
+
+\begin{proof}
+    Sea $F: S \subset \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n \times \mathbb{R}^m$, definida como $F(x,y) = (x, f(x,y))$. Como $f \in C^1$, entonces $F \in C^1$.
+    Evaluando en el punto tenemos $F(a,b) = (a, f(a,b)) = (a,0)$.
+
+    La matriz jacobiana es:
+    \[ DF(a,b) = \begin{pmatrix} I & 0 \\ X & M \end{pmatrix} \]
+    la cual es inversible porque $\det(DF(a,b)) = \det(I) \cdot \det(M) = \det(M) \neq 0$.
+
+    Por el Teorema de la Función Inversa aplicado a $F$, existen $V \subset S \subset \mathbb{R}^{n+m}$ abierto y $W \subset \mathbb{R}^{n+m}$ abierto tales que:
+    $(a,b) \in V$, $F(a,b) = (a,0) \in W$, $F: V \to W$ es biyectiva y $F^{-1}: W \to V$ es de clase $C^1$.
+
+    Escribimos $V = \tilde{A} \times B$ con $\tilde{A} \subset \mathbb{R}^n$ y $B \subset \mathbb{R}^m \implies F^{-1}: W \to \tilde{A} \times B$.
+    Podemos escribir $F^{-1}(x,y) = (F_1^{-1}(x,y), F_2^{-1}(x,y))$ con $F_1^{-1}: W \to \tilde{A}$ y $F_2^{-1}: W \to B$.
+
+    Aplicando $F$ se tiene que:
+    \[ (x,y) = F(F^{-1}(x,y)) = F(F_1^{-1}(x,y), F_2^{-1}(x,y)) = (F_1^{-1}(x,y), f(F_1^{-1}(x,y), F_2^{-1}(x,y))) \]
+    De aquí se deduce que $F_1^{-1}(x,y) = x \quad \forall (x,y) \in W$ y además se tiene que:
+    \[ f(x, F_2^{-1}(x,y)) = y \quad \forall (x,y) \in W \]
+    En definitiva, $F^{-1}(x,y) = (x, F_2^{-1}(x,y))$ con $F_2^{-1} \in C^1$.
+
+    Notemos que $\pi_1: \mathbb{R}^n \times \{0\} \to \mathbb{R}^n$, $\pi_1(x,0) = x$ es de clase $C^1$ y biyectiva.
+    Tomo $A = \pi_1( (\mathbb{R}^n \times \{0\}) \cap W )$. Como $W$ es abierto en $\mathbb{R}^{n+m}$, la intersección es abierta en $\mathbb{R}^n \times \{0\}$, y por tanto $A$ es abierto en $\mathbb{R}^n$.
+
+    Veamos que $A \subset \tilde{A}$: si $x \in A \implies x = \pi_1(x,0)$ con $(x,0) \in W$.
+    \[ F^{-1}(x,0) = (x, F_2^{-1}(x,0)) \in \tilde{A} \times B \]
+    Por lo tanto, $x \in \tilde{A}$ y $F_2^{-1}(x,0) \in B$.
+    Luego, restringiendo los dominios adecuadamente, $g: A \to B$ dada por $g(x) = F_2^{-1}(x,0)$ es de clase $C^1$.
+
+    Afirmo que $g(a) = b$. En efecto:
+    \[ F(a,b) = (a,0) \implies (a,b) = F^{-1}(a,0) = (a, F_2^{-1}(a,0)) = (a, g(a)) \]
+    Por lo tanto, $g(a) = b$.
+
+    Nos queda ver que $f(x,g(x)) = 0$.
+    \[ f(x, g(x)) = f(x, F_2^{-1}(x,0)) = 0 \]
+    pues vimos que $f(x, F_2^{-1}(x,y)) = y$, y tomando $y=0$ se cumple.
+
+    Por último, veamos que $g$ es única.
+    Supongamos que $\exists \tilde{g}: A \to B$ tal que $f(x, \tilde{g}(x)) = 0 \quad \forall x \in A$.
+    \[ F(x, g(x)) = (x, f(x, g(x))) = (x, 0) = (x, f(x, \tilde{g}(x))) = F(x, \tilde{g}(x)) \]
+    Como $F$ es biyectiva en la región, $F(x, g(x)) = F(x, \tilde{g}(x)) \implies \tilde{g}(x) = g(x) \quad \forall x \in A$.
+\end{proof}

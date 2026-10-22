@@ -73,8 +73,88 @@
   Todo conjunto con un único punto tiene medida nula (se cubre con un intervalo de medida menor que $\e$), de modo que todo conjunto numerable, por ejemplo $\Q = \{r_1, r_2, \dots\}$, tiene medida nula. Explícitamente, cubriendo a $r_k$ con el intervalo $\left( r_k - \frac{\e}{2^{k+2}}, r_k + \frac{\e}{2^{k+2}} \right)$ se obtiene una suma total $\sum_k \frac{\e}{2^{k+1}} = \frac{\e}{2} < \e$.
 \end{proof}
 
-TODO: terminar esta clase.
-
 \section{Integrabilidad y medida de Jordan}
 
+Vamos a ver que $f: I \subset \R^n \to \R$ es integrable Riemann si y solo si su conjunto de puntos de discontinuidad tiene medida de Lebesgue nula.
+
+\begin{definition}[Oscilación]
+  Sea $f: I \subset \R^n \to \R$ acotada, $I$ intervalo compacto. Se define la oscilación de $f$ en un punto $x_0 \in I$ como:
+  \[ \omega(f, x_0) = \lim_{\delta \to 0} \omega(f, B_\delta(x_0) \cap I) \]
+  donde $\omega(f, A) = \sup_A f - \inf_A f$. Notar que el límite existe porque $\omega(f, B_\delta(x_0) \cap I)$ es acotada por ser $f$ acotada y es una función decreciente de $\delta$.
+\end{definition}
+
+\begin{theorem}
+  Sea $f: I \subset \R^n \to \R$ acotada, $I$ intervalo compacto. $f$ es continua en $x_0 \in I$ si y solo si $\omega(f, x_0) = 0$.
+\end{theorem}
+\begin{proof}
+  Sea $f$ continua en $x_0$. Dado $\e > 0$, $\exists \delta > 0$ tal que si $x \in B_\delta(x_0) \cap I \implies f(x) \in B_{\e/2}(f(x_0))$. Esto implica que $\omega(f, B_\delta(x_0) \cap I) < \e$, y por tanto $\omega(f, x_0) = 0$.
+
+  Recíprocamente, si $\omega(f, x_0) = 0 \implies \forall \e > 0, \exists \delta > 0 : \omega(f, B_\delta(x_0) \cap I) < \e$.
+  Para todo $x, y \in B_\delta(x_0) \cap I \implies |f(x) - f(y)| < \e$. En particular, tomando $y = x_0$, tenemos $|f(x) - f(x_0)| < \e$, así que $f$ es continua en $x_0$.
+\end{proof}
+
+\begin{theorem}
+  Sea $f: I \subset \R^n \to \R$ acotada, $I \subset \R^n$ intervalo compacto. Si $\omega(f, x) < \e$ para todo $x \in I \implies \exists \delta > 0$ tal que para todo subintervalo cerrado $J \subset I$, si la longitud del mayor lado de $J$ es $< \delta$, entonces $\omega(f, J) < \e$.
+\end{theorem}
+\begin{proof}
+  Para cada $x \in I$, existe $\delta_x > 0$ tal que en $B_x = B_{\delta_x}(x)$, se tiene $\omega(f, B_x \cap I) < \e$.
+  El conjunto de bolas $\{B_{\delta_x/2}(x) : x \in I\}$ es un cubrimiento abierto de $I$. Como $I$ es compacto, nos podemos quedar con finitos, digamos $M$.
+  Sea $\delta = \min \left\{ \frac{\delta_{x_1}}{2\sqrt{n}}, \dots, \frac{\delta_{x_M}}{2\sqrt{n}} \right\}$.
+  Si la longitud del mayor lado de $J$ es menor que $\delta$, entonces $J$ está parcialmente cubierto por una bola de estas que contiene a su centro, digamos $B_{\delta_p/2}(x_p)$.
+  Entonces la bola $B_{\delta_p}(x_p)$ cubre a $J$ porque $\delta_p \geq 2\sqrt{n}\delta$ y el mayor lado de $J$ tiene longitud $\leq \delta$. Además, en $B_{\delta_p}(x_p) \cap I$ la oscilación de $f$ es menor que $\e$, por lo que $\omega(f, J) < \e$.
+\end{proof}
+
+\begin{theorem}
+  Sea $f: I \subset \R^n \to \R$ acotada, $I$ compacto. Para cada $\e > 0$, definimos $T_\e = \{x \in I : \omega(f, x) \geq \e\}$. Entonces $T_\e$ es cerrado.
+\end{theorem}
+\begin{proof}
+  Sea $x_0 \notin T_\e \implies \omega(f, x_0) < \e \implies \exists B_\delta(x_0)$ tal que $\omega(f, B_\delta(x_0) \cap I) < \e$.
+  Pero entonces ningún punto de $B_\delta(x_0)$ puede estar en $T_\e$, absurdo si $x_0 \in \cl{T_\e}$. Luego el complemento de $T_\e$ es abierto, y $T_\e$ es cerrado.
+\end{proof}
+
+\begin{theorem}[Criterio de Lebesgue]
+  Sea $f: I \subset \R^n \to \R$ acotada, $I$ compacto y sea $D$ el conjunto de puntos de discontinuidad de $f$. $f$ es integrable Riemann en $I$ si y solo si $|D| = 0$.
+\end{theorem}
+\begin{proof}
+  Supongamos que $f$ es integrable Riemann y $|D| \neq 0$. Como $D = \{x \in I : \omega(f, x) > 0\}$, entonces $D = \bigcup_{r=1}^\infty D_r$ con $D_r = \{x \in I : \omega(f, x) \geq 1/r\}$.
+  Si $|D| \neq 0$, entonces $|D_r| \neq 0$ para algún $r$, es decir, existe $\e > 0$ tal que todo cubrimiento numerable de $D_r$ por intervalos abiertos tiene suma de medidas mayor a $\e$.
+
+  Si $P$ es una partición de $I$ que define subintervalos $I_1, \dots, I_n$, separamos la suma:
+  \[ S(f, P) - s(f, P) = \sum_{m=1}^n (M_m - m_m)|I_m| = S_1 + S_2 \]
+  donde $S_1$ son los términos con intervalos que tienen puntos de $D_r$ en el interior.
+  Los intervalos abiertos de $S_1$ cubren a $D_r$, salvo quizás por un subconjunto de medida nula (las fronteras). Así que la suma de las medidas de los intervalos de $S_1$ es por lo menos $\e$.
+  Además, en estos intervalos $M_m - m_m \geq 1/r \implies S_1 \geq \e/r$.
+  Luego $S(f, P) - s(f, P) \geq \e/r > 0$ para toda partición $P$, lo cual contradice que $f$ sea integrable.
+
+  Supongamos ahora que $|D| = 0$. Vuelvo a escribir $D = \bigcup_{r=1}^\infty D_r$.
+  Como $|D| = 0 \implies |D_r| = 0$. Es decir que $D_r$ se puede cubrir por numerables intervalos abiertos cuyas medidas suman menos que $\e$.
+  Como $D_r$ es compacto (es un subconjunto cerrado del compacto $I$), me puedo quedar con finitos intervalos abiertos que cubren a $D_r$. La unión es abierta, la llamo $A_r$.
+  $B_r = I \setminus A_r$ es una unión de finitos subintervalos cerrados de $I$.
+  Para todo $x \in B_r$, $x \notin D_r$, por lo que $\omega(f, x) < 1/r$.
+  Existe $\delta > 0$ tal que $J \subset B_r$ con lados de longitud $< \delta$ cumple $\omega(f, J) < 1/r$.
+  Subdividimos $I$ en finitos subintervalos con una partición $P$ de norma menor a $\delta$.
+  Separamos la suma:
+  \[ S(f, P) - s(f, P) = \sum_{m=1}^n (M_m - m_m)|I_m| = S_1 + S_2 \]
+  En $S_2$ (intervalos en $B_r$), tenemos $M_m - m_m < 1/r \implies S_2 < |I|/r$.
+  En $S_1$ (intervalos que intersecan $A_r$), acotamos $M_m - m_m \leq M - m$. Como la suma de las medidas de estos intervalos es menor a $\e$, $S_1 \leq (M - m)\e$.
+  Como $\e$ y $r$ son arbitrarios, podemos hacer la suma tan pequeña como queramos, por lo tanto $f$ es integrable Riemann.
+\end{proof}
+
 \section{Integración en conjuntos}
+
+\begin{definition}
+  Sea $f$ acotada y definida en un conjunto $S \subset \R^n$. Sea $I \subset \R^n$ un intervalo compacto que contiene a $S$. Definimos:
+  \[ \tilde{f}(x) = \begin{cases} f(x) & \text{si } x \in S \\ 0 & \text{si } x \in I \setminus S \end{cases} \]
+  Definimos $\int_S f = \int_I \tilde{f}$ si $\tilde{f}$ es integrable Riemann. Análogamente se definen la integral superior e inferior.
+\end{definition}
+
+\begin{theorem}
+  Sea $S \subset \R^n$ medible Jordan y sea $f: S \to \R$ acotada. $f$ es integrable en $S$ si y solo si las discontinuidades de $f$ en $S$ son un conjunto de medida nula.
+\end{theorem}
+\begin{proof}
+  Sea $I$ compacto con $S \subset I$. Si $x \notin \cl{S} \cup \partial S$, entonces $x \in I \setminus \cl{S}$, que es abierto, y en un entorno de $x$, $\tilde{f} = 0$, por lo que $\tilde{f}$ es continua ahí.
+  Las discontinuidades de $\tilde{f}$ pueden ocurrir en las discontinuidades de $f$ en el interior de $S$, o en los puntos de la frontera $\partial S$.
+  Como $S$ es medible Jordan, $c(\partial S) = 0 \implies |\partial S| = 0$.
+  Por el criterio de Lebesgue, $\tilde{f}$ es integrable Riemann en $I$ si y solo si el conjunto de sus discontinuidades tiene medida nula.
+  Como $|\partial S| = 0$, el conjunto total de discontinuidades tiene medida nula si y solo si el conjunto de discontinuidades de $f$ en el interior de $S$ tiene medida nula.
+\end{proof}
