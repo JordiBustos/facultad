@@ -1,9 +1,16 @@
 \documentclass{article}
 
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
 \usepackage[spanish]{babel}
 \usepackage{enumitem}
+\usepackage[utf8]{inputenc} % BABEL
+\usepackage[T1]{fontenc} % BABEL
+\usepackage{lmodern} % BABEL
+\addto\captionsspanish{\renewcommand{\proofname}{Demostración}} % BABEL
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
 
 % Number sets
 \newcommand{\R}{\mathbb{R}}
@@ -13,6 +20,8 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\K}{\mathbb{K}}
 
+\newcommand{\caja}[1]{\begin{center}\fbox{\parbox{0.93\textwidth}{#1}}\end{center}}
+
 % Linear algebra operators
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\rg}{rg}
@@ -20,6 +29,21 @@
 \DeclareMathOperator{\dimm}{dim}
 \newcommand{\gen}[1]{\overline{\{#1\}}}          % Span / subespacio generado
 \newcommand{\restr}[2]{{#1}\big|_{#2}}            % Restricción de un operador
+\DeclareMathOperator{\Nu}{Nu}
+\DeclareMathOperator{\mcm}{mcm}
+\DeclareMathOperator{\mcd}{mcd}
+\DeclareMathOperator{\Id}{Id}
+ 
+% ---------- Entornos ----------
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{corolario}[teorema]{Corolario}
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definición}
+\theoremstyle{remark}
+\newtheorem*{observacion}{Observación}
 
 % Useful shortcuts
 \newcommand{\sii}{\iff}
@@ -310,5 +334,585 @@
         \item Si \(\mathcal A\) es la forma bilineal estándar en \(\R^{2}\) pero de signatura \((1,1)\) (por ejemplo \(\mathcal A(x,y) = x_1y_1 - x_2y_2\)), describir \(G(\mathcal A)\) y comparar con el caso anterior.
     \end{enumerate}
 \end{ejercicio}
+
+\section*{Convenciones y notación}
+\addcontentsline{toc}{section}{Convenciones y notación}
+
+\begin{itemize}
+    \item \(\K\) es \(\R\) o \(\C\); \(V\) es un \(\K\)-espacio vectorial de dimensión finita \(n\) y \(T\in L(V)\).
+    \item \(\Nu(S)\) es el núcleo (en la práctica se escribe \(N(S)\)), \(\Ima(S)\) la imagen y \(\rg(S)=\dim\Ima(S)\). Vale \(\dim\Nu(S)=n-\rg(S)\).
+    \item \( Z(v;T)=\gen{v,Tv,T^2v,\dots} \) es el \emph{subespacio cíclico} generado por \(v\).
+    \item \textbf{Bloque de Jordan} (convención de la práctica: unos \emph{debajo} de la diagonal):
+          \[
+              J_d(\lambda)=\begin{pmatrix}\lambda&&&\\1&\lambda&&\\&\ddots&\ddots&\\&&1&\lambda\end{pmatrix}\in\K^{d\times d}.
+          \]
+    \item Salvo que se diga otra cosa, se supone que \(p_T\) se factoriza en factores lineales en \(\K\) (siempre ocurre en \(\C\); en \(\R\) hay que verificarlo). En todos los ejercicios de este apunte es así.
+\end{itemize}
+
+\textbf{Esquema lógico de todo el tema} (para no perderse):
+\begin{center}
+    \fbox{\parbox{0.93\textwidth}{
+            \textbf{(1)} Descomposición primaria: \(V=\bigoplus_\lambda V_\lambda\) con \(V_\lambda=\Nu((T-\lambda)^{a_\lambda})\) (\(T\)-invariantes). Esto reduce todo a \emph{un solo autovalor}.\\[2pt]
+            \textbf{(2)} En \(V_\lambda\), \(N=T-\lambda\) es nilpotente. Los nilpotentes se descomponen en \emph{cadenas} \(v,Nv,\dots,N^{d-1}v\) (subespacios cíclicos).\\[2pt]
+            \textbf{(3)} Cada cadena es un bloque \(J_d(\lambda)\). Los tamaños \(d\) salen de las dimensiones \(\dim\Nu(N^j)\) (único dato que hay que calcular).\\[2pt]
+            \textbf{(4)} Para hallar los vectores se construyen las cadenas ``de arriba hacia abajo'' (Sección~\ref{sec:receta}).
+        }}
+\end{center}
+
+\newpage
+
+% =====================================================================
+\section{Preliminares Jordan}
+
+\subsection{Matriz de un operador y cambio de base}
+
+Sea \(\mathcal B=\{b_1,\dots,b_n\}\) una base de \(V\). La matriz \([T]_{\mathcal B}\) tiene por columna \(j\) las coordenadas de \(T(b_j)\) en \(\mathcal B\):
+\[
+    T(b_j)=\sum_{i=1}^n\big([T]_{\mathcal B}\big)_{ij}\,b_i .
+\]
+
+\begin{proposicion}[Cambio de base]\label{prop:cambio}
+    Sean \(\mathcal B,\mathcal B'\) bases de \(V\) y \(P\) la matriz cuyas columnas son las coordenadas, respecto de \(\mathcal B\), de los vectores de \(\mathcal B'\) (en ese orden). Entonces
+    \[
+        [T]_{\mathcal B'}=P^{-1}[T]_{\mathcal B}\,P,\qquad\text{o sea}\qquad AP=PJ\ \text{ con } A=[T]_{\mathcal B},\ J=[T]_{\mathcal B'}.
+    \]
+\end{proposicion}
+
+\begin{observacion}
+    \begin{itemize}
+        \item Si \(\mathcal B\) es la base canónica de \(\K^n\), las columnas de \(P\) \emph{son} los vectores de la base nueva.
+        \item \(AP=PJ\) dice, columna por columna, que \(Ap_j=\sum_iJ_{ij}p_i\). Es la mejor verificación de un resultado porque no requiere invertir \(P\).
+        \item Reordenar una base equivale a conjugar con una matriz de permutación: la entrada \((i,j)\) de la matriz nueva es el coeficiente de \(b'_i\) en \(T(b'_j)\). En la práctica se recalcula directamente \(T(b'_j)\) en términos de \(\mathcal B'\).
+        \item \(A\sim B\) (\(A\) y \(B\) semejantes) significa \(B=P^{-1}AP\): representan al mismo operador en bases distintas.
+    \end{itemize}
+\end{observacion}
+
+\subsection{Subespacios invariantes}
+
+\(W\subseteq V\) es \emph{\(T\)-invariante} si \(T(W)\subseteq W\); en tal caso \(T|_W\in L(W)\) es la restricción. Si \(V=V_1\oplus\cdots\oplus V_r\) con cada \(V_i\) invariante y \(\mathcal B\) es la unión de bases de los \(V_i\), entonces \([T]_{\mathcal B}=\operatorname{diag}\big([T|_{V_1}],\dots,[T|_{V_r}]\big)\) (matriz diagonal por bloques).
+
+\begin{proposicion}\label{prop:bloques}
+    En esa situación, \(p_T=\prod_ip_{T|_{V_i}}\) y \(m_T=\mcm\big(m_{T|_{V_1}},\dots,m_{T|_{V_r}}\big)\).
+\end{proposicion}
+\begin{proof}
+    El determinante de una matriz diagonal por bloques es el producto de los determinantes de los bloques. Para el minimal: \(q(T)=0\) si y sólo si \(q(T|_{V_i})=0\) para todo \(i\), si y sólo si \(m_{T|_{V_i}}\mid q\) para todo \(i\), si y sólo si \(\mcm(\dots)\mid q\) (ver Proposición~\ref{prop:minimal}(i)).
+\end{proof}
+
+\subsection{Autovalores y multiplicidades}
+
+\(\lambda\in\K\) es autovalor si \(\Nu(T-\lambda)\ne0\). Se definen
+\[
+    a_\lambda=\text{multiplicidad de }\lambda\text{ en }p_T,\qquad
+    \mu_\lambda=\text{multiplicidad de }\lambda\text{ en }m_T,\qquad
+    g_\lambda=\dim\Nu(T-\lambda).
+\]
+
+% =====================================================================
+\section{Polinomio característico y polinomio minimal}
+
+\begin{definicion}
+    \(p_T(x)=\det(xI-T)\) (mónico de grado \(n\), independiente de la base; sus raíces son los autovalores). Si la matriz de \(T\) es triangular, \(p_T=\prod_i(x-a_{ii})\).
+    El \emph{polinomio minimal} \(m_T\) es el polinomio mónico de menor grado tal que \(m_T(T)=0\) (existe porque \(\dim L(V)=n^2\), luego \(I,T,\dots,T^{n^2}\) son linealmente dependientes).
+\end{definicion}
+
+\begin{proposicion}\label{prop:minimal}
+    \begin{enumerate}[label=(\roman*)]
+        \item \(q(T)=0\iff m_T\mid q\).
+        \item (Cayley--Hamilton) \(p_T(T)=0\); por lo tanto \(m_T\mid p_T\).
+        \item \(p_T\) y \(m_T\) tienen las mismas raíces. En particular, si \(p_T\) se factoriza en lineales, \(m_T\) también.
+    \end{enumerate}
+\end{proposicion}
+\begin{proof}
+    (i) Si \(q=s\,m_T+r\) con \(\deg r<\deg m_T\), entonces \(q(T)=0\iff r(T)=0\iff r=0\) por minimalidad. (ii) es el teorema de Cayley--Hamilton. (iii) De \(m_T\mid p_T\) sale que toda raíz de \(m_T\) lo es de \(p_T\). Recíprocamente, si \(\lambda\) es raíz de \(p_T\) y \(v\ne0\) es un autovector, \(0=m_T(T)v=m_T(\lambda)v\), así que \(m_T(\lambda)=0\).
+\end{proof}
+
+\textbf{Consecuencia práctica.} Para calcular \(m_T\) hay dos caminos: (a) probar divisores de \(p_T\) con las mismas raíces, de menor a mayor grado; (b) leerlo de la forma de Jordan (\(\mu_\lambda\) es el tamaño del bloque más grande de \(\lambda\)). Siempre \(1\le\mu_\lambda\le a_\lambda\).
+
+% =====================================================================
+\section{Descomposición primaria}
+
+\begin{teorema}[Descomposición primaria]\label{teo:primaria}
+    Sea \(m_T=\prod_{i=1}^r(x-\lambda_i)^{\mu_i}\) con \(\lambda_i\) distintos y sea \(V_i=\Nu\big((T-\lambda_i)^{\mu_i}\big)\). Entonces:
+    \begin{enumerate}[label=(\roman*)]
+        \item \(V=V_1\oplus\cdots\oplus V_r\) y cada \(V_i\) es \(T\)-invariante.
+        \item \(m_{T|_{V_i}}=(x-\lambda_i)^{\mu_i}\) y \(p_{T|_{V_i}}=(x-\lambda_i)^{a_i}\); en particular \(\dim V_i=a_i\).
+        \item \(\Nu\big((T-\lambda_i)^k\big)\subseteq V_i\) para todo \(k\ge1\), y vale la igualdad si \(k\ge\mu_i\) (en particular para \(k=a_i\)).
+    \end{enumerate}
+    \(V_i\) se llama \emph{subespacio propio generalizado} (o espacio raíz) de \(\lambda_i\).
+\end{teorema}
+
+\begin{proof}
+    Sea \(q_i=m_T/(x-\lambda_i)^{\mu_i}=\prod_{j\ne i}(x-\lambda_j)^{\mu_j}\). Los \(q_i\) no tienen raíz común, luego \(\mcd(q_1,\dots,q_r)=1\) y por Bézout existen polinomios \(a_i\) con \(\sum_ia_iq_i=1\). Sea \(E_i=a_i(T)q_i(T)\).
+    \begin{itemize}
+        \item \(\sum_iE_i=\Id\).
+        \item Si \(i\ne j\), \(m_T\mid q_iq_j\), así que \(E_iE_j=0\). Luego \(E_i=E_i\sum_jE_j=E_i^2\): los \(E_i\) son proyecciones con \(\sum E_i=\Id\) y \(E_iE_j=0\), de modo que \(V=\bigoplus_i\Ima E_i\).
+        \item \((T-\lambda_i)^{\mu_i}E_i=a_i(T)\,m_T(T)=0\), o sea \(\Ima E_i\subseteq V_i\).
+        \item Si \(v\in V_i\) y \(j\ne i\), entonces \((x-\lambda_i)^{\mu_i}\mid q_j\), así que \(E_jv=0\) y \(v=\sum_jE_jv=E_iv\in\Ima E_i\). Entonces \(V_i=\Ima E_i\).
+    \end{itemize}
+    Esto prueba (i) (la invarianza es clara pues \(V_i\) es núcleo de un polinomio en \(T\)).
+
+    (ii) \(m_{T|_{V_i}}\) divide a \((x-\lambda_i)^{\mu_i}\). Si una potencia menor \((x-\lambda_i)^k\), \(k<\mu_i\), anulara a \(V_i\), entonces \((x-\lambda_i)^k\prod_{j\ne i}(x-\lambda_j)^{\mu_j}\) anularía a todo \(V\) y tendría grado menor que \(m_T\): absurdo. Además \(p_{T|_{V_i}}\) divide a \(p_T\) (Prop.~\ref{prop:bloques}), así que se factoriza en lineales; sus raíces son las de \(m_{T|_{V_i}}\), o sea sólo \(\lambda_i\). Luego \(p_{T|_{V_i}}=(x-\lambda_i)^{\dim V_i}\) y de \(p_T=\prod_ip_{T|_{V_i}}\) resulta \(\dim V_i=a_i\).
+
+    (iii) En \(V_j\), \(T-\lambda_j\) es nilpotente, y para \(j\ne i\), \(T-\lambda_i=(T-\lambda_j)+(\lambda_j-\lambda_i)\Id\) es nilpotente más un múltiplo no nulo de la identidad, luego inversible en \(V_j\). Si \((T-\lambda_i)^kv=0\) y \(v=\sum_jv_j\) con \(v_j\in V_j\), cada componente cumple \((T-\lambda_i)^kv_j=0\), de donde \(v_j=0\) para \(j\ne i\) y \(v\in V_i\). Por otro lado, si \(k\ge\mu_i\) es claro que \(V_i\subseteq\Nu((T-\lambda_i)^k)\).
+\end{proof}
+
+\begin{corolario}\label{cor:diag}
+    \(T\) es diagonalizable \(\iff\) \(m_T=\prod_i(x-\lambda_i)\) con \(\lambda_i\) distintos \(\iff\) \(\mu_i=1\) para todo \(i\).
+\end{corolario}
+\begin{proof}
+    Si \(\mu_i=1\) para todo \(i\), \(V_i=\Nu(T-\lambda_i)\) y \(V\) es suma de espacios propios. Recíprocamente, si hay una base de autovectores, \(\prod_i(x-\lambda_i)\) la anula, así que \(m_T\) lo divide.
+\end{proof}
+
+% =====================================================================
+\section{Operadores nilpotentes y subespacios cíclicos}
+
+\(N\in L(W)\) es \emph{nilpotente} si \(N^k=0\) para algún \(k\); el menor tal \(k\) es su \emph{índice}.
+
+\begin{lema}[Estabilización de la cadena de núcleos]\label{lema:estab}
+    Para cualquier \(N\in L(V)\) vale \(\Nu(N)\subseteq\Nu(N^2)\subseteq\Nu(N^3)\subseteq\cdots\), y si \(\Nu(N^j)=\Nu(N^{j+1})\) entonces \(\Nu(N^{j+1})=\Nu(N^{j+2})\); luego todos los núcleos siguientes son iguales. Por lo tanto la cadena crece estrictamente hasta cierto paso \(\le n\) y desde ahí es constante.
+\end{lema}
+\begin{proof}
+    Si \(N^{j+2}x=0\), entonces \(Nx\in\Nu(N^{j+1})=\Nu(N^j)\), o sea \(N^{j+1}x=0\). El resto es que las dimensiones, enteras y acotadas por \(n\), no pueden crecer indefinidamente.
+\end{proof}
+
+Si \(N\) es nilpotente de índice \(\mu\) en \(W\), la cadena termina en \(\Nu(N^\mu)=W\). Para \(T\) cualquiera y \(N=T-\lambda\), el Teorema~\ref{teo:primaria}(iii) dice que la cadena \(\Nu((T-\lambda)^j)\) crece estrictamente hasta \(j=\mu_\lambda\) y después es constante, igual a \(V_\lambda\) (de dimensión \(a_\lambda\)).
+
+\subsection{Subespacios cíclicos}
+
+\begin{definicion}
+    Para \(v\in V\), \(Z(v;T)=\gen{T^kv:k\ge0}\) es el menor subespacio \(T\)-invariante que contiene a \(v\). El \emph{anulador} \(m_v\) de \(v\) es el mónico de menor grado con \(m_v(T)v=0\); se tiene \(m_v\mid m_T\).
+\end{definicion}
+
+\begin{proposicion}\label{prop:ciclico}
+    Si \(d=\deg m_v\), entonces \(\{v,Tv,\dots,T^{d-1}v\}\) es base de \(Z(v;T)\); en particular \(\dim Z(v;T)=\deg m_v\).
+\end{proposicion}
+\begin{proof}
+    Son linealmente independientes: una combinación nula no trivial daría un polinomio no nulo de grado \(<d\) que anula a \(v\). Generan: dado \(k\), se divide \(x^k=s\,m_v+r\) con \(\deg r<d\) y entonces \(T^kv=r(T)v\).
+\end{proof}
+
+\begin{proposicion}[Cadenas y bloques]\label{prop:cadena}
+    Sea \(N=T-\lambda\) y \(v\) con \(N^dv=0\ne N^{d-1}v\). Entonces:
+    \begin{enumerate}[label=(\roman*)]
+        \item \(Z(v;T)=Z(v;N)\) (los polinomios en \(T\) y en \(T-\lambda\) son los mismos), \(m_v=(x-\lambda)^d\) y \(\dim Z(v;T)=d\).
+        \item \(\{v,Nv,\dots,N^{d-1}v\}\) es base de \(Z(v;T)\) (la ``cadena'' de \(v\)) y, en esa base ordenada, la matriz de \(T|_{Z(v;T)}\) es exactamente \(J_d(\lambda)\).
+    \end{enumerate}
+\end{proposicion}
+\begin{proof}
+    (i) \(m_v\mid x^d\) en la variable \(N\), y si fuese \(x^k\) con \(k<d\) sería \(N^kv=0\). (ii) Con \(w_l=N^{l-1}v\) se tiene \(Tw_l=\lambda w_l+w_{l+1}\) para \(l<d\) y \(Tw_d=\lambda w_d\): la columna \(l\) tiene \(\lambda\) en la posición \(l\) y un \(1\) en la posición \(l+1\). Notar que \(w_d=N^{d-1}v\) es un \emph{autovector}.
+\end{proof}
+
+\subsection{Teorema de estructura para nilpotentes}
+
+\begin{teorema}\label{teo:nilp}
+    Sea \(N\in L(W)\) nilpotente. Existen \(v_1,\dots,v_r\in W\) y enteros \(d_1\ge\cdots\ge d_r\ge1\) con \(N^{d_i}v_i=0\) tales que
+    \[
+        \{N^jv_i:\ 1\le i\le r,\ 0\le j<d_i\}
+    \]
+    es una base de \(W\). Equivalentemente, \(W=Z(v_1;N)\oplus\cdots\oplus Z(v_r;N)\) con \(\dim Z(v_i;N)=d_i\).
+\end{teorema}
+
+\begin{proof}
+    Por inducción en \(\dim W\); si \(W=0\) no hay nada que probar. Como \(N\) es nilpotente, no es inyectivo, así que \(U:=\Ima N\) cumple \(\dim U<\dim W\); además \(U\) es \(N\)-invariante y \(N|_U\) es nilpotente. Por hipótesis inductiva hay \(w_1,\dots,w_s\in U\) y enteros \(e_i\ge1\) tales que \(\{N^jw_i:0\le j<e_i\}\) es base de \(U\) (con \(N^{e_i}w_i=0\)).
+
+    Como \(w_i\in\Ima N\), elegimos \(v_i\) con \(Nv_i=w_i\) y ponemos \(d_i=e_i+1\); entonces \(N^{d_i}v_i=0\ne N^{d_i-1}v_i=N^{e_i-1}w_i=:u_i\). Los \(u_i\) están en \(\Nu N\) y son linealmente independientes (son parte de una base de \(U\)).
+
+    \emph{Los \(u_i\) forman una base de \(\Nu N\cap U\).} Sea \(x=\sum_{i,j<e_i}a_{ij}N^jw_i\in\Nu N\). Entonces \(0=Nx=\sum_{i,\,j<e_i-1}a_{ij}N^{j+1}w_i\), y por independencia \(a_{ij}=0\) si \(j<e_i-1\); queda \(x=\sum_ia_{i,e_i-1}u_i\).
+
+    Completemos \(\{u_1,\dots,u_s\}\) a una base de \(\Nu N\) con vectores \(z_1,\dots,z_t\). Sea
+    \[
+        \mathcal C=\{N^jv_i:0\le j<d_i\}\cup\{z_1,\dots,z_t\}.
+    \]
+    \emph{Cantidad:} \(|\mathcal C|=\sum_i(e_i+1)+t=\dim U+s+t=\dim\Ima N+\dim\Nu N=\dim W\).
+    \emph{Independencia:} si \(\sum_{i,j<d_i}a_{ij}N^jv_i+\sum_kb_kz_k=0\), aplicando \(N\) queda \(\sum_{i,j<e_i}a_{ij}N^jw_i=0\) (pues \(Nz_k=0\) y \(N^{d_i}v_i=0\)), luego \(a_{ij}=0\) para \(j<e_i=d_i-1\). Entonces queda \(\sum_ia_{i,d_i-1}u_i+\sum_kb_kz_k=0\), y como \(\{u_i\}\cup\{z_k\}\) es base de \(\Nu N\), todos los coeficientes son nulos.
+    Así, \(\mathcal C\) es una base formada por las cadenas de los \(v_i\) (longitud \(d_i\)) y de los \(z_k\) (longitud \(1\)). Se reordenan por longitud decreciente.
+\end{proof}
+
+\begin{proposicion}[Los tamaños están determinados por los núcleos]\label{prop:tamanos}
+    En la situación del Teorema~\ref{teo:nilp}, sea \(k_j=\dim\Nu(N^j)\) (\(k_0=0\)). Entonces
+    \begin{enumerate}[label=(\roman*)]
+        \item \(k_j=\sum_{i=1}^r\min(d_i,j)\).
+        \item \(\#\{i:d_i\ge j\}=k_j-k_{j-1}=\dim\big(\Nu(N^j)/\Nu(N^{j-1})\big)\); en particular \(r=k_1\).
+        \item \(\#\{i:d_i=j\}=2k_j-k_{j-1}-k_{j+1}\).
+        \item \(\#\{i:d_i\ge j\}=\dim\big(\Nu N\cap\Ima N^{j-1}\big)\).
+        \item \(d_1=\mu\) (índice de nilpotencia) y \(\sum_id_i=\dim W\).
+    \end{enumerate}
+    En particular, la lista \((d_1,\dots,d_r)\) no depende de las elecciones hechas.
+\end{proposicion}
+\begin{proof}
+    Cada \(Z_i=Z(v_i;N)\) es \(N\)-invariante. Con \(w_l=N^{l-1}v_i\) (\(1\le l\le d_i\)) se tiene \(N^jw_l=w_{l+j}\) (que vale \(0\) si \(l+j>d_i\)); luego \(\Nu(N^j)\cap Z_i=\gen{w_l:l>d_i-j}\), de dimensión \(\min(d_i,j)\), y \(\Ima(N^j)\cap Z_i=\gen{w_l:l>j}\). Como \(W=\bigoplus Z_i\), \(\Nu(N^j)=\bigoplus_i(\Nu(N^j)\cap Z_i)\), lo que da (i). (ii) y (iii) se obtienen restando en (i). Para (iv): \(\Nu N\) está generado por los últimos vectores \(w_{d_i}\) de cada cadena y \(\Ima N^{j-1}\) por los \(w_l\) con \(l\ge j\); como todos son vectores de una misma base, la intersección está generada por los \(w_{d_i}\) con \(d_i\ge j\). (v) es inmediato.
+\end{proof}
+
+% =====================================================================
+\section{El teorema de Jordan}
+
+\begin{teorema}[Forma canónica de Jordan]\label{teo:jordan}
+    Sea \(T\in L(V)\) con \(p_T\) factorizable en lineales. Existe una base \(\mathcal B\) de \(V\) tal que
+    \[
+        [T]_{\mathcal B}=J=\operatorname{diag}\big(J_{d_1}(\lambda_1),\dots,J_{d_s}(\lambda_s)\big)
+    \]
+    (los \(\lambda_i\) pueden repetirse). \(J\) es única salvo el orden de los bloques. Una base así se llama \emph{base de Jordan} y está formada por cadenas.
+\end{teorema}
+\begin{proof}
+    \emph{Existencia.} Por el Teorema~\ref{teo:primaria}, \(V=\bigoplus V_{\lambda}\). En cada \(V_\lambda\), \(N_\lambda=(T-\lambda)|_{V_\lambda}\) es nilpotente, así que por el Teorema~\ref{teo:nilp} hay una base de cadenas; por la Proposición~\ref{prop:cadena}, en ella \(T|_{V_\lambda}=\lambda+N_\lambda\) tiene matriz diagonal por bloques \(J_d(\lambda)\). Se unen las bases.
+
+    \emph{Unicidad.} Sea \(J\) una matriz de Jordan de \(T\). Fijado \(\lambda\), los bloques \(J_d(\mu)\) con \(\mu\ne\lambda\) dan \(J_d(\mu)-\lambda\) triangular con diagonal no nula, es decir inversible, y no aportan al núcleo de \((J-\lambda)^j\); los bloques \(J_d(\lambda)\) aportan \(\min(d,j)\) (Prop.~\ref{prop:tamanos}(i)). Así \(k_j=\dim\Nu((T-\lambda)^j)=\sum_{\text{bloques de }\lambda}\min(d,j)\) y, por la Prop.~\ref{prop:tamanos}(iii), la cantidad de bloques \(J_j(\lambda)\) es \(2k_j-k_{j-1}-k_{j+1}\), que sólo depende de \(T\).
+\end{proof}
+
+\begin{proposicion}[Diccionario: datos de \(T\) \(\leftrightarrow\) bloques de Jordan]\label{prop:dicc}
+    Sea \(\lambda\) un autovalor de \(T\), sean \(s_1\ge\dots\ge s_g\) los tamaños de sus bloques de Jordan y \(k_j=\dim\Nu((T-\lambda)^j)=n-\rg(T-\lambda)^j\). Entonces:
+
+    \begin{center}
+        \renewcommand{\arraystretch}{1.35}
+        \begin{tabular}{@{}p{6.2cm}p{9.6cm}@{}}
+            \toprule
+            \textbf{Dato de Jordan}                         & \textbf{Cómo se calcula}                                                                                                     \\
+            \midrule
+            cantidad de bloques (\(g\))                     & \(g_\lambda=k_1=\dim\Nu(T-\lambda)\)                                                                                         \\
+            suma de los tamaños                             & \(a_\lambda\) (multiplicidad en \(p_T\)) \(=k_n\)                                                                            \\
+            tamaño del bloque más grande                    & \(\mu_\lambda\) (multiplicidad en \(m_T\)) \(=\) primer \(j\) con \(k_j=a_\lambda\) \(=\) primer \(j\) con \(k_j=k_{j+1}\)   \\
+            \(\dim\Nu((T-\lambda)^j)\)                      & \(k_j=\sum_i\min(s_i,j)\)                                                                                                    \\
+            cantidad de bloques de tamaño \(\ge j\)         & \(k_j-k_{j-1}=\dim\dfrac{\Nu((T-\lambda)^j)}{\Nu((T-\lambda)^{j-1})}=\dim\big(\Nu(T-\lambda)\cap\Ima(T-\lambda)^{j-1}\big)\) \\
+            cantidad de bloques de tamaño exactamente \(j\) & \(2k_j-k_{j-1}-k_{j+1}\)                                                                                                     \\
+            polinomios                                      & \(p_T=\prod_\lambda(x-\lambda)^{a_\lambda}\), \quad \(m_T=\prod_\lambda(x-\lambda)^{\mu_\lambda}\)                           \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    Además \(1\le g_\lambda\le a_\lambda-\mu_\lambda+1\), y \(T\) es diagonalizable si y sólo si todos los bloques tienen tamaño \(1\) (Corolario~\ref{cor:diag}).
+\end{proposicion}
+
+Con esta tabla se pasa de la matriz a los bloques y de los bloques a las dimensiones. Es todo el ``ida y vuelta'' que piden los ejercicios.
+
+\begin{corolario}[Criterio de semejanza]\label{cor:semej}
+    Dos operadores (o matrices) \(A,B\) cuyos polinomios característicos se factorizan son semejantes si y sólo si tienen la misma forma de Jordan, si y sólo si \(p_A=p_B\) y \(\dim\Nu((A-\lambda)^j)=\dim\Nu((B-\lambda)^j)\) para todo autovalor \(\lambda\) y todo \(j\).
+\end{corolario}
+
+\begin{corolario}[Cuántas formas de Jordan admiten \(p\) y \(m\)]\label{cor:cuantas}
+    Dados \(p_T\) y \(m_T\), la cantidad de clases de semejanza posibles es el producto, sobre los autovalores \(\lambda\), de la cantidad de particiones de \(a_\lambda\) cuya parte mayor es exactamente \(\mu_\lambda\).
+\end{corolario}
+
+\textbf{Cuándo bastan \(p\) y \(m\).} Las formas posibles para un autovalor con \((a,\mu)\) son las particiones de \(a\) con parte mayor \(\mu\). Para \(a\le3\) hay una sola. Los primeros casos con varias opciones (el número \(g\) de bloques las distingue hasta \(a\le6\)):
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{@{}ccl@{}}
+        \toprule
+        \(a\) & \(\mu\) & tamaños de bloques (con su \(g\))                                                  \\
+        \midrule
+        4     & 2       & \((2,2)\ [g=2]\), \ \((2,1,1)\ [g=3]\)                                             \\
+        5     & 2       & \((2,2,1)\ [3]\), \ \((2,1,1,1)\ [4]\)                                             \\
+        5     & 3       & \((3,2)\ [2]\), \ \((3,1,1)\ [3]\)                                                 \\
+        6     & 2       & \((2,2,2)\ [3]\), \ \((2,2,1,1)\ [4]\), \ \((2,1,1,1,1)\ [5]\)                     \\
+        6     & 3       & \((3,3)\ [2]\), \ \((3,2,1)\ [3]\), \ \((3,1,1,1)\ [4]\)                           \\
+        6     & 4       & \((4,2)\ [2]\), \ \((4,1,1)\ [3]\)                                                 \\
+        7     & 3       & \((3,3,1)\ [3]\), \ \((3,2,2)\ [3]\), \ \((3,2,1,1)\ [4]\), \ \((3,1,1,1,1)\ [5]\) \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+Todos los demás casos con \(a\le6\) tienen una única partición. Para \(a=7\), \(\mu=3\) aparece el primer caso en que ni siquiera \((a,\mu,g)\) alcanzan: \((3,3,1)\) y \((3,2,2)\) tienen \(g=3\); hay que mirar \(k_2\).
+
+% =====================================================================
+\section{Descomposición en subespacios cíclicos}
+
+\begin{proposicion}[Jordan \(\iff\) descomposición cíclica]
+    Cada bloque de Jordan \(J_d(\lambda)\) de una base de Jordan corresponde a un subespacio cíclico \(Z(v;T)=\gen{v,(T-\lambda)v,\dots,(T-\lambda)^{d-1}v}\) de dimensión \(d\), con anulador \((x-\lambda)^d\), donde \(v\) es el primer vector de la cadena. Entonces \(V=\bigoplus_iZ(v_i;T)\) con \(m_{v_i}=(x-\lambda_i)^{d_i}\) (\(\sum d_i=n\), \(\prod_i(x-\lambda_i)^{d_i}=p_T\)).
+\end{proposicion}
+
+Lo único que la descomposición determina son los anuladores \((x-\lambda_i)^{d_i}\) (con multiplicidad); los subespacios y los generadores \emph{no} son únicos. Por ejemplo, si \(T=\lambda\Id\) en \(\K^2\), cualquier par de rectas distintas da una descomposición cíclica. En la práctica, ``describir la descomposición determinada por \(P\)'' significa: agrupar las columnas de \(P\) por bloques, indicar el generador (primera columna de cada grupo), el subespacio que genera y su anulador.
+
+\begin{proposicion}[Pegado de subespacios cíclicos]\label{prop:pegado}
+    Si \(m_v\) y \(m_w\) son coprimos, entonces \(Z(v+w;T)=Z(v;T)\oplus Z(w;T)\) y \(m_{v+w}=m_vm_w\).
+\end{proposicion}
+\begin{proof}
+    Si \(x\in Z(v;T)\cap Z(w;T)\), entonces \(m_v(T)x=0=m_w(T)x\) y por Bézout \(x=0\); luego la suma es directa. Si \(p(T)(v+w)=0\), entonces \(p(T)v=-p(T)w\in Z(v;T)\cap Z(w;T)=0\), así que \(m_v\mid p\) y \(m_w\mid p\), luego \(m_vm_w\mid p\). Entonces \(m_{v+w}=m_vm_w\) y \(\dim Z(v+w;T)=\deg m_vm_w=\dim Z(v;T)+\dim Z(w;T)\). Como \(Z(v+w;T)\subseteq Z(v;T)\oplus Z(w;T)\), hay igualdad.
+\end{proof}
+
+\begin{teorema}[Forma con factores invariantes]\label{teo:invariantes}
+    Para cada autovalor \(\lambda\) sean \(s_1(\lambda)\ge s_2(\lambda)\ge\cdots\) los tamaños de sus bloques (completando con ceros) y sea \(v_{\lambda,k}\) el generador del \(k\)-ésimo bloque. Definamos \(q_k=\prod_\lambda(x-\lambda)^{s_k(\lambda)}\) y \(u_k=\sum_\lambda v_{\lambda,k}\). Entonces
+    \[
+        V=Z(u_1;T)\oplus Z(u_2;T)\oplus\cdots,\qquad m_{u_k}=q_k,\qquad \cdots\mid q_3\mid q_2\mid q_1=m_T,\qquad \prod_kq_k=p_T.
+    \]
+\end{teorema}
+\begin{proof}
+    Se aplica repetidamente la Proposición~\ref{prop:pegado} (los factores \((x-\lambda)^{s_k(\lambda)}\) para distintos \(\lambda\) son coprimos). La divisibilidad sale de \(s_{k+1}(\lambda)\le s_k(\lambda)\).
+\end{proof}
+Esta es la descomposición con la menor cantidad posible de sumandos (\(\max_\lambda g_\lambda\), pues en un subespacio cíclico \(\dim\Nu(T-\lambda)\le1\)). Si tu cátedra pide ``descomposición en subespacios cíclicos'' sin más, la forma por bloques (con anuladores \((x-\lambda)^d\)) es la que sale directo de \(P\).
+
+% =====================================================================
+\section{Receta de cálculo}\label{sec:receta}
+
+\subsection{Problema tipo A: dada \(A\) (o \(T\)), hallar \(J\), \(P\) y la descomposición cíclica}
+
+\begin{enumerate}[label=\textbf{Paso \arabic*.},leftmargin=*,itemsep=3pt]
+    \item[\textbf{Paso 0.}] Si \(T\) viene dado por una fórmula, hallar \(A=[T]_{\mathcal E}\) calculando \(T(e_j)\) (\emph{columnas}). Si hay un subespacio invariante evidente, reordenar la base para ver bloques.
+    \item \textbf{Polinomio característico.} \(p_A=\det(xI-A)\); si \(A\) es triangular, producto de \((x-a_{ii})\). Obtener los autovalores \(\lambda\) y \(a_\lambda\).
+    \item \textbf{Tamaños de bloque.} Para cada \(\lambda\), con \(N=A-\lambda I\), calcular \(k_j=n-\rg(N^j)\) para \(j=1,2,\dots\) hasta que \(k_j=a_\lambda\). Entonces \(c_j=k_j-k_{j-1}\) es la cantidad de bloques de tamaño \(\ge j\) y se deducen los tamaños (Prop.~\ref{prop:dicc}). \(\mu_\lambda\) es el primer \(j\) con \(k_j=a_\lambda\).
+    \item \textbf{Forma de Jordan.} Escribir \(J\) ordenando, por ejemplo, autovalores crecientes y, dentro de cada uno, bloques de mayor a menor tamaño. También se obtiene \(m_A=\prod(x-\lambda)^{\mu_\lambda}\).
+    \item \textbf{Cadenas} (algoritmo de arriba hacia abajo, Prop.~\ref{prop:algoritmo}).
+    \item \textbf{Matriz \(P\).} Cada cadena \(v,Nv,\dots,N^{d-1}v\) va en columnas consecutivas \emph{en ese orden}, y el orden de las cadenas debe coincidir con el orden de los bloques de \(J\). Verificar \(AP=PJ\) y \(\det P\ne0\).
+    \item \textbf{Descomposición cíclica.} Cada grupo de columnas es \(Z(v;A)\), con generador \(v\) y anulador \((x-\lambda)^d\).
+\end{enumerate}
+
+\textbf{Chequeos rápidos:} \(\tr A=\sum_\lambda a_\lambda\lambda\); \(\det A=\prod_\lambda\lambda^{a_\lambda}\); \(\sum_\lambda a_\lambda=n\); la suma de tamaños de bloques de \(\lambda\) es \(a_\lambda\).
+
+\begin{proposicion}[Construcción de cadenas, de arriba hacia abajo]\label{prop:algoritmo}
+    Sea \(N=T-\lambda\), \(\mu=\mu_\lambda\), \(K_j=\Nu(N^j)\) (\(K_0=0\)) y \(c_j=\dim K_j-\dim K_{j-1}\). Se define recursivamente, para \(j=\mu,\mu-1,\dots,1\), un conjunto \(S_j\subset K_j\):
+    \begin{itemize}
+        \item \(S_{\mu+1}=\emptyset\).
+        \item Dado \(S_{j+1}\), se considera \(N(S_{j+1})\subset K_j\) y se agrega un conjunto \(T_j\subset K_j\) de vectores nuevos de modo que las clases de \(S_j:=N(S_{j+1})\cup T_j\) módulo \(K_{j-1}\) formen una base de \(K_j/K_{j-1}\).
+    \end{itemize}
+    Entonces: \(|S_j|=c_j\); cada \(t\in T_j\) genera la cadena \(t,Nt,\dots,N^{j-1}t\) (de longitud exacta \(j\)); y la unión de todas esas cadenas, para \(t\in T_1\cup\dots\cup T_\mu\), es una base de \(V_\lambda\) formada por los bloques de Jordan de \(\lambda\) (hay \(|T_j|=c_j-c_{j+1}\) bloques de tamaño \(j\)).
+\end{proposicion}
+\begin{proof}
+    Las clases de \(N(S_{j+1})\) módulo \(K_{j-1}\) son linealmente independientes: si \(\sum a_xNx\in K_{j-1}\) (\(x\in S_{j+1}\)), entonces \(N^j(\sum a_xx)=0\), o sea \(\sum a_xx\in K_j\), y por independencia módulo \(K_j\) resulta \(a_x=0\). Luego se puede completar a una base de \(K_j/K_{j-1}\) y \(|S_j|=c_j\). Por inducción, \(S_1\cup\dots\cup S_j\) es una base de \(K_j\) (las clases de \(S_j\) completan una base de \(K_{j-1}\)); para \(j=\mu\) resulta \(K_\mu=V_\lambda\). Cada elemento de \(S_j\) es de la forma \(N^it\) con \(t\in T_{j+i}\), así que la base es la unión de las cadenas de los \(t\).
+\end{proof}
+
+\textbf{En la práctica.} (1) Nivel \(j=\mu\): elegir \(c_\mu\) vectores de \(K_\mu\setminus K_{\mu-1}\) independientes módulo \(K_{\mu-1}\) (se verifica con un chequeo de rango: junto con una base de \(K_{\mu-1}\) deben seguir siendo independientes). (2) Bajar un nivel: los vectores \(Nv\) ya obtenidos están en \(K_{\mu-1}\) y son independientes módulo \(K_{\mu-2}\); agregar vectores nuevos de \(K_{\mu-1}\) hasta tener \(c_{\mu-1}\). (3) Repetir hasta el nivel \(1\). Los vectores nuevos del último nivel son autovectores que no son imagen de nada de lo anterior.
+
+\textbf{Variante de abajo hacia arriba.} Los finales de cadena están en \(\Nu N\cap\Ima N^{j-1}\) (Prop.~\ref{prop:tamanos}(iv)). Para alargar un autovector \(u\) se resuelve \(Nv=u\). Esto sólo tiene solución si \(u\in\Ima N\); por eso no se puede elegir un autovector cualquiera: se deja la combinación de autovectores con coeficientes indeterminados y se impone la compatibilidad del sistema.
+
+\subsection{Problema tipo B: dados \(p\) y \(m\), hallar las formas posibles}
+Para cada autovalor, listar las particiones de \(a_\lambda\) con parte mayor \(\mu_\lambda\) (tabla de la Sección~5). Dos operadores con los mismos \(p\) y \(m\) no son necesariamente semejantes. Para \emph{construir} un \(T\) con datos prescritos: elegir una partición por autovalor, escribir \(J\) por bloques, y \(T\) es el operador cuya matriz en la base canónica es \(J\).
+
+\subsection{Problema tipo C: dada \(J\), calcular dimensiones de núcleos}
+Usar \(\dim\Nu((T-\lambda)^j)=\sum_i\min(s_i,j)\) y la cantidad de bloques de tamaño \(\ge j\). Para el cociente \(\Nu(N^{j+1})/\Nu(N^j)\): su dimensión es la cantidad de bloques de tamaño \(\ge j+1\).
+
+% =====================================================================
+\section{Errores frecuentes y lista de verificación}
+
+\begin{itemize}
+    \item \textbf{Convención de los unos} (arriba o abajo) y el \emph{orden} de las columnas de \(P\) dentro de cada cadena. Con unos abajo la cadena es \(v,Nv,\dots\) (el autovector queda al final); con unos arriba es \(\dots,Nv,v\).
+    \item El orden de los bloques de \(J\) tiene que coincidir con el orden de los grupos de columnas de \(P\).
+    \item Un vector de la cadena tiene que cumplir \(N^dv=0\) pero \(N^{d-1}v\ne0\). Un vector de \(\Nu(N^2)\) que ya está en \(\Nu(N)\) no sirve como cabeza de un bloque de tamaño \(2\).
+    \item Extender un autovector \(u\) con \(Nv=u\) sin comprobar que \(u\in\Ima N\).
+    \item No verificar que \(P\) es inversible (hacer \(\det P\ne0\) o una cuenta de rango) ni que \(AP=PJ\).
+    \item \(m_T\ne p_T\) en general: los exponentes de \(m_T\) son los tamaños \emph{máximos}, los de \(p_T\) las \emph{sumas}.
+    \item \(p\) y \(m\) no determinan la forma de Jordan desde \(a=4\) (\(\mu=2\)); tampoco \((a,\mu,g)\) desde \(a=7\).
+    \item Cuando \(T\) viene dado por una fórmula, las columnas de \([T]_{\mathcal E}\) son las imágenes \(T(e_j)\), no las filas.
+    \item Si \(A=[T]_{\mathcal B}\) con \(\mathcal B\) no canónica, las columnas de \(P\) son \emph{coordenadas}; los vectores de \(V\) se recuperan combinando los de \(\mathcal B\).
+    \item En \(\R\) hay que chequear que el polinomio característico se factorice en \(\R\).
+\end{itemize}
+
+% =====================================================================
+\section{Aplicaciones breves}
+
+\begin{itemize}
+    \item \textbf{Potencias.} Si \(A=PJP^{-1}\), entonces \(A^k=PJ^kP^{-1}\), y con \(N_d=J_d(0)\) (que cumple \(N_d^d=0\)):
+          \[
+              J_d(\lambda)^k=(\lambda I+N_d)^k=\sum_{i=0}^{d-1}\binom ki\lambda^{k-i}N_d^{\,i}.
+          \]
+    \item \textbf{Toda matriz es semejante a su transpuesta.} \(J_d(\lambda)^t\) es el bloque con unos arriba, que se obtiene de \(J_d(\lambda)\) invirtiendo el orden de la base. Como \(A\sim J\) y \(J\sim J^t\), resulta \(A\sim A^t\).
+    \item \textbf{Nilpotentes.} \(N\) es nilpotente \(\iff\) \(p_N=x^n\) \(\iff\) su forma de Jordan tiene sólo \(\lambda=0\).
+\end{itemize}
+
+\newpage
+% =====================================================================
+\section{Ejercicios resueltos}
+
+\textbf{Nota.} Los ejercicios de las imágenes 3 y 5 son el mismo (la misma matriz \(A\)); se resuelve una sola vez como Ejercicio~3. Siempre con la convención de unos \emph{debajo} de la diagonal.
+
+% ---------------------------------------------------------------------
+\subsection{Ejercicio 1}
+\textbf{Enunciado.} Hallar (explícitamente) \(T\in L(\C^6)\) tal que su polinomio característico sea \(p_T(x)=x^2(x-1)^4\) y su polinomio minimal sea \(m_T(x)=x^2(x-1)^2\). ¿Es el único \(T\) con esa propiedad?
+
+\textbf{Resolución.}
+Se miran los datos por autovalor (Prop.~\ref{prop:dicc}): suma de tamaños \(=a_\lambda\) y tamaño máximo \(=\mu_\lambda\).
+\begin{itemize}
+    \item \(\lambda=0\): \(a=2\), \(\mu=2\). La única partición de \(2\) con parte mayor \(2\) es \((2)\): un bloque \(J_2(0)\).
+    \item \(\lambda=1\): \(a=4\), \(\mu=2\). Particiones de \(4\) con parte mayor exactamente \(2\): \((2,2)\) y \((2,1,1)\).
+\end{itemize}
+Entonces hay dos formas de Jordan posibles:
+\[
+    J'=J_2(0)\oplus J_2(1)\oplus J_2(1),\qquad J''=J_2(0)\oplus J_2(1)\oplus J_1(1)\oplus J_1(1).
+\]
+
+\emph{Un \(T\) explícito.} Sea \(T\) el operador cuya matriz en la base canónica es
+\[
+    J'=\begin{pmatrix}
+        0 & 0 & 0 & 0 & 0 & 0 \\
+        1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 1
+    \end{pmatrix},\qquad\text{es decir}\qquad T(x_1,\dots,x_6)=(0,\ x_1,\ x_3,\ x_3+x_4,\ x_5,\ x_5+x_6).
+\]
+Por ser diagonal por bloques (Prop.~\ref{prop:bloques}): \(p_T=x^2\cdot(x-1)^2\cdot(x-1)^2=x^2(x-1)^4\) y \(m_T=\mcm\big(x^2,(x-1)^2,(x-1)^2\big)=x^2(x-1)^2\). \checkmark
+
+\emph{Unicidad.} \textbf{No es único.} El operador \(T'\) con matriz \(J''\) también cumple \(p_{T'}=x^2(x-1)^2(x-1)(x-1)=x^2(x-1)^4\) y \(m_{T'}=\mcm\big(x^2,(x-1)^2,x-1,x-1\big)=x^2(x-1)^2\). Pero \(T\) y \(T'\) \emph{no son semejantes}: \(\dim\Nu(T-I)\) es la cantidad de bloques de autovalor \(1\), que es \(2\) para \(J'\) y \(3\) para \(J''\). (Directamente: \(\rg(J'-I)=2+1+1=4\) y \(\rg(J''-I)=2+1+0+0=3\).)
+
+En resumen: hay exactamente dos clases de semejanza con esos \(p\) y \(m\) (Cor.~\ref{cor:cuantas}: \(1\cdot2=2\)), y además dentro de cada clase hay infinitos operadores (cualquier conjugado \(P^{-1}TP\) sirve). Los polinomios \(p_T\) y \(m_T\) no alcanzan para determinar la forma de Jordan.
+
+% ---------------------------------------------------------------------
+\subsection{Ejercicio 2}
+\textbf{Enunciado.} \(T\in L(\R^5)\), \(T(v,w,x,y,z)=(2v,\ 2w,\ 2x+y,\ v+2y,\ w+2z)\).
+a) Matriz de \(T\) en la base canónica \(\mathcal E=\{e_1,\dots,e_5\}\). b) Matriz de \(T\) en \(\mathcal B=\{e_3,e_4,e_1,e_5,e_2\}\). c) Polinomios característico y minimal. d) Forma de Jordan y base que la determina. e) Descomposición de \(\R^5\) como suma directa de subespacios cíclicos.
+
+\textbf{Resolución.} Las coordenadas \((v,w,x,y,z)\) son los coeficientes de \(e_1,\dots,e_5\).
+
+\textbf{a)} Se calcula \(T(e_j)\) (cada una es una \emph{columna}):
+\begin{align*}
+    T(e_1) & =(2,0,0,1,0)=2e_1+e_4, & T(e_2) & =(0,2,0,0,1)=2e_2+e_5, & T(e_3) & =(0,0,2,0,0)=2e_3, \\
+    T(e_4) & =(0,0,1,2,0)=e_3+2e_4, & T(e_5) & =(0,0,0,0,2)=2e_5.
+\end{align*}
+\[
+    [T]_{\mathcal E}=\begin{pmatrix}2&0&0&0&0\\0&2&0&0&0\\0&0&2&1&0\\1&0&0&2&0\\0&1&0&0&2\end{pmatrix}.
+\]
+
+\textbf{b)} Con \(b_1=e_3,\ b_2=e_4,\ b_3=e_1,\ b_4=e_5,\ b_5=e_2\), se escribe cada \(T(b_j)\) en términos de \(\mathcal B\):
+\begin{align*}
+    T(b_1) & =T(e_3)=2e_3=2b_1,         \\
+    T(b_2) & =T(e_4)=e_3+2e_4=b_1+2b_2, \\
+    T(b_3) & =T(e_1)=2e_1+e_4=b_2+2b_3, \\
+    T(b_4) & =T(e_5)=2e_5=2b_4,         \\
+    T(b_5) & =T(e_2)=2e_2+e_5=b_4+2b_5.
+\end{align*}
+\[
+    [T]_{\mathcal B}=\begin{pmatrix}2&1&0&0&0\\0&2&1&0&0\\0&0&2&0&0\\0&0&0&2&1\\0&0&0&0&2\end{pmatrix}.
+\]
+(Es \(P^{-1}[T]_{\mathcal E}P\) con \(P\) la matriz de permutación de columnas \(e_3,e_4,e_1,e_5,e_2\).) La matriz ya es diagonal por bloques: \(\gen{e_3,e_4,e_1}\) y \(\gen{e_5,e_2}\) son invariantes.
+
+\textbf{c)} \([T]_{\mathcal B}\) es triangular con \(2\) en toda la diagonal, así que \(p_T(x)=(x-2)^5\). Sea \(N=T-2\Id\):
+\[
+    N(v,w,x,y,z)=(0,0,y,v,w),\quad N^2(v,w,x,y,z)=(0,0,v,0,0),\quad N^3=0.
+\]
+Como \(N^2\ne0\) (por ejemplo \(N^2e_1=e_3\)) y \(N^3=0\), el minimal es \(m_T(x)=(x-2)^3\).
+
+\textbf{d)} Núcleos: \(\Nu N=\{y=v=w=0\}=\gen{e_3,e_5}\), \(k_1=2\); \(\Nu N^2=\{v=0\}\), \(k_2=4\); \(\Nu N^3=\R^5\), \(k_3=5=a_2\). Entonces \(c_1=2\), \(c_2=2\), \(c_3=1\): hay \(c_1=2\) bloques, uno de tamaño \(\ge3\) y dos de tamaño \(\ge2\). Tamaños: \((3,2)\) (suma \(5\), mayor \(3=\mu\) \checkmark).
+
+Cadenas (arriba hacia abajo):
+\begin{itemize}
+    \item Nivel \(3\): \(v_1=e_1\in\Nu N^3\setminus\Nu N^2\). Cadena \(e_1\mapsto Ne_1=e_4\mapsto N^2e_1=e_3\mapsto0\).
+    \item Nivel \(2\): \(Ne_1=e_4\in\Nu N^2\) ya aporta una clase; falta otra independiente módulo \(\Nu N=\gen{e_3,e_5}\): \(v_2=e_2\in\Nu N^2\) sirve. Cadena \(e_2\mapsto Ne_2=e_5\mapsto0\).
+    \item Nivel \(1\): \(c_1=2\) y ya están \(N^2e_1=e_3\) y \(Ne_2=e_5\) (independientes). No hace falta agregar nada.
+\end{itemize}
+\(\{e_1,e_4,e_3,\ e_2,e_5\}\) es la base de Jordan y
+\[
+    J=\begin{pmatrix}2&0&0&0&0\\1&2&0&0&0\\0&1&2&0&0\\0&0&0&2&0\\0&0&0&1&2\end{pmatrix}=J_3(2)\oplus J_2(2).
+\]
+\emph{Comentario sobre la base del inciso b).} En \(\mathcal B\) la matriz tiene unos \emph{arriba} de la diagonal: \(\mathcal B\) es la base de Jordan para la convención de unos arriba (cadenas invertidas: \(e_3,e_4,e_1\) y \(e_5,e_2\)). Para unos abajo se invierte el orden de cada cadena, que da la base de Jordan de arriba.
+
+\textbf{e)} Cada bloque es un subespacio cíclico:
+\begin{align*}
+    \R^5     & =Z(e_1;T)\oplus Z(e_2;T),                                 \\
+    Z(e_1;T) & =\gen{e_1,e_4,e_3}\quad(\text{anulador }(x-2)^3,\ \dim3), \\
+    Z(e_2;T) & =\gen{e_2,e_5}\quad(\text{anulador }(x-2)^2,\ \dim2).
+\end{align*}
+(Para verificar: \(Z(e_1;T)=\gen{e_1,Te_1=2e_1+e_4,T^2e_1}=\gen{e_1,e_4,e_3}\), y \(\{e_1,e_4,e_3,e_2,e_5\}\) es base.) Con un solo autovalor, la forma con factores invariantes (Teorema~\ref{teo:invariantes}) coincide con ésta: \(q_1=(x-2)^3\), \(q_2=(x-2)^2\), \(q_1q_2=p_T\).
+
+% ---------------------------------------------------------------------
+\subsection{Ejercicio 3}
+\textbf{Enunciado.} \(A=\begin{pmatrix}3&-1&2&-2&2\\0&2&1&-1&1\\0&0&2&0&0\\0&0&0&2&1\\0&0&0&0&3\end{pmatrix}\in\R^{5\times5}\).
+a) Forma de Jordan de \(A\). b) Matriz \(P\) con \(P^{-1}AP=J\). c) Descomposición de \(\R^5\) en suma directa de subespacios cíclicos determinada por \(P\).
+
+\textbf{Resolución.}
+
+\textbf{a)} \(A\) es triangular con diagonal \((3,2,2,2,3)\), así que \(p_A(x)=(x-2)^3(x-3)^2\): \(a_2=3\), \(a_3=2\).
+
+\emph{Autovalor \(2\).} Sea \(N=A-2I\):
+\[
+    N=\begin{pmatrix}1&-1&2&-2&2\\0&0&1&-1&1\\0&0&0&0&0\\0&0&0&0&1\\0&0&0&0&1\end{pmatrix},\qquad
+    N^2=\begin{pmatrix}1&-1&1&-1&1\\0&0&0&0&0\\0&0&0&0&0\\0&0&0&0&1\\0&0&0&0&1\end{pmatrix}.
+\]
+\(\rg N=3\) (filas 1, 2 y 4 independientes; la 3 es nula y la 5 repite la 4), luego \(k_1=\dim\Nu N=2\). \(\rg N^2=2\), luego \(k_2=3=a_2\): se estabiliza en \(j=2\), así que \(\mu_2=2\). Entonces \(c_1=2\) bloques y \(c_2=k_2-k_1=1\) bloque de tamaño \(\ge2\): tamaños \((2,1)\) (suma \(3\) \checkmark).
+
+\emph{Autovalor \(3\).} Sea \(M=A-3I\); el sistema \(Mx=0\) da: fila 3: \(x_3=0\); fila 4: \(x_4=x_5\); fila 2: \(-x_2+x_3-x_4+x_5=0\), o sea \(x_2=0\); la fila 1 es consecuencia. Entonces \(\Nu M=\{(a,0,0,b,b)\}\), \(k_1=2=a_3\): dos bloques de tamaño \(1\) (el autovalor \(3\) es ``semisimple'').
+
+Por lo tanto
+\[
+    J=J_2(2)\oplus J_1(2)\oplus J_1(3)\oplus J_1(3)=\begin{pmatrix}2&0&0&0&0\\1&2&0&0&0\\0&0&2&0&0\\0&0&0&3&0\\0&0&0&0&3\end{pmatrix},\qquad m_A(x)=(x-2)^2(x-3).
+\]
+(Orden de bloques: \(\lambda=2\) primero, tamaño decreciente; otro orden daría una matriz igualmente válida.)
+
+\textbf{b)} \emph{Autovalor \(2\).} Núcleos: \(\Nu N=\{x_5=0,\ x_3=x_4,\ x_1=x_2\}=\{(a,a,b,b,0)\}\), con base \((1,1,0,0,0),(0,0,1,1,0)\), y \(\Nu N^2=\{x_5=0,\ x_1-x_2+x_3-x_4=0\}\) (dimensión \(3\)).
+\begin{itemize}
+    \item Nivel \(2\): elegir \(v\in\Nu N^2\setminus\Nu N\). Por ejemplo \(v=(0,1,1,0,0)\): \(x_5=0\) y \(0-1+1-0=0\) \checkmark, y no está en \(\Nu N\) porque \(x_1\ne x_2\). Entonces
+          \(Nv=(1,1,0,0,0)\) y \(N^2v=0\).
+    \item Nivel \(1\): \(c_1=2\); ya está \(Nv=(1,1,0,0,0)\in\Nu N\). Agregar un autovector independiente: \(w=(0,0,1,1,0)\in\Nu N\).
+\end{itemize}
+\emph{Autovalor \(3\):} autovectores \((1,0,0,0,0)\) y \((0,0,0,1,1)\) (base de \(\Nu M\)).
+
+Columnas de \(P\) en el orden de los bloques de \(J\):
+\[
+    c_1=v=\begin{pmatrix}0\\1\\1\\0\\0\end{pmatrix},\quad c_2=Nv=\begin{pmatrix}1\\1\\0\\0\\0\end{pmatrix},\quad c_3=w=\begin{pmatrix}0\\0\\1\\1\\0\end{pmatrix},\quad c_4=\begin{pmatrix}1\\0\\0\\0\\0\end{pmatrix},\quad c_5=\begin{pmatrix}0\\0\\0\\1\\1\end{pmatrix},
+\]
+\[
+    P=\begin{pmatrix}0&1&0&1&0\\1&1&0&0&0\\1&0&1&0&0\\0&0&1&0&1\\0&0&0&0&1\end{pmatrix}.
+\]
+\emph{Verificación de \(AP=PJ\), columna por columna.}
+\begin{align*}
+    Ac_1 & =\text{col}_2(A)+\text{col}_3(A)=(-1,2,0,0,0)+(2,1,2,0,0)=(1,3,2,0,0)=2c_1+c_2, \\
+    Ac_2 & =\text{col}_1(A)+\text{col}_2(A)=(3,0,0,0,0)+(-1,2,0,0,0)=(2,2,0,0,0)=2c_2,     \\
+    Ac_3 & =\text{col}_3(A)+\text{col}_4(A)=(2,1,2,0,0)+(-2,-1,0,2,0)=(0,0,2,2,0)=2c_3,    \\
+    Ac_4 & =\text{col}_1(A)=(3,0,0,0,0)=3c_4,                                              \\
+    Ac_5 & =\text{col}_4(A)+\text{col}_5(A)=(-2,-1,0,2,0)+(2,1,0,1,3)=(0,0,0,3,3)=3c_5.
+\end{align*}
+Esto coincide con las columnas de \(PJ\): \((2c_1+c_2,\ 2c_2,\ 2c_3,\ 3c_4,\ 3c_5)\). Además \(\det P=1\ne0\) (desarrollando por la última fila, luego por la cuarta columna), así que \(P\) es inversible y \(P^{-1}AP=J\). Para quien la necesite:
+\[
+    P^{-1}=\begin{pmatrix}0&0&1&-1&1\\0&1&-1&1&-1\\0&0&0&1&-1\\1&-1&1&-1&1\\0&0&0&0&1\end{pmatrix}.
+\]
+(La elección de \(v\) y \(w\) no es única; \(P\) no es única, \(J\) sí, salvo el orden de bloques.)
+
+\textbf{c)} Cada grupo de columnas de \(P\) es un subespacio cíclico \(Z(\text{generador};A)\):
+\begin{align*}
+    Z(c_1;A) & =\gen{c_1,c_2}=\gen{(0,1,1,0,0),(1,1,0,0,0)}, & m_{c_1} & =(x-2)^2,\ \dim2, \\
+    Z(c_3;A) & =\gen{c_3}=\gen{(0,0,1,1,0)},                 & m_{c_3} & =x-2,\ \dim1,     \\
+    Z(c_4;A) & =\gen{c_4}=\gen{(1,0,0,0,0)},                 & m_{c_4} & =x-3,\ \dim1,     \\
+    Z(c_5;A) & =\gen{c_5}=\gen{(0,0,0,1,1)},                 & m_{c_5} & =x-3,\ \dim1,
+\end{align*}
+y \(\R^5=Z(c_1;A)\oplus Z(c_3;A)\oplus Z(c_4;A)\oplus Z(c_5;A)\). Agrupando por autovalor es \(\R^5=\Nu(A-2I)^2\oplus\Nu(A-3I)\), con \(\Nu(A-2I)^2=Z(c_1)\oplus Z(c_3)\) y \(\Nu(A-3I)=Z(c_4)\oplus Z(c_5)\).
+
+\emph{Forma con factores invariantes} (Teorema~\ref{teo:invariantes}): \(u_1=c_1+c_4\) con anulador \(q_1=(x-2)^2(x-3)=m_A\), y \(u_2=c_3+c_5\) con anulador \(q_2=(x-2)(x-3)\); \(q_1q_2=(x-2)^3(x-3)^2=p_A\) y \(\R^5=Z(u_1;A)\oplus Z(u_2;A)\), de dimensiones \(3+2\).
+
+% ---------------------------------------------------------------------
+\subsection{Ejercicio 4}
+\textbf{Enunciado.} \(V\) un \(\K\)-espacio vectorial con \(\dim V=n\) y \(T\in L(V)\) con un único autovalor \(\lambda\in\K\).
+a) Supongamos además que \(\Nu((T-\lambda I)^3)=\Nu((T-\lambda I)^2)\). ¿Es cierto que \(\Nu((T-\lambda I)^m)=\Nu((T-\lambda I)^2)\) para todo \(m\ge2\)?
+b) Supongamos ahora que la matriz de Jordan de \(T\) es \(J=J_4(\lambda)\oplus J_3(\lambda)\oplus J_1(\lambda)\oplus J_1(\lambda)\). Calcular \(\dim\Nu((T-\lambda I)^m)\) y \(\dim\dfrac{\Nu((T-\lambda I)^{m+1})}{\Nu((T-\lambda I)^m)}\) para todo \(m\in\mathbb N\).
+
+\textbf{Resolución.} Sea \(N=T-\lambda I\).
+
+\textbf{a)} \textbf{Sí.} Es el Lema~\ref{lema:estab}: probamos por inducción que \(\Nu(N^{m+1})=\Nu(N^m)\) para todo \(m\ge2\). El caso \(m=2\) es la hipótesis. Si vale para \(m\) y \(N^{m+2}x=0\), entonces \(Nx\in\Nu(N^{m+1})=\Nu(N^m)\), o sea \(N^{m+1}x=0\); luego \(\Nu(N^{m+2})\subseteq\Nu(N^{m+1})\), y la otra inclusión es trivial. Entonces \(\Nu(N^m)=\Nu(N^2)\) para todo \(m\ge2\).
+
+\emph{Comentario.} Como \(\lambda\) es el único autovalor, \(p_T=(x-\lambda)^n\) y \(\Nu(N^n)=V\) (Teorema~\ref{teo:primaria}). Entonces \(V=\Nu(N^2)\), o sea \((T-\lambda I)^2=0\): todos los bloques tienen tamaño \(\le2\).
+
+\textbf{b)} Los tamaños de bloques son \(s=(4,3,1,1)\) y \(n=9\). Por la Prop.~\ref{prop:tamanos}(i): \(\dim\Nu(N^m)=\sum_i\min(s_i,m)\). (En cada bloque \(w_1\mapsto w_2\mapsto\dots\mapsto w_s\mapsto0\), el núcleo de \(N^m\) está generado por los últimos \(\min(m,s)\) vectores.)
+\[
+    \dim\Nu(N^m)=\min(4,m)+\min(3,m)+2\min(1,m)=
+    \begin{cases}
+        4 & m=1,   \\
+        6 & m=2,   \\
+        8 & m=3,   \\
+        9 & m\ge4.
+    \end{cases}
+\]
+(Para \(m=0\): \(0\).) La dimensión del cociente es \(k_{m+1}-k_m\), que es la cantidad de bloques de tamaño \(\ge m+1\):
+\[
+    \dim\frac{\Nu(N^{m+1})}{\Nu(N^m)}=
+    \begin{cases}
+        2 & m=1\quad(\text{bloques de tamaño}\ge2:\ 4,3), \\
+        2 & m=2\quad(\text{tamaño}\ge3:\ 4,3),            \\
+        1 & m=3\quad(\text{tamaño}\ge4:\ 4),              \\
+        0 & m\ge4.
+    \end{cases}
+\]
+(Para \(m=0\) el ``cociente'' es \(\Nu(N)\), de dimensión \(4\) = cantidad de bloques.) Verificación: la suma de los cocientes desde \(m=0\) es \(4+2+2+1=9=n\).
+
+% =====================================================================
+\newpage
+\section{Hoja de resumen}
+
+\begin{itemize}
+    \item \(A\sim J\) con \(J=\operatorname{diag}(J_d(\lambda))\); \(AP=PJ\); columnas de \(P\) = cadenas \(v,Nv,\dots,N^{d-1}v\) (\(N=A-\lambda I\)), bloque por bloque.
+    \item \(p_A=\prod(x-\lambda)^{a_\lambda}\) (\(a_\lambda\) = suma de tamaños de bloques) y \(m_A=\prod(x-\lambda)^{\mu_\lambda}\) (\(\mu_\lambda\) = tamaño máximo).
+    \item \(k_j=\dim\Nu(A-\lambda)^j=n-\rg(A-\lambda)^j=\sum_i\min(s_i,j)\). Estabiliza en \(k_{\mu_\lambda}=a_\lambda\).
+    \item \#bloques de tamaño \(\ge j\): \(k_j-k_{j-1}\). \#bloques de tamaño \(=j\): \(2k_j-k_{j-1}-k_{j+1}\). \#bloques \(=k_1=g_\lambda\).
+    \item Cadena: \(N^dv=0\ne N^{d-1}v\) \(\Rightarrow\) \(Z(v;A)=\gen{v,Nv,\dots,N^{d-1}v}\), anulador \((x-\lambda)^d\), \(\dim=d\). El último vector es autovector.
+    \item Algoritmo: de \(K_\mu\) hacia \(K_1\); en cada nivel, \(N(\text{nivel anterior})\) + vectores nuevos independientes módulo \(K_{j-1}\).
+    \item Dados \(p\) y \(m\): particiones de \(a_\lambda\) con parte mayor \(\mu_\lambda\) (por autovalor). No bastan desde \(a=4\), \(\mu=2\).
+    \item Semejantes \(\iff\) misma forma de Jordan \(\iff\) mismos \(\dim\Nu(A-\lambda)^j\) para todo \(\lambda,j\).
+    \item Diagonalizable \(\iff\) \(m_A\) sin raíces múltiples \(\iff\) todos los bloques de tamaño \(1\).
+    \item Lema de estabilización: \(\Nu N^j=\Nu N^{j+1}\Rightarrow\Nu N^{j+1}=\Nu N^{j+2}\).
+    \item Verificar siempre: \(AP=PJ\), \(\det P\ne0\), \(\tr A=\sum a_\lambda\lambda\).
+\end{itemize}
 
 \end{document}
