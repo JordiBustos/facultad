@@ -1,0 +1,289 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Linear algebra operators
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Id}{Id}
+\newcommand{\Nu}{N}
+\newcommand{\gen}[1]{\overline{\{#1\}}}
+\newcommand{\ip}[2]{\langle #1, #2\rangle}
+\newcommand{\A}{\mathcal{A}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=2pt}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{Álgebra Lineal: Simulacros de Final}
+\author{Bustos Jordi}
+\date{}
+\maketitle
+
+\noindent Cinco simulacros de examen final, con la misma estructura y dificultad que los finales anteriores: cinco ejercicios cada uno, que cubren (en este orden aproximado) espacios vectoriales, operadores y forma de Jordan, espacios con producto interno, espacio dual y transpuesta, y formas bilineales y cuadráticas. Los ejercicios \textbf{no repiten} los de los finales de referencia. Todos los ejercicios son AI-generated.
+
+\noindent Salvo que se indique lo contrario, \( \K \) es \( \R \) o \( \C \) y los espacios son de dimensión finita.
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Simulacro 1}
+\addcontentsline{toc}{section}{Simulacro 1}
+
+\begin{ejercicio}{1}
+    Sea \( V \) un \( \K \)-espacio vectorial. Decidir si las siguientes afirmaciones son verdaderas o falsas. Justificar.
+    \begin{enumerate}
+        \item Si \( U, W \) son subespacios de \( V \) y \( U \cup W \) es un subespacio de \( V \), entonces \( U \subseteq W \) o \( W \subseteq U \).
+        \item Sea \( T \in L(V, W) \) y \( \{v_1, \dots, v_m\} \subset V \). Si \( \{Tv_1, \dots, Tv_m\} \) es linealmente independiente, entonces \( \{v_1, \dots, v_m\} \) es linealmente independiente. ¿Vale la recíproca?
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sea \( T \in L(P_3(\R)) \) dado por \( T(p) = p' + 2p \), donde \( P_3(\R) \) es el espacio de polinomios de grado menor o igual que 3.
+    \begin{enumerate}
+        \item Calcular la matriz de \( T \) en la base canónica \( \{1, x, x^2, x^3\} \).
+        \item Calcular el polinomio característico y el polinomio minimal de \( T \).
+        \item Hallar la forma de Jordan de \( T \) y una base de \( P_3(\R) \) que la determine.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( V = P_2(\R) \) con el producto interno \( \ip{p}{q} = \int_{-1}^{1} p(x) q(x) \, dx \).
+    \begin{enumerate}
+        \item Aplicar Gram--Schmidt a la base \( \{1, x, x^2\} \) para obtener una base ortonormal de \( V \).
+        \item Calcular la proyección ortogonal de \( q(x) = x^3 \) sobre \( V \) (considerando \( q \) como elemento de \( P_3(\R) \) con el mismo producto interno).
+        \item Sea \( W \) un \( \C \)-espacio vectorial con producto interno y \( P \in L(W) \) un operador normal tal que \( P^2 = P \). Probar que \( P \) es autoadjunto.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( V = \R^3 \) y sea \( B = \{(1,0,1), (0,1,1), (1,1,0)\} \).
+    \begin{enumerate}
+        \item Probar que \( B \) es una base de \( \R^3 \) y hallar su base dual \( B^* \).
+        \item Sean \( V, W \) espacios de dimensión finita y \( T \in L(V, W) \). Probar que \( \rg(T^t) = \rg(T) \).
+        \item Si \( W_1, W_2 \) son subespacios de \( V \), probar que \( (W_1 + W_2)^\circ = W_1^\circ \cap W_2^\circ \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( \alpha \in \R \) y sea \( \A_\alpha \) la forma cuadrática sobre \( \R^3 \) dada por
+    \[ \A_\alpha(x, y, z) = x^2 + y^2 + 2z^2 + 2\alpha xy + 2yz. \]
+    \begin{enumerate}
+        \item Determinar para qué valores de \( \alpha \) la forma \( \A_\alpha \) es definida positiva.
+        \item Para \( \alpha = 1 \), hallar una representación matricial diagonal de \( \A_1 \) y calcular su rango y signatura.
+        \item Sea \( \A \) una forma bilineal simétrica sobre un \( \R \)-espacio vectorial con \( \A(v, v) \ge 0 \) para todo \( v \). Probar que \( \A(u, v)^2 \le \A(u, u)\,\A(v, v) \) para todo \( u, v \).
+    \end{enumerate}
+\end{ejercicio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Simulacro 2}
+\addcontentsline{toc}{section}{Simulacro 2}
+
+\begin{ejercicio}{1}
+    Sea \( V \) un \( \K \)-espacio vectorial de dimensión \( n \).
+    \begin{enumerate}
+        \item Si \( W_1 \neq W_2 \) son hiperespacios de \( V \), probar que \( W_1 + W_2 = V \) y que \( \dim(W_1 \cap W_2) = n - 2 \).
+        \item Decidir si es verdadero o falso: si \( U, W, Z \) son subespacios de \( V \) tales que \( U \cap W = \{0\} \) y \( U \cap Z = \{0\} \), entonces \( U \cap (W + Z) = \{0\} \). Justificar.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sea \( V \) un \( \C \)-espacio vectorial de dimensión finita y \( T \in L(V) \) tal que \( T^2 - 3T + 2I = 0 \).
+    \begin{enumerate}
+        \item Probar que \( T \) es diagonalizable y que \( V = N(T - I) \oplus N(T - 2I) \).
+        \item Sea \( A = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix} \). Verificar que \( A^2 - 3A + 2I = 0 \), hallar una base de autovectores de \( A \) y calcular \( A^k \) para todo \( k \in \N \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( (V, \ip{\cdot}{\cdot}) \) un \( \C \)-espacio vectorial con producto interno de dimensión finita.
+    \begin{enumerate}
+        \item Sea \( T \in L(V) \) tal que \( \|Tv\| = \|v\| \) para todo \( v \in V \). Probar que \( \ip{Tu}{Tv} = \ip{u}{v} \) para todo \( u, v \in V \) y que \( T^*T = I \).
+        \item Si \( W \) es un subespacio de \( V \), probar que \( V = W \oplus W^\perp \) y que \( (W^\perp)^\perp = W \).
+        \item En \( \R^3 \) con el producto interno canónico, sea \( W = \{(x, y, z) : x + y + z = 0\} \). Calcular la proyección ortogonal de \( (1, 2, 3) \) sobre \( W \) y la distancia de \( (1,2,3) \) a \( W \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( V = P_2(\R) \) y sean \( f_1, f_2, f_3 \in V^* \) dados por
+    \[ f_1(p) = p(0), \qquad f_2(p) = p'(0), \qquad f_3(p) = \int_0^1 p(x) \, dx. \]
+    \begin{enumerate}
+        \item Probar que \( \{f_1, f_2, f_3\} \) es una base de \( V^* \).
+        \item Hallar la base de \( V \) cuya base dual es \( \{f_1, f_2, f_3\} \).
+        \item Si \( T \in L(V, W) \) es sobreyectiva, probar que \( T^t \in L(W^*, V^*) \) es inyectiva.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( \A: \R^{2 \times 2} \times \R^{2 \times 2} \to \R \) dada por \( \A(X, Y) = \tr(XY) \).
+    \begin{enumerate}
+        \item Probar que \( \A \) es una forma bilineal simétrica y hallar su matriz en la base canónica \( \{E_{11}, E_{12}, E_{21}, E_{22}\} \).
+        \item Calcular el rango y la signatura de \( \A \). ¿Es \( \A \) no degenerada?
+        \item Hallar un subespacio de dimensión máxima en el cual \( \A \) sea definida positiva y otro de dimensión máxima en el cual sea definida negativa.
+    \end{enumerate}
+\end{ejercicio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Simulacro 3}
+\addcontentsline{toc}{section}{Simulacro 3}
+
+\begin{ejercicio}{1}
+    Sea \( A \in \K^{n \times n} \).
+    \begin{enumerate}
+        \item Probar que \( \rg(A) = 1 \) si y sólo si existen vectores no nulos \( u, v \in \K^n \) tales que \( A = uv^\top \).
+        \item Si \( A = uv^\top \) con \( v^\top u \neq 0 \), probar que \( A^2 = (v^\top u) A \), que \( A \) es diagonalizable y calcular sus autovalores.
+        \item Calcular el polinomio minimal de \( A = uv^\top \) cuando \( v^\top u = 0 \) y \( n \ge 2 \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    \begin{enumerate}
+        \item Sea \( A \in \C^{5 \times 5} \) tal que \( \dim N(A - 2I) = 2 \), \( \dim N((A - 2I)^2) = 4 \) y \( \dim N((A - 2I)^3) = 5 \). Hallar la forma de Jordan de \( A \) y su polinomio minimal.
+        \item Sea \( V \) un \( \K \)-espacio vectorial de dimensión finita, \( T \in L(V) \) y \( W \) un subespacio \( T \)-invariante. Probar que el polinomio minimal de \( T|_W \) divide al polinomio minimal de \( T \). Deducir que si \( T \) es diagonalizable, entonces \( T|_W \) también lo es.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( (V, \ip{\cdot}{\cdot}) \) un \( \C \)-espacio vectorial con producto interno de dimensión finita.
+    \begin{enumerate}
+        \item Si \( T \in L(V) \), probar que \( (\Ima T)^\perp = N(T^*) \) y que \( N(T)^\perp = \Ima(T^*) \).
+        \item Sea \( A = \begin{pmatrix} 1 & i \\ i & 1 \end{pmatrix} \in \C^{2 \times 2} \). Probar que \( A \) es normal, calcular sus autovalores y hallar una base ortonormal de \( \C^2 \) formada por autovectores de \( A \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    Sea \( V = \R^{n \times n} \).
+    \begin{enumerate}
+        \item Probar que para cada \( f \in V^* \) existe una única matriz \( B \in \R^{n \times n} \) tal que \( f(A) = \tr(BA) \) para todo \( A \in V \).
+        \item Sea \( W = \{A \in V : A = A^\top\} \). Describir \( W^\circ \subset V^* \) en términos de las matrices \( B \) del inciso anterior y verificar que \( \dim W + \dim W^\circ = n^2 \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    \begin{enumerate}
+        \item Sea \( \A \) una forma bilineal simétrica definida positiva sobre un \( \R \)-espacio vectorial \( V \) de dimensión \( n \) y \( B \) una base de \( V \). Probar que \( [\A]_B \) tiene todos los elementos de la diagonal positivos y determinante positivo.
+        \item Sea \( \A \) la forma cuadrática sobre \( \R^3 \) dada por \( \A(x, y, z) = xy + yz + zx \). Determinar si es definida positiva, semidefinida positiva, definida negativa, semidefinida negativa o indefinida. Encontrar una representación matricial diagonal y calcular rango y signatura.
+    \end{enumerate}
+\end{ejercicio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Simulacro 4}
+\addcontentsline{toc}{section}{Simulacro 4}
+
+\begin{ejercicio}{1}
+    Sea \( V \) un \( \K \)-espacio vectorial de dimensión finita \( n \).
+    \begin{enumerate}
+        \item Si \( U, W \) son subespacios de \( V \) con \( \dim U + \dim W > n \), probar que \( U \cap W \neq \{0\} \).
+        \item Sea \( T \in L(V) \). Probar que si \( N(T^2) = N(T) \), entonces \( V = N(T) \oplus \Ima(T) \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Para \( a \in \R \) sea
+    \[ A_a = \begin{pmatrix} 2 & 1 & 0 \\ 0 & 2 & a \\ 0 & 0 & 2 \end{pmatrix}. \]
+    \begin{enumerate}
+        \item Calcular el polinomio característico y el polinomio minimal de \( A_a \) según el valor de \( a \), y hallar su forma de Jordan.
+        \item Para \( a = 1 \), hallar una base de Jordan y calcular \( A_1^k \) para todo \( k \in \N \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    Sea \( (V, \ip{\cdot}{\cdot}) \) un \( \C \)-espacio vectorial con producto interno de dimensión finita y \( T \in L(V) \) un operador normal. Probar que:
+    \begin{enumerate}
+        \item \( T \) es autoadjunto si y sólo si todos sus autovalores son reales.
+        \item \( T \) es unitario si y sólo si todos sus autovalores tienen módulo 1.
+        \item Verificar que \( A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \in \C^{2 \times 2} \) es normal y unitaria, y hallar una base ortonormal de \( \C^2 \) formada por autovectores de \( A \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    \begin{enumerate}
+        \item En \( \R^3 \) consideremos \( f(x) = x_1 + x_2 \), \( g(x) = x_2 - x_3 \) y \( h(x) = x_3 \). Probar que \( \{f, g, h\} \) es una base de \( (\R^3)^* \) y hallar la base de \( \R^3 \) cuya base dual es \( \{f, g, h\} \).
+        \item Sean \( V, W \) espacios de dimensión finita y \( T \in L(V, W) \). Probar que \( T^t = 0 \) si y sólo si \( T = 0 \).
+        \item Si \( W_1, W_2 \) son subespacios de \( V \), probar que \( (W_1 \cap W_2)^\circ = W_1^\circ + W_2^\circ \).
+
+              (Sugerencia: probar la inclusión \( \supseteq \) y comparar dimensiones usando \( (W_1 + W_2)^\circ = W_1^\circ \cap W_2^\circ \)).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    Sea \( V \) un \( \R \)-espacio vectorial de dimensión \( n \). Decimos que \( \A \in \mathrm{Bil}(V) \) es antisimétrica si \( \A(u, v) = -\A(v, u) \) para todo \( u, v \in V \).
+    \begin{enumerate}
+        \item Probar que si \( \A \) es antisimétrica entonces \( \A(v, v) = 0 \) para todo \( v \in V \) y que \( [\A]_B \) es una matriz antisimétrica para toda base \( B \).
+        \item Probar que \( \mathrm{Bil}(V) = \mathrm{Sim}(V) \oplus \mathrm{Antisim}(V) \), donde \( \mathrm{Sim}(V) \) y \( \mathrm{Antisim}(V) \) son los subespacios de formas simétricas y antisimétricas respectivamente. Calcular las dimensiones de ambos.
+        \item Descomponer la forma bilineal \( \A((x_1, x_2, x_3), (y_1, y_2, y_3)) = x_1 y_2 + 2 x_2 y_3 + x_3 y_3 \) como suma de una forma simétrica y una antisimétrica.
+    \end{enumerate}
+\end{ejercicio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{Simulacro 5}
+\addcontentsline{toc}{section}{Simulacro 5}
+
+\begin{ejercicio}{1}
+    \begin{enumerate}
+        \item En \( V = \R^{2 \times 2} \) sean \( U = \{A \in V : A = A^\top\} \) y \( W = \{A \in V : \tr(A) = 0\} \). Hallar una base y la dimensión de \( U \), \( W \), \( U \cap W \) y \( U + W \).
+        \item Sea \( V \) un \( \K \)-espacio vectorial y \( \{v_1, v_2, v_3\} \) una base de \( V \). Determinar si \( \{v_1 + v_2, v_2 + v_3, v_3 + v_1\} \) es una base de \( V \) cuando \( \K = \R \) y cuando \( \K = \mathbb{Z}_2 \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{2}
+    Sea \( V \) un \( \K \)-espacio vectorial de dimensión finita y \( T \in L(V) \).
+    \begin{enumerate}
+        \item Sean \( \lambda \neq \mu \) en \( \K \). Probar que \( N((T - \lambda I)^j) \cap N((T - \mu I)^k) = \{0\} \) para todo \( j, k \in \N \).
+        \item Supongamos que \( T^k = 0 \) y \( T^{k-1} \neq 0 \). Probar que si \( v \in V \) cumple \( T^{k-1} v \neq 0 \), entonces \( \{v, Tv, \dots, T^{k-1} v\} \) es linealmente independiente.
+        \item Deducir que si \( T \) es nilpotente entonces \( T^n = 0 \), donde \( n = \dim V \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{3}
+    \begin{enumerate}
+        \item Sea \( A = \begin{pmatrix} 2 & 1 & 1 \\ 1 & 2 & 1 \\ 1 & 1 & 2 \end{pmatrix} \in \R^{3 \times 3} \). Hallar una matriz ortogonal \( Q \) tal que \( Q^\top A Q \) sea diagonal.
+        \item Sea \( (V, \ip{\cdot}{\cdot}) \) un \( \C \)-espacio vectorial con producto interno de dimensión finita y \( T \in L(V) \) autoadjunto. Probar que \( \|(T + iI)v\|^2 = \|Tv\|^2 + \|v\|^2 \) para todo \( v \in V \) y deducir que \( T + iI \) es inversible.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{4}
+    \begin{enumerate}
+        \item Sea \( T: \R^3 \to \R^2 \) dada por \( T(x, y, z) = (x + y, y - z) \). Hallar la matriz de \( T^t \) respecto de las bases duales canónicas, calcular \( N(T^t) \) e \( \Ima(T^t) \), y verificar que \( N(T)^\circ = \Ima(T^t) \).
+        \item Sea \( V \) un \( \K \)-espacio vectorial de dimensión finita y para cada \( v \in V \) sea \( \mathrm{ev}_v \in V^{**} \) dado por \( \mathrm{ev}_v(f) = f(v) \). Probar que \( v \mapsto \mathrm{ev}_v \) es un isomorfismo de \( V \) en \( V^{**} \).
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{5}
+    \begin{enumerate}
+        \item Sea \( \A \) la forma bilineal sobre \( \R^3 \) cuya matriz en la base canónica es
+              \[ \begin{pmatrix} 1 & 2 & 0 \\ 2 & 4 & 0 \\ 0 & 0 & -1 \end{pmatrix}. \]
+              Hallar el núcleo \( N(\A) = V^\perp \), el rango y la signatura de \( \A \). Calcular \( S^\perp \) para \( S = \{(0, 0, 1)\} \).
+        \item Sea \( \A(p, q) = \int_0^1 p(t) q(t) \, dt \) para \( p, q \in P_2(\R) \). Hallar la matriz de \( \A \) en la base \( \{1, t, t^2\} \) y probar que \( \A \) es definida positiva.
+        \item Sea \( \A \) una forma bilineal simétrica sobre un \( \R \)-espacio \( V \) de dimensión \( n \). Si \( \A \) es definida positiva sobre un subespacio \( W \) y definida negativa sobre un subespacio \( U \), probar que \( W \cap U = \{0\} \) y que \( \dim W + \dim U \le n \).
+    \end{enumerate}
+\end{ejercicio}
+
+\end{document}
