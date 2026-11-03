@@ -1,0 +1,220 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                       % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                         % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                          % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
+\newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}   % Inner product
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                                  % Si y sólo si
+\newcommand{\imp}{\implies}                              % Implies
+\newcommand{\setdiff}{\smallsetminus}                    % Set difference
+\newcommand{\diam}{\text{diam}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Trabajo Práctico N°5 - 2026}
+\author{Espacios de Hilbert}
+\date{}
+
+\maketitle
+
+\vspace{0.8cm}
+
+\section{Espacios de Hilbert}
+
+\begin{ejercicio}{1}
+	(Identidad de polarización) Sean \( H \) un espacio vectorial complejo y \( a: H \times H \to \C \) sesquilineal y hermitiana. Probar que vale la fórmula de polarización; \( \forall x, y \in H \)
+	\[
+		a(x, y) = \frac{a(x+y, x+y) - a(x-y, x-y) + i \left[ a(x+iy, x+iy) - a(x-iy, x-iy) \right]}{4}.
+	\]
+	En particular si \( H \) es un espacio de Hilbert complejo
+	\[
+		\ip{x}{y} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x+iy}^2 - \norm{x-iy}^2 \right]}{4} \quad \forall x, y \in H.
+	\]
+	\textbf{Comentario:} Si tenemos un espacio de Hilbert real \( H \). Su ``complejización'' de \( H \) es el espacio vectorial complejo \( H_{\C} \) definido por \( H_{\C} = H \times H \), cada elemento típico de \( H_{\C} \) podemos escribirlo como \( f + ig \) en lugar de \( (f, g) \). La suma y la multiplicación escalar se definen en \( H_{\C} \) por
+	\[ (f_1 + ig_1) + (f_2 + ig_2) = (f_1 + f_2) + i(g_1 + g_2) \]
+	y
+	\[ (\alpha + \beta i)(f + ig) = (\alpha f - \beta g) + (\alpha g + \beta f)i \]
+	para todo \( f_1, f_2, f, g_1, g_2, g \in H \) y \( \alpha, \beta \in \R \). Considerando esto tenemos que
+	\[ \ip{f_1 + ig_1}{f_2 + ig_2} = \ip{f_1}{f_2} + \ip{g_1}{g_2} + (\ip{g_1}{f_2} - \ip{f_1}{g_2})i \]
+	define un producto interno en \( H_{\C} \). Lo que convierte a \( H_{\C} \) en un espacio de Hilbert complejo.
+\end{ejercicio}
+\begin{proof}
+	Adoptamos la convención compatible con la fórmula: \( a \) es lineal en la primera variable y antilineal en la segunda, es decir, \( a(x, \lambda y) = \overline{\lambda}\, a(x, y) \). En particular
+	\[ a(x, iy) = -i\, a(x, y), \qquad a(iy, x) = i\, a(y, x), \qquad a(iy, iy) = i \cdot (-i)\, a(y, y) = a(y, y). \]
+	Desarrollando por sesquilinealidad,
+	\[ a(x \pm y, x \pm y) = a(x, x) \pm a(x, y) \pm a(y, x) + a(y, y), \]
+	de donde
+	\[ a(x+y, x+y) - a(x-y, x-y) = 2a(x, y) + 2a(y, x). \]
+	Análogamente,
+	\[ a(x \pm iy, x \pm iy) = a(x, x) \mp i\, a(x, y) \pm i\, a(y, x) + a(y, y), \]
+	y entonces
+	\[ a(x+iy, x+iy) - a(x-iy, x-iy) = -2i\, a(x, y) + 2i\, a(y, x). \]
+	Multiplicando por \( i \) esta última igualdad obtenemos \( 2a(x, y) - 2a(y, x) \). Sumando ambas expresiones:
+	\begin{align*}
+		a(x+y, x+y) - a(x-y, x-y) + i \left[ a(x+iy, x+iy) - a(x-iy, x-iy) \right] & = 2a(x, y) + 2a(y, x) + 2a(x, y) - 2a(y, x) \\
+		                                                                            & = 4a(x, y),
+	\end{align*}
+	que es la fórmula buscada.
+
+	Si \( H \) es un espacio de Hilbert complejo, \( a(x, y) = \ip{x}{y} \) es sesquilineal y hermitiana, y \( a(z, z) = \ip{z}{z} = \norm{z}^2 \) para todo \( z \in H \). Reemplazando en la fórmula anterior resulta
+	\[ \ip{x}{y} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x+iy}^2 - \norm{x-iy}^2 \right]}{4}. \qedhere \]
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+	Sea \( (H, \norm{\cdot}) \) un espacio de Banach. Probar que podremos definir una forma sesquilineal definida positiva sobre el espacio vectorial \( H \) de modo que \( (H, \ip{\cdot}{\cdot}) \) sea un espacio de Hilbert y \( \norm{\cdot} = \ip{\cdot}{\cdot}^{1/2} \) sea la norma inducida, siempre y cuando se verifique la regla del paralelogramo en el espacio de Banach, es decir, si se cumple
+	\[ \norm{x+y}^2 + \norm{x-y}^2 = 2\left( \norm{x}^2 + \norm{y}^2 \right) \quad \forall x, y \in H. \]
+	\textbf{Sugerencia:} Para la vuelta usar la identidad de polarización para definir el producto interno, es decir,
+	\[ \ip{x}{y} := \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x+iy}^2 - \norm{x-iy}^2 \right]}{4} \quad \forall x, y \in H. \]
+\end{ejercicio}
+\begin{proof}
+	Trabajamos con \( H \) complejo.
+
+	\textbf{(\(\Rightarrow\))} Si \( \norm{x} = \ip{x}{x}^{1/2} \) para un producto interno, entonces
+	\[ \norm{x \pm y}^2 = \norm{x}^2 \pm \ip{x}{y} \pm \ip{y}{x} + \norm{y}^2 = \norm{x}^2 \pm 2\operatorname{Re}\ip{x}{y} + \norm{y}^2. \]
+	Sumando las dos igualdades se obtiene la regla del paralelogramo.
+
+	\textbf{(\(\Leftarrow\))} Supongamos que vale la regla del paralelogramo y definimos \( \ip{\cdot}{\cdot} \) por la fórmula de polarización. Sea
+	\[ B(x, y) := \frac{\norm{x+y}^2 - \norm{x-y}^2}{4}, \]
+	de modo que \( \operatorname{Re}\ip{x}{y} = B(x, y) \). Notemos que \( B(x, y) = B(y, x) \), \( B(-x, y) = -B(x, y) \) y \( B(0, y) = 0 \).
+
+	\emph{Paso 1: \( \ip{x}{x} = \norm{x}^2 \).} Como \( \norm{x + ix} = \norm{(1+i)x} = \sqrt{2}\norm{x} = \norm{(1-i)x} = \norm{x - ix} \), el término imaginario se anula y
+	\[ \ip{x}{x} = \frac{\norm{2x}^2 - 0}{4} = \norm{x}^2. \]
+	En particular \( \ip{x}{x} \ge 0 \) y \( \ip{x}{x} = 0 \sii x = 0 \).
+
+	\emph{Paso 2: simetría hermitiana.} Usando que \( \norm{z} = \norm{\lambda z} \) si \( |\lambda| = 1 \):
+	\[ \norm{y + ix} = \norm{i(x - iy)} = \norm{x - iy}, \qquad \norm{y - ix} = \norm{-i(x + iy)} = \norm{x + iy}, \]
+	y \( \norm{y - x} = \norm{x - y} \). Entonces
+	\[ \ip{y}{x} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x-iy}^2 - \norm{x+iy}^2 \right]}{4} = \overline{\ip{x}{y}}. \]
+
+	\emph{Paso 3: expresión mediante \( B \).} Como \( \norm{x + iy} = \norm{i(y - ix)} = \norm{y - ix} \) y \( \norm{x - iy} = \norm{-i(y + ix)} = \norm{y + ix} \),
+	\[ \operatorname{Im}\ip{x}{y} = \frac{\norm{y - ix}^2 - \norm{y + ix}^2}{4} = -B(ix, y). \]
+	Luego
+	\[ \ip{x}{y} = B(x, y) - i B(ix, y). \]
+
+	\emph{Paso 4: \( B \) es aditiva en la primera variable.} Aplicando la regla del paralelogramo a \( u = x + y \), \( v = z + y \) (donde \( u + v = x + z + 2y \) y \( u - v = x - z \)) y a \( u = x - y \), \( v = z - y \) (donde \( u + v = x + z - 2y \) y \( u - v = x - z \)):
+	\begin{align*}
+		\norm{x+z+2y}^2 + \norm{x-z}^2 & = 2\norm{x+y}^2 + 2\norm{z+y}^2, \\
+		\norm{x+z-2y}^2 + \norm{x-z}^2 & = 2\norm{x-y}^2 + 2\norm{z-y}^2.
+	\end{align*}
+	Restando y dividiendo por 4:
+	\[ B(x+z, 2y) = 2B(x, y) + 2B(z, y). \]
+	Con \( z = 0 \) se obtiene \( B(x, 2y) = 2B(x, y) \), y lo mismo vale reemplazando \( x \) por \( x + z \). Por lo tanto
+	\[ 2B(x+z, y) = B(x+z, 2y) = 2B(x, y) + 2B(z, y) \implies B(x+z, y) = B(x, y) + B(z, y). \]
+
+	\emph{Paso 5: \( B(\lambda x, y) = \lambda B(x, y) \) para \( \lambda \in \R \).} De la aditividad se deduce \( B(nx, y) = nB(x, y) \) para \( n \in \N \), y con la imparidad vale para \( n \in \Z \). Si \( \lambda = m/n \in \Q \), entonces \( nB(\lambda x, y) = B(mx, y) = mB(x, y) \), es decir \( B(\lambda x, y) = \lambda B(x, y) \). Finalmente, la función \( \lambda \mapsto B(\lambda x, y) \) es continua en \( \R \) porque \( |\norm{a} - \norm{b}| \le \norm{a - b} \) implica que \( \lambda \mapsto \norm{\lambda x \pm y}^2 \) es continua. Dos funciones continuas que coinciden en \( \Q \) coinciden en \( \R \).
+
+	\emph{Paso 6: linealidad en la primera variable.} Por los pasos 3 y 4, \( \ip{\cdot}{y} \) es aditiva. Para \( \alpha \in \R \), usando el paso 5 para \( x \) y para \( ix \):
+	\[ \ip{\alpha x}{y} = B(\alpha x, y) - iB(\alpha ix, y) = \alpha \ip{x}{y}. \]
+	Además, como \( i \cdot (ix) = -x \) y \( B \) es impar en la primera variable,
+	\[ \ip{ix}{y} = B(ix, y) - iB(-x, y) = B(ix, y) + iB(x, y) = i\left( B(x, y) - iB(ix, y) \right) = i\ip{x}{y}. \]
+	Luego, para \( \lambda = \alpha + i\beta \),
+	\[ \ip{\lambda x}{y} = \alpha\ip{x}{y} + \beta\ip{ix}{y} = \lambda \ip{x}{y}. \]
+	Por el paso 2, \( \ip{x}{\lambda y} = \overline{\ip{\lambda y}{x}} = \overline{\lambda}\,\ip{x}{y} \) y \( \ip{\cdot}{\cdot} \) es sesquilineal.
+
+	\emph{Conclusión.} \( \ip{\cdot}{\cdot} \) es una forma sesquilineal, hermitiana y definida positiva, es decir, un producto interno, cuya norma inducida es \( \ip{x}{x}^{1/2} = \norm{x} \) (paso 1). Como \( (H, \norm{\cdot}) \) es completo, \( (H, \ip{\cdot}{\cdot}) \) es un espacio de Hilbert.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+	\begin{enumerate}
+		\item Probar que \( \{e_n\}_n \subset \ell^2 \) dado por los elementos definidos por \( e_n = (0, \dots, 0, \underset{n}{1}, 0, \dots) \) es una base ortonormal de \( \ell^2 \).
+		\item Probar que \( \left\{ \dfrac{e^{int}}{\sqrt{2\pi}} \right\} \) para \( n \in \Z \) es una base ortonormal de \( L^2[-\pi, \pi] \). Calcular la expresión para los coeficientes \( a_n \) cuando
+		      \[ f(t) = \sum_{n \in \Z} \frac{e^{int}}{\sqrt{2\pi}}\, a_n. \]
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+	Probar que los siguientes espacios son espacios de Hilbert:
+	\begin{enumerate}
+		\item \( (\C^n, \ip{\cdot}{\cdot}) \) con \( \ip{x}{y} = \sum_{i=1}^{n} x_i \overline{y_i} \).
+		\item \( (\C^{n \times m}, \ip{\cdot}{\cdot}) \) con \( \ip{A}{B} = \operatorname{tr}(AB^*) \).
+		\item \( (L^2(\mu), \ip{\cdot}{\cdot}) \) con \( \ip{f}{g} = \int_X f \overline{g} \, d\mu \) donde \( (X, \mathcal{X}, \mu) \) es un espacio de medida.
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+	Probar que \( (\ell^p, \norm{\cdot}_p) \) no es espacio de Hilbert cuando \( p \neq 2 \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+	Sean \( H_1 \) y \( H_2 \) espacios de Hilbert. Consideremos el espacio \( H_1 \times H_2 \) y la aplicación \( \ip{\cdot}{\cdot} \) dada por
+	\[ \ip{(h_1, k_1)}{(h_2, k_2)} := \ip{h_1}{h_2}_{H_1} + \ip{k_1}{k_2}_{H_2}. \]
+	\begin{enumerate}
+		\item Probar que \( (H_1 \times H_2, \ip{\cdot}{\cdot}) \) es un espacio de Hilbert.
+		\item Demostrar que los espacios \( H_1 \times \{0\} \) y \( \{0\} \times H_2 \) son cerrados y ortogonales en el espacio producto.
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+	Probar que todo espacio de Hilbert es reflexivo.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+	Consideremos \( {\{e_n \}}_{n \ge 1} \) una base ortonormal de un espacio de Hilbert \( H \) y sea
+	\[ S := \left\{ y \in H : \sum_{n=1}^{\infty} \left( 1 + \frac{1}{n} \right)^2 |\ip{y}{e_n}|^2 \le 1 \right\}. \]
+	Probar que \( S \) es un conjunto convexo, acotado, cerrado y que no posee un elemento con norma máxima.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+	En \( \ell^2(\N) \) sea
+	\[ S = \left\{ x \in \ell^1(\N) : \sum_{n \in \N} x_n = 0 \right\}. \]
+	Probar que \( S \) es un subespacio denso de \( \ell^2(\N) \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+	Sean \( L_1, L_2 \) subespacios de un espacio de Hilbert \( H \).
+	\begin{enumerate}
+		\item Probar que
+		      \[ (L_1 + L_2)^{\perp} = L_1^{\perp} \cap L_2^{\perp}. \]
+		\item Si tenemos dos subespacios cerrados \( C_1, C_2 \) de \( H \), probar que
+		      \[ (C_1 \cap C_2)^{\perp} = \cl{C_1^{\perp} + C_2^{\perp}}. \]
+	\end{enumerate}
+\end{ejercicio}
+
+\end{document}
