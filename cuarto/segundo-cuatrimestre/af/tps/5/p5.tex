@@ -80,13 +80,13 @@
 	\[ a(x+iy, x+iy) - a(x-iy, x-iy) = -2i\, a(x, y) + 2i\, a(y, x). \]
 	Multiplicando por \( i \) esta última igualdad obtenemos \( 2a(x, y) - 2a(y, x) \). Sumando ambas expresiones:
 	\begin{align*}
-		a(x+y, x+y) - a(x-y, x-y) + i \left[ a(x+iy, x+iy) - a(x-iy, x-iy) \right] & = 2a(x, y) + 2a(y, x) + 2a(x, y) - 2a(y, x) \\
-		                                                                            & = 4a(x, y),
+		 & a(x+y, x+y) - a(x-y, x-y) + i \left[ a(x+iy, x+iy) - a(x-iy, x-iy) \right] \\
+		 & = 2a(x, y) + 2a(y, x) + 2a(x, y) - 2a(y, x) = 4a(x, y),
 	\end{align*}
 	que es la fórmula buscada.
 
 	Si \( H \) es un espacio de Hilbert complejo, \( a(x, y) = \ip{x}{y} \) es sesquilineal y hermitiana, y \( a(z, z) = \ip{z}{z} = \norm{z}^2 \) para todo \( z \in H \). Reemplazando en la fórmula anterior resulta
-	\[ \ip{x}{y} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x+iy}^2 - \norm{x-iy}^2 \right]}{4}. \qedhere \]
+	\[ \ip{x}{y} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left( \norm{x+iy}^2 - \norm{x-iy}^2 \right)}{4}. \qedhere \]
 \end{proof}
 
 \vspace{0.5cm}
@@ -95,16 +95,16 @@
 	Sea \( (H, \norm{\cdot}) \) un espacio de Banach. Probar que podremos definir una forma sesquilineal definida positiva sobre el espacio vectorial \( H \) de modo que \( (H, \ip{\cdot}{\cdot}) \) sea un espacio de Hilbert y \( \norm{\cdot} = \ip{\cdot}{\cdot}^{1/2} \) sea la norma inducida, siempre y cuando se verifique la regla del paralelogramo en el espacio de Banach, es decir, si se cumple
 	\[ \norm{x+y}^2 + \norm{x-y}^2 = 2\left( \norm{x}^2 + \norm{y}^2 \right) \quad \forall x, y \in H. \]
 	\textbf{Sugerencia:} Para la vuelta usar la identidad de polarización para definir el producto interno, es decir,
-	\[ \ip{x}{y} := \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x+iy}^2 - \norm{x-iy}^2 \right]}{4} \quad \forall x, y \in H. \]
+	\[ \ip{x}{y} := \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left( \norm{x+iy}^2 - \norm{x-iy}^2 \right)}{4} \quad \forall x, y \in H. \]
 \end{ejercicio}
 \begin{proof}
 	Trabajamos con \( H \) complejo.
 
-	\textbf{(\(\Rightarrow\))} Si \( \norm{x} = \ip{x}{x}^{1/2} \) para un producto interno, entonces
+	\textbf{(\(\Rightarrow \))} Si \( \norm{x} = \ip{x}{x}^{1/2} \) para un producto interno, entonces
 	\[ \norm{x \pm y}^2 = \norm{x}^2 \pm \ip{x}{y} \pm \ip{y}{x} + \norm{y}^2 = \norm{x}^2 \pm 2\operatorname{Re}\ip{x}{y} + \norm{y}^2. \]
 	Sumando las dos igualdades se obtiene la regla del paralelogramo.
 
-	\textbf{(\(\Leftarrow\))} Supongamos que vale la regla del paralelogramo y definimos \( \ip{\cdot}{\cdot} \) por la fórmula de polarización. Sea
+	\textbf{(\(\Leftarrow \))} Supongamos que vale la regla del paralelogramo y definimos \( \ip{\cdot}{\cdot} \) por la fórmula de polarización. Sea
 	\[ B(x, y) := \frac{\norm{x+y}^2 - \norm{x-y}^2}{4}, \]
 	de modo que \( \operatorname{Re}\ip{x}{y} = B(x, y) \). Notemos que \( B(x, y) = B(y, x) \), \( B(-x, y) = -B(x, y) \) y \( B(0, y) = 0 \).
 
@@ -115,7 +115,7 @@
 	\emph{Paso 2: simetría hermitiana.} Usando que \( \norm{z} = \norm{\lambda z} \) si \( |\lambda| = 1 \):
 	\[ \norm{y + ix} = \norm{i(x - iy)} = \norm{x - iy}, \qquad \norm{y - ix} = \norm{-i(x + iy)} = \norm{x + iy}, \]
 	y \( \norm{y - x} = \norm{x - y} \). Entonces
-	\[ \ip{y}{x} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left[ \norm{x-iy}^2 - \norm{x+iy}^2 \right]}{4} = \overline{\ip{x}{y}}. \]
+	\[ \ip{y}{x} = \frac{\norm{x+y}^2 - \norm{x-y}^2 + i \left( \norm{x-iy}^2 - \norm{x+iy}^2 \right)}{4} = \overline{\ip{x}{y}}. \]
 
 	\emph{Paso 3: expresión mediante \( B \).} Como \( \norm{x + iy} = \norm{i(y - ix)} = \norm{y - ix} \) y \( \norm{x - iy} = \norm{-i(y + ix)} = \norm{y + ix} \),
 	\[ \operatorname{Im}\ip{x}{y} = \frac{\norm{y - ix}^2 - \norm{y + ix}^2}{4} = -B(ix, y). \]
@@ -149,11 +149,59 @@
 
 \begin{ejercicio}{3}
 	\begin{enumerate}
-		\item Probar que \( \{e_n\}_n \subset \ell^2 \) dado por los elementos definidos por \( e_n = (0, \dots, 0, \underset{n}{1}, 0, \dots) \) es una base ortonormal de \( \ell^2 \).
-		\item Probar que \( \left\{ \dfrac{e^{int}}{\sqrt{2\pi}} \right\} \) para \( n \in \Z \) es una base ortonormal de \( L^2[-\pi, \pi] \). Calcular la expresión para los coeficientes \( a_n \) cuando
+		\item Probar que \( {\{e_n\}}_n \subset \ell^2 \) dado por los elementos definidos por \( e_n = (0, \dots, 0, \underset{n}{1}, 0, \dots) \) es una base ortonormal de \( \ell^2 \).
+		\item Probar que \( \left \{ \dfrac{e^{int}}{\sqrt{2\pi}} \right \} \) para \( n \in \Z \) es una base ortonormal de \( L^2[-\pi, \pi] \). Calcular la expresión para los coeficientes \( a_n \) cuando
 		      \[ f(t) = \sum_{n \in \Z} \frac{e^{int}}{\sqrt{2\pi}}\, a_n. \]
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Recordemos que un conjunto \( \{e_n\} \) de un espacio de Hilbert \( H \) es una base ortonormal si es un sistema ortonormal, es decir \( \ip{e_n}{e_m} = \delta_{nm} \) (en particular \( \norm{e_n} = 1 \)), y además \( \cl{\operatorname{span}\{e_n\}} = H \).
+
+	Para \( \ell^2 \) con \( \ip{x}{y} = \sum_{k \ge 1} x_k \overline{y_k} \), los \( e_n \) pertenecen a \( \ell^2 \) y
+	\[
+		\ip{e_n}{e_m} = \sum_{k \ge 1} {(e_n)}_k \overline{{(e_m)}_k} = \delta_{nm},
+	\]
+	pues \( {(e_n)}_k = \delta_{nk} \). Luego es un sistema ortonormal.
+
+	Veamos que el span clausurado es todo \( \ell^2 \). Sea \( x = (x_1, x_2, \ldots) \in \ell^2 \) y definimos
+	\[
+		S_N := \sum_{n=1}^{N} x_n e_n = (x_1, x_2, \ldots, x_N, 0, 0, \ldots) \in \operatorname{span}\{e_1, \dots, e_N\}.
+	\]
+	Entonces \( x - S_N = (0, \ldots, 0, x_{N+1}, x_{N+2}, \ldots) \) y
+	\[
+		\norm{x - S_N}_2^2 = \sum_{n=N+1}^{\infty} |x_n|^2 \xrightarrow[N \to \infty]{} 0,
+	\]
+	ya que es la cola de la serie convergente \( \sum_{n \ge 1} |x_n|^2 < \infty \). Por lo tanto \( S_N \to x \) en \( \ell^2 \), y entonces \( x \in \cl{\operatorname{span}\{e_n\}} \). Como \( x \) era arbitrario, \( \{e_n\} \) es una base ortonormal de \( \ell^2 \).
+
+	Para el caso de \( L^2[-\pi, \pi] \), con el producto interno \( \ip{f}{g} = \int_{-\pi}^{\pi} f \overline{g} \, dt \), sea \( \varphi_n(t) := \dfrac{e^{int}}{\sqrt{2\pi}} \) para \( n \in \Z \).
+
+	\emph{Ortonormalidad.} Para \( n \neq m \),
+	\[
+		\ip{\varphi_n}{\varphi_m} = \frac{1}{2\pi} \int_{-\pi}^{\pi} e^{i(n-m)t} \, dt = \frac{1}{2\pi} {\left[ \frac{e^{i(n-m)t}}{i(n-m)} \right]}_{-\pi}^{\pi} = \frac{e^{i(n-m)\pi} - e^{-i(n-m)\pi}}{2\pi i (n-m)} = \frac{\sin\left((n-m)\pi\right)}{\pi (n-m)} = 0,
+	\]
+	y para \( n = m \), \( \ip{\varphi_n}{\varphi_n} = \frac{1}{2\pi} \int_{-\pi}^{\pi} 1 \, dt = 1 \). Luego \( {\{\varphi_n \}}_{n \in \Z} \) es un sistema ortonormal.
+
+	\emph{Completitud.} Sea \( M := \cl{\operatorname{span}\{\varphi_n : n \in \Z \}} \), que es un subespacio cerrado de \( L^2[-\pi, \pi] \). Veamos que \( M = L^2[-\pi, \pi] \), para lo cual basta ver que \( M \) es denso.
+	\begin{itemize}
+		\item Las funciones continuas con soporte compacto en \( (-\pi, \pi) \), \( C_c(-\pi, \pi) \), son densas en \( L^2[-\pi, \pi] \).
+		\item Sea \( g \in C_c(-\pi, \pi) \). Como \( g(-\pi) = g(\pi) = 0 \), \( g \) se extiende a una función continua \( 2\pi \)-periódica, es decir, a una función continua en la circunferencia \( S^1 \). Los polinomios trigonométricos \( \operatorname{span}\{e^{int} : n \in \Z \} \) forman una subálgebra de \( C(S^1) \) que contiene a las constantes, separa puntos (pues \( e^{it} \) es inyectiva en \( S^1 \)) y es cerrada por conjugación (\( \overline{e^{int}} = e^{-int} \)). Por Stone Weierstrass, son densos en \( C(S^1) \) con la norma del supremo. Dado \( \varepsilon > 0 \) existe un polinomio trigonométrico \( p \) con \( \norm{g - p}_\infty < \varepsilon \), y entonces
+		      \[
+			      \norm{g - p}_2^2 = \int_{-\pi}^{\pi} |g - p|^2 \, dt \le 2\pi \norm{g - p}_\infty^2 < 2\pi \varepsilon^2.
+		      \]
+		      Como \( p \in \operatorname{span}\{\varphi_n\} \), resulta \( g \in M \).
+	\end{itemize}
+	Así, \( C_c(-\pi, \pi) \subset M \) y como \( M \) es cerrado, \( M \supset \cl{C_c(-\pi, \pi)} = L^2[-\pi, \pi] \). Por lo tanto \( {\{\varphi_n\}}_{n \in \Z} \) es una base ortonormal de \( L^2[-\pi, \pi] \).
+
+	\emph{Cálculo de los coeficientes.} Si \( f = \sum_{n \in \Z} a_n \varphi_n \) (convergencia en \( L^2 \), es decir, \( \sum_{|k| \le N} a_k \varphi_k \to f \) cuando \( N \to \infty \)), como el producto interno es continuo y \( \ip{\varphi_k}{\varphi_n} = \delta_{kn} \),
+	\[
+		\ip{f}{\varphi_n} = \lim_{N \to \infty} \ip{\sum_{|k| \le N} a_k \varphi_k}{\varphi_n} = \lim_{N \to \infty} \sum_{|k| \le N} a_k \ip{\varphi_k}{\varphi_n} = a_n.
+	\]
+	Por lo tanto,
+	\[
+		a_n = \ip{f}{\varphi_n} = \int_{-\pi}^{\pi} f(t) \overline{\varphi_n(t)} \, dt = \frac{1}{\sqrt{2\pi}} \int_{-\pi}^{\pi} f(t) e^{-int} \, dt.
+	\]
+	Observemos que, en términos de los coeficientes de Fourier usuales \( c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-int} \, dt \), vale \( a_n = \sqrt{2\pi}\, c_n \) y \( f = \sum_{n \in \Z} c_n e^{int} \).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -165,12 +213,60 @@
 		\item \( (L^2(\mu), \ip{\cdot}{\cdot}) \) con \( \ip{f}{g} = \int_X f \overline{g} \, d\mu \) donde \( (X, \mathcal{X}, \mu) \) es un espacio de medida.
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Para ver que un espacio es de Hilbert debemos ver que está dotado de un PI y que, con la norma inducida por él, queda completo. En este caso, es claro que los tres productos internos definidos son efectivamente productos internos.
+	\begin{enumerate}
+		\item Veamos que \( \C^n \) con \( \ip{x}{y} = \sum_{i=1}^{n} x_i \overline{y_i} \) es un espacio de Hilbert. La norma inducida por este PI viene dada por: \[
+			      \| x \| = \sqrt{\ip{x}{x}} = \sqrt{\sum_{i=1}^{n} |x_i|^2}.
+		      \]
+		      Sea \( {(x_n)}_{n \in \N} \) una sucesión de elementos de \( \C^n \) que sea de Cauchy con respecto a la norma inducida, es decir, para todo \( \varepsilon > 0 \) existe \( N \) tal que \( \| x_n - x_m \| < \varepsilon \) para todo \( n, m \ge N \). Como \( \C^n \) es finito dimensional, cada componente \( {(x_n)}_i \) es una sucesión de Cauchy en \( \C \), que es completo, por lo que existe \( x_i \in \C \) tal que \( {(x_n)}_i \to x_i \). Definiendo \( x = (x_1, \dots, x_n) \), se tiene que \( x_n \to x \) en la norma inducida, por lo que \( \C^n \) es completo y, por lo tanto, un espacio de Hilbert.
+		\item Veamos que \( \C^{n \times m} \) con \( \ip{A}{B} = \operatorname{tr}(AB^*) \) es un espacio de Hilbert. La norma inducida por este PI viene dada por:
+		      \[
+			      \| A \| = \sqrt{\ip{A}{A}} = \sqrt{\operatorname{tr}(AA^*)}.
+		      \]
+		      Sea \( {(A_n)}_{n \in \N} \) una sucesión de elementos de \( \C^{n \times m} \) que sea de Cauchy con respecto a la norma inducida. Como \( \C^{n \times m} \) es finito dimensional, cada componente \( {(A_n)}_{ij} \) es una sucesión de Cauchy en \( \C \), que es completo, por lo que existe \( A_{ij} \in \C \) tal que \( {(A_n)}_{ij} \to A_{ij} \). Definiendo \( A = (A_{ij}) \), se tiene que \( A_n \to A \) en la norma inducida, por lo que \( \C^{n \times m} \) es completo y, por lo tanto, un espacio de Hilbert.
+		\item Veamos que \( L^2(\mu) \) con \( \ip{f}{g} = \int_X f \overline{g} \, d\mu \) es un espacio de Hilbert. La norma inducida por este PI viene dada por:
+		      \[
+			      \| f \| = \sqrt{\ip{f}{f}} = \sqrt{\int_X |f|^2 \, d\mu}.
+		      \]
+		      Sea \( {(f_n)}_{n \in \N} \) una sucesión de elementos de \( L^2(\mu) \) que sea de Cauchy con respecto a la norma inducida. Por el Teorema de Riesz-Fischer (completitud de los espacios \(L^p\)), sabemos que existe \( f \in L^2(\mu) \) tal que \( f_n \to f \) en \( L^2 \), es decir, \( \| f_n - f \| \to 0 \). Por lo tanto, \( L^2(\mu) \) es completo y, por consiguiente, un espacio de Hilbert.
+	\end{enumerate}
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{5}
-	Probar que \( (\ell^p, \norm{\cdot}_p) \) no es espacio de Hilbert cuando \( p \neq 2 \).
+	Probar que \( (\ell^p, \| \cdot \|_p) \) no es espacio de Hilbert cuando \( p \neq 2 \).
 \end{ejercicio}
+\begin{proof}
+	Queremos ver que si \( p \neq 2 \) entonces \( (\ell^p, \| \cdot \|_p) \) no puede ser un espacio de Hilbert.
+	Por el \textbf{Ejercicio 2}, sabemos que si \( (H, \| \cdot \|) \) es un espacio de Banach, entonces \( H \) es un espacio de Hilbert si y solo si la norma satisface la identidad del paralelogramo.
+	Es decir, basta con observar que la norma \( \| \cdot \|_p \) no puede derivarse de un producto interno si \( p \neq 2 \), ya que no satisface dicha identidad:
+	\[
+		\| x+y \|_p^2 + \| x-y \|_p^2 = 2 \| x \|_p^2 + 2 \| y \|_p^2.
+	\]
+	Para ver que esta igualdad no se cumple, tomamos los vectores \( x = (1,0,0,\dots) \) y \( y = (0,1,0,\dots) \) en \( \ell^p \). Calculamos sus normas:
+	\[
+		\| x \|_p = 1 \quad \text{y} \quad \| y \|_p = 1.
+	\]
+	Por otro lado, los vectores suma y resta son \( x+y = (1,1,0,\dots) \) y \( x-y = (1,-1,0,\dots) \). Calculamos sus normas en \( \ell^p \):
+	\[
+		\| x+y \|_p = {\left( |1|^p + |1|^p \right)}^{1/p} = {2}^{1/p},
+	\]
+	\[
+		\| x-y \|_p = {\left( |1|^p + |-1|^p \right)}^{1/p} = 2^{1/p}.
+	\]
+	Reemplazando estos valores en el lado izquierdo de la identidad del paralelogramo obtenemos:
+	\[
+		\| x+y \|_p^2 + \| x-y \|_p^2 = {(2^{1/p})}^2 + {(2^{1/p})}^2 = 2 \cdot 2^{2/p}.
+	\]
+	Mientras que el lado derecho de la identidad nos da:
+	\[
+		2 \| x \|_p^2 + 2 \| y \|_p^2 = 2{(1)}^2 + 2{(1)}^2 = 4.
+	\]
+	Para que \( \ell^p \) sea un espacio de Hilbert, se debería cumplir que \( 2 \cdot 2^{2/p} = 4 \), lo cual implica que \( 2^{2/p} = 2 \). Esto ocurre si y solo si \( \frac{2}{p} = 1 \), es decir, \( p = 2 \).
+	Como por hipótesis \( p \neq 2 \), la identidad no se cumple, lo que confirma de manera constructiva que \( (\ell^p, \| \cdot \|_p) \) no es un espacio de Hilbert.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -182,28 +278,40 @@
 		\item Demostrar que los espacios \( H_1 \times \{0\} \) y \( \{0\} \times H_2 \) son cerrados y ortogonales en el espacio producto.
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
 	Probar que todo espacio de Hilbert es reflexivo.
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{8}
 	Consideremos \( {\{e_n \}}_{n \ge 1} \) una base ortonormal de un espacio de Hilbert \( H \) y sea
-	\[ S := \left\{ y \in H : \sum_{n=1}^{\infty} \left( 1 + \frac{1}{n} \right)^2 |\ip{y}{e_n}|^2 \le 1 \right\}. \]
+	\[ S := \left \{ y \in H : \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y}{e_n}|^2 \le 1 \right \}. \]
 	Probar que \( S \) es un conjunto convexo, acotado, cerrado y que no posee un elemento con norma máxima.
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{9}
 	En \( \ell^2(\N) \) sea
-	\[ S = \left\{ x \in \ell^1(\N) : \sum_{n \in \N} x_n = 0 \right\}. \]
+	\[ S = \left \{ x \in \ell^1(\N) : \sum_{n \in \N} x_n = 0 \right \}. \]
 	Probar que \( S \) es un subespacio denso de \( \ell^2(\N) \).
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -211,10 +319,13 @@
 	Sean \( L_1, L_2 \) subespacios de un espacio de Hilbert \( H \).
 	\begin{enumerate}
 		\item Probar que
-		      \[ (L_1 + L_2)^{\perp} = L_1^{\perp} \cap L_2^{\perp}. \]
+		      \[ {(L_1 + L_2)}^{\perp} = L_1^{\perp} \cap L_2^{\perp}. \]
 		\item Si tenemos dos subespacios cerrados \( C_1, C_2 \) de \( H \), probar que
-		      \[ (C_1 \cap C_2)^{\perp} = \cl{C_1^{\perp} + C_2^{\perp}}. \]
+		      \[ {(C_1 \cap C_2)}^{\perp} = \cl{C_1^{\perp} + C_2^{\perp}}. \]
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+
+\end{proof}
 
 \end{document}
