@@ -279,16 +279,77 @@
 	\end{enumerate}
 \end{ejercicio}
 \begin{proof}
+	Para ver que \( H_1 \times H_2 \) es un espacio de Hilbert, debemos verificar que la aplicación \( \ip{\cdot}{\cdot} \) definida en el enunciado es un producto interno y que el espacio es completo con respecto a la norma inducida.
 
+	Primero, comprobamos que \( \ip{\cdot}{\cdot} \) es un producto interno:
+	\begin{itemize}
+		\item Linealidad en la primera componente: para \( (h_1, k_1), (h_2, k_2), (h_3, k_3) \in H_1 \times H_2 \) y \( \alpha \in \mathbb{C} \),
+		      \begin{align*}
+			      \ip{(h_1, k_1) + \alpha (h_2, k_2)}{(h_3, k_3)} & = \ip{h_1 + \alpha h_2}{h_3}_{H_1} + \ip{k_1 + \alpha k_2}{k_3}_{H_2}                                 \\
+			                                                      & = \ip{h_1}{h_3}_{H_1} + \alpha \ip{h_2}{h_3}_{H_1} + \ip{k_1}{k_3}_{H_2} + \alpha \ip{k_2}{k_3}_{H_2} \\ & = \ip{(h_1, k_1)}{(h_3, k_3)} + \alpha \ip{(h_2, k_2)}{(h_3, k_3)}.
+		      \end{align*}
+		\item Conjugado simétrico:
+		      \[
+			      \ip{(h_1, k_1)}{(h_2, k_2)} = \ip{h_1}{h_2}_{H_1} + \ip{k_1}{k_2}_{H_2} = \overline{\ip{h_2}{h_1}_{H_1}} + \overline{\ip{k_2}{k_1}_{H_2}} = \overline{\ip{(h_2, k_2)}{(h_1, k_1)}}.
+		      \]
+		\item Positividad:
+		      \[
+			      \ip{(h, k)}{(h, k)} = \ip{h}{h}_{H_1} + \ip{k}{k}_{H_2} \ge 0,
+		      \]
+		      y la igualdad se da si y solo si \( h = 0 \) y \( k = 0 \), es decir, \( (h, k) = 0 \).
+	\end{itemize}
+	Por lo tanto, \( \ip{\cdot}{\cdot} \) es un producto interno.
+
+	Ahora, la norma inducida es
+	\[
+		\|(h, k)\|^2 = \ip{(h, k)}{(h, k)} = \|h\|_{H_1}^2 + \|k\|_{H_2}^2.
+	\]
+	Si \( \{(h_n, k_n)\} \) es una sucesión de Cauchy en \( H_1 \times H_2 \), entonces \( \{h_n\} \) es Cauchy en \( H_1 \) y \( \{k_n\} \) es Cauchy en \( H_2 \). Como \( H_1 \) y \( H_2 \) son completos, existen \( h \in H_1 \) y \( k \in H_2 \) tales que \( h_n \to h \) y \( k_n \to k \). Por lo tanto, \( (h_n, k_n) \to (h, k) \) en \( H_1 \times H_2 \), lo que muestra que el espacio es completo.
+	Así, \( (H_1 \times H_2, \ip{\cdot}{\cdot}) \) es un espacio de Hilbert.
+
+	Veamos ahora que \( H_1 \times \{ 0 \} \) y \( \{ 0 \} \times H_2 \) son subespacios ortogonales de \( H_1 \times H_2 \). Para cualquier \( (h, 0) \in H_1 \times \{ 0 \} \) y \( (0, k) \in \{ 0 \} \times H_2 \), tenemos:
+	\[
+		\ip{(h, 0)}{(0, k)} = \ip{h}{0}_{H_1} + \ip{0}{k}_{H_2} = 0 + 0 = 0.
+	\]
+	Esto demuestra que son ortogonales, es decir, \( H_1 \times \{ 0 \} \perp \{ 0 \} \times H_2 \).
+
+	Por otro lado, cualquier elemento \( (h, k) \in H_1 \times H_2 \) se descompone de forma única como:
+	\[
+		(h, k) = (h, 0) + (0, k).
+	\]
+	Esto implica que \( H_1 \times \{ 0 \} \) es exactamente el complemento ortogonal de \( \{ 0 \} \times H_2 \) (y viceversa). Como el complemento ortogonal de cualquier conjunto en un espacio de Hilbert es siempre un subespacio cerrado, concluimos que tanto \( H_1 \times \{ 0 \} \) como \( \{ 0 \} \times H_2 \) son cerrados.
 \end{proof}
 
 \vspace{0.5cm}
 
-\begin{ejercicio}{7}
-	Probar que todo espacio de Hilbert es reflexivo.
-\end{ejercicio}
 \begin{proof}
+	Sea \( \mathcal{H} \) un espacio de Hilbert. Que sea reflexivo equivale a que la inyección canónica
+	\[
+		J: \mathcal{H} \to \mathcal{H}^{**}, \quad J(x)(\phi) = \phi(x), \quad \forall \phi \in \mathcal{H}^*
+	\]
+	sea sobreyectiva (ya que siempre es una isometría lineal y, por lo tanto, inyectiva).
 
+	Sea \( \Phi \in \mathcal{H}^{**} \) un funcional lineal continuo arbitrario sobre \( \mathcal{H}^* \). Queremos encontrar \( x \in \mathcal{H} \) tal que \( J(x) = \Phi \).
+
+	Por el Teorema de Representación de Riesz, para cada \( y \in \mathcal{H} \) definimos el funcional \( \phi_y \in \mathcal{H}^* \) como \( \phi_y(z) = \ip{z}{y} \). La aplicación \( y \mapsto \phi_y \) es una isometría conjugada-lineal biyectiva de \( \mathcal{H} \) en \( \mathcal{H}^* \).
+
+	Definimos ahora una nueva aplicación \( f: \mathcal{H} \to \mathbb{C} \) dada por:
+	\[
+		f(y) = \overline{\Phi(\phi_y)}.
+	\]
+	Como \( \Phi \) es lineal y \( y \mapsto \phi_y \) es conjugada-lineal, resulta que \( f \) es lineal. Además, \( f \) es acotada porque:
+	\[
+		|f(y)| = |\Phi(\phi_y)| \le \| \Phi \| {\| \phi_y \|}_{\mathcal{H}^*} = \| \Phi \| {\| y \|}_{\mathcal{H}}.
+	\]
+	Así, \( f \in \mathcal{H}^* \). Aplicando nuevamente el Teorema de Riesz a \( f \), existe un único \( x \in \mathcal{H} \) tal que \( f(y) = \ip{y}{x} \) para todo \( y \in \mathcal{H} \).
+
+	Por lo tanto, tenemos que:
+	\[
+		\overline{\Phi(\phi_y)} = \ip{y}{x} \implies \Phi(\phi_y) = \overline{\ip{y}{x}} = \ip{x}{y} = \phi_y(x).
+	\]
+	Como todo funcional en \( \mathcal{H}^* \) es de la forma \( \phi_y \) para algún \( y \in \mathcal{H} \), concluimos que \( \Phi(\phi) = \phi(x) = J(x)(\phi) \) para todo \( \phi \in \mathcal{H}^* \).
+
+	Esto demuestra que \( \Phi = J(x) \), por lo que \( J \) es sobreyectiva y \( \mathcal{H} \) es reflexivo.
 \end{proof}
 
 \vspace{0.5cm}
@@ -299,10 +360,46 @@
 	Probar que \( S \) es un conjunto convexo, acotado, cerrado y que no posee un elemento con norma máxima.
 \end{ejercicio}
 \begin{proof}
+	Veamos que \( S \) es convexo, dado que para \( y_1, y_2 \in S \) y \( \lambda \in [0,1] \) tenemos:
+	\begin{align*}
+		\sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{\lambda y_1 + (1-\lambda) y_2}{e_n}|^2
+		 & = \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \lambda \ip{y_1}{e_n} + (1-\lambda) \ip{y_2}{e_n}|^2                                                             \\
+		 & \le \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 {(\lambda | \ip{y_1}{e_n}| + (1-\lambda) | \ip{y_2}{e_n}|)}^2                                                    \\
+		 & \le \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 (\lambda | \ip{y_1}{e_n}|^2 + (1-\lambda) | \ip{y_2}{e_n}|^2)                                                    \\
+		 & = \lambda \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y_1}{e_n}|^2 + (1-\lambda) \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y_2}{e_n}|^2 \\
+		 & \le \lambda \cdot 1 + (1-\lambda) \cdot 1 = 1.
+	\end{align*}
+	Así, \( S \) es convexo.
 
+	Veamos ahora que \( S \) es acotado. Para \( y \in S \) tenemos:
+	\[
+		\|y\|^2 = \sum_{n=1}^{\infty} | \ip{y}{e_n}|^2 \le \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y}{e_n}|^2 \le 1,
+	\]
+	donde la igualdad \( \norm{y}^2 = \sum_{n=1}^{\infty} | \ip{y}{e_n}|^2\) vale para bases ortonormales, por lo que \( \norm{y} \le 1 \) y \( S \) es acotado.
+
+	Para ver que \( S \) es cerrado, consideremos una sucesión \( {(y_k)}_{k \ge 1} \subseteq S \) tal que \( y_k \to y \in H \). Queremos ver que \( y \in S \). Por la continuidad del producto interno, sabemos que \( \ip{y_k}{e_n} \to \ip{y}{e_n} \) para todo \( n \ge 1 \).
+	Para cualquier entero \( N \ge 1 \), se cumple que:
+	\[
+		\sum_{n=1}^{N} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y}{e_n}|^2 = \lim_{k \to \infty} \sum_{n=1}^{N} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y_k}{e_n}|^2 \le 1,
+	\]
+	dado que la suma es finita y cada \( y_k \in S \). Como esta cota es independiente de \( N \), al tomar el supremo sobre \( N \) obtenemos la serie completa:
+	\[
+		\sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y}{e_n}|^2 \le 1,
+	\]
+	lo que implica que \( y \in S \) y, por lo tanto, \( S \) es cerrado.
+
+	En resumen, \( S \) es convexo, acotado y cerrado. Finalmente, veamos que \( S \) no posee un elemento con norma máxima. Primero notemos que el supremo de las normas de los elementos de \( S \) es 1 (por ejemplo, los elementos \( x_m = {(1 + 1/m)}^{-1} e_m \) pertenecen a \( S \) y \( \|x_m\| \to 1 \)).
+
+	Supongamos que existe un \( y \in S \) que alcanza esta norma máxima, es decir, \( \|y\| = 1 \). Como su norma es no nula, debe existir al menos un índice \( m \) tal que \( \ip{y}{e_m} \neq 0 \). Para este índice, \( {\left( 1 + \frac{1}{m} \right)}^2 |\ip{y}{e_m}|^2 > |\ip{y}{e_m}|^2 \). Utilizando la identidad de Parseval, tenemos:
+	\begin{align*}
+		1 = \|y\|^2 = \sum_{n=1}^{\infty} | \ip{y}{e_n}|^2 < \sum_{n=1}^{\infty} {\left( 1 + \frac{1}{n} \right)}^2 | \ip{y}{e_n}|^2 \le 1.
+	\end{align*}
+	Esto nos lleva a la contradicción \( 1 < 1 \), por lo que deducimos que no existe tal \( y \) en \( S \).
 \end{proof}
 
 \vspace{0.5cm}
+
+Seguramente una forma más \textbf{elegante} de demostrar el Ejercicio 9 sea aprovechándose de que un \( S \) es denso en un Hilbert \( \iff \) su ortogonal es trivial (\( S^\perp = \{0\} \)), pero mirando fijo el conjunto \( S \) es fácil dar con la construcción de abajo. A priori uno intentaría ajustar un solo término para que la suma sea cero, pero repartir el resto entre muchos términos permite controlar la norma de la diferencia y asegurar la convergencia en \( \ell^2(\N) \).
 
 \begin{ejercicio}{9}
 	En \( \ell^2(\N) \) sea
@@ -310,7 +407,46 @@
 	Probar que \( S \) es un subespacio denso de \( \ell^2(\N) \).
 \end{ejercicio}
 \begin{proof}
+	Sea \( y = {(y_n)}_{n \ge 1} \in \ell^2(\N) \). Queremos construir una sucesión en \( S \) que converja a \( y \) en la norma de \( \ell^2(\N) \).
 
+	Primero, consideremos la sucesión truncada \( y^{(N)} \) que coincide con \( y \) hasta el término \( N \) y luego se anula:
+	\[
+		y^{(N)}_n = \begin{cases} y_n, & 1 \le n \le N \\ 0, & n > N \end{cases}
+	\]
+	Sabemos que \( y^{(N)} \to y \) en \( \ell^2(\N) \). Sin embargo, la suma de las componentes de \( y^{(N)} \) es \( C_N = \sum_{n=1}^N y_n \), que en general no es cero.
+
+	Para corregir esto y forzar que la suma sea cero sin alejarnos de \( y \), vamos a repartir el resto \( -C_N \) entre los siguientes \( M = N^2 \) términos. Definimos \( z^{(N)} \) como:
+	\[
+		z^{(N)}_n =
+		\begin{cases}
+			y_n,              & 1 \le n \le N       \\
+			-\frac{C_N}{N^2}, & N+1 \le n \le N+N^2 \\
+			0,                & n > N+N^2
+		\end{cases}
+	\]
+	Es evidente que \( z^{(N)} \) tiene soporte finito, por lo que pertenece a \( \ell^1(\N) \). Además, la suma de sus componentes es \( C_N + N^2 \left( -\frac{C_N}{N^2} \right) = 0 \), por lo que \( z^{(N)} \in S \).
+
+	Ahora acotemos la distancia entre \( y \) y \( z^{(N)} \). Por la desigualdad triangular:
+	\[
+		\|y - z^{(N)}\|_2 \le \|y - y^{(N)}\|_2 + \|y^{(N)} - z^{(N)}\|_2.
+	\]
+	El primer término \( \|y - y^{(N)}\|_2 \to 0 \) cuando \( N \to \infty \) porque \( y \in \ell^2(\N) \).
+
+	Para el segundo término, \( y^{(N)} - z^{(N)} \) es una sucesión con ceros en las primeras \( N \) posiciones y el valor \( \frac{C_N}{N^2} \) en las siguientes \( N^2 \) posiciones. Su norma \( \ell^2 \) al cuadrado es:
+	\[
+		\|y^{(N)} - z^{(N)}\|_2^2 = N^2 \left| \frac{C_N}{N^2} \right|^2 = \frac{|C_N|^2}{N^2}.
+	\]
+	Usando la desigualdad de Cauchy-Schwarz en \( C_N \):
+	\[
+		|C_N| = \left| \sum_{n=1}^N y_n \cdot 1 \right| \le {\left( \sum_{n=1}^N |y_n|^2 \right)}^{1/2} {\left( \sum_{n=1}^N 1^2 \right)}^{1/2} \le \|y\|_2 \sqrt{N}.
+	\]
+	Por lo tanto, \( |C_N|^2 \le N \|y\|_2^2 \). Reemplazando esta cota obtenemos:
+	\[
+		\|y^{(N)} - z^{(N)}\|_2^2 \le \frac{N \|y\|_2^2}{N^2} = \frac{\|y\|_2^2}{N}.
+	\]
+	Tomando raíz cuadrada, resulta \( \|y^{(N)} - z^{(N)}\|_2 \le \frac{\|y\|_2}{\sqrt{N}} \), que claramente tiende a cero cuando \( N \to \infty \).
+
+	En conclusión, \( \|y - z^{(N)}\|_2 \to 0 \), por lo que la sucesión constructiva \( {(z^{(N)})}_{N \ge 1} \subseteq S \) converge a \( y \), demostrando que \( S \) es denso.
 \end{proof}
 
 \vspace{0.5cm}
@@ -325,7 +461,19 @@
 	\end{enumerate}
 \end{ejercicio}
 \begin{proof}
+	Sean \( L_1 \) y \( L_2 \) subespacios de \( H \).\begin{enumerate}
+		\item Veamos que \( {(L_1 + L_2)}^{\perp} \subseteq L_1^{\perp} \cap L_2^{\perp} \). Sea \( x \in {(L_1 + L_2)}^{\perp} \). Entonces para todo \( y_1 \in L_1 \) y \( y_2 \in L_2 \) se tiene:\[
+			      \langle x, y_1 + y_2 \rangle = 0.
+		      \]
+		      Tomando \( y_2 = 0 \) obtenemos \( \langle x, y_1 \rangle = 0 \) para todo \( y_1 \in L_1 \), es decir, \( x \in L_1^{\perp} \). Análogamente, tomando \( y_1 = 0 \) obtenemos \( x \in L_2^{\perp} \). Por lo tanto, \( x \in L_1^{\perp} \cap L_2^{\perp} \), demostrando la inclusión.
 
+		      Veamos la inclusión contraria \( L_1^{\perp} \cap L_2^{\perp} \subseteq {(L_1 + L_2)}^{\perp} \). Sea \( x \in L_1^{\perp} \cap L_2^{\perp} \). Entonces para todo \( y_1 \in L_1 \) y \( y_2 \in L_2 \) se tiene:
+		      \[
+			      \langle x, y_1 + y_2 \rangle = \langle x, y_1 \rangle + \langle x, y_2 \rangle = 0 + 0 = 0,
+		      \]
+		      por lo que \( x \in {(L_1 + L_2)}^{\perp} \). Esto completa la demostración de la igualdad.
+		\item TODO.
+	\end{enumerate}
 \end{proof}
 
 \end{document}
