@@ -1,0 +1,183 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+% Number sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Functional analysis operators
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}       % Norm
+\newcommand{\seminorm}[1]{\left\lVert #1 \right\rVert}   % Seminorm (same symbol)
+\newcommand{\cl}[1]{\overline{#1}}                       % Closure
+\newcommand{\Int}[1]{{#1}^\circ}                         % Interior
+\newcommand{\bola}[2]{B(#1;#2)}                          % Ball centered at #1 with radius #2
+\newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
+\newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}   % Inner product
+\newcommand{\LH}{\mathcal{L}(H)}                         % Bounded operators on H
+\newcommand{\Ker}{\operatorname{ker}}                    % Kernel
+\newcommand{\Ran}{\operatorname{R}}                      % Range
+\newcommand{\Lat}{\operatorname{Lat}}                    % Invariant subspaces lattice
+\newcommand{\subesp}{\sqsubseteq}                        % Closed subspace
+
+% Useful shortcuts
+\newcommand{\sii}{\iff}                                  % Si y sólo si
+\newcommand{\imp}{\implies}                              % Implies
+\newcommand{\setdiff}{\smallsetminus}                    % Set difference
+\newcommand{\diam}{\text{diam}}
+
+% Exercise environment
+\newenvironment{ejercicio}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries Ejercicio}\hskip \labelsep {\bfseries #1.}]}{\end{trivlist}}
+
+\setlist[enumerate,1]{label=\alph*), leftmargin=*, itemsep=2pt}
+\setlist[enumerate,2]{label=\roman*., leftmargin=*, itemsep=2pt}
+
+\begin{document}
+
+\title{Análisis Funcional: Trabajo Práctico N°6 - 2026}
+\author{Operadores en Espacios de Hilbert}
+\date{}
+
+\maketitle
+
+\vspace{0.8cm}
+
+\section{Operadores en Espacios de Hilbert}
+
+\begin{ejercicio}{1}
+	Sean \( H \) un espacio de Hilbert complejo y \( T \in \LH \) un operador normal. Demostrar:
+	\begin{enumerate}
+		\item \( \norm{T}^2 = \norm{T^2} \).
+		\item \( \Ker(T) = \Ker(T^*) \).
+		\item Si \( T^2 = T \) entonces \( T \) es autoadjunto.
+		\item Si \( T^2 = 0 \) entonces \( T = 0 \).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+	Sean \( H \) un espacio de Hilbert complejo y \( S, T \in \LH \). Demostrar:
+	\begin{enumerate}
+		\item \( T^*T \) y \( TT^* \) son operadores positivos.
+		\item Si \( T \) es positivo, entonces \( S^*TS \) es positivo.
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{3}
+	Sean \( H \) un espacio de Hilbert complejo y \( T \in \LH \). Demostrar:
+	\begin{enumerate}
+		\item Si \( \ip{Tx}{x} = 0 \) para todo \( x \in H \) entonces \( T = 0 \).
+		\item Encontrar un contraejemplo que muestre la falsedad del enunciado anterior si \( H \) es un espacio de Hilbert real.
+		\item \( T \) es normal si, y sólo si, \( \norm{Tx} = \norm{T^*x} \) para todo \( x \in H \).
+		\item Probar que si \( H \) es un espacio de Hilbert real y \( T \in \LH \) autoadjunto entonces vale a).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{4}
+	Dado un espacio de Hilbert \( H \), sean \( \{T_n\}, T \in \LH \) operadores normales. Probar que si \( T_n(x) \xrightarrow[n \to \infty]{} T(x) \) para todo \( x \in H \), entonces \( T_n^*(x) \xrightarrow[n \to \infty]{} T^*(x) \) para todo \( x \in H \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{5}
+	Sean \( H \) un espacio de Hilbert y \( P : H \to H \) un proyector. Demostrar que son equivalentes:
+	\begin{enumerate}
+		\item \( P^* = P \).
+		\item \( P \) es normal.
+		\item \( \norm{P} = 1 \).
+		\item \( \Ker(P) = \Ran(P)^{\perp} \).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{6}
+	Sean \( a, b \in \R \) con \( a < b \). Consideramos el espacio de Hilbert \( L^2(a, b) \) sobre \( \R \) y definimos el funcional \( T : L^2(a, b) \to \R \) dado por
+	\[ T(f) = \int_a^b f(x) \, dx \]
+	para \( f \in L^2(a, b) \).
+	\begin{enumerate}
+		\item Probar que \( T \) es acotado, lineal y calcular \( \norm{T} \).
+		\item De acuerdo al Teorema de Riesz existe \( g \in L^2(a, b) \) tal que \( T(f) = \ip{f}{g} \) para toda \( f \in L^2(a, b) \). Hallar tal \( g \) explícitamente y verificar que \( \norm{g}_2 = \norm{T} \).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{7}
+	Sea \( H \) un espacio de Hilbert y \( A \in \LH \) un operador autoadjunto. Probar que \( 0 \le A \le 1 \) si y sólo si \( A^2 \le A \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{8}
+	Sea \( T \in \mathcal{L}(L^2(0,1)) \) definido por \( (Tf)(x) = xf(x) \).
+	\begin{enumerate}
+		\item Probar que \( T \ge 0 \).
+		\item Calcular \( T^{1/n} \) donde \( n \in \N \).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{9}
+	Sea \( H \) un espacio de Hilbert. Sea \( A \in \LH^+ \) y tomemos su raíz cuadrada \( A^{1/2} \in \LH^+ \). Probar que
+	\[ \Ker(A) = \Ker(A^{1/2}) \quad \text{pero} \quad \Ran(A) \subseteq \Ran(A^{1/2}) \subseteq \cl{\Ran(A)}. \]
+	Mostrar además que si \( \Ran(A) \not\subesp H \) entonces las inclusiones son estrictas.
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{10}
+	Sea \( H \) un espacio de Hilbert y sea \( T \in \LH^+ \). Probar que \( T^2 \le \norm{T}\, T \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{11}
+	Probar que \( U \) es una isometría parcial si y sólo si \( U = UU^*U \).
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{12}
+	Hallar la Descomposición Polar de los siguientes operadores:
+	\begin{enumerate}
+		\item El operador de multiplicación \( M_\varphi : L^2([0,1]) \to L^2([0,1]) \) dado por
+		      \[ M_\varphi(f) = \varphi f, \]
+		      donde \( \varphi \in L^\infty([0,1]) \).
+		\item Los operadores Shifts: \( S \in \mathcal{L}(\ell^2) \) y \( T \in \mathcal{L}(\ell^2) \) los shifts a izquierda y derecha, respectivamente.
+		\item El operador \( A(x_1, x_2, \ldots) = (0, \alpha_1 x_1, \alpha_2 x_2, \ldots) \) donde \( x \in \ell^2 \) y \( \sup_{n \in \N} |\alpha_n| < \infty \).
+	\end{enumerate}
+\end{ejercicio}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{13}
+	Dado un espacio de Hilbert \( H \), sea \( T \in \LH \). Probar que:
+	\begin{enumerate}
+		\item Si un subespacio \( S \) es \( T \)-invariante, entonces \( S \in \Lat(T) \).
+		\item Si ahora \( S \subesp H \) y consideramos \( P_S \) el proyector ortogonal o autoadjunto, entonces
+		      \begin{enumerate}
+			      \item \( S \in \Lat(T) \) si y sólo si \( TP_S = P_S T P_S \).
+			      \item \( S \in \Lat_r(T) \) si y sólo si \( TP_S = P_S T \), i.e. si \( T \) y \( P_S \) conmutan.
+		      \end{enumerate}
+	\end{enumerate}
+\end{ejercicio}
+
+\end{document}
