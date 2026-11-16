@@ -43,8 +43,8 @@
 \end{ejercicio}
 \begin{proof}
     Sea \( K_4 \) el grafo como en \textbf{Definición\,\ref{def:k4}}.\begin{enumerate}
-        \item \( K_4 \) contiene un recorrido que no es una cadena, por ejemplo, un recorrido que repite una arista \( 12 - 21 \).
-        \item \( K_4 \) contiene una cadena que no es cerrada y no es un camino, por ejemplo, una cadena que repite un vértice pero no una arista \( 12 - 23 - 31 - 14 \).
+        \item \( K_4 \) contiene un recorrido que no es una cadena, por ejemplo, el recorrido \( 1, 2, 1 \), que recorre dos veces la arista \( \{1,2\} \).
+        \item \( K_4 \) contiene una cadena que no es cerrada y no es un camino, por ejemplo, el recorrido \( 1, 2, 3, 1, 4 \): sus aristas \( \{1,2\}, \{2,3\}, \{3,1\}, \{1,4\} \) son distintas, por lo que es una cadena, pero repite el vértice \( 1 \) (no es un camino) y termina en \( 4 \neq 1 \) (no es cerrada).
         \item Para que una cadena cerrada no trivial no sea un ciclo, la cadena debe repetir algún vértice (además del primero y el último). Si un recorrido pasa por un vértice, utiliza dos aristas distintas \( \implies \) Para que un vértice se repita en una cadena, debe tener grado al menos 4 dentro del subgrafo formado por el recorrido. Como en \( K_4 \) el grado máximo de cualquier vértice es 3 no puede existir ningún vértice con al menos 4 aristas incidentes y es imposible visitarlo más de una vez sin repetir aristas \( \therefore \) (c) es falsa.
     \end{enumerate}
 \end{proof}
@@ -118,7 +118,7 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 \begin{proof}
     Es fácil ver que el grafo de Petersen no puede contener cíclos de longitud 3 pues por como está construido tener un ciclo de longitud 3 implicaría tener 3 subconjuntos dos a dos disjuntos de 2 elementos del conjunto \( P = \{1,2,3,4,5\} \), lo cual es imposible.
 
-    Para ver que no puede haber un ciclo de longitud 4, supongamos que existe uno de la forma \( u - v - w - x - u \). Por la definición de adyacencia, los vértices consecutivos deben ser conjuntos disjuntos. Sin pérdida de generalidad, supongamos que \( u = \{1, 2\} \). Como \( v \) es adyacente a \( u \), debe ser disjunto, por lo que podemos asumir que \( v = \{3, 4\} \).
+    Para ver que no puede haber un ciclo de longitud 4, supongamos que existe uno de la forma \( u - v - w - x - u \). Por la definición de adyacencia, los vértices consecutivos deben ser conjuntos disjuntos. Sin pérdida de generalidad y por simetría, supongamos que \( u = \{1, 2\} \). Como \( v \) es adyacente a \( u \), debe ser disjunto, por lo que podemos asumir que \( v = \{3, 4\} \).
 
     El vértice \( w \) debe ser adyacente a \( v \), lo que implica que \( w \cap \{3, 4\} = \varnothing \). Por lo tanto, los dos elementos de \( w \) deben elegirse del conjunto restante \( \{1, 2, 5\} \). Además, \( w \neq u \) (pues son vértices distintos del ciclo), lo que nos obliga a que \( w \) contenga al 5 y a un elemento de \( u \). Supongamos s.p.d.g que \( w = \{1, 5\} \).
 
@@ -260,11 +260,11 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 \vspace{0.5cm}
 
 \begin{definition}
-    Dado un grafo \( G \), el \textbf{complemento} de \( G \), denotado \( \overline{G} \), es el grafo con el mismo conjunto de vértices que \( G \) en el que dos vértices distintos son adyacentes si y sólo si no lo son en \( G \).
+    Dado un grafo simple \( G \), el \textbf{complemento} de \( G \), denotado \( \overline{G} \), es el grafo con el mismo conjunto de vértices que \( G \) en el que dos vértices distintos son adyacentes si y sólo si no lo son en \( G \).
 \end{definition}
 
 \begin{definition}
-    Un \textbf{vértice de corte} de un grafo conexo \( G \) es un vértice \( v \) tal que \( G - v \) tiene más de una componente conexa que \( G \).
+    Un \textbf{vértice de corte} de un grafo \( G \) es un vértice \( v \) tal que \( G - v \) tiene más de una componente conexa que \( G \).
 \end{definition}
 
 \begin{ejercicio}{8}
@@ -302,18 +302,24 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
     Sea \( G \) un grafo auto-complementario. Probar que \( G \) tiene un vértice de corte si y sólo si \( G \) tiene un vértice de grado 1.
 \end{ejercicio}
 \begin{proof}
-    Notar que para ser auto-complementario no trivial, \( G \) debe tener al menos 4 vértices.
+    Notar que para ser auto-complementario no trivial, \( G \) debe tener al menos 4 vértices. Además, \( G \) es conexo: si no lo fuera, \( \overline{G} \) sería conexo (por el mismo argumento del \textbf{Ejercicio 3} de la Práctica I) y, al ser \( G \cong \overline{G} \), también lo sería \( G \). Sea \( \varphi : V(G) \to V(\overline{G}) \) un isomorfismo.
 
-    \( (\implies) \) Sea \( v \) un vértice de corte de \( G \). Entonces \( G - v \) es disconexo y sus vértices se particionan en las componentes conexas \( C_1, C_2, \dots, C_k \) con \( k \ge 2 \).
-    En \( \overline{G} \), cualquier vértice de \( C_i \) es adyacente a todos los vértices de \( C_j \quad \forall i \neq j \).
-    Debido a que el isomorfismo preserva la estructura, \( \overline{G} \) debe tener un vértice de corte. Sea \( w \) dicho vértice de corte en \( \overline{G} \).
-    Si eliminamos \( w \) de \( \overline{G} \), los vértices restantes de \( V(G) \setminus \{v, w\} \) siguen formando un subgrafo conexo, ya entre los \( C_i \) asegura que exista un camino entre cualquier par de vértices (como \( n \ge 4 \), siempre hay suficientes vértices para mantener la conexión).
-    Por lo tanto, la única forma en que la eliminación de \( w \) pueda desconectar a \( \overline{G} \) es si \( w \) aísla a \( v \) del resto del grafo. Esto implica que \( v \) está conectado únicamente a \( w \) en \( \overline{G} \), lo que significa que el grado de \( v \) en \( \overline{G} \) es 1. Al ser \( G \) y \( \overline{G} \) isomorfos, \( G \) también debe tener un vértice de grado 1.
+    \( (\implies) \) Sea \( v \) un vértice de corte de \( G \). Entonces \( G - v \) es disconexo y sus vértices se particionan en las componentes conexas \( C_1, C_2, \dots, C_k \) con \( k \ge 2 \). Recordemos que, en \( \overline{G} \), cualquier vértice de \( C_i \) es adyacente a todos los vértices de \( C_j \) para todo \( i \neq j \).
+
+    \paragraph{Caso 1}: alguna componente es un único vértice \( C_i = \{ x \} \). \\
+    Como \( G \) es conexo, \( x \) tiene algún vecino y, como en \( G - v \) no tiene ninguno, su único vecino es \( v \). Luego \( \deg(x) = 1 \).
+
+    \paragraph{Caso 2}: todas las componentes \( C_1, \ldots, C_k \) tienen al menos 2 vértices. \\
+    Como \( \varphi(v) \) es un vértice de corte de \( \overline{G} \) (pues el isomorfismo preserva la estructura), sea \( w = \varphi(v) \). Por el \textbf{Ejercicio 8}, \( \overline{G} - v \) es conexo, por lo que \( w \neq v \) y, en consecuencia, \( w \in C_j \) para algún \( j \).
+
+    Veamos que \( \overline{G} - \{v, w\} \) es conexo. Sean \( x, y \) dos vértices de \( V(G) \setminus \{v, w\} \). Si pertenecen a componentes distintas de \( G - v \), son adyacentes en \( \overline{G} \). Si pertenecen a la misma componente \( C_i \), elegimos un vértice \( z \) de otra componente que sea distinto de \( w \): si \( i \neq j \) tomamos \( z \in C_j \setminus \{w\} \) (no vacío pues \( |C_j| \geq 2 \)), y si \( i = j \) tomamos \( z \in C_l \) con \( l \neq j \) (que no contiene a \( w \)). En ambos casos \( x - z - y \) es un camino en \( \overline{G} - \{v, w\} \).
+
+    Como \( \overline{G} - w \) es disconexo pero \( \overline{G} - \{v, w\} \) es conexo, el vértice \( v \) no puede tener ningún vecino en \( \overline{G} - \{v, w\} \), es decir, \( N_{\overline{G}}(v) \subseteq \{ w \} \). Además, \( v \) no es aislado en \( \overline{G} \), pues \( \overline{G} \cong G \) es conexo. Por lo tanto, \( N_{\overline{G}}(v) = \{ w \} \) y \( \deg_{\overline{G}}(v) = 1 \). Al ser \( G \) y \( \overline{G} \) isomorfos, \( \deg_G(\varphi^{-1}(v)) = 1 \), por lo que \( G \) tiene un vértice de grado 1.
 
     \( (\impliedby) \) Sea \( x \) un vértice de grado 1 en \( G \), y sea \( u \) su único vecino.
     Como \( G \) es auto-complementario no trivial, su cantidad de vértices es \( n \ge 4 \).
-    Consideremos el subgrafo \( G - u \). Al eliminar el vértice \( u \), el vértice \( x \) pierde su única arista incidente, quedando aislado.
-    Dado que originalmente el grafo tenía al menos 4 vértices, \( G - u \) contiene a \( x \) y al menos a otros dos vértices. Por lo tanto, \( G - u \) se descompone en al menos dos componentes conexas \( \therefore u \) es un vértice de corte en \( G \).
+    Consideremos el subgrafo \( G - u \). Al eliminar el vértice \( u \), el vértice \( x \) pierde su única arista incidente, quedando aislado, es decir, \( \{ x \} \) es una componente conexa de \( G - u \).
+    Dado que \( n \ge 4 \), \( G - u \) tiene al menos \( 3 \) vértices, por lo que existe algún vértice fuera de \( \{ x \} \), que pertenece a otra componente conexa. Por lo tanto, \( G - u \) tiene al menos dos componentes conexas, mientras que \( G \) tiene una \( \therefore u \) es un vértice de corte en \( G \).
 \end{proof}
 
 \clearpage
@@ -323,7 +329,7 @@ Un ejemplo del grafo de Petersen se puede construir tomando el conjunto de cinco
 \end{definition}
 
 \begin{definition}
-    Un vértice \( v \) de un grafo \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \) i.e no tiene vecinos.
+    Un vértice \( v \) de un grafo simple \( G \) se dice \textbf{aislado} si \( \deg(v) = 0 \) i.e no tiene vecinos.
 \end{definition}
 
 \begin{ejercicioEntregar}{10}

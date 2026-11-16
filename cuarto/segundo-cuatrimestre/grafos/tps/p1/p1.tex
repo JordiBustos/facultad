@@ -16,14 +16,14 @@
 \vspace{0.5cm}
 
 \begin{definition}\label{def:grado}
-    Definimos el grado de un vértice \( v \) en un grafo \( G \) como el número de aristas incidentes a \( v \). Se denota por \( \deg(v) \).
+    Definimos el grado de un vértice \( v \) en un grafo \( G \) como el número de aristas incidentes en \( v \). Se denota por \( \deg(v) \).
 \end{definition}
 
 \begin{ejercicio}{2}
     Dado \( n \) entero mayor o igual que 1, hallar una fórmula para la cantidad de grafos simples con conjunto de vértices \( \{1,\dots, n\} \). ¿En cuántos de esos grafos simples el grado del vértice 1 es menor o igual que 2? (la respuesta debe ser una expresión en función de \( n \) y completamente simplificada)
 \end{ejercicio}
 \begin{proof}
-    Sea \( n \) el número de vértices. Un grafo simple con \( n \) vértices puede tener o no aristas entre cada par de vértices distintos. Dado que hay \( \binom{n}{2} \) números de pares distintos de vértices, y cada par puede estar conectado por una arista o no, el número total de grafos simples con \( n \) vértices es de \( 2^{\binom{n}{2}} \).
+    Sea \( n \) el número de vértices. Un grafo simple con \( n \) vértices puede tener o no aristas entre cada par de vértices distintos. Dado que hay \( \binom{n}{2} \) pares distintos de vértices, y cada par puede estar conectado por una arista o no, el número total de grafos simples con \( n \) vértices es de \( 2^{\binom{n}{2}} \).
 
     Para la segunda parte, consideremos el vértice 1. El grado del vértice 1 es el número de aristas que lo conectan con los otros \( n-1 \) vértices. Para que su grado sea menor o igual que 2, podemos tener las siguientes posibilidades:
     \begin{enumerate}
@@ -34,6 +34,10 @@
     Luego, el número total de grafos simples con el grado del vértice 1 menor o igual que 2 es:
     \[
         \left [ 1 + (n-1) + \binom{n-1}{2} \right] \cdot 2^{\binom{n-1}{2}}
+    \]
+    Simplificando, \( 1 + (n-1) + \binom{n-1}{2} = n + \frac{(n-1)(n-2)}{2} = \frac{n^2 - n + 2}{2} \) y \( \binom{n-1}{2} - 1 = \frac{n^2-3n+2}{2} - 1 = \frac{n(n-3)}{2} \), por lo que el total es
+    \[
+        \frac{n^2 - n + 2}{2} \cdot 2^{\binom{n-1}{2}} = \left( n^2 - n + 2 \right) \cdot 2^{\frac{n(n-3)}{2}}.
     \]
 \end{proof}
 
@@ -62,11 +66,11 @@
 \vspace{0.5cm}
 
 \begin{definition}
-    Un \textbf{clique} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que cada par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un clique es un subgrafo completo de \( G \).
+    Un \textbf{clique} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que cada par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un clique es un conjunto de vértices que induce un subgrafo completo de \( G \).
 \end{definition}
 
 \begin{definition}\label{def:conjunto-independiente}
-    Un \textbf{conjunto independiente} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que ningún par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un conjunto independiente es un subgrafo sin aristas.
+    Un \textbf{conjunto independiente} en un grafo \( G \) es un conjunto de vértices de \( G \) tal que ningún par de vértices distintos en el conjunto está conectado por una arista en \( G \). En otras palabras, un conjunto independiente es un conjunto de vértices que induce un subgrafo sin aristas.
 \end{definition}
 
 \begin{ejercicio}{4}
@@ -88,9 +92,11 @@
     \end{center}
 \end{ejercicio}
 \begin{proof}
-    Es claro que para formar un clique maximal necesitamos tomar el polo norte y el polo sur, ya que ambos están conectados con todos los vértices y entre sí. Luego, podemos tomar un vértice del conjunto de 4 vértices que están en el medio, ya que todos ellos están conectados con el polo norte y el polo sur, finalmente podemos tomar un vértice más del conjunto de 4 vértices que están en el medio que sea adyacente al vértice que ya tomamos. Por lo tanto, el tamaño máximo de un clique es 4, pues si agregamos un vértice más del conjunto de 4 vértices que están en el medio, no estará conectado con al menos uno de los vértices que ya tomamos.
+    Llamemos \( n \) y \( s \) a los polos norte y sur, y \( c_1, c_2, c_3, c_4 \) a los vértices del medio, de izquierda a derecha. Notemos que \( n \) y \( s \) son adyacentes entre sí y a todos los demás vértices, y que los vértices del medio inducen el camino \( c_1 - c_2 - c_3 - c_4 \).
 
-    Contrariamente, para formar un conjunto independiente maximal, no podemos tomar ni el polo norte ni el polo sur, ya que ambos están conectados con todos los vértices. Por lo tanto, si elegimos un vértice del conjunto de 4 vértices que están en el medio, no podemos elegir su adyacente, pero sí podemos elegir el otro vértice que está en el medio y que no es adyacente al vértice que ya elegimos. Sin embargo, no podemos elegir ningún otro vértice del centro pues estará conectado a uno de los vértices que ya elegimos. Por lo tanto, el tamaño máximo de un conjunto independiente es 2.
+    \textbf{Clique máximo.} El conjunto \( \{ n, s, c_1, c_2 \} \) es un clique de tamaño 4, pues todos sus pares de vértices son adyacentes. Veamos que no existe un clique de tamaño mayor. Sea \( K \) un clique cualquiera. Como el camino \( c_1 - c_2 - c_3 - c_4 \) no contiene triángulos, \( K \) contiene a lo sumo 2 de los vértices del medio y, como además hay solo 2 polos, \( |K| \leq 2 + 2 = 4 \). Por lo tanto, el tamaño máximo de un clique es 4.
+
+    \textbf{Conjunto independiente máximo.} El conjunto \( \{ c_1, c_3 \} \) es independiente de tamaño 2. Veamos que no existe uno de tamaño mayor. Sea \( S \) un conjunto independiente cualquiera. Si \( S \) contiene a \( n \) o a \( s \), como ese vértice es adyacente a todos los demás, \( S \) no puede contener ningún otro vértice y \( |S| = 1 \). En caso contrario, \( S \subseteq \{ c_1, c_2, c_3, c_4 \} \); como \( c_1c_2 \) y \( c_3c_4 \) son aristas, \( S \) contiene a lo sumo un vértice de \( \{ c_1, c_2 \} \) y a lo sumo uno de \( \{ c_3, c_4 \} \), de modo que \( |S| \leq 2 \). Por lo tanto, el tamaño máximo de un conjunto independiente es 2.
 \end{proof}
 
 \begin{ejercicioEntregar}{5}
@@ -105,11 +111,11 @@
 \vspace{0.5cm}
 
 \begin{definition}
-    Sea \( G \) un grafo con conjunto de vértices \( V(G) = \{ v_1, \ldots, v_n \} \) y conjunto de aristas \( E(G) = \{ e_1, \ldots, e_m \} \). La matriz de adyacencia \( A(G) \) es una matriz \( n \times n \) donde el elemento \( a_{ij} \) es 1 si \( v_i \) y \( v_j \) están conectados por una arista y 0 en caso contrario.
+    Sea \( G \) un grafo con conjunto de vértices \( V(G) = \{ v_1, \ldots, v_n \} \) y conjunto de aristas \( E(G) = \{ e_1, \ldots, e_m \} \). La matriz de adyacencia \( A(G) \) es una matriz \( n \times n \) donde el elemento \( a_{ij} \) es la cantidad de aristas con extremos \( v_i \) y \( v_j \) (en particular, \( a_{ii} \) es la cantidad de lazos en \( v_i \)).
 \end{definition}
 
 \begin{definition}
-    Sea \( G \) un grafo con conjunto de vértices \( V(G) = \{ v_1, \ldots, v_n \} \) y conjunto de aristas \( E(G) = \{ e_1, \ldots, e_m \} \). La matriz de incidencia \( B(G) \) es una matriz \( n \times m \) donde el elemento \( b_{ij} \) es 1 si el vértice \( v_i \) está incidente a la arista \( e_j \) y 0 en caso contrario.
+    Sea \( G \) un grafo con conjunto de vértices \( V(G) = \{ v_1, \ldots, v_n \} \) y conjunto de aristas \( E(G) = \{ e_1, \ldots, e_m \} \). La matriz de incidencia \( B(G) \) es una matriz \( n \times m \) donde el elemento \( b_{ij} \) es 1 si el vértice \( v_i \) es extremo de \( e_j \) y 0 en caso contrario.
 \end{definition}
 
 \begin{ejercicioEntregar}{6}
@@ -118,9 +124,13 @@
 \begin{proof}
     Sea \( V(G) = \{ v_1, \ldots, v_n \} \) y \( E(G) = \{ e_1, \ldots, e_m \} \).
 
-    Luego, si suponemos que \( v = v_i \) para \( i \in \{ 1, \ldots, n \} \) y \( e = e_j = v_p v_q \) para \( j \in \{ 1, \ldots, m \} \), entonces la matriz de adyacencia de \( G - v \) es la matriz \( A(G) \) con la \( i \)-ésima fila y la \( i \)-ésima columna eliminadas. Por otro lado, la matriz de adyacencia de \( G - e \) es la matriz \( A(G) \) con las entradas \( a_{pq} \) y \( a_{qp} \) (correspondientes a los dos vértices incidentes a \( e_j \)) puestas en 0, dejando el resto de la matriz sin cambios, ya que las demás aristas incidentes a \( v_p \) y \( v_q \) siguen presentes en \( G-e \).
-
-    De manera análoga, sea \( B(G) \) la matriz de incidencia de \( G \implies \) la matriz de incidencia de \( G - v \) es la matriz \( B(G) \) con la fila correspondiente a \( v \) eliminada, junto con las columnas correspondientes a las aristas incidentes a \( v \) (pues dichas aristas dejan de existir en \( G - v \)), y la matriz de incidencia de \( G - e \) es la matriz \( B(G) \) con la columna correspondiente a \( e \) eliminada.
+    Luego, si suponemos que \( v = v_i \) para \( i \in \{ 1, \ldots, n \} \) y \( e = e_j \) tiene extremos \( v_p \) y \( v_q \) (con \( p = q \) si \( e \) es un lazo) para \( j \in \{ 1, \ldots, m \} \), entonces:
+    \begin{itemize}
+        \item \( A(G-v) \) es la matriz \( A(G) \) con la \( i \)-ésima fila y la \( i \)-ésima columna eliminadas. En efecto, \( G-v \) tiene los mismos vértices salvo \( v_i \), y se eliminan exactamente las aristas (incluidos los lazos) incidentes a \( v_i \), por lo que las entradas restantes, que cuentan aristas entre vértices distintos de \( v_i \), no cambian.
+        \item \( A(G-e) \) es la matriz \( A(G) \) en la que se resta 1 a las entradas \( a_{pq} \) y \( a_{qp} \) (si \( p = q \), solo se resta 1 a \( a_{pp} \)), y el resto de la matriz queda sin cambios. Esto se debe a que \( G-e \) conserva todos los vértices y todas las aristas salvo \( e \), y puede haber otras aristas con los mismos extremos que \( e \) que siguen presentes.
+        \item \( B(G-v) \) es la matriz \( B(G) \) con la fila \( i \) eliminada, junto con las columnas correspondientes a las aristas incidentes a \( v_i \) (pues dichas aristas dejan de existir en \( G - v \)).
+        \item \( B(G-e) \) es la matriz \( B(G) \) con la columna \( j \) eliminada, ya que \( G-e \) conserva todos los vértices y las demás aristas con los mismos extremos.
+    \end{itemize}
 \end{proof}
 
 \vspace{0.5cm}
@@ -172,7 +182,7 @@
 \end{definition}
 
 \begin{definition}\label{def:complemento}
-    Sea \( G \) un grafo, notaremos \( \overline{G} \) al grafo complemento de \( G \), es decir, el grafo con los mismos vértices que \( G \) y con aristas \( \{u,v\} \) tales que \( \{u,v\} \notin E(G) \) para todo \( u,v \in V(G) \).
+    Sea \( G \) un grafo simple, notaremos \( \overline{G} \) al grafo complemento de \( G \), es decir, el grafo con los mismos vértices que \( G \) y con aristas \( \{u,v\} \) tales que \( \{u,v\} \notin E(G) \) para todo \( u,v \in V(G) \).
 \end{definition}
 
 \begin{ejercicio}{8}
@@ -215,15 +225,15 @@
 
             % Grafo 2 (Q3 con cruces)
             \begin{scope}[shift={(5,1)}]
-                \node (a1) at (-1, 1) {};
-                \node (a2) at (1, 1) {};
-                \node (a3) at (1, -1) {};
-                \node (a4) at (-1, -1) {};
+                \node[label=above left:1] (a1) at (-1, 1) {};
+                \node[label=above right:2] (a2) at (1, 1) {};
+                \node[label=below right:3] (a3) at (1, -1) {};
+                \node[label=below left:4] (a4) at (-1, -1) {};
 
-                \node (b1) at (-0.5, 0.5) {};
-                \node (b2) at (0.5, 0.5) {};
-                \node (b3) at (0.5, -0.5) {};
-                \node (b4) at (-0.5, -0.5) {};
+                \node[label=below right:5] (b1) at (-0.5, 0.5) {};
+                \node[label=below left:6] (b2) at (0.5, 0.5) {};
+                \node[label=above left:7] (b3) at (0.5, -0.5) {};
+                \node[label=above right:8] (b4) at (-0.5, -0.5) {};
 
                 \draw[thick]
                 (a1) -- (a2) -- (a3) -- (a4) -- (a1)
@@ -237,29 +247,42 @@
     \end{center}
 \end{ejercicio}
 \begin{proof}
-    Notemos que si \( G_1 \) y \( G_2 \) son los dos grafos, luego \( G_1 \) y \( \overline{G_2} \) son dos \( Q_3 \) grafos. Es decir, tienen \( 8 \) vértices y \( 12 \) aristas cada uno y exactamente tres aristas inciden en cada vértice.
+    Sean \( G_1 \) y \( G_2 \) el primer y el segundo grafo, respectivamente, ambos con conjunto de vértices \( \{1,\ldots,8\} \), numerados como en la figura. Por el \emph{Ejercicio 8}, basta ver que \( G_1 \cong \overline{G_2} \): en ese caso, \( \overline{G_1} \cong \overline{\overline{G_2}} = G_2 \).
 
-    Consideremos la función biyectiva \( f : V(G_1) \to V\left(\overline{G_2}\right) \) dada por: \[
-        f = \begin{cases}
-            1 & \mapsto 6, \quad 2 \mapsto 1, \\
-            3 & \mapsto 7, \quad 4 \mapsto 4, \\
-            5 & \mapsto 8, \quad 6 \mapsto 3, \\
-            7 & \mapsto 2, \quad 8 \mapsto 5  \\
-        \end{cases}
+    Las aristas de \( G_1 \) son \[
+        E(G_1) = \bigl \{ \{1,2\}, \{2,3\}, \{3,4\}, \{1,4\}, \{5,6\}, \{6,7\}, \{7,8\}, \{5,8\}, \{1,5\}, \{2,6\}, \{3,7\}, \{4,8\} \bigr \},
+    \]
+    y las de \( G_2 \) son \[
+        \begin{aligned}
+            E(G_2) = \bigl \{ & \{1,2\}, \{2,3\}, \{3,4\}, \{1,4\}, \{5,6\}, \{6,7\}, \{7,8\}, \{5,8\},          \\
+                              & \{1,5\}, \{1,8\}, \{2,6\}, \{2,7\}, \{3,6\}, \{3,7\}, \{4,5\}, \{4,8\} \bigr \}.
+        \end{aligned}
+    \]
+    Como \( G_2 \) tiene \( 16 \) aristas y hay \( \binom{8}{2} = 28 \) pares de vértices, \( \overline{G_2} \) tiene \( 12 \) aristas, que son los pares restantes: \[
+        E\left(\overline{G_2}\right) = \bigl \{ \{1,3\}, \{1,6\}, \{1,7\}, \{2,4\}, \{2,5\}, \{2,8\}, \{3,5\}, \{3,8\}, \{4,6\}, \{4,7\}, \{5,7\}, \{6,8\} \bigr \}.
     \]
 
-    Aplicando esta función, obtenemos:  \[
-        \begin{cases}
-            12 & \mapsto 61, \quad 23 \mapsto 17, \\
-            34 & \mapsto 74, \quad 41 \mapsto 46, \\
-            56 & \mapsto 83, \quad 67 \mapsto 32, \\
-            78 & \mapsto 25, \quad 85 \mapsto 58, \\
-            15 & \mapsto 68, \quad 26 \mapsto 13, \\
-            37 & \mapsto 72, \quad 48 \mapsto 45.
-        \end{cases}
+    Definimos la biyección \( f : V(G_1) \to V\left(\overline{G_2}\right) \) dada por
+    \begin{center}
+        \begin{tabular}{@{}lcccccccc@{}}
+            \toprule
+            \( v \)    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+            \midrule
+            \( f(v) \) & 1 & 3 & 5 & 7 & 6 & 8 & 2 & 4 \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    y verificamos que \( \{u,v\} \in E(G_1) \) si y sólo si \( \{f(u),f(v)\} \in E\left(\overline{G_2}\right) \). Como \( f \) es biyectiva y ambos grafos tienen \( 12 \) aristas, basta ver que \( f \) lleva cada arista de \( G_1 \) en una arista de \( \overline{G_2} \): \[
+        \begin{aligned}
+            \{1,2\} & \mapsto \{1,3\}, & \{2,3\} & \mapsto \{3,5\}, & \{3,4\} & \mapsto \{5,7\}, & \{1,4\} & \mapsto \{1,7\}, \\
+            \{5,6\} & \mapsto \{6,8\}, & \{6,7\} & \mapsto \{2,8\}, & \{7,8\} & \mapsto \{2,4\}, & \{5,8\} & \mapsto \{4,6\}, \\
+            \{1,5\} & \mapsto \{1,6\}, & \{2,6\} & \mapsto \{3,8\}, & \{3,7\} & \mapsto \{2,5\}, & \{4,8\} & \mapsto \{4,7\}.
+        \end{aligned}
     \]
-    Obteniendo el isomorfismo entre las aristas de \( G_1 \) y \( \overline{G_2} \).
+    Cada imagen pertenece a \( E\left(\overline{G_2}\right) \) y las doce son distintas, luego \( f \) es un isomorfismo entre \( G_1 \) y \( \overline{G_2} \). Por lo tanto \( \overline{G_1} \cong G_2 \) y \( \overline{G_2} \cong G_1 \).
 \end{proof}
+
+\vspace{0.5cm}
 
 \begin{ejercicio}{10}
     Determinar, para los grafos de abajo, qué pares de ellos son isomorfos y qué pares no lo son. En caso afirmativo, hallar un isomorfismo, dándole previamente nombres a los vértices. En caso negativo, dar argumentos estructurales.
