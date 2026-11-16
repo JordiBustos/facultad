@@ -1,3 +1,9 @@
+\begin{definition}
+    Un \textbf{árbol} es un grafo conexo y sin ciclos (Definición~\ref{def:ciclo} de la Práctica~II).
+\end{definition}
+
+Recordemos la noción de grafos isomorfos (Definición~\ref{def:isomorfos} de la Práctica~I).
+
 \begin{ejercicio}{1}
     Hallar la cantidad total de árboles no isomorfos entre sí con 5 vértices. ¿Cuántos hay de 6 vértices?
 \end{ejercicio}
@@ -7,6 +13,10 @@
 
 \vspace{0.5cm}
 
+\begin{definition}
+    Una \textbf{arista de corte} (o \textbf{puente}) de un grafo \( G \) es una arista \( e \) tal que \( G - e \) tiene más componentes conexas que \( G \) (Definición~\ref{def:componente-conexa} de la Práctica~I).
+\end{definition}
+
 \begin{ejercicio}{2}
     Probar que un grafo conexo \( G \) es un árbol si y sólo si toda arista de \( G \) es de corte.
 \end{ejercicio}
@@ -15,6 +25,16 @@
 \end{proof}
 
 \vspace{0.5cm}
+
+Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la Práctica~I).
+
+\begin{definition}
+    El \textbf{grado máximo} de un grafo \( G \) es \( \Delta(G) = \max \{ \deg(v) : v \in V(G) \} \).
+\end{definition}
+
+\begin{definition}
+    Una \textbf{hoja} de un grafo \( G \) es un vértice de grado \( 1 \).
+\end{definition}
 
 \begin{ejercicio}{3}
     Probar que todo árbol con grado máximo \( a > 1 \) tiene al menos \( a \) hojas.
@@ -34,14 +54,26 @@
 
 \vspace{0.5cm}
 
+\begin{definition}
+    La \textbf{distancia} \( d(u, v) \) entre dos vértices \( u \) y \( v \) de un grafo conexo \( G \) es la longitud (número de aristas) de un \( uv \)-camino de longitud mínima en \( G \).
+\end{definition}
+
 \begin{ejercicio}{5}
-    Dado un vértice \( v \) de un grafo \( G \), la excentricidad de \( v \) está definida por \( \operatorname{ecc}(v) = \max\{d(v, w) : w \in V(G)\} \). El centro de \( G \) es el subgrafo inducido por los vértices de mínima excentricidad en \( G \). Demostrar que, para todo árbol, el centro consiste de un único vértice o de dos vértices adyacentes.
+    Dado un vértice \( v \) de un grafo \( G \), la excentricidad de \( v \) está definida por \( \operatorname{ecc}(v) = \max \{d(v, w) : w \in V(G)\} \). El centro de \( G \) es el subgrafo inducido por los vértices de mínima excentricidad en \( G \). Demostrar que, para todo árbol, el centro consiste de un único vértice o de dos vértices adyacentes.
 \end{ejercicio}
 \begin{proof}
 
 \end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}\label{def:prufer}
+    Sea \( T \) un árbol con \( n \geq 2 \) vértices numerados con \( \{1, \ldots, n\} \). El \textbf{código de Prüfer} de \( T \) es la sucesión \( (a_1, \ldots, a_{n-2}) \) que se obtiene repitiendo \( n - 2 \) veces el siguiente paso: para \( i = 1, \ldots, n-2 \), se elimina la hoja de menor número del árbol actual y se anota como \( a_i \) el número de su único vecino.
+\end{definition}
+
+\begin{definition}\label{def:prufer-inverso}
+    Dada una sucesión \( (a_1, \ldots, a_{n-2}) \) con \( a_i \in \{1, \ldots, n\} \), el \textbf{árbol asociado} se reconstruye de la siguiente manera: para \( i = 1, \ldots, n-2 \), sea \( b_i \) el menor elemento de \( \{1, \ldots, n\} \) que no pertenece a \( \{b_1, \ldots, b_{i-1}\} \cup \{a_i, \ldots, a_{n-2}\} \) y se agrega la arista \( b_i a_i \). Finalmente, se agrega la arista que une a los dos vértices que no pertenecen a \( \{b_1, \ldots, b_{n-2}\} \). El árbol así construido es el único con ese código de Prüfer.
+\end{definition}
 
 \begin{ejercicio}{6}
     Elegir un árbol de \( 8 \) vértices, numerar sus vértices y hallar su código de Prüfer. Luego, invertir dicho código y hallar el árbol que posee tal código (mostrar el procedimiento en ambas partes. Si el código resultante es capicúa, cambiar alguno de los números del código para resolver la segunda parte).
@@ -66,6 +98,14 @@
 
 \vspace{0.5cm}
 
+\begin{definition}
+    Un \textbf{subgrafo generador} de un grafo \( G \) es un subgrafo \( H \) de \( G \) con \( V(H) = V(G) \). Un \textbf{árbol generador} de \( G \) es un subgrafo generador de \( G \) que es un árbol.
+\end{definition}
+
+\begin{definition}
+    El grafo \( C_n \) es el \textbf{ciclo} de \( n \) vértices \( v_{1}, \ldots, v_{n} \), cuyas aristas son \( \{v_{i}, v_{i+1}\} \) para \( 1 \leq i \leq n-1 \) y \( \{v_{n}, v_{1}\} \).
+\end{definition}
+
 \begin{ejercicio}{8}
     Sea \( G \) un grafo simple con cinco vértices, tales que cuatro de ellos inducen \( C_4 \) y el vértice restante es adyacente a todos los demás. Hallar la cantidad total de árboles generadores de este grafo.
 \end{ejercicio}
@@ -74,6 +114,18 @@
 \end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}
+    Un \textbf{grafo con pesos} es un grafo \( G \) junto con una función \( w : E(G) \to \mathbb{R} \) que asigna un peso \( w(e) \) a cada arista \( e \). El \textbf{peso} de un subgrafo \( H \) de \( G \) es \( w(H) = \sum_{e \in E(H)} w(e) \). En particular, el peso de un camino es la suma de los pesos de sus aristas.
+\end{definition}
+
+\begin{definition}
+    Un \textbf{árbol generador de peso mínimo} de un grafo conexo con pesos \( G \) es un árbol generador \( T \) de \( G \) tal que \( w(T) \leq w(T') \) para todo árbol generador \( T' \) de \( G \).
+\end{definition}
+
+\begin{definition}
+    Un \textbf{\( uv \)-camino} es un camino (Definición~\ref{def:camino} de la Práctica~II) que comienza en \( u \) y termina en \( v \). Un \( uv \)-camino es \textbf{mínimo} si su peso es menor o igual que el de todo otro \( uv \)-camino de \( G \).
+\end{definition}
 
 \begin{ejercicio}{9}
     Determinar si es verdadero o falso: si \( T \) es un árbol generador de peso mínimo de un grafo \( G \) y \( u, v \in V(G) \), entonces el \( uv \)-camino en \( T \) es un \( uv \)-camino mínimo en \( G \).
@@ -93,6 +145,14 @@
 
 \vspace{0.5cm}
 
+\begin{definition}
+    Dado un grafo \( G \), una arista \( e \in E(G) \) y una arista \( e' \notin E(G) \) con extremos en \( V(G) \), notamos \( G - e \) al grafo que se obtiene de \( G \) eliminando \( e \) y \( G + e' \) al grafo que se obtiene agregando \( e' \). Así, \( T - e + e' \) es el grafo con conjunto de aristas \( \left( E(T) \setminus \{e\} \right) \cup \{e'\} \).
+\end{definition}
+
+\begin{definition}
+    En un grafo con pesos, la \textbf{multiplicidad} de un valor \( p \) como peso es la cantidad de aristas \( e \) con \( w(e) = p \).
+\end{definition}
+
 \begin{ejercicio}{11}
     Dado un grafo conexo \( G \), sea \( H \) el grafo cuyos vértices son todos los árboles generadores de \( G \), siendo dos árboles generadores distintos \( T \) y \( T' \) adyacentes si y sólo si existen aristas \( e \) y \( e' \) tales que \( T' = T - e + e' \).
     \begin{itemize}
@@ -106,6 +166,18 @@
 \end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}
+    La \textbf{matriz de pesos} de un grafo con pesos \( G \) con \( V(G) = \{1, \ldots, n\} \) es la matriz \( A \) de \( n \times n \) tal que \( a_{ij} = w(ij) \) si \( ij \in E(G) \), \( a_{ii} = 0 \), y \( a_{ij} = \infty \) si \( i \neq j \) y \( ij \notin E(G) \).
+\end{definition}
+
+\begin{definition}[Algoritmo de Kruskal]
+    Dado un grafo conexo con pesos \( G \), el algoritmo de Kruskal construye un árbol generador de peso mínimo \( T \) de la siguiente forma: se ordenan las aristas de \( G \) por peso no decreciente, se parte de \( T \) sin aristas y, recorriendo las aristas en ese orden, se agrega cada arista a \( T \) si no forma un ciclo con las aristas ya elegidas. El algoritmo termina cuando \( T \) tiene \( |V(G)| - 1 \) aristas.
+\end{definition}
+
+\begin{definition}[Algoritmo de Prim]
+    Dado un grafo conexo con pesos \( G \), el algoritmo de Prim construye un árbol generador de peso mínimo \( T \) de la siguiente forma: se parte de un vértice cualquiera \( r \) y, en cada paso, se agrega a \( T \) una arista de peso mínimo entre las que tienen un extremo en \( V(T) \) y el otro fuera de \( V(T) \), junto con su extremo nuevo. El algoritmo termina cuando \( V(T) = V(G) \).
+\end{definition}
 
 \begin{ejercicio}{12}
     Determinar el menor costo de construcción de una red de carreteras entre \( 5 \) ciudades de manera que, partiendo desde cualquier ciudad, se pueda llegar a toda otra ciudad, sabiendo que el costo de construcción de una ruta entre cada par de ciudades está dado por la matriz
@@ -124,6 +196,10 @@
 \end{proof}
 
 \vspace{0.5cm}
+
+\begin{definition}[Algoritmo de Dijkstra]
+    Dado un grafo con pesos no negativos \( G \) y un vértice \( s \), el algoritmo de Dijkstra halla caminos de peso mínimo desde \( s \) a todos los demás vértices de la siguiente manera: se asigna a cada vértice \( v \) una etiqueta \( \ell(v) \), con \( \ell(s) = 0 \) y \( \ell(v) = \infty \) para \( v \neq s \), y se parte del conjunto \( S = \varnothing \) de vértices definitivos. En cada paso se elige \( u \notin S \) con \( \ell(u) \) mínima, se agrega \( u \) a \( S \) y, para cada vecino \( v \notin S \) de \( u \), se actualiza \( \ell(v) \leftarrow \min\{ \ell(v), \ell(u) + w(uv) \} \). Al terminar, \( \ell(v) \) es el peso de un camino mínimo de \( s \) a \( v \).
+\end{definition}
 
 \begin{ejercicio}{13}
     Hallar caminos de peso mínimo desde el vértice \( 1 \) a todos los demás. Considerar el grafo cuyos pesos están dados por la matriz
