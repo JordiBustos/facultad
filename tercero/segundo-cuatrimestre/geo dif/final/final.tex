@@ -1,0 +1,646 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+% --- Configuración de Página ---
+\geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.4em minus 0.2em}
+
+% --- Configuración de Hipervínculos ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    citecolor=darkblue,
+    bookmarksnumbered=true
+}
+
+% --- Colores Profesionales ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+
+% --- Encabezados y Pies de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkblue}{\textbf{La desigualdad isoperimétrica}}}
+\fancyhead[R]{\textcolor{mediumgray}{Geometría Diferencial}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{darkblue}\hrule width\headwidth height\headrulewidth \kern-\headrulewidth}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Definición de Entornos Matemáticos con Estilo ---
+\newtheoremstyle{profesional}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{darkblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{profesional}
+\newtheorem{teorema}{Teorema}[subsection]
+\newtheorem{lemma}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+
+% --- Estilo para definiciones ---
+\newtheoremstyle{definicion-style}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{definicion-style}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+
+% --- Estilo para observaciones ---
+\newtheoremstyle{observacion-style}%
+    {0.5em}%
+    {0.5em}%
+    {\color{mediumgray}\itshape}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+\newtheorem{observacion}[teorema]{Observación}
+
+% --- Macros útiles ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% --- Configuración de tcolorbox para teoremas ---
+\tcbset{
+    colback=white,
+    colframe=darkblue,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=3pt,
+    right=3pt,
+    top=3pt,
+    bottom=3pt
+}
+
+% --- Formato de títulos de secciones ---
+\titleformat{\section}
+    {\Large\bfseries\color{darkblue}}
+    {\thesection.}
+    {0.5em}
+    {}
+    [\vspace{0.3em}\noindent\textcolor{darkblue}{\rule{\textwidth}{1.5pt}}]
+
+\titleformat{\subsection}
+    {\large\bfseries\color{accentblue}}
+    {\thesubsection.}
+    {0.5em}
+    {}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{accentblue}}
+    {\thesubsubsection.}
+    {0.5em}
+    {}
+
+\begin{document}
+
+% --- PORTADA PROFESIONAL ---
+\thispagestyle{empty}
+\begin{center}
+    \includegraphics[width=4cm]{logo_unlp.png}
+
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{0.5cm}
+    {\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+    {\normalsize Facultad de Ciencias Exactas}\\
+    {\normalsize Departamento de Matemática}\\
+
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{2.5cm}
+
+    {\Huge \textbf{\textcolor{darkblue}{La desigualdad}}}\\[0.3cm]
+    {\Huge \textbf{\textcolor{darkblue}{isoperimétrica}}}\\
+
+    \vspace{3cm}
+
+    {\large \textbf{Examen Final}}\\
+    {\normalsize Geometría Diferencial}
+
+    \vspace{2.5cm}
+
+    {\normalsize
+        \renewcommand{\arraystretch}{1.3} % Da un poco más de aire a las filas
+        \begin{tabular}{>{\bfseries\color{darkblue}}l l}
+            Autor:   & Jordi Bustos               \\
+            Fecha:   & \today                     \\
+            Carrera: & Licenciatura en Matemática
+        \end{tabular}
+    }
+
+    \vfill
+
+    {\footnotesize \textcolor{mediumgray}{%
+            Este documento presenta la desigualdad isoperimétrica en el plano \\
+            junto con los resultados preliminares necesarios para demostrarla. \\
+        }}
+
+    \vspace{1cm}
+\end{center}
+
+\newpage
+
+% --- EPÍGRAFE ---
+\thispagestyle{empty}
+\vspace*{\fill}
+
+\begin{flushright}
+    \textit{``Devenere locos, ubi nunc ingentia cernis}\\
+    \textit{moenia surgentemque novae Karthaginis arcem,}\\
+    \textit{mercatique solum, facti de nomine Byrsam,}\\
+    \textit{taurino quantum possent circumdare tergo.''}
+
+    \vspace{0.5cm}
+    \textbf{--- Virgilio, \textit{Eneida}, I, 365--368}
+
+    \vspace{0.8cm}
+    {\footnotesize \textcolor{mediumgray}{(Llegaron a los lugares donde hoy ves enormes murallas y la ciudadela de la naciente Cartago;\\
+            compraron el terreno, llamado Birsa por aquel hecho, que pudieran rodear con la piel de un toro. Traducción libre.)}}
+\end{flushright}
+
+\vspace*{\fill}
+
+\newpage
+
+% --- ÍNDICE ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+% --- CUERPO DEL TRABAJO ---
+\section{Introducción}
+
+\subsection{El problema de Dido}
+
+Cuenta la leyenda (la versión que se suele citar es la de Virgilio, en el canto I de la \textit{Eneida}) que la reina Dido, huyendo de Tiro, llegó a las costas del norte de África y negoció con los pobladores locales
+tanta tierra como pudiera rodearse con la piel de un toro. Dido, que sabía bastante más de geometría que sus interlocutores, cortó la piel en tiras finísimas, las empalmó y con la soga resultante delimitó un
+terreno de la mayor extensión posible. Ahí se fundó Cartago. (En algunas versiones la costa hace de borde, y eso cambia el problema: la forma óptima pasa a ser una semicircunferencia.
+Acá nos quedamos con curvas cerradas.) Sacándole el ropaje histórico, la pregunta es esta:
+\begin{center}
+    \textit{entre todas las curvas cerradas simples del plano de longitud dada, ¿cuál encierra la mayor área?}
+\end{center}
+Todos sospechamos que la respuesta es \textbf{la circunferencia}. Veamos que esta sospecha es cierta.
+
+\begin{teorema}[Desigualdad isoperimétrica]\label{teo:iso}
+    Sea \( \gamma \) una curva plana cerrada, simple y regular de longitud \( L \), y sea \( A \) el área de la región acotada que encierra.
+    Entonces
+    \[
+        L^2 \geq 4\pi A.
+    \]
+    Más aún, la igualdad vale si y solo si \( \gamma \) es una circunferencia.
+\end{teorema}
+
+Primero lo primero: la igualdad se alcanza. Para una circunferencia de radio \( r \) se tiene \( L = 2\pi r \) y \( A = \pi r^2 \), o sea que \( L^2 = 4\pi^2 r^2 = 4\pi A \).
+
+Recordemos que una homotecia de razón \( \lambda \) es una transformación del plano que envía cada punto \( (x, y) \) a \( (\lambda x, \lambda y) \). Si se aplica una homotecia de razón \( \lambda > 0 \), la longitud se multiplica por \( \lambda \)
+y el área por \( \lambda^2 \). De modo que ambos miembros de \( L^2 \geq 4\pi A \) se multiplican por \( \lambda^2 \). En otras palabras, el \textbf{cociente isoperimétrico}
+\[
+    Q = \frac{L^2}{4\pi A}
+\]
+no cambia por semejanzas, y el teorema dice que \( Q \geq 1 \), con \( Q = 1 \) solamente para la circunferencia. O sea que \( Q \) es, groseramente, una medida de cuán lejos está una curva (cerrada, simple y regular) de ser un círculo.
+
+Zenodoro, un matemático griego (200 a.C. - 140 a.C.), estudió en su ahora perdido tratado \emph{Sobre las figuras isométricas} este problema, llegando a la conclusión de que ``De todas las figuras sólidas cuyas superficies son iguales, la esfera es la mayor en contenido sólido''. En el siglo XIX, J.~Steiner dio argumentos geométricos de simetrización que
+presuponían la existencia de una curva óptima, laguna que fue salvada más tarde por Weierstrass con métodos del cálculo de variaciones.
+Hay muchísimas demostraciones del teorema (el artículo~\cite{osserman} es un buen recorrido). Acá elegimos la atribuida a \textbf{E.~Schmidt} (ver~\cite{docarmo}), que es corta, elemental, y solo utiliza el teorema de Green junto con la desigualdad de Cauchy--Schwarz.
+
+\subsection{Notaciones básicas}
+
+Para no aburrir, no vamos a definir todos los símbolos habituales. A continuación va una lista de cosas necesarias:
+
+\begin{itemize}[leftmargin=2em]
+    \item En \( \R^2 \) usamos el producto escalar \( u \cdot v \) y la norma \( \abs{u} = \sqrt{u \cdot u} \).
+    \item Una curva es una función \( \alpha : I \to \R^2 \), con \( I \) un intervalo. Escribimos \( \alpha = (x, y) \), donde \( x, y : I \to \R \) son sus \emph{funciones coordenadas}, y \( \alpha' = (x', y') \) para la derivada.
+          Cuando la curva esté parametrizada por longitud de arco, el parámetro se llama \( s \).
+    \item Los \emph{puntos del plano} (los que se usan para evaluar campos y para integrar) se escriben con mayúsculas, \( (X, Y) \in \R^2 \). Así no se confunden con las funciones \( x(s), y(s) \) de arriba.
+    \item \( C = \alpha([0, L]) \) es la \emph{traza} de la curva, \( \Omega \) es su interior (cuando tenga sentido hablar de él) y \( \overline{\Omega} = \Omega \cup C \).
+    \item \( L \) es la longitud de la curva, \( A \) el área que encierra y \( Q = L^2/4\pi A \) el cociente isoperimétrico.
+    \item Todas las curvas son al menos de clase \( C^1 \). En el curso se las pide \( C^\infty \) (suaves), pero no hace falta tanto.
+\end{itemize}
+
+\newpage
+% =====================================================================
+\section{Preliminares: curvas planas, longitud y área}\label{sec:curvas}
+
+Esta sección es de preliminares. Nada de lo que sigue es profundo, pero conviene tenerlo enunciado y aceptado desde el principio, para no enturbiar la prueba principal.
+
+\subsection{Curvas regulares y longitud de arco}
+
+\begin{definicion}[Curva regular y longitud]
+    Sea \( I \subseteq \R \) un intervalo.
+    \begin{enumerate}[label=\arabic*.]
+        \item Una \textbf{curva parametrizada regular} es una función \( \gamma : I \to \R^2 \) de clase \( C^1 \) tal que \( \gamma'(t) \neq 0 \) para todo \( t \in I \).
+        \item Si \( I = [a, b] \), la \textbf{longitud} de \( \gamma \) es
+              \[
+                  \ell(\gamma) = \int_a^b \abs{\gamma'(t)} \, \mathrm{d}t.
+              \]
+        \item Decimos que \( \gamma \) está \textbf{parametrizada por longitud de arco} si \( \abs{\gamma'(t)} = 1 \) para todo \( t \).
+    \end{enumerate}
+\end{definicion}
+
+La condición \( \gamma' \neq 0 \) evita que la curva ``frene en seco'' y forme picos: por ejemplo, \( \gamma(t) = (t^2, t^3) \) tiene una cúspide en el origen, y ahí justamente \( \gamma'(0) = 0 \).
+Además es la condición que permite el siguiente truco, que consiste en usar como parámetro la longitud ya recorrida.
+
+\begin{proposicion}[Reparametrización por longitud de arco]\label{prop:arco}
+    Sea \( \gamma : [a, b] \to \R^2 \) una curva regular y \( L = \ell(\gamma) \). Existe un difeomorfismo \( C^1 \) creciente \( \varphi : [0, L] \to [a, b] \) tal que
+    \( \alpha = \gamma \circ \varphi : [0, L] \to \R^2 \) cumple \( \abs{\alpha'(s)} = 1 \) para todo \( s \). En particular, \( \alpha \) tiene la misma traza y la misma longitud que \( \gamma \).
+\end{proposicion}
+\begin{proof}
+    Sea \( s(t) = \int_a^t \abs{\gamma'(u)} \, \mathrm{d}u \). Como \( \gamma' \) es continua, \( s \) es de clase \( C^1 \) con \( s'(t) = \abs{\gamma'(t)} > 0 \). Luego
+    \( s : [a, b] \to [0, L] \) es una biyección estrictamente creciente de clase \( C^1 \) con inversa \( \varphi \) también de clase \( C^1 \) (teorema de la función inversa).
+    Por la regla de la cadena, si \( t = \varphi(s) \),
+    \[
+        \alpha'(s) = \gamma'(t) \, \varphi'(s) = \frac{\gamma'(t)}{s'(t)} = \frac{\gamma'(t)}{\abs{\gamma'(t)}},
+    \]
+    que tiene norma \( 1 \). Finalmente, \( \ell(\alpha) = \int_0^L 1 \, \mathrm{d}s = L \).
+\end{proof}
+
+O sea que, a la hora de probar cosas sobre longitudes y áreas, siempre podemos asumir sin pérdida de generalidad que \( \abs{\alpha'} = 1 \), y eso es lo que vamos a hacer.
+
+\begin{definicion}[Curva cerrada y simple]
+    Sea \( \gamma : [a, b] \to \R^2 \) una curva regular.
+    \begin{enumerate}[label=\arabic*.]
+        \item Es \textbf{cerrada} si \( \gamma(a) = \gamma(b) \) y \( \gamma'(a) = \gamma'(b) \), o sea, si se extiende a una función \( (b-a) \)-periódica de clase \( C^1 \) sobre \( \R \).
+        \item Es \textbf{simple} si es inyectiva en \( [a, b) \) (la curva no se cruza a sí misma).
+    \end{enumerate}
+\end{definicion}
+
+Ojo: no alcanza con pedir \( \gamma(a) = \gamma(b) \). Pedimos también que las derivadas coincidan, para que no haya un piquito en el punto donde la curva se cierra (así la extensión periódica sigue siendo regular).
+
+Observar que si \( \gamma \) es cerrada, la reparametrización \( \alpha \) de la Proposición~\ref{prop:arco} también lo es, pues \( \alpha'(0) = \gamma'(a)/\abs{\gamma'(a)} = \alpha'(L) \). Por lo tanto, \( \alpha \) se extiende a una función
+\( L \)-periódica de clase \( C^1 \) sobre \( \R \). Además, para cada \( s_0 \in \R \), la función \( s \mapsto \alpha(s + s_0) \) es otra parametrización por longitud de arco de la misma curva: uno puede \textbf{cambiar el punto inicial} sin alterar nada.
+
+\subsection{El teorema de la curva de Jordan y la orientación}
+
+Ahora viene un clásico de la topología: una curva cerrada simple divide al plano en un ``adentro'' y un ``afuera''. La demostración está muy lejos de ser obvia y escapa al alcance de este texto, por eso nos tomamos el atrevimiento de asumirlo como cierto (ver, por ejemplo,~\cite{docarmo}).
+
+\begin{teorema}[Teorema de la curva de Jordan]
+    Sea \( C \subset \R^2 \) la traza de una curva cerrada simple. Entonces \( \R^2 \setminus C \) tiene exactamente dos componentes conexas: una acotada \( \Omega \), llamada el \textbf{interior} de \( C \),
+    y una no acotada, el \textbf{exterior}. Además, \( C \) es la frontera de ambas.
+\end{teorema}
+
+Dada una curva cerrada simple regular \( \gamma \), llamamos \textbf{área encerrada} por \( \gamma \) al área
+\[
+    A = \iint_{\Omega} \mathrm{d}X \, \mathrm{d}Y
+\]
+de su interior. Si \( \alpha = (x, y) \) está parametrizada por longitud de arco, el vector tangente es \( T = \alpha' = (x', y') \) y el vector normal es \( N = (-y', x') \) (la rotación de \( T \) en \( +\pi/2 \)).
+Para una curva regular simple y cerrada, \( N \) apunta hacia el interior en todos los puntos de la curva o bien hacia el exterior en todos ellos.
+Decimos que \( \alpha \) está \textbf{orientada positivamente} si \( N \) apunta hacia el interior \( \Omega \), es decir, si la curva recorre su frontera dejando a \( \Omega \) a la izquierda.
+Cambiando \( s \) por \( -s \) se invierte la orientación sin alterar la traza ni la longitud, por lo que \textbf{siempre podemos suponer que \( \alpha \) está orientada positivamente}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=1.1]
+        \def\blob{(-2,0) .. controls (-2,1.5) and (-0.5,2.2) .. (0.5,1.8) .. controls (1.5,1.4) and (2,1) .. (2,0) .. controls (2,-1.2) and (1,-1.8) .. (0,-1.6) .. controls (-1,-1.4) and (-2,-1.2) .. cycle}
+        \fill[lightgray] \blob;
+        \draw[thick, darkblue] \blob;
+        \node at (-0.3, 0) {$\Omega$};
+        \node[darkblue] at (-1.9, 1.5) {$\alpha$};
+        \node[mediumgray] at (3.3, 1.5) {exterior};
+        \fill (2,0) circle (1.5pt);
+        \draw[-{Stealth}, accentblue, thick] (2,0) -- (2,1) node[right] {$T$};
+        \draw[-{Stealth}, accentblue, thick] (2,0) -- (1,0) node[above] {$N$};
+    \end{tikzpicture}
+    \caption{Curva cerrada simple orientada positivamente: el vector normal \( N \) apunta hacia el interior \( \Omega \).}
+\end{figure}
+
+\subsection{El teorema de Green y la fórmula del área}
+
+El Teorema de Green se asume sin demostración, pero conviene ser cuidadosos con el enunciado porque es lo que hace todo el trabajo pesado de la prueba principal: nos deja calcular un área (una integral doble) como una integral sobre el borde (una integral en una variable).
+Antes de enunciarlo fijamos la notación para campos vectoriales en el plano. Recordar que los puntos del plano se escriben \( (X, Y) \), para no confundirlos con las funciones coordenadas \( x(s), y(s) \) de la curva.
+
+\begin{definicion}[Campo vectorial, circulación y rotacional]\label{def:campo}
+    Sea \( U \subseteq \R^2 \) un abierto. Un \textbf{campo vectorial de clase \( C^1 \)} en \( U \) es una función
+    \[
+        F : U \to \R^2, \qquad F(X, Y) = \big( P(X, Y), \, Q(X, Y) \big),
+    \]
+    donde \( P, Q : U \to \R \) son funciones de clase \( C^1 \) (es decir, tienen derivadas parciales continuas en \( U \)). Geométricamente, \( F \) asigna a cada punto \( (X, Y) \in U \) el vector \( P(X, Y) \, e_1 + Q(X, Y) \, e_2 \), donde \( e_1 = (1, 0) \) y \( e_2 = (0, 1) \):
+    \( P \) es la \textbf{componente horizontal} del campo (la que acompaña a \( \mathrm{d}X \)) y \( Q \) es la \textbf{componente vertical} (la que acompaña a \( \mathrm{d}Y \)).
+    \begin{itemize}[leftmargin=2em]
+        \item Sea \( \alpha = (x, y) : [0, L] \to U \) una curva de clase \( C^1 \); en particular, su traza está contenida en \( U \), de modo que \( P(\alpha(s)) \) y \( Q(\alpha(s)) \) están bien definidos. La \textbf{circulación} de \( F \) a lo largo de \( \alpha \) es
+              \[
+                  \int_{\alpha} P \, \mathrm{d}X + Q \, \mathrm{d}Y := \int_0^L F(\alpha(s)) \cdot \alpha'(s) \, \mathrm{d}s = \int_0^L \Big( P(\alpha(s)) \, x'(s) + Q(\alpha(s)) \, y'(s) \Big) \, \mathrm{d}s.
+              \]
+              En cada instante \( s \), el integrando es el producto escalar entre el campo en el punto \( \alpha(s) \) y el vector velocidad \( \alpha'(s) \): mide cuánto empuja el campo en la dirección en la que se mueve la curva (si \( F \) es un campo de fuerzas, la circulación es el trabajo realizado al recorrer \( \alpha \)).
+        \item El \textbf{rotacional} (escalar) de \( F \) es la función continua
+              \[
+                  \operatorname{rot} F = \frac{\partial Q}{\partial X} - \frac{\partial P}{\partial Y} : U \to \R,
+              \]
+              que mide la tendencia local del campo a girar alrededor de cada punto: cuánto varía la componente vertical al avanzar en la dirección horizontal, menos cuánto varía la componente horizontal al avanzar en la dirección vertical.
+    \end{itemize}
+\end{definicion}
+
+\begin{teorema}[Teorema de Green]\label{teo:green}
+    Sea \( \alpha = (x, y) : [0, L] \to \R^2 \) una curva cerrada simple regular, orientada positivamente, con traza \( C \) e interior \( \Omega \). Sea \( U \subseteq \R^2 \) un abierto tal que \( \overline{\Omega} = \Omega \cup C \subseteq U \) y sea
+    \( F = (P, Q) : U \to \R^2 \) un campo vectorial de clase \( C^1 \). Entonces
+    \[
+        \int_{\alpha} P \, \mathrm{d}X + Q \, \mathrm{d}Y = \iint_{\Omega} \operatorname{rot} F \, \mathrm{d}X \, \mathrm{d}Y,
+    \]
+    es decir,
+    \[
+        \int_0^L \Big( P(\alpha(s)) \, x'(s) + Q(\alpha(s)) \, y'(s) \Big) \, \mathrm{d}s = \iint_{\Omega} \left( \frac{\partial Q}{\partial X} - \frac{\partial P}{\partial Y} \right) \mathrm{d}X \, \mathrm{d}Y.
+    \]
+\end{teorema}
+
+La hipótesis \( \overline{\Omega} \subseteq U \) garantiza que \( F \) y sus derivadas parciales están definidas y son continuas en la región y en su borde; como \( \overline{\Omega} \) es compacto (\( \Omega \) es acotado y \( C \) es compacto),
+\( \operatorname{rot} F \) es continua y acotada sobre \( \Omega \), por lo que la integral doble del miembro derecho está bien definida. Si \( F \) está definido en todo el plano, se puede tomar \( U = \R^2 \).
+
+\begin{observacion}[Invariancia por reparametrización]\label{obs:reparam}
+    La circulación de la Definición~\ref{def:campo} no cambia bajo reparametrizaciones que preserven la orientación. En efecto, si \( \tilde{\alpha} = \alpha \circ \varphi : [a, b] \to \R^2 \) con \( \varphi : [a, b] \to [0, L] \) difeomorfismo tal que \( \varphi'(u) > 0 \), la regla de la cadena y el teorema de cambio de variable dan
+    \begin{align*}
+         & \int_a^b \Big( P(\tilde{\alpha}(u)) \, \tilde{x}'(u) + Q(\tilde{\alpha}(u)) \, \tilde{y}'(u) \Big) \, \mathrm{d}u \\ & = \int_a^b \Big( P(\alpha(\varphi(u))) \, x'(\varphi(u)) + Q(\alpha(\varphi(u))) \, y'(\varphi(u)) \Big) \varphi'(u) \, \mathrm{d}u \\
+         & = \int_0^L \Big( P(\alpha(s)) \, x'(s) + Q(\alpha(s)) \, y'(s) \Big) \, \mathrm{d}s.
+    \end{align*}
+    En particular, podemos suponer sin pérdida de generalidad que \( \alpha \) está parametrizada por longitud de arco en \( [0, L] \).
+\end{observacion}
+
+\begin{corolario}[Fórmula del área]\label{cor:area}
+    En las hipótesis del Teorema~\ref{teo:green}, el área \( A \) encerrada por \( \alpha \) viene dada por
+    \begin{align*}
+        A & = \int_0^L x(s) \, y'(s) \, \mathrm{d}s = -\int_0^L y(s) \, x'(s) \, \mathrm{d}s \\ & = \frac{1}{2} \int_0^L \big( x(s) \, y'(s) - y(s) \, x'(s) \big) \, \mathrm{d}s.
+    \end{align*}
+\end{corolario}
+\begin{proof}
+    Tomemos \( U = \R^2 \) y consideremos los campos \( F_1 = (P_1, Q_1) \) y \( F_2 = (P_2, Q_2) \) definidos por
+    \[
+        P_1(X, Y) = 0, \quad Q_1(X, Y) = X, \qquad\qquad P_2(X, Y) = -Y, \quad Q_2(X, Y) = 0.
+    \]
+    Son polinomios, luego de clase \( C^\infty \) en todo \( \R^2 \supseteq \overline{\Omega} \), y por lo tanto satisfacen las hipótesis del Teorema~\ref{teo:green}.
+
+    Para \( F_1 \): al evaluar en la curva, \( P_1(\alpha(s)) = 0 \) y \( Q_1(\alpha(s)) = x(s) \), de modo que la circulación es \( \int_0^L x(s) \, y'(s) \, \mathrm{d}s \); además
+    \( \operatorname{rot} F_1 = \frac{\partial X}{\partial X} - \frac{\partial 0}{\partial Y} = 1 \). Luego
+    \[
+        \int_0^L x(s) \, y'(s) \, \mathrm{d}s = \iint_{\Omega} 1 \, \mathrm{d}X \, \mathrm{d}Y = A.
+    \]
+    Análogamente, para \( F_2 \): \( P_2(\alpha(s)) = -y(s) \) y \( Q_2(\alpha(s)) = 0 \), de modo que la circulación es \( -\int_0^L y(s) \, x'(s) \, \mathrm{d}s \); y
+    \( \operatorname{rot} F_2 = \frac{\partial 0}{\partial X} - \frac{\partial (-Y)}{\partial Y} = 1 \). En consecuencia,
+    \[
+        -\int_0^L y(s) \, x'(s) \, \mathrm{d}s = \iint_{\Omega} 1 \, \mathrm{d}X \, \mathrm{d}Y = A.
+    \]
+    Finalmente, sumando ambas identidades y dividiendo por \( 2 \) se obtiene la tercera expresión:
+    \[
+        A = \frac{1}{2}(A + A) = \frac{1}{2} \int_0^L \big( x(s) \, y'(s) - y(s) \, x'(s) \big) \, \mathrm{d}s. \qedhere
+    \]
+\end{proof}
+
+Esta fórmula es el motor de la prueba que sigue: para calcular el área ya no hace falta saber nada del interior \( \Omega \), alcanza con mirar la curva.
+
+\begin{observacion}[Invariancia por punto inicial y traslaciones]\label{obs:invariancia}
+    Al ser \( \alpha \) cerrada y regular, sus funciones coordenadas \( x, y \) admiten una extensión \( L \)-periódica de clase \( C^1 \) a todo \( \R \). En consecuencia, los integrandos del Corolario~\ref{cor:area} también son \( L \)-periódicos, por lo que para cualquier \( s_0 \in \R \) se cumple
+    \[
+        \int_{s_0}^{s_0 + L} x(s) \, y'(s) \, \mathrm{d}s = \int_0^L x(s) \, y'(s) \, \mathrm{d}s = A,
+    \]
+    es decir, el cálculo de \( A \) es independiente de la elección del punto inicial \( \alpha(s_0) \).
+
+    Asimismo, la fórmula del área es invariante por traslaciones en el plano: dado cualquier vector \( (a, b) \in \R^2 \), al reemplazar \( (x, y) \) por \( (x + a, y + b) \) y usar que \( y(L) = y(0) \), resulta
+    \begin{align*}
+         & \int_0^L \big( x(s) + a \big) \big( y(s) + b \big)' \, \mathrm{d}s                                                                                 \\
+         & = \int_0^L x(s) \, y'(s) \, \mathrm{d}s + a \int_0^L y'(s) \, \mathrm{d}s = \int_0^L x(s) \, y'(s) \, \mathrm{d}s + a \big( y(L) - y(0) \big) = A.
+    \end{align*}
+\end{observacion}
+
+\subsection{Dos desigualdades elementales}
+
+Dos viejos conocidos, con sus casos de igualdad (que son los que nos van a importar a la hora de decidir cuándo vale el signo \( = \)).
+
+\begin{lemma}[Cauchy--Schwarz en \( \R^2 \)]\label{lema:cs}
+    Si \( u, v \in \R^2 \), entonces \( u \cdot v \leq \abs{u} \abs{v} \). Si vale la igualdad y \( v \neq 0 \), entonces \( u = \lambda v \) con \( \lambda \geq 0 \). En particular, si \( \abs{u} = r \) y \( \abs{v} = 1 \), la igualdad implica \( u = r v \).
+\end{lemma}
+\begin{proof}
+    Un cálculo directo da
+    \[
+        \big| \abs{v} u - \abs{u} v \big|^2 = 2 \abs{u}^2 \abs{v}^2 - 2 \abs{u} \abs{v} \, (u \cdot v) = 2 \abs{u} \abs{v} \big( \abs{u} \abs{v} - u \cdot v \big) \geq 0.
+    \]
+    Si \( u = 0 \) o \( v = 0 \) la desigualdad es trivial; en caso contrario, esto prueba \( u \cdot v \leq \abs{u} \abs{v} \). Si vale la igualdad con \( v \neq 0 \) (y \( u \neq 0 \)), el miembro izquierdo es cero, así que \( \abs{v} u = \abs{u} v \), es decir, \( u = \frac{\abs{u}}{\abs{v}} v \). Si \( u = 0 \), basta tomar \( \lambda = 0 \).
+\end{proof}
+
+\begin{lemma}[Desigualdad entre las medias aritmética y geométrica]\label{lema:amgm}
+    Si \( a, b \geq 0 \), entonces \( \sqrt{ab} \leq \frac{a + b}{2} \), con igualdad si y solo si \( a = b \).
+\end{lemma}
+\begin{proof}
+    Basta observar que \( \frac{a + b}{2} - \sqrt{ab} = \frac{1}{2} {(\sqrt{a} - \sqrt{b})}^2 \geq 0 \), que se anula si y solo si \( \sqrt{a} = \sqrt{b} \).
+\end{proof}
+
+\newpage
+\section{La demostración de Schmidt}\label{sec:schmidt}
+
+\subsection{La idea}
+
+Antes de meternos en las cuentas conviene saber para dónde vamos. La demostración es de naturaleza geométrica y consiste en comparar la curva con una circunferencia:
+\begin{enumerate}[label=\arabic*.]
+    \item Se eligen dos rectas verticales tangentes a la curva \( \alpha \), \( x = -r \) y \( x = r \), que la dejan en el medio. Se considera la circunferencia de radio \( r \) centrada en el origen, que vive en la misma franja.
+    \item A cada punto \( (x(s), y(s)) \) de la curva se le asocia el punto \( (x(s), \bar y(s)) \) de la circunferencia con la misma abscisa.
+    \item Se escriben las dos áreas (la de la curva con el Corolario~\ref{cor:area}, la del círculo a mano), se suman, y aparece un producto escalar al que se le aplica Cauchy--Schwarz. El resto es AM--GM.
+\end{enumerate}
+Para la igualdad hay que ir mirando en qué lugar se usó cada desigualdad. La Figura~\ref{fig:schmidt} resume la construcción.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=1.1]
+        \def\blob{(-2,0) .. controls (-2,1.8) and (-1,3) .. (0.3,2.6) .. controls (1.4,2.2) and (2,1.2) .. (2,0) .. controls (2,-1.5) and (1,-2.4) .. (-0.2,-2.0) .. controls (-1.2,-1.7) and (-2,-1.2) .. cycle}
+        \draw[dashed, mediumgray] (-2,-3.2) -- (-2,3.2) node[above] {$x = -r$};
+        \draw[dashed, mediumgray] (2,-3.2) -- (2,3.2) node[above] {$x = r$};
+        \draw[thick, accentblue] (0,0) circle (2);
+        \draw[thick, darkblue] \blob;
+        \fill (-2,0) circle (1.5pt) node[left] {$\alpha(0)$};
+        \fill (2,0) circle (1.5pt) node[right] {$\alpha(s_1)$};
+        \node[darkblue] at (-1.8,2.6) {$\alpha$};
+        \node[accentblue, right] at (2.3,-1.4) {$x^2 + \bar y^2 = r^2$};
+    \end{tikzpicture}
+    \caption{La curva \( \alpha \) entre las rectas \( x = \pm r \) y la circunferencia de radio \( r \) tangente a ambas.}\label{fig:schmidt}
+\end{figure}
+
+\subsection{La prueba}
+
+\begin{proof}[Demostración del Teorema~\ref{teo:iso} (E.~Schmidt)]
+    Sea \( \alpha(s) = (x(s), y(s)) \) una parametrización por longitud de arco, \( L \)-periódica y orientada positivamente.
+
+    \textbf{Paso 1: elección de las rectas.}
+    La función \( x \) es continua y periódica, así que alcanza su mínimo y su máximo. Y \textbf{no} es constante: de lo contrario \( x' \equiv 0 \), luego \( \abs{y'} = 1 \) y, por continuidad, \( y' \equiv 1 \) o \( y' \equiv -1 \), con lo que \( y \) sería estrictamente monótona,
+    contradiciendo la periodicidad. Trasladando horizontalmente la curva y cambiando el punto inicial (Observación~\ref{obs:invariancia}), podemos suponer que
+    \[
+        x(0) = \min x = -r, \qquad x(s_1) = \max x = r, \qquad \text{con } r > 0 \text{ y } 0 < s_1 < L.
+    \]
+    Las rectas verticales \( x = -r \) y \( x = r \) son tangentes a la curva (en un extremo de \( x \) se tiene \( x' = 0 \), es decir, la tangente es vertical) y la dejan entre ellas (Figura~\ref{fig:schmidt}).
+
+    \textbf{Paso 2: la circunferencia asociada.}
+    Definimos \( \bar y : [0, L] \to \R \) por
+    \[
+        \bar y(s) = \begin{cases}
+            -\sqrt{r^2 - x(s)^2} & \text{si } 0 \leq s \leq s_1, \\
+            +\sqrt{r^2 - x(s)^2} & \text{si } s_1 \leq s \leq L.
+        \end{cases}
+    \]
+    Geométricamente, \( \bar y(s) \) es la altura de la circunferencia sobre la abscisa \( x(s) \): se toma el semicírculo de abajo mientras \( s \in [0, s_1] \) y el de arriba después.
+    Está bien definida y es continua porque \( \abs{x} \leq r \) y \( \sqrt{r^2 - x(s_1)^2} = 0 \). Además, \( x(s)^2 + \bar y(s)^2 = r^2 \) para todo \( s \): el punto \( (x(s), \bar y(s)) \) recorre la circunferencia de radio \( r \).
+    Afirmamos que
+    \[
+        -\int_0^L \bar y(s) \, x'(s) \, \mathrm{d}s = \pi r^2.
+    \]
+    En efecto, sea \( G(u) = \int_{-r}^{u} \sqrt{r^2 - v^2} \, \mathrm{d}v \), que cumple \( G(-r) = 0 \) y \( G(r) = \frac{\pi r^2}{2} \) (área del semidisco). Por la regla de la cadena,
+    \( \frac{\mathrm{d}}{\mathrm{d}s} G(x(s)) = \sqrt{r^2 - x(s)^2} \, x'(s) \), de modo que
+    \begin{align*}
+        -\int_0^L \bar y \, x' \, \mathrm{d}s & = \int_0^{s_1} \sqrt{r^2 - x^2} \, x' \, \mathrm{d}s - \int_{s_1}^{L} \sqrt{r^2 - x^2} \, x' \, \mathrm{d}s \\
+                                              & = \big( G(x(s_1)) - G(x(0)) \big) - \big( G(x(L)) - G(x(s_1)) \big)                                         \\
+                                              & = \frac{\pi r^2}{2} - \left( 0 - \frac{\pi r^2}{2} \right) = \pi r^2,
+    \end{align*}
+    donde usamos \( x(0) = x(L) = -r \) y \( x(s_1) = r \). Observar que esto no es otra cosa que la fórmula del área \( -\int \bar y \, \mathrm{d}x \) aplicada al círculo, pero verificada a mano (sin pasar por Green).
+
+    \textbf{Paso 3: la desigualdad.}
+    Acá viene la idea central. Por el Corolario~\ref{cor:area}, \( A = \int_0^L x \, y' \, \mathrm{d}s \). Sumando con el Paso 2, los dos integrandos se combinan en un producto escalar:
+    \begin{align*}
+        A + \pi r^2 & = \int_0^L \left( x \, y' - \bar y \, x' \right) \mathrm{d}s = \int_0^L \big( x, \bar y \big) \cdot \big( y', -x' \big) \, \mathrm{d}s \\
+                    & \leq \int_0^L \abs{(x, \bar y)} \, \abs{(y', -x')} \, \mathrm{d}s = \int_0^L r \cdot 1 \, \mathrm{d}s = r L,
+    \end{align*}
+    donde usamos el Lema~\ref{lema:cs} en cada punto, \( \abs{(x, \bar y)} = r \) y \( \abs{(y', -x')} = \abs{\alpha'} = 1 \). Aplicando ahora el Lema~\ref{lema:amgm} con \( a = A \) y \( b = \pi r^2 \):
+    \[
+        r \sqrt{\pi A} = \sqrt{A \cdot \pi r^2} \leq \frac{A + \pi r^2}{2} \leq \frac{r L}{2}.
+        \tag{\(\ast\)}\label{eq:schmidt}
+    \]
+    Dividiendo por \( r > 0 \) se obtiene \( \sqrt{\pi A} \leq L/2 \), es decir, \( 4\pi A \leq L^2 \).
+
+    \textbf{Paso 4: el caso de igualdad.}
+    Para ver cuándo vale el signo \( = \) hay que ir mirando en qué lugar se usó cada desigualdad. Supongamos \( L^2 = 4\pi A \). Entonces \( L/2 = \sqrt{\pi A} \) y todas las desigualdades de~\eqref{eq:schmidt} son igualdades. La primera es la desigualdad entre las medias, de donde \( A = \pi r^2 \) (Lema~\ref{lema:amgm}).
+    La segunda dice que \( \int_0^L \big[ r - (x, \bar y) \cdot (y', -x') \big] \mathrm{d}s = 0 \); como el integrando es continuo y no negativo, es idénticamente nulo, y por el caso de igualdad en el Lema~\ref{lema:cs},
+    \[
+        (x, \bar y) = r \, (y', -x') \quad \text{en todo punto, en particular} \quad x = r \, y'.
+        \tag{\(\ast\ast\)}\label{eq:igualdad-x}
+    \]
+    Además \( L^2 = 4\pi A = 4\pi^2 r^2 \), o sea \( L = 2\pi r \).
+
+    Notemos que~\eqref{eq:igualdad-x} es una identidad válida para todo valor del parámetro, de modo que no depende del punto inicial elegido; y que, sin la traslación del Paso 1, se lee
+    \( x - x_0 = r \, y' \), donde \( x_0 \) es el punto medio del rango de \( x \) y \( r \) es la mitad de ese rango.
+
+    Ahora repetimos el argumento con la curva rotada \( \tilde\alpha = (\tilde x, \tilde y) = (y, -x) \), que es la imagen de \( \alpha \) por la rotación de ángulo \( -\pi/2 \): sigue siendo simple, cerrada, parametrizada por longitud de arco y orientada positivamente, y
+    tiene la misma longitud \( L \) y la misma área \( A \). Por lo tanto \( L^2 = 4\pi A \) también para \( \tilde\alpha \), y lo ya demostrado (aplicado a \( \tilde\alpha \)) da \( A = \pi \tilde r^2 \) y \( \tilde x - \tilde x_0 = \tilde r \, \tilde y' \),
+    donde \( \tilde x_0 \) es el punto medio del rango de \( \tilde x = y \) y \( \tilde r \) es la mitad de ese rango. Como \( \tilde y' = -x' \), llamando \( y_0 = \tilde x_0 \) resulta
+    \[
+        y - y_0 = - \tilde r \, x', \qquad \tilde r^2 = \frac{A}{\pi} = r^2 \implies \tilde r = r.
+    \]
+    Por lo tanto, con \( u = x - x_0 \) y \( v = y - y_0 \),
+    \[
+        u' = -\frac{v}{r}, \qquad v' = \frac{u}{r}, \qquad u^2 + v^2 = r^2 \left( x'^2 + y'^2 \right) = r^2.
+    \]
+    Es decir, \( \alpha(s) = (x_0, y_0) + r \big( \cos(s/r + \varphi), \sin(s/r + \varphi) \big) \) para alguna constante \( \varphi \): \( \alpha \) es una circunferencia de centro \( (x_0, y_0) \) y radio \( r \), recorrida en sentido antihorario.
+    La recíproca ya se verificó en la introducción, y con esto queda todo demostrado.
+\end{proof}
+
+\subsection{Una lectura en términos de curvatura}
+
+Para los que vienen del curso, hay una forma muy linda de leer la condición de igualdad.
+
+\begin{observacion}
+    La condición de igualdad \( \alpha - (x_0, y_0) = r (y', -x') = -r N \) se puede leer así: \( \alpha(s) + r N(s) \) es constante, es decir, el centro de curvatura es fijo y la curvatura vale \( 1/r \). En efecto, con las fórmulas de Frenet planas
+    \( T' = \kappa N \), \( N' = -\kappa T \), se tiene \( \big( \alpha + r N \big)' = (1 - r \kappa) T \), que se anula si y solo si \( \kappa = 1/r \). Esto conecta el resultado con la caracterización de las circunferencias como las únicas curvas planas de curvatura constante no nula.
+\end{observacion}
+
+\newpage
+% =====================================================================
+\section{Consecuencias, ejemplos y comentarios}\label{sec:consecuencias}
+
+\subsection{La forma dual}
+
+El Teorema~\ref{teo:iso} se puede leer de dos maneras, según qué se deje fijo: la longitud o el área.
+
+\begin{corolario}[Forma dual]
+    Sea \( \gamma \) una curva cerrada simple regular de longitud \( L \) que encierra un área \( A \). Entonces:
+    \begin{enumerate}[label=(\roman*)]
+        \item \( A \leq \dfrac{L^2}{4\pi} \), con igualdad si y solo si \( \gamma \) es una circunferencia. En otras palabras, entre todas las curvas de longitud \( L \) dada, la circunferencia encierra el área máxima.
+        \item \( L \geq 2\sqrt{\pi A} \), con igualdad si y solo si \( \gamma \) es una circunferencia. En otras palabras, entre todas las curvas que encierran un área \( A \) dada, la circunferencia tiene la longitud mínima.
+    \end{enumerate}
+\end{corolario}
+\begin{proof}
+    Ambas afirmaciones son reformulaciones del Teorema~\ref{teo:iso}: (i) se obtiene dividiendo por \( 4\pi \) y (ii) tomando raíz cuadrada (\( L > 0 \) y \( A > 0 \)).
+\end{proof}
+
+\subsection{Algunos ejemplos}
+
+Veamos cuánto vale \( Q \) en algunos casos concretos. Una aclaración: los polígonos no son curvas \( C^1 \), pero la desigualdad del Teorema~\ref{teo:iso} (o sea, los Pasos 1 a 3 de la prueba) se repite con ajustes menores para curvas regulares a trozos,
+que es el contexto habitual del curso. Ahí el Teorema de Green sigue valiendo.
+
+\begin{ejemplo}[Cociente isoperimétrico de algunas figuras]
+    Calculamos \( Q = L^2/(4\pi A) \) para algunos polígonos regulares.
+    \begin{center}
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{lccc}
+            \toprule
+            Figura                               & \( L \)      & \( A \)                       & \( Q = \dfrac{L^2}{4\pi A} \)              \\
+            \midrule
+            Círculo de radio \( r \)             & \( 2\pi r \) & \( \pi r^2 \)                 & \( 1 \)                                    \\
+            Hexágono regular de lado \( a \)     & \( 6a \)     & \( \frac{3\sqrt{3}}{2} a^2 \) & \( \frac{2\sqrt{3}}{\pi} \approx 1{,}10 \) \\
+            Cuadrado de lado \( a \)             & \( 4a \)     & \( a^2 \)                     & \( \frac{4}{\pi} \approx 1{,}27 \)         \\
+            Triángulo equilátero de lado \( a \) & \( 3a \)     & \( \frac{\sqrt{3}}{4} a^2 \)  & \( \frac{3\sqrt{3}}{\pi} \approx 1{,}65 \) \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    En general, para el \( n \)-ágono regular se tiene \( Q_n = \frac{n}{\pi} \tan \frac{\pi}{n} \), que decrece hacia \( 1 \) cuando \( n \to \infty \), en concordancia con el teorema (cuantos más lados, más se parece a un círculo).
+    Para un rectángulo de lados \( a, b \) se tiene \( Q = \frac{{(a + b)}^2}{\pi a b} \geq \frac{4}{\pi} \) por el Lema~\ref{lema:amgm}, con igualdad si y solo si \( a = b \): entre los rectángulos de perímetro fijo, el cuadrado encierra el área máxima.
+\end{ejemplo}
+
+\subsection{Otros contextos}
+
+Un panorama completo de estas generalizaciones puede encontrarse en~\cite{osserman}.
+
+\begin{observacion}[Otros contextos]
+    Mencionamos, sin demostración, algunas generalizaciones:
+    \begin{itemize}[leftmargin=2em]
+        \item \textbf{Dimensión superior.} Si \( E \subset \R^n \) es un conjunto acotado con frontera suave, entonces
+              \( \operatorname{Per}(E) \geq n \, \omega_n^{1/n} \, \abs{E}^{(n-1)/n} \), donde \( \omega_n \) es el volumen de la bola unitaria, con igualdad si y solo si \( E \) es una bola. Para \( n = 2 \) se recupera \( L \geq 2\sqrt{\pi A} \).
+        \item \textbf{Superficies de curvatura constante.} Si la curvatura de Gauss de la superficie es constante \( K \), vale \( L^2 \geq 4\pi A - K A^2 \) (para la esfera unitaria, \( K = 1 \), y para el plano hiperbólico, \( K = -1 \)), con igualdad para los círculos geodésicos.
+              Por ejemplo, en la esfera unitaria un círculo geodésico de radio \( \rho \) tiene \( L = 2\pi \sin\rho \) y \( A = 2\pi (1 - \cos\rho) \), y se verifica \( 4\pi A - A^2 = 4\pi^2 \sin^2\rho = L^2 \).
+              Para \( K = 0 \) se recupera la desigualdad plana.
+    \end{itemize}
+\end{observacion}
+
+\newpage
+% --- BIBLIOGRAFÍA ---
+\renewcommand{\refname}{Referencias Bibliográficas}
+\addcontentsline{toc}{section}{Referencias Bibliográficas}
+
+\begin{thebibliography}{99}
+    \bibitem{caruso} Caruso, M. I., Tori, C. I. y Zuccalli, M. \textit{Notas de Geometría Diferencial: Curvas, superficies y variedades} (versión parcial y en revisión). Facultad de Ciencias Exactas, UNLP.
+    \bibitem{docarmo} do Carmo, M. P. (2016). \textit{Differential Geometry of Curves and Surfaces} (2nd ed.). Dover. [Capítulo 1: propiedades globales de curvas planas]
+    \bibitem{osserman} Osserman, R. (1978). The isoperimetric inequality. \textit{Bulletin of the American Mathematical Society}, 84(6), 1182--1238.
+\end{thebibliography}
+
+\end{document}
