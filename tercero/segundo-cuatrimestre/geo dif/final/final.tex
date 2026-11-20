@@ -240,7 +240,7 @@ y el área por \( \lambda^2 \). De modo que ambos miembros de \( L^2 \geq 4\pi A
 \]
 no cambia por semejanzas, y el teorema dice que \( Q \geq 1 \), con \( Q = 1 \) solamente para la circunferencia. O sea que \( Q \) es, groseramente, una medida de cuán lejos está una curva (cerrada, simple y regular) de ser un círculo.
 
-Zenodoro, un matemático griego (200 a.C. - 140 a.C.), estudió en su ahora perdido tratado \emph{Sobre las figuras isométricas} este problema, llegando a la conclusión de que ``De todas las figuras sólidas cuyas superficies son iguales, la esfera es la mayor en contenido sólido''. En el siglo XIX, J.~Steiner dio argumentos geométricos de simetrización que
+Zenodoro, un matemático griego (200 a.C. -- 140 a.C.), estudió en su ahora perdido tratado \emph{Sobre las figuras isoperimétricas} este problema, llegando a la conclusión de que ``De todas las figuras sólidas cuyas superficies son iguales, la esfera es la mayor en contenido sólido''. En el siglo XIX, J.~Steiner dio argumentos geométricos de simetrización que
 presuponían la existencia de una curva óptima, laguna que fue salvada más tarde por Weierstrass con métodos del cálculo de variaciones.
 Hay muchísimas demostraciones del teorema (el artículo~\cite{osserman} es un buen recorrido). Acá elegimos la atribuida a \textbf{E.~Schmidt} (ver~\cite{docarmo}), que es corta, elemental, y solo utiliza el teorema de Green junto con la desigualdad de Cauchy--Schwarz.
 
@@ -518,7 +518,7 @@ Para la igualdad hay que ir mirando en qué lugar se usó cada desigualdad. La F
         -\int_0^L \bar y(s) \, x'(s) \, \mathrm{d}s = \pi r^2.
     \]
     En efecto, sea \( G(u) = \int_{-r}^{u} \sqrt{r^2 - v^2} \, \mathrm{d}v \), que cumple \( G(-r) = 0 \) y \( G(r) = \frac{\pi r^2}{2} \) (área del semidisco). Por la regla de la cadena,
-    \( \frac{\mathrm{d}}{\mathrm{d}s} G(x(s)) = \sqrt{r^2 - x(s)^2} \, x'(s) \), de modo que
+    \( \frac{\mathrm{d}}{\mathrm{d}s} G(x(s)) = \sqrt{r^2 - x(s)^2} \, x'(s) \) (observar que \( \bar y \) no es derivable respecto de \( s \) donde \( x(s) = \pm r \), pues allí la circunferencia tiene tangente vertical; pero esto no afecta la cuenta: por el teorema fundamental del cálculo, \( G \) es derivable con \( G'(u) = \sqrt{r^2 - u^2} \), que es continua en todo el cerrado \( [-r, r] \), incluidos los extremos donde vale \( 0 \). Luego \( G \in C^1([-r, r]) \) y, como \( x \) es \( C^1 \) con valores en \( [-r, r] \), la regla de la cadena aplica sin restricciones en todo \( [0, L] \)), de modo que
     \begin{align*}
         -\int_0^L \bar y \, x' \, \mathrm{d}s & = \int_0^{s_1} \sqrt{r^2 - x^2} \, x' \, \mathrm{d}s - \int_{s_1}^{L} \sqrt{r^2 - x^2} \, x' \, \mathrm{d}s \\
                                               & = \big( G(x(s_1)) - G(x(0)) \big) - \big( G(x(L)) - G(x(s_1)) \big)                                         \\
