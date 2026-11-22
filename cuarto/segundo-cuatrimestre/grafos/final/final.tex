@@ -1,0 +1,600 @@
+\documentclass[12pt,a4paper]{article}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+% --- Configuración de Página ---
+\geometry{left=2.8cm, right=2.8cm, top=3.2cm, bottom=3.2cm, headheight=14.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em plus 0.4em minus 0.2em}
+
+% --- Configuración de Hipervínculos ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    citecolor=darkblue,
+    bookmarksnumbered=true
+}
+
+% --- Colores Profesionales ---
+\definecolor{darkblue}{RGB}{0, 51, 102}
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{mediumgray}{RGB}{100, 100, 100}
+\definecolor{accentblue}{RGB}{0, 102, 204}
+
+% --- Encabezados y Pies de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkblue}{\textbf{El teorema de Kirchhoff}}}
+\fancyhead[R]{\textcolor{mediumgray}{Teoría de Grafos}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{darkblue}\hrule width\headwidth height\headrulewidth \kern-\headrulewidth}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Definición de Entornos Matemáticos con Estilo ---
+\newtheoremstyle{profesional}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{darkblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{profesional}
+\newtheorem{teorema}{Teorema}[subsection]
+\newtheorem{lemma}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+
+% --- Estilo para definiciones ---
+\newtheoremstyle{definicion-style}%
+    {0.5em}%
+    {0.5em}%
+    {}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+
+\theoremstyle{definicion-style}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+
+% --- Estilo para observaciones ---
+\newtheoremstyle{observacion-style}%
+    {0.5em}%
+    {0.5em}%
+    {\color{mediumgray}\itshape}%
+    {0pt}%
+    {\textbf{\color{accentblue}}}%
+    {.}%
+    {0.5em}%
+    {\textbf{\thmname{#1}\thmnumber{ #2}\thmnote{ (\textcolor{accentblue}{\textbf{#3}})}}}%
+\theoremstyle{observacion-style}
+\newtheorem{observacion}[teorema]{Observación}
+
+% --- Macros útiles ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\colS}[2]{\operatorname{col}_{#2}(#1)}
+\newcommand{\filS}[2]{\operatorname{fil}_{#2}(#1)}
+
+% --- Configuración de tcolorbox para teoremas ---
+\tcbset{
+    colback=white,
+    colframe=darkblue,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=3pt,
+    right=3pt,
+    top=3pt,
+    bottom=3pt
+}
+
+% --- Estilos de TikZ para grafos ---
+\tikzset{
+    vertex/.style={circle, draw=darkblue, fill=lightgray, thick, inner sep=1pt, minimum size=6.5mm, font=\small},
+    edge/.style={thick, darkblue},
+    directed/.style={edge, -{Stealth[length=2.5mm]}}
+}
+
+% --- Formato de títulos de secciones ---
+\titleformat{\section}
+    {\Large\bfseries\color{darkblue}}
+    {\thesection.}
+    {0.5em}
+    {}
+    [\vspace{0.3em}\noindent\textcolor{darkblue}{\rule{\textwidth}{1.5pt}}]
+
+\titleformat{\subsection}
+    {\large\bfseries\color{accentblue}}
+    {\thesubsection.}
+    {0.5em}
+    {}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{accentblue}}
+    {\thesubsubsection.}
+    {0.5em}
+    {}
+
+\begin{document}
+
+% --- PORTADA PROFESIONAL ---
+\thispagestyle{empty}
+\begin{center}
+    \includegraphics[width=4cm]{logo_unlp.png}
+
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{0.5cm}
+    {\large \textbf{UNIVERSIDAD NACIONAL DE LA PLATA}}\\
+    {\normalsize Facultad de Ciencias Exactas}\\
+    {\normalsize Departamento de Matemática}\\
+
+    \vspace{0.5cm}
+    \textcolor{darkblue}{\rule{\linewidth}{2pt}}
+
+    \vspace{2.5cm}
+
+    {\Huge \textbf{\textcolor{darkblue}{El teorema}}}\\[0.3cm]
+    {\Huge \textbf{\textcolor{darkblue}{de Kirchhoff}}}\\[0.3cm]
+    {\Large \textcolor{mediumgray}{(\textit{Matrix Tree Theorem})}}\\
+
+    \vspace{3cm}
+
+    {\large \textbf{Examen Final}}\\
+    {\normalsize Teoría de Grafos}
+
+    \vspace{2.5cm}
+
+    {\normalsize
+        \renewcommand{\arraystretch}{1.3} % Da un poco más de aire a las filas
+        \begin{tabular}{>{\bfseries\color{darkblue}}l l}
+            Autor:   & Jordi Bustos               \\
+            Fecha:   & \today                     \\
+            Carrera: & Licenciatura en Matemática
+        \end{tabular}
+    }
+
+    \vfill
+
+    {\footnotesize \textcolor{mediumgray}{%
+            Este documento presenta el teorema de Kirchhoff para contar árboles generadores \\
+            junto con los resultados preliminares necesarios para demostrarlo. \\
+        }}
+
+    \vspace{1cm}
+\end{center}
+
+\newpage
+
+% --- ÍNDICE ---
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+% --- CUERPO DEL TRABAJO ---
+\section{Introducción}
+
+\subsection{Contar árboles generadores}
+
+Dado un grafo conexo, ¿de cuántas maneras se lo puede ``podar'' hasta dejarlo como un árbol que pase por todos sus vértices? Un grafo con \( m \) aristas tiene \( 2^m \) subconjuntos de aristas, y en principio habría que revisar
+cada uno de ellos, así que a priori la cuenta parece una pesadilla combinatoria. Sin embargo, existe una fórmula \emph{determinantal} que reduce todo a calcular el determinante de una matriz de tamaño \( (n-1) \times (n-1) \). Es el teorema que vamos a demostrar.
+
+La fórmula se debe a G.~Kirchhoff, quien la obtuvo en 1847 al estudiar corrientes en redes eléctricas (ver~\cite{kirchhoff}), y por eso lleva su nombre. En inglés se la conoce como \emph{Matrix Tree Theorem}, ya que relaciona matrices con árboles.
+
+\begin{teorema}[Kirchhoff]\label{teo:kirchhoff}
+    Sea \( G \) un grafo simple con \( n \geq 2 \) vértices y sea \( L \) su matriz laplaciana. Si \( L(r) \) denota la matriz que resulta de eliminar la fila y la columna correspondientes a un vértice cualquiera \( r \), entonces
+    \[
+        \tau(G) = \det L(r),
+    \]
+    donde \( \tau(G) \) es la cantidad de árboles generadores de \( G \).
+\end{teorema}
+
+Todavía no definimos la matriz laplaciana, pero eso viene enseguida. Un detalle llamativo es que el resultado \textbf{no depende} del vértice \( r \) que se elimine.
+
+La demostración que presentamos es la clásica (ver~\cite{west}), y se apoya en tres ingredientes:
+\begin{enumerate}[label=\arabic*.]
+    \item la factorización \( L = B B^{T} \), donde \( B \) es la matriz de incidencia orientada del grafo;
+    \item la fórmula de Cauchy--Binet, que expresa el determinante de un producto de matrices rectangulares como una suma de productos de menores;
+    \item el hecho de que los menores maximales de \( B \) valen \( \pm 1 \) o \( 0 \), según el conjunto de aristas correspondiente sea o no un árbol generador.
+\end{enumerate}
+Todo lo necesario se desarrolla en este texto, que es autocontenido.
+
+\subsection{Notaciones básicas}
+
+Para no aburrir, no vamos a definir todos los símbolos habituales. A continuación va una lista de cosas necesarias:
+
+\begin{itemize}[leftmargin=2em]
+    \item Un \emph{grafo} \( G = (V, E) \) es simple (sin lazos ni aristas múltiples) y finito. Escribimos \( n = \abs{V} \), \( m = \abs{E} \), y \( V = \{1, \ldots, n\} \) cuando haga falta numerar los vértices.
+    \item Una arista con extremos \( u \) y \( v \) se escribe \( uv \), y \( \deg(v) \) es el grado de \( v \), o sea, la cantidad de aristas incidentes en \( v \).
+    \item Dado \( S \subseteq E \), \( (V, S) \) es el subgrafo generador de \( G \) que tiene a \( S \) como conjunto de aristas.
+    \item Las matrices tienen entradas reales. \( I \) es la identidad, \( J \) la matriz de unos y \( \mathbf{1} \) el vector de unos (el tamaño se deduce del contexto).
+    \item Usamos libremente las propiedades básicas del determinante: es multilineal y alternante en las filas, \( \det M^{T} = \det M \), se puede desarrollar por una fila, y es nulo si las filas son linealmente dependientes.
+    \item \( \tau(G) \) es la cantidad de árboles generadores de \( G \).
+\end{itemize}
+
+\newpage
+% =====================================================================
+\section{Preliminares}\label{sec:prelim}
+
+Esta sección es de preliminares. Nada de lo que sigue es profundo, pero conviene tenerlo enunciado y probado desde el principio, para no enturbiar la prueba principal.
+
+\subsection{Árboles generadores}
+
+\begin{definicion}[Camino, ciclo, árbol]
+    Sea \( G = (V, E) \) un grafo.
+    \begin{enumerate}[label=\arabic*.]
+        \item Un \textbf{camino} es una sucesión de vértices distintos \( v_0, v_1, \ldots, v_k \) tal que \( v_{i-1}v_i \in E \) para todo \( i \).
+        \item Un \textbf{ciclo} es una sucesión \( v_0, v_1, \ldots, v_k = v_0 \) con \( k \geq 3 \), con \( v_0, \ldots, v_{k-1} \) distintos y \( v_{i-1}v_i \in E \) para todo \( i \).
+        \item \( G \) es \textbf{conexo} si entre cada par de vértices hay un camino.
+        \item Un \textbf{árbol} es un grafo conexo y sin ciclos, y una \textbf{hoja} es un vértice de grado \( 1 \).
+    \end{enumerate}
+\end{definicion}
+
+\begin{definicion}[Árbol generador]
+    Un \textbf{árbol generador} de \( G = (V, E) \) es un subconjunto \( S \subseteq E \) tal que \( (V, S) \) es un árbol. Notamos \( \tau(G) \) a la cantidad de árboles generadores de \( G \).
+\end{definicion}
+
+Para el teorema vamos a necesitar algunos hechos básicos sobre árboles. Aunque son conocidos, no nos cuesta nada demostrarlos.
+
+\begin{lemma}[Propiedades básicas de los árboles]\label{lema:arboles}
+    Sea \( T \) un árbol con \( n \geq 2 \) vértices.
+    \begin{enumerate}[label=(\alph*)]
+        \item \( T \) tiene al menos dos hojas.
+        \item Si \( \ell \) es una hoja de \( T \), entonces \( T - \ell \) es un árbol.
+        \item \( T \) tiene exactamente \( n - 1 \) aristas.
+        \item Todo grafo conexo con \( n \) vértices y \( n - 1 \) aristas es un árbol.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Sea \( P = v_0 v_1 \cdots v_k \) un camino de longitud máxima en \( T \); como \( T \) es conexo y \( n \geq 2 \), \( k \geq 1 \). Un vecino de \( v_0 \) fuera de \( P \) permitiría extender \( P \), y un vecino de \( v_0 \) en \( P \) distinto de \( v_1 \) produciría un ciclo. Luego \( \deg(v_0) = 1 \), y análogamente \( \deg(v_k) = 1 \). Así, \( v_0 \neq v_k \) son dos hojas.
+        \item \( T - \ell \) no tiene ciclos por ser subgrafo de \( T \). Además es conexo: un camino entre dos vértices distintos de \( \ell \) no puede pasar por \( \ell \), ya que un vértice interior de un camino tiene al menos dos vecinos y \( \ell \) tiene uno solo.
+        \item Por inducción en \( n \). Si \( n = 2 \), \( T \) es conexo con dos vértices, luego tiene \( 1 \) arista. Si \( n \geq 3 \), por (a) existe una hoja \( \ell \) y por (b) \( T - \ell \) es un árbol con \( n - 1 \) vértices, que por hipótesis inductiva tiene \( n - 2 \) aristas. Como \( T \) tiene una arista más que \( T - \ell \), tiene \( n - 1 \).
+        \item Sea \( G \) conexo con \( n \) vértices y \( n - 1 \) aristas. Si \( G \) tuviera un ciclo, al quitar una arista del ciclo el grafo seguiría siendo conexo (cualquier camino que usara esa arista puede reemplazarla por el resto del ciclo). Repitiendo este procedimiento mientras haya ciclos se llega a un subgrafo generador conexo y sin ciclos, es decir, un árbol con \( n \) vértices y estrictamente menos de \( n - 1 \) aristas, lo que contradice (c). Por lo tanto \( G \) no tiene ciclos y es un árbol.
+    \end{enumerate}
+\end{proof}
+
+\begin{corolario}\label{cor:subconjuntos}
+    Sea \( G = (V, E) \) un grafo con \( n \geq 2 \) vértices y sea \( S \subseteq E \) con \( \abs{S} = n - 1 \). Entonces \( S \) es un árbol generador de \( G \) o bien \( (V, S) \) no es conexo. Además, todo árbol generador de \( G \) tiene exactamente \( n - 1 \) aristas.
+\end{corolario}
+\begin{proof}
+    La primera afirmación es la contrarrecíproca del Lema~\ref{lema:arboles}(d), y la segunda es el Lema~\ref{lema:arboles}(c).
+\end{proof}
+
+En otras palabras: para un conjunto de \( n - 1 \) aristas, ``ser árbol generador'' es lo mismo que ``ser conexo'', y no hay una tercera opción.
+
+\subsection{Matrices asociadas a un grafo}
+
+\begin{definicion}[Matriz laplaciana]
+    Sea \( G \) un grafo con \( V = \{1, \ldots, n\} \). La \textbf{matriz de adyacencia} es la matriz \( A \in \R^{n \times n} \) con \( A_{uv} = 1 \) si \( uv \in E \) y \( A_{uv} = 0 \) en otro caso. La \textbf{matriz de grados} es la matriz diagonal \( D = \operatorname{diag}\big(\deg(1), \ldots, \deg(n)\big) \). La \textbf{matriz laplaciana} de \( G \) es
+    \[
+        L = D - A.
+    \]
+    Para \( r \in V \), notamos \( L(r) \in \R^{(n-1) \times (n-1)} \) a la matriz que se obtiene de \( L \) eliminando la fila \( r \) y la columna \( r \).
+\end{definicion}
+
+Concretamente, \( L_{uu} = \deg(u) \), \( L_{uv} = -1 \) si \( uv \in E \) y \( L_{uv} = 0 \) en otro caso. Observar que cada fila de \( L \) suma cero, es decir, \( L \mathbf{1} = 0 \).
+
+\begin{definicion}[Matriz de incidencia orientada]\label{def:incidencia}
+    Una \textbf{orientación} de \( G \) es una elección, para cada arista, de uno de sus extremos como \emph{origen} y del otro como \emph{destino}. Dada una orientación, la \textbf{matriz de incidencia} \( B \in \R^{n \times m} \) (con filas indexadas por los vértices y columnas por las aristas) tiene entradas
+    \[
+        B_{v,e} = \begin{cases}
+            +1 & \text{si } v \text{ es el origen de } e,  \\
+            -1 & \text{si } v \text{ es el destino de } e, \\
+            0  & \text{si } v \text{ no es extremo de } e.
+        \end{cases}
+    \]
+    Para \( r \in V \), notamos \( B_r \in \R^{(n-1) \times m} \) a la matriz que se obtiene de \( B \) eliminando la fila \( r \).
+\end{definicion}
+
+Cada columna de \( B \) tiene exactamente una entrada \( +1 \), una entrada \( -1 \) y el resto ceros. La orientación es completamente arbitraria: la usamos como andamio y al final desaparece.
+
+\begin{lemma}[Factorización de la laplaciana]\label{lema:LBBt}
+    Para cualquier orientación de \( G \), vale \( L = B B^{T} \). En consecuencia, para todo \( r \in V \) vale \( L(r) = B_r B_r^{T} \).
+\end{lemma}
+\begin{proof}
+    Para \( u, v \in V \),
+    \[
+        (B B^{T})_{uv} = \sum_{e \in E} B_{u,e} B_{v,e}.
+    \]
+    Si \( u = v \), cada término es \( B_{u,e}^2 \), que vale \( 1 \) si \( u \) es extremo de \( e \) y \( 0 \) si no; la suma es \( \deg(u) = L_{uu} \). Si \( u \neq v \), el producto \( B_{u,e} B_{v,e} \) es no nulo sólo si \( e \) tiene por extremos a \( u \) y a \( v \), es decir, \( e = uv \); en ese caso uno de ellos es el origen y el otro el destino, así que el producto vale \( -1 \). Como \( G \) es simple hay a lo sumo una arista \( uv \), y la suma vale \( -A_{uv} = L_{uv} \).
+
+    Para la segunda afirmación, las entradas de \( B_r B_r^{T} \) son las mismas sumas \( \sum_{e} B_{u,e}B_{v,e} \), pero con \( u, v \neq r \); estas son exactamente las entradas de \( L(r) \).
+\end{proof}
+
+\subsection{La fórmula de Cauchy--Binet}
+
+Para una matriz \( M \in \R^{k \times m} \) y un subconjunto \( S \subseteq \{1, \ldots, m\} \) con \( \abs{S} = k \), notamos \( \colS{M}{S} \in \R^{k \times k} \) a la submatriz formada por las columnas de \( M \) con índice en \( S \) (en orden creciente).
+Análogamente, para \( N \in \R^{m \times k} \), \( \filS{N}{S} \in \R^{k \times k} \) es la submatriz formada por las filas de \( N \) con índice en \( S \). Observar que \( \filS{(M^{T})}{S} = \big( \colS{M}{S} \big)^{T} \).
+
+\begin{teorema}[Cauchy--Binet]\label{teo:cb}
+    Sean \( M \in \R^{k \times m} \) y \( N \in \R^{m \times k} \). Entonces
+    \[
+        \det(M N) = \sum_{\substack{S \subseteq \{1,\ldots,m\} \\ \abs{S} = k}} \det\big( \colS{M}{S} \big) \, \det\big( \filS{N}{S} \big).
+    \]
+    En particular, si \( m < k \) la suma es vacía y \( \det(MN) = 0 \).
+\end{teorema}
+\begin{proof}
+    Por la definición de determinante,
+    \[
+        \det(MN) = \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} (MN)_{i,\sigma(i)}
+        = \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} \sum_{l=1}^{m} M_{i l} N_{l,\sigma(i)}.
+    \]
+    Distribuyendo el producto de sumas aparece una suma sobre todas las funciones \( f : \{1,\ldots,k\} \to \{1,\ldots,m\} \):
+    \[
+        \det(MN) = \sum_{f} \left( \prod_{i=1}^{k} M_{i, f(i)} \right) \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} N_{f(i),\sigma(i)}
+        = \sum_{f} \left( \prod_{i=1}^{k} M_{i, f(i)} \right) \det(N_f),
+    \]
+    donde \( N_f \in \R^{k \times k} \) es la matriz cuya fila \( i \) es la fila \( f(i) \) de \( N \).
+
+    Si \( f \) no es inyectiva, \( N_f \) tiene dos filas iguales y \( \det(N_f) = 0 \). Si \( f \) es inyectiva, su imagen es un conjunto \( S = \{s_1 < \cdots < s_k\} \) y \( f(i) = s_{\pi(i)} \) para una única permutación \( \pi \in S_k \). Entonces \( N_f \) se obtiene de \( \filS{N}{S} \) permutando sus filas según \( \pi \), de modo que \( \det(N_f) = \operatorname{sgn}(\pi) \det\big(\filS{N}{S}\big) \). Agrupando las funciones inyectivas según su imagen \( S \),
+    \[
+        \begin{aligned}
+            \det(MN) & = \sum_{\abs{S} = k} \det\big(\filS{N}{S}\big) \sum_{\pi \in S_k} \operatorname{sgn}(\pi) \prod_{i=1}^{k} M_{i, s_{\pi(i)}} \\
+                     & = \sum_{\abs{S} = k} \det\big(\filS{N}{S}\big) \det\big(\colS{M}{S}\big),
+        \end{aligned}
+    \]
+    pues \( \big(\colS{M}{S}\big)_{i,j} = M_{i,s_j} \) y la suma interna es justamente el determinante de \( \colS{M}{S} \).
+
+    Si \( m < k \) no existen funciones inyectivas, luego todos los términos se anulan.
+\end{proof}
+
+\newpage
+% =====================================================================
+\section{La demostración}\label{sec:demo}
+
+\subsection{La idea}
+
+Antes de meternos en las cuentas conviene saber para dónde vamos. La demostración es de naturaleza algebraica y consiste en ``traducir'' el conteo de árboles a una suma de cuadrados:
+\begin{enumerate}[label=\arabic*.]
+    \item Se fija una orientación de \( G \) y un vértice \( r \). Por el Lema~\ref{lema:LBBt}, \( L(r) = B_r B_r^{T} \).
+    \item Cauchy--Binet expresa \( \det L(r) \) como una suma, sobre los subconjuntos \( S \) de \( n - 1 \) aristas, de \( \det\big(\colS{B_r}{S}\big)^2 \).
+    \item Cada uno de esos determinantes vale \( \pm 1 \) si \( S \) es un árbol generador y \( 0 \) en caso contrario, así que la suma cuenta exactamente los árboles generadores.
+\end{enumerate}
+La Figura~\ref{fig:idea} resume el esquema.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[every node/.style={font=\small}]
+        \node[draw=darkblue, rounded corners=2pt, thick, inner sep=5pt] (a) at (0,0) {\( \tau(G) \)};
+        \node[draw=darkblue, rounded corners=2pt, thick, inner sep=5pt] (b) at (4.8,0) {\( \displaystyle \sum_{S} \det\big(\colS{B_r}{S}\big)^2 \)};
+        \node[draw=darkblue, rounded corners=2pt, thick, inner sep=5pt] (c) at (9.6,0) {\( \det L(r) \)};
+        \draw[-{Stealth}, accentblue, thick] (a) -- node[above] {\scriptsize Lema~\ref{lema:unimod}} (b);
+        \draw[-{Stealth}, accentblue, thick] (b) -- node[above] {\scriptsize Cauchy--Binet} (c);
+    \end{tikzpicture}
+    \caption{Sketch of proof: ambos miembros de \( \tau(G) = \det L(r) \) se comparan con una suma sobre subconjuntos de \( n - 1 \) aristas.}\label{fig:idea}
+\end{figure}
+
+\subsection{Los menores maximales de la matriz de incidencia}
+
+Fijemos una orientación de \( G \) y un vértice \( r \in V \). Recordemos que \( B_r \) tiene \( n - 1 \) filas, de modo que para \( S \subseteq E \) con \( \abs{S} = n - 1 \), \( \colS{B_r}{S} \) es una matriz cuadrada de tamaño \( n - 1 \).
+
+\begin{lemma}[Unimodularidad]\label{lema:unimod}
+    Sea \( G \) un grafo con \( n \geq 2 \) vértices y sea \( S \subseteq E \) con \( \abs{S} = n - 1 \). Entonces
+    \[
+        \det \colS{B_r}{S} = \begin{cases}
+            \pm 1 & \text{si } S \text{ es un árbol generador de } G, \\
+            0     & \text{en otro caso.}
+        \end{cases}
+    \]
+\end{lemma}
+\begin{proof}
+    \textbf{Caso 1: \( S \) no es un árbol generador.} Por el Corolario~\ref{cor:subconjuntos}, \( (V, S) \) no es conexo, así que tiene al menos dos componentes conexas y alguna de ellas, digamos \( C \subseteq V \), no contiene a \( r \).
+    Veamos que la suma de las filas de \( \colS{B_r}{S} \) indexadas por los vértices de \( C \) (que existen en \( B_r \) porque \( r \notin C \)) es nula.
+    Sea \( e \in S \). Como \( C \) es una componente conexa de \( (V, S) \), o bien ambos extremos de \( e \) están en \( C \), y entonces contribuyen \( +1 \) y \( -1 \) a la suma en la columna \( e \), o bien ninguno lo está y no contribuyen. En ambos casos la suma en la columna \( e \) es \( 0 \).
+    Como \( C \neq \emptyset \), esto da una combinación lineal no trivial de filas igual a cero, y \( \det \colS{B_r}{S} = 0 \).
+
+    \textbf{Caso 2: \( S \) es un árbol generador.} Probaremos, por inducción en \( n \geq 2 \), una afirmación un poco más general:
+    \begin{quote}
+        \emph{Si \( T \) es un árbol con \( n \) vértices, con una orientación cualquiera, y \( r \) es un vértice de \( T \), la matriz cuadrada de tamaño \( n - 1 \) cuyas filas son las de los vértices \( v \neq r \) y cuyas columnas son las de las aristas de \( T \) (en cualquier orden) tiene determinante \( \pm 1 \).}
+    \end{quote}
+    (El orden de filas y columnas sólo afecta el signo.)
+
+    Si \( n = 2 \), la matriz es \( 1 \times 1 \) y su única entrada es \( \pm 1 \). Si \( n \geq 3 \), por el Lema~\ref{lema:arboles}(a) \( T \) tiene al menos dos hojas, así que existe una hoja \( \ell \neq r \).
+    La fila de \( \ell \) tiene una única entrada no nula, igual a \( \pm 1 \), ubicada en la columna de la única arista \( e \) incidente a \( \ell \). Desarrollando el determinante por esta fila,
+    \[
+        \det = \pm \det M',
+    \]
+    donde \( M' \) es la matriz que resulta de eliminar la fila \( \ell \) y la columna \( e \). Pero \( M' \) es exactamente la matriz del mismo tipo asociada al árbol \( T - \ell \) (Lema~\ref{lema:arboles}(b)), que tiene \( n - 1 \) vértices, con la orientación heredada y el mismo vértice \( r \).
+    Por hipótesis inductiva, \( \det M' = \pm 1 \), y por lo tanto \( \det = \pm 1 \).
+\end{proof}
+
+\subsection{La prueba del teorema}
+
+\begin{proof}[Demostración del Teorema~\ref{teo:kirchhoff} (Kirchhoff)]
+    Fijemos una orientación arbitraria de \( G \) y un vértice \( r \). Por el Lema~\ref{lema:LBBt}, \( L(r) = B_r B_r^{T} \), con \( B_r \in \R^{(n-1) \times m} \).
+    Aplicando la fórmula de Cauchy--Binet (Teorema~\ref{teo:cb}) con \( M = B_r \) y \( N = B_r^{T} \), y notando que \( \filS{(B_r^{T})}{S} = \big(\colS{B_r}{S}\big)^{T} \),
+    \[
+        \det L(r) = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} \det\big(\colS{B_r}{S}\big) \det\big(\colS{B_r}{S}\big)^{T} = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} \det\big(\colS{B_r}{S}\big)^{2}.
+    \]
+    (Si \( m < n - 1 \) la suma es vacía y vale \( 0 \); en ese caso \( G \) no tiene árboles generadores, pues estos necesitarían \( n - 1 \) aristas.)
+
+    Por el Lema~\ref{lema:unimod}, el sumando correspondiente a \( S \) es \( (\pm 1)^2 = 1 \) si \( S \) es un árbol generador y \( 0 \) en caso contrario. Como por el Corolario~\ref{cor:subconjuntos} todo árbol generador tiene exactamente \( n - 1 \) aristas, cada árbol generador aparece exactamente una vez en la suma. Por lo tanto,
+    \[
+        \det L(r) = \big| \{ S \subseteq E : S \text{ es un árbol generador de } G \} \big| = \tau(G),
+    \]
+    y como \( r \) era arbitrario, el resultado vale para todo vértice.
+\end{proof}
+
+Observemos que la demostración nunca usa la orientación más allá de la columna que le toca a cada arista: la orientación es un andamio que desaparece al final.
+
+\begin{observacion}
+    El mismo argumento vale para multigrafos sin lazos, reemplazando \( A_{uv} \) por la cantidad de aristas entre \( u \) y \( v \): en ese caso \( \tau(G) \) cuenta los árboles generadores como subconjuntos de aristas, distinguiendo las aristas paralelas.
+\end{observacion}
+
+\newpage
+% =====================================================================
+\section{Ejemplos y consecuencias}\label{sec:consecuencias}
+
+\subsection{Un ejemplo a mano}
+
+Para ver las piezas funcionando juntas, calculemos todo en un grafo chico.
+
+\begin{ejemplo}\label{ej:diamante}
+    Sea \( G \) el grafo con vértices \( \{1,2,3,4\} \) y aristas \( e_1 = 12 \), \( e_2 = 13 \), \( e_3 = 23 \), \( e_4 = 24 \), \( e_5 = 34 \) (es \( K_4 \) sin la arista \( 14 \)), orientadas como indica la Figura~\ref{fig:diamante}.
+
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \node[vertex] (v1) at (0,0) {1};
+            \node[vertex] (v2) at (2.2,1.5) {2};
+            \node[vertex] (v3) at (2.2,-1.5) {3};
+            \node[vertex] (v4) at (4.4,0) {4};
+            \draw[directed] (v1) -- node[above left] {\( e_1 \)} (v2);
+            \draw[directed] (v1) -- node[below left] {\( e_2 \)} (v3);
+            \draw[directed] (v2) -- node[left] {\( e_3 \)} (v3);
+            \draw[directed] (v2) -- node[above right] {\( e_4 \)} (v4);
+            \draw[directed] (v3) -- node[below right] {\( e_5 \)} (v4);
+        \end{tikzpicture}
+        \caption{El grafo \( K_4 \) sin la arista \( 14 \), con una orientación de sus aristas.}\label{fig:diamante}
+    \end{figure}
+
+    Las matrices de incidencia y laplaciana son
+    \[
+        B = \begin{pmatrix}
+            1  & 1  & 0  & 0  & 0  \\
+            -1 & 0  & 1  & 1  & 0  \\
+            0  & -1 & -1 & 0  & 1  \\
+            0  & 0  & 0  & -1 & -1
+        \end{pmatrix},
+        \qquad
+        L = \begin{pmatrix}
+            2  & -1 & -1 & 0  \\
+            -1 & 3  & -1 & -1 \\
+            -1 & -1 & 3  & -1 \\
+            0  & -1 & -1 & 2
+        \end{pmatrix},
+    \]
+    y se verifica directamente que \( L = B B^{T} \). Tomando \( r = 4 \),
+    \[
+        \det L(4) = \det \begin{pmatrix}
+            2  & -1 & -1 \\
+            -1 & 3  & -1 \\
+            -1 & -1 & 3
+        \end{pmatrix}
+        = 2 (9 - 1) + (-3 - 1) - (1 + 3) = 8.
+    \]
+    En efecto, de los \( \binom{5}{3} = 10 \) subconjuntos de tres aristas, sólo \( \{e_1,e_2,e_3\} \) y \( \{e_3,e_4,e_5\} \) forman un ciclo (un triángulo), y los otros \( 8 \) son árboles generadores.
+
+    Para ilustrar el Lema~\ref{lema:unimod}, con \( r = 4 \) (se elimina la última fila de \( B \)): para \( S = \{e_1, e_2, e_4\} \), que es un árbol generador,
+    \[
+        \det \begin{pmatrix}
+            1  & 1  & 0 \\
+            -1 & 0  & 1 \\
+            0  & -1 & 0
+        \end{pmatrix} = 1,
+    \]
+    mientras que para \( S = \{e_1, e_2, e_3\} \), que no es árbol (el vértice \( 4 \) queda aislado), la suma de las tres filas es nula y el determinante es \( 0 \).
+\end{ejemplo}
+
+\subsection{La fórmula de Cayley}
+
+El ejemplo más famoso de aplicación es el conteo de árboles con vértices etiquetados.
+
+\begin{corolario}[Fórmula de Cayley]\label{cor:cayley}
+    El grafo completo \( K_n \) tiene \( n^{n-2} \) árboles generadores; equivalentemente, hay \( n^{n-2} \) árboles con vértices etiquetados \( 1, \ldots, n \) (ver~\cite{cayley}).
+\end{corolario}
+\begin{proof}
+    Para \( K_n \), \( D = (n-1) I \) y \( A = J - I \), luego \( L = nI - J \) y \( L(r) = n I_{n-1} - J_{n-1} \).
+    La matriz \( J_{n-1} \) satisface \( J_{n-1}\mathbf{1} = (n-1)\mathbf{1} \), y \( J_{n-1} w = 0 \) para todo \( w \) en el subespacio \( W = \{ w \in \R^{n-1} : w_1 + \cdots + w_{n-1} = 0 \} \), de dimensión \( n - 2 \).
+    Como \( \R^{n-1} = \langle \mathbf{1} \rangle \oplus W \) (pues \( \mathbf{1} \notin W \)), la matriz \( n I - J_{n-1} \) actúa como la multiplicación por \( n - (n-1) = 1 \) sobre \( \langle \mathbf{1} \rangle \) y por \( n \) sobre \( W \). Entonces
+    \[
+        \det L(r) = 1 \cdot n^{n-2} = n^{n-2},
+    \]
+    y el resultado se sigue del Teorema~\ref{teo:kirchhoff}.
+\end{proof}
+
+Es notable que el Teorema~\ref{teo:kirchhoff} permita obtener la fórmula de Cayley con tan poco trabajo; la demostración clásica de Prüfer, por ejemplo, es de naturaleza muy distinta (biyectiva, en lugar de algebraica).
+
+\subsection{Otro ejemplo: la rueda}
+
+\begin{ejemplo}[La rueda de cinco vértices]
+    Sea \( G \) el grafo formado por un vértice central \( v \) adyacente a los cuatro vértices \( u_1, u_2, u_3, u_4 \) de un ciclo \( u_1u_2u_3u_4u_1 \) (Figura~\ref{fig:rueda}).
+
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \node[vertex] (v) at (0,0) {\( v \)};
+            \node[vertex] (u1) at (45:1.9) {\( u_1 \)};
+            \node[vertex] (u2) at (135:1.9) {\( u_2 \)};
+            \node[vertex] (u3) at (225:1.9) {\( u_3 \)};
+            \node[vertex] (u4) at (315:1.9) {\( u_4 \)};
+            \draw[edge] (u1) -- (u2) -- (u3) -- (u4) -- (u1);
+            \foreach \i in {1,2,3,4} { \draw[edge] (v) -- (u\i); }
+        \end{tikzpicture}
+        \caption{La rueda de cinco vértices.}\label{fig:rueda}
+    \end{figure}
+
+    Eliminando la fila y la columna de \( v \), se obtiene \( L(v) = 3 I_4 - A(C_4) \), es decir,
+    \[
+        L(v) = \begin{pmatrix}
+            3  & -1 & 0  & -1 \\
+            -1 & 3  & -1 & 0  \\
+            0  & -1 & 3  & -1 \\
+            -1 & 0  & -1 & 3
+        \end{pmatrix}.
+    \]
+    Los vectores \( (1,1,1,1) \), \( (1,-1,1,-1) \), \( (1,0,-1,0) \) y \( (0,1,0,-1) \) forman una base de \( \R^4 \) y son autovectores de \( A(C_4) \) con autovalores \( 2, -2, 0, 0 \), respectivamente. Por lo tanto los autovalores de \( L(v) \) son \( 1, 5, 3, 3 \) y
+    \[
+        \tau(G) = \det L(v) = 1 \cdot 5 \cdot 3 \cdot 3 = 45.
+    \]
+\end{ejemplo}
+
+\subsection{Versión espectral y otros comentarios}
+
+\begin{observacion}[Versión espectral]
+    Sean \( 0 = \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n \) los autovalores de \( L \) (es simétrica y semidefinida positiva, pues \( L = BB^{T} \); además \( L\mathbf{1} = 0 \)).
+    El coeficiente de \( x \) en \( \det(xI - L) = \prod_i (x - \lambda_i) \) es, por un lado, \( (-1)^{n-1} \lambda_2 \lambda_3 \cdots \lambda_n \) (pues \( \lambda_1 = 0 \)) y, por otro, \( (-1)^{n-1} \) por la suma de los menores principales de orden \( n - 1 \) de \( L \), que son los \( \det L(r) = \tau(G) \) con \( r = 1, \ldots, n \). Luego
+    \[
+        \tau(G) = \frac{1}{n} \, \lambda_2 \lambda_3 \cdots \lambda_n.
+    \]
+    Por ejemplo, \( L(K_n) = nI - J \) tiene autovalores \( 0 \) y \( n \) (con multiplicidad \( n - 1 \)), lo que reproduce \( \tau(K_n) = n^{n-1}/n = n^{n-2} \).
+\end{observacion}
+
+\begin{observacion}[Otros contextos]
+    Mencionamos, sin demostración, algunas generalizaciones:
+    \begin{itemize}[leftmargin=2em]
+        \item \textbf{Grafos con pesos.} Si cada arista \( e \) tiene un peso \( w(e) > 0 \) y se define \( L \) con \( A_{uv} = w(uv) \) y \( D_{uu} = \sum_{v} A_{uv} \), entonces \( \det L(r) = \sum_{T} \prod_{e \in T} w(e) \), donde la suma recorre los árboles generadores \( T \) de \( G \). Se recupera \( \tau(G) \) tomando todos los pesos iguales a \( 1 \).
+        \item \textbf{Grafos dirigidos.} Existe una versión (el teorema de Tutte) que cuenta arborescencias orientadas hacia una raíz fija, usando la matriz laplaciana dirigida.
+        \item \textbf{Redes eléctricas.} Es el contexto original de Kirchhoff~\cite{kirchhoff}: las resistencias efectivas de una red se pueden expresar como cocientes de cantidades \( \tau \) de la red y de la red con dos nodos identificados.
+    \end{itemize}
+\end{observacion}
+
+\newpage
+% --- BIBLIOGRAFÍA ---
+\renewcommand{\refname}{Referencias Bibliográficas}
+\addcontentsline{toc}{section}{Referencias Bibliográficas}
+
+\begin{thebibliography}{99}
+    \bibitem{cayley} Cayley, A. (1889). A theorem on trees. \textit{Quarterly Journal of Pure and Applied Mathematics}, 23, 376--378.
+    \bibitem{kirchhoff} Kirchhoff, G. (1847). Über die Auflösung der Gleichungen, auf welche man bei der Untersuchung der linearen Vertheilung galvanischer Ströme geführt wird. \textit{Annalen der Physik und Chemie}, 72, 497--508.
+    \bibitem{west} West, D. B. (2001). \textit{Introduction to Graph Theory} (2nd ed.). Prentice Hall. [Sección 2.2: Matrix Tree Theorem]
+\end{thebibliography}
+
+\end{document}
