@@ -284,7 +284,7 @@ Para el teorema vamos a necesitar algunos hechos básicos sobre árboles. Aunque
     Sea \( G = (V, E) \) un grafo con \( n \geq 2 \) vértices y sea \( S \subseteq E \) con \( \abs{S} = n - 1 \). Entonces \( S \) es un árbol generador de \( G \) o bien \( (V, S) \) no es conexo. Además, todo árbol generador de \( G \) tiene exactamente \( n - 1 \) aristas.
 \end{corolario}
 \begin{proof}
-    La primera afirmación es la contrarrecíproca del Lema~\ref{lema:arboles}(d), y la segunda es el Lema~\ref{lema:arboles}(c).
+    La primera afirmación es la contrarrecíproca del Lema~\ref{lema:arboles} (d), y la segunda es el Lema~\ref{lema:arboles} (c).
 \end{proof}
 
 En otras palabras: para un conjunto de \( n - 1 \) aristas, ``ser árbol generador'' es lo mismo que ``ser conexo'', y no hay una tercera opción.
@@ -321,7 +321,7 @@ Cada columna de \( B \) tiene exactamente una entrada \( +1 \), una entrada \( -
 \begin{proof}
     Para \( u, v \in V \),
     \[
-        (B B^{T})_{uv} = \sum_{e \in E} B_{u,e} B_{v,e}.
+        {(B B^{T})}_{uv} = \sum_{e \in E} B_{u,e} B_{v,e}.
     \]
     Si \( u = v \), cada término es \( B_{u,e}^2 \), que vale \( 1 \) si \( u \) es extremo de \( e \) y \( 0 \) si no; la suma es \( \deg(u) = L_{uu} \). Si \( u \neq v \), el producto \( B_{u,e} B_{v,e} \) es no nulo sólo si \( e \) tiene por extremos a \( u \) y a \( v \), es decir, \( e = uv \); en ese caso uno de ellos es el origen y el otro el destino, así que el producto vale \( -1 \). Como \( G \) es simple hay a lo sumo una arista \( uv \), y la suma vale \( -A_{uv} = L_{uv} \).
 
@@ -331,7 +331,7 @@ Cada columna de \( B \) tiene exactamente una entrada \( +1 \), una entrada \( -
 \subsection{La fórmula de Cauchy--Binet}
 
 Para una matriz \( M \in \R^{k \times m} \) y un subconjunto \( S \subseteq \{1, \ldots, m\} \) con \( \abs{S} = k \), notamos \( \colS{M}{S} \in \R^{k \times k} \) a la submatriz formada por las columnas de \( M \) con índice en \( S \) (en orden creciente).
-Análogamente, para \( N \in \R^{m \times k} \), \( \filS{N}{S} \in \R^{k \times k} \) es la submatriz formada por las filas de \( N \) con índice en \( S \). Observar que \( \filS{(M^{T})}{S} = \big( \colS{M}{S} \big)^{T} \).
+Análogamente, para \( N \in \R^{m \times k} \), \( \filS{N}{S} \in \R^{k \times k} \) es la submatriz formada por las filas de \( N \) con índice en \( S \). Observar que \( \filS{M^{T}}{S} = {\big( \colS{M}{S} \big)}^{T} \).
 
 \begin{teorema}[Cauchy--Binet]\label{teo:cb}
     Sean \( M \in \R^{k \times m} \) y \( N \in \R^{m \times k} \). Entonces
@@ -341,28 +341,7 @@ Análogamente, para \( N \in \R^{m \times k} \), \( \filS{N}{S} \in \R^{k \times
     En particular, si \( m < k \) la suma es vacía y \( \det(MN) = 0 \).
 \end{teorema}
 \begin{proof}
-    Por la definición de determinante,
-    \[
-        \det(MN) = \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} (MN)_{i,\sigma(i)}
-        = \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} \sum_{l=1}^{m} M_{i l} N_{l,\sigma(i)}.
-    \]
-    Distribuyendo el producto de sumas aparece una suma sobre todas las funciones \( f : \{1,\ldots,k\} \to \{1,\ldots,m\} \):
-    \[
-        \det(MN) = \sum_{f} \left( \prod_{i=1}^{k} M_{i, f(i)} \right) \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) \prod_{i=1}^{k} N_{f(i),\sigma(i)}
-        = \sum_{f} \left( \prod_{i=1}^{k} M_{i, f(i)} \right) \det(N_f),
-    \]
-    donde \( N_f \in \R^{k \times k} \) es la matriz cuya fila \( i \) es la fila \( f(i) \) de \( N \).
-
-    Si \( f \) no es inyectiva, \( N_f \) tiene dos filas iguales y \( \det(N_f) = 0 \). Si \( f \) es inyectiva, su imagen es un conjunto \( S = \{s_1 < \cdots < s_k\} \) y \( f(i) = s_{\pi(i)} \) para una única permutación \( \pi \in S_k \). Entonces \( N_f \) se obtiene de \( \filS{N}{S} \) permutando sus filas según \( \pi \), de modo que \( \det(N_f) = \operatorname{sgn}(\pi) \det\big(\filS{N}{S}\big) \). Agrupando las funciones inyectivas según su imagen \( S \),
-    \[
-        \begin{aligned}
-            \det(MN) & = \sum_{\abs{S} = k} \det\big(\filS{N}{S}\big) \sum_{\pi \in S_k} \operatorname{sgn}(\pi) \prod_{i=1}^{k} M_{i, s_{\pi(i)}} \\
-                     & = \sum_{\abs{S} = k} \det\big(\filS{N}{S}\big) \det\big(\colS{M}{S}\big),
-        \end{aligned}
-    \]
-    pues \( \big(\colS{M}{S}\big)_{i,j} = M_{i,s_j} \) y la suma interna es justamente el determinante de \( \colS{M}{S} \).
-
-    Si \( m < k \) no existen funciones inyectivas, luego todos los términos se anulan.
+    No viene al caso.
 \end{proof}
 
 \newpage
@@ -388,7 +367,7 @@ La Figura~\ref{fig:idea} resume el esquema.
         \draw[-{Stealth}, accentblue, thick] (a) -- node[above] {\scriptsize Lema~\ref{lema:unimod}} (b);
         \draw[-{Stealth}, accentblue, thick] (b) -- node[above] {\scriptsize Cauchy--Binet} (c);
     \end{tikzpicture}
-    \caption{Sketch of proof: ambos miembros de \( \tau(G) = \det L(r) \) se comparan con una suma sobre subconjuntos de \( n - 1 \) aristas.}\label{fig:idea}
+    \caption{Esquema de la demostración: ambos miembros de \( \tau(G) = \det L(r) \) se comparan con una suma sobre subconjuntos de \( n - 1 \) aristas.}\label{fig:idea}
 \end{figure}
 
 \subsection{Los menores maximales de la matriz de incidencia}
@@ -416,12 +395,12 @@ Fijemos una orientación de \( G \) y un vértice \( r \in V \). Recordemos que 
     \end{quote}
     (El orden de filas y columnas sólo afecta el signo.)
 
-    Si \( n = 2 \), la matriz es \( 1 \times 1 \) y su única entrada es \( \pm 1 \). Si \( n \geq 3 \), por el Lema~\ref{lema:arboles}(a) \( T \) tiene al menos dos hojas, así que existe una hoja \( \ell \neq r \).
+    Si \( n = 2 \), la matriz es \( 1 \times 1 \) y su única entrada es \( \pm 1 \). Si \( n \geq 3 \), por el Lema~\ref{lema:arboles} (a) \( T \) tiene al menos dos hojas, así que existe una hoja \( \ell \neq r \).
     La fila de \( \ell \) tiene una única entrada no nula, igual a \( \pm 1 \), ubicada en la columna de la única arista \( e \) incidente a \( \ell \). Desarrollando el determinante por esta fila,
     \[
         \det = \pm \det M',
     \]
-    donde \( M' \) es la matriz que resulta de eliminar la fila \( \ell \) y la columna \( e \). Pero \( M' \) es exactamente la matriz del mismo tipo asociada al árbol \( T - \ell \) (Lema~\ref{lema:arboles}(b)), que tiene \( n - 1 \) vértices, con la orientación heredada y el mismo vértice \( r \).
+    donde \( M' \) es la matriz que resulta de eliminar la fila \( \ell \) y la columna \( e \). Pero \( M' \) es exactamente la matriz del mismo tipo asociada al árbol \( T - \ell \) (Lema~\ref{lema:arboles} (b)), que tiene \( n - 1 \) vértices, con la orientación heredada y el mismo vértice \( r \).
     Por hipótesis inductiva, \( \det M' = \pm 1 \), y por lo tanto \( \det = \pm 1 \).
 \end{proof}
 
@@ -429,13 +408,13 @@ Fijemos una orientación de \( G \) y un vértice \( r \in V \). Recordemos que 
 
 \begin{proof}[Demostración del Teorema~\ref{teo:kirchhoff} (Kirchhoff)]
     Fijemos una orientación arbitraria de \( G \) y un vértice \( r \). Por el Lema~\ref{lema:LBBt}, \( L(r) = B_r B_r^{T} \), con \( B_r \in \R^{(n-1) \times m} \).
-    Aplicando la fórmula de Cauchy--Binet (Teorema~\ref{teo:cb}) con \( M = B_r \) y \( N = B_r^{T} \), y notando que \( \filS{(B_r^{T})}{S} = \big(\colS{B_r}{S}\big)^{T} \),
+    Aplicando la fórmula de Cauchy--Binet (Teorema~\ref{teo:cb}) con \( M = B_r \) y \( N = B_r^{T} \), y notando que \( \filS{B_r^{T}}{S} = {\big(\colS{B_r}{S}\big)}^{T} \),
     \[
-        \det L(r) = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} \det\big(\colS{B_r}{S}\big) \det\big(\colS{B_r}{S}\big)^{T} = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} \det\big(\colS{B_r}{S}\big)^{2}.
+        \det L(r) = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} \det\big(\colS{B_r}{S}\big) \det\Big({\big(\colS{B_r}{S}\big)}^{T}\Big) = \sum_{\substack{S \subseteq E \\ \abs{S} = n - 1}} {\det\big(\colS{B_r}{S}\big)}^{2}.
     \]
     (Si \( m < n - 1 \) la suma es vacía y vale \( 0 \); en ese caso \( G \) no tiene árboles generadores, pues estos necesitarían \( n - 1 \) aristas.)
 
-    Por el Lema~\ref{lema:unimod}, el sumando correspondiente a \( S \) es \( (\pm 1)^2 = 1 \) si \( S \) es un árbol generador y \( 0 \) en caso contrario. Como por el Corolario~\ref{cor:subconjuntos} todo árbol generador tiene exactamente \( n - 1 \) aristas, cada árbol generador aparece exactamente una vez en la suma. Por lo tanto,
+    Por el Lema~\ref{lema:unimod}, el sumando correspondiente a \( S \) es \( {(\pm 1)}^2 = 1 \) si \( S \) es un árbol generador y \( 0 \) en caso contrario. Como por el Corolario~\ref{cor:subconjuntos} todo árbol generador tiene exactamente \( n - 1 \) aristas, cada árbol generador aparece exactamente una vez en la suma. Por lo tanto,
     \[
         \det L(r) = \big| \{ S \subseteq E : S \text{ es un árbol generador de } G \} \big| = \tau(G),
     \]
@@ -518,7 +497,7 @@ Para ver las piezas funcionando juntas, calculemos todo en un grafo chico.
 El ejemplo más famoso de aplicación es el conteo de árboles con vértices etiquetados.
 
 \begin{corolario}[Fórmula de Cayley]\label{cor:cayley}
-    El grafo completo \( K_n \) tiene \( n^{n-2} \) árboles generadores; equivalentemente, hay \( n^{n-2} \) árboles con vértices etiquetados \( 1, \ldots, n \) (ver~\cite{cayley}).
+    Para \( n \geq 2 \), el grafo completo \( K_n \) tiene \( n^{n-2} \) árboles generadores; equivalentemente, hay \( n^{n-2} \) árboles con vértices etiquetados \( 1, \ldots, n \) (ver~\cite{cayley}).
 \end{corolario}
 \begin{proof}
     Para \( K_n \), \( D = (n-1) I \) y \( A = J - I \), luego \( L = nI - J \) y \( L(r) = n I_{n-1} - J_{n-1} \).
@@ -565,26 +544,6 @@ Es notable que el Teorema~\ref{teo:kirchhoff} permita obtener la fórmula de Cay
         \tau(G) = \det L(v) = 1 \cdot 5 \cdot 3 \cdot 3 = 45.
     \]
 \end{ejemplo}
-
-\subsection{Versión espectral y otros comentarios}
-
-\begin{observacion}[Versión espectral]
-    Sean \( 0 = \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n \) los autovalores de \( L \) (es simétrica y semidefinida positiva, pues \( L = BB^{T} \); además \( L\mathbf{1} = 0 \)).
-    El coeficiente de \( x \) en \( \det(xI - L) = \prod_i (x - \lambda_i) \) es, por un lado, \( (-1)^{n-1} \lambda_2 \lambda_3 \cdots \lambda_n \) (pues \( \lambda_1 = 0 \)) y, por otro, \( (-1)^{n-1} \) por la suma de los menores principales de orden \( n - 1 \) de \( L \), que son los \( \det L(r) = \tau(G) \) con \( r = 1, \ldots, n \). Luego
-    \[
-        \tau(G) = \frac{1}{n} \, \lambda_2 \lambda_3 \cdots \lambda_n.
-    \]
-    Por ejemplo, \( L(K_n) = nI - J \) tiene autovalores \( 0 \) y \( n \) (con multiplicidad \( n - 1 \)), lo que reproduce \( \tau(K_n) = n^{n-1}/n = n^{n-2} \).
-\end{observacion}
-
-\begin{observacion}[Otros contextos]
-    Mencionamos, sin demostración, algunas generalizaciones:
-    \begin{itemize}[leftmargin=2em]
-        \item \textbf{Grafos con pesos.} Si cada arista \( e \) tiene un peso \( w(e) > 0 \) y se define \( L \) con \( A_{uv} = w(uv) \) y \( D_{uu} = \sum_{v} A_{uv} \), entonces \( \det L(r) = \sum_{T} \prod_{e \in T} w(e) \), donde la suma recorre los árboles generadores \( T \) de \( G \). Se recupera \( \tau(G) \) tomando todos los pesos iguales a \( 1 \).
-        \item \textbf{Grafos dirigidos.} Existe una versión (el teorema de Tutte) que cuenta arborescencias orientadas hacia una raíz fija, usando la matriz laplaciana dirigida.
-        \item \textbf{Redes eléctricas.} Es el contexto original de Kirchhoff~\cite{kirchhoff}: las resistencias efectivas de una red se pueden expresar como cocientes de cantidades \( \tau \) de la red y de la red con dos nodos identificados.
-    \end{itemize}
-\end{observacion}
 
 \newpage
 % --- BIBLIOGRAFÍA ---
