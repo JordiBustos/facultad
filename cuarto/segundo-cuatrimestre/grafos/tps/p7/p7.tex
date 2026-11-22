@@ -2,31 +2,7 @@
     Un \textbf{árbol} es un grafo conexo y sin ciclos (Definición~\ref{def:ciclo} de la Práctica~II).
 \end{definition}
 
-Recordemos la noción de grafos isomorfos (Definición~\ref{def:isomorfos} de la Práctica~I).
-
-\begin{ejercicio}{1}
-    Hallar la cantidad total de árboles no isomorfos entre sí con 5 vértices. ¿Cuántos hay de 6 vértices?
-\end{ejercicio}
-\begin{proof}
-
-\end{proof}
-
-\vspace{0.5cm}
-
-\begin{definition}
-    Una \textbf{arista de corte} (o \textbf{puente}) de un grafo \( G \) es una arista \( e \) tal que \( G - e \) tiene más componentes conexas que \( G \) (Definición~\ref{def:componente-conexa} de la Práctica~I).
-\end{definition}
-
-\begin{ejercicio}{2}
-    Probar que un grafo conexo \( G \) es un árbol si y sólo si toda arista de \( G \) es de corte.
-\end{ejercicio}
-\begin{proof}
-
-\end{proof}
-
-\vspace{0.5cm}
-
-Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la Práctica~I).
+Recordemos la noción de grafos isomorfos (Definición~\ref{def:isomorfos} de la Práctica~I) y la de grado de un vértice (Definición~\ref{def:grado} de la Práctica~I).
 
 \begin{definition}
     El \textbf{grado máximo} de un grafo \( G \) es \( \Delta(G) = \max \{ \deg(v) : v \in V(G) \} \).
@@ -36,11 +12,65 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     Una \textbf{hoja} de un grafo \( G \) es un vértice de grado \( 1 \).
 \end{definition}
 
+\begin{definition}
+    Una \textbf{arista de corte} (o \textbf{puente}) de un grafo \( G \) es una arista \( e \) tal que \( G - e \) tiene más componentes conexas que \( G \) (Definición~\ref{def:componente-conexa} de la Práctica~I).
+\end{definition}
+
+\begin{ejercicio}{1}
+    Hallar la cantidad total de árboles no isomorfos entre sí con 5 vértices. ¿Cuántos hay de 6 vértices?
+\end{ejercicio}
+\begin{proof}
+    Clasificamos los árboles de \( n \) vértices según su grado máximo \( \Delta \). Recordemos que un árbol con \( n \) vértices tiene \( n-1 \) aristas y que, si \( n \geq 2 \), tiene al menos dos hojas; en particular \( \Delta \geq 2 \) si \( n \geq 3 \).
+
+    \textbf{Caso \( n = 5 \).}
+    \begin{itemize}
+        \item \( \Delta = 4 \): el vértice de grado \( 4 \) es adyacente a todos los demás, y como ya hay \( 4 = n-1 \) aristas, el árbol es la estrella \( K_{1,4} \).
+        \item \( \Delta = 3 \): sea \( v \) de grado \( 3 \) con vecinos \( a, b, c \), y sea \( x \) el vértice restante. Como \( \deg(v) = 3 \), \( x \) no es adyacente a \( v \), y debe unirse a exactamente uno de \( a, b, c \) (una sola arista más). Todas las elecciones son isomorfas.
+        \item \( \Delta = 2 \): un grafo conexo con todos los grados \( \leq 2 \) es un camino o un ciclo; al ser árbol, es el camino \( P_5 \).
+    \end{itemize}
+    Estos tres árboles tienen distintas secuencias de grados \( (4,1,1,1,1) \), \( (3,2,1,1,1) \), \( (2,2,2,1,1) \), luego no son isomorfos. Por lo tanto hay exactamente \( 3 \) árboles no isomorfos con \( 5 \) vértices.
+
+    \textbf{Caso \( n = 6 \).}
+    \begin{itemize}
+        \item \( \Delta = 5 \): la estrella \( K_{1,5} \).
+        \item \( \Delta = 4 \): \( v \) de grado \( 4 \) con cuatro vecinos, y el vértice restante se une a uno de ellos. Hay un único árbol, con secuencia \( (4,2,1,1,1,1) \).
+        \item \( \Delta = 3 \): sea \( v \) de grado \( 3 \) con vecinos \( a, b, c \), y sean \( x, y \) los otros dos vértices, que se unen al resto con dos aristas sin que ningún grado supere \( 3 \). Hay tres posibilidades:
+              \begin{itemize}
+                  \item \( x \) e \( y \) se unen ambos al mismo vecino, digamos \( a \): resulta \( \deg(a) = 3 \) y hay dos vértices adyacentes de grado \( 3 \), secuencia \( (3,3,1,1,1,1) \).
+                  \item \( x \) se une a \( a \) e \( y \) se une a \( b \): secuencia \( (3,2,2,1,1,1) \).
+                  \item \( x \) se une a \( a \) e \( y \) se une a \( x \): secuencia \( (3,2,2,1,1,1) \), pero aquí el vértice de grado \( 3 \) tiene una rama de longitud \( 3 \) y dos de longitud \( 1 \), mientras que en el caso anterior tiene ramas de longitudes \( 2, 2, 1 \); no son isomorfos.
+              \end{itemize}
+              (Otras posibilidades, como unir \( x \) e \( y \) a \( v \), darían grado mayor que \( 3 \).)
+        \item \( \Delta = 2 \): el camino \( P_6 \).
+    \end{itemize}
+    En total hay \( 1 + 1 + 3 + 1 = 6 \) árboles no isomorfos con \( 6 \) vértices.
+\end{proof}
+
+\vspace{0.5cm}
+
+\begin{ejercicio}{2}
+    Probar que un grafo conexo \( G \) es un árbol si y sólo si toda arista de \( G \) es de corte.
+\end{ejercicio}
+\begin{proof}
+    \( (\Rightarrow) \) Sea \( G \) un árbol y \( e = xy \in E(G) \). Si existiera un \( xy \)-camino \( P \) en \( G - e \), entonces \( P \) junto con \( e \) formaría un ciclo en \( G \), lo cual es absurdo. Luego \( x \) e \( y \) están en componentes distintas de \( G - e \). Como \( G \) es conexo, todo vértice está conectado con \( x \) o con \( y \) en \( G - e \) (un camino en \( G \) que use \( e \) se parte en dos tramos sin \( e \)), así que \( G - e \) tiene exactamente dos componentes, es decir, más que \( G \). Por lo tanto \( e \) es de corte.
+
+    \( (\Leftarrow) \) Supongamos que \( G \) es conexo y toda arista es de corte, y que \( G \) tiene un ciclo \( C \). Sea \( e = xy \) una arista de \( C \). Entonces \( C - e \) es un \( xy \)-camino en \( G - e \). Todo camino de \( G \) que use \( e \) puede reemplazar \( e \) por este \( xy \)-camino, de modo que \( G - e \) sigue siendo conexo y \( e \) no es de corte, contradiciendo la hipótesis. Luego \( G \) no tiene ciclos y, siendo conexo, es un árbol.
+\end{proof}
+
+\vspace{0.5cm}
+
 \begin{ejercicio}{3}
     Probar que todo árbol con grado máximo \( a > 1 \) tiene al menos \( a \) hojas.
 \end{ejercicio}
 \begin{proof}
+    Sea \( T \) un árbol con \( \Delta(T) = a > 1 \) y sea \( v \) un vértice con \( \deg(v) = a \), con vecinos \( u_1, \ldots, u_a \). Por el ejercicio anterior, cada arista \( vu_i \) es de corte, por lo que los \( u_i \) pertenecen a componentes distintas de \( T - v \); además, como \( T \) es conexo, cada componente de \( T - v \) contiene algún vecino de \( v \). Luego \( T - v \) tiene exactamente \( a \) componentes \( T_1, \ldots, T_a \), con \( u_i \in V(T_i) \), y cada \( T_i \) es un árbol (es conexo y sin ciclos), en el que \( u_i \) es el único vértice adyacente a \( v \).
 
+    Afirmamos que cada \( T_i \) contiene una hoja de \( T \):
+    \begin{itemize}
+        \item Si \( T_i = \{u_i\} \), entonces \( \deg_T(u_i) = 1 \) y \( u_i \) es hoja de \( T \).
+        \item Si \( |V(T_i)| \geq 2 \), el árbol \( T_i \) tiene al menos dos hojas, por lo que alguna \( w \neq u_i \) es hoja de \( T_i \). Como \( w \) no es adyacente a \( v \), \( \deg_T(w) = \deg_{T_i}(w) = 1 \).
+    \end{itemize}
+    Como las componentes son disjuntas, obtenemos \( a \) hojas distintas de \( T \). Por lo tanto, \( T \) tiene al menos \( a \) hojas.
 \end{proof}
 
 \vspace{0.5cm}
@@ -49,7 +79,14 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     Sea \( T \) un árbol tal que todo vértice adyacente a una hoja tiene grado al menos \( 3 \). Probar que \( T \) tiene un par de hojas con vecino común.
 \end{ejercicio}
 \begin{proof}
+    Sea \( P = v_0 v_1 \cdots v_k \) un camino de longitud máxima en \( T \). Como \( T \) es finito, existe. Notemos que \( v_0 \) es una hoja: un vecino de \( v_0 \) fuera de \( P \) permitiría extender \( P \), y un vecino en \( P \) distinto de \( v_1 \) formaría un ciclo. Además \( k \geq 2 \): si \( k = 1 \), \( T = K_2 \) y el vecino \( v_1 \) de la hoja \( v_0 \) tendría grado \( 1 < 3 \).
 
+    Como \( v_1 \) es adyacente a la hoja \( v_0 \), por hipótesis \( \deg(v_1) \geq 3 \). Sea \( w \) un vecino de \( v_1 \) con \( w \neq v_2 \). Entonces:
+    \begin{itemize}
+        \item \( w \notin \{v_3, \ldots, v_k\} \), pues si no habría un ciclo \( v_1 v_2 \cdots w v_1 \) en \( T \).
+        \item Si \( w \neq v_0 \) y \( w \) tuviera un vecino \( z \neq v_1 \), entonces \( z \notin V(P) \) (si no, habría un ciclo), y \( z\, w\, v_1 v_2 \cdots v_k \) sería un camino de longitud \( k + 1 \), contradiciendo la maximalidad de \( P \). Por lo tanto \( w \) es una hoja.
+    \end{itemize}
+    Así, todo vecino de \( v_1 \) distinto de \( v_2 \) es una hoja (incluido \( v_0 \)). Como \( \deg(v_1) \geq 3 \), \( v_1 \) tiene al menos dos vecinos distintos de \( v_2 \), que son hojas con vecino común \( v_1 \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -58,11 +95,35 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     La \textbf{distancia} \( d(u, v) \) entre dos vértices \( u \) y \( v \) de un grafo conexo \( G \) es la longitud (número de aristas) de un \( uv \)-camino de longitud mínima en \( G \).
 \end{definition}
 
+\begin{definition}
+    Dado un vértice \( v \) de un grafo \( G \), la excentricidad de \( v \) está definida por \( \operatorname{ecc}(v) = \max \{d(v, w) : w \in V(G)\} \).
+\end{definition}
+
+\begin{definition}
+    El \textbf{centro} de \( G \) es el subgrafo inducido por los vértices de mínima excentricidad en \( G \).
+\end{definition}
+
 \begin{ejercicio}{5}
-    Dado un vértice \( v \) de un grafo \( G \), la excentricidad de \( v \) está definida por \( \operatorname{ecc}(v) = \max \{d(v, w) : w \in V(G)\} \). El centro de \( G \) es el subgrafo inducido por los vértices de mínima excentricidad en \( G \). Demostrar que, para todo árbol, el centro consiste de un único vértice o de dos vértices adyacentes.
+    Dado \( T \) un árbol, entonces el centro consiste de un único vértice o de dos vértices adyacentes.
 \end{ejercicio}
 \begin{proof}
+    Procedemos por inducción en el número de vértices \( n \) de \( T \). Para \( n = 1 \), el centro es el único vértice; para \( n = 2 \), ambos vértices tienen excentricidad \( 1 \) y el centro consiste en dos vértices adyacentes.
 
+    Supongamos \( n \geq 3 \) y sea \( L \) el conjunto de hojas de \( T \). Como \( n \geq 3 \), \( L \) es no vacío y \( T \) posee vértices de grado al menos \( 2 \) (de lo contrario, la suma de grados sería \( n \neq 2(n-1) \)). Así, el grafo \( T' = T - L \) es no vacío y tiene menos vértices que \( T \). Además, todo camino en \( T \) entre vértices de \( T' \) evita las hojas por tener estas grado \( 1 \); en consecuencia, \( T' \) es conexo, acíclico (por ser subgrafo de \( T \)) y conserva las distancias de \( T \), es decir, \( d_{T'}(u,v) = d_T(u,v) \) para todo \( u,v \in V(T') \). Luego \( T' \) es un árbol con menos vértices que \( T \).
+
+    \begin{enumerate}
+        \item \textbf{Ninguna hoja está en el centro de \( T \).} Sea \( \ell \in L \) y sea \( u \) su único vecino. Como \( n \geq 3 \), se tiene \( \deg_T(u) \geq 2 \), por lo que \( u \) tiene algún vecino \( z \neq \ell \) y \( \operatorname{ecc}_T(u) = \max_{w \neq \ell} d_T(u,w) \geq 1 \). Dado que \( d_T(\ell, w) = 1 + d_T(u,w) \) para todo \( w \neq \ell \), resulta
+              \[
+                  \operatorname{ecc}_T(\ell) = 1 + \max_{w \neq \ell} d_T(u,w) = \operatorname{ecc}_T(u) + 1 > \operatorname{ecc}_T(u),
+              \]
+              de modo que ningún vértice de \( L \) minimiza \( \operatorname{ecc}_T \).
+
+        \item \textbf{Para todo \( v \in V(T') \), \( \operatorname{ecc}_T(v) = \operatorname{ecc}_{T'}(v) + 1 \).} Sea \( w \in V(T) \) tal que \( d_T(v,w) = \operatorname{ecc}_T(v) \). Necesariamente \( w \in L \), pues si \( \deg_T(w) \geq 2 \) tendría un vecino fuera del único \( vw \)-camino a distancia \( \operatorname{ecc}_T(v) + 1 \) de \( v \). Su vecino \( w' \) pertenece a \( T' \) (ya que \( n \geq 3 \)) y satisface \( d_{T'}(v,w') = d_T(v,w') = \operatorname{ecc}_T(v) - 1 \), por lo que \( \operatorname{ecc}_T(v) \leq \operatorname{ecc}_{T'}(v) + 1 \).
+
+              Recíprocamente, sea \( x \in V(T') \) tal que \( d_{T'}(v,x) = \operatorname{ecc}_{T'}(v) \). El mismo argumento aplicado a \( T' \) implica \( \deg_{T'}(x) \leq 1 \) (incluso si \( |V(T')| = 1 \)). Como \( x \notin L \), se cumple \( \deg_T(x) \geq 2 \), luego \( x \) tiene algún vecino \( \ell \in L \), el cual verifica \( d_T(v,\ell) = d_T(v,x) + 1 = \operatorname{ecc}_{T'}(v) + 1 \). Por tanto, \( \operatorname{ecc}_T(v) \geq \operatorname{ecc}_{T'}(v) + 1 \).
+    \end{enumerate}
+
+    Por (1), los vértices de mínima excentricidad de \( T \) pertenecen a \( V(T') \); por (2), minimizar \( \operatorname{ecc}_T \) en \( V(T') \) equivale a minimizar \( \operatorname{ecc}_{T'} \). Así, el centro de \( T \) y el de \( T' \) están inducidos por el mismo conjunto de vértices, por lo que coinciden y el resultado se sigue por hipótesis inductiva.
 \end{proof}
 
 \vspace{0.5cm}
@@ -79,7 +140,77 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     Elegir un árbol de \( 8 \) vértices, numerar sus vértices y hallar su código de Prüfer. Luego, invertir dicho código y hallar el árbol que posee tal código (mostrar el procedimiento en ambas partes. Si el código resultante es capicúa, cambiar alguno de los números del código para resolver la segunda parte).
 \end{ejercicio}
 \begin{proof}
+    \textbf{Parte 1: código de Prüfer de un árbol.} Consideremos el árbol \( T \) con \( V(T) = \{1, \ldots, 8\} \) y aristas
+    \[
+        E(T) = \{13,\ 23,\ 34,\ 45,\ 56,\ 57,\ 78\}.
+    \]
+    \begin{center}
+        \begin{tikzpicture}
+            \node[vertex] (v1) at (-1.2,1) {1};
+            \node[vertex] (v2) at (-1.2,-1) {2};
+            \node[vertex] (v3) at (0,0) {3};
+            \node[vertex] (v4) at (1.6,0) {4};
+            \node[vertex] (v5) at (3.2,0) {5};
+            \node[vertex] (v6) at (4.4,1) {6};
+            \node[vertex] (v7) at (4.4,-1) {7};
+            \node[vertex] (v8) at (6,-1) {8};
+            \draw[edge] (v1) -- (v3) -- (v2);
+            \draw[edge] (v3) -- (v4) -- (v5) -- (v6);
+            \draw[edge] (v5) -- (v7) -- (v8);
+        \end{tikzpicture}
+    \end{center}
+    Como \( n = 8 \), el código tiene \( n-2 = 6 \) términos. En cada paso eliminamos la hoja de menor número y anotamos su vecino:
+    \begin{center}
+        \begin{tabular}{ccccc}
+            \toprule
+            Paso \( i \) & Hojas del árbol actual & Hoja eliminada & Vecino \( a_i \) & Aristas restantes            \\
+            \midrule
+            \( 1 \)      & \( \{1,2,6,8\} \)      & \( 1 \)        & \( 3 \)          & \( 23, 34, 45, 56, 57, 78 \) \\
+            \( 2 \)      & \( \{2,6,8\} \)        & \( 2 \)        & \( 3 \)          & \( 34, 45, 56, 57, 78 \)     \\
+            \( 3 \)      & \( \{3,6,8\} \)        & \( 3 \)        & \( 4 \)          & \( 45, 56, 57, 78 \)         \\
+            \( 4 \)      & \( \{4,6,8\} \)        & \( 4 \)        & \( 5 \)          & \( 56, 57, 78 \)             \\
+            \( 5 \)      & \( \{6,8\} \)          & \( 6 \)        & \( 5 \)          & \( 57, 78 \)                 \\
+            \( 6 \)      & \( \{5,8\} \)          & \( 5 \)        & \( 7 \)          & \( 78 \)                     \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    Por lo tanto, el código de Prüfer de \( T \) es \( (3,3,4,5,5,7) \). Este código no es capicúa, y su inverso (leído de derecha a izquierda) es \( (7,5,5,4,3,3) \).
 
+    \textbf{Parte 2: árbol asociado al código inverso.} Sea \( (a_1, \ldots, a_6) = (7,5,5,4,3,3) \) y \( n = 8 \). Para cada \( i \), \( b_i \) es el menor elemento de \( \{1,\ldots,8\} \) que no está en \( \{b_1,\ldots,b_{i-1}\} \cup \{a_i,\ldots,a_6\} \):
+    \begin{center}
+        \begin{tabular}{cccc}
+            \toprule
+            Paso \( i \) & \( \{b_1,\ldots,b_{i-1}\} \cup \{a_i,\ldots,a_6\} \) & \( b_i \) & Arista \( b_i a_i \) \\
+            \midrule
+            \( 1 \)      & \( \{3,4,5,7\} \)                                    & \( 1 \)   & \( 17 \)             \\
+            \( 2 \)      & \( \{1,3,4,5\} \)                                    & \( 2 \)   & \( 25 \)             \\
+            \( 3 \)      & \( \{1,2,3,4,5\} \)                                  & \( 6 \)   & \( 65 \)             \\
+            \( 4 \)      & \( \{1,2,3,4,6\} \)                                  & \( 5 \)   & \( 54 \)             \\
+            \( 5 \)      & \( \{1,2,3,5,6\} \)                                  & \( 4 \)   & \( 43 \)             \\
+            \( 6 \)      & \( \{1,2,3,4,5,6\} \)                                & \( 7 \)   & \( 73 \)             \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    Los vértices que no pertenecen a \( \{b_1, \ldots, b_6\} = \{1,2,4,5,6,7\} \) son \( 3 \) y \( 8 \), así que se agrega la arista \( 38 \). El árbol obtenido, \( T' \), tiene aristas
+    \[
+        E(T') = \{17,\ 25,\ 56,\ 45,\ 34,\ 37,\ 38\}.
+    \]
+    \begin{center}
+        \begin{tikzpicture}
+            \node[vertex] (v8) at (-1.2,1) {8};
+            \node[vertex] (v7) at (-1.2,-1) {7};
+            \node[vertex] (v1) at (-2.8,-1) {1};
+            \node[vertex] (v3) at (0,0) {3};
+            \node[vertex] (v4) at (1.6,0) {4};
+            \node[vertex] (v5) at (3.2,0) {5};
+            \node[vertex] (v2) at (4.4,1) {2};
+            \node[vertex] (v6) at (4.4,-1) {6};
+            \draw[edge] (v8) -- (v3) -- (v7) -- (v1);
+            \draw[edge] (v3) -- (v4) -- (v5);
+            \draw[edge] (v2) -- (v5) -- (v6);
+        \end{tikzpicture}
+    \end{center}
+    \textbf{Verificación.} Las hojas de \( T' \) son \( 1,2,6,8 \). Eliminando sucesivamente la hoja de menor número se anota: \( 1 \to 7 \); \( 2 \to 5 \); \( 6 \to 5 \); \( 5 \to 4 \); \( 4 \to 3 \); \( 7 \to 3 \), lo que recupera el código \( (7,5,5,4,3,3) \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -93,7 +224,61 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     \end{enumerate}
 \end{ejercicio}
 \begin{proof}
+    Sea \( T \) un árbol con \( n \geq 3 \) vértices (para \( n = 2 \) el código es vacío). Usaremos el siguiente hecho.
 
+    \textbf{Lema.} En el código de Prüfer de \( T \), cada vértice \( v \) aparece exactamente \( \deg(v) - 1 \) veces.
+
+    \emph{Demostración del lema.} En cada uno de los \( n-2 \) pasos se elimina una arista \( \ell u \) con \( \ell \) hoja y se anota \( u \); queda sin eliminar una única arista, la final. Luego \( v \) se anota una vez por cada arista incidente a \( v \) que se elimina con \( v \) como extremo no-hoja. Hay dos casos:
+    \begin{itemize}
+        \item Si \( v \) es uno de los dos vértices de la arista final, \( v \) nunca se elimina, y de sus \( \deg(v) \) aristas, \( \deg(v) - 1 \) se eliminan con \( v \) como extremo no-hoja y la restante es la final.
+        \item Si no, \( v \) se elimina en algún paso, cuando es hoja y tiene una sola arista incidente; las otras \( \deg(v) - 1 \) aristas ya fueron eliminadas antes, cada una con \( v \) como extremo no-hoja (pues \( v \) seguía presente y no era hoja de esa arista).
+    \end{itemize}
+    En ambos casos \( v \) aparece \( \deg(v) - 1 \) veces. \( \square \)
+
+    En particular, los vértices que aparecen en el código son exactamente los que no son hojas.
+
+    \begin{enumerate}
+        \item \textbf{Un solo valor.} Si el código es \( (c, c, \ldots, c) \), por el lema \( \deg(c) = n - 2 + 1 = n - 1 \) y todo otro vértice tiene grado \( 1 \). Luego \( c \) es adyacente a todos los demás y \( T \) es la \textbf{estrella} \( K_{1,n-1} \) con centro \( c \). Recíprocamente, en una estrella el único vértice que no es hoja es el centro, que aparece \( n-2 \) veces, y por tanto el código es constante.
+
+        \item \textbf{Exactamente dos valores.} Sean \( a, b \) los dos valores distintos, con \( p \) y \( q \) apariciones respectivamente (\( p, q \geq 1 \), \( p + q = n - 2 \)). Por el lema, \( a \) y \( b \) son los únicos vértices que no son hojas, con \( \deg(a) = p + 1 \geq 2 \) y \( \deg(b) = q + 1 \geq 2 \). Si \( L \) es el conjunto de hojas, \( T - L \) es un árbol (ver ejercicio 5) con vértices \( a, b \), así que \( a \) y \( b \) son adyacentes. Luego \( T \) es una \textbf{estrella doble}: dos vértices adyacentes de grado al menos \( 2 \), con todos los demás vértices hojas adyacentes a alguno de ellos (\( p \) hojas en \( a \) y \( q \) en \( b \)). Recíprocamente, una estrella doble tiene exactamente dos vértices que no son hojas, que aparecen en el código (cada uno al menos una vez), y ningún otro vértice aparece; luego el código tiene exactamente dos valores. (Esto incluye al camino \( P_4 \), con \( p = q = 1 \).)
+
+        \item \textbf{Todos los valores distintos.} Si los \( n-2 \) valores del código son distintos, entonces hay \( n-2 \) vértices que no son hojas, cada uno apareciendo exactamente una vez, es decir, de grado \( 2 \), y los otros \( 2 \) vértices son hojas. Así todos los vértices tienen grado a lo sumo \( 2 \); un grafo conexo y sin ciclos con esta propiedad es un camino. Luego \( T \) es el \textbf{camino} \( P_n \). Recíprocamente, en un camino los \( n-2 \) vértices internos tienen grado \( 2 \), por lo que aparecen exactamente una vez cada uno, y los extremos no aparecen; luego el código tiene todos sus valores distintos.
+    \end{enumerate}
+
+    \begin{center}
+        \begin{tikzpicture}[v/.style={circle, fill=black, inner sep=1.5pt}]
+            % Estrella K_{1,5}
+            \node[v, label=above left:\( c \)] (c) at (0,0) {};
+            \foreach \ang in {90,162,234,306,18} {
+                    \node[v] (l\ang) at (\ang:1.1) {};
+                    \draw[edge] (c) -- (l\ang);
+                }
+            \node at (0,-1.7) {Estrella};
+            % Estrella doble
+            \begin{scope}[xshift=4.5cm]
+                \node[v, label=above:\( a \)] (a) at (0,0) {};
+                \node[v, label=above:\( b \)] (b) at (1.4,0) {};
+                \draw[edge] (a) -- (b);
+                \foreach \y [count=\k] in {0.8,-0.8} {
+                        \node[v] (la\k) at (-0.9,\y) {};
+                        \draw[edge] (a) -- (la\k);
+                    }
+                \foreach \y [count=\k] in {0.8,0,-0.8} {
+                        \node[v] (lb\k) at (2.3,\y) {};
+                        \draw[edge] (b) -- (lb\k);
+                    }
+                \node at (0.7,-1.7) {Estrella doble};
+            \end{scope}
+            % Camino
+            \begin{scope}[xshift=9cm]
+                \foreach \x in {0,1,2,3,4} {
+                        \node[v] (p\x) at (0.8*\x,0) {};
+                    }
+                \draw[edge] (p0) -- (p1) -- (p2) -- (p3) -- (p4);
+                \node at (1.6,-1.7) {Camino};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
 \end{proof}
 
 \vspace{0.5cm}
@@ -110,7 +295,40 @@ Recordemos la noción de grado de un vértice (Definición~\ref{def:grado} de la
     Sea \( G \) un grafo simple con cinco vértices, tales que cuatro de ellos inducen \( C_4 \) y el vértice restante es adyacente a todos los demás. Hallar la cantidad total de árboles generadores de este grafo.
 \end{ejercicio}
 \begin{proof}
+    Sea \( v \) el vértice adyacente a todos los demás y sean \( u_1, u_2, u_3, u_4 \) los vértices que inducen \( C_4 \), con aristas \( u_1u_2, u_2u_3, u_3u_4, u_4u_1 \). Llamaremos \emph{rayos} a las aristas \( vu_i \) y \emph{aristas del ciclo} a las \( u_i u_{i+1} \).
+    \begin{center}
+        \begin{tikzpicture}
+            \node[vertex] (v) at (0,0) {\( v \)};
+            \node[vertex] (u1) at (45:1.8) {\( u_1 \)};
+            \node[vertex] (u2) at (135:1.8) {\( u_2 \)};
+            \node[vertex] (u3) at (225:1.8) {\( u_3 \)};
+            \node[vertex] (u4) at (315:1.8) {\( u_4 \)};
+            \draw[edge] (u1) -- (u2) -- (u3) -- (u4) -- (u1);
+            \foreach \i in {1,2,3,4} { \draw[edge] (v) -- (u\i); }
+        \end{tikzpicture}
+    \end{center}
+    Un árbol generador \( T \) de \( G \) tiene \( 5 - 1 = 4 \) aristas. Sea \( F \) el conjunto de aristas del ciclo que pertenecen a \( T \); como \( T \) no tiene ciclos, \( F \neq E(C_4) \), es decir, \( |F| = j \in \{0,1,2,3\} \), y los \( 4 - j \) rayos restantes completan las \( 4 \) aristas.
 
+    Fijado \( F \), el subgrafo \( (\{u_1,\ldots,u_4\}, F) \) es un bosque de caminos con \( 4 - j \) componentes. Entonces \( F \cup R \) (con \( R \) un conjunto de rayos) es un árbol generador si y sólo si \( R \) contiene \textbf{exactamente un rayo por cada componente}: al menos uno para que \( v \) se conecte con cada componente, y a lo sumo uno porque dos rayos hacia la misma componente cerrarían un ciclo con \( v \). Por lo tanto, el número de árboles con ese \( F \) es el producto de los tamaños de las componentes.
+
+    \begin{center}
+        \small
+        \setlength{\tabcolsep}{4pt}
+        \begin{tabular}{clcccc}
+            \toprule
+            \( |F| \) & Forma de \( F \)         & \( \#F \) & Tamaños de componentes & Árboles por \( F \) & Total    \\
+            \midrule
+            \( 0 \)   & vacío                    & \( 1 \)   & \( 1,1,1,1 \)          & \( 1 \)             & \( 1 \)  \\
+            \( 1 \)   & una arista               & \( 4 \)   & \( 2,1,1 \)            & \( 2 \)             & \( 8 \)  \\
+            \( 2 \)   & dos aristas consecutivas & \( 4 \)   & \( 3,1 \)              & \( 3 \)             & \( 12 \) \\
+            \( 2 \)   & dos aristas opuestas     & \( 2 \)   & \( 2,2 \)              & \( 4 \)             & \( 8 \)  \\
+            \( 3 \)   & tres aristas             & \( 4 \)   & \( 4 \)                & \( 4 \)             & \( 16 \) \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    Aquí \( \#F \) es la cantidad de conjuntos \( F \) de esa forma y ``Tamaños de componentes'' son los tamaños de las componentes de \( F \). ``Árboles por \( F \)'' es la cantidad de árboles generadores que se pueden formar con ese \( F \), y ``Total'' es el producto de \( \#F \) y ``Árboles por \( F \)''.
+    En total, la cantidad de árboles generadores de \( G \) es \(
+    1 + 8 + 12 + 8 + 16 = 45 \).
 \end{proof}
 
 \vspace{0.5cm}
