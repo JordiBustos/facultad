@@ -349,7 +349,13 @@ Recordemos la noción de grafos isomorfos (Definición~\ref{def:isomorfos} de la
     Determinar si es verdadero o falso: si \( T \) es un árbol generador de peso mínimo de un grafo \( G \) y \( u, v \in V(G) \), entonces el \( uv \)-camino en \( T \) es un \( uv \)-camino mínimo en \( G \).
 \end{ejercicio}
 \begin{proof}
+    \textbf{Falso.} Consideremos el grafo completo \( G = K_3 \) con conjunto de vértices \( V(G) = \{u, v, x\} \) y función de pesos \( w : E(G) \to \mathbb{R} \) dada por
+    \[
+        w(ux) = 2, \qquad w(xv) = 2, \qquad w(uv) = 3.
+    \]
+    Los tres árboles generadores de \( G \) tienen pesos \( 4 \), \( 5 \) y \( 5 \), por lo que el subgrafo \( T \) con aristas \( \{ux, xv\} \) es el único árbol generador de peso mínimo de \( G \) (con peso total \( 4 \)).
 
+    Sin embargo, el único \( uv \)-camino en \( T \) es \( u, x, v \), cuyo peso es \( w(ux) + w(xv) = 4 \), mientras que en \( G \) el camino formado por la arista \( uv \) tiene peso \( w(uv) = 3 < 4 \). Así, el \( uv \)-camino en \( T \) no es un \( uv \)-camino mínimo en \( G \).
 \end{proof}
 
 \vspace{0.5cm}
@@ -358,7 +364,19 @@ Recordemos la noción de grafos isomorfos (Definición~\ref{def:isomorfos} de la
     Sea \( G \) un grafo tal que sus aristas tienen peso y sea \( C \) un ciclo de \( G \). Probar que, si \( e \) es una arista de \( C \) que tiene un peso mayor que cualquier otra del ciclo, entonces no existe un árbol generador de \( G \) de peso mínimo que tenga a la arista \( e \).
 \end{ejercicio}
 \begin{proof}
+    Si \( G \) no es conexo, no posee árboles generadores y la afirmación se cumple de manera vacua. Supongamos entonces que \( G \) admite al menos un árbol generador y procedamos por el absurdo: supongamos que existe un árbol generador \( T \) de \( G \) de peso mínimo tal que \( e \in E(T) \).
 
+    Al eliminar la arista \( e \) de \( T \), el grafo \( T - e \) deja de ser conexo y tiene exactamente dos componentes conexas, cuyos conjuntos de vértices denotamos \( V_1 \) y \( V_2 \). Así, \( \{V_1, V_2\} \) es una partición de \( V(G) \) y los extremos \( u, v \) de \( e \) pertenecen a conjuntos distintos; sin pérdida de generalidad, \( u \in V_1 \) y \( v \in V_2 \).
+
+    Por otro lado, al quitar la arista \( e \) del ciclo \( C \), el subgrafo \( C - e \) es un \( uv \)-camino en \( G \). Como dicho camino comienza en \( u \in V_1 \) y termina en \( v \in V_2 \), debe existir al menos una arista \( f \in E(C) \setminus \{e\} \) que tenga un extremo en \( V_1 \) y el otro en \( V_2 \).
+
+    Consideremos el subgrafo generador \( T' = (T - e) + f \). Dado que \( f \) une las dos componentes conexas de \( T - e \), el grafo \( T' \) es conexo; además, tiene la misma cantidad de aristas que \( T \), es decir, \( |E(T')| = |V(G)| - 1 \). En consecuencia, \( T' \) es un árbol generador de \( G \).
+
+    Finalmente, como \( f \in E(C) \setminus \{e\} \), se tiene \( w(f) < w(e) \). Por lo tanto,
+    \[
+        w(T') = w(T) - w(e) + w(f) < w(T),
+    \]
+    absurdo, pues \( T \) era de peso mínimo. Se concluye que ningún árbol generador de peso mínimo de \( G \) contiene a \( e \).
 \end{proof}
 
 \vspace{0.5cm}
