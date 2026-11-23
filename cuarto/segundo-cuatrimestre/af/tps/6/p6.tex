@@ -25,6 +25,7 @@
 \newcommand{\EN}[1][E]{(#1,\norm{\cdot})}                % Normed space (E, ||.||); use \EN or \EN[F]
 \newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}   % Inner product
 \newcommand{\LH}{\mathcal{L}(H)}                         % Bounded operators on H
+\newcommand{\AH}{\mathcal{A}(H)}                         % Self-adjoint operators on H
 \newcommand{\Ker}{\operatorname{ker}}                    % Kernel
 \newcommand{\Ran}{\operatorname{R}}                      % Range
 \newcommand{\Lat}{\operatorname{Lat}}                    % Invariant subspaces lattice
@@ -64,6 +65,30 @@
 		\item Si \( T^2 = 0 \) entonces \( T = 0 \).
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Sea \( H \) un espacio de Hilbert complejo y \( T \in \LH \) un operador normal.
+	\begin{enumerate}
+		\item Como \( T \in \LH \) es normal, vale \(T^*T = TT^*\), y además \(T^*T\) es autoadjunto pues \({(T^*T)}^* = T^*T\). Aplicando la identidad \(C^*\) (\( \|S^*S\| = \|S\|^2\)) reiteradamente, resulta:
+		      \begin{align*}
+			      \norm{T^2}^2 & = \norm{{(T^2)}^* T^2} = \norm{T^* (T^* T) T} = \norm{T^* (T T^*) T} = \norm{{(T^* T)}^2} \\
+			                   & = \norm{{(T^* T)}^* (T^* T)} = \norm{T^* T}^2 = {\bigl(\norm{T}^2\bigr)}^2 = \norm{T}^4.
+		      \end{align*}
+		      Tomando raíz cuadrada en ambos miembros, se obtiene \( \|T^2\| = \|T\|^2\).
+		\item Sale de que \( \norm{T} = \norm{T^*} \). Luego si \( x \in \Ker(T) \), \( \norm{T^* x} = \norm{T x} = 0 \), es decir, \( x \in \Ker(T^*) \). De manera análoga, si \( x \in \Ker(T^*) \) entonces \( x \in \Ker(T) \). Por lo tanto, \( \Ker(T) = \Ker(T^*) \).
+		\item Como \(T \in \LH \) es normal, \((I - T)(I - T^*) = (I - T^*)(I - T)\). Aplicando la identidad \(C^*\) al operador \((I - T^*)T\) y usando que \(T^2 = T\), obtenemos:
+		      \begin{align*}
+			      \norm{(I - T^*)T}^2 & = \norm{T^*(I - T)(I - T^*)T}       \\
+			                          & = \norm{T^*(I - T^*)(I - T)T}       \\
+			                          & = \norm{T^*(I - T^*)(T - T^2)} = 0.
+		      \end{align*}
+		      Luego \((I - T^*)T = 0\), es decir, \(T = T^*T\). Tomando adjuntos en ambos miembros resulta
+		      \[
+			      T^* = {(T^*T)}^* = T^*T = T,
+		      \]
+		      por lo que \(T\) es autoadjunto.
+		\item Por el primer inciso \( \norm{T}^2 = 0 \implies T = 0 \).
+	\end{enumerate}
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -74,6 +99,19 @@
 		\item Si \( T \) es positivo, entonces \( S^*TS \) es positivo.
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Sean \( H \) Hilbert y \( S, T \in \LH \). Recordemos que un operador \( A \in \LH \) es positivo si \( A \) es autoadjunto y \( \ip{Ax}{x} \ge 0 \) para todo \( x \in H \).
+	\begin{enumerate}
+		\item Para todo \( x \in H \) se tiene \( {(T^* T)}^* = T^* T \) y \[
+			      \ip{T^*T x}{x} = \ip{Tx}{Tx} = \norm{Tx}^2 \ge 0.
+		      \]
+		\item Para todo \( x \in H \) se tiene \( {(S^*TS)}^* = S^*T^*S = S^*TS \) y
+		      \[
+			      \ip{S^*TS x}{x} = \ip{TSx}{Sx} = \ip{T(Sx)}{Sx} \ge 0,
+		      \]
+		      por lo que \( S^*TS \) es positivo.
+	\end{enumerate}
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -83,15 +121,51 @@
 		\item Si \( \ip{Tx}{x} = 0 \) para todo \( x \in H \) entonces \( T = 0 \).
 		\item Encontrar un contraejemplo que muestre la falsedad del enunciado anterior si \( H \) es un espacio de Hilbert real.
 		\item \( T \) es normal si, y sólo si, \( \norm{Tx} = \norm{T^*x} \) para todo \( x \in H \).
-		\item Probar que si \( H \) es un espacio de Hilbert real y \( T \in \LH \) autoadjunto entonces vale a).
+		\item Probar que si \( H \) es un espacio de Hilbert real y \( T \in \LH \) autoadjunto entonces vale (a).
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Sea \( H \) Hilbert y \( T \in \LH \).
+	\begin{enumerate}
+		\item Sea \( B(x, y) = \ip{Tx}{y} \) como \( B \) es sesquilineal y \( \ip{Tx}{x} = 0 \quad \forall x \in H \) se cumple que \begin{align*}
+			      4 \ip{Tx}{y} & = \sum_{k=0}^3 i^k B(Tx + i^k y, Tx + i^k y)                                 \\
+			                   & = \sum_{k=0}^3 i^k \ip{T(x+i^k y)}{x+i^k y}  = \sum_{k=0}^3 i^k \cdot 0 = 0.
+		      \end{align*}
+		      Por lo tanto \( \ip{Tx}{y} = 0 \) para todo \( x, y \in H \), lo que implica que \( T = 0 \).
+		\item Un contraejemplo clásico de álgebra lineal en el caso real es el operador \( T : \R^2 \to \R^2 \) definido por \( T(x, y) = (-y, x) \). Para todo \( (x, y) \in \R^2 \) se tiene \( \ip{T(x, y)}{(x, y)} = (-y, x) \cdot (x, y) = -xy + xy = 0 \), pero \( T \neq 0 \).
+		\item Sea \( T \) autoadjunto \( T = T^* \) y \( H \) ahora un espacio de Hilbert real. Veamos que si para todo \( x \in H \) ocurre que \( \ip{Tx}{x} = 0 \implies T = 0 \). Tenemos que \( \ip{Tx}{x} = 0 \quad \forall x \in H \). Además \( T = T^* \) y \( \ip{x}{y} = \ip{y}{x} \quad \forall x, y \in H \). Por lo tanto, para todo \( x, y \in H \) se tiene
+		      \[
+			      0 = \ip{T(x+y)}{x+y} = \ip{Tx}{x} + \ip{Tx}{y} + \ip{Ty}{x} + \ip{Ty}{y} = 0 + \ip{Tx}{y} + \ip{Ty}{x} + 0 = 2\ip{Tx}{y},
+		      \]
+		      lo que implica que \( \ip{Tx}{y} = 0 \) para todo \( x, y \in H \), y por lo tanto \( T = 0 \).
+	\end{enumerate}
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{4}
 	Dado un espacio de Hilbert \( H \), sean \( \{T_n\}, T \in \LH \) operadores normales. Probar que si \( T_n(x) \xrightarrow[n \to \infty]{} T(x) \) para todo \( x \in H \), entonces \( T_n^*(x) \xrightarrow[n \to \infty]{} T^*(x) \) para todo \( x \in H \).
 \end{ejercicio}
+\begin{proof}
+	Sea \( x \in H \) fijo. En primer lugar, notemos que para todo \( y \in H \), la continuidad del producto interno y la hipótesis \( T_n(y) \to T(y) \) implican que
+	\[
+		\lim_{n \to \infty} \langle T_n^*(x), y \rangle = \lim_{n \to \infty} \langle x, T_n(y) \rangle = \langle x, T(y) \rangle = \langle T^*(x), y \rangle.
+	\]
+	En particular, tomando \( y = T^*(x) \) se obtiene
+	\[
+		\lim_{n \to \infty} \langle T_n^*(x), T^*(x) \rangle = \norm{T^*(x)}^2 \quad \text{y} \quad \lim_{n \to \infty} \langle T^*(x), T_n^*(x) \rangle = \norm{T^*(x)}^2.
+	\]
+	Por otro lado, como \( T_n \) y \( T \) son normales para cada \( n \), cumplen \( \norm{T_n^*(x)} = \norm{T_n(x)} \) y \( \norm{T^*(x)} = \norm{T(x)} \). Dado que \( T_n(x) \to T(x) \), por continuidad de la norma resulta
+	\[
+		\lim_{n \to \infty} \norm{T_n^*(x)}^2 = \lim_{n \to \infty} \norm{T_n(x)}^2 = \norm{T(x)}^2 = \norm{T^*(x)}^2.
+	\]
+	Finalmente, desarrollando el cuadrado de la norma de la diferencia y tomando límite cuando \( n \to \infty \), concluimos que
+	\begin{align*}
+		\lim_{n \to \infty} \norm{T_n^*(x) - T^*(x)}^2 & = \lim_{n \to \infty} \Bigl( \norm{T_n^*(x)}^2 - \langle T_n^*(x), T^*(x) \rangle - \langle T^*(x), T_n^*(x) \rangle + \norm{T^*(x)}^2 \Bigr) \\
+		                                               & = \norm{T^*(x)}^2 - \norm{T^*(x)}^2 - \norm{T^*(x)}^2 + \norm{T^*(x)}^2 = 0,
+	\end{align*}
+	de donde \( T_n^*(x) \xrightarrow[n \to \infty]{} T^*(x) \) para todo \( x \in H \).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -101,9 +175,12 @@
 		\item \( P^* = P \).
 		\item \( P \) es normal.
 		\item \( \norm{P} = 1 \).
-		\item \( \Ker(P) = \Ran(P)^{\perp} \).
+		\item \( \Ker(P) = {\Ran(P)}^{\perp} \).
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	\textbf{Proposición 4.2.5} del apunte de Demetrio.
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -116,12 +193,61 @@
 		\item De acuerdo al Teorema de Riesz existe \( g \in L^2(a, b) \) tal que \( T(f) = \ip{f}{g} \) para toda \( f \in L^2(a, b) \). Hallar tal \( g \) explícitamente y verificar que \( \norm{g}_2 = \norm{T} \).
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Sea \( T \) el operador definido arriba.
+	\begin{enumerate}[label=\roman*.]
+		\item Para probar que \( T \) es lineal, sean \( f, g \in L^2(a, b) \) y \( \alpha, \beta \in \R \). Entonces
+		      \[
+			      T(\alpha f + \beta g) = \int_a^b (\alpha f(x) + \beta g(x)) \, dx = \alpha \int_a^b f(x) \, dx + \beta \int_a^b g(x) \, dx = \alpha T(f) + \beta T(g).
+		      \]
+		\item Para probar que \( T \) es acotado, notemos que por la desigualdad de Cauchy-Schwarz,
+		      \[
+			      |T(f)| = \left| \int_a^b f(x) \, dx \right| \le \int_a^b |f(x)| \, dx \le \sqrt{b-a} \, \norm{f}_2.
+		      \]
+		      Por lo tanto, \( \norm{T} \le \sqrt{b-a} \). Tomando \( f = 1 \) se obtiene \( \norm{T} = \sqrt{b-a} \).
+	\end{enumerate}
+	Por Riesz, existe \( g \in L^2(a, b) \) tal que \( T(f) = \ip{f}{g} \quad \forall f \in L^2(a, b) \). Sabemos que el producto interno en \( L^2(a, b) \) es
+	\[
+		\ip{f}{g} = \int_a^b f(x) g(x) \, dx.
+	\]
+	Comparando con \( T(f) = \int_a^b f(x) \, dx \), se deduce que \( g(x) = 1 \) para casi todo \( x \in [a, b] \). Por lo tanto, \( g = 1 \) y
+	\[
+		\norm{g}_2 = {\left( \int_a^b 1^2 \, dx \right)}^{1/2} = \sqrt{b-a} = \norm{T}.
+	\]
+\end{proof}
 
 \vspace{0.5cm}
 
 \begin{ejercicio}{7}
-	Sea \( H \) un espacio de Hilbert y \( A \in \LH \) un operador autoadjunto. Probar que \( 0 \le A \le 1 \) si y sólo si \( A^2 \le A \).
+	Sea \( H \) un espacio de Hilbert y \( A \in \AH \). Probar que \( 0 \le A \le 1 \) si y sólo si \( A^2 \le A \).
 \end{ejercicio}
+\begin{proof}
+	Recordemos que en \( \AH \) el orden parcial está dado por \( A \le B \iff B - A \in \LH^+ \iff \ip{Ax}{x} \le \ip{Bx}{x} \) para todo \( x \in H \).
+
+	\( (\Rightarrow) \) Supongamos que \( 0 \le A \le 1 \). Entonces \( A \in \LH^+ \) y \( 1 - A \in \LH^+ \). Por existencia de la raíz cuadrada positiva, existe \( A^{1/2} \in \LH^+ \) tal que \( {(A^{1/2})}^2 = A \). Como \( A^{1/2} \) conmuta con \( A \) (pues \( A^{1/2}A = {(A^{1/2})}^3 = A A^{1/2} \)), también conmuta con \( 1 - A \). Luego podemos escribir
+	\[
+		A - A^2 = A(1 - A) = A^{1/2} A^{1/2}(1 - A) = {(A^{1/2})}^* (1 - A) A^{1/2}.
+	\]
+	Dado que \( 1 - A \in \LH^+ \), por el Ejercicio 2b concluimos que \( A - A^2 \in \LH^+ \), es decir, \( A^2 \le A \).
+
+	\( (\Leftarrow) \) Supongamos ahora que \( A^2 \le A \). Como \( A \in \AH \), para todo \( x \in H \) vale
+	\[
+		0 \le \ip{(A - A^2)x}{x} = \ip{Ax}{x} - \ip{A^2 x}{x} = \ip{Ax}{x} - \ip{Ax}{Ax} = \ip{Ax}{x} - \norm{Ax}^2,
+	\]
+	de donde se deduce que
+	\[
+		0 \le \norm{Ax}^2 \le \ip{Ax}{x} \quad \forall x \in H.
+	\]
+	En particular, \( \ip{Ax}{x} \ge 0 \) para todo \( x \in H \), lo cual prueba que \( 0 \le A \). Además, aplicando la desigualdad de Cauchy-Schwarz a la segunda desigualdad, obtenemos
+	\[
+		\norm{Ax}^2 \le \ip{Ax}{x} \le \norm{Ax}\norm{x}.
+	\]
+	Si \( Ax = 0 \), trivialmente \( \ip{Ax}{x} = 0 \le \norm{x}^2 \); si \( Ax \neq 0 \), dividiendo por \( \norm{Ax} \) resulta \( \norm{Ax} \le \norm{x} \), y por lo tanto
+	\[
+		\ip{Ax}{x} \le \norm{Ax}\norm{x} \le \norm{x}^2 = \ip{x}{x} \quad \forall x \in H,
+	\]
+	es decir, \( A \le 1 \).
+\end{proof}
 
 \vspace{0.5cm}
 
@@ -132,6 +258,14 @@
 		\item Calcular \( T^{1/n} \) donde \( n \in \N \).
 	\end{enumerate}
 \end{ejercicio}
+\begin{proof}
+	Sea \( f \in L^2(0, 1) \). Entonces, \[
+		\ip{Tf}{f} = \int_0^1 (Tf)(x) \overline{f(x)} \, dx = \int_0^1 x |f(x)|^2 \, dx \ge 0.
+	\]
+	Por lo tanto, \( \ip{Tf}{f} \ge 0 \) para todo \( f \in L^2(0, 1) \), lo que demuestra que \( T \ge 0 \).
+
+	TODO: inciso b.
+\end{proof}
 
 \vspace{0.5cm}
 
